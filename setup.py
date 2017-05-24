@@ -30,7 +30,7 @@ if "install" in sys.argv:
             break
 
 # Dynamically calculate the version based on django.VERSION.
-version = antares.get_version()
+version = antares.get_main_version()
 print('Current version is ' + version)
 
 setup(
@@ -42,7 +42,7 @@ setup(
     description=('Antares Apps Module'),
     long_description=README,
     zip_safe=True,
-    download_url='https://github.com/SurferTank/antares-apps/archive/' +
+    download_url='https://bitbucket.org/leobelen/antares-apps/get/' +
     version + '.tar.gz',
     keywords=['management', 'infrastructure'],
     install_requires=[
