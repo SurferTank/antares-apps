@@ -1,0 +1,108 @@
+{% extends "base_layout.html" %} 
+{% load staticfiles i18n pipeline flow_tags %} 
+{% block content %}
+
+
+
+    <div class="container">
+    <div class="row">
+        <div class="col-lg-12">
+ <h5>{{ activity.flow_case.flow_definition }} - {% if activity.activity_definition.display_name %}
+                {{ activity.activity_definition.display_name }}
+            {% elif activity.activity_definition.activity_id %}
+                {{ activity.activity_definition.activity_id}}
+            {% else %}
+                {{ activity.activity_definition.id}}
+            {% endif %}</h5>
+    </div>
+    </div>
+        <div class="row">
+            <div class="col-lg-3">
+                {% include 'workspace_view/_left.html' %}
+            </div>
+            <div class="col-lg-9">
+                <div class="row">
+                    <ul class="nav nav-tabs">
+                        <li class="active"><a data-toggle="tab" href="#generalTab"> {% trans 'antares.apps.flow.templates.dashboard.tabs.general' %}</a></li>
+                        <li><a data-toggle="tab" href="#propertiesTab">{% trans 'antares.apps.flow.templates.dashboard.tabs.properties' %}</a></li>
+                        <li><a data-toggle="tab" href="#documentsTab"> {% trans 'antares.apps.flow.templates.dashboard.tabs.documents' %}</a></li>
+                        <li><a data-toggle="tab" href="#notesTab"> {% trans 'antares.apps.flow.templates.dashboard.left.notes' %}</a></li>
+                        <li><a data-toggle="tab" href="#historyTab">{% trans 'antares.apps.flow.templates.dashboard.tabs.history' %}</a></li>
+                        {% extra_tabs_index %}
+                    </ul>
+                    <div class="tab-content">
+                        <div id="generalTab" class="tab-pane fade in active">
+                            {% include 'workspace_view/_general_tab.html' %}
+                        </div>
+                        <div id="propertiesTab" class="tab-pane fade">
+                            {% include 'workspace_view/_properties_tab.html' %}
+                        </div>
+                        <div id="documentsTab" class="tab-pane fade">
+                            {% include 'workspace_view/_documents_tab.html' %}
+                        </div>
+                        <div id="notesTab" class="tab-pane fade">
+                            {% include 'workspace_view/_notes_tab.html' %}
+                        </div>
+                        <div id="historyTab" class="tab-pane fade">
+                            {% include 'workspace_view/_history_tab.html' %}
+                        </div>
+                        {% extra_tabs_content %}
+                    </div>
+                </div>
+
+
+            </div>
+<script type="text/javascript">
+    var antaresFlowLinks = { 
+        update_property_call: "{% url "antares.apps.flow:api_case_update_property" %}", 
+        case_history_call: "{% url "antares.apps.flow:api_case_history" %}", 
+        case_properties_call: "{% url "antares.apps.flow:api_case_properties" %}", 
+        case_document_call: "{% url "antares.apps.flow:api_case_document"  %}", 
+        case_notes_call: "{% url "antares.apps.flow:api_case_note_list"  %}",
+        case_update_note_call: "{% url "antares.apps.flow:api_case_update_note"  %}",
+        case_document_view_call: "{% url 'antares.apps.document:view_view' document_id='5911F917-A61B-478B-B7F2-89C754D1FAF6' %}?is_inner=yes", 
+        case_document_edit_call: "{% url 'antares.apps.document:edit_view' document_id='5911F917-A61B-478B-B7F2-89C754D1FAF6' %}?is_inner=yes", 
+        case_forward_case_call: "{% url "antares.apps.flow:api_forward_case" %}", 
+        case_set_tracking_option_call: "{% url "antares.apps.flow:api_case_set_tracking_option" %}",
+        inbox_view: "{% url "antares.apps.flow:inbox_view" %}", 
+    };
+    var priority_type_choices = {{ priority_type_choices|safe }};
+    var activity_id = "{{activity_id}}";
+    var case_id = "{{activity.flow_case.id}}";
+    
+    $(document).ready(function() { 
+        display_workflow_panel('{{activity.id}}');
+         $('#flow_options_track_flow').change(function() {
+        if (antaresFlowLinks.case_set_tracking_option_call) {
+        $.ajax({
+            'url': antaresFlowLinks.case_set_tracking_option_call,
+            'data': {
+                'case_id': case_id,
+                'value': $(this).prop('checked'),
+                'csrfmiddlewaretoken': $.cookie('csrftoken'),
+            },
+            'method': 'POST',
+            'type': 'json',
+            'success': function(data) {
+            },
+        });
+        }
+
+        });
+    });
+</script>
+{% endblock %} 
+{% block javascript %} 
+    {% javascript 'jquery_ui_js' %} 
+    {% javascript 'datatables_js' %} 
+    {% javascript 'x_editable_js' %} 
+    {% javascript 'ckeditor_js' %} 
+    {% javascript 'flow_js' %} 
+{% endblock javascript %} 
+{% block stylesheets %} 
+    {% stylesheet 'jquery_ui_css' %} 
+    {% stylesheet 'datatables_css' %}
+    {% stylesheet 'x_editable_css' %}
+    {% stylesheet 'ckeditor_css' %}
+{% endblock stylesheets %}
+{% block ng_app_name %}{% endblock ng_app_name %}

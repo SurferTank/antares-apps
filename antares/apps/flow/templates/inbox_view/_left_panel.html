@@ -1,0 +1,30 @@
+{% load staticfiles i18n pipeline %}
+<div class="panel-group" id="inboxAccordion">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h4 class="panel-title">
+                <a data-toggle="collapse" data-parent="#inboxAccordion" href="#collapseToolbar">{% trans 'antares.apps.flow.templates.inbox.myInbox' %}</a>
+            </h4>
+        </div>
+        <div id="collapseToolbar" class="panel-collapse collapse in">
+            <div class="panel-body">
+                <div><a onClick="display_inbox_page('created');">{% trans 'antares.apps.flow.templates.inbox.newCases' %}</a></div>
+                <div><a onClick="display_inbox_page('active');">{% trans 'antares.apps.flow.templates.inbox.activeCases' %}</a></div>
+                <div><a onClick="display_inbox_page('completed');">{% trans 'antares.apps.flow.templates.inbox.completedCases' %}</a></div>
+                
+            </div>
+        </div>
+    </div>
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h4 class="panel-title">
+                <a data-toggle="collapse" data-parent="#inboxAccordion" href="#collapseStats">{% trans 'antares.apps.flow.templates.inbox.myStats'  %}</a>
+            </h4>
+        </div>
+        <div id="collapseStats" class="panel-collapse collapse">
+           <div class="panel-body">
+                <div><a onClick="display_inbox_page('stats');">{% trans "antares.apps.flow.templates.inbox.user_stats" %}</a></div>
+           </div>
+        </div>
+    </div>
+</div>

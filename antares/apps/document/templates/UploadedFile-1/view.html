@@ -1,0 +1,42 @@
+{% extends template %}
+{% load staticfiles i18n pipeline %} 
+
+{% block title %}Antares Document{% endblock %}
+{% block ng_app_name %}{% endblock ng_app_name %}
+{% block bodyId %}Antares Document{% endblock %}
+{% block javascript %} 
+    {% if is_inner == 'false' %}
+        {% javascript 'jquery_ui_js' %} 
+    {% endif %}
+{% endblock javascript %} 
+
+{% block stylesheets %}
+    {% if is_inner == 'false' %}
+        {% stylesheet 'jquery_ui_css' %} 
+    {% endif %}
+{% endblock stylesheets %} 
+ 
+{% block content %} <div class="container">
+  <form id="documentEditorForm" method="POST">
+    <div class="panel">
+      <div class="row">
+        <div class="col-lg-4">
+          <span>Un monto</span>
+        </div>
+        <div class="col-lg-4">
+          <div>{{fields.anAmount|default_if_none:''}}</div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-lg-4">
+          <span>Un período</span>
+        </div>
+        <div class="col-lg-4">
+          <div>{{fields.aPeriod|default_if_none:''}}</div>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>{% endblock %}
+        
+

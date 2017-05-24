@@ -1,0 +1,399 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2016-08-22 18:23-0300\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: console/client_relation_console.py:43
+msgid ".console.dont_now_command"
+msgstr ""
+
+#: console/client_relation_console.py:51
+msgid ".console.the_current_user_has_no_clients_associated"
+msgstr ""
+
+#: console/client_relation_console.py:54
+msgid ".tables.client"
+msgstr ""
+
+#: console/client_relation_console.py:56
+msgid ".tables.relation_type"
+msgstr ""
+
+#: console/client_relation_console.py:78
+#, python-format
+msgid ".current_client_is %(client_name)s"
+msgstr ""
+
+#: console/client_relation_console.py:90
+#, python-format
+msgid ".no_client_found_by_id %(client_id)s"
+msgstr ""
+
+#: console/client_relation_console.py:93
+msgid ".switched_to_specified_client"
+msgstr ""
+
+#: console/client_relation_console.py:96
+msgid ".switched_to_own_client"
+msgstr ""
+
+#: console/client_relation_console.py:98
+#, python-format
+msgid ".missing_parameter %(parameter)s "
+msgstr ""
+
+#: models/client_relation.py:83
+msgid "antares.apps.client.models.client_relation.table_name"
+msgstr ""
+
+#: models/client_relation.py:84
+msgid "antares.apps.client.models.client_relation.table_name_plural"
+msgstr ""
+
+#: models/client_relation_permission.py:53
+msgid "antares.apps.client.models.client_relation_permission.table_name"
+msgstr ""
+
+#: models/client_relation_permission.py:54
+msgid "antares.apps.client.models.client_relation_permission.table_name_plural"
+msgstr ""
+
+msgid "antares.apps.client.templates.panel.general_information"
+msgstr "General Information"
+
+msgid "antares.apps.client.templates.panel.attributes"
+msgstr "Attributes"
+
+msgid "antares.apps.client.templates.panel.relations"
+msgstr "Relations"
+
+
+msgid "antares.apps.client.templates.panel.attribute_name"
+msgstr "Name"
+
+
+msgid "antares.apps.client.templates.panel.attribute_value"
+msgstr "Value"
+
+msgid "antares.apps.client.templates.panel.client"
+msgstr "Client"
+
+msgid "antares.apps.client.templates.panel.relation_type"
+msgstr "Relation Type"
+
+msgid "antares.apps.client.templates.panel.start_date"
+msgstr "Start Date"
+
+msgid "antares.apps.client.templates.panel.end_date"
+msgstr "End Date"
+
+msgid "antares.apps.client.templates.panel.branches"
+msgstr "Branches"
+
+msgid "antares.apps.client.templates.panel.no_branches_found"
+msgstr "No branches found"
+
+
+msgid "antares.apps.client.templates.emptyMessages.no_attributes_set"
+msgstr "No attributes found"
+
+
+msgid "antares.apps.client.templates.emptyMessages.no_relations_set"
+msgstr "No relations found"
+
+msgid "antares.apps.client.models.address_item.table_name_plural"
+msgstr "Address Items"
+
+msgid "antares.apps.client.models.address_item.table_name"
+msgstr "Address Item"
+
+msgid "antares.apps.client.models.attribute_definition.table_name"
+msgstr "Attribute Definition"
+
+msgid "antares.apps.client.models.attribute_definition.table_name_plural"
+msgstr "Attribute Definitions"
+
+msgid "antares.apps.client.models.isic_position.table_name"
+msgstr "Isic Position"
+
+msgid "antares.apps.client.models.isic_position.table_name_plural"
+msgstr "Isic Positions"
+
+msgid "antares.apps.client.models.client.table_name"
+msgstr "Client"
+
+msgid "antares.apps.client.models.client.table_name_plural"
+msgstr "Clients"
+
+msgid "antares.apps.client.models.client_branch.table_name"
+msgstr "Client Branch"
+
+msgid "antares.apps.client.models.client_branch.table_name_plural"
+msgstr "Client Branches"
+
+msgid "antares.apps.client.models.client_business_classification.table_name"
+msgstr "Client Business Classification"
+
+msgid "antares.apps.client.models.client_business_classification.table_name_plural"
+msgstr "Client Business Classifications"
+
+msgid "antares.apps.client.models.client_type.table_name"
+msgstr "Client Type"
+
+msgid "antares.apps.client.models.client_type.table_name_plural"
+msgstr "Client Types"
+
+msgid "antares.apps.client.models.client_user_relation.table_name"
+msgstr "User Relation"
+
+msgid "antares.apps.client.models.client_user_relation.table_name_plural"
+msgstr "User Relations"
+
+msgid "antares.apps.client.models.client_user_relation_permission.table_name"
+msgstr "User Relation Permission"
+
+msgid "antares.apps.client.models.client_user_relation_permission.table_name_plural"
+msgstr "User Relation Permissions"
+
+msgid "antares.apps.client.models.email_item.table_name"
+msgstr "Email Item"
+
+msgid "antares.apps.client.models.email_item.table_name_plural"
+msgstr "Email Items"
+
+msgid "antares.apps.client.models.identification_item.table_name"
+msgstr "Identification Item"
+
+msgid "antares.apps.client.models.identification_item.table_name_plural"
+msgstr "Identification Items"
+
+msgid "antares.apps.client.models.social_network_item.table_name"
+msgstr "Social Network Item"
+
+msgid "antares.apps.client.models.social_network_item.table_name_plural"
+msgstr "Social Network Items"
+
+msgid "antares.apps.client.models.telephone_item.table_name"
+msgstr "Telephone Item"
+
+msgid "antares.apps.client.models.telephone_item.table_name_plural"
+msgstr "Telephone Items"
+
+msgid "antares.apps.client.models.client_identification_type.table_name"
+msgstr "Identification Type"
+
+msgid "antares.apps.client.models.client_identification_type.table_name_plural"
+msgstr "Identification Types"
+
+msgid "antares.apps.client.templates.panel.general.code"
+msgstr "Code"
+
+msgid "antares.apps.client.templates.panel.general.full_name"
+msgstr "Full Name"
+
+msgid "antares.apps.client.templates.panel.general.client_type"
+msgstr "Client Type"
+
+msgid "antares.apps.client.templates.panel.general.registration_date"
+msgstr "Registration Date"
+
+msgid "antares.apps.client.templates.panel.general.status"
+msgstr "Status"
+
+msgid "antares.apps.client.templates.panel.general.birth_date"
+msgstr "Birth Date"
+
+msgid "antares.apps.client.templates.panel.general.defunction_date"
+msgstr "Defunction Date"
+
+msgid "antares.apps.client.templates.panel.general.gender"
+msgstr "Gender"
+
+msgid "antares.apps.client.templates.client_id_table.type"
+msgstr "Type"
+
+msgid "antares.apps.client.templates.client_id_table.code"
+msgstr "Code"
+
+msgid "antares.apps.client.templates.client_id_table.active"
+msgstr "Active"
+
+msgid "antares.apps.client.templates.emptyMessages.no_client_ids_set"
+msgstr "No client IDs Set"
+
+
+msgid "antares.apps.client.constants.ClientStatusType.ACTIVE"
+msgstr "Active"
+
+msgid "antares.apps.client.constants.ClientStatusType.DEFUNCT"
+msgstr "Defunct"
+
+msgid "antares.apps.client.constants.ClientStatusType.DEFUNCT_CANDIDATE"
+msgstr "Defunct Candidate"
+
+msgid "antares.apps.client.constants.ClientGenderType.MALE"
+msgstr "Male"
+
+msgid "antares.apps.client.constants.ClientGenderType.FEMALE"
+msgstr "Female"
+
+msgid "antares.apps.client.constants.ClientArchetype.INDIVIDUAL"
+msgstr "Individual"
+
+msgid "antares.apps.client.constants.ClientArchetype.CORPORATE"
+msgstr "Corporate"
+
+msgid "antares.apps.client.templates.client_id_table.identification_information"
+msgstr "Identification Information"
+
+msgid "antares.apps.client.templates.client_id_table.addresses"
+msgstr "Addresses"
+
+msgid "antares.apps.client.templates.client_id_table.address_type"
+msgstr "Address Type"
+
+msgid "antares.apps.client.templates.client_id_table.country"
+msgstr "Country"
+
+msgid "antares.apps.client.templates.client_id_table.line_1"
+msgstr "Line 1"
+
+msgid "antares.apps.client.templates.client_id_table.line_2"
+msgstr "Line 2"
+
+msgid "antares.apps.client.templates.client_id_table.postal_code"
+msgstr "Postal Code"
+
+msgid "antares.apps.client.templates.client_id_table.is_principal"
+msgstr "Is principal"
+
+msgid "antares.apps.client.templates.client_id_table.status"
+msgstr "Status"
+
+msgid "antares.apps.client.templates.emptyMessages.no_addresses_set"
+msgstr "No addresses defined yet"
+
+msgid "antares.apps.client.templates.client_id_table.telephone"
+msgstr "Telephone"
+
+msgid "antares.apps.client.templates.client_id_table.telephone_type"
+msgstr "Type"
+
+msgid "antares.apps.client.templates.client_id_table.social_network"
+msgstr "Social Network"
+
+msgid "antares.apps.client.templates.client_id_table.social_media_type"
+msgstr "Type"
+
+msgid "antares.apps.client.templates.client_id_table.item"
+msgstr "Item"
+
+msgid "antares.apps.client.templates.emptyMessages.no_telephone_set"
+msgstr "No telephones defined yet"
+
+msgid "antares.apps.client.templates.emptyMessages.no_social_networks_set"
+msgstr "No social networks defined yet"
+
+msgid "antares.apps.client.templates.panel.general.branch_name"
+msgstr "Branch Name"
+
+msgid "antares.apps.client.templates.panel.general.branch_number"
+msgstr "Branch Number"
+
+
+msgid "antares.apps.client.constants.ClientRelationType.OWNER"
+msgstr "Owner"
+
+msgid "antares.apps.client.constants.ClientRelationType.DIRECTOR"
+msgstr "Director"
+
+msgid "antares.apps.client.constants.ClientRelationType.ACCOUNTANT"
+msgstr "Accountant"
+
+
+msgid "antares.apps.client.constants.ClientRelationType.LAWYER"
+msgstr "Lawyer"
+
+msgid "antares.apps.client.constants.ClientRelationType.CLERK"
+msgstr "Clerk"
+
+msgid "antares.apps.client.constants.TelephoneItemType.HOME"
+msgstr "Home"
+
+msgid "antares.apps.client.constants.TelephoneItemType.WORK"
+msgstr "Work"
+
+msgid "antares.apps.client.constants.TelephoneItemType.OTHER"
+msgstr "Other"
+
+msgid "antares.apps.client.constants.TelephoneItemType.CELLPHONE"
+msgstr "Cellphone"
+
+msgid "antares.apps.client.constants.SocialNetworkItemType.SKYPE"
+msgstr "Skype"
+
+msgid "antares.apps.client.templates.client_id_table.emails"
+msgstr "Emails"
+
+msgid "antares.apps.client.templates.client_id_table.email_type"
+msgstr "Email Type"
+
+msgid "antares.apps.client.templates.client_id_table.email"
+msgstr "Email"
+
+msgid "antares.apps.client.constants.EmailType.OFFICIAL"
+msgstr "Official"
+
+msgid "antares.apps.client.constants.EmailType.HOME"
+msgstr "Home"
+
+msgid "antares.apps.client.constants.EmailType.WORK"
+msgstr "Work"
+
+msgid "antares.apps.client.constants.EmailType.OTHER"
+msgstr "Other"
+
+msgid "antares.apps.client.templates.client_id_table.business_classification"
+msgstr "Business Classification"
+
+msgid "antares.apps.client.templates.client_id_table.start_date"
+msgstr "Start Date"
+
+msgid "antares.apps.client.templates.client_id_table.end_date"
+msgstr "End Date"
+
+msgid "antares.apps.client.templates.panel.general.occupation"
+msgstr "Occupation"
+
+msgid "antares.apps.client.isic.isic_loader.command_successful"
+msgstr "ISIC records loaded successfully"
+
+
+msgid "antares.apps.client.templates.emptyMessages.no_email_set"
+msgstr "No emails defined yet"
+
+msgid "antares.apps.client.templates.emptyMessages.no_business_classification_set"
+msgstr "No business classifications defined yet"
+
+msgid "antares.apps.client.templates.client_header.client_name"
+msgstr "Client Name"
+
+msgid "antares.apps.client.templates.client_header.total_balance"
+msgstr "Total Balance"
+
+

@@ -1,0 +1,246 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" elementFormDefault="unqualified" xml:lang="en">
+    <xs:element name="document" type="DocumentXml"/>
+    <xs:complexType name="DocumentXml">
+        <xs:sequence>
+            <xs:element name="headerElements" type="HeaderElements" minOccurs="1" maxOccurs="1"/>
+            <xs:element name="structuredData" type="StructuredData" minOccurs="1" maxOccurs="1"/>
+            <xs:element name="nonstructuredData" type="NonstructuredData" minOccurs="0" maxOccurs="1"/>
+        </xs:sequence>
+        <xs:attribute name="defaultLanguage" type="xs:NCName"/>
+        <xs:attribute name="formDefinition" type="xs:NCName"/>
+        <xs:attribute name="documentId" type="uuid-type"/>
+    </xs:complexType>
+    <xs:complexType name="HeaderElements" mixed="true">
+        <xs:sequence>
+            <xs:element name="formName" type="xs:NCName" minOccurs="1" maxOccurs="1"/>
+            <xs:element name="formVersion" type="xs:integer" minOccurs="1" maxOccurs="1"/>
+            <xs:element name="documentVersion" type="xs:integer" minOccurs="1" maxOccurs="1"/>
+            <xs:element name="activeVersion" type="xs:boolean" minOccurs="1" maxOccurs="1"/>
+            <xs:element name="author" type="uuid-type" minOccurs="0" maxOccurs="1"/>
+            <xs:element name="authorName" type="xs:string" minOccurs="0" maxOccurs="1"/>
+            <xs:element name="saveDate" type="datetime-or-null" minOccurs="0" maxOccurs="1"/>
+            <xs:element name="draftDate" type="datetime-or-null" minOccurs="1" maxOccurs="1"/>
+            <xs:element name="creationDate" type="datetime-or-null" minOccurs="1" maxOccurs="1"/>
+            <xs:element name="deleteDate" type="datetime-or-null" minOccurs="0" maxOccurs="1"/>
+            <xs:element name="deleteCase" type="uuid-type" minOccurs="0" maxOccurs="1"/>
+            <xs:element name="deleteComment" type="xs:string" minOccurs="1" maxOccurs="1"/>
+            <xs:element name="associatedTo" type="uuid-type" minOccurs="0" maxOccurs="1"/>
+            <xs:element name="associationType" type="xs:string" minOccurs="0" maxOccurs="1"/>
+            <xs:element name="flowCase" type="uuid-type" minOccurs="0" maxOccurs="1"/>
+            <xs:element name="origin" type="xs:string" minOccurs="0" maxOccurs="1"/>
+            <xs:element name="status" type="xs:string" minOccurs="1" maxOccurs="1"/>
+            <xs:element name="userReferralCode" type="uuid-type" minOccurs="0" maxOccurs="1"/>
+            <xs:element name="accountingElements" type="AccountingElements" minOccurs="0" maxOccurs="1"/>
+            <xs:element name="hash" type="xs:string" minOccurs="1" maxOccurs="1"/>
+            <xs:element name="hrnCode" type="xs:string" minOccurs="0" maxOccurs="1"/>
+            <xs:element name="hrnTitle" type="xs:string" minOccurs="0" maxOccurs="1"/>
+            <xs:element name="tags" type="Tags" minOccurs="0" maxOccurs="1"/>
+            <xs:element name="externalReference" type="ExternalReference" minOccurs="0" maxOccurs="1"/>
+            <xs:element name="options" type="DocumentOptions" minOccurs="0" maxOccurs="1"/>
+            <xs:element name="externalFunctions" type="ExternalFunctions" minOccurs="0" maxOccurs="1"/>
+            <xs:element name="helpText" type="HelpText" minOccurs="0" maxOccurs="1"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="HelpText">
+        <xs:sequence>
+            <xs:element name="help" type="HelpElement" minOccurs="0" maxOccurs="1"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType mixed="true" name="HelpElement">
+        <xs:attribute name="markdown" type="xs:boolean"/>
+        <xs:attribute name="language" type="xs:NCName"/>
+        <xs:attribute name="event" type="xs:NCName"/>
+    </xs:complexType>
+    <xs:complexType name="DocumentOptions">
+        <xs:sequence>
+            <xs:element name="defaultCurrency" type="xs:NCName" minOccurs="0" maxOccurs="1"/>
+            <xs:element name="hrnScript" type="HRNScript" minOccurs="0" maxOccurs="1"/>
+            <xs:element name="country" type="xs:NCName" minOccurs="0" maxOccurs="1"/>
+            <xs:element name="allowNegativeNumbers" type="xs:boolean" minOccurs="0" maxOccurs="1"/>
+            <xs:element name="allowCancellation" type="xs:boolean" minOccurs="0" maxOccurs="1"/>
+            <xs:element name="autoSaveSeconds" type="xs:integer" minOccurs="0" maxOccurs="1"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType mixed="true" name="HRNScript">
+        <xs:attribute name="language" type="xs:NCName"/>
+    </xs:complexType>
+    <xs:complexType name="ExternalReference">
+        <xs:sequence>
+            <xs:element name="site" type="xs:unsignedLong" minOccurs="1" maxOccurs="1"/>
+            <xs:element name="hash" type="xs:string" minOccurs="1" maxOccurs="1"/>
+            <xs:element name="docIdAtReference" type="uuid-type" minOccurs="1" maxOccurs="1"/>
+            <xs:element name="additionDate" type="xs:dateTime" minOccurs="1" maxOccurs="1"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="Tags">
+        <xs:sequence>
+            <xs:element name="tag" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="ExternalFunctions">
+        <xs:sequence>
+            <xs:element name="externalFunction" type="ExternalFunction" minOccurs="0" maxOccurs="unbounded"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="ExternalFunction">
+        <xs:choice>
+            <xs:element name="externalFunctionParameter" type="ExternalFunctionParameter" minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element name="code" type="ExternalFunctionCode" minOccurs="0" maxOccurs="unbounded"/>
+        </xs:choice>
+        <xs:attribute name="id" use="required" type="xs:NCName"/>
+        <xs:attribute name="events" type="xs:string"/>
+    </xs:complexType>
+    <xs:complexType name="ExternalFunctionParameter">
+        <xs:attribute name="mode" type="xs:NCName"/>
+        <xs:attribute name="field" use="required" type="xs:NCName"/>
+        <xs:attribute name="header" type="xs:boolean"/>
+    </xs:complexType>
+    <xs:complexType mixed="true" name="ExternalFunctionCode">
+        <xs:attribute name="language" type="xs:NCName"/>
+    </xs:complexType>
+    <xs:complexType name="AccountingElements">
+        <xs:sequence>
+            <xs:element name="client" type="uuid-type" minOccurs="1" maxOccurs="1" xsi:nil="true"/>
+            <xs:element name="branch" type="uuid-type" minOccurs="1" maxOccurs="1" xsi:nil="true"/>
+            <xs:element name="conceptType" type="xs:string" minOccurs="0" maxOccurs="1" xsi:nil="true"/>
+            <xs:element name="period" type="integer-or-null" minOccurs="1" maxOccurs="1" xsi:nil="true"/>
+            <xs:element name="accountType" type="xs:string" minOccurs="1" maxOccurs="1" xsi:nil="true"/>
+            <xs:element name="baseDocument" type="uuid-type" minOccurs="0" maxOccurs="1" xsi:nil="true"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="StructuredData">
+        <xs:sequence>
+            <xs:element name="page" type="Page" minOccurs="0" maxOccurs="unbounded"/>
+        </xs:sequence>
+        <xs:attribute name="title" use="required"/>
+        <xs:attribute name="letterhead"/>
+        <xs:attribute name="maxCols"/>
+    </xs:complexType>
+    <xs:complexType name="Page">
+        <xs:sequence>
+            <xs:element name="line" type="Line" minOccurs="1" maxOccurs="unbounded"/>
+        </xs:sequence>
+        <xs:attribute name="pageId" use="required" type="xs:NCName"/>
+        <xs:attribute name="title" use="required"/>
+    </xs:complexType>
+    <xs:complexType name="Line">
+        <xs:sequence>
+            <xs:element minOccurs="0" maxOccurs="unbounded" name="field" type="Field"/>
+        </xs:sequence>
+        <xs:attribute name="row" use="required" type="xs:integer"/>
+    </xs:complexType>
+    <xs:complexType mixed="true" name="Field">
+        <xs:attribute name="class" type="xs:NCName"/>
+        <xs:attribute name="dataType" type="xs:string"/>
+        <xs:attribute name="id" type="xs:NCName"/>
+        <xs:attribute name="indexed" type="xs:boolean"/>
+        <xs:attribute name="name" type="xs:string"/>
+        <xs:attribute name="readonly" type="xs:boolean"/>
+        <xs:attribute name="type" type="xs:string"/>
+        <xs:attribute name="startCol" type="xs:integer"/>
+        <xs:attribute name="calculate" type="xs:string"/>
+        <xs:attribute name="calculationOrder" type="xs:long"/>
+        <xs:attribute name="validate" type="xs:string"/>
+        <xs:attribute name="validationMessage" type="xs:string"/>
+        <xs:attribute name="required" type="xs:boolean"/>
+        <xs:attribute name="requiredMessage" type="xs:string"/>
+        <xs:attribute name="externalReference" type="xs:string"/>
+        <xs:attribute name="alias" type="xs:NCName"/>
+        <xs:attribute name="headerField" type="xs:NCName"/>
+        <xs:attribute name="messageMap" type="xs:NCName"/>
+        <xs:attribute name="fieldCode" type="xs:string"/>
+        <xs:attribute name="tooltip" type="xs:string"/>
+        <xs:attribute name="alignment" type="xs:NCName"/>
+        <xs:attribute name="catalogId" type="xs:NCName"/>
+        <xs:attribute name="format" type="xs:string"/>
+        <xs:attribute name="colspan" type="xs:integer"/>
+    </xs:complexType>
+    <xs:complexType name="NonstructuredData">
+        <xs:sequence>
+            <xs:element name="specs" type="Specs" minOccurs="0" maxOccurs="1"/>
+            <xs:element name="printPage" type="PrintPage" minOccurs="1" maxOccurs="1"/>
+        </xs:sequence>
+        <xs:attribute name="formatStyleName" use="required" type="xs:string"/>
+    </xs:complexType>
+    <xs:complexType name="Specs">
+        <xs:sequence>
+            <xs:element name="pageSize" type="xs:NCName" minOccurs="0" maxOccurs="1"/>
+            <xs:element name="pageMeasurement" type="xs:NCName" minOccurs="0" maxOccurs="1"/>
+            <xs:element name="pageTopMargin" type="xs:double" minOccurs="0" maxOccurs="1"/>
+            <xs:element name="pageBottomMargin" type="xs:double" minOccurs="0" maxOccurs="1"/>
+            <xs:element name="pageLeftMargin" type="xs:double" minOccurs="0" maxOccurs="1"/>
+            <xs:element name="pageRightMargin" type="xs:double" minOccurs="0" maxOccurs="1"/>
+            <xs:element name="pageHeadDistance" type="xs:double" minOccurs="0" maxOccurs="1"/>
+            <xs:element name="pageFooterDistance" type="xs:double" minOccurs="0" maxOccurs="1"/>
+            <xs:element name="pageStyle" type="xs:NCName" minOccurs="0" maxOccurs="1"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="PrintPage">
+        <xs:sequence>
+            <xs:element name="header" type="Paragraphs" minOccurs="0" maxOccurs="1"/>
+            <xs:element name="body" type="Paragraphs" minOccurs="1" maxOccurs="1"/>
+            <xs:element name="footer" type="Paragraphs" minOccurs="0" maxOccurs="1"/>
+        </xs:sequence>
+        <xs:attribute name="pageId" use="required" type="xs:NCName"/>
+        <xs:attribute name="title" use="required"/>
+    </xs:complexType>
+    <xs:element name="documentId" type="xs:long"/>
+    <xs:complexType name="Paragraphs">
+        <xs:sequence>
+            <xs:element name="paragraph" type="Paragraph"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType mixed="true" name="Paragraph">
+        <xs:choice>
+            <xs:element name="element" type="ParagraphElement" minOccurs="0" maxOccurs="1"/>
+            <xs:element name="b" type="xs:string" minOccurs="0" maxOccurs="1"/>
+            <xs:element name="i" type="xs:string" minOccurs="0" maxOccurs="1"/>
+            <xs:element name="u" type="xs:string" minOccurs="0" maxOccurs="1"/>
+        </xs:choice>
+        <xs:attribute name="order" use="required" type="xs:integer"/>
+    </xs:complexType>
+    <xs:complexType name="ParagraphElement">
+        <xs:attribute name="name" use="required" type="xs:string"/>
+    </xs:complexType>
+    <xs:simpleType name="uuid-type">
+        <xs:union>
+            <xs:simpleType>
+                <xs:restriction base="xs:string">
+                    <xs:length value="0"/>
+                </xs:restriction>
+            </xs:simpleType>
+            <xs:simpleType>
+                <xs:restriction base="xs:string">
+                    <xs:length value="36"/>
+                    <xs:pattern value="(([0-9a-fA-F]){8}-([0-9a-fA-F]){4}-([0-9a-fA-F]){4}-([0-9a-fA-F]){4}-([0-9a-fA-F]){12})"/>
+                </xs:restriction>
+            </xs:simpleType>
+        </xs:union>
+    </xs:simpleType>
+    <xs:simpleType name="integer-or-null">
+        <xs:union>
+            <xs:simpleType>
+                <xs:restriction base="xs:string">
+                    <xs:length value="0"/>
+                </xs:restriction>
+            </xs:simpleType>
+            <xs:simpleType>
+                <xs:restriction base="xs:unsignedLong"/>
+            </xs:simpleType>
+        </xs:union>
+    </xs:simpleType>
+    <xs:simpleType name="datetime-or-null">
+        <xs:union>
+            <xs:simpleType>
+                <xs:restriction base="xs:string">
+                    <xs:length value="0"/>
+                </xs:restriction>
+            </xs:simpleType>
+            <xs:simpleType>
+                <xs:restriction base="xs:dateTime"/>
+            </xs:simpleType>
+        </xs:union>
+    </xs:simpleType>
+</xs:schema>

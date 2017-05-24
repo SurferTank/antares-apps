@@ -1,0 +1,125 @@
+{% load staticfiles i18n pipeline core_tags %} 
+<div class="container">
+    <div class="row">
+        <h3>{% trans 'antares.apps.flow.templates.dashboard.general_tab.case_information' %}</h3>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-2">
+            {% trans 'antares.apps.flow.templates.dashboard.general_tab.number' %}:
+        </div>
+        <div class="col-lg-2">
+            {% if activity.flow_case.hrn_code  %}
+                {{activity.flow_case.hrn_code}}
+            {% else %}
+                {{activity.flow_case.id}}
+            {% endif %}
+        </div>
+        <div class="col-lg-2">
+            {% trans 'antares.apps.flow.templates.dashboard.general_tab.name' %}:
+        </div>
+        <div class="col-lg-2">
+            {% if activity.flow_case.case_name is empty %}
+                <a id="activityCaseName" data-type="text" data-pk="{{activity.flow_case.id}}" data-value="{{activity.flow_case.case_name}}" data-url="{% url 'antares.apps.flow:api_case_update_name' %}" data-params="{csrfmiddlewaretoken:'{{csrf_token}}'}" data-title="{% trans 'antares.apps.flow.templates.dashboard.general_tab.enter_case_name' %}">[{% trans 'antares.apps.flow.templates.dashboard.general_tab.enter_name' %}]</a>
+            {% else %}
+                <a  id="activityCaseName" data-type="text" data-pk="{{activity.flow_case.id}}" data-value="{{activity.flow_case.case_name}}" data-url="{% url 'antares.apps.flow:api_case_update_name' %}" data-params="{csrfmiddlewaretoken:'{{csrf_token}}'}" data-title="{% trans 'antares.apps.flow.templates.dashboard.general_tab.enter_case_name' %}">{{activity.flow_case.case_name}}</a>
+            {% endif %}
+        </div>
+        
+    </div>
+    <div class="row">
+        <div class="col-lg-2">
+            {% trans 'antares.apps.flow.templates.dashboard.general_tab.status' %}:
+        </div>
+        <div class="col-lg-2">
+            {{ activity.flow_case.status}}
+        </div>
+        <div class="col-lg-2">
+            {% trans 'antares.apps.flow.templates.dashboard.general_tab.priority' %}:
+        </div>
+        <div class="col-lg-2">
+            <a href="#" id="casePriority" data-type="select2" data-pk="{{activity.flow_case.id}}" data-value="{{activity.flow_case.priority}}" data-url="{% url 'antares.apps.flow:api_case_update_priority' %}" data-params="{csrfmiddlewaretoken:'{{csrf_token}}'}" data-title="{% trans 'antares.apps.flow.templates.dashboard.general_tab.select_priority' %}"></a>
+        </div>
+        </div>
+        <div class="row">
+        <div class="col-lg-2">
+            {% trans 'antares.apps.flow.templates.dashboard.general_tab.source_type' %}:
+        </div>
+
+        <div class="col-lg-2">
+            {{ activity.flow_case.source.message_type}}
+        </div>
+        
+        {% if activity.flow_case.source.document %}
+            <div class="col-lg-2">
+                {% trans 'antares.apps.flow.templates.dashboard.general_tab.document_id' %}:
+            </div>
+            <div class="col-lg-2">
+                {{ activity.flow_case.source.document.hrn_code|default_if_none:activity.flow_case.source.document.id }}
+            </div>
+        {% else %}
+            <div class="col-lg-2">
+                &nbsp;
+            </div>
+            <div class="col-lg-2">
+                &nbsp;
+            </div>
+        {% endif %}
+    </div>    
+    <div class="row">
+        <h3>{% trans 'antares.apps.flow.templates.dashboard.general_tab.activity_information' %}</h3>
+    </div>
+    <div class="row">
+        <div class="col-lg-2">
+            {% trans 'antares.apps.flow.templates.dashboard.general_tab.name' %}:
+        </div>
+        <div class="col-lg-2">
+            {% if activity.activity_definition.display_name %}
+                {{ activity.activity_definition.display_name }}
+            {% elif activity.activity_definition.activity_id %}
+                {{ activity.activity_definition.activity_id}}
+            {% else %}
+                {{ activity.activity_definition.id}}
+            {% endif %}
+        </div>
+        <div class="col-lg-2">
+            {% trans 'antares.apps.flow.templates.dashboard.general_tab.id' %}:
+        </div>
+        <div class="col-lg-2">
+            {% if activity.hrn_code %}
+                {{ activity.hrn_code }} 
+            {% else %}
+                {{ activity.id}}
+            {% endif %}    
+        </div>
+       
+    </div>
+    <div class="row">
+         <div class="col-lg-2">
+            {% trans 'antares.apps.flow.templates.dashboard.general_tab.status' %}:
+        </div>
+        <div class="col-lg-2">
+            {{ activity.status}}
+        </div>    
+        <div class="col-lg-2">
+            {% trans 'antares.apps.flow.templates.dashboard.general_tab.creation_date' %}:
+        </div>
+        <div class="col-lg-2">
+            {{ activity.creation_date| date_time_format | default_if_none:""}}
+        </div>
+        </div>
+        <div class="row">
+        <div class="col-lg-2">
+            {% trans 'antares.apps.flow.templates.dashboard.general_tab.start_date' %}:
+        </div>
+        <div class="col-lg-2">
+            {{ activity.start_date | date_time_format | default_if_none:"" }}
+        </div>
+        <div class="col-lg-2">
+            &nbsp;
+        </div>
+        <div class="col-lg-2">
+            &nbsp;
+        </div>
+    </div>
+</div>

@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" targetNamespace="http://www.surfertank.com/antares/flow/xml/activityextendedattributes" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:subs="http://www.surfertank.com/antares/flow/xml/subscriptions" xmlns:act="http://www.surfertank.com/antares/flow/xml/activityextendedattributes" xmlns:xpdl="http://www.wfmc.org/2008/XPDL2.1">
+  <xs:import namespace="http://www.surfertank.com/antares/flow/xml/subscriptions" schemaLocation="subs.xsd"/>
+  <xs:import namespace="http://www.w3.org/2001/XMLSchema-instance" schemaLocation="xsi.xsd"/>
+  <xs:import namespace="http://www.wfmc.org/2008/XPDL2.1" schemaLocation="extendedattributes.xsd"/>
+  <xs:element name="Forms">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="act:Form"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Form">
+    <xs:complexType>
+      <xs:attribute name="canCreate" use="required" type="xs:boolean"/>
+      <xs:attribute name="canSave" use="required" type="xs:boolean"/>
+      <xs:attribute name="id" use="required" type="xs:NCName"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Tabs">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="act:Tab"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Tab">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="act:Parameters"/>
+      </xs:sequence>
+      <xs:attribute name="id" use="required" type="xs:NCName"/>
+      <xs:attribute name="name" use="required"/>
+      <xs:attribute name="route" use="required"/>
+      <xs:attribute name="url" use="required"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Parameters">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="act:Parameter"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Parameter">
+    <xs:complexType>
+      <xs:simpleContent>
+        <xs:extension base="xs:NCName">
+          <xs:attribute name="id" use="required" type="xs:NCName"/>
+        </xs:extension>
+      </xs:simpleContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Validations">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="act:Validation"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Validation">
+    <xs:complexType mixed="true">
+      <xs:attribute name="id" use="required" type="xs:NCName"/>
+      <xs:attribute name="message" use="required"/>
+      <xs:attribute name="scriptType" use="required" type="xs:NCName"/>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

@@ -1,0 +1,85 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2016-08-22 18:23-0300\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+
+msgid "antares.apps.core.models.action_definition.table_name"
+msgstr "Action Definition"
+
+msgid "antares.apps.core.models.action_definition.table_name_plural"
+msgstr "Action Definition"
+
+msgid "antares.apps.core.models.concept_type.table_name"
+msgstr "Concept Type"
+
+msgid "antares.apps.core.models.concept_type.table_name_plural"
+msgstr "Concept Types"
+
+msgid "antares.apps.core.models.currency.table_name"
+msgstr "Currency"
+
+msgid "antares.apps.core.models.currency.table_name_plural"
+msgstr "Currencies"
+
+msgid "antares.apps.core.models.holiday.table_name"
+msgstr "Holiday"
+
+msgid "antares.apps.core.models.holiday.table_name_plural"
+msgstr "Holidays"
+
+msgid "antares.apps.core.models.hrn_code.table_name"
+msgstr "Human Readable Code"
+
+msgid "antares.apps.core.models.hrn_code.table_name_plural"
+msgstr "Human Readable Codes"
+
+msgid "antares.apps.core.models.system_parameter.table_name"
+msgstr "System Parameter"
+
+msgid "antares.apps.core.models.system_parameter.table_name_plural"
+msgstr "System Parameters"
+
+msgid "antares.apps.core.models.user_parameter.table_name"
+msgstr "User Parameter"
+
+msgid "antares.apps.core.models.user_parameter.table_name_plural"
+msgstr "User Parameters"
+
+msgid "antares.apps.core.models.catalog.table_name"
+msgstr "Catalog"
+
+msgid "antares.apps.core.models.catalog.table_name_plural"
+msgstr "Catalogs"
+
+msgid "antares.apps.core.console.nuke_console.console.dont_now_command"
+msgstr "Don't know the specified command"
+
+msgid "antares.apps.core.console.nuke_console.messages.the_flow_definitions_could_not_be_deleted {error_message}"
+msgstr "Flow definitions could not be deleted (reason: {error_message})"
+
+
+msgid "antares.apps.core.console.nuke_console.console.package_deleted_sucessfully"
+msgstr "Package deleted successfully from the system"
+
+msgid "antares.apps.client.views.client_panel_view.exceptions.client_does_not_exist"
+msgstr "Client does not exist"
+
+msgid "antares.apps.client.views.client_panel_view.exceptions.user_has_no_client_assigned {username}"
+msgstr "User {username} has no client assigned"
+

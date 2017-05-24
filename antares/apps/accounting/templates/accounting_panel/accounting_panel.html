@@ -1,0 +1,113 @@
+{% extends template %} 
+{% load staticfiles i18n pipeline accounting_tags %} 
+{% block content %}
+    <div class="container">
+        <div class="row" id="accountingPanel" style="display:none; ">
+            <div class="col-lg-10">
+                {% if is_inner == False %}
+                    {% include 'client_header_info/client_header_info.html' %}
+                {% endif %}
+               <div class="panel panel-default" id="breadcrumsAccountingPanel" style="display:none; ">
+                    
+               </div>
+               <div id="clientAccountingPanel" >
+                <table width="100%" id="clientAccountingTable" class="table table-striped" >
+                    <thead>
+                        <tr>
+                            <th>{% trans 'antares.apps.accounting.templates.panel.concept_type' %}</th>
+                            <th>{% trans 'antares.apps.accounting.templates.panel.principal' %}</th>
+                            <th>{% trans 'antares.apps.accounting.templates.panel.interest' %}</th>
+                            <th>{% trans 'antares.apps.accounting.templates.panel.penalties' %}</th>
+                            <th>{% trans 'antares.apps.accounting.templates.panel.balance' %}</th>
+                        </tr>
+                    </thead>
+
+                </table>
+                <br/>
+                </div>
+                <div id="conceptTypeAccountingPanel" style="display:none; ">
+                 <table width="100%" id="conceptTypeAccountingTable" class="table table-striped" >
+                    <thead>
+                        <tr>
+                            <th>{% trans 'antares.apps.accounting.templates.panel.period' %}</th>
+                            <th>{% trans 'antares.apps.accounting.templates.panel.principal' %}</th>
+                            <th>{% trans 'antares.apps.accounting.templates.panel.interest' %}</th>
+                            <th>{% trans 'antares.apps.accounting.templates.panel.penalties' %}</th>
+                            <th>{% trans 'antares.apps.accounting.templates.panel.balance' %}</th>
+                        </tr>
+                    </thead>
+
+                </table>
+                <br/>
+                </div>
+                <div id="periodAccountingPanel" style="display:none; ">
+                <table width="100%" id="periodAccountingTable" class="table table-striped" >
+                    <thead>
+                        <tr>
+                            <th>{% trans 'antares.apps.accounting.templates.panel.account_type' %}</th>
+                            <th>{% trans 'antares.apps.accounting.templates.panel.principal' %}</th>
+                            <th>{% trans 'antares.apps.accounting.templates.panel.interest' %}</th>
+                            <th>{% trans 'antares.apps.accounting.templates.panel.penalties' %}</th>
+                            <th>{% trans 'antares.apps.accounting.templates.panel.balance' %}</th>
+                        </tr>
+                    </thead>
+
+                </table>
+                <br/>
+                </div>
+                <div id="accountTypeAccountingPanel" style="display:none; ">
+                <table  width="100%" id="accountTypeAccountingTable" class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th >{% trans 'antares.apps.accounting.templates.panel.transaction_id' %}</th>
+                            <th >{% trans 'antares.apps.accounting.templates.panel.document_id' %}</th>
+                            <th> {% trans 'antares.apps.accounting.templates.panel.transaction_type' %}</th>
+                            <th >{% trans 'antares.apps.accounting.templates.panel.effect' %}</th>
+                            <th >{% trans 'antares.apps.accounting.templates.panel.principal_amount' %}</th>
+                            <th >{% trans 'antares.apps.accounting.templates.panel.interest_amount' %}</th>
+                            <th >{% trans 'antares.apps.accounting.templates.panel.penalties_amount' %}</th>
+                            <th >{% trans 'antares.apps.accounting.templates.panel.total_amount' %}</th>
+                        </tr>
+                    </thead>
+
+                </table>
+                <br/>
+                </div>
+            </div>
+
+            <div class="col-lg-2">
+                {{client.id|accounting_balance_status_image}}
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript">
+    var antaresAccountingLinks = { 
+          client_panel_call: "{% url "antares.apps.accounting:api_client" %}", 
+          panel_view: "{% url "antares.apps.accounting:panel_view" %}", 
+          concept_type_call: "{% url "antares.apps.accounting:api_concept_type" %}", 
+          period_call: '{% url "antares.apps.accounting:api_period" %}', 
+          account_type_call: '{% url "antares.apps.accounting:api_account_type" %}', 
+          document_view: '{% url 'antares.apps.document:view_view' document_id='5911F917-A61B-478B-B7F2-89C754D1FAF6' %}?is_inner=yes'
+    };
+        
+    $(document).ready(function() { 
+        display_accounting_panel('{{client.id}}');
+    });
+    
+    </script>
+
+{% endblock %} 
+{% block javascript %} 
+    {% if is_inner == False %}
+        {% javascript 'jquery_ui_js' %} 
+        {% javascript 'datatables_js' %} 
+    {% endif %} 
+    {% javascript 'accounting_panel_js' %} 
+{% endblock javascript %} 
+{% block stylesheets %} 
+    {% if is_inner == False %}
+        {% stylesheet 'jquery_ui_css' %} 
+        {% stylesheet 'datatables_css' %}
+    {% endif %}
+{% endblock stylesheets %}
+{% block ng_app_name %}{% endblock ng_app_name %}

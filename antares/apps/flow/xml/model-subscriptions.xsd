@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+  <xs:element name="Suscriptions">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element maxOccurs="unbounded" ref="Suscription"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Suscription">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="Condition"/>
+        <xs:element ref="Publisher"/>
+        <xs:element ref="Actions"/>
+      </xs:sequence>
+      <xs:attribute name="eventTrigger" use="required" type="xs:NCName"/>
+      <xs:attribute name="suscriptionId" use="required" type="xs:NCName"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Condition" type="xs:string"/>
+  <xs:element name="Publisher">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="Type"/>
+        <xs:element ref="Form"/>
+        <xs:element ref="Document"/>
+        <xs:element ref="AlertRecord"/>
+        <xs:element ref="CaseId"/>
+        <xs:element ref="Activity"/>
+        <xs:element ref="Transition"/>
+        <xs:element ref="FlowDefinition"/>
+        <xs:element ref="Client"/>
+        <xs:element ref="ConceptType"/>
+        <xs:element ref="AccountType"/>
+        <xs:element ref="Period"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Type" type="xs:NCName"/>
+  <xs:element name="Form" type="xs:NCName"/>
+  <xs:element name="Document" type="xs:integer"/>
+  <xs:element name="AlertRecord" type="xs:integer"/>
+  <xs:element name="CaseId" type="xs:integer"/>
+  <xs:element name="Activity" type="xs:NCName"/>
+  <xs:element name="Transition" type="xs:NCName"/>
+  <xs:element name="FlowDefinition" type="xs:NCName"/>
+  <xs:element name="Client" type="xs:integer"/>
+  <xs:element name="ConceptType" type="xs:NCName"/>
+  <xs:element name="AccountType" type="xs:NCName"/>
+  <xs:element name="Period" type="xs:integer"/>
+  <xs:element name="Actions">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element maxOccurs="unbounded" ref="Action"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Action">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="Parameters"/>
+      </xs:sequence>
+      <xs:attribute name="id" use="required" type="xs:NCName"/>
+      <xs:attribute name="index" use="required" type="xs:integer"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Parameters">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element maxOccurs="unbounded" ref="Parameter"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Parameter">
+    <xs:complexType mixed="true">
+      <xs:attribute name="id" use="required" type="xs:NCName"/>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

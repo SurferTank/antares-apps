@@ -1,0 +1,6 @@
+include LICENSE
+include README.rst
+global-exclude *.pyc 
+recursive-include antares *.py *.html *.xhtml *.x* *.js *.css *.mo *.po
+
+recursive-include docs *

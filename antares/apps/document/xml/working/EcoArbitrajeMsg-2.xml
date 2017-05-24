@@ -1,0 +1,216 @@
+<?xml version="1.0"?>
+
+<document defaultLanguage="en" formDefinition="EcoArbitrajeMsg-1"
+	documentId="C7ADA348-90F9-45CC-801D-B926560E5971">
+	<headerElements>
+		<formName>EcoArbitrajeMsg</formName>
+		<formVersion>2</formVersion>
+		<documentVersion>0</documentVersion>
+		<activeVersion>true</activeVersion>
+		<author />
+		<authorName />
+		<saveDate />
+		<draftDate />
+		<creationDate />
+		<deleteDate />
+		<deleteCase />
+		<deleteComment />
+		<associatedTo />
+		<associationType />
+		<flowCase />
+		<origin />
+		<status />
+		<userReferralCode />
+		<accountingElements>
+			<client />
+			<branch />
+			<conceptType />
+			<period />
+			<accountType />
+			<baseDocument />
+		</accountingElements>
+		<hash>0</hash>
+		<hrnCode />
+		<hrnTitle />
+		<tags />
+		<options>
+			<allowCancellation>false</allowCancellation>
+		</options>
+		<externalFunctions>
+		</externalFunctions>
+		<helpText>
+			<help language="en" event="edit" markdown="true"><![CDATA[
+                ]]></help>
+		</helpText>
+	</headerElements>
+	<structuredData title="Mensaje de Economix" letterhead="images/generic_letterhead.jpg">
+		<page pageId="page1" title="Página 1">
+			<line row="1">
+				<field colspan="12" type="label" class="">Información General</field>
+			</line>
+			<line row="2">
+				<field colspan="3" type="label" class="someFieldClass">ID de mensaje</field>
+				<field colspan="3" dataType="integer" type="input" id="messageId"
+					name="Message Id" indexed="true" class="someFieldClass" messageMap="messageId"
+					fieldCode="100" tooltip="Id de mensaje emitido por economix"
+					readonly="true"></field>
+				<field colspan="3" type="label" class="someFieldClass">Fecha de Emisión</field>
+				<field colspan="3" dataType="date" type="date" id="timestamp"
+					name="Fecha de Emisión" indexed="false" class="someFieldClass"
+					messageMap="timestamp" fieldCode="101" tooltip="This is the message id"
+					readonly="true"></field>
+			</line>
+			<line row="3">
+				<field colspan="3" type="label" class="someFieldClass">Mercado Local</field>
+				<field colspan="3" dataType="string" type="input" id="localMarket"
+					name="Mercado Local" class="someFieldClass" messageMap="localMarket"
+					fieldCode="102" tooltip="Mercado Local" readonly="true"></field>
+				<field colspan="3" type="label" class="someFieldClass">Mercado Extranjero</field>
+				<field colspan="3" dataType="string" type="input" id="foreignMarket"
+					name="Mercado Extranjero" class="someFieldClass" messageMap="foreignMarket"
+					fieldCode="103" tooltip="Mercado Extranjero" readonly="true"></field>
+			</line>
+			<line row="4">
+				<field colspan="12" type="label" class="">Comprar</field>
+			</line>
+			<line row="5">
+				<field colspan="9" type="label" class="someFieldClass">Tasa de Cambio</field>
+				<field colspan="3" dataType="float" type="input" id="buyExchangeRate"
+					name="Tasa de cambio en compra" class="someFieldClass" messageMap="buyExchangeRate"
+					fieldCode="104" tooltip="Tasa de cambio en compra" readonly="true"></field>
+			</line>
+			<line row="6">
+				<field colspan="12" type="label" class="">Local</field>
+			</line>
+			<line row="7">
+				<field colspan="9" type="label" class="someFieldClass">Símbolo</field>
+				<field colspan="3" dataType="string" type="input" id="buyLocalSymbol"
+					name="Símbolo del Mercado Local" class="someFieldClass" messageMap="buyLocalSymbol"
+					fieldCode="105" tooltip="Símbolo dentro del mercado local"
+					readonly="true"></field>
+			</line>
+			<line row="8">
+				<field colspan="9" type="label" class="someFieldClass">Cantidad</field>
+				<field colspan="3" dataType="integer" type="input" id="buyLocalQuantity"
+					name="Comprar cantidad local" class="someFieldClass" messageMap="buyLocalQuantity"
+					fieldCode="106" tooltip="Cantidad a comprar dentro del mercado local"
+					readonly="true"></field>
+			</line>
+			<line row="9">
+				<field colspan="9" type="label" class="someFieldClass">Precio</field>
+				<field colspan="3" dataType="float" type="input" id="buyLocalPrice"
+					name="Precio" class="someFieldClass" messageMap="buyLocalPrice"
+					fieldCode="107" tooltip="Precio dentro del mercado local" readonly="true"></field>
+			</line>
+			<line row="10">
+				<field colspan="9" type="label" class="someFieldClass">Monto</field>
+				<field colspan="3" dataType="string" type="input" id="buyLocalAmount"
+					name="Monto" class="someFieldClass" messageMap="buyLocalAmount"
+					fieldCode="108" tooltip="Monto dentro del mercado local" readonly="true"></field>
+			</line>
+			<line row="11">
+				<field colspan="12" type="label" class="">Extranjero</field>
+			</line>
+			<line row="12">
+				<field colspan="9" type="label" class="someFieldClass">Símbolo</field>
+				<field colspan="3" dataType="string" type="input" id="buyForeignSymbol"
+					name="Símbolo del Mercado Extranjero" class="someFieldClass"
+					messageMap="buyForeignSymbol" fieldCode="109"
+					tooltip="Símbolo dentro del mercado extranjero" readonly="true"></field>
+			</line>
+			<line row="13">
+				<field colspan="9" type="label" class="someFieldClass">Cantidad</field>
+				<field colspan="3" dataType="float" type="input" id="buyForeignQuantity"
+					name="Cantidad" class="someFieldClass" messageMap="buyForeignQuantity"
+					fieldCode="110" tooltip="Cantidad a comprar dentro del mercado extranjero"
+					readonly="true"></field>
+			</line>
+			<line row="14">
+				<field colspan="9" type="label" class="someFieldClass">Precio</field>
+				<field colspan="3" dataType="float" type="input" id="buyForeignPrice"
+					name="Precio" class="someFieldClass" messageMap="buyForeignPrice"
+					fieldCode="111" tooltip="Precio dentro del mercado extranjero"
+					readonly="true"></field>
+			</line>
+			<line row="15">
+				<field colspan="9" type="label" class="someFieldClass">Paridad</field>
+				<field colspan="3" dataType="string" type="input" id="buyForeignParity"
+					name="Paridad" class="someFieldClass" messageMap="buyForeignParity"
+					fieldCode="112" tooltip="Paridad con el mercado extranjero"
+					readonly="true"></field>
+			</line>
+
+			<line row="16">
+				<field colspan="12" type="label" class="">Vender</field>
+			</line>
+			<line row="17">
+				<field colspan="9" type="label" class="someFieldClass">Tasa de Cambio</field>
+				<field colspan="3" dataType="float" type="input" id="sellExchangeRate"
+					name="Tasa de cambio en venta" class="someFieldClass" messageMap="sellExchangeRate"
+					fieldCode="113" tooltip="Tasa de cambio en venta" readonly="true"></field>
+			</line>
+			<line row="18">
+				<field colspan="12" type="label" class="">Local</field>
+			</line>
+			<line row="19">
+				<field colspan="9" type="label" class="someFieldClass" id="sellLocalSymbolLabel"
+					dataType="string">Símbolo</field>
+				<field colspan="3" dataType="string" type="input" id="sellLocalSymbol"
+					name="Símbolo del Mercado Local" class="someFieldClass" messageMap="sellLocalSymbol"
+					fieldCode="114" tooltip="Símbolo dentro del mercado local"
+					readonly="true"></field>
+			</line>
+			<line row="20">
+				<field colspan="9" type="label" class="someFieldClass">Cantidad</field>
+				<field colspan="3" dataType="integer" type="input" id="sellLocalQuantity"
+					name="Cantidad" class="someFieldClass" messageMap="sellLocalQuantity"
+					fieldCode="115" tooltip="Cantidad a comprar dentro del mercado local"
+					readonly="true"></field>
+			</line>
+			<line row="21">
+				<field colspan="9" type="label" class="someFieldClass">Precio</field>
+				<field colspan="3" dataType="float" type="input" id="sellLocalPrice"
+					name="Precio" class="someFieldClass" messageMap="sellLocalPrice"
+					fieldCode="116" tooltip="Precio dentro del mercado local" readonly="true"></field>
+			</line>
+			<line row="22">
+				<field colspan="9" type="label" class="someFieldClass">Paridad</field>
+				<field colspan="3" dataType="float" type="input" id="sellLocalParity"
+					name="Paridad" class="someFieldClass" messageMap="sellLocalParity"
+					fieldCode="117" tooltip="Paridad con el mercado local" readonly="true"></field>
+			</line>
+			<line row="23">
+				<field colspan="12" type="label" class="">Extranjero</field>
+			</line>
+			<line row="24">
+				<field colspan="9" type="label" class="someFieldClass">Símbolo</field>
+				<field colspan="3" dataType="string" type="input" id="sellForeignSymbol"
+					name="Símbolo del Mercado Extranjero" class="someFieldClass"
+					messageMap="sellForeignSymbol" fieldCode="118"
+					tooltip="Símbolo dentro del mercado extranjero" readonly="true"></field>
+			</line>
+			<line row="25">
+				<field colspan="9" type="label" class="someFieldClass">Cantidad</field>
+				<field colspan="3" dataType="integer" type="input"
+					id="sellForeignQuantity" name="Cantidad" class="someFieldClass"
+					messageMap="sellForeignQuantity" fieldCode="119"
+					tooltip="Cantidad a comprar dentro del mercado extranjero"
+					readonly="true"></field>
+			</line>
+			<line row="26">
+				<field colspan="9" type="label" class="someFieldClass">Precio</field>
+				<field colspan="3" dataType="float" type="input" id="sellForeignPrice"
+					name="Precio" class="someFieldClass" messageMap="sellForeignPrice"
+					fieldCode="120" tooltip="Precio dentro del mercado extranjero"
+					readonly="true"></field>
+			</line>
+			<line row="27">
+				<field colspan="9" type="label" class="someFieldClass">Monto</field>
+				<field colspan="3" dataType="float" type="input" id="sellForeignAmount"
+					name="Monto" class="someFieldClass" messageMap="sellForeignAmount"
+					fieldCode="121" tooltip="Monto dentro del mercado extranjero"
+					readonly="true"></field>
+			</line>
+		</page>
+	</structuredData>
+</document>

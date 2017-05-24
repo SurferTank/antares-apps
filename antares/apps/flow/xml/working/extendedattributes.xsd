@@ -1,0 +1,490 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" targetNamespace="http://www.wfmc.org/2008/XPDL2.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:subs="http://www.surfertank.com/antares/flow/xml/subscriptions" xmlns:xpdl="http://www.wfmc.org/2008/XPDL2.1">
+  <xs:import namespace="http://www.surfertank.com/antares/flow/xml/subscriptions" schemaLocation="subs.xsd"/>
+  <xs:import namespace="http://www.w3.org/2001/XMLSchema-instance" schemaLocation="xsi.xsd"/>
+  <xs:element name="Package">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="xpdl:PackageHeader"/>
+        <xs:element ref="xpdl:RedefinableHeader"/>
+        <xs:element ref="xpdl:ConformanceClass"/>
+        <xs:element ref="xpdl:Script"/>
+        <xs:element ref="xpdl:TypeDeclarations"/>
+        <xs:element ref="xpdl:Participants"/>
+        <xs:element ref="xpdl:Applications"/>
+        <xs:element ref="xpdl:DataFields"/>
+        <xs:element ref="xpdl:Pools"/>
+        <xs:element ref="xpdl:WorkflowProcesses"/>
+        <xs:element ref="xpdl:ExtendedAttributes"/>
+      </xs:sequence>
+      <xs:attribute name="Id" use="required" type="xs:NCName"/>
+      <xs:attribute name="Name" use="required"/>
+      <xs:attribute ref="xsi:schemaLocation" use="required"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="PackageHeader">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="xpdl:XPDLVersion"/>
+        <xs:element ref="xpdl:Vendor"/>
+        <xs:element ref="xpdl:Created"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="XPDLVersion" type="xs:decimal"/>
+  <xs:element name="Vendor" type="xs:string"/>
+  <xs:element name="ConformanceClass">
+    <xs:complexType>
+      <xs:attribute name="GraphConformance" use="required" type="xs:NCName"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Script">
+    <xs:complexType>
+      <xs:attribute name="Type" use="required" type="xs:NCName"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="TypeDeclarations">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="xpdl:TypeDeclaration"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="TypeDeclaration">
+    <xs:complexType>
+      <xs:complexContent>
+        <xs:extension base="xpdl:BasicType">
+          <xs:attribute name="Id" use="required" type="xs:NCName"/>
+          <xs:attribute name="Name" use="required"/>
+        </xs:extension>
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Pools">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="xpdl:Pool"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Pool">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="xpdl:Lanes"/>
+        <xs:element ref="xpdl:NodeGraphicsInfos"/>
+      </xs:sequence>
+      <xs:attribute name="BoundaryVisible" use="required" type="xs:boolean"/>
+      <xs:attribute name="Id" use="required" type="xs:NCName"/>
+      <xs:attribute name="MainPool" use="required" type="xs:boolean"/>
+      <xs:attribute name="Name" use="required"/>
+      <xs:attribute name="Orientation" use="required" type="xs:NCName"/>
+      <xs:attribute name="Process" use="required" type="xs:NCName"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Lanes">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="xpdl:Lane"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Lane">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="xpdl:NodeGraphicsInfos"/>
+      </xs:sequence>
+      <xs:attribute name="Id" use="required" type="xs:NCName"/>
+      <xs:attribute name="Name" use="required"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="WorkflowProcesses">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="xpdl:WorkflowProcess"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="WorkflowProcess">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="xpdl:ProcessHeader"/>
+        <xs:element ref="xpdl:RedefinableHeader"/>
+        <xs:element ref="xpdl:FormalParameters"/>
+        <xs:element ref="xpdl:Participants"/>
+        <xs:element ref="xpdl:Applications"/>
+        <xs:element ref="xpdl:DataFields"/>
+        <xs:element ref="xpdl:Activities"/>
+        <xs:element ref="xpdl:Transitions"/>
+        <xs:element ref="xpdl:ExtendedAttributes"/>
+      </xs:sequence>
+      <xs:attribute name="AccessLevel" use="required" type="xs:NCName"/>
+      <xs:attribute name="Id" use="required" type="xs:NCName"/>
+      <xs:attribute name="Name" use="required"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ProcessHeader">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="xpdl:Created"/>
+      </xs:sequence>
+      <xs:attribute name="DurationUnit" use="required" type="xs:NCName"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Activities">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element maxOccurs="unbounded" ref="xpdl:Activity"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Activity">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:choice>
+          <xs:element ref="xpdl:Event"/>
+          <xs:sequence>
+            <xs:element ref="xpdl:Implementation"/>
+            <xs:element ref="xpdl:Performers"/>
+            <xs:element ref="xpdl:SimulationInformation"/>
+          </xs:sequence>
+        </xs:choice>
+        <xs:element ref="xpdl:NodeGraphicsInfos"/>
+        <xs:element minOccurs="0" ref="xpdl:ExtendedAttributes"/>
+      </xs:sequence>
+      <xs:attribute name="FinishMode" use="required" type="xs:NCName"/>
+      <xs:attribute name="Id" use="required" type="xs:NCName"/>
+      <xs:attribute name="Name" use="required"/>
+      <xs:attribute name="StartMode" use="required" type="xs:NCName"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Event">
+    <xs:complexType>
+      <xs:choice>
+        <xs:element ref="xpdl:EndEvent"/>
+        <xs:element ref="xpdl:StartEvent"/>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="EndEvent">
+    <xs:complexType>
+      <xs:attribute name="Result" use="required" type="xs:NCName"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="StartEvent">
+    <xs:complexType>
+      <xs:attribute name="Trigger" use="required" type="xs:NCName"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Implementation">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="xpdl:Task"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Task">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element maxOccurs="unbounded" ref="xpdl:TaskApplication"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="TaskApplication">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="xpdl:ActualParameters"/>
+        <xs:element minOccurs="0" ref="xpdl:Description"/>
+      </xs:sequence>
+      <xs:attribute name="Id" use="required" type="xs:NCName"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ActualParameters">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="xpdl:ActualParameter"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ActualParameter" type="xs:string"/>
+  <xs:element name="Performers">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="xpdl:Performer"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Performer" type="xs:NCName"/>
+  <xs:element name="SimulationInformation">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="xpdl:Cost"/>
+        <xs:element ref="xpdl:TimeEstimation"/>
+      </xs:sequence>
+      <xs:attribute name="Instantiation" use="required" type="xs:NCName"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Cost" type="xs:integer"/>
+  <xs:element name="TimeEstimation">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="xpdl:WaitingTime"/>
+        <xs:element ref="xpdl:WorkingTime"/>
+        <xs:element ref="xpdl:Duration"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="WaitingTime" type="xs:integer"/>
+  <xs:element name="WorkingTime" type="xs:integer"/>
+  <xs:element name="Duration" type="xs:integer"/>
+  <xs:element name="Transitions">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element maxOccurs="unbounded" ref="xpdl:Transition"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Transition">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="xpdl:ConnectorGraphicsInfos"/>
+      </xs:sequence>
+      <xs:attribute name="From" use="required" type="xs:NCName"/>
+      <xs:attribute name="Id" use="required" type="xs:NCName"/>
+      <xs:attribute name="To" use="required" type="xs:NCName"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ConnectorGraphicsInfos">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="xpdl:ConnectorGraphicsInfo"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ConnectorGraphicsInfo">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" ref="xpdl:Coordinates"/>
+      </xs:sequence>
+      <xs:attribute name="FillColor" use="required"/>
+      <xs:attribute name="IsVisible" use="required" type="xs:boolean"/>
+      <xs:attribute name="Style" use="required" type="xs:NCName"/>
+      <xs:attribute name="ToolId" use="required" type="xs:NCName"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Created" type="xs:string"/>
+  <xs:element name="RedefinableHeader">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="xpdl:Author"/>
+        <xs:element ref="xpdl:Version"/>
+        <xs:sequence minOccurs="0">
+          <xs:element ref="xpdl:Codepage"/>
+          <xs:element ref="xpdl:Countrykey"/>
+        </xs:sequence>
+      </xs:sequence>
+      <xs:attribute name="PublicationStatus" use="required" type="xs:NCName"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Author" type="xs:string"/>
+  <xs:element name="Version" type="xs:decimal"/>
+  <xs:element name="Codepage" type="xs:NCName"/>
+  <xs:element name="Countrykey" type="xs:NCName"/>
+  <xs:complexType name="BasicType">
+    <xs:sequence>
+      <xs:element ref="xpdl:BasicType"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="BasicType">
+    <xs:complexType>
+      <xs:attribute name="Type" use="required" type="xs:NCName"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Participants">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element maxOccurs="unbounded" ref="xpdl:Participant"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Participant">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="xpdl:ParticipantType"/>
+        <xs:element minOccurs="0" ref="xpdl:ExtendedAttributes"/>
+      </xs:sequence>
+      <xs:attribute name="Id" use="required" type="xs:NCName"/>
+      <xs:attribute name="Name"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ParticipantType">
+    <xs:complexType>
+      <xs:attribute name="Type" use="required" type="xs:NCName"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Applications">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="xpdl:Application"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Application">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="xpdl:Description"/>
+        <xs:element ref="xpdl:FormalParameters"/>
+        <xs:element ref="xpdl:ExtendedAttributes"/>
+      </xs:sequence>
+      <xs:attribute name="Id" use="required" type="xs:NCName"/>
+      <xs:attribute name="Name" use="required"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="DataFields">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element maxOccurs="unbounded" ref="xpdl:DataField"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="DataField">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="xpdl:DataType"/>
+        <xs:element minOccurs="0" ref="xpdl:Length"/>
+      </xs:sequence>
+      <xs:attribute name="Id" use="required" type="xs:NCName"/>
+      <xs:attribute name="IsArray" use="required" type="xs:boolean"/>
+      <xs:attribute name="Name" use="required"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="NodeGraphicsInfos">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element maxOccurs="unbounded" ref="xpdl:NodeGraphicsInfo"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="NodeGraphicsInfo">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" ref="xpdl:Coordinates"/>
+      </xs:sequence>
+      <xs:attribute name="BorderColor" use="required"/>
+      <xs:attribute name="FillColor" use="required"/>
+      <xs:attribute name="Height" type="xs:integer"/>
+      <xs:attribute name="IsVisible" use="required" type="xs:boolean"/>
+      <xs:attribute name="LaneId" type="xs:NCName"/>
+      <xs:attribute name="ToolId" use="required" type="xs:NCName"/>
+      <xs:attribute name="Width" type="xs:integer"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="FormalParameters">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element maxOccurs="unbounded" ref="xpdl:FormalParameter"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="FormalParameter">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="xpdl:DataType"/>
+        <xs:element minOccurs="0" ref="xpdl:Length"/>
+      </xs:sequence>
+      <xs:attribute name="Id" use="required" type="xs:NCName"/>
+      <xs:attribute name="IsArray" use="required" type="xs:boolean"/>
+      <xs:attribute name="Mode" use="required" type="xs:NCName"/>
+      <xs:attribute name="Name"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Description" type="xs:string"/>
+  <xs:element name="ExtendedAttributes">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element maxOccurs="unbounded" ref="xpdl:ExtendedAttribute"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ExtendedAttribute">
+    <xs:complexType>
+      <xs:choice minOccurs="0">
+        <xs:element ref="subs:Subscriptions"/>
+        <xs:element ref="xpdl:ActivityTabs"/>
+        <xs:element ref="xpdl:Forms"/>
+        <xs:element ref="xpdl:Validations"/>
+      </xs:choice>
+      <xs:attribute name="Name" use="required" type="xs:NCName"/>
+      <xs:attribute name="Value" type="xs:anyURI"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ActivityTabs">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="xpdl:ActivityTab"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ActivityTab">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="xpdl:Parameters"/>
+      </xs:sequence>
+      <xs:attribute name="id" use="required" type="xs:NCName"/>
+      <xs:attribute name="name" use="required"/>
+      <xs:attribute name="route" use="required"/>
+      <xs:attribute name="url" use="required"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Parameters">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="xpdl:Parameter"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Parameter">
+    <xs:complexType>
+      <xs:simpleContent>
+        <xs:extension base="xs:NCName">
+          <xs:attribute name="id" use="required" type="xs:NCName"/>
+        </xs:extension>
+      </xs:simpleContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Forms">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="xpdl:Form"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Form">
+    <xs:complexType>
+      <xs:attribute name="canCreate" use="required" type="xs:boolean"/>
+      <xs:attribute name="canSave" use="required" type="xs:boolean"/>
+      <xs:attribute name="id" use="required" type="xs:NCName"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Validations">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="xpdl:Validation"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Validation">
+    <xs:complexType mixed="true">
+      <xs:attribute name="id" use="required" type="xs:NCName"/>
+      <xs:attribute name="message" use="required"/>
+      <xs:attribute name="scriptType" use="required" type="xs:NCName"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Coordinates">
+    <xs:complexType>
+      <xs:attribute name="XCoordinate" use="required" type="xs:integer"/>
+      <xs:attribute name="YCoordinate" use="required" type="xs:integer"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="DataType" type="xpdl:BasicType"/>
+  <xs:element name="Length" type="xs:integer"/>
+</xs:schema>

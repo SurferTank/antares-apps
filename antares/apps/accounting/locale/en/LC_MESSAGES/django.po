@@ -1,0 +1,167 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# LEONARDO JAVIER BELEN <leobelen@gmail.com>, 2016.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: 0.1\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2016-08-22 18:23-0300\n"
+"PO-Revision-Date: 2016-08-22 18:23-0300\n"
+"Last-Translator: LEONARDO JAVIER BELEN <leobelen@gmail.com>\n"
+"Language-Team: EN <en@surfertank.com>\n"
+"Language: en\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: constants.py:76
+msgid "antares.apps.accounting.constants.TransactionEffectType.CREDIT"
+msgstr "Credit"
+
+msgid "antares.apps.accounting.constants.TransactionEffectType.DEBIT"
+msgstr "Debit"
+
+msgid "antares.apps.accounting.constants.TransactionAffectedValueType.PRINCIPAL"
+msgstr "Principal"
+
+msgid "antares.apps.accounting.constants.TransactionAffectedValueType.INTEREST"
+msgstr "Interest"
+
+msgid "antares.apps.accounting.constants.TransactionAffectedValueType.PENALTIES"
+msgstr "Penalties"
+
+
+#: manager/account_manager.py:41
+msgid "antares.apps.accounting.manager.account_manager.no_rules"
+msgstr "No rules"
+
+#: manager/account_manager.py:47
+msgid "antares.apps.accounting.manager.account_manager.document_not_ready_for_posting"
+msgstr "Document not ready for posting"
+
+msgid "antares.apps.accounting.templates.panel.concept_type"
+msgstr "Concept Type"
+
+msgid "antares.apps.accounting.templates.panel.principal"
+msgstr "Principal"
+
+msgid "antares.apps.accounting.templates.panel.interest"
+msgstr "Interest"
+
+msgid "antares.apps.accounting.templates.panel.penalties"
+msgstr "Penalties"
+
+msgid "antares.apps.accounting.templates.panel.balance"
+msgstr "Balance"
+
+msgid "antares.apps.accounting.templates.emptyMessages.emptyAccount"
+msgstr "No accounts found"
+
+msgid "antares.apps.accounting.templates.panel.period"
+msgstr "Period"
+
+msgid "antares.apps.accounting.templates.panel.account_type"
+msgstr "Account Type"
+
+
+#: manager/account_manager.py:53
+#, python-format
+msgid "antares.apps.accounting.manager.account_manager.cancelling_document %(document_id)s"
+msgstr "Cancelling Document with id %(document_id)s"
+
+#: manager/account_manager.py:144
+msgid "antares.apps.accounting.manager.account_manager.starting_to_balance_the_account"
+msgstr "Starting to balance the account"
+
+#: manager/account_manager.py:163
+#, python-format
+msgid "antares.app.accounting.manager.apply_transaction_to_balance_info1 %(principal)d %(interest)d %(penalties)d"
+msgstr "Applying transaction to balance with values principal: %(principal)d interest:%(interest)d penalties:%(penalties)d"
+
+#: manager/account_manager.py:194
+msgid "antares.apps.accounting.manager.account_manager.missing_client"
+msgstr "Missing Client"
+
+#: manager/account_manager.py:209
+msgid "antares.apps.accounting.manager.account_manager.missing_account_type"
+msgstr "Missing Account Type"
+
+#: manager/account_manager.py:226
+msgid "antares.apps.accounting.manager.account_manager.missing_concept_type"
+msgstr "Missing Concept Type"
+
+#: manager/account_manager.py:237
+msgid "antares.apps.accounting.manager.account_manager.missing_period"
+msgstr "Missing Period"
+
+#: manager/account_manager.py:250
+msgid ""
+"antares.apps.accounting.manager.account_manager.negative_amount_exception"
+msgstr "Numbers cannot be negative"
+
+#: models/account_balance.py:112 models/account_document.py:52
+#: models/account_rule.py:60 models/account_transaction.py:54
+#: models/account_type.py:48 models/gl_account_type.py:47
+#: models/gl_balance.py:44 models/gl_transaction.py:41
+#: models/transaction_type.py:46
+msgid "antares.apps.accounting.models.account_rule.table_name"
+msgstr "Account Rule"
+
+msgid "antares.apps.accounting.models.account_rule.table_name_plural"
+msgstr "Account Rules"
+
+msgid "antares.apps.accounting.models.account_type.table_name"
+msgstr "Account Type"
+
+msgid "antares.apps.accounting.models.account_type.table_name_plural"
+msgstr "Account Types"
+
+msgid "antares.apps.accounting.models.gl_account_type.table_name"
+msgstr "General Ledger Account Type"
+
+msgid "antares.apps.accounting.models.gl_account_type.table_name_plural"
+msgstr "General Ledger Account Types"
+
+msgid "antares.apps.accounting.models.transaction_type.table_name"
+msgstr "Transaction Type"
+
+msgid "antares.apps.accounting.models.transaction_type.table_name_plural"
+msgstr "Transaction Types"
+
+msgid "antares.apps.accounting.templates.panel.transaction_id"
+msgstr "Transaction Id"
+
+msgid "antares.apps.accounting.templates.panel.document_id"
+msgstr "Document"
+
+msgid "antares.apps.accounting.templates.panel.transaction_type"
+msgstr "Transaction Type"
+
+msgid "antares.apps.accounting.templates.panel.effect"
+msgstr "Effect"
+
+msgid "antares.apps.accounting.templates.panel.principal_amount"
+msgstr "Principal"
+
+msgid "antares.apps.accounting.templates.panel.interest_amount"
+msgstr "Interest"
+
+msgid "antares.apps.accounting.templates.panel.penalties_amount"
+msgstr "Penalties"
+
+msgid "antares.apps.accounting.templates.panel.total_amount"
+msgstr "Total"
+
+msgid "antares.apps.accounting.views.accounting_panel_view.exceptions.user_has_no_client_assigned {username}"
+msgstr "User {username} has no client assigned"
+
+msgid "antares.apps.accounting.views.accounting_panel_view.exceptions.client_does_not_exist"
+msgstr "Client does not exist"
+
+
+
+

@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" targetNamespace="http://www.surfertank.com/antares/flow/xml/subscriptions" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:subs="http://www.surfertank.com/antares/flow/xml/subscriptions" xmlns:xpdl="http://www.wfmc.org/2008/XPDL2.1">
+  <xs:import namespace="http://www.w3.org/2001/XMLSchema-instance" schemaLocation="xsi.xsd"/>
+  <xs:import namespace="http://www.wfmc.org/2008/XPDL2.1" schemaLocation="extendedattributes.xsd"/>
+  <xs:element name="Subscriptions">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="subs:Subscription"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Subscription">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="subs:Condition"/>
+        <xs:element ref="subs:Publisher"/>
+        <xs:element ref="subs:Actions"/>
+      </xs:sequence>
+      <xs:attribute name="eventTrigger" use="required" type="xs:NCName"/>
+      <xs:attribute name="subscriptionId" use="required" type="xs:NCName"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Condition" type="xs:string"/>
+  <xs:element name="Publisher">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="subs:Type"/>
+        <xs:element ref="subs:Form"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Type" type="xs:string"/>
+  <xs:element name="Form" type="xs:NCName"/>
+  <xs:element name="Actions">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="subs:Action"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Action">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="subs:Parameters"/>
+      </xs:sequence>
+      <xs:attribute name="id" use="required" type="xs:NCName"/>
+      <xs:attribute name="index" use="required" type="xs:integer"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Parameters">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element maxOccurs="unbounded" ref="subs:Parameter"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Parameter">
+    <xs:complexType mixed="true">
+      <xs:attribute name="id" use="required" type="xs:NCName"/>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

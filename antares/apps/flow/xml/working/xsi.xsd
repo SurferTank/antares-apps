@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" targetNamespace="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:subs="http://www.surfertank.com/antares/flow/xml/subscriptions" xmlns:xpdl="http://www.wfmc.org/2008/XPDL2.1">
+  <xs:import namespace="http://www.surfertank.com/antares/flow/xml/subscriptions" schemaLocation="subs.xsd"/>
+  <xs:import namespace="http://www.wfmc.org/2008/XPDL2.1" schemaLocation="extendedattributes.xsd"/>
+  <xs:attribute name="schemaLocation"/>
+</xs:schema>

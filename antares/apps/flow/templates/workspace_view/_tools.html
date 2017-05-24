@@ -1,0 +1,9 @@
+{% load staticfiles i18n pipeline %} 
+{% for tool in activity_tools %}
+    <div>
+        {% autoescape off %}
+            {{ tool  }}
+        {% endautoescape %}
+    </div>
+{% endfor %}
+

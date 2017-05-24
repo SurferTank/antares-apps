@@ -1,0 +1,75 @@
+{% extends template %}
+{% load staticfiles i18n pipeline %} 
+
+{% block title %}Antares Document{% endblock %}
+{% block ng_app_name %}{% endblock ng_app_name %}
+{% block bodyId %}Antares Document{% endblock %}
+{% block javascript %} 
+    {% if is_inner == 'false' %}
+        {% javascript 'jquery_ui_js' %} 
+    {% endif %}
+{% endblock javascript %} 
+
+{% block stylesheets %}
+    {% if is_inner == 'false' %}
+        {% stylesheet 'jquery_ui_css' %} 
+    {% endif %}
+{% endblock stylesheets %} 
+ 
+{% block content %} <div class="container">
+  <form id="documentEditorForm" method="POST">
+    <div class="panel">
+      <div class="row">
+        <div class="col-lg-12">
+          <span>Información General</span>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-lg-3">
+          <span>ID de mensaje</span>
+        </div>
+        <div class="col-lg-3">
+          <div>{{fields.messageId|default_if_none:''}}</div>
+        </div>
+        <div class="col-lg-3">
+          <span>Fecha de Emisión</span>
+        </div>
+        <div class="col-lg-3">
+          <div>{{fields.timestamp|default_if_none:''}}</div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-lg-3">
+          <span>Mercado Local</span>
+        </div>
+        <div class="col-lg-3">
+          <div>{{fields.localMarket|default_if_none:''}}</div>
+        </div>
+        <div class="col-lg-3">
+          <span>Mercado Extranjero</span>
+        </div>
+        <div class="col-lg-3">
+          <div>{{fields.foreignMarket|default_if_none:''}}</div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-lg-9">
+          <span>Retorno Promedio</span>
+        </div>
+        <div class="col-lg-3">
+          <div>{{fields.avgReturn|default_if_none:''}}</div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-lg-9">
+          <span>Retorno Operation</span>
+        </div>
+        <div class="col-lg-3">
+          <div>{{fields.avgOperation|default_if_none:''}}</div>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>{% endblock %}
+        
+

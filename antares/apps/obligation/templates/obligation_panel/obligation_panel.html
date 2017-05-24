@@ -1,0 +1,80 @@
+{% extends template %} 
+{% load staticfiles i18n pipeline  %} 
+{% block content %} 
+    {{error_message}} 
+    <div class="container">
+        <div class="row"> <!-- client info -->
+            {% if is_inner == False %}
+                    {% include 'client_header_info/client_header_info.html' %}
+            {% endif %}
+        </div> <!-- client info -->
+        <div class="row"> <!-- client info -->
+            <div class="col-lg-12">
+                <ul class="nav nav-tabs">
+                    <li class="active"><a data-toggle="tab" href="#pendingTab">{% trans 'antares.apps.obligation.templates.panel.pending' %}</a></li>
+                    <li><a data-toggle="tab" href="#compliedTab">{% trans 'antares.apps.obligation.templates.panel.complied' %}</a></li>
+                </ul>
+                <div class="tab-content">
+                    <div id="pendingTab" class="tab-pane fade in active">
+                        <table  width="100%" id="pendingObligationsTable" class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>{% trans 'antares.apps.obligation.templates.panel.type' %}</th>
+                                    <th>{% trans 'antares.apps.obligation.templates.panel.concept_type' %}</th>
+                                    <th>{% trans 'antares.apps.obligation.templates.panel.period' %}</th>
+                                    <th>{% trans 'antares.apps.obligation.templates.panel.due_date' %}</th>
+                                    <th>{% trans 'antares.apps.obligation.templates.panel.status' %}</th>
+                                    <th>{% trans 'antares.apps.obligation.templates.panel.actions' %}</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div id="compliedTab" class="tab-pane fade">
+                        <table  width="100%" id="compliedObligationsTable" class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>{% trans 'antares.apps.obligation.templates.panel.type' %}</th>
+                                    <th>{% trans 'antares.apps.obligation.templates.panel.concept_type' %}</th>
+                                    <th>{% trans 'antares.apps.obligation.templates.panel.period' %}</th>
+                                    <th>{% trans 'antares.apps.obligation.templates.panel.due_date' %}</th>
+                                    <th>{% trans 'antares.apps.obligation.templates.panel.compliance_date' %}</th>
+                                    <th>{% trans 'antares.apps.obligation.templates.panel.status' %}</th>
+                                     <th>{% trans 'antares.apps.obligation.templates.panel.actions' %}</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript">
+    var antaresObligationLinks = { 
+          obligations_pending_view: "{% url "antares.apps.obligation:panel_ajax_pending_view" %}",
+          obligations_complied_view: "{% url "antares.apps.obligation:panel_ajax_complied_view" %}", 
+    };
+        
+    $(document).ready(function() { 
+        display_obligations_panel('{{client.id}}');
+    });
+    </script>
+{% endblock %} 
+
+{% block javascript %} 
+    {% if is_inner == False %}
+        {% javascript 'datatables_js' %} 
+    {% endif %} 
+    {% javascript 'obligation_panel_js' %} 
+{% endblock javascript %} 
+    
+{% block stylesheets %}
+    {% if is_inner == False %}
+        {% stylesheet 'datatables_css' %}
+    {% endif %} 
+{% endblock stylesheets %} 
+
+{% block ng_app_name %}{% endblock ng_app_name %}

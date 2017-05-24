@@ -1,0 +1,92 @@
+# Antares Obligation Module.
+# Copyright (C) 2016 SurferTank Inc. 
+# This file is distributed under the same license as the Antares package.
+# Leonardo Javier Belen <leobelen@gmail.com>, 2016.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: 1\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2016-08-22 18:23-0300\n"
+"PO-Revision-Date: 2016-07-29 02:11-0300\n"
+"Last-Translator: Leonardo Javier Belen <leobelen@gmail.com>\n"
+"Language-Team: Leonardo Javier Belen <leobelen@gmail.com>\n"
+"Language: en \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+
+msgid "antares.apps.obligation.templates.panel.type"
+msgstr "Type"
+
+msgid "antares.apps.obligation.templates.panel.concept_type"
+msgstr "Concept Type"
+
+msgid "antares.apps.obligation.templates.panel.period"
+msgstr "Period"
+
+msgid "antares.apps.obligation.templates.panel.due_date"
+msgstr "Due Date"
+
+msgid "antares.apps.obligation.templates.panel.status"
+msgstr "Status"
+
+msgid "antares.apps.obligation.templates.panel.compliance_date"
+msgstr "Compliance Date"
+
+msgid "antares.apps.obligation.templates.panel.pending"
+msgstr "Pending"
+
+msgid "antares.apps.obligation.templates.panel.complied"
+msgstr "Complied"
+
+msgid "antares.apps.obligation.templates.emptyMessages.no_complied_obligations_found"
+msgstr "No complied obligations found"
+
+msgid "antares.apps.obligation.templates.emptyMessages.no_pending_obligations_found"
+msgstr "No pending obligations found"
+
+msgid "antares.apps.obligation.models.obligation_rule.table_name"
+msgstr "Obligation Rule"
+
+msgid "antares.apps.obligation.models.obligation_rule.table_name_plural"
+msgstr "Obligation Rules"
+
+msgid "antares.apps.obligation.templates.panel.actions"
+msgstr "Actions"
+
+
+
+msgid "antares.apps.obligation.constants.ObligationType.File"
+msgstr "File"
+
+msgid "antares.apps.obligation.constants.ObligationType.Pay"
+msgstr "Pay"
+
+msgid "antares.apps.obligation.constants.ObligationType.Inform"
+msgstr "Inform"
+
+msgid "antares.apps.obligation.constants.ObligationStatusType.Not Exigible"
+msgstr "Not Exigible"
+
+msgid "antares.apps.obligation.constants.ObligationStatusType.Pending"
+msgstr "Pending"
+
+msgid "antares.apps.obligation.constants.ObligationStatusType.Compliant"
+msgstr "Compliant"
+
+msgid "antares.apps.obligation.constants.ObligationStatusType.Cancelled"
+msgstr "Cancelled"
+
+msgid "antares.apps.obligation.console.obligation_console.console.command_sucessfully_run"
+msgstr "Command successfully run"
+
+msgid "antares.apps.obligation.console.obligation_console.console.dont_now_command"
+msgstr "Do not know command"
+
+
+
+

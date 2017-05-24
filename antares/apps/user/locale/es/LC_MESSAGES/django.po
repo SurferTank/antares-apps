@@ -1,0 +1,131 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2016-08-22 18:23-0300\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+
+#: models/org_unit.py:52
+msgid "antares.apps.user.models.org_unit.table_name"
+msgstr "Unidad organizacional"
+
+#: models/org_unit.py:53
+msgid "antares.apps.user.models.org_unit.table_name_plural"
+msgstr "Unidades organizacionales"
+
+#: models/role.py:57
+msgid "antares.apps.user.models.role.table_name"
+msgstr "Rol"
+
+#: models/role.py:58
+msgid "antares.apps.user.models.role.table_name_plural"
+msgstr "Roles"
+
+#: models/role_view.py:54
+#, fuzzy
+#| msgid "antares.apps.user.models.role.table_name"
+msgid "antares.apps.user.models.role_view.table_name"
+msgstr "Rol"
+
+#: models/role_view.py:55
+#, fuzzy
+#| msgid "antares.apps.user.models.role.table_name_plural"
+msgid "antares.apps.user.models.role_view.table_name_plural"
+msgstr "Roles"
+
+
+#: models/user.py:126
+msgid "antares.apps.user.models.user.table_name"
+msgstr "Usuario"
+
+#: models/user.py:127
+msgid "antares.apps.user.models.user.table_name_plural"
+msgstr "Usuarios"
+
+#: models/user_org_unit.py:45
+msgid "antares.apps.user.models.user_org_unit.table_name"
+msgstr "Unidad Organizacional de Usuario"
+
+#: models/user_org_unit.py:46
+msgid "antares.apps.user.models.user_org_unit.table_name_plural"
+msgstr "Unidades Organizacionales de Usuario"
+
+#: models/user_role.py:51
+msgid "antares.apps.user.models.user_role.table_name"
+msgstr "Rol de Usuario"
+
+#: models/user_role.py:52
+msgid "antares.apps.user.models.user_role.table_name_plural"
+msgstr "Roles de Usuario"
+
+#: models/view.py:53
+#, fuzzy
+#| msgid "antares.apps.user.models.role.table_name"
+msgid "antares.apps.user.models.view.table_name"
+msgstr "Rol"
+
+#: models/view.py:54
+#, fuzzy
+#| msgid "antares.apps.user.models.role.table_name_plural"
+msgid "antares.apps.user.models.view.table_name_plural"
+msgstr "Roles"
+
+#, fuzzy
+msgid "antares.apps.user.models.user.logged_user_has_no_client"
+msgstr "El Usuario no existe en este sistema"
+
+msgid "antares.apps.user.login.template.login"
+msgstr "Entrar"
+
+msgid "antares.apps.user.login.template.forgot_password"
+msgstr "Olvidó la contraseña?"
+
+msgid "antares.apps.user.models.application.table_name_plural"
+msgstr "Aplicaciones"
+
+msgid "antares.apps.user.models.application.table_name"
+msgstr "Aplicación"
+
+msgid "antares.apps.user.models.application_parameter.table_name_plural"
+msgstr "Parámetros de Aplicación"
+
+msgid "antares.apps.user.models.application_parameter.table_name"
+msgstr "Parámetro de Aplicación"
+
+msgid "antares.apps.user.models.role_application.table_name_plural"
+msgstr "Roles de Aplicación"
+
+msgid "antares.apps.user.models.role_application.table_name"
+msgstr "Rol de Aplicación"
+
+msgid "antares.apps.user.api.api_on_behalf_change_client_view.client_successfully_changed {client}"
+msgstr "El cliente {client} ha sido cambiado exitosamente"
+
+msgid "antares.apps.user.console.user_console.the_user_id_is {username} {userid}"
+msgstr "El ID de Usuario de {username} es {userid}"
+
+msgid "antares.apps.user.console.user_console.missing_parameter {parameter}"
+msgstr "Falta el parámetro {parameter}"
+
+msgid "antares.apps.user.constants.ApplicationScopeType.SELF"
+msgstr "Misma ventana"
+
+msgid "antares.apps.user.constants.ApplicationScopeType.NEW_WINDOW"
+msgstr "Ventana nueva"
+
+msgid "antares.apps.user.constants.ApplicationScopeType.DIALOG"
+msgstr "Cuadro de diálogo"

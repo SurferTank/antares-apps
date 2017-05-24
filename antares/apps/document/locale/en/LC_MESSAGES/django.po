@@ -1,0 +1,157 @@
+# Antares Document Internationalization File - English Version 
+# Copyright (C) 2016, Leonardo Javier Belen
+# This file is distributed under the same license as the Antares package.
+# Leonardo Javier Belen <leobelen@gmail.com>, 2016.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: 1.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2016-08-22 18:23-0300\n"
+"PO-Revision-Date: 2016-06-18 23:30-0300\n"
+"Last-Translator: Leonardo Javier Belen <leobelen@gmail.com>\n"
+"Language-Team: English <EN@li.org>\n"
+"Language: English \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+msgid "antares.apps.document.console.load_document_success {document_id}"
+msgstr "Document Load {document_id}"
+
+#: constants.py:162
+msgid "antares.apps.document.constants.DocumentStatusType.DRAFTED"
+msgstr "Drafted"
+
+#: constants.py:162
+msgid "antares.apps.document.constants.DocumentStatusType.DELETED"
+msgstr "Deleted"
+
+#: constants.py:162
+msgid "antares.apps.document.constants.DocumentStatusType.SAVED"
+msgstr "Saved"
+
+#: constants.py:162
+msgid "antares.apps.document.constants.DocumentStatusType.CANCELLED"
+msgstr "Cancelled"
+
+
+#: templates/AccountForm-1/edit.html:56
+msgid "antares.apps.document.edit.buttons.validate"
+msgstr "Validate"
+
+#: templates/AccountForm-1/edit.html:59
+msgid "antares.apps.document.edit.buttons.draft"
+msgstr "Draft Save"
+
+#: templates/AccountForm-1/edit.html:62
+msgid "antares.apps.document.edit.buttons.save"
+msgstr "Save"
+
+#: templates/AccountForm-1/edit.html:67 templates/AccountForm-1/edit.html:77
+msgid "antares.apps.document.edit.buttons.help"
+msgstr "Help"
+
+#: types/document.py:1199
+msgid "antares.apps.document.type.invalid_status_progression"
+msgstr "Invalid Status progression"
+
+#: types/document.py:1201
+#, fuzzy
+#| msgid "antares.apps.document.type.cannot_save_without_author"
+msgid ".exceptions.cannot_save_without_author"
+msgstr "Cannot save without setting the author"
+
+#: types/document.py:1338
+msgid "antares.apps.core.hrn_code.missing_key_elements"
+msgstr ""
+
+msgid "antares.apps.document.models.document_acl.table_name"
+msgstr "Document Access Control List"
+
+msgid "antares.apps.document.models.document_acl.table_name_plural"
+msgstr "Document Access Control Lists"
+
+msgid "antares.apps.document.models.form_class.table_name"
+msgstr "Form Class"
+
+msgid "antares.apps.document.models.form_class.table_name_plural"
+msgstr "Form Classes"
+
+msgid "antares.apps.document.models.form_definition.table_name"
+msgstr "Form Definition"
+
+msgid "antares.apps.document.models.form_definition.table_name_plural"
+msgstr "Form Definitions"
+
+msgid "antares.apps.document.models.form_definition_acl.table_name"
+msgstr "Form Definition Access Control List"
+
+msgid "antares.apps.document.models.form_definition_acl.table_name_plural"
+msgstr "Form Definition Access Control Lists"
+
+msgid "antares.apps.document.types.document.messages.document_load"
+msgstr "Document Load"
+
+msgid "antares.apps.document.types.document.messages.document_load_document_id {document_id}"
+msgstr "We successfully loaded the document with id {document_id}"
+
+msgid "antares.apps.flow.api.api_case_properties_view.exceptions.not_implemented_yet"
+msgstr "Property type not implemented yet"
+
+msgid "antares.apps.document.document_view.templates.continue_button"
+msgstr "Continue"
+
+msgid "antares.apps.document.document_view.templates.stay_editing_button"
+msgstr "Stay editing"
+
+msgid "antares.apps.document.document_view.templates.cancel_button"
+msgstr "Cancel"
+
+msgid "antares.apps.document.types.document.starting_evaluation"
+msgstr "Starting Field Evaluation"
+
+msgid "antares.apps.document.types.document.new_value_for_calculated_field {field_id} {calculation_result} {calculation_order}"
+msgstr "New value for calculated field {field_id}='{calculation_result}' for calculation order '{calculation_order}'"
+
+msgid "antares.apps.document.types.document.validation_result {field_id} {validation_result} {validation}"
+msgstr "Validation result for field '{field_id}' is {validation_result} for validation {validation}"
+
+msgid "antares.apps.document.document_view.templates.negative_validation_the_field"
+msgstr "The field"
+
+msgid "antares.apps.document.document_view.templates.negative_validation_cannot_be_negative"
+msgstr "cannot be negative"
+
+msgid "antares.apps.document.document_view.templates.negative_validation_title"
+msgstr "Validation Error"
+
+msgid "antares.apps.document.document_view.templates.negative_validation_is_not_a_number"
+msgstr "is not a number"
+
+msgid "antares.apps.document.constants.FormClassType.ADMINISTRATIVE"
+msgstr "Administrative"
+
+msgid "antares.apps.document.constants.FormClassType.OBLIGATION_BASED"
+msgstr "Obligation Based"
+
+msgid "antares.apps.document.constants.FormClassStatusType.DEVELOPMENT"
+msgstr "Development"
+
+msgid "antares.apps.document.constants.FormClassStatusType.PRODUCTION"
+msgstr "Production"
+
+msgid "antares.apps.document.constants.FormClassStatusType.DEACTIVATED"
+msgstr "Deactivated"
+
+msgid "antares.apps.document.constants.FormDefinitionStatusType.DEVELOPMENT"
+msgstr "Development"
+
+msgid "antares.apps.document.constants.FormDefinitionStatusType.PRODUCTION"
+msgstr "Production"
+
+msgid "antares.apps.document.constants.FormDefinitionStatusType.DEACTIVATED"
+msgstr "Deactivated"
+

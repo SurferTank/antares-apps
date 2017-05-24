@@ -1,0 +1,36 @@
+# Antares Subscription Translation Strings
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# Leonardo Belen <leobelen@gmail.com>, 2016.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: 1\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2016-08-22 18:23-0300\n"
+"PO-Revision-Date: 2016-07-16 17:25-0300\n"
+"Last-Translator: Leonardo Belen <leobelen@gmail.com>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: en\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+
+msgid "antares.apps.subscription.console.subscription_console.missing_parameter {parameter}"
+msgstr "Missing parameter {parameter}"
+
+msgid "antares.apps.subscription.console.subscription_console.dont_now_command"
+msgstr "Don't know command"
+
+msgid "antares.apps.subscription.console.subscription_console.document_subscription_processed_successfully {document_id}"
+msgstr "Document subscription processed successfully for Document ID {document_id}"
+
+msgid "antares.apps.subscription.console.subscription_console.document_not_found"
+msgstr "Document not found"
+
+
+
+

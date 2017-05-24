@@ -1,0 +1,142 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# Leonardo Belen <leobelen@gmail.com>, 2016.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: 1\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2016-08-22 18:23-0300\n"
+"PO-Revision-Date: 2016-07-19 01:34-0300\n"
+"Last-Translator: Leonardo Belen <leobelen@gmail.com>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: models/org_unit.py:52
+msgid "antares.apps.user.models.org_unit.table_name"
+msgstr "Organizational Unit"
+
+#: models/org_unit.py:53
+msgid "antares.apps.user.models.org_unit.table_name_plural"
+msgstr "Organizational Units"
+
+#: models/role.py:57
+msgid "antares.apps.user.models.role.table_name"
+msgstr "Role"
+
+#: models/role.py:58
+msgid "antares.apps.user.models.role.table_name_plural"
+msgstr "Roles"
+
+#: models/role_view.py:54
+#, fuzzy
+#| msgid "antares.apps.user.models.role.table_name"
+msgid "antares.apps.user.models.role_view.table_name"
+msgstr "Role"
+
+#: models/role_view.py:55
+#, fuzzy
+#| msgid "antares.apps.user.models.role.table_name_plural"
+msgid "antares.apps.user.models.role_view.table_name_plural"
+msgstr "Roles"
+
+#: models/user.py:23
+msgid ".id"
+msgstr ""
+
+#: models/user.py:24
+msgid ".primary_key_help"
+msgstr ""
+
+#: models/user.py:70
+#, python-format
+msgid ".user_has_no_relation_with_client %(client_id)s"
+msgstr ""
+
+#: models/user.py:126
+msgid "antares.apps.user.models.user.table_name"
+msgstr "User"
+
+#: models/user.py:127
+msgid "antares.apps.user.models.user.table_name_plural"
+msgstr "Users"
+
+#: models/user_org_unit.py:45
+msgid "antares.apps.user.models.user_org_unit.table_name"
+msgstr "User Organizational Unit"
+
+#: models/user_org_unit.py:46
+msgid "antares.apps.user.models.user_org_unit.table_name_plural"
+msgstr "User Organizational Units"
+
+#: models/user_role.py:51
+msgid "antares.apps.user.models.user_role.table_name"
+msgstr "User Role"
+
+#: models/user_role.py:52
+msgid "antares.apps.user.models.user_role.table_name_plural"
+msgstr "User Roles"
+
+#: models/view.py:53
+#, fuzzy
+#| msgid "antares.apps.user.models.role.table_name"
+msgid "antares.apps.user.models.view.table_name"
+msgstr "Role"
+
+#: models/view.py:54
+#, fuzzy
+#| msgid "antares.apps.user.models.role.table_name_plural"
+msgid "antares.apps.user.models.view.table_name_plural"
+msgstr "Roles"
+
+#, fuzzy
+msgid "antares.apps.user.models.user.logged_user_has_no_client"
+msgstr "User does not exist on this system"
+
+msgid "antares.apps.user.login.template.login"
+msgstr "Log In"
+
+msgid "antares.apps.user.login.template.forgot_password"
+msgstr "Forgot Password?"
+
+msgid "antares.apps.user.models.application.table_name_plural"
+msgstr "Applications"
+
+msgid "antares.apps.user.models.application.table_name"
+msgstr "Application"
+
+msgid "antares.apps.user.models.application_parameter.table_name_plural"
+msgstr "Application Parameters"
+
+msgid "antares.apps.user.models.application_parameter.table_name"
+msgstr "Application Parameter"
+
+msgid "antares.apps.user.models.role_application.table_name_plural"
+msgstr "Application Roles"
+
+msgid "antares.apps.user.models.role_application.table_name"
+msgstr "Application Role"
+
+msgid "antares.apps.user.api.api_on_behalf_change_client_view.client_successfully_changed {client}"
+msgstr "Client {client} successfully changed"
+
+msgid "antares.apps.user.console.user_console.the_user_id_is {username} {userid}"
+msgstr "The user id for {username} is {userid}"
+
+msgid "antares.apps.user.console.user_console.missing_parameter {parameter}"
+msgstr "The parameter {parameter} is missing"
+
+msgid "antares.apps.user.constants.ApplicationScopeType.SELF"
+msgstr "Self"
+
+msgid "antares.apps.user.constants.ApplicationScopeType.NEW_WINDOW"
+msgstr "New Window"
+
+msgid "antares.apps.user.constants.ApplicationScopeType.DIALOG"
+msgstr "Dialog"

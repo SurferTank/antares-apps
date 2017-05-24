@@ -1,0 +1,34 @@
+{
+    "general": {
+        "type": "ecoArbitrajeMsg",
+        "creation_date": "2017-02-21 02:09:41.952296",
+        "author": "leobelen"
+    },
+    "documents": [
+        {
+            "message_id": 1,
+            "local_market": "BA",
+            "foreign_market": "NYCE",
+            "message_date": "2017-02-21 02:09:41.952296",
+            "buy_exchange_rate": 10.10,
+            "buy_symbol": "PAMPA.BA",
+            "buy_local_quantity": 1,
+            "buy_local_price": 10.88,
+            "buy_local_amount": 20.20,
+            "buy_foreign_quantity": 30,
+            "buy_foreing_price": 40,
+            "buy_foreign_parity": 1,
+            "sell_symbol": "YPF",
+            "sell_exchange_rate": 40.10,
+            "sell_foreign_quantity": 50,
+            "sell_foreing_price": 60.10,
+            "sell_foreing_amount": 70.01,
+            "sell_foreign_parity": 80.1,
+            "sell_local_quantity": 90,
+            "sell_local_price": 100.01,
+            "sell_local_amount": 110.02,
+            "average_exchange_rate": 120.1,
+            "operation_return": 130.3
+        }
+    ]
+}

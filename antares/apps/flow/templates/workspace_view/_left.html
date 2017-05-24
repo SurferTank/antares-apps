@@ -1,0 +1,71 @@
+{% load staticfiles i18n pipeline markdown_deux_tags %} 
+
+    <div style="text-align:right; ">
+    <a class="btn btn-primary" href="{% url "antares.apps.flow:inbox_view" %}">{% trans 'antares.apps.flow.templates.dashboard.forward.returnToInboxButton' %}</a>&nbsp;
+    <a class="btn btn-primary" onclick="openForwardWindow('{{activity_id}}');">{% trans 'antares.apps.flow.templates.dashboard.forward.forwardCaseButton' %}</a>
+    </div>
+
+<div class="panel-group" id="dashboardAccordion">
+    {% if activity_tools %}
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h4 class="panel-title">
+                <a data-toggle="collapse" data-parent="#dashboardAccordion" href="#collapseToolbar">{% trans 'antares.apps.flow.templates.dashboard.left.tools' %}</a>
+            </h4>
+        </div>
+        <div id="collapseToolbar" class="panel-collapse collapse in">
+            <div class="panel-body">
+                {% include 'workspace_view/_tools.html' %}
+            </div>
+        </div>
+    </div>
+    {% endif %}
+    {% if activity.activity_definition.description %}
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                    <a data-toggle="collapse" data-parent="#dashboardAccordion" href="#collapseHelp">{% trans 'antares.apps.flow.templates.dashboard.left.help' %}</a>
+                </h4>
+            </div>
+            <div id="collapseHelp" class="panel-collapse collapse">
+                <div class="panel-body">
+                    {% markdown %}{{ activity.activity_definition.description }}{% endmarkdown %}
+                </div>
+            </div>
+        </div>
+    {% endif %}
+    
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h4 class="panel-title">
+                <a data-toggle="collapse" data-parent="#dashboardAccordion" href="#collapseOptions">{% trans 'antares.apps.flow.templates.dashboard.left.options' %}</a>
+            </h4>
+        </div>
+        <div id="collapseOptions" class="panel-collapse collapse">
+            <div class="panel-body">
+                <div>{% trans "antares.apps.flow.templates.dashboard.left.options.track_this_flow" %}
+                    <input type="checkbox" id="flow_options_track_flow" data-toggle="toggle" {% if tracking_option == 'true' %} checked {% endif %}></input>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div id="forwardDialog" style="display:none; ">
+    <div id="forwardDialogInner">
+        <div id="msgValidationError">
+        
+        </div>
+        <div id="msgPathNotFound">
+            {% trans 'antares.apps.flow.templates.dashboard.forward.noPathFound' %} 
+        </div>
+        <div id="msgPathFound">
+            {% trans 'antares.apps.flow.templates.dashboard.forward.pathsWereFound' %} 
+            <table id="fowardActivitiesTable" width="100%" class="table table-striped table-bordered">
+            </table>
+        </div>
+            
+        </div>
+    </div>
+

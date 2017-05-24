@@ -1,0 +1,157 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2016-08-22 18:23-0300\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+msgid "antares.apps.document.console.load_document_success {document_id}"
+msgstr "Documento Cargado {document_id}"
+
+#: constants.py:162
+msgid "antares.apps.document.constants.DocumentStatusType.DRAFTED"
+msgstr "Borrador"
+
+#: constants.py:162
+msgid "antares.apps.document.constants.DocumentStatusType.DELETED"
+msgstr "Borrado"
+
+#: constants.py:162
+msgid "antares.apps.document.constants.DocumentStatusType.SAVED"
+msgstr "Grabado"
+
+#: constants.py:162
+msgid "antares.apps.document.constants.DocumentStatusType.CANCELLED"
+msgstr "Cancelado"
+
+
+#: templates/AccountForm-1/edit.html:56
+msgid "antares.apps.document.edit.buttons.validate"
+msgstr "Validar"
+
+#: templates/AccountForm-1/edit.html:59
+msgid "antares.apps.document.edit.buttons.draft"
+msgstr "Borrador"
+
+#: templates/AccountForm-1/edit.html:62
+msgid "antares.apps.document.edit.buttons.save"
+msgstr "Grabar"
+
+#: templates/AccountForm-1/edit.html:67 templates/AccountForm-1/edit.html:77
+msgid "antares.apps.document.edit.buttons.help"
+msgstr "Ayuda"
+
+#: types/document.py:1199
+msgid "antares.apps.document.type.invalid_status_progression"
+msgstr "Progresión de estado inválida"
+
+#: types/document.py:1201
+#, fuzzy
+#| msgid "antares.apps.document.type.cannot_save_without_author"
+msgid ".exceptions.cannot_save_without_author"
+msgstr "Imposible grabar sin especificar el autor"
+
+#: types/document.py:1338
+msgid "antares.apps.core.hrn_code.missing_key_elements"
+msgstr "Faltan elementos clave"
+
+msgid "antares.apps.document.models.document_acl.table_name"
+msgstr "ACL de Documento"
+
+msgid "antares.apps.document.models.document_acl.table_name_plural"
+msgstr "ACLs de Documento"
+
+msgid "antares.apps.document.models.form_class.table_name"
+msgstr "Clase de Formulario"
+
+msgid "antares.apps.document.models.form_class.table_name_plural"
+msgstr "Clases de Formulario"
+
+msgid "antares.apps.document.models.form_definition.table_name"
+msgstr "Definición de Formulario"
+
+msgid "antares.apps.document.models.form_definition.table_name_plural"
+msgstr "Definiciones de Formulario"
+
+msgid "antares.apps.document.models.form_definition_acl.table_name"
+msgstr "ACL de la Definición de Formulario"
+
+msgid "antares.apps.document.models.form_definition_acl.table_name_plural"
+msgstr "ACLs de la Definición de Formulario"
+
+msgid "antares.apps.document.types.document.messages.document_load"
+msgstr "Carga de Documento"
+
+msgid "antares.apps.document.types.document.messages.document_load_document_id {document_id}"
+msgstr "Hemos cargado satisfactoriamente el documento con id {document_id}"
+
+msgid "antares.apps.flow.api.api_case_properties_view.exceptions.not_implemented_yet"
+msgstr "Tipo de propiedad no implementada todavía"
+
+msgid "antares.apps.document.document_view.templates.continue_button"
+msgstr "Continuar"
+
+msgid "antares.apps.document.document_view.templates.stay_editing_button"
+msgstr "Seguir editando"
+
+msgid "antares.apps.document.document_view.templates.cancel_button"
+msgstr "Cancelar"
+
+msgid "antares.apps.document.types.document.starting_evaluation"
+msgstr "Empezando evaluación de campos"
+
+msgid "antares.apps.document.types.document.new_value_for_calculated_field {field_id} {calculation_result} {calculation_order}"
+msgstr "Nuevo valor para campo calculado {field_id}='{calculation_result}' para el orden de cálculo '{calculation_order}'"
+
+msgid "antares.apps.document.types.document.validation_result {field_id} {validation_result} {validation}"
+msgstr "El resultado de la validación del campo '{field_id}' es {validation_result} para la validación {validation}"
+
+msgid "antares.apps.document.document_view.templates.negative_validation_the_field"
+msgstr "El campo"
+
+msgid "antares.apps.document.document_view.templates.negative_validation_cannot_be_negative"
+msgstr "no puede ser negativo"
+
+msgid "antares.apps.document.document_view.templates.negative_validation_title"
+msgstr "Error de validación"
+
+msgid "antares.apps.document.document_view.templates.negative_validation_is_not_a_number"
+msgstr "no es un número"
+
+msgid "antares.apps.document.constants.FormClassType.ADMINISTRATIVE"
+msgstr "Administrativo"
+
+msgid "antares.apps.document.constants.FormClassType.OBLIGATION_BASED"
+msgstr "Basado en Obligación"
+
+msgid "antares.apps.document.constants.FormClassStatusType.DEVELOPMENT"
+msgstr "Desarrollo"
+
+msgid "antares.apps.document.constants.FormClassStatusType.PRODUCTION"
+msgstr "Producción"
+
+msgid "antares.apps.document.constants.FormClassStatusType.DEACTIVATED"
+msgstr "Desactivado"
+
+msgid "antares.apps.document.constants.FormDefinitionStatusType.DEVELOPMENT"
+msgstr "Desarrollo"
+
+msgid "antares.apps.document.constants.FormDefinitionStatusType.PRODUCTION"
+msgstr "Producción"
+
+msgid "antares.apps.document.constants.FormDefinitionStatusType.DEACTIVATED"
+msgstr "Desactivado"
+

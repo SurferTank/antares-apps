@@ -1,0 +1,90 @@
+<?xml version="1.0"?>
+
+<document defaultLanguage="en" formDefinition="EcoArbitrajeMsg-1"
+	documentId="C7ADA348-90F9-45CC-801D-B926560E5971">
+	<headerElements>
+		<formName>EcoArbitrajeMsg</formName>
+		<formVersion>1</formVersion>
+		<documentVersion>0</documentVersion>
+		<activeVersion>true</activeVersion>
+		<author />
+		<authorName />
+		<saveDate />
+		<draftDate />
+		<creationDate />
+		<deleteDate />
+		<deleteCase />
+		<deleteComment />
+		<associatedTo />
+		<associationType />
+		<flowCase />
+		<origin />
+		<status />
+		<userReferralCode />
+		<accountingElements>
+			<client />
+			<branch />
+			<conceptType />
+			<period />
+			<accountType />
+			<baseDocument />
+		</accountingElements>
+		<hash>0</hash>
+		<hrnCode />
+		<hrnTitle />
+		<tags />
+		<options>
+			<allowCancellation>false</allowCancellation>
+		</options>
+		<externalFunctions>
+		</externalFunctions>
+		<helpText>
+			<help language="en" event="edit" markdown="true"><![CDATA[
+                ]]></help>
+		</helpText>
+	</headerElements>
+	<structuredData title="Mensaje de Economix" letterhead="images/generic_letterhead.jpg">
+		<page pageId="page1" title="Página 1">
+			<line row="1">
+				<field colspan="12" type="label" class="">Información General</field>
+			</line>
+			<line row="2">
+				<field colspan="3" type="label" class="someFieldClass">ID de mensaje</field>
+				<field colspan="3" dataType="integer" type="input" id="messageId"
+					name="Message Id" indexed="true" class="someFieldClass" messageMap="message_id"
+					fieldCode="100" tooltip="Id de mensaje emitido por economix"
+					readonly="true"></field>
+				<field colspan="3" type="label" class="someFieldClass">Fecha de Emisión</field>
+				<field colspan="3" dataType="date" type="date" id="timestamp"
+					name="Fecha de Emisión" indexed="false" class="someFieldClass"
+					messageMap="timestamp" fieldCode="101" tooltip="This is the message id"
+					readonly="true"></field>
+			</line>
+			<line row="3">
+				<field colspan="3" type="label" class="someFieldClass">Mercado Local</field>
+				<field colspan="3" dataType="string" type="input" id="localMarket"
+					name="Mercado Local" class="someFieldClass" messageMap="local_market"
+					fieldCode="102" tooltip="Mercado Local" readonly="true"></field>
+				<field colspan="3" type="label" class="someFieldClass">Mercado Extranjero</field>
+				<field colspan="3" dataType="string" type="input" id="foreignMarket"
+					name="Mercado Extranjero" class="someFieldClass" messageMap="foreign_market"
+					fieldCode="103" tooltip="Mercado Extranjero" readonly="true"></field>
+			</line>
+			   
+			<line row="4">
+				<field colspan="9" type="label" class="someFieldClass">Exchange Rate Promedio</field>
+				<field colspan="3" dataType="float" type="input" id="avgReturn"
+					name="avgReturn" class="someFieldClass" messageMap="average_exchange_rate"
+					fieldCode="120" tooltip="Retorno Promedio"
+					readonly="true"></field>
+			</line>
+			<line row="5">
+				<field colspan="9" type="label" class="someFieldClass">Retorno Operación</field>
+				<field colspan="3" dataType="float" type="input" id="avgOperation"
+					name="Average Operation" class="someFieldClass" messageMap="operation_return"
+					fieldCode="121" tooltip="Operacion Promedio"
+					readonly="true"></field>
+			</line>
+		</page>
+	</structuredData>
+</document>

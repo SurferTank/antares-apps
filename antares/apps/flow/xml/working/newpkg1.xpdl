@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<xpdl:Package xmlns:xpdl="http://www.wfmc.org/2008/XPDL2.1" xmlns="http://www.wfmc.org/2008/XPDL2.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" Id="newpkg1" Name="newpkg1" xsi:schemaLocation="http://www.wfmc.org/2008/XPDL2.1 http://www.wfmc.org/standards/docs/bpmnxpdl_31.xsd">
+    <xpdl:PackageHeader>
+        <xpdl:XPDLVersion>2.1</xpdl:XPDLVersion>
+        <xpdl:Vendor>(c) Together Teamsolutions Co., Ltd.</xpdl:Vendor>
+        <xpdl:Created>2016-02-04 03:35:30</xpdl:Created>
+    </xpdl:PackageHeader>
+    <xpdl:Pools>
+        <xpdl:Pool BoundaryVisible="true" Id="newpkg1_pool1" MainPool="true" Name="newpkg1_wp1" Orientation="HORIZONTAL" Process="newpkg1_wp1">
+            <xpdl:Lanes>
+                <xpdl:Lane Id="newpkg1_pool1_lan1" Name="Expression lane">
+                    <xpdl:NodeGraphicsInfos>
+                        <xpdl:NodeGraphicsInfo BorderColor="0,0,0" FillColor="255,255,215" IsVisible="true" ToolId="JaWE"/>
+                        <xpdl:NodeGraphicsInfo BorderColor="0,0,0" FillColor="255,255,215" IsVisible="true" ToolId="JaWE"/>
+                    </xpdl:NodeGraphicsInfos>
+                </xpdl:Lane>
+            </xpdl:Lanes>
+            <xpdl:NodeGraphicsInfos>
+                <xpdl:NodeGraphicsInfo BorderColor="0,0,0" FillColor="255,255,215" IsVisible="true" ToolId="JaWE"/>
+            </xpdl:NodeGraphicsInfos>
+        </xpdl:Pool>
+    </xpdl:Pools>
+    <xpdl:WorkflowProcesses>
+        <xpdl:WorkflowProcess Id="newpkg1_wp1" Name="newpkg1_wp1">
+            <xpdl:ProcessHeader>
+                <xpdl:Created>2016-02-04 03:35:37</xpdl:Created>
+            </xpdl:ProcessHeader>
+            <xpdl:Applications>
+                <xpdl:Application Id="newpkg1_wp1_app1">
+                    <xpdl:FormalParameters>
+                        <xpdl:FormalParameter Id="newpkg1_wp1_fp1" IsArray="false" Mode="IN">
+                            <xpdl:DataType>
+                                <xpdl:BasicType Type="STRING"/>
+                            </xpdl:DataType>
+                        </xpdl:FormalParameter>
+                    </xpdl:FormalParameters>
+                </xpdl:Application>
+            </xpdl:Applications>
+            <xpdl:Activities>
+                <xpdl:Activity Id="newpkg1_wp1_act1">
+                    <xpdl:Implementation>
+                        <xpdl:Task>
+                            <xpdl:TaskApplication Id="newpkg1_wp1_app1">
+                                <xpdl:ActualParameters>
+                                    <xpdl:ActualParameter/>
+                                </xpdl:ActualParameters>
+                            </xpdl:TaskApplication>
+                        </xpdl:Task>
+                    </xpdl:Implementation>
+                    <xpdl:Performers>
+                        <xpdl:Performer/>
+                    </xpdl:Performers>
+                    <xpdl:ExtendedAttributes>
+                        <xpdl:ExtendedAttribute Name="extratools">
+                            <xpdl:TaskApplication Id="SamplePackage_wp1_app1">
+								<xpdl:ActualParameters>
+									<ActualParameter>example_string</ActualParameter>
+								</xpdl:ActualParameters>
+								<xpdl:Description>A task definition</xpdl:Description>
+							</xpdl:TaskApplication>
+                            <xpdl:TaskApplication Id="SamplePackage_wp1_app1">
+								<xpdl:ActualParameters>
+									<ActualParameter>example_string</ActualParameter>
+								</xpdl:ActualParameters>
+								<xpdl:Description>A task definition</xpdl:Description>
+							</xpdl:TaskApplication>
+                        </xpdl:ExtendedAttribute>
+                    </xpdl:ExtendedAttributes>
+                    <xpdl:NodeGraphicsInfos>
+                        <xpdl:NodeGraphicsInfo BorderColor="0,0,0" FillColor="255,204,204" Height="60" IsVisible="true" LaneId="newpkg1_pool1_lan1" ToolId="JaWE" Width="90">
+                            <xpdl:Coordinates XCoordinate="35" YCoordinate="35"/>
+                        </xpdl:NodeGraphicsInfo>
+                    </xpdl:NodeGraphicsInfos>
+                </xpdl:Activity>
+            </xpdl:Activities>
+        </xpdl:WorkflowProcess>
+    </xpdl:WorkflowProcesses>
+    <xpdl:ExtendedAttributes>
+        <xpdl:ExtendedAttribute Name="EDITING_TOOL" Value="Together Workflow Editor"/>
+        <xpdl:ExtendedAttribute Name="EDITING_TOOL_VERSION" Value="5.3-1-20160120-2200-TAB-2.9-1"/>
+        <xpdl:ExtendedAttribute Name="JaWE_CONFIGURATION" Value="default"/>
+    </xpdl:ExtendedAttributes>
+</xpdl:Package>

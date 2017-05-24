@@ -1,0 +1,30 @@
+{% load staticfiles i18n pipeline django_markdown %} 
+<table width="100%" id="caseNotesTable" class="table table-striped">
+    <thead>
+        <tr>
+            <th>{% trans 'antares.apps.flow.templates.dashboard.left.postDate' %}</th>
+            <th>{% trans 'antares.apps.flow.templates.dashboard.left.author' %}</th>
+            <th>{% trans 'antares.apps.flow.templates.dashboard.left.title' %}</th>
+            <th>{% trans 'antares.apps.flow.templates.dashboard.left.actions' %}</th>
+        </tr>
+     </thead>
+</table>
+<div style="text-align: right;"><a href="#" class="small button round" onclick="editNote('', '', '');">{% trans 'antares.apps.flow.templates.dashboard.left.createNote' %}</a></div>
+ 
+<div id="flow_add_note" title="{% trans 'antares.apps.flow.templates.dashboard.notes.edit_note' %}" style="display: none;">
+  <form>
+    <input type="hidden" id="note_id" name="note_id" style="width: 100%;box-sizing: border-box; -webkit-box-sizing:border-box; -moz-box-sizing: border-box; "/>
+        <div id="title">
+        {% trans 'antares.apps.flow.templates.dashboard.left.title' %}: <input type="input" id="note_title" name="note_title" style="width:100%; "/>
+        </div> 
+        <br/>
+        <div id="content">
+            <textarea name="note_content" id="note_content" rows="10" cols="80">
+            </textarea>                    
+            {% markdown_editor "#note_content" %}
+            {% markdown_media %}
+        </div>
+    </form>
+</div>
+ 
+ 

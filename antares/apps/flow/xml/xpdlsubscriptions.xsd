@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://www.surfertank.com/antares/flow/xml/subscriptions" elementFormDefault="qualified" targetNamespace="http://www.surfertank.com/antares/flow/xml/subscriptions" version="1">
+    <xs:element name="Subscriptions">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element maxOccurs="unbounded" ref="Subscription"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="Subscription">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="Condition"/>
+                <xs:element ref="Publisher"/>
+                <xs:element ref="Actions"/>
+            </xs:sequence>
+            <xs:attribute name="eventTrigger" use="required" type="xs:NCName"/>
+            <xs:attribute name="subscriptionId" use="required" type="xs:NCName"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="Condition" type="xs:string"/>
+    <xs:element name="Publisher">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="Type" maxOccurs="1" minOccurs="1"/>
+                <xs:element ref="Form" maxOccurs="1" minOccurs="0"/>
+                <xs:element ref="Document" maxOccurs="1" minOccurs="0"/>
+                <xs:element ref="AlertRecord" maxOccurs="1" minOccurs="0"/>
+                <xs:element ref="CaseId" maxOccurs="1" minOccurs="0"/>
+                <xs:element ref="Activity" maxOccurs="1" minOccurs="0"/>
+                <xs:element ref="Transition" maxOccurs="1" minOccurs="0"/>
+                <xs:element ref="FlowDefinition" maxOccurs="1" minOccurs="0"/>
+                <xs:element ref="Client" maxOccurs="1" minOccurs="0"/>
+                <xs:element ref="ConceptType" maxOccurs="1" minOccurs="0"/>
+                <xs:element ref="AccountType" maxOccurs="1" minOccurs="0"/>
+                <xs:element ref="Period" maxOccurs="1" minOccurs="0"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="Type" type="xs:string"/>
+    <xs:element name="Form" type="xs:NCName"/>
+    <xs:element name="Document" type="xs:integer"/>
+    <xs:element name="AlertRecord" type="xs:integer"/>
+    <xs:element name="CaseId" type="xs:integer"/>
+    <xs:element name="Activity" type="xs:NCName"/>
+    <xs:element name="Transition" type="xs:NCName"/>
+    <xs:element name="FlowDefinition" type="xs:NCName"/>
+    <xs:element name="Client" type="xs:integer"/>
+    <xs:element name="ConceptType" type="xs:NCName"/>
+    <xs:element name="AccountType" type="xs:NCName"/>
+    <xs:element name="Period" type="xs:integer"/>
+    <xs:element name="Actions">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element maxOccurs="unbounded" ref="Action"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="Action">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="Parameters"/>
+            </xs:sequence>
+            <xs:attribute name="id" use="required" type="xs:NCName"/>
+            <xs:attribute name="index" use="required" type="xs:integer"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="Parameters">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element maxOccurs="unbounded" ref="Parameter"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="Parameter">
+        <xs:complexType mixed="true">
+            <xs:attribute name="id" use="required" type="xs:NCName"/>
+        </xs:complexType>
+    </xs:element>
+</xs:schema>

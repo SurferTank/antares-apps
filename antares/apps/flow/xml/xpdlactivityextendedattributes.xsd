@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://www.surfertank.com/antares/flow/xml/activityextendedattributes" elementFormDefault="qualified" targetNamespace="http://www.surfertank.com/antares/flow/xml/subscriptions" version="1">
+    <xs:element name="ActivityTabs">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="xpdl:ActivityTab"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="ActivityTab">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="xpdl:Parameters"/>
+            </xs:sequence>
+            <xs:attribute name="id" use="required" type="xs:NCName"/>
+            <xs:attribute name="name" use="required"/>
+            <xs:attribute name="route" use="required"/>
+            <xs:attribute name="url" use="required"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="Parameters">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="xpdl:Parameter"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="Parameter">
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="xs:NCName">
+                    <xs:attribute name="id" use="required" type="xs:NCName"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="Forms">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="xpdl:Form"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="Form">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="xpdl:Parameters"/>
+            </xs:sequence>
+            <xs:attribute name="canCreate" use="required" type="xs:boolean"/>
+            <xs:attribute name="canSave" use="required" type="xs:boolean"/>
+            <xs:attribute name="id" use="required" type="xs:NCName"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="Validations">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="xpdl:Validation"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="Validation">
+        <xs:complexType mixed="true">
+            <xs:attribute name="id" use="required" type="xs:NCName"/>
+            <xs:attribute name="message" use="required"/>
+            <xs:attribute name="scriptType" use="required" type="xs:NCName"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="Actions">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element maxOccurs="unbounded" ref="xpdl:Action"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Action">
+    <xs:complexType mixed="true">
+      <xs:sequence>
+        <xs:element minOccurs="0" maxOccurs="unbounded" ref="xpdl:ActionParameters"/>
+      </xs:sequence>
+      <xs:attribute name="Id" type="xs:NCName"/>
+      <xs:attribute name="ScriptEngine" use="required" type="xs:NCName"/>
+      <xs:attribute name="Type" use="required" type="xs:NCName"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ActionParameters">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element maxOccurs="unbounded" ref="xpdl:ActionParameter"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ActionParameter">
+    <xs:complexType mixed="true">
+        <xs:attribute name="Id" use="required" type="xs:NCName"/>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

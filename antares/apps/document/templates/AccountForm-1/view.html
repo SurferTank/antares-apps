@@ -1,0 +1,74 @@
+{% extends template %}
+{% load staticfiles i18n pipeline %} 
+
+{% block title %}Antares Document{% endblock %}
+{% block ng_app_name %}{% endblock ng_app_name %}
+{% block bodyId %}Antares Document{% endblock %}
+{% block javascript %} 
+    {% if is_inner == 'false' %}
+        {% javascript 'jquery_ui_js' %} 
+    {% endif %}
+{% endblock javascript %} 
+
+{% block stylesheets %}
+    {% if is_inner == 'false' %}
+        {% stylesheet 'jquery_ui_css' %} 
+    {% endif %}
+{% endblock stylesheets %} 
+ 
+{% block content %} <div class="container">
+  <form id="documentEditorForm" method="POST">
+    <div class="panel">
+      <div class="row">
+        <div class="col-lg-2">
+          <span>A label</span>
+        </div>
+        <div class="col-lg-2">
+          <div>{{fields.aAmount|default_if_none:''}}</div>
+        </div>
+        <div class="col-lg-2">
+          <div>{{fields.aPeriod|default_if_none:''}}</div>
+        </div>
+        <div class="col-lg-2">
+          <div>{{fields.anUserCode|default_if_none:''}}</div>
+        </div>
+        <div class="col-lg-2">
+          <div>{{fields.aConcept|default_if_none:''}}</div>
+        </div>
+        <div class="col-lg-2">
+          <div>{{fields.aType|default_if_none:''}}</div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-lg-2">
+          <span>A label</span>
+        </div>
+        <div class="col-lg-2">
+          <div>{{fields.aAmount2|default_if_none:''}}</div>
+        </div>
+        <div class="col-lg-2">
+          <div>{{fields.aPercent|default_if_none:''}}</div>
+        </div>
+        <div class="col-lg-2">
+          <div>{{fields.anUserCode2|default_if_none:''}}</div>
+        </div>
+        <div class="col-lg-2">
+          <div>{{fields.aConcept2|default_if_none:''}}</div>
+        </div>
+        <div class="col-lg-2">
+          <div>{{fields.aCatalog|default_if_none:''}}</div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-lg-10">
+          <span>Client</span>
+        </div>
+        <div class="col-lg-2">
+          <div>{{fields.aClient|default_if_none:''}}</div>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>{% endblock %}
+        
+

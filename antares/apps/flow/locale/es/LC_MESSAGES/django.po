@@ -1,0 +1,461 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2016-08-24 18:49-0300\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+
+#: constants.py:187
+msgid "antares.apps.flow.constants.FlowActivityStatusType.CREATED"
+msgstr "Creado"
+
+#: constants.py:187
+msgid "antares.apps.flow.constants.FlowActivityStatusType.CANCELLED"
+msgstr "Cancelado"
+
+
+#: constants.py:187
+msgid "antares.apps.flow.constants.FlowActivityStatusType.ACTIVE"
+msgstr "Activo"
+
+#: constants.py:187
+msgid "antares.apps.flow.constants.FlowActivityStatusType.COMPLETED"
+msgstr "Completado"
+
+#: constants.py:187
+msgid "antares.apps.flow.constants.FlowActivityStatusType.REASSIGNED"
+msgstr "Reassignado"
+
+
+
+#: templates/inbox_view/_left_panel.html:6
+msgid "antares.apps.flow.templates.inbox.myInbox"
+msgstr "Mi bandeja de entrada"
+
+#: templates/inbox_view/_left_panel.html:11
+msgid "antares.apps.flow.templates.inbox.newCases"
+msgstr "Nuevos casos"
+
+#: templates/inbox_view/_left_panel.html:12
+msgid "antares.apps.flow.templates.inbox.activeCases"
+msgstr "Casos activos"
+
+#: templates/inbox_view/_left_panel.html:13
+msgid "antares.apps.flow.templates.inbox.reassignedCases"
+msgstr "Casos reasignados"
+
+#: templates/inbox_view/_left_panel.html:14
+msgid "antares.apps.flow.templates.inbox.completedCases"
+msgstr "Casos completados"
+
+#: templates/inbox_view/_left_panel.html:15
+msgid "antares.apps.flow.templates.inbox.cancelledCases"
+msgstr "Casos cancelados"
+
+#: templates/inbox_view/_left_panel.html:27
+msgid "antares.apps.flow.templates.inbox.myStats"
+msgstr "Mis estadísticas"
+
+#: templates/inbox_view/inbox.html:14
+msgid "antares.apps.flow.templates.inbox.activityId"
+msgstr "ID de Actividad"
+
+#: templates/inbox_view/inbox.html:15
+msgid "antares.apps.flow.templates.inbox.caseId"
+msgstr "ID de caso"
+
+#: templates/inbox_view/inbox.html:16
+msgid "antares.apps.flow.templates.inbox.caseName"
+msgstr "Nombre del caso"
+
+#: templates/inbox_view/inbox.html:17
+msgid "antares.apps.flow.templates.inbox.priority"
+msgstr "Prioridad"
+
+#: templates/inbox_view/inbox.html:18
+msgid "antares.apps.flow.templates.inbox.sourceId"
+msgstr "ID de fuente"
+
+#: templates/inbox_view/inbox.html:19
+msgid "antares.apps.flow.templates.inbox.created"
+msgstr "Creado"
+
+#: templates/inbox_view/inbox.html:20
+msgid "antares.apps.flow.templates.inbox.started"
+msgstr "Iniciado"
+
+#: templates/inbox_view/inbox.html:21
+msgid "antares.apps.flow.templates.inbox.action.label"
+msgstr "Acción"
+
+#: templates/inbox_view/inbox.html:65
+msgid "antares.apps.flow.templates.inbox.emptyTable"
+msgstr "No se encontraron casos"
+
+#: templates/workspace_view/_documents_tab.html:2
+msgid "antares.apps.flow.templates.dashboard.documentTab.draftDocuments"
+msgstr "Documentos en borrador"
+
+#: templates/workspace_view/_documents_tab.html:6
+#: templates/workspace_view/_documents_tab.html:22
+msgid "antares.apps.flow.templates.dashboard.documentTab.id"
+msgstr "ID"
+
+#: templates/workspace_view/_documents_tab.html:6
+#: templates/workspace_view/_documents_tab.html:22
+msgid "antares.apps.flow.templates.dashboard.documentTab.status"
+msgstr "Estado"
+
+#: templates/workspace_view/_documents_tab.html:7
+#: templates/workspace_view/_documents_tab.html:23
+msgid "antares.apps.flow.templates.dashboard.documentTab.formType"
+msgstr "Tipo de Formulario"
+
+#: templates/workspace_view/_documents_tab.html:8
+#: templates/workspace_view/_documents_tab.html:24
+msgid "antares.apps.flow.templates.dashboard.documentTab.relationship"
+msgstr "Relación"
+
+#: templates/workspace_view/_documents_tab.html:9
+msgid "antares.apps.flow.templates.dashboard.documentTab.created"
+msgstr "Creado"
+
+#: templates/workspace_view/_documents_tab.html:10
+#: templates/workspace_view/_documents_tab.html:27
+msgid "antares.apps.flow.templates.dashboard.documentTab.saved"
+msgstr "Guardado"
+
+#: templates/workspace_view/_documents_tab.html:10
+#: templates/workspace_view/_documents_tab.html:27
+msgid "antares.apps.flow.templates.dashboard.documentTab.actions"
+msgstr "Acciones"
+
+#: templates/workspace_view/_documents_tab.html:18
+msgid "antares.apps.flow.templates.dashboard.documentTab.savedDocuments"
+msgstr "Documentos grabados"
+
+#: templates/workspace_view/_documents_tab.html:25
+msgid "antares.apps.flow.templates.dashboard.documentTab.savedDate"
+msgstr "Guardado"
+
+#: templates/workspace_view/_documents_tab.html:26
+msgid "antares.apps.flow.templates.dashboard.documentTab.author"
+msgstr "Autor"
+
+#: templates/workspace_view/_general_tab.html:4
+msgid "antares.apps.flow.templates.dashboard.general_tab.case_information"
+msgstr "Información de caso"
+
+#: templates/workspace_view/_general_tab.html:9
+msgid "antares.apps.flow.templates.dashboard.general_tab.number"
+msgstr "Número"
+
+#: templates/workspace_view/_general_tab.html:15
+#: templates/workspace_view/_general_tab.html:68
+msgid "antares.apps.flow.templates.dashboard.general_tab.name"
+msgstr "Nombre"
+
+#: templates/workspace_view/_general_tab.html:25
+#: templates/workspace_view/_general_tab.html:80
+msgid "antares.apps.flow.templates.dashboard.general_tab.status"
+msgstr "Estado"
+
+#: templates/workspace_view/_general_tab.html:33
+msgid "antares.apps.flow.templates.dashboard.general_tab.priority"
+msgstr "Prioridad"
+
+#: templates/workspace_view/_general_tab.html:39
+#: templates/workspace_view/_general_tab.html:49
+msgid "antares.apps.flow.templates.dashboard.general_tab.status_type"
+msgstr "Tipo de estado"
+
+#: templates/workspace_view/_general_tab.html:64
+msgid "antares.apps.flow.templates.dashboard.general_tab.activity_information"
+msgstr "Información de actividad"
+
+#: templates/workspace_view/_general_tab.html:74
+msgid "antares.apps.flow.templates.dashboard.general_tab.id"
+msgstr "ID"
+
+#: templates/workspace_view/_general_tab.html:88
+msgid "antares.apps.flow.templates.dashboard.general_tab.creation_date"
+msgstr "Fecha de creación"
+
+#: templates/workspace_view/_general_tab.html:94
+msgid "antares.apps.flow.templates.dashboard.general_tab.start_date"
+msgstr "Fecha de comienzo"
+
+#: templates/workspace_view/_history_tab.html:5
+msgid "antares.apps.flow.templates.dashboard.historyTab.id"
+msgstr "ID"
+
+#: templates/workspace_view/_history_tab.html:6
+msgid "antares.apps.flow.templates.dashboard.historyTab.activityName"
+msgstr "Nombre de actividad"
+
+#: templates/workspace_view/_history_tab.html:7
+msgid "antares.apps.flow.templates.dashboard.historyTab.status"
+msgstr "Estado"
+
+#: templates/workspace_view/_history_tab.html:8
+msgid "antares.apps.flow.templates.dashboard.historyTab.creationDate"
+msgstr "Fecha de Creación"
+
+#: templates/workspace_view/_history_tab.html:9
+msgid "antares.apps.flow.templates.dashboard.historyTab.startDate"
+msgstr "Fecha de comienzo"
+
+#: templates/workspace_view/_history_tab.html:10
+msgid "antares.apps.flow.templates.dashboard.historyTab.finishDate"
+msgstr "Fecha de finalización"
+
+#: templates/workspace_view/_history_tab.html:11
+msgid "antares.apps.flow.templates.dashboard.historyTab.performer"
+msgstr "Responsable"
+
+#: templates/workspace_view/_left.html:3
+msgid "antares.apps.flow.templates.dashboard.forward.forwardCaseButton"
+msgstr "Avanzar Caso"
+
+
+#: templates/workspace_view/_left.html:3
+msgid "antares.apps.flow.templates.dashboard.forward.returnToInboxButton"
+msgstr "Volver"
+
+#: templates/workspace_view/_left.html:10
+msgid "antares.apps.flow.templates.dashboard.left.tools"
+msgstr "Herramientas"
+
+#: templates/workspace_view/_left.html:23
+msgid "antares.apps.flow.templates.dashboard.left.help"
+msgstr "Ayuda"
+
+#: templates/workspace_view/_left.html:38
+msgid "antares.apps.flow.templates.dashboard.left.notes"
+msgstr "Notas"
+
+#: templates/workspace_view/_left.html:46
+msgid "antares.apps.flow.templates.dashboard.left.postDate"
+msgstr "Fecha de publicación"
+
+#: templates/workspace_view/_left.html:47
+msgid "antares.apps.flow.templates.dashboard.left.author"
+msgstr "Autor"
+
+#: templates/workspace_view/_left.html:48
+msgid "antares.apps.flow.templates.dashboard.left.title"
+msgstr "Título"
+
+#: templates/workspace_view/_left.html:63
+msgid "antares.apps.flow.templates.dashboard.left.createNote"
+msgstr "Crear Nota"
+
+#: templates/workspace_view/_left.html:74
+msgid "antares.apps.flow.templates.dashboard.forward.title"
+msgstr "Título"
+
+#: templates/workspace_view/_left.html:78
+msgid "antares.apps.flow.templates.dashboard.forward.noPathFound"
+msgstr "No se encontró un camino"
+
+#: templates/workspace_view/_left.html:81
+msgid "antares.apps.flow.templates.dashboard.forward.pathsWereFound"
+msgstr "Los siguientes caminos fueron encontrados"
+
+#: templates/workspace_view/_left.html:87
+msgid "antares.apps.flow.templates.dashboard.forward.cancelButton"
+msgstr "Cancelar"
+
+#: templates/workspace_view/_left.html:88
+msgid "antares.apps.flow.templates.dashboard.forward.forwardButton"
+msgstr "Avanzar"
+
+#: templates/workspace_view/_properties_tab.html:5
+msgid "antares.apps.flow.templates.dashboard.propertiesTab.propertyName"
+msgstr "Nombre de propiedad"
+
+#: templates/workspace_view/_properties_tab.html:6
+msgid "antares.apps.flow.templates.dashboard.propertiesTab.value"
+msgstr "Valor"
+
+#: templates/workspace_view/workspace.html:14
+msgid "antares.apps.flow.templates.dashboard.tabs.general"
+msgstr "General"
+
+#: templates/workspace_view/workspace.html:15
+msgid "antares.apps.flow.templates.dashboard.tabs.properties"
+msgstr "Propiedades"
+
+#: templates/workspace_view/workspace.html:16
+msgid "antares.apps.flow.templates.dashboard.tabs.documents"
+msgstr "Documentos"
+
+#: templates/workspace_view/workspace.html:17
+msgid "antares.apps.flow.templates.dashboard.tabs.history"
+msgstr "Historia"
+
+
+msgid "antares.apps.flow.constants.FlowDefinitionStatusType.UNDER_TEST"
+msgstr "En Prueba"
+
+msgid "antares.apps.flow.constants.FlowDefinitionStatusType.UNDER_REVISION"
+msgstr "En Revisión"
+
+msgid "antares.apps.flow.constants.FlowDefinitionStatusType.RELEASED"
+msgstr "Liberado"
+
+msgid "antares.apps.flow.constants.FlowDefinitionStatusType.PHASED_OUT"
+msgstr "Retirado"
+
+msgid "antares.apps.flow.constants.FlowDefinitionStatusType.CANCELLED"
+msgstr "Cancelado"
+
+msgid "antares.apps.flow.templates.left.save"
+msgstr "Grabado"
+
+msgid "antares.apps.flow.ajax.ajax_inbox_created_cases_view.messages.enter"
+msgstr "Entrar"
+
+msgid "antares.apps.flow.templates.dashboard.general_tab.document_id"
+msgstr "ID de Documento"
+
+msgid "antares.apps.flow.templates.inbox.start_date"
+msgstr "Fecha de inicio"
+
+msgid "antares.apps.flow.templates.inbox.completion_date"
+msgstr "Fecha de finalización"
+
+msgid "antares.apps.flow.views.ajax_inbox_completed_cases_view.messages.enter"
+msgstr "Entrar"
+
+msgid "antares.apps.flow.views.ajax_inbox_active_cases_view.messages.enter"
+msgstr "Entrar"
+
+msgid "antares.apps.flow.models.flow_activity.buttons.save"
+msgstr "Grabar"
+
+msgid "antares.apps.flow.templates.dashboard.left.actions"
+msgstr "Acciones"
+
+msgid "antares.apps.flow.templates.dashboard.left.options"
+msgstr "Opciones"
+
+msgid "antares.apps.flow.templates.dashboard.forward.activity"
+msgstr "Actividad"
+
+msgid "antares.apps.flow.templates.dashboard.notes.edit_note"
+msgstr "Editar Nota"
+
+msgid "antares.apps.flow.templates.dashboard.notes.save_button"
+msgstr "Grabar"
+
+msgid "antares.apps.flow.templates.dashboard.notes.cancel_button"
+msgstr "Cancelar"
+
+msgid "antares.apps.flow.console.flow_admin_console.console.flow_status_was_changed_successfully"
+msgstr "El estado del flujo de trabajo fue modificado exitosamente"
+
+msgid "antares.apps.flow.templates.inbox.user_stats"
+msgstr "Estadísticas de usuario"
+
+msgid "antares.apps.flow.templates.dashboard.left.options.track_this_flow"
+msgstr "Seguir este Flujo"
+
+msgid "antares.apps.flow.console.flow_admin_console.console.load_xpdl_sucess"
+msgstr "XPDL grabado exitosamente"
+
+msgid "antares.apps.flow.console.flow_admin_console.cases_sucessfully_deleted"
+msgstr "Casos borrados exitosamente"
+
+msgid "antares.apps.flow.constants.FlowDocumentRelationshipType.SOURCE"
+msgstr "Fuente"
+
+msgid "antares.apps.flow.constants.FlowDocumentRelationshipType.ATTACHED"
+msgstr "Adjunto"
+
+msgid "antares.apps.flow.models.operation.flow_activity.buttons.save"
+msgstr "Grabar"
+
+msgid "antares.apps.flow.templates.dashboard.general_tab.source_type"
+msgstr "Tipo de fuente"
+
+msgid "antares.apps.flow.models.operation.flow_activity.selector.default_option_text"
+msgstr "Seleccionar uno"
+
+msgid "antares.apps.flow.templates.dashboard.general_tab.enter_case_name"
+msgstr "Ingresar el nombre del caso"
+
+msgid "antares.apps.flow.templates.dashboard.general_tab.enter_name"
+msgstr "ingresar nombre"
+
+msgid "antares.apps.flow.templates.dashboard.general_tab.select_priority"
+msgstr "Seleccionar prioridad"
+
+
+msgid "antares.apps.flow.console.flow_admin_console.console.activity_list.activity_code"
+msgstr "Código de actividad"
+
+msgid "antares.apps.flow.console.flow_admin_console.console.activity_list.status"
+msgstr "Estado"
+
+msgid "antares.apps.flow.console.flow_admin_console.console.activity_list.creation_date"
+msgstr "Fecha de creación"
+
+msgid "antares.apps.flow.console.flow_admin_console.console.activity_list.start_date"
+msgstr "Fecha de inicio"
+
+msgid "antares.apps.flow.console.flow_admin_console.console.activity_list.end_date"
+msgstr "Fecha de finalización"
+
+msgid "antares.apps.flow.console.flow_admin_console.console.activity_list.performer"
+msgstr "Responsable"
+
+msgid "antares.apps.flow.console.flow_admin_console.activities_finalized_or_cancelled_cannot_be_reassigned"
+msgstr "los casos finalizados o cancelados no pueden ser reasignados"
+
+msgid "antares.apps.flow.console.flow_admin_console.activity_reassigned_to {activity} {username}"
+msgstr "La actividad {activity} fue reasignada a {username}"
+
+
+msgid "antares.apps.flow.constants.FlowCaseStatusType.ACTIVE"
+msgstr "Activo"
+
+msgid "antares.apps.flow.constants.FlowCaseStatusType.COMPLETED"
+msgstr "Completado"
+
+msgid "antares.apps.flow.constants.FlowCaseStatusType.CANCELLED"
+msgstr "Cancelado"
+
+msgid "antares.apps.flow.constants.FlowCaseStatusType.CREATED"
+msgstr "Creado"
+
+
+msgid "antares.apps.flow.constants.FlowPriorityType.TOP"
+msgstr "Top"
+
+msgid "antares.apps.flow.constants.FlowPriorityType.HIGH"
+msgstr "Alto"
+
+msgid "antares.apps.flow.constants.FlowPriorityType.STANDARD"
+msgstr "Estándar"
+
+msgid "antares.apps.flow.constants.FlowPriorityType.LOW"
+msgstr "Bajo"
+
+msgid "antares.apps.flow.constants.FlowPriorityType.MINIMAL"
+msgstr "Mínimo"

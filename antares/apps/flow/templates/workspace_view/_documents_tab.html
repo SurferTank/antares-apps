@@ -1,0 +1,21 @@
+{% load staticfiles i18n pipeline flow_tags %} 
+<table  width="100%" id="caseDraftDocumentsTable" class="table table-striped">
+    <thead>
+        <tr>
+            <th>{% trans  'antares.apps.flow.templates.dashboard.documentTab.relationship' %}</th>
+            <th>{% trans  'antares.apps.flow.templates.dashboard.documentTab.id' %} </th>
+            <th>{% trans  'antares.apps.flow.templates.dashboard.documentTab.formType' %}</th>
+            <th>{% trans  'antares.apps.flow.templates.dashboard.documentTab.status' %}</th>
+            <th>{% trans  'antares.apps.flow.templates.dashboard.documentTab.created' %}</th>
+            <th>{% trans  'antares.apps.flow.templates.dashboard.documentTab.saved' %}</th>
+            <th>{% trans  'antares.apps.flow.templates.dashboard.documentTab.author' %}</th>
+            <th>{% trans  'antares.apps.flow.templates.dashboard.documentTab.actions' %}</th>
+        </tr>
+    </thead>
+    <tbody>
+        
+    </tbody>
+</table>
+<div style="text-align: right;">{% doc_create_dropdown_menu %}</div>
+ 
+<br/>
