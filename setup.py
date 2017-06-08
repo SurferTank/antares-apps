@@ -42,8 +42,8 @@ setup(
     description=('Antares Apps Module'),
     long_description=README,
     zip_safe=True,
-    download_url='https://bitbucket.org/leobelen/antares-apps/get/' +
-    version + '.tar.gz',
+    download_url='https://bitbucket.org/leobelen/antares-apps/get/' + version +
+    '.tar.gz',
     keywords=['management', 'infrastructure'],
     install_requires=[
         'Django >=1.11.1',

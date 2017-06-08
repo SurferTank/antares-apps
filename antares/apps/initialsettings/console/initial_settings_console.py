@@ -42,7 +42,7 @@ class InitialSettingsConsole(object):
             Loads an XPDL to Antares
         """
         if ('withpackage' in params):
-            package = os.path.join(settings.BASE_DIR, 'antares',
+            package = os.path.join(settings.BASE_DIR,
                                    SystemParameter.find_one(
                                        "INITIAL_SETTINGS_DEFAULT_FOLDER",
                                        FieldDataType.STRING,

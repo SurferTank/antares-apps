@@ -396,4 +396,9 @@ msgstr "Client Name"
 msgid "antares.apps.client.templates.client_header.total_balance"
 msgstr "Total Balance"
 
+msgid "antares.apps.client.views.client_panel_view.exceptions.client_does_not_exist"
+msgstr "Client does not exist"
+
+msgid "antares.apps.client.views.client_panel_view.exceptions.user_has_no_client_assigned {username}"
+msgstr "User {username} has no client assigned"
 

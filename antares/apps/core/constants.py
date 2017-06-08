@@ -133,6 +133,8 @@ class TimeUnitType(EnumUtilsMixin, Enum):
     MONTH = "Month"
     DAY = "Day"
     HOUR = "Hour"
+    MINUTE = "Minute"
+    SECOND = "Second"
 
     def __str__(self):
         """
@@ -140,11 +142,34 @@ class TimeUnitType(EnumUtilsMixin, Enum):
         """
         return str(self.value)
 
+    @classmethod
+    def to_enum_from_xpdl(cls, time_unit):
+        """ 
+        Converts from xpdl duration units to this type
+        """
+        if time_unit == 'Y':
+            return TimeUnitType.YEAR
+        if time_unit == 'M':
+            return TimeUnitType.MONTH
+        if time_unit == 'D':
+            return TimeUnitType.DAY
+        if time_unit == 'h':
+            return TimeUnitType.HOUR
+        if time_unit == 'm':
+            return TimeUnitType.MINUTE
+        if time_unit == 's':
+            return TimeUnitType.SECOND
+        else:
+            raise ValueError(
+                _(__name__ + ".Exceptions.TimeUnitType.Invalid_time_unit"))
+
     class Labels:
         YEAR = _(__name__ + '.TimeUnitType.' + 'YEAR')
         MONTH = _(__name__ + '.TimeUnitType.' + 'MONTH')
         DAY = _(__name__ + '.TimeUnitType.' + 'DAY')
         HOUR = _(__name__ + '.TimeUnitType.' + 'HOUR')
+        MINUTE = _(__name__ + '.TimeUnitType.' + 'MINUTE')
+        SECOND = _(__name__ + '.TimeUnitType.' + 'SECOND')
 
 
 class LanguageType(EnumUtilsMixin, Enum):
@@ -164,6 +189,23 @@ class LanguageType(EnumUtilsMixin, Enum):
         SPANISH = _(__name__ + '.LanguageType.' + 'SPANISH')
         FRENCH = _(__name__ + '.LanguageType.' + 'FRENCH')
         PORTUGUESE = _(__name__ + '.LanguageType.' + 'PORTUGUESE')
+
+
+class WeightUnitType(EnumUtilsMixin, Enum):
+    KILOGRAM = "Kilogram"
+    GRAM = "Gram"
+    TON = "Ton"
+
+    def __str__(self):
+        """
+        Just returns the value of the Enumeration
+        """
+        return str(self.value)
+
+    class Labels:
+        KILOGRAM = _(__name__ + '.WeightUnitType.' + 'KILOGRAM')
+        GRAM = _(__name__ + '.WeightUnitType.' + 'GRAM')
+        TON = _(__name__ + '.WeightUnitType.' + 'TON')
 
 
 class SystemModuleType(EnumUtilsMixin, Enum):

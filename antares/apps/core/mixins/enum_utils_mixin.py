@@ -39,6 +39,9 @@ class EnumUtilsMixin:
         
         :param element: the element to convert
         """
+        if element is None:
+            return element
+
         if isinstance(element, cls):
             return cls
 

@@ -7,7 +7,8 @@ from django.utils.translation import ugettext as _
 
 from enumfields import EnumField
 
-from antares.apps.flow.constants import FlowDefinitionStatusType
+from antares.apps.flow.constants import FlowDefinitionStatusType, FlowPriorityType
+from antares.apps.core.constants import TimeUnitType
 
 logger = logging.getLogger(__name__)
 
@@ -33,6 +34,11 @@ class FlowDefinition(models.Model):
     status = EnumField(FlowDefinitionStatusType, max_length=30)
     valid_from = models.DateTimeField(blank=True, null=True)
     valid_to = models.DateTimeField(blank=True, null=True)
+    time_unit = EnumField(TimeUnitType, blank=True, null=True)
+    waiting_time = models.FloatField(blank=True, null=True)
+    working_time = models.FloatField(blank=True, null=True)
+    duration = models.FloatField(blank=True, null=True)
+    priority = EnumField(FlowPriorityType, blank=True, null=True)
 
     def __str__(self):
         if self.display_name:

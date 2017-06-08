@@ -7,7 +7,7 @@ from django.utils.translation import ugettext as _
 from enumfields import EnumField
 
 from antares.apps.flow.constants import ActivityType, AssignmentStrategyType,\
-    ExecutionModeType
+    ExecutionModeType, FlowActivityInstantiationType, FlowActivityInstantiationType
 from antares.apps.flow.constants import AssignmentStrategyType
 from antares.apps.flow.constants import ExecutionModeType
 from .transition_definition import TransitionDefinition
@@ -39,6 +39,12 @@ class ActivityDefinition(models.Model):
         max_length=100, blank=True, null=True)
     activity_strategy_definition = models.CharField(
         max_length=100, blank=True, null=True)
+    instantation = EnumField(
+        FlowActivityInstantiationType, blank=True, null=True)
+    cost = models.FloatField(blank=True, null=True)
+    waiting_time = models.FloatField(blank=True, null=True)
+    working_time = models.FloatField(blank=True, null=True)
+    duration = models.FloatField(blank=True, null=True)
 
     def __str__(self):
         if self.display_name:

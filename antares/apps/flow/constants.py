@@ -352,3 +352,46 @@ class TransitionType(EnumUtilsMixin, Enum):
         EXCEPTION = _(__name__ + '.TransitionType.' + 'EXCEPTION')
         OTHERWISE = _(__name__ + '.TransitionType.' + 'OTHERWISE')
         NONE = _(__name__ + '.TransitionType.' + 'NONE')
+
+
+class FlowDefinitionAccessLevelType(EnumUtilsMixin, Enum):
+    PRIVATE = "Private"
+    PUBLIC = "Public"
+
+    def __str__(self):
+        """
+        Just returns the value of the Enumeration
+        """
+        return str(self.value)
+
+    class Labels:
+        PRIVATE = _(__name__ + '.FlowDefinitionAccessLevelType.' + 'PRIVATE')
+        PUBLIC = _(__name__ + '.FlowDefinitionAccessLevelType.' + 'PUBLIC')
+
+
+class FlowActivityInstantiationType(EnumUtilsMixin, Enum):
+    ONCE = "Once"
+    MULTIPLE = "Multiple"
+
+    def __str__(self):
+        """
+        Just returns the value of the Enumeration
+        """
+        return str(self.value)
+
+    class Labels:
+        ONCE = _(__name__ + '.FlowActivityInstantiationType.' + 'ONCE')
+        MULTIPLE = _(__name__ + '.FlowActivityInstantiationType.' + 'MULTIPLE')
+
+
+class TimeEstimationMethodType(EnumUtilsMixin, Enum):
+    AVERAGE = "Average"
+
+    def __str__(self):
+        """
+        Just returns the value of the Enumeration
+        """
+        return str(self.value)
+
+    class Labels:
+        AVERAGE = _(__name__ + '.TimeEstimationMethodType.' + 'AVERAGE')

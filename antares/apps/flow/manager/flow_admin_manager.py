@@ -9,6 +9,7 @@ import os
 from django.utils.translation import ugettext as _
 from lxml import etree
 from lxml import objectify
+import dateutil.parser
 
 from antares.apps.core.constants import ScriptEngineType, FieldDataType,\
     ActionType
@@ -17,13 +18,16 @@ from antares.apps.document.models.form_definition import FormDefinition
 from antares.apps.flow.models.definition.flow_action_definition import FlowActionDefinition
 from antares.apps.user.models import Role, OrgUnit, User
 
-from ..constants import ExecutionModeType, FlowBasicDataSubtype, AssignmentStrategyType, TransitionType, FormalParameterModeType, ActivityApplicationDefinitionScopeType
-from ..constants import FlowDefinitionStatusType, FlowAccessLevelType, DefinitionSiteType, PropertyType, FlowDataType, ParticipantType, ActivityType
-from ..exceptions import InvalidXPDLException, InvalidStatusException
+from antares.apps.flow.constants import ExecutionModeType, FlowBasicDataSubtype, AssignmentStrategyType, TransitionType, FormalParameterModeType, ActivityApplicationDefinitionScopeType
+from antares.apps.flow.constants import FlowDefinitionStatusType, FlowAccessLevelType, DefinitionSiteType, PropertyType, FlowDataType, ParticipantType, ActivityType, FlowDefinitionAccessLevelType, FlowPriorityType
+from antares.apps.flow.exceptions import InvalidXPDLException, InvalidStatusException
 from ..models import ApplicationDefinition, ApplicationParameterDefinition, ParticipantDefinition, ActivityDefinition, ActivityApplicationDefinition
 from ..models import FlowActivityExtraTab, FlowActivityExtraTabParameter, FlowActivityForm, FlowActivityValidation, FlowActivityFormParameter
 from ..models import FlowPackage, FlowDefinition
 from ..models import TransitionDefinition, PropertyDefinition, ActivityApplicationParameterDefinition
+from antares.apps.core.constants import TimeUnitType
+from antares.apps.flow.constants import TimeEstimationMethodType
+from build.lib.antares.apps.core.constants import FieldDataType
 
 NS_MAP = {
     'subs':
@@ -38,14 +42,17 @@ logger = logging.getLogger(__name__)
 
 
 class FlowAdminManager(object):
-    '''
-    classdocs
-    '''
+    """
+    Provides services to load an XPDL to the database
+    """
+
     XPDL_SCHEMA_LOCATION = os.path.dirname(
         os.path.realpath(__file__)) + '/../xml/XPDL21.xsd'
 
     def __init__(self, **kwargs):
-
+        """
+        Sets up the class for further use
+        """
         xpdl_string = kwargs.get('xpdl_string')
         xpdl_file = kwargs.get('xpdl_file')
         if (xpdl_file is not None):
@@ -56,12 +63,19 @@ class FlowAdminManager(object):
         self.xpdl = etree.fromstring(xpdl_string)
 
     def load_xpdl(self):
+        """
+        Loads the xpdl into the system
+        """
         self._check_package_header()
         self._check_processes()
         self._check_package_exists_on_db()
         self._hibernate_package()
 
     def _check_package_header(self):
+        """
+        Checks basic information regarding the package to be sure that the XPDL version and the general 
+        script engine is valid and supported. 
+        """
         xpdl_version = self.xpdl.find(
             'xpdl:PackageHeader/xpdl:XPDLVersion', namespaces=NS_MAP)
 
@@ -84,6 +98,9 @@ class FlowAdminManager(object):
                 _(__name__ + ".exceptions.invalid_script_engine"))
 
     def _check_processes(self):
+        """
+        Checks that processes are defined for the package
+        """
         processes = self.xpdl.find(
             'xpdl:WorkflowProcesses/xpdl:WorkflowProcess', namespaces=NS_MAP)
         if (processes is None or len(processes) == 0):
@@ -91,7 +108,10 @@ class FlowAdminManager(object):
                 _(__name__ + ".exceptions.no_processes_defined"))
 
     def _check_package_exists_on_db(self):
-        logger.info("we are in the _check_package_exists_on_db method")
+        """
+        Verifies that the package does not exist on the system.
+        """
+        logger.debug("we are in the _check_package_exists_on_db method")
         package_id = self.xpdl.get('Id')
         package_version = self.xpdl.find(
             'xpdl:RedefinableHeader/xpdl:Version', namespaces=NS_MAP)
@@ -111,6 +131,9 @@ class FlowAdminManager(object):
             logger.info('package does not exist')
 
     def verify_xml_against_schema(self, xpdl_string):
+        """
+        Verifies that the XPDL conforms to all schemas. 
+        """
         path = os.path.isfile(FlowAdminManager.XPDL_SCHEMA_LOCATION)
         if not path:
             raise FileNotFoundError(
@@ -128,6 +151,9 @@ class FlowAdminManager(object):
         #        _(__name__ + ".exceptions.xpdl_is_invalid"))
 
     def _hibernate_package(self):
+        """
+        Saves the package to the system.
+        """
         package = FlowPackage()
         package_id = self.xpdl.get('Id')
         package_version = self.xpdl.find(
@@ -147,6 +173,9 @@ class FlowAdminManager(object):
         package.save()
 
     def _hibernate_workflows(self, package):
+        """
+        Saves the workflow to the system.
+        """
         for workflow_node in self.xpdl.iterfind(
                 'xpdl:WorkflowProcesses/xpdl:WorkflowProcess',
                 namespaces=NS_MAP):
@@ -160,6 +189,17 @@ class FlowAdminManager(object):
             flow_id = workflow_node.get('Id')
             if (flow_id):
                 flow_def.flow_id = flow_id
+            access_level = workflow_node.get('AccessLevel')
+            if (access_level and
+                    FlowDefinitionAccessLevelType.to_enum(access_level) is
+                    not None):
+                flow_def.access_level = FlowDefinitionAccessLevelType.to_enum(
+                    access_level)
+            else:
+                flow_def.access_level = FlowDefinitionAccessLevelType.to_enum(
+                    SystemParameter("FLOW_DEFINITION_DEFAULT_ACCESS_LEVEL",
+                                    FieldDataType.STRING,
+                                    FlowDefinitionAccessLevelType.PUBLIC))
             flow_version = workflow_node.find(
                 'xpdl:RedefinableHeader/xpdl:Version', namespaces=NS_MAP)
             if (flow_version is not None and flow_version.text):
@@ -177,6 +217,89 @@ class FlowAdminManager(object):
                 'xpdl:Description', namespaces=NS_MAP)
             if (description is not None and description.text):
                 flow_def.description = description.text
+
+            process_header_node = workflow_node.find(
+                'xpdl:ProcessHeader', namespaces=NS_MAP)
+            if process_header_node is not None:
+                if process_header_node.get('DurationUnit') is not None:
+                    duration = TimeUnitType.to_enum_from_xpdl(
+                        process_header_node.get('DurationUnit'))
+                    if duration is not None:
+                        flow_def.time_unit = duration
+                    else:
+                        flow_def.time_unit = TimeUnitType.to_enum(
+                            SystemParameter(
+                                "FLOW_DEFINITION_DEFAULT_TIME_UNIT_TYPE",
+                                FieldDataType.STRING, TimeUnitType.HOUR.value))
+            else:
+                flow_def.time_unit = TimeUnitType.to_enum(
+                    SystemParameter("FLOW_DEFINITION_DEFAULT_TIME_UNIT_TYPE",
+                                    FieldDataType.STRING,
+                                    TimeUnitType.HOUR.value))
+
+            priority_node = process_header_node.find(
+                'xpdl:Priority', namespaces=NS_MAP)
+            if (priority_node is not None and priority_node.text):
+                priority = FlowPriorityType.to_enum(priority_node.text)
+                if priority is None:
+                    priority = FlowPriorityType.to_enum(
+                        SystemParameter.find_one(
+                            "FLOW_DEFINITION_DEFAULT_PRIORITY", FieldDataType.
+                            STRING, FlowPriorityType.STANDARD.value))
+                flow_def.priority = priority
+            else:
+                flow_def.priority = FlowPriorityType.to_enum(
+                    SystemParameter.find_one(
+                        "FLOW_DEFINITION_DEFAULT_PRIORITY",
+                        FieldDataType.STRING, FlowPriorityType.STANDARD.value))
+
+            valid_from_node = process_header_node.find(
+                'xpdl:ValidFrom', namespaces=NS_MAP)
+            if (valid_from_node is not None and valid_from_node.text):
+                flow_def.valid_from = dateutil.parser.parse(
+                    valid_from_node.text)
+
+            valid_to_node = process_header_node.find(
+                'xpdl:ValidTo', namespaces=NS_MAP)
+            if (valid_to_node is not None and valid_to_node.text):
+                flow_def.valid_to = dateutil.parser.parse(valid_to_node.text)
+
+            time_estimation_node = process_header_node.find(
+                'xpdl:TimeEstimation', namespaces=NS_MAP)
+            if time_estimation_node is not None:
+                waiting_time_node = time_estimation_node.find(
+                    'xpdl:WaitingTime', namespaces=NS_MAP)
+                if (waiting_time_node is not None and
+                        waiting_time_node.text is not None):
+                    flow_def.waiting_time = float(waiting_time_node.text)
+                else:
+                    flow_def.waiting_time = 0
+
+                working_time_node = time_estimation_node.find(
+                    'xpdl:WorkingTime', namespaces=NS_MAP)
+                if (working_time_node is not None and
+                        working_time_node.text is not None):
+                    flow_def.working_time = float(working_time_node.text)
+                else:
+                    flow_def.working_time = 0
+
+                duration_node = time_estimation_node.find(
+                    'xpdl:Duration', namespaces=NS_MAP)
+                if (duration_node is not None and
+                        duration_node.text is not None):
+                    flow_def.duration = float(duration_node.text)
+                else:
+                    flow_def.duration = 0
+
+                if flow_def.duration != (
+                        flow_def.waiting_time + flow_def.working_time):
+                    flow_def.duration = (
+                        flow_def.waiting_time + flow_def.working_time)
+            else:
+                flow_def.duration = 0
+                flow_def.waiting_time = 0
+                flow_def.working_time = 0
+
             flow_def.save()
             self._hibernate_application_records(package, flow_def,
                                                 workflow_node)
@@ -197,6 +320,9 @@ class FlowAdminManager(object):
             package.save()
 
     def _hibernate_application_records(self, package, flow_def, workflow_node):
+        """
+        Saves the applications to the system.
+        """
         self._create_system_apps(package, flow_def, workflow_node)
 
         for package_app_node in self.xpdl.iterfind(
@@ -209,7 +335,9 @@ class FlowAdminManager(object):
                                               DefinitionSiteType.FLOW)
 
     def _create_system_apps(self, package, flow_def, workflow_node):
-
+        """
+        Creates the system provided application records and serializes them.
+        """
         # update property
         app_def = ApplicationDefinition()
         app_def.flow_definition = flow_def
@@ -262,6 +390,9 @@ class FlowAdminManager(object):
 
     def _process_application_records(self, flow_def, app_node,
                                      definition_site):
+        """
+        Processes the application records to save them to the system. 
+        """
         app_def = ApplicationDefinition()
         app_def.flow_definition = flow_def
         app_def.definition_site = definition_site
@@ -328,6 +459,9 @@ class FlowAdminManager(object):
         flow_def.application_definition_set.add(app_def, bulk=False)
 
     def _hibernate_participant_records(self, package, flow_def, workflow_node):
+        """
+        Saves the participant records to the system.
+        """
         for package_participant_node in self.xpdl.iterfind(
                 'xpdl:Participants/xpdl:Participant', namespaces=NS_MAP):
             self._process_participant_records(
@@ -339,6 +473,9 @@ class FlowAdminManager(object):
 
     def _process_participant_records(self, flow_def, participant_node,
                                      definition_site):
+        """
+        Processes the application records to be saved to the system. 
+        """
         participant_def = ParticipantDefinition()
         participant_def.flow_definition = flow_def
         participant_def.definition_site = definition_site
@@ -408,6 +545,9 @@ class FlowAdminManager(object):
         flow_def.participant_definition_set.add(participant_def)
 
     def _hibernate_activity_records(self, package, flow_def, workflow_node):
+        """
+        Saves activity records to the system. 
+        """
         for activity_node in workflow_node.iterfind(
                 'xpdl:Activities/xpdl:Activity', namespaces=NS_MAP):
             activity_def = ActivityDefinition()
@@ -446,6 +586,54 @@ class FlowAdminManager(object):
                 'xpdl:Description', namespaces=NS_MAP)
             if (description is not None and description.text):
                 activity_def.description = description.text
+
+            simulation_node = activity_node.find(
+                'xpdl:SimulationInformation', namespaces=NS_MAP)
+            if simulation_node is not None:
+                cost_node = simulation_node.find(
+                    'xpdl:Cost', namespaces=NS_MAP)
+                if (cost_node is not None and cost_node.text is not None):
+                    activity_def.cost = cost_node.text
+                else:
+                    activity_def.cost = "0"
+
+                time_estimation_node = simulation_node.find(
+                    'xpdl:TimeEstimation', namespaces=NS_MAP)
+                if time_estimation_node is not None:
+                    waiting_time_node = time_estimation_node.find(
+                        'xpdl:WaitingTime', namespaces=NS_MAP)
+                    if (waiting_time_node is not None and
+                            waiting_time_node.text is not None):
+                        activity_def.waiting_time = float(
+                            waiting_time_node.text)
+                    else:
+                        activity_def.waiting_time = 0
+
+                    working_time_node = time_estimation_node.find(
+                        'xpdl:WorkingTime', namespaces=NS_MAP)
+                    if (working_time_node is not None and
+                            working_time_node.text is not None):
+                        activity_def.working_time = float(
+                            working_time_node.text)
+                    else:
+                        activity_def.working_time = 0
+
+                    duration_node = time_estimation_node.find(
+                        'xpdl:Duration', namespaces=NS_MAP)
+                    if (duration_node is not None and
+                            duration_node.text is not None):
+                        activity_def.duration = float(duration_node.text)
+                    else:
+                        activity_def.duration = 0
+
+                    if activity_def.duration != (activity_def.waiting_time +
+                                                 activity_def.working_time):
+                        activity_def.duration = activity_def.waiting_time + activity_def.working_time
+            else:
+                activity_def.duration = 0
+                activity_def.waiting_time = 0
+                activity_def.working_time = 0
+                activity_def.cost = 0
 
             for performer in activity_node.iterfind(
                     'xpdl:Performers/xpdl:Performer', namespaces=NS_MAP):
@@ -654,6 +842,9 @@ class FlowAdminManager(object):
             flow_def.save()
 
     def _hibernate_transition_records(self, package, flow_def, workflow_node):
+        """
+        Saves the transitions to the system. 
+        """
         for transition_node in workflow_node.iterfind(
                 'xpdl:Transitions/xpdl:Transition', namespaces=NS_MAP):
             trans_def = TransitionDefinition()
@@ -712,8 +903,13 @@ class FlowAdminManager(object):
             flow_def.save()
 
     def _hibernate_property_records(self, package, flow_def, workflow_node):
-        # we have 4 sources of properties, DataField and Property, both from
-        # the package and the flow.
+        """
+        Saves the property definition to be used by the flow to the system. 
+        
+        There are 4 sources of properties, DataField and Property, both from 
+        the package and the flow.
+        
+        """
         for field_node in self.xpdl.iterfind(
                 'xpdl:DataFields/xpdl:DataField', namespaces=NS_MAP):
             prop_def = PropertyDefinition()
@@ -1059,3 +1255,38 @@ class FlowAdminManager(object):
                     application.delete()
                 flow_definition.delete()
             flow_package.delete()
+
+    def update_flow_definition_time_estimation(self, flow_def):
+        """
+        Updates the definition's time estimation based on the values stored on the Activity Definition Records. 
+        Assumes all times in the base unit. 
+        """
+        waiting_time = 0
+        working_time = 0
+
+        for activity_def in flow_def.activity_definition_set.select_related(
+        ).all():
+            waiting_time = waiting_time + activity_def.waiting_time
+            working_time = working_time + activity_def.working_time
+
+        flow_def.waiting_time = waiting_time
+        flow_def.working_time = working_time
+        flow_def.duration = waiting_time + working_time
+
+        return flow_def
+
+    def update_activity_definition_time_estimation(self, flow_def,
+                                                   method=None):
+        if isinstance(str, method):
+            method = TimeEstimationMethodType.to_enum(method)
+        if method is None:
+            method = TimeEstimationMethodType.to_enum(
+                SystemParameter.find_one(
+                    "FLOW_ACTIVITY_DEFINITION_TIME_ESTIMATION_METHOD",
+                    FieldDataType.STRING,
+                    TimeEstimationMethodType.AVERAGE.value))
+        if method is None:
+            raise ValueError(
+                _(__name__ +
+                  ".exceptions.invalid_time_estimation_method_type_especified")
+            )
