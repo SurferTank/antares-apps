@@ -1302,8 +1302,10 @@ class FlowAdminManager(object):
                 _(__name__ +
                   ".exceptions.invalid_time_estimation_method_type_especified")
             )
+            
         waiting_time = 0
         working_time = 0
+        
         for activity_def in flow_def.activity_definition_set.select_related():
             waiting_time = waiting_time + FlowActivity.find_average_waiting_time(activity_def)
             working_time = working_time + FlowActivity.find_average_waiting_time(activity_def)
