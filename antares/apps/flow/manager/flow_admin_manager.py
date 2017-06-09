@@ -18,8 +18,8 @@ from antares.apps.document.models.form_definition import FormDefinition
 from antares.apps.flow.models.definition.flow_action_definition import FlowActionDefinition
 from antares.apps.user.models import Role, OrgUnit, User
 
-from antares.apps.flow.constants import ExecutionModeType, FlowBasicDataSubtype, AssignmentStrategyType, TransitionType, FormalParameterModeType, ActivityApplicationDefinitionScopeType,\
-    FlowActivityInstantiationType
+from ..constants import ExecutionModeType, FlowBasicDataSubtype, AssignmentStrategyType, TransitionType, FormalParameterModeType, ActivityApplicationDefinitionScopeType,\
+    FlowActivityInstantiationType, TimeEstimationMethodType
 from antares.apps.flow.constants import FlowDefinitionStatusType, FlowAccessLevelType, DefinitionSiteType, PropertyType, FlowDataType, ParticipantType, ActivityType, FlowDefinitionAccessLevelType, FlowPriorityType
 from antares.apps.flow.exceptions import InvalidXPDLException, InvalidStatusException
 from ..models import ApplicationDefinition, ApplicationParameterDefinition, ParticipantDefinition, ActivityDefinition, ActivityApplicationDefinition
@@ -27,7 +27,7 @@ from ..models import FlowActivityExtraTab, FlowActivityExtraTabParameter, FlowAc
 from ..models import FlowPackage, FlowDefinition, FlowActivity
 from ..models import TransitionDefinition, PropertyDefinition, ActivityApplicationParameterDefinition
 from antares.apps.core.constants import TimeUnitType
-from antares.apps.flow.constants import TimeEstimationMethodType
+
 
 
 NS_MAP = {
@@ -300,7 +300,7 @@ class FlowAdminManager(object):
                 flow_def.duration = 0
                 flow_def.waiting_time = 0
                 flow_def.working_time = 0
-
+            
             flow_def.save()
             self._hibernate_application_records(package, flow_def,
                                                 workflow_node)
@@ -315,7 +315,7 @@ class FlowAdminManager(object):
             self._hibernate_transition_records(package, flow_def,
                                                workflow_node)
             self._hibernate_property_records(package, flow_def, workflow_node)
-
+            self.update_flow_definition_time_estimation()
             flow_def.save()
             package.flow_definition_set.add(flow_def)
             package.save()
@@ -1287,7 +1287,8 @@ class FlowAdminManager(object):
         flow_def.save()
         return flow_def
 
-    def update_activity_definition_time_estimation(self, flow_def,
+    @classmethod
+    def update_activity_definition_time_estimation(cls, flow_def,
                                                    method=None):
         if isinstance(str, method):
             method = TimeEstimationMethodType.to_enum(method)

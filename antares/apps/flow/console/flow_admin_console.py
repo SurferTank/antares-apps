@@ -13,12 +13,12 @@ from antares.apps.user.models import User
 from django.core.exceptions import ObjectDoesNotExist
 from django.utils.translation import ugettext as _
 import logging
-import traceback
 from uuid import UUID
 
-from ..constants import FlowDefinitionStatusType
+from ..constants import FlowDefinitionStatusType, TimeEstimationMethodType
 from ..manager import FlowAdminManager
 from ..models import FlowPackage
+
 
 logger = logging.getLogger(__name__)
 
@@ -47,6 +47,8 @@ class FlowAdminConsole(object):
             message += FlowAdminConsole._list_activities(params, html)
         elif ('reassignactivity' in params):
             message += FlowAdminConsole._reassign_activity(params, html)
+        elif ('updateestimation' in params):
+            message += FlowAdminConsole._update_estimation(params, html)
 
         elif ('help' in params):
             message += "We may say that the flow help will show up here"
@@ -371,3 +373,40 @@ class FlowAdminConsole(object):
                  ".activity_reassigned_to {activity} {username}").format(
                      activity=flow_activity.hrn_code,
                      username=performer.username)
+    @classmethod
+    def _update_estimation(cls, params, html):
+        if ('withpackageid' in params):
+            package_id = params['withpackageid']
+        else:
+            return _(__name__ + ".console.missing_parameter %(parameter)s ") % \
+                {'parameter': 'withpackageid'}
+        if ('withpackageversion' in params):
+            package_version = params['withpackageversion']
+        else:
+            return _(__name__ + ".console.missing_parameter %(parameter)s ") % \
+                {'parameter': 'withpackageversion'}
+
+        package = FlowPackage.find_one_by_package_id_and_package_version(
+            package_id, package_version)
+        if ('withdefinitionid' in params):
+            flow_definition_id = params['withdefinitionid']
+        else:
+            return _(__name__ + ".console.missing_parameter %(parameter)s ") % \
+                {'parameter': 'withdefinitionid'}
+        if ('withdefinitionversion' in params):
+            flow_definition_version = params['withdefinitionversion']
+        else:
+            return _(__name__ + ".console.missing_parameter %(parameter)s ") % \
+                {'parameter': 'withdefinitionversion'}
+        try:
+            flow_definition = package.flow_definition_set.select_related().get(
+                flow_id=flow_definition_id,
+                flow_version=flow_definition_version)
+        except ObjectDoesNotExist:
+            return _(__name__ + ".console.flow_does_not_exist_in_package")
+
+        FlowAdminManager.update_flow_definition_time_estimation(flow_definition, TimeEstimationMethodType.AVERAGE)
+        
+        return _(__name__ + ".console.estimations_successfully_updated")
+        
+        
