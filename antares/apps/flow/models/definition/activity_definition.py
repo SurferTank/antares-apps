@@ -39,7 +39,7 @@ class ActivityDefinition(models.Model):
         max_length=100, blank=True, null=True)
     activity_strategy_definition = models.CharField(
         max_length=100, blank=True, null=True)
-    instantation = EnumField(
+    instantiation = EnumField(
         FlowActivityInstantiationType, blank=True, null=True)
     cost = models.FloatField(blank=True, null=True)
     waiting_time = models.FloatField(blank=True, null=True)

@@ -18,16 +18,17 @@ from antares.apps.document.models.form_definition import FormDefinition
 from antares.apps.flow.models.definition.flow_action_definition import FlowActionDefinition
 from antares.apps.user.models import Role, OrgUnit, User
 
-from antares.apps.flow.constants import ExecutionModeType, FlowBasicDataSubtype, AssignmentStrategyType, TransitionType, FormalParameterModeType, ActivityApplicationDefinitionScopeType
+from antares.apps.flow.constants import ExecutionModeType, FlowBasicDataSubtype, AssignmentStrategyType, TransitionType, FormalParameterModeType, ActivityApplicationDefinitionScopeType,\
+    FlowActivityInstantiationType
 from antares.apps.flow.constants import FlowDefinitionStatusType, FlowAccessLevelType, DefinitionSiteType, PropertyType, FlowDataType, ParticipantType, ActivityType, FlowDefinitionAccessLevelType, FlowPriorityType
 from antares.apps.flow.exceptions import InvalidXPDLException, InvalidStatusException
 from ..models import ApplicationDefinition, ApplicationParameterDefinition, ParticipantDefinition, ActivityDefinition, ActivityApplicationDefinition
 from ..models import FlowActivityExtraTab, FlowActivityExtraTabParameter, FlowActivityForm, FlowActivityValidation, FlowActivityFormParameter
-from ..models import FlowPackage, FlowDefinition
+from ..models import FlowPackage, FlowDefinition, FlowActivity
 from ..models import TransitionDefinition, PropertyDefinition, ActivityApplicationParameterDefinition
 from antares.apps.core.constants import TimeUnitType
 from antares.apps.flow.constants import TimeEstimationMethodType
-from build.lib.antares.apps.core.constants import FieldDataType
+
 
 NS_MAP = {
     'subs':
@@ -197,9 +198,9 @@ class FlowAdminManager(object):
                     access_level)
             else:
                 flow_def.access_level = FlowDefinitionAccessLevelType.to_enum(
-                    SystemParameter("FLOW_DEFINITION_DEFAULT_ACCESS_LEVEL",
-                                    FieldDataType.STRING,
-                                    FlowDefinitionAccessLevelType.PUBLIC))
+                    SystemParameter.find_one(
+                        "FLOW_DEFINITION_DEFAULT_ACCESS_LEVEL", FieldDataType.
+                        STRING, FlowDefinitionAccessLevelType.PUBLIC))
             flow_version = workflow_node.find(
                 'xpdl:RedefinableHeader/xpdl:Version', namespaces=NS_MAP)
             if (flow_version is not None and flow_version.text):
@@ -228,14 +229,14 @@ class FlowAdminManager(object):
                         flow_def.time_unit = duration
                     else:
                         flow_def.time_unit = TimeUnitType.to_enum(
-                            SystemParameter(
+                            SystemParameter.find_one(
                                 "FLOW_DEFINITION_DEFAULT_TIME_UNIT_TYPE",
                                 FieldDataType.STRING, TimeUnitType.HOUR.value))
             else:
                 flow_def.time_unit = TimeUnitType.to_enum(
-                    SystemParameter("FLOW_DEFINITION_DEFAULT_TIME_UNIT_TYPE",
-                                    FieldDataType.STRING,
-                                    TimeUnitType.HOUR.value))
+                    SystemParameter.find_one(
+                        "FLOW_DEFINITION_DEFAULT_TIME_UNIT_TYPE",
+                        FieldDataType.STRING, TimeUnitType.HOUR.value))
 
             priority_node = process_header_node.find(
                 'xpdl:Priority', namespaces=NS_MAP)
@@ -590,6 +591,17 @@ class FlowAdminManager(object):
             simulation_node = activity_node.find(
                 'xpdl:SimulationInformation', namespaces=NS_MAP)
             if simulation_node is not None:
+                if simulation_node.get('Instantiation'):
+                    instantiation = FlowActivityInstantiationType.to_enum(
+                        simulation_node)
+                    if instantiation is not None:
+                        activity_def.instantiation = instantiation
+                if activity_def.instantiation is None:
+                    activity_def.instantiation = FlowActivityInstantiationType.to_enum(
+                        SystemParameter.find_one(
+                            "FLOW_ACTIVITY_DEFINITION_DEFAULT_INSTANTIATION",
+                            FieldDataType.STRING,
+                            FlowActivityInstantiationType.MULTIPLE.value))
                 cost_node = simulation_node.find(
                     'xpdl:Cost', namespaces=NS_MAP)
                 if (cost_node is not None and cost_node.text is not None):
@@ -1272,7 +1284,7 @@ class FlowAdminManager(object):
         flow_def.waiting_time = waiting_time
         flow_def.working_time = working_time
         flow_def.duration = waiting_time + working_time
-
+        flow_def.save()
         return flow_def
 
     def update_activity_definition_time_estimation(self, flow_def,
@@ -1290,3 +1302,17 @@ class FlowAdminManager(object):
                 _(__name__ +
                   ".exceptions.invalid_time_estimation_method_type_especified")
             )
+        waiting_time = 0
+        working_time = 0
+        for activity_def in flow_def.activity_definition_set.select_related():
+            waiting_time = waiting_time + FlowActivity.find_average_waiting_time(activity_def)
+            working_time = working_time + FlowActivity.find_average_waiting_time(activity_def)
+         
+        
+        flow_def.working_time = working_time
+        flow_def.waiting_time = waiting_time
+        flow_def.duration = waiting_time + working_time
+        
+        flow_def.save()
+        return flow_def
+    

@@ -2,4 +2,5 @@ eclipse.preferences.version=1
 encoding//antares/apps/flow/migrations/0003_auto_20170608_0200.py=utf-8
 encoding//antares/apps/flow/migrations/0004_auto_20170608_1518.py=utf-8
 encoding//antares/apps/flow/migrations/0005_auto_20170608_1519.py=utf-8
+encoding//antares/apps/flow/migrations/0006_auto_20170608_1737.py=utf-8
 encoding//antares/apps/user/models/user.py=utf-8
