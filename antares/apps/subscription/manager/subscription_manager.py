@@ -51,12 +51,12 @@ class SubscriptionManager(object):
                 if (len(action_set) > 0 and
                     ((subs_event.condition_text and SubscriptionManager.
                       _execute_document_subscription_condition(
-                          subs_event, document) == True) or
-                     not subs_event.condition_text)):
+                          subs_event, document) == True)
+                     or not subs_event.condition_text)):
                     for action in action_set:
                         if (action.action_definition.id.lower() ==
-                                'create_case' or
-                                action.action_definition.lower() ==
+                                'create_case'
+                                or action.action_definition.lower() ==
                                 'createcase'):
                             message = Message.find_or_create_one(
                                 document=document)

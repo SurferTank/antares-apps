@@ -99,8 +99,8 @@ class FormDefinition(models.Model):
         FormDefinition.verify_xml_against_schema(form_def)
         form_name = definition_obj.find('headerElements/formName')
         form_version = definition_obj.find('headerElements/formVersion')
-        if (form_name is not None and form_name.text and
-                form_version is not None and form_version.text):
+        if (form_name is not None and form_name.text
+                and form_version is not None and form_version.text):
             form_def.form_name = form_name.text
             form_def.form_version = form_version.text
             form_def.id = "{form_name}{separator}{form_version}".format(

@@ -83,8 +83,8 @@ class Holiday(models.Model):
         """
         Gets the next available working day.
         """
-        if ((consider_saturdays == True and day.isoweekday() == 6) or
-            (consider_sundays == True and day.isoweekday() == 7)):
+        if ((consider_saturdays == True and day.isoweekday() == 6)
+                or (consider_sundays == True and day.isoweekday() == 7)):
             return Holiday.next_day(
                 day + timedelta(days=1),
                 consider_saturdays,
@@ -120,8 +120,8 @@ class Holiday(models.Model):
         """
         Gets the previous available working day.
         """
-        if ((consider_saturdays == True and day.isoweekday() == 6) or
-            (consider_sundays == True and day.isoweekday() == 7)):
+        if ((consider_saturdays == True and day.isoweekday() == 6)
+                or (consider_sundays == True and day.isoweekday() == 7)):
             return Holiday.next_day(
                 day - timedelta(days=1),
                 consider_saturdays,

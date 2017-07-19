@@ -74,8 +74,8 @@ class ClientUserRelation(models.Model):
             ):
                 if ((only_executive == True and
                      ClientRelationType.to_enum(client_relation.relation_type)
-                     != ClientRelationType.GENERIC_WORKER) or
-                        only_executive == False):
+                     != ClientRelationType.GENERIC_WORKER)
+                        or only_executive == False):
                     client_list.append(client_relation.child_client)
         else:
             for client_relation in ClientUserRelation.objects.filter(
@@ -84,8 +84,8 @@ class ClientUserRelation(models.Model):
                 (Q(end_date__gte=timezone.now()) | Q(end_date__isnull=True))):
                 if ((only_executive == True and
                      ClientRelationType.to_enum(client_relation.relation_type)
-                     != ClientRelationType.GENERIC_WORKER) or
-                        only_executive == False):
+                     != ClientRelationType.GENERIC_WORKER)
+                        or only_executive == False):
                     client_list.append(client_relation)
         return client_list
 

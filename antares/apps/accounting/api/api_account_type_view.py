@@ -61,9 +61,9 @@ class ApiAccountTypeView(BaseDatatableView):
     max_display_length = 50
 
     default_currency = None
-    
-    default_locale  = None
-    
+
+    default_locale = None
+
     def __init__(self):
         """ Initial value settings 
         """

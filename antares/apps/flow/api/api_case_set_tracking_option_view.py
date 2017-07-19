@@ -18,8 +18,8 @@ class ApiCaseSetTrackingOptionView(AjaxResponseMixin, JSONResponseMixin, View):
         if flow_case is not None:
             option = FlowUserNotificationOption.find_or_create_one_by_flow_case(
                 flow_case)
-            if (value is not None and
-                (value.lower() == 'true' or value.lower() == 'yes')):
+            if (value is not None
+                    and (value.lower() == 'true' or value.lower() == 'yes')):
                 option.active = True
             else:
                 option.active = False

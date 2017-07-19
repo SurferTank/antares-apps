@@ -35,9 +35,9 @@ class DocumentEditView(TemplateView):
 
         show_submit = request.GET.get('ss')
         if (show_submit is not None and
-            (show_submit.lower() == 'false' or show_submit.lower() == 'f' or
-             show_submit.lower() == 'no' or show_submit.lower() == 'n' or
-             show_submit.lower() == '0')):
+            (show_submit.lower() == 'false' or show_submit.lower() == 'f'
+             or show_submit.lower() == 'no' or show_submit.lower() == 'n'
+             or show_submit.lower() == '0')):
             show_submit = 'false'
         else:
             show_submit = 'true'

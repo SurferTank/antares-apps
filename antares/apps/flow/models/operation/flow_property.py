@@ -154,8 +154,8 @@ class FlowProperty(models.Model):
                 if (param_def.parameter_name and
                         param_def.parameter_name.lower() == '_flow_client_id'):
                     context.execute('result_value = ' + param_def.content_text)
-                    if (hasattr(context, 'result_value') and
-                            context.result_value is not None):
+                    if (hasattr(context, 'result_value')
+                            and context.result_value is not None):
                         client = Client.find_one(
                             uuid.UUID(context.result_value))
                         if client is not None:
@@ -179,9 +179,9 @@ class FlowProperty(models.Model):
                     if prop_def is not None:
                         context.execute('result_value =' +
                                         param_def.content_text)
-                        if (hasattr(context, 'result_value') and
-                                prop_def.data_type == FlowDataType.BASIC and
-                                context.result_value is not None):
+                        if (hasattr(context, 'result_value')
+                                and prop_def.data_type == FlowDataType.BASIC
+                                and context.result_value is not None):
                             if (prop_def.sub_data_type ==
                                     FlowBasicDataSubtype.STRING):
                                 prop_def.string_value = context.result_value

@@ -95,8 +95,8 @@ class SubscriptionEvent(models.Model):
                     form_definition=FormDefinition.find_one(
                         form_def_node.text))
                 event_type = subs_node.get("eventTrigger")
-                if (event_type is not None and
-                        EventType.to_enum(event_type) is not None):
+                if (event_type is not None
+                        and EventType.to_enum(event_type) is not None):
                     subs_event.event_type = EventType.to_enum(event_type)
                 else:
                     raise SubscriptionException(
@@ -111,8 +111,8 @@ class SubscriptionEvent(models.Model):
             subs_action_def = SubscriptionAction()
             subs_action_def.event = subs_event
             action_id = action_node.get('id')
-            if (action_id and (action_id.lower() == 'createcase' or
-                               action_id.lower() == 'create_case')):
+            if (action_id and (action_id.lower() == 'createcase'
+                               or action_id.lower() == 'create_case')):
                 action_def = ActionDefinition.find_one_or_create_by_params(
                     'create_case',
                     environment=EnvironmentType.LOCAL,
@@ -151,14 +151,14 @@ class SubscriptionEvent(models.Model):
                 namespaces=NS_MAP):
             flow_version = flow_node.find(
                 'xpdl:RedefinableHeader/xpdl:Version', namespaces=NS_MAP)
-            if (flow_version is not None and flow_version.text and
-                    flow_version.text == flow_def.flow_version):
+            if (flow_version is not None and flow_version.text
+                    and flow_version.text == flow_def.flow_version):
                 for subscription_container in flow_node.iterfind(
                         'xpdl:ExtendedAttributes/xpdl:ExtendedAttribute',
                         namespaces=NS_MAP):
                     ea_name = subscription_container.get('Name')
-                    if (ea_name is not None and
-                            ea_name.lower() == 'subscriptions'):
+                    if (ea_name is not None
+                            and ea_name.lower() == 'subscriptions'):
                         return subscription_container.findall(
                             'subs:Subscriptions/subs:Subscription',
                             namespaces=NS_MAP)
@@ -173,8 +173,8 @@ class SubscriptionEvent(models.Model):
         """
         subs_publisher_type = subs_node.find(
             'subs:Publisher/subs:Type', namespaces=NS_MAP)
-        if (subs_publisher_type is None or
-                MessageType.to_enum(subs_publisher_type.text) is None):
+        if (subs_publisher_type is None
+                or MessageType.to_enum(subs_publisher_type.text) is None):
             raise SubscriptionException(
                 _('antares.apps.subscription.service.subscription_event.publisher_is_missing'
                   ))

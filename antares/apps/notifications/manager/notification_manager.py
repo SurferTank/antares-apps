@@ -48,8 +48,8 @@ class NotificationManager(object):
                 notification_date = timezone.now()
 
             data_type = document.get_field_data_type(rule.content_variable)
-            if (data_type and (data_type == FieldDataType.STRING or
-                               data_type == FieldDataType.TEXT)):
+            if (data_type and (data_type == FieldDataType.STRING
+                               or data_type == FieldDataType.TEXT)):
                 notification_contents = document.get_field_value(
                     rule.content_variable)
                 if (notification_contents is None):
@@ -58,8 +58,8 @@ class NotificationManager(object):
 
             if rule.title_variable:
                 data_type = document.get_field_data_type(rule.title_variable)
-                if (data_type and (data_type == FieldDataType.STRING or
-                                   data_type == FieldDataType.TEXT)):
+                if (data_type and (data_type == FieldDataType.STRING
+                                   or data_type == FieldDataType.TEXT)):
                     notification_title = document.get_field_value(
                         rule.title_variable)
                     if (notification_title is None):

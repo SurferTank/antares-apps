@@ -4,6 +4,7 @@ Copyright 2013-2017 SurferTank Inc.
 Original version by Leonardo Belen<leobelen@gmail.com>
 """
 
+
 class MissingAccountHeaderInformationException(Exception):
     """ Indicates a problem exists with the header information of the current account. 
     """

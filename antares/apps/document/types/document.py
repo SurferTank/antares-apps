@@ -244,10 +244,10 @@ class Document(object):
         for page in self.document_xml.iterfind('structuredData/page'):
             for line in page.iterfind('line'):
                 for field in line.iterfind('field'):
-                    if (field.get('id') is not None and
-                            field.get('dataType') is not None and
-                            field.get('type') is not None and
-                            field.get('type').lower() != 'label'):
+                    if (field.get('id') is not None
+                            and field.get('dataType') is not None
+                            and field.get('type') is not None
+                            and field.get('type').lower() != 'label'):
                         fieldDb = DocumentField.find_one(
                             self.header, field.attrib['id'])
                         datatype = FieldDataType.to_enum(
@@ -295,8 +295,8 @@ class Document(object):
             if (document is not None):
                 self.header.account_base_document = document.header
         period_node = accountingElements.find('period')
-        if (period_node is not None and period_node.text and
-                period_node.text != ''):
+        if (period_node is not None and period_node.text
+                and period_node.text != ''):
             self.header.period = int(float(period_node.text))
 
         concept_type_node = accountingElements.find('conceptType')
@@ -339,8 +339,8 @@ class Document(object):
 
         active_version_node = headerElements.find('activeVersion')
         if (active_version_node is not None and active_version_node.text):
-            if (active_version_node.text.lower() == 'yes' or
-                    active_version_node.text.lower() == 'true'):
+            if (active_version_node.text.lower() == 'yes'
+                    or active_version_node.text.lower() == 'true'):
                 self.header.active_version = True
             else:
                 self.header.active_version = False
@@ -441,18 +441,18 @@ class Document(object):
         for page in self.document_xml.iterfind('structuredData/page'):
             for line in page.iterfind('line'):
                 for field in line.iterfind('field'):
-                    if (field.get('id') is not None and
-                            field.get('dataType') is not None and
-                            field.get('type') is not None and
-                            field.get('type').lower() != 'label'):
+                    if (field.get('id') is not None
+                            and field.get('dataType') is not None
+                            and field.get('type') is not None
+                            and field.get('type').lower() != 'label'):
                         datatype = FieldDataType.to_enum(field.get('dataType'))
                         fieldDb = DocumentField.find_one(
                             self.header, field.get('id'))
                         indexedDb = IndexedField.find_one(
                             self.header, field.get('id'))
                         if datatype == FieldDataType.STRING:
-                            if (fieldDb is not None and
-                                    fieldDb.string_value != field.text):
+                            if (fieldDb is not None
+                                    and fieldDb.string_value != field.text):
                                 fieldDb.string_value = field.text
                                 fieldDb.save()
                             elif (fieldDb is None):
@@ -465,8 +465,8 @@ class Document(object):
                                 fieldDb.data_type = str(FieldDataType.STRING)
                                 fieldDb.save()
                             if (field.get('indexed') and
-                                (field.get('indexed').lower() == 'true' or
-                                 field.get('indexed').lower() == 'yes')):
+                                (field.get('indexed').lower() == 'true'
+                                 or field.get('indexed').lower() == 'yes')):
                                 if (indexedDb is not None and
                                         indexedDb.string_value != field.text):
                                     indexedDb.string_value = field.text
@@ -482,8 +482,8 @@ class Document(object):
                                         FieldDataType.STRING)
                                     indexedDb.save()
                         elif datatype == FieldDataType.TEXT:
-                            if (fieldDb is not None and
-                                    fieldDb.text_value != field.text):
+                            if (fieldDb is not None
+                                    and fieldDb.text_value != field.text):
                                 fieldDb.text_value = field.text
                                 fieldDb.save()
                             elif (fieldDb is None):
@@ -496,8 +496,8 @@ class Document(object):
                                 fieldDb.data_type = str(FieldDataType.TEXT)
                                 fieldDb.save()
                             if (field.get('indexed') and
-                                (field.get('indexed').lower() == 'true' or
-                                 field.get('indexed').lower() == 'yes')):
+                                (field.get('indexed').lower() == 'true'
+                                 or field.get('indexed').lower() == 'yes')):
                                 if (indexedDb is not None and
                                         indexedDb.text_value != field.text):
                                     indexedDb.text_value = field.text
@@ -513,8 +513,8 @@ class Document(object):
                                         FieldDataType.TEXT)
                                     indexedDb.save()
                         elif datatype == FieldDataType.INTEGER:
-                            if (fieldDb is not None and
-                                    fieldDb.string_value != field.text):
+                            if (fieldDb is not None
+                                    and fieldDb.string_value != field.text):
                                 fieldDb.integer_value = int(float(field.text))
                                 fieldDb.save()
                             elif (fieldDb is None):
@@ -528,8 +528,8 @@ class Document(object):
                                 fieldDb.data_type = str(FieldDataType.INTEGER)
                                 fieldDb.save()
                             if (field.get('indexed') and
-                                (field.get('indexed').lower() == 'true' or
-                                 field.get('indexed').lower() == 'yes')):
+                                (field.get('indexed').lower() == 'true'
+                                 or field.get('indexed').lower() == 'yes')):
                                 if (indexedDb is not None and
                                         indexedDb.integer_value != field.text):
                                     indexedDb.integer_value = int(
@@ -547,8 +547,8 @@ class Document(object):
                                         FieldDataType.INTEGER)
                                     indexedDb.save()
                         elif datatype == FieldDataType.FLOAT:
-                            if (fieldDb is not None and
-                                    fieldDb.float_value != field.text):
+                            if (fieldDb is not None
+                                    and fieldDb.float_value != field.text):
                                 fieldDb.float_value = float(field.text)
                                 fieldDb.save()
                             elif (fieldDb is None):
@@ -561,8 +561,8 @@ class Document(object):
                                 fieldDb.data_type = str(FieldDataType.FLOAT)
                                 fieldDb.save()
                             if (field.get('indexed') and
-                                (field.get('indexed').lower() == 'true' or
-                                 field.get('indexed').lower() == 'yes')):
+                                (field.get('indexed').lower() == 'true'
+                                 or field.get('indexed').lower() == 'yes')):
                                 if (indexedDb is not None and
                                         indexedDb.float_value != field.text):
                                     indexedDb.float_value = float(field.text)
@@ -579,8 +579,8 @@ class Document(object):
                                         FieldDataType.FLOAT)
                                     indexedDb.save()
                         elif datatype == FieldDataType.DATE:
-                            if (fieldDb is not None and
-                                    fieldDb.date_value != field.text):
+                            if (fieldDb is not None
+                                    and fieldDb.date_value != field.text):
                                 fieldDb.date_value = field.text
                                 fieldDb.save()
                             elif (fieldDb is None):
@@ -593,8 +593,8 @@ class Document(object):
                                 fieldDb.data_type = str(FieldDataType.DATE)
                                 fieldDb.save()
                             if (field.get('indexed') and
-                                (field.get('indexed').lower() == 'true' or
-                                 field.get('indexed').lower() == 'yes')):
+                                (field.get('indexed').lower() == 'true'
+                                 or field.get('indexed').lower() == 'yes')):
                                 if (indexedDb is not None and
                                         indexedDb.date_value != field.text):
                                     indexedDb.date_value = field.text
@@ -616,11 +616,11 @@ class Document(object):
         for page in self.document_xml.iterfind('structuredData/page'):
             for line in page.iterfind('line'):
                 for field in line.iterfind('field'):
-                    if (field.get('id') is not None and
-                            field.get('dataType') is not None and
-                            field.get('type') is not None and
-                            field.get('id') == key and
-                            field.get('type').lower() != 'label'):
+                    if (field.get('id') is not None
+                            and field.get('dataType') is not None
+                            and field.get('type') is not None
+                            and field.get('id') == key
+                            and field.get('type').lower() != 'label'):
                         return FieldDataType.to_enum(field.get('dataType'))
         raise DocumentFieldNotFound(
             _(__name__ + ".exceptions.document_field_not_found"))
@@ -629,11 +629,11 @@ class Document(object):
         for page in self.document_xml.iterfind('structuredData/page'):
             for line in page.iterfind('line'):
                 for field in line.iterfind('field'):
-                    if (field.get('id') is not None and
-                            field.get('dataType') is not None and
-                            field.get('type') is not None and
-                            field.get('id') == key and
-                            field.get('type').lower() != 'label'):
+                    if (field.get('id') is not None
+                            and field.get('dataType') is not None
+                            and field.get('type') is not None
+                            and field.get('id') == key
+                            and field.get('type').lower() != 'label'):
                         return field.text
 
     def get_field_id_by_messagemap(self, message_map):
@@ -647,11 +647,11 @@ class Document(object):
         for page in self.document_xml.iterfind('structuredData/page'):
             for line in page.iterfind('line'):
                 for field in line.iterfind('field'):
-                    if (field.get('messageMap') is not None and
-                            field.get('messageMap') == message_map and
-                            field.get('type') is not None and
-                            field.get('id') is not None and
-                            field.get('type').lower() != 'label'):
+                    if (field.get('messageMap') is not None
+                            and field.get('messageMap') == message_map
+                            and field.get('type') is not None
+                            and field.get('id') is not None
+                            and field.get('type').lower() != 'label'):
                         return field.get('id')
         return None
 
@@ -659,11 +659,11 @@ class Document(object):
         for page in self.document_xml.iterfind('structuredData/page'):
             for line in page.iterfind('line'):
                 for field in line.iterfind('field'):
-                    if (field.get('id') is not None and
-                            field.get('dataType') is not None and
-                            field.get('type') is not None and
-                            field.get('id') == key and
-                            field.get('type').lower() != 'label'):
+                    if (field.get('id') is not None
+                            and field.get('dataType') is not None
+                            and field.get('type') is not None
+                            and field.get('id') == key
+                            and field.get('type').lower() != 'label'):
                         datatype = FieldDataType.to_enum(field.get('dataType'))
                         if datatype == FieldDataType.STRING:
                             field.text = value
@@ -711,10 +711,10 @@ class Document(object):
         for page in self.document_xml.iterfind('structuredData/page'):
             for line in page.iterfind('line'):
                 for field in line.iterfind('field'):
-                    if (field.get('id') is not None and
-                            field.get('dataType') is not None and
-                            field.get('type') is not None and
-                            field.get('type').lower() != 'label'):
+                    if (field.get('id') is not None
+                            and field.get('dataType') is not None
+                            and field.get('type') is not None
+                            and field.get('type').lower() != 'label'):
                         data_type = FieldDataType.to_enum(
                             field.get('dataType'))
                         if (data_type == FieldDataType.DATE):
@@ -743,11 +743,11 @@ class Document(object):
                                 fields[field.attrib['id']] = None
                         elif (data_type == FieldDataType.BOOLEAN):
                             if field.text is not None:
-                                if (field.text.lower() == 'yes' or
-                                        field.text.lower() == 'true'):
+                                if (field.text.lower() == 'yes'
+                                        or field.text.lower() == 'true'):
                                     fields[field.attrib['id']] = True
-                                elif (field.text.lower() == 'no' or
-                                      field.text.lower() == 'false'):
+                                elif (field.text.lower() == 'no'
+                                      or field.text.lower() == 'false'):
                                     fields[field.attrib['id']] = True
                             else:
                                 fields[field.attrib['id']] = None
@@ -899,10 +899,9 @@ class Document(object):
                 return None
         elif (key.lower() == 'active_version'):
             active_version_node = headerElements.find('activeVersion')
-            if (active_version_node is not None and
-                    active_version_node.text and
-                (active_version_node.text.lower() == 'yes' or
-                 active_version_node.text.lower() == 'true')):
+            if (active_version_node is not None and active_version_node.text
+                    and (active_version_node.text.lower() == 'yes'
+                         or active_version_node.text.lower() == 'true')):
                 return True
             else:
                 return False
@@ -927,8 +926,8 @@ class Document(object):
 
         elif (key.lower() == 'association_type'):
             association_type_node = headerElements.find('associationType')
-            if (association_type_node is not None and
-                    association_type_node.text):
+            if (association_type_node is not None
+                    and association_type_node.text):
                 return DocumentAssociationType.to_enum(
                     association_type_node.text)
             else:
@@ -997,8 +996,8 @@ class Document(object):
                 return None
         elif (key.lower() == 'document_version'):
             document_version_node = headerElements.find('documentVersion')
-            if (document_version_node is not None and
-                    document_version_node.text):
+            if (document_version_node is not None
+                    and document_version_node.text):
                 try:
                     return int(float(document_version_node.text))
                 except ValueError:
@@ -1066,8 +1065,8 @@ class Document(object):
 
         elif (key.lower() == 'secondary_client'):
             secondary_client_node = headerElements.find('secondaryClient')
-            if (secondary_client_node is not None and
-                    secondary_client_node.text):
+            if (secondary_client_node is not None
+                    and secondary_client_node.text):
                 try:
                     secondary_client_uuid = uuid.UUID(
                         secondary_client_node.text)
@@ -1395,13 +1394,13 @@ class Document(object):
             raise InvalidDocumentStatusException(
                 _(__name__ + ".exceptions.invalid_document_status"))
         prev_status = self.header.status
-        if ((status == DocumentStatusType.CANCELLED or
-             status == DocumentStatusType.DELETED) and not prev_status):
+        if ((status == DocumentStatusType.CANCELLED
+             or status == DocumentStatusType.DELETED) and not prev_status):
             raise InvalidDocumentStatusException(
                 _(__name__ +
                   ".exceptions.cannot_change_status_if_cancelled_exception"))
-        if (status == DocumentStatusType.SAVED and
-                prev_status is not DocumentStatusType.DRAFTED):
+        if (status == DocumentStatusType.SAVED
+                and prev_status is not DocumentStatusType.DRAFTED):
             raise InvalidDocumentStatusException(
                 _("antares.apps.document.type.invalid_status_progression"))
         if (status == DocumentStatusType.SAVED and self.get_author() is None):
@@ -1596,8 +1595,8 @@ class Document(object):
                       validation_result=context.return_value),
                 validation=validation_node.get('id'))
 
-            if (hasattr(context, 'return_value') and
-                    context.return_value != True):
+            if (hasattr(context, 'return_value')
+                    and context.return_value != True):
                 raise DocumentValidationException(
                     validation_node.get('validationMessage'))
 
@@ -1606,9 +1605,9 @@ class Document(object):
         fields = self.get_field_dict()
         for required_node in self.document_xml.iterfind(
                 'structuredData/page/line/field[@required="yes"]'):
-            if (required_node.get('id') in fields and
-                (fields[required_node.get('id')] is None or
-                 len(fields[required_node.get('id')]) == 0)):
+            if (required_node.get('id') in fields
+                    and (fields[required_node.get('id')] is None
+                         or len(fields[required_node.get('id')]) == 0)):
                 raise DocumentRequiredException(
                     required_node.get('requiredMessage'))
 
@@ -1632,13 +1631,13 @@ class Document(object):
         """
         if (client is not None and isinstance(client, Client)):
             self.set_header_field('client', client)
-        if (concept_type is not None and
-                isinstance(concept_type, ConceptType)):
+        if (concept_type is not None
+                and isinstance(concept_type, ConceptType)):
             self.set_header_field('concept_type', concept_type)
         if (period is not None and isinstance(period, int)):
             self.set_header_field('period', period)
-        if (account_type is not None and
-                isinstance(account_type, AccountType)):
+        if (account_type is not None
+                and isinstance(account_type, AccountType)):
             self.set_header_field('account_type', account_type)
         if (base_document is not None and isinstance(base_document, Document)):
             self.set_header_field('account_type', base_document.header)

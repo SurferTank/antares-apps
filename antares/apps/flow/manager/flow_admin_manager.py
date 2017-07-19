@@ -28,8 +28,6 @@ from ..models import FlowPackage, FlowDefinition, FlowActivity
 from ..models import TransitionDefinition, PropertyDefinition, ActivityApplicationParameterDefinition
 from antares.apps.core.constants import TimeUnitType
 
-
-
 NS_MAP = {
     'subs':
     'http://www.surfertank.com/antares/flow/xml/subscriptions',
@@ -91,10 +89,10 @@ class FlowAdminManager(object):
                 _(__name__ + ".exceptions.null_xpdl_package_version"))
 
         script_type = self.xpdl.find('xpdl:Script', namespaces=NS_MAP)
-        if (not (script_type is not None and
-                 script_type.get('Type') is not None and
-                 ScriptEngineType.to_enum(script_type.get('Type')) is not None
-                 )):
+        if (not (script_type is not None
+                 and script_type.get('Type') is not None
+                 and ScriptEngineType.to_enum(script_type.get('Type')) is
+                 not None)):
             raise InvalidXPDLException(
                 _(__name__ + ".exceptions.invalid_script_engine"))
 
@@ -116,8 +114,8 @@ class FlowAdminManager(object):
         package_id = self.xpdl.get('Id')
         package_version = self.xpdl.find(
             'xpdl:RedefinableHeader/xpdl:Version', namespaces=NS_MAP)
-        if (not package_id or package_version is None or
-                not package_version.text):
+        if (not package_id or package_version is None
+                or not package_version.text):
             raise InvalidXPDLException(
                 _(__name__ + ".exceptions.package_id_information_is_missing"))
         logger.info("package id " + package_id + ' package_version ' +
@@ -159,8 +157,8 @@ class FlowAdminManager(object):
         package_id = self.xpdl.get('Id')
         package_version = self.xpdl.find(
             'xpdl:RedefinableHeader/xpdl:Version', namespaces=NS_MAP)
-        if (package_id and package_version is not None and
-                package_version.text):
+        if (package_id and package_version is not None
+                and package_version.text):
             package.package_id = package_id
             package.package_version = package_version.text
 
@@ -191,8 +189,8 @@ class FlowAdminManager(object):
             if (flow_id):
                 flow_def.flow_id = flow_id
             access_level = workflow_node.get('AccessLevel')
-            if (access_level and
-                    FlowDefinitionAccessLevelType.to_enum(access_level) is
+            if (access_level
+                    and FlowDefinitionAccessLevelType.to_enum(access_level) is
                     not None):
                 flow_def.access_level = FlowDefinitionAccessLevelType.to_enum(
                     access_level)
@@ -208,8 +206,8 @@ class FlowAdminManager(object):
 
             access_level = workflow_node.find(
                 'xpdl:RedefinableHeader/xpdl:Version', namespaces=NS_MAP)
-            if (access_level is not None and access_level.text and
-                    FlowAccessLevelType.to_enum(access_level.text) is
+            if (access_level is not None and access_level.text
+                    and FlowAccessLevelType.to_enum(access_level.text) is
                     not None):
                 flow_def.access_level = str(
                     FlowAccessLevelType.to_enum(access_level.text))
@@ -270,24 +268,24 @@ class FlowAdminManager(object):
             if time_estimation_node is not None:
                 waiting_time_node = time_estimation_node.find(
                     'xpdl:WaitingTime', namespaces=NS_MAP)
-                if (waiting_time_node is not None and
-                        waiting_time_node.text is not None):
+                if (waiting_time_node is not None
+                        and waiting_time_node.text is not None):
                     flow_def.waiting_time = float(waiting_time_node.text)
                 else:
                     flow_def.waiting_time = 0
 
                 working_time_node = time_estimation_node.find(
                     'xpdl:WorkingTime', namespaces=NS_MAP)
-                if (working_time_node is not None and
-                        working_time_node.text is not None):
+                if (working_time_node is not None
+                        and working_time_node.text is not None):
                     flow_def.working_time = float(working_time_node.text)
                 else:
                     flow_def.working_time = 0
 
                 duration_node = time_estimation_node.find(
                     'xpdl:Duration', namespaces=NS_MAP)
-                if (duration_node is not None and
-                        duration_node.text is not None):
+                if (duration_node is not None
+                        and duration_node.text is not None):
                     flow_def.duration = float(duration_node.text)
                 else:
                     flow_def.duration = 0
@@ -300,7 +298,7 @@ class FlowAdminManager(object):
                 flow_def.duration = 0
                 flow_def.waiting_time = 0
                 flow_def.working_time = 0
-            
+
             flow_def.save()
             self._hibernate_application_records(package, flow_def,
                                                 workflow_node)
@@ -413,9 +411,9 @@ class FlowAdminManager(object):
         for extended_attribute_node in app_node.iterfind(
                 'xpdl:ExtendedAttributes/xpdl:ExtendedAttribute',
                 namespaces=NS_MAP):
-            if (extended_attribute_node is not None and
-                    extended_attribute_node.get('Name') and
-                    extended_attribute_node.get('Value')):
+            if (extended_attribute_node is not None
+                    and extended_attribute_node.get('Name')
+                    and extended_attribute_node.get('Value')):
                 if (extended_attribute_node.get('Name') and
                         extended_attribute_node.get('Name').lower() == 'url'):
                     app_def.url = extended_attribute_node.get('Value')
@@ -444,8 +442,8 @@ class FlowAdminManager(object):
 
             sub_data_type = app_node.find(
                 'xpdl:DataType/xpdl:BasicType', namespaces=NS_MAP)
-            if (sub_data_type is not None and sub_data_type.get('Type') and
-                    FieldDataType.to_enum(sub_data_type.get('Type'))):
+            if (sub_data_type is not None and sub_data_type.get('Type')
+                    and FieldDataType.to_enum(sub_data_type.get('Type'))):
                 parameter.sub_data_type = FieldDataType.to_enum(
                     sub_data_type.get('Type'))
             else:
@@ -490,8 +488,8 @@ class FlowAdminManager(object):
 
         participant_type_node = participant_node.find(
             'xpdl:ParticipantType', namespaces=NS_MAP)
-        if (participant_type_node is not None and
-                participant_type_node.get('Type') and
+        if (participant_type_node is not None
+                and participant_type_node.get('Type') and
                 ParticipantType.to_enum(participant_type_node.get('Type'))):
             participant_def.participant_type = ParticipantType.to_enum(
                 participant_type_node.get('Type'))
@@ -500,9 +498,9 @@ class FlowAdminManager(object):
         for extended_attribute_node in participant_node.iterfind(
                 'xpdl:ExtendedAttributes/xpdl:ExtendedAttribute',
                 namespaces=NS_MAP):
-            if (extended_attribute_node is not None and
-                    extended_attribute_node.get('Name') and
-                    extended_attribute_node.get('Value')):
+            if (extended_attribute_node is not None
+                    and extended_attribute_node.get('Name')
+                    and extended_attribute_node.get('Value')):
                 if (extended_attribute_node.get('Name') and
                         extended_attribute_node.get('Name').lower() == 'role'):
                     participant_role = Role.find_one_by_code(
@@ -573,13 +571,13 @@ class FlowAdminManager(object):
                 activity_def.display_name = activity_name
 
             start_mode = activity_node.get('StartMode')
-            if (start_mode and
-                    ExecutionModeType.to_enum(start_mode) is not None):
+            if (start_mode
+                    and ExecutionModeType.to_enum(start_mode) is not None):
                 activity_def.start_mode = ExecutionModeType.to_enum(start_mode)
 
             finish_mode = activity_node.get('FinishMode')
-            if (finish_mode and
-                    ExecutionModeType.to_enum(finish_mode) is not None):
+            if (finish_mode
+                    and ExecutionModeType.to_enum(finish_mode) is not None):
                 activity_def.finish_mode = ExecutionModeType.to_enum(
                     finish_mode)
 
@@ -614,8 +612,8 @@ class FlowAdminManager(object):
                 if time_estimation_node is not None:
                     waiting_time_node = time_estimation_node.find(
                         'xpdl:WaitingTime', namespaces=NS_MAP)
-                    if (waiting_time_node is not None and
-                            waiting_time_node.text is not None):
+                    if (waiting_time_node is not None
+                            and waiting_time_node.text is not None):
                         activity_def.waiting_time = float(
                             waiting_time_node.text)
                     else:
@@ -623,8 +621,8 @@ class FlowAdminManager(object):
 
                     working_time_node = time_estimation_node.find(
                         'xpdl:WorkingTime', namespaces=NS_MAP)
-                    if (working_time_node is not None and
-                            working_time_node.text is not None):
+                    if (working_time_node is not None
+                            and working_time_node.text is not None):
                         activity_def.working_time = float(
                             working_time_node.text)
                     else:
@@ -632,8 +630,8 @@ class FlowAdminManager(object):
 
                     duration_node = time_estimation_node.find(
                         'xpdl:Duration', namespaces=NS_MAP)
-                    if (duration_node is not None and
-                            duration_node.text is not None):
+                    if (duration_node is not None
+                            and duration_node.text is not None):
                         activity_def.duration = float(duration_node.text)
                     else:
                         activity_def.duration = 0
@@ -672,8 +670,8 @@ class FlowAdminManager(object):
 
                     description_node = tool_node.find(
                         'xpdl:Description', namespaces=NS_MAP)
-                    if (description_node is not None and
-                            description_node.text):
+                    if (description_node is not None
+                            and description_node.text):
                         app_flow_def.description = description_node.text
                     ea_node = tool_node.find(
                         'xpdl:ExtendedAttributes/xpdl:ExtendedAttribute',
@@ -704,8 +702,8 @@ class FlowAdminManager(object):
                     namespaces=NS_MAP):
                 ea_name = extended_attribute.get('Name')
                 ea_value = extended_attribute.get('Value')
-                if (ea_name and ea_value and
-                        ea_name.lower() == 'assigmentstrategy' and
+                if (ea_name and ea_value
+                        and ea_name.lower() == 'assigmentstrategy' and
                         AssignmentStrategyType.to_enum(ea_value) is not None):
                     activity_def.assignment_strategy = AssignmentStrategyType.to_enum(
                         ea_value)
@@ -720,15 +718,16 @@ class FlowAdminManager(object):
                                 activity_form.activity_definition = activity_def
                                 activity_form.form_definition = form_def
                                 can_save = form_node.get('canSave')
-                                if (can_save and (can_save.lower() == 'true' or
-                                                  can_save.lower() == 'yes')):
+                                if (can_save
+                                        and (can_save.lower() == 'true'
+                                             or can_save.lower() == 'yes')):
                                     activity_form.can_save = True
                                 else:
                                     activity_form.can_save = False
                                 can_create = form_node.get('canCreate')
-                                if (can_create and
-                                    (can_create.lower() == 'true' or
-                                     can_create.lower() == 'yes')):
+                                if (can_create
+                                        and (can_create.lower() == 'true'
+                                             or can_create.lower() == 'yes')):
                                     activity_form.can_create = True
                                 else:
                                     activity_form.can_create = False
@@ -772,8 +771,8 @@ class FlowAdminManager(object):
                         extra_tab_url = extra_tabs_node.get('url')
                         extra_tab_route = extra_tabs_node.get('route')
                         extra_tab_name = extra_tabs_node.get('name')
-                        if (extra_tab_id and
-                            (extra_tab_url or extra_tab_route)):
+                        if (extra_tab_id
+                                and (extra_tab_url or extra_tab_route)):
                             extra_tab = FlowActivityExtraTab()
                             extra_tab.activity_definition = activity_def
                             extra_tab.tab_id = extra_tab_id
@@ -823,8 +822,8 @@ class FlowAdminManager(object):
             if (not activity_def.assignment_strategy):
                 if (activity_def.activity_type == ActivityType.ROUTE):
                     activity_def.assignment_strategy = AssignmentStrategyType.NONE
-                elif (activity_def.activity_type == ActivityType.TASK or
-                      activity_def.activity_type ==
+                elif (activity_def.activity_type == ActivityType.TASK
+                      or activity_def.activity_type ==
                       ActivityType.NO_IMPLEMENTATION):
                     activity_def.assignment_strategy = SystemParameter.find_one(
                         'FLOW_DEFAULT_ACTIVITY_ASSIGNMENT_STRATEGY',
@@ -872,9 +871,9 @@ class FlowAdminManager(object):
             condition_node = transition_node.find(
                 'xpdl:Condition', namespaces=NS_MAP)
             if (condition_node is not None):
-                if (condition_node.get('Type') and
-                        TransitionType.to_enum(condition_node.get('Type')) is
-                        not None):
+                if (condition_node.get('Type')
+                        and TransitionType.to_enum(condition_node.get('Type'))
+                        is not None):
                     trans_def.transition_type = TransitionType.to_enum(
                         condition_node.get('Type'))
                 if (condition_node.text):
@@ -939,9 +938,9 @@ class FlowAdminManager(object):
 
             sub_data_type_node = field_node.find(
                 'xpdl:DataType/xpdl:BasicType', namespaces=NS_MAP)
-            if (sub_data_type_node is not None and
-                    sub_data_type_node.get('Type') and
-                    FlowBasicDataSubtype.to_enum(
+            if (sub_data_type_node is not None
+                    and sub_data_type_node.get('Type')
+                    and FlowBasicDataSubtype.to_enum(
                         sub_data_type_node.get('Type')) is not None):
                 prop_def.sub_data_type = FlowBasicDataSubtype.to_enum(
                     sub_data_type_node.get('Type'))
@@ -951,8 +950,8 @@ class FlowAdminManager(object):
             if (initial_value_node is not None):
                 if (initial_value_node.text):
                     prop_def.initial_value = initial_value_node.text
-                if (initial_value_node.get('ScriptType') and
-                        ScriptEngineType.to_enum(
+                if (initial_value_node.get('ScriptType')
+                        and ScriptEngineType.to_enum(
                             initial_value_node.get('ScriptType')) is not None):
                     prop_def.script_engine = ScriptEngineType.to_enum(
                         initial_value_node.get('ScriptType'))
@@ -995,9 +994,9 @@ class FlowAdminManager(object):
 
             sub_data_type_node = field_node.find(
                 'xpdl:DataType/xpdl:BasicType', namespaces=NS_MAP)
-            if (sub_data_type_node is not None and
-                    sub_data_type_node.get('Type') and
-                    FlowBasicDataSubtype.to_enum(
+            if (sub_data_type_node is not None
+                    and sub_data_type_node.get('Type')
+                    and FlowBasicDataSubtype.to_enum(
                         sub_data_type_node.get('Type')) is not None):
                 prop_def.sub_data_type = FlowBasicDataSubtype.to_enum(
                     sub_data_type_node.get('Type'))
@@ -1007,8 +1006,8 @@ class FlowAdminManager(object):
             if (initial_value_node is not None):
                 if (initial_value_node.text):
                     prop_def.initial_value = initial_value_node.text
-                if (initial_value_node.get('ScriptType') and
-                        ScriptEngineType.to_enum(
+                if (initial_value_node.get('ScriptType')
+                        and ScriptEngineType.to_enum(
                             initial_value_node.get('ScriptType')) is not None):
                     prop_def.script_engine = ScriptEngineType.to_enum(
                         initial_value_node.get('ScriptType'))
@@ -1053,9 +1052,9 @@ class FlowAdminManager(object):
 
             sub_data_type_node = field_node.find(
                 'xpdl:DataType/xpdl:BasicType', namespaces=NS_MAP)
-            if (sub_data_type_node is not None and
-                    sub_data_type_node.get('Type') and
-                    FlowBasicDataSubtype.to_enum(
+            if (sub_data_type_node is not None
+                    and sub_data_type_node.get('Type')
+                    and FlowBasicDataSubtype.to_enum(
                         sub_data_type_node.get('Type')) is not None):
                 prop_def.sub_data_type = FlowBasicDataSubtype.to_enum(
                     sub_data_type_node.get('Type'))
@@ -1065,8 +1064,8 @@ class FlowAdminManager(object):
             if (initial_value_node is not None):
                 if (initial_value_node.text):
                     prop_def.initial_value = initial_value_node.text
-                if (initial_value_node.get('ScriptType') and
-                        ScriptEngineType.to_enum(
+                if (initial_value_node.get('ScriptType')
+                        and ScriptEngineType.to_enum(
                             initial_value_node.get('ScriptType')) is not None):
                     prop_def.script_engine = ScriptEngineType.to_enum(
                         initial_value_node.get('ScriptType'))
@@ -1089,8 +1088,8 @@ class FlowAdminManager(object):
                     prop_def.catalog = ea_value
 
             formal_param_mode = field_node.get('Mode')
-            if (formal_param_mode and
-                    FormalParameterModeType.to_enum(formal_param_mode) is
+            if (formal_param_mode
+                    and FormalParameterModeType.to_enum(formal_param_mode) is
                     not None):
                 prop_def.mode = FormalParameterModeType.to_enum(
                     formal_param_mode)
@@ -1120,9 +1119,9 @@ class FlowAdminManager(object):
 
             sub_data_type_node = field_node.find(
                 'xpdl:DataType/xpdl:BasicType', namespaces=NS_MAP)
-            if (sub_data_type_node is not None and
-                    sub_data_type_node.get('Type') and
-                    FlowBasicDataSubtype.to_enum(
+            if (sub_data_type_node is not None
+                    and sub_data_type_node.get('Type')
+                    and FlowBasicDataSubtype.to_enum(
                         sub_data_type_node.get('Type')) is not None):
                 prop_def.sub_data_type = FlowBasicDataSubtype.to_enum(
                     sub_data_type_node.get('Type'))
@@ -1132,8 +1131,8 @@ class FlowAdminManager(object):
             if (initial_value_node is not None):
                 if (initial_value_node.text):
                     prop_def.initial_value = initial_value_node.text
-                if (initial_value_node.get('ScriptType') and
-                        ScriptEngineType.to_enum(
+                if (initial_value_node.get('ScriptType')
+                        and ScriptEngineType.to_enum(
                             initial_value_node.get('ScriptType')) is not None):
                     prop_def.script_engine = ScriptEngineType.to_enum(
                         initial_value_node.get('ScriptType'))
@@ -1147,8 +1146,8 @@ class FlowAdminManager(object):
                 prop_def.length = int(float(length_node.text))
 
             formal_param_mode = field_node.get('Mode')
-            if (formal_param_mode and
-                    FormalParameterModeType.to_enum(formal_param_mode) is
+            if (formal_param_mode
+                    and FormalParameterModeType.to_enum(formal_param_mode) is
                     not None):
                 prop_def.mode = FormalParameterModeType.to_enum(
                     formal_param_mode)
@@ -1294,8 +1293,7 @@ class FlowAdminManager(object):
         return flow_def
 
     @classmethod
-    def update_activity_definition_time_estimation(cls, flow_def,
-                                                   method=None):
+    def update_activity_definition_time_estimation(cls, flow_def, method=None):
         if isinstance(str, method):
             method = TimeEstimationMethodType.to_enum(method)
         if method is None:
@@ -1309,19 +1307,19 @@ class FlowAdminManager(object):
                 _(__name__ +
                   ".exceptions.invalid_time_estimation_method_type_especified")
             )
-            
+
         waiting_time = 0
         working_time = 0
-        
+
         for activity_def in flow_def.activity_definition_set.select_related():
-            waiting_time = waiting_time + FlowActivity.find_average_waiting_time(activity_def)
-            working_time = working_time + FlowActivity.find_average_waiting_time(activity_def)
-         
-        
+            waiting_time = waiting_time + FlowActivity.find_average_waiting_time(
+                activity_def)
+            working_time = working_time + FlowActivity.find_average_waiting_time(
+                activity_def)
+
         flow_def.working_time = working_time
         flow_def.waiting_time = waiting_time
         flow_def.duration = waiting_time + working_time
-        
+
         flow_def.save()
         return flow_def
-    

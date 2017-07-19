@@ -55,8 +55,8 @@ class ClientUserRelationConsole(object):
                  "<b>" + _(__name__ + ".tables.relation_type") + \
                  "</b></td>"
         for client_relation in client_relation_list:
-            if (client_relation.child_client.code and
-                    client_relation.child_client.full_name):
+            if (client_relation.child_client.code
+                    and client_relation.child_client.full_name):
                 result += "<tr><td>" + client_relation.child_client.code + \
                     " - " + client_relation.child_client.full_name + "</td>"
             elif (client_relation.child_client.code):

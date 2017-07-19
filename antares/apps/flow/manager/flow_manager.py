@@ -87,8 +87,8 @@ class FlowManager(object):
 
     @classmethod
     def _initial_run(cls, flow_case):
-        if (flow_case is None or
-                flow_case.status != FlowCaseStatusType.CREATED):
+        if (flow_case is None
+                or flow_case.status != FlowCaseStatusType.CREATED):
             raise FlowException(
                 _(__package__ + '.invalid_case_status_for_initial_run'))
         activity_definition_list = ActivityDefinition.find_start_activity_definitions(
@@ -117,8 +117,8 @@ class FlowManager(object):
             activity.status = FlowActivityStatusType.CREATED
             # todo: add hrn to this.
             activity.save()
-            if (activity_def.activity_type != ActivityType.ROUTE and
-                    activity_def.activity_type != ActivityType.SUBFLOW):
+            if (activity_def.activity_type != ActivityType.ROUTE
+                    and activity_def.activity_type != ActivityType.SUBFLOW):
                 activity.performer = AssignmentManager.get_activity_performer(
                     activity)
             else:
@@ -131,9 +131,9 @@ class FlowManager(object):
 
     @classmethod
     def _execute_activity(cls, activity):
-        if (activity is None or
-            (activity.status != FlowActivityStatusType.ACTIVE and
-             activity.status != FlowActivityStatusType.CREATED)):
+        if (activity is None
+                or (activity.status != FlowActivityStatusType.ACTIVE
+                    and activity.status != FlowActivityStatusType.CREATED)):
             raise FlowException(
                 _(__package__ + '.invalid_activity_status_for_execution'))
         if activity.activity_definition.start_mode == ExecutionModeType.AUTOMATIC:
@@ -263,8 +263,8 @@ class FlowManager(object):
         otherwise_trans_list = []
         for transition_definition in transition_definition_list:
             if transition_definition.transition_type == TransitionType.CONDITION:
-                if (transition_definition.condition_text and
-                        FlowManager._process_transition_condition(
+                if (transition_definition.condition_text
+                        and FlowManager._process_transition_condition(
                             activity.flow_case,
                             transition_definition) == True):
                     viable_trans_list.append(transition_definition)
@@ -333,8 +333,8 @@ class FlowManager(object):
         """
         for action in FlowActionDefinition.find_by_activity_definition_and_action_type(
                 activity.activity_definition, action_type):
-            if (action.content is not None and
-                    action.script_engine == ScriptEngineType.JAVASCRIPT):
+            if (action.content is not None
+                    and action.script_engine == ScriptEngineType.JAVASCRIPT):
                 properties = {}
                 properties.update(activity.flow_case.get_property_dict())
                 properties['activity'] = activity

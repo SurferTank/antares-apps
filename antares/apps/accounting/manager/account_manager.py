@@ -25,7 +25,6 @@ from ..models import AccountTransaction
 from ..models import AccountType
 from ..models import TransactionType
 
-
 logger = logging.getLogger(__name__)
 
 
@@ -33,7 +32,7 @@ class AccountManager(object):
     """
     Processes a document and produces the associated accounting structures. 
     """
-    
+
     @classmethod
     def post_document(cls, document: Document) -> AccountDocumentStatusType:
         """ Posts a document into the current account, assuming there are rules defined for it. Otherwise it just returns. 
@@ -56,30 +55,33 @@ class AccountManager(object):
             return None
 
         try:
-            cancelled_document = AccountManager._get_cancelled_document(document)
+            cancelled_document = AccountManager._get_cancelled_document(
+                document)
             if (cancelled_document is not None):
                 logger.error(
                     _(__name__ + '.cancelling_document %(document_id)s') %
                     {'document_id': document.document_id})
                 AccountManager._cancel_document(cancelled_document, document)
-    
+
             transactions = AccountManager._create_transactions_from_rules(
                 account_document, document, account_rules)
-    
+
             account_document.content = AccountManager._get_account_document_string(
                 account_document, transactions)
             account_document.status = AccountDocumentStatusType.PROCESSED
 
         except Exception:
             account_document.status = AccountDocumentStatusType.WITH_ERRORS
-        
+
         account_document.save()
-        
+
         return account_document.status
 
     @classmethod
-    def _create_transactions_from_rules(cls, account_document: AccountDocument, document: Document,
-                                        account_rules:[AccountRule]):
+    def _create_transactions_from_rules(cls,
+                                        account_document: AccountDocument,
+                                        document: Document,
+                                        account_rules: [AccountRule]):
         """ Processes the rules one by one and produces the required transactions.
         
         :param account_document: Account document to process
@@ -98,7 +100,10 @@ class AccountManager(object):
         return transaction_list
 
     @classmethod
-    def _create_transaction(cls, account_document:AccountDocument, document:Document, rule:AccountRule) -> AccountTransaction:
+    def _create_transaction(cls,
+                            account_document: AccountDocument,
+                            document: Document,
+                            rule: AccountRule) -> AccountTransaction:
         """ Computes the transaction out of a document and a rule
         
         :param account_document: Account document to process
@@ -109,7 +114,7 @@ class AccountManager(object):
         default_payment_transaction = SystemParameter.find_one(
             "DEFAULT_PAYMENT_TRANSACTION_TYPE", FieldDataType.STRING,
             'PAYMENT')
-        
+
         transaction = AccountTransaction()
         transaction.document = account_document.document
         transaction.account_document = account_document
@@ -139,7 +144,9 @@ class AccountManager(object):
         return transaction
 
     @classmethod
-    def _process_payment_transaction(cls, transaction:AccountTransaction, document:Document):
+    def _process_payment_transaction(cls,
+                                     transaction: AccountTransaction,
+                                     document: Document):
         """
         Processes a payment transaction to assign the proper values to the accounts. 
         TODO: Needs to be implemented. 
@@ -155,20 +162,22 @@ class AccountManager(object):
 
     @classmethod
     def _is_transaction_to_be_applied(cls, transaction):
-        if (transaction.transaction_type.post_zeros == True or
-                transaction.total_amount > 0):
+        if (transaction.transaction_type.post_zeros == True
+                or transaction.total_amount > 0):
             return True
         else:
             return False
 
     @classmethod
-    def _apply_transaction_to_balance(cls, transaction:AccountTransaction, document:Document):
+    def _apply_transaction_to_balance(cls,
+                                      transaction: AccountTransaction,
+                                      document: Document):
         """ Applies the given transaction to the balance. 
         
         :param transaction: the current transaction
         :param document: the document object. 
         """
-        
+
         logger.debug(
             _(__name__ +
               ".manager.account_manager.starting_to_balance_the_account"))
@@ -209,7 +218,10 @@ class AccountManager(object):
         transaction.balance.save()
 
     @classmethod
-    def _compute_balance_status(cls, principal: float, interest: float, penalties: float) -> BalanceStatusType:
+    def _compute_balance_status(cls,
+                                principal: float,
+                                interest: float,
+                                penalties: float) -> BalanceStatusType:
         """ Computes the actual balance status based on the values given
         
         :param principal: the principal amount
@@ -226,7 +238,10 @@ class AccountManager(object):
             return BalanceStatusType.DEBIT
 
     @classmethod
-    def _process_client(cls, account_document:AccountDocument, document:Document, rule:AccountRule) -> Client:
+    def _process_client(cls,
+                        account_document: AccountDocument,
+                        document: Document,
+                        rule: AccountRule) -> Client:
         """ Processes the document to get the client
         
         :param account_document: the account document
@@ -250,7 +265,10 @@ class AccountManager(object):
                 _(__name__ + ".manager.account_manager.missing_client"))
 
     @classmethod
-    def _process_account_type(cls,  account_document:AccountDocument, document:Document, rule:AccountRule) -> AccountType:
+    def _process_account_type(cls,
+                              account_document: AccountDocument,
+                              document: Document,
+                              rule: AccountRule) -> AccountType:
         """ Processes the document to get the AccountType
         
         :param account_document: the account document
@@ -275,7 +293,10 @@ class AccountManager(object):
                 _(__name__ + ".manager.account_manager.missing_account_type"))
 
     @classmethod
-    def _process_concept_type(cls,  account_document:AccountDocument, document:Document, rule:AccountRule) -> ConceptType:
+    def _process_concept_type(cls,
+                              account_document: AccountDocument,
+                              document: Document,
+                              rule: AccountRule) -> ConceptType:
         """ Processes the document to get the concept type
         
         :param account_document: the account document
@@ -300,7 +321,10 @@ class AccountManager(object):
                 _(__name__ + ".manager.account_manager.missing_concept_type"))
 
     @classmethod
-    def _process_period(cls,  account_document:AccountDocument, document:Document, rule:AccountRule) -> int:
+    def _process_period(cls,
+                        account_document: AccountDocument,
+                        document: Document,
+                        rule: AccountRule) -> int:
         """ Processes the document to get the period
         
         :param account_document: the account document
@@ -320,7 +344,10 @@ class AccountManager(object):
                     _(__name__ + ".manager.account_manager.missing_period"))
 
     @classmethod
-    def _process_transaction_type(cls,  account_document:AccountDocument, document:Document, rule:AccountRule) -> TransactionType:
+    def _process_transaction_type(cls,
+                                  account_document: AccountDocument,
+                                  document: Document,
+                                  rule: AccountRule) -> TransactionType:
         """ Processes the rule to get the transaction type
         
         :param account_document: the account document
@@ -331,12 +358,13 @@ class AccountManager(object):
         return rule.transaction_type
 
     @classmethod
-    def _process_amount(cls,
-                        account_document:AccountDocument,
-                        document:Document,
-                        rule:AccountRule,
-                        transaction:AccountTransaction,
-                        is_cancelled_document:bool =False)->AccountTransaction:
+    def _process_amount(
+            cls,
+            account_document: AccountDocument,
+            document: Document,
+            rule: AccountRule,
+            transaction: AccountTransaction,
+            is_cancelled_document: bool=False) -> AccountTransaction:
         """ Processes the transaction amount based on parameters
         
         :param account_document: the account document
@@ -375,7 +403,8 @@ class AccountManager(object):
         return transaction
 
     @classmethod
-    def _get_account_document_string(cls, account_document: AccountDocument, 
+    def _get_account_document_string(cls,
+                                     account_document: AccountDocument,
                                      transactions):
         """
          TODO: Implement me.
@@ -390,7 +419,9 @@ class AccountManager(object):
         return None
 
     @classmethod
-    def _cancel_document(cls, cancelled_document: AccountDocument, document: Document):
+    def _cancel_document(cls,
+                         cancelled_document: AccountDocument,
+                         document: Document):
         """
          TODO: Implement me.
         """

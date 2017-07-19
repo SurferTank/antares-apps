@@ -76,15 +76,15 @@ class Message(models.Model):
         obj_type = MessageType.to_enum(obj.type)
         if (obj is None or obj_type is None):
             return False
-        if (obj_type == MessageType.CURRENT_ACCOUNT and
-                obj.client is not None and obj.concept_type is not None and
-                obj.period is not None and obj.account_type is not None):
+        if (obj_type == MessageType.CURRENT_ACCOUNT and obj.client is not None
+                and obj.concept_type is not None and obj.period is not None
+                and obj.account_type is not None):
             return True
-        elif (obj_type == MessageType.FORM_DEFINITION and
-              obj.form_definition is not None):
+        elif (obj_type == MessageType.FORM_DEFINITION
+              and obj.form_definition is not None):
             return True
-        elif (obj_type == MessageType.FLOW_DEFINITION and
-              obj.flow_definition is not None):
+        elif (obj_type == MessageType.FLOW_DEFINITION
+              and obj.flow_definition is not None):
             return True
         elif (obj_type == MessageType.FLOW_CASE and obj.form_case is not None):
             return True
@@ -98,16 +98,16 @@ class Message(models.Model):
         obj_type = MessageType.to_enum(obj.type)
         if (obj is None or obj_type is None):
             return None
-        if (obj_type == MessageType.CURRENT_ACCOUNT and
-                obj.client is not None and obj.concept_type is not None and
-                obj.period is not None and obj.account_type is not None):
+        if (obj_type == MessageType.CURRENT_ACCOUNT and obj.client is not None
+                and obj.concept_type is not None and obj.period is not None
+                and obj.account_type is not None):
             # TODO: we need to figure this out yet.
             pass
-        elif (obj_type == MessageType.FORM_DEFINITION and
-              obj.form_definition is not None):
+        elif (obj_type == MessageType.FORM_DEFINITION
+              and obj.form_definition is not None):
             return obj.form_definition
-        elif (obj_type == MessageType.FLOW_DEFINITION and
-              obj.flow_definition is not None):
+        elif (obj_type == MessageType.FLOW_DEFINITION
+              and obj.flow_definition is not None):
             return obj.flow_definition
         elif (obj_type == MessageType.FLOW_CASE and obj.form_case is not None):
             return obj.form_case

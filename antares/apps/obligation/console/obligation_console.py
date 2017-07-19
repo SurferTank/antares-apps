@@ -188,17 +188,17 @@ class ObligationConsole(object):
             else:
                 result += "<td>" + str(
                     obligation_vector.account_type.id) + "</td>"
-            if (obligation_vector.base_document is not None and
-                    obligation_vector.base_document.hrn_string):
+            if (obligation_vector.base_document is not None
+                    and obligation_vector.base_document.hrn_string):
                 result += "<td>" + obligation_vector.base_document.hrn_string + "</td>"
             elif (obligation_vector.base_document is not None):
                 result += "<td>" + str(
                     obligation_vector.base_document.id) + "</td>"
             else:
                 result += "<td>&nbsp;</td>"
-            if (obligation_vector.status is not None and
-                    ObligationStatusType.to_enum(obligation_vector.status) is
-                    not None):
+            if (obligation_vector.status is not None
+                    and ObligationStatusType.to_enum(obligation_vector.status)
+                    is not None):
                 result += "<td>" + ObligationStatusType.to_enum(
                     obligation_vector.status).get_label() + "</td>"
             else:

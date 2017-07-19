@@ -84,8 +84,8 @@ class User(AbstractUser):
     def get_on_behalf_client(self):
         from antares.apps.client.models import Client
         try:
-            if ('on_behalf_client' in get_request().session and
-                    get_request().session['on_behalf_client'] is not None):
+            if ('on_behalf_client' in get_request().session
+                    and get_request().session['on_behalf_client'] is not None):
                 return Client.find_one(
                     UUID(get_request().session['on_behalf_client']))
         except Exception as e:

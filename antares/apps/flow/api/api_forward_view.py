@@ -15,16 +15,16 @@ class ApiForwardView(AjaxResponseMixin, JSONResponseMixin, View):
         request_type = request.POST.get('type')
         if 'activityId' in request.POST:
             activity = FlowActivity.find_one(request.POST.get('activityId'))
-        if (request.POST.get('confirmation').lower() == 'yes' or
-                request.POST.get('confirmation').lower() == 'true'):
+        if (request.POST.get('confirmation').lower() == 'yes'
+                or request.POST.get('confirmation').lower() == 'true'):
             confirmation = True
         else:
             confirmation = False
 
         if request_type.lower() == 'forward':
             result = FlowManager.forward_activity(activity, None, confirmation)
-            if (result is not None and len(result) != 0 and
-                    confirmation == False):
+            if (result is not None and len(result) != 0
+                    and confirmation == False):
                 return self.render_json_response(result)
             else:
                 return self.render_json_response("")

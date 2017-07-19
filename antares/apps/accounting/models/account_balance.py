@@ -43,8 +43,8 @@ class AccountBalance(models.Model):
     :attribute penalties_balance: total penalties balance for the account
     :attribute total_balance: total balance for the account (principal+interest+penalties)
     :attribute hrn_code: human readable number for the account
-    """ 
-    
+    """
+
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     default_currency = models.ForeignKey(
         "core.Currency",
@@ -116,8 +116,12 @@ class AccountBalance(models.Model):
         return str(self.id)
 
     @classmethod
-    def find_or_create_by_CCPAD(cls, client: Client, concept_type: ConceptType, period: int, account_type: AccountType,
-                                document:DocumentHeader):
+    def find_or_create_by_CCPAD(cls,
+                                client: Client,
+                                concept_type: ConceptType,
+                                period: int,
+                                account_type: AccountType,
+                                document: DocumentHeader):
         """ Returns the account balance that matches the unique identifiers - COPAD
         (Client, Concept type, Period, Account type and Document). If none is
         found, it creates one balance with zeroes as principal, interest, penalties and total. 
@@ -146,7 +150,12 @@ class AccountBalance(models.Model):
             return balance
 
     @classmethod
-    def find_by_CCPAD(cls, client: Client, concept_type:ConceptType, period:int, account_type:AccountType, document:DocumentHeader) :
+    def find_by_CCPAD(cls,
+                      client: Client,
+                      concept_type: ConceptType,
+                      period: int,
+                      account_type: AccountType,
+                      document: DocumentHeader):
         """ Retrieves a balance by Client, concept type, Period, Account Type or, if a document based 
             document, by Client, Document, Period, Account type. It infers the document based account 
             based on the document being not none.
@@ -179,7 +188,7 @@ class AccountBalance(models.Model):
             return None
 
     @classmethod
-    def get_total_balance_by_client(cls, client:Client) -> float:
+    def get_total_balance_by_client(cls, client: Client) -> float:
         """ Gets the total balance by client
         """
         if (client is None or client == ""):

@@ -53,12 +53,12 @@ class ApiClientView(BaseDatatableView):
         'total_balance',
     ]
     client = None
-    
+
     max_display_length = 50
-    
+
     default_currency = None
-    
-    default_locale  = None
+
+    default_locale = None
 
     def __init__(self):
         """ Initial value settings 

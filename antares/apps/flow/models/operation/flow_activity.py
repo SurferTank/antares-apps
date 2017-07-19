@@ -68,85 +68,87 @@ class FlowActivity(models.Model):
             return self.activity_number
         else:
             return str(self.id)
-    
+
     def waiting_time(self):
-        if (self.creation_date is not None 
-            and self.start_date is not None
-            and self.status not in 
-            (FlowActivityStatusType.CREATED.value, FlowActivityStatusType.CANCELLED.value)):
-            return DateUtils.convert_days_to_time_unit(self.start_date - self.creation_date, 
-                                                       self.flow_case.flow_definition.duration)
+        if (self.creation_date is not None and self.start_date is not None and
+                self.status not in (FlowActivityStatusType.CREATED.value,
+                                    FlowActivityStatusType.CANCELLED.value)):
+            return DateUtils.convert_days_to_time_unit(
+                self.start_date - self.creation_date,
+                self.flow_case.flow_definition.duration)
         else:
             return None
-    
+
     def working_time(self):
-        if (self.start_date is not None 
-            and self.completion_date is not None
-            and self.status not in 
-            (FlowActivityStatusType.CREATED.value, FlowActivityStatusType.CANCELLED.value, 
-             FlowActivityStatusType.ACTIVE.value)):
-            return DateUtils.convert_days_to_time_unit(self.completion_date - self.start_date, 
-                                                       self.flow_case.flow_definition.duration)
+        if (self.start_date is not None and self.completion_date is not None
+                and self.status not in (FlowActivityStatusType.CREATED.value,
+                                        FlowActivityStatusType.CANCELLED.value,
+                                        FlowActivityStatusType.ACTIVE.value)):
+            return DateUtils.convert_days_to_time_unit(
+                self.completion_date - self.start_date,
+                self.flow_case.flow_definition.duration)
         else:
             return None
-    
+
     def duration(self):
-        if (self.creation_date is not None 
-            and self.completion_date is not None
-            and self.status not in 
-            (FlowActivityStatusType.CREATED.value, FlowActivityStatusType.CANCELLED.value, 
-             FlowActivityStatusType.ACTIVE.value)):
-            return DateUtils.convert_days_to_time_unit(self.completion_date - self.creation_date,
-                                                       self.flow_case.flow_definition.duration)
+        if (self.creation_date is not None and self.completion_date is not None
+                and self.status not in (FlowActivityStatusType.CREATED.value,
+                                        FlowActivityStatusType.CANCELLED.value,
+                                        FlowActivityStatusType.ACTIVE.value)):
+            return DateUtils.convert_days_to_time_unit(
+                self.completion_date - self.creation_date,
+                self.flow_case.flow_definition.duration)
         else:
             return None
-    
-    @classmethod 
+
+    @classmethod
     def find_average_waiting_time(cls, activity_def, perfomer=None):
         query = cls.objects.filter(activity_definition=activity_def).\
                 filter(creation_date__is_null=False).\
                 filter(start_date__is_null=False).\
                 filter(status__not_in=[FlowActivityStatusType.CREATED.value, FlowActivityStatusType.CANCELLED.value])
-                
+
         if perfomer is not None:
             query = query.filter(perfomer=perfomer)
-        
-        query = query.aggregate(average_difference=Avg(F('start_date') - F('creation_date')))
-            
-        return DateUtils.convert_days_to_time_unit(query, 
-                activity_def.flow_case.flow_definition.duration)
-    
-    @classmethod 
+
+        query = query.aggregate(
+            average_difference=Avg(F('start_date') - F('creation_date')))
+
+        return DateUtils.convert_days_to_time_unit(
+            query, activity_def.flow_case.flow_definition.duration)
+
+    @classmethod
     def find_average_working_time(cls, activity_def, perfomer=None):
         query = cls.objects.filter(activity_definition=activity_def).\
             filter(completion__is_null=False).\
             filter(start_date__is_null=False).\
-            filter(status__not_in=[FlowActivityStatusType.CREATED.value, FlowActivityStatusType.CANCELLED.value, 
+            filter(status__not_in=[FlowActivityStatusType.CREATED.value, FlowActivityStatusType.CANCELLED.value,
              FlowActivityStatusType.ACTIVE.value])
-        
+
         if perfomer is not None:
             query = query.filter(perfomer=perfomer)
-            
-        query = query.aggregate(average_difference=Avg(F('completion_date') - F('start_date')))
-        
-        return  DateUtils.convert_days_to_time_unit(query,
-                activity_def.flow_case.flow_definition.duration)
-            
-            
-    
-    @classmethod 
+
+        query = query.aggregate(
+            average_difference=Avg(F('completion_date') - F('start_date')))
+
+        return DateUtils.convert_days_to_time_unit(
+            query, activity_def.flow_case.flow_definition.duration)
+
+    @classmethod
     def find_average_duration(cls, activity_def, perfomer=None):
         query = cls.objects.filter(activity_definition=activity_def).\
             filter(completion__is_null=False).\
             filter(creation_date__is_null=False).\
             filter(status__not_in=[FlowActivityStatusType.CREATED.value, FlowActivityStatusType.CANCELLED.value])
-        
+
         if perfomer is not None:
             query = query.filter(perfomer=perfomer)
-        query = query.aggregate(average_difference=Avg(F('completion_date') - F('creation_date')))
-        
-        return  DateUtils.convert_days_to_time_unit(query, activity_def.flow_case.flow_definition.duration)
-    
+        query = query.aggregate(
+            average_difference=Avg(F('completion_date') - F('creation_date')))
+
+        return DateUtils.convert_days_to_time_unit(
+            query, activity_def.flow_case.flow_definition.duration)
+
     @classmethod
     def find_one(cls, doc_id):
         try:
@@ -188,9 +190,9 @@ class FlowActivity(models.Model):
             cls, flow_case, performer):
         try:
             return flow_case.activity_set.select_related().filter(
-                Q(status=FlowActivityStatusType.ACTIVE) |
-                Q(status=FlowActivityStatusType.CREATED) |
-                Q(status=FlowActivityStatusType.REASSIGNED),
+                Q(status=FlowActivityStatusType.ACTIVE)
+                | Q(status=FlowActivityStatusType.CREATED)
+                | Q(status=FlowActivityStatusType.REASSIGNED),
                 performer=performer)
         except FlowActivity.DoesNotExist:
             return []

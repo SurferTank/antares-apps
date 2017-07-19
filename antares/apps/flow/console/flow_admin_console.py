@@ -19,7 +19,6 @@ from ..constants import FlowDefinitionStatusType, TimeEstimationMethodType
 from ..manager import FlowAdminManager
 from ..models import FlowPackage
 
-
 logger = logging.getLogger(__name__)
 
 
@@ -132,8 +131,8 @@ class FlowAdminConsole(object):
                     result += "<td>" + flow_definition.description + "</td>"
                 else:
                     result += "<td>&nbsp;</td>"
-                if (flow_definition.status and
-                        FlowDefinitionStatusType.to_enum(
+                if (flow_definition.status
+                        and FlowDefinitionStatusType.to_enum(
                             flow_definition.status) is not None):
                     result += "<td>" + FlowDefinitionStatusType.to_enum(
                         flow_definition.status).get_label() + "</td>"
@@ -237,8 +236,8 @@ class FlowAdminConsole(object):
         except ObjectDoesNotExist:
             return _(__name__ + ".console.flow_does_not_exist_in_package")
 
-        if ('withstatus' in params and
-                FlowDefinitionStatusType.to_enum(params['withstatus']) is
+        if ('withstatus' in params
+                and FlowDefinitionStatusType.to_enum(params['withstatus']) is
                 not None):
             flow_status = FlowDefinitionStatusType.to_enum(
                 params['withstatus'])
@@ -373,6 +372,7 @@ class FlowAdminConsole(object):
                  ".activity_reassigned_to {activity} {username}").format(
                      activity=flow_activity.hrn_code,
                      username=performer.username)
+
     @classmethod
     def _update_estimation(cls, params, html):
         if ('withpackageid' in params):
@@ -405,8 +405,7 @@ class FlowAdminConsole(object):
         except ObjectDoesNotExist:
             return _(__name__ + ".console.flow_does_not_exist_in_package")
 
-        FlowAdminManager.update_flow_definition_time_estimation(flow_definition, TimeEstimationMethodType.AVERAGE)
-        
+        FlowAdminManager.update_flow_definition_time_estimation(
+            flow_definition, TimeEstimationMethodType.AVERAGE)
+
         return _(__name__ + ".console.estimations_successfully_updated")
-        
-        

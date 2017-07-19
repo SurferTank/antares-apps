@@ -194,8 +194,8 @@ class ObligationManager(object):
             return period_list
 
         if (client_obligation.client.registration_date >
-                client_obligation.start_date and
-                from_registration_date == True):
+                client_obligation.start_date
+                and from_registration_date == True):
             base_date = client_obligation.start_date
         else:
             base_date = client_obligation.client.registration_date

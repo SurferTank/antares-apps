@@ -233,8 +233,8 @@ class HrnCode(models.Model):
                                               HrnModuleType.DOCUMENT,
                                               "GENERAL_DOCUMENT_SEQUENCE"))
 
-            if (hasattr(context, 'hrn_title') and
-                    context.hrn_title is not None):
+            if (hasattr(context, 'hrn_title')
+                    and context.hrn_title is not None):
                 document.set_header_field("hrn_title", context.hrn_title)
         return document
 
