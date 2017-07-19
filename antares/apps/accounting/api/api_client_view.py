@@ -1,3 +1,8 @@
+""" 
+Copyright 2013-2017 SurferTank Inc. 
+
+Original version by Leonardo Belen<leobelen@gmail.com>
+"""
 import logging
 import uuid
 import babel.numbers
@@ -20,6 +25,18 @@ logger = logging.getLogger(__name__)
 
 
 class ApiClientView(BaseDatatableView):
+    """ Retrieves a JSON formatted string to be used on the current account as the front page. 
+    
+    :attribute model: The model in which is based the class (required by BaseDatatableView)
+    :attribute columns: The columns to serve (required by BaseDatatableView)
+    :attribute order_columns: The definition to allow ordering (required by BaseDatatableView)
+    :attribute max_display_length: Max limit of records returned, this is used to protect our 
+            site if someone tries to attack our site and make it return huge amount of data 
+            (required by BaseDatatableView)
+    :attribute default_currency: system-wide value  default currency
+    :attribute default_locale: system-wide value default locale
+    
+    """
     model = AccountBalance
     columns = [
         'concept_type',
@@ -36,18 +53,24 @@ class ApiClientView(BaseDatatableView):
         'total_balance',
     ]
     client = None
-    # set max limit of records returned, this is used to protect our site if someone tries to attack our site
-    # and make it return huge amount of data
+    
     max_display_length = 50
+    
+    default_currency = None
+    
+    default_locale  = None
 
     def __init__(self):
+        """ Initial value settings 
+        """
         self.default_currency = SystemParameter.find_one(
             "CORE_DEFAULT_CURRENCY", FieldDataType.STRING, 'USD')
         self.default_locale = SystemParameter.find_one(
             "CORE_DEFAULT_LOCALE", FieldDataType.STRING, 'en_US')
 
     def render_column(self, row, column):
-
+        """ Overriden method to render a column (a hook on BaseDatatableView)
+        """
         # We want to render user as a custom column
         if column == 'concept_type':
             if row.concept_type.concept_type_name:
@@ -108,6 +131,8 @@ class ApiClientView(BaseDatatableView):
             return super(ApiClientView, self).render_column(row, column)
 
     def filter_queryset(self, qs):
+        """ Overriden method to modify the query to retrieve the correct data (a hook on BaseDatatableView)
+        """
         if (self.request.GET.get('client_id')):
             self.client = Client.find_one(
                 uuid.UUID(self.request.GET.get('client_id')))

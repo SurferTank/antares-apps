@@ -1171,6 +1171,9 @@ class FlowAdminManager(object):
 
     @classmethod
     def update_flow_definition_status(cls, flow_definition, status):
+        """
+        Updates the status of the flow definition. 
+        """
         if (status == FlowDefinitionStatusType.UNDER_TEST):
             flow_definition.status = status
         elif (status == FlowDefinitionStatusType.UNDER_REVISION):
@@ -1188,6 +1191,9 @@ class FlowAdminManager(object):
 
     @classmethod
     def delete_cases_by_flow_definition(cls, flow_definition):
+        """ 
+        Deletes all cases by flow definition
+        """
         for flow_case in flow_definition.flow_case_set.select_related().all():
             for user_notification_option in flow_case.user_notification_option_set.select_related(
             ).all():

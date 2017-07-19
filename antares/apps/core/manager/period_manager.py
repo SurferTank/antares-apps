@@ -9,7 +9,8 @@ import logging
 from django.utils.translation import ugettext as _
 
 from ..constants import FieldDataType, TimeUnitType
-from ..models import SystemParameter, Holiday
+from ..models.system_parameter import SystemParameter
+from ..models.holiday import Holiday
 
 logger = logging.getLogger(__name__)
 

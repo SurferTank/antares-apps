@@ -1,17 +1,16 @@
-'''
-Created on Jun 24, 2016
+""" 
+Copyright 2013-2017 SurferTank Inc. 
 
-@author: leobelen
-'''
+Original version by Leonardo Belen<leobelen@gmail.com>
+"""
 
 
 class GLManager(object):
-    '''
-    classdocs
-    '''
+    """ Provides services for the General Ledger
+        
+    """
 
     def __init__(self, params):
-        '''
-        Constructor
-        '''
+        """ Initial value settings 
+        """
         pass

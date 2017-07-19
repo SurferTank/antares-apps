@@ -36,9 +36,9 @@ logger = logging.getLogger(__name__)
 
 
 class FlowManager(object):
-    '''
-    classdocs
-    '''
+    """
+    
+    """
 
     def __init__(self, **kwargs):
         pass

@@ -1,3 +1,8 @@
+""" 
+Copyright 2013-2017 SurferTank Inc. 
+
+Original version by Leonardo Belen<leobelen@gmail.com>
+"""
 import logging
 import uuid
 
@@ -6,12 +11,40 @@ from django.utils import timezone
 from django.utils.translation import ugettext as _
 
 from ..constants import BalanceStatusType
+from ..models.account_type import AccountType
+from antares.apps.core.models.concept_type import ConceptType
+from antares.apps.client.models.client import Client
+
+from antares.apps.document.models.document_header import DocumentHeader
+
 from enumfields import EnumField
 
 logger = logging.getLogger(__name__)
 
 
 class AccountBalance(models.Model):
+    """ The current account balance record
+    
+    :attribute id: the account id
+    :attribute default_currency: the currency in which the account is defined
+    :attribute concept_type: the concept type for which the current account is defined
+    :attribute compliance_document: the document  that marks the underlying obligation's compliance
+    :attribute base_document: the document that created the account
+    :attribute client: the client for which the account is created
+    :attribute period: the period for which the account is created
+    :attribute account_type: the account type for which the account is created
+    :attribute balance_status: the balance status of the account
+    :attribute calculation_date: last calculation date
+    :attribute compliance_date: compliance date
+    :attribute creation_date: creation date
+    :attribute update: update date 
+    :attribute interest_balance: total interest balance for the account
+    :attribute principal_balance: total principal balance for the account
+    :attribute penalties_balance: total penalties balance for the account
+    :attribute total_balance: total balance for the account (principal+interest+penalties)
+    :attribute hrn_code: human readable number for the account
+    """ 
+    
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     default_currency = models.ForeignKey(
         "core.Currency",
@@ -67,6 +100,8 @@ class AccountBalance(models.Model):
         help_text=_(__name__ + ".hrn_code_help"))
 
     def save(self, *args, **kwargs):
+        """ Saves the balance after making some basic validations and sanity controls
+        """
         from antares.apps.core.models import HrnCode
         if self.creation_date is None:
             self.creation_date = timezone.now()
@@ -80,13 +115,13 @@ class AccountBalance(models.Model):
     def __str__(self):
         return str(self.id)
 
-    @staticmethod
-    def find_or_create_by_CCPAD(client, concept_type, period, account_type,
-                                document):
-        """
-        Returns the account balance that matches the unique identifiers - COPAD
+    @classmethod
+    def find_or_create_by_CCPAD(cls, client: Client, concept_type: ConceptType, period: int, account_type: AccountType,
+                                document:DocumentHeader):
+        """ Returns the account balance that matches the unique identifiers - COPAD
         (Client, Concept type, Period, Account type and Document). If none is
-        found, it creates one balance with zeroes.
+        found, it creates one balance with zeroes as principal, interest, penalties and total. 
+        
         """
         balance = AccountBalance.find_by_CCPAD(client, concept_type, period,
                                                account_type, document)
@@ -110,11 +145,11 @@ class AccountBalance(models.Model):
             balance.save()
             return balance
 
-    @staticmethod
-    def find_by_CCPAD(client, concept_type, period, account_type, document):
-        """
-        Gets a balance by Client, concept type, Period, Account Type or, if a document based document, by
-            Client, Document, Period, Account type. It infers the document based account based on the document being not none.
+    @classmethod
+    def find_by_CCPAD(cls, client: Client, concept_type:ConceptType, period:int, account_type:AccountType, document:DocumentHeader) :
+        """ Retrieves a balance by Client, concept type, Period, Account Type or, if a document based 
+            document, by Client, Document, Period, Account type. It infers the document based account 
+            based on the document being not none.
         """
         try:
             if (document is None):
@@ -144,8 +179,9 @@ class AccountBalance(models.Model):
             return None
 
     @classmethod
-    def get_total_balance_by_client(cls, client):
-        from antares.apps.client.models import Client
+    def get_total_balance_by_client(cls, client:Client) -> float:
+        """ Gets the total balance by client
+        """
         if (client is None or client == ""):
             logger.info("The client is empty")
             return 0

@@ -14,12 +14,18 @@ register = template.Library()
 
 
 @register.filter
-def total_accounting_balance(value):
+def total_accounting_balance(client):
+    """ Returns the total balance for the given client 
+    
+    :param client: the client object
+    :returns: the consolidated total balance of the client already formatted. 
+    
+    """
     default_currency = SystemParameter.find_one("CORE_DEFAULT_CURRENCY",
                                                 FieldDataType.STRING, 'USD')
     default_locale = SystemParameter.find_one("CORE_DEFAULT_LOCALE",
                                               FieldDataType.STRING, 'en_US')
-    result = AccountBalance.get_total_balance_by_client(value)
+    result = AccountBalance.get_total_balance_by_client(client)
     if result is None:
         return babel.numbers.format_currency(
             decimal.Decimal(0),
@@ -33,8 +39,14 @@ def total_accounting_balance(value):
 
 
 @register.filter
-def accounting_balance_status_image(value):
-    result = AccountBalance.get_total_balance_by_client(value)
+def accounting_balance_status_image(client):
+    """ Returns an image of the consolidated client's account status
+    
+    :param client: the client object
+    :returns: the HTML string corresponding to the client's account status
+    
+    """
+    result = AccountBalance.get_total_balance_by_client(client)
     if (result is None or result > 0):
         return mark_safe('<div style="text-align:center;"><font color="green" size="30">'+\
             '<i class="fa fa-check" aria-hidden="true"></i></font></div>')
