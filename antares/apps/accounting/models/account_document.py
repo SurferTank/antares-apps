@@ -7,6 +7,7 @@ from django.utils.translation import ugettext as _
 from enumfields import EnumField
 
 from ..constants import AccountDocumentStatusType
+from antares.apps.document.models.document_header import DocumentHeader
 
 logger = logging.getLogger(__name__)
 
@@ -30,11 +31,16 @@ class AccountDocument(models.Model):
         self.update_date = timezone.now()
         super(AccountDocument, self).save(*args, **kwargs)
 
-    def __str__(self):
+    def __str__(self) -> str:
         return str(self.id)
 
     @staticmethod
-    def find_or_create_by_document(document_header):
+    def find_or_create_by_document(document_header:DocumentHeader):
+        """ Finds the corresponding AccountDocument record or creates a new one with status PENDING
+        
+        :param document: the document header that will be used to create the account
+        :returns: the account document that corresponds to the document header passed
+        """
         document = AccountDocument._find_one_by_document_header(
             document_header)
         if (document is None):
@@ -45,9 +51,15 @@ class AccountDocument(models.Model):
         return document
 
     @staticmethod
-    def _find_one_by_document_header(document):
+    def _find_one_by_document_header(document_header:DocumentHeader) :
+        """ finds the account document based on the document header passed
+        
+        :param document_header: the document header
+        :returns: the corresponding account document
+        """
+        
         try:
-            return AccountDocument.objects.get(document=document)
+            return AccountDocument.objects.get(document=document_header)
         except AccountDocument.DoesNotExist:
             return None
 

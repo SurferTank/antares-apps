@@ -112,7 +112,7 @@ class AccountBalance(models.Model):
             HrnCode.process_account_balance_hrn_script(self)
         super(AccountBalance, self).save(*args, **kwargs)
 
-    def __str__(self):
+    def __str__(self) -> str:
         return str(self.id)
 
     @classmethod

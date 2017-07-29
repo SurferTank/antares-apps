@@ -21,10 +21,13 @@ class VersionUtils(object):
 
         sub = ''
         if version[3] == 'alpha' and version[4] == 0:
-            git_changeset = cls.get_git_changeset()
-            if git_changeset:
-                sub = '.dev%s' % git_changeset
-
+            #git_changeset = cls.get_git_changeset()
+            #if git_changeset:
+            #    sub = '.dev%s' % git_changeset
+            git_hash = cls.get_last_git_hash()
+            if git_hash:
+                sub = '.dev%s' % git_hash
+            
         elif version[3] != 'final':
             mapping = {'alpha': 'a', 'beta': 'b', 'rc': 'rc'}
             sub = mapping[version[3]] + str(version[4])
@@ -41,7 +44,7 @@ class VersionUtils(object):
     @classmethod
     def get_complete_version(cls, version=None):
         """
-        Return a tuple of the django version. If version argument is non-empty,
+        Return a tuple of the version. If version argument is non-empty,
         check for correctness of the tuple provided.
         """
         if version is None:
@@ -59,6 +62,23 @@ class VersionUtils(object):
             return 'dev'
         else:
             return '%d.%d' % version[:2]
+
+    @classmethod
+    @functools.lru_cache()
+    def get_last_git_hash(cls):
+        """Return a string identifier of the latest git commit.
+        This value is unique enough to generate the development version numbers.
+        """
+        repo_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+        git_log = subprocess.Popen(
+            "git log --pretty=format:'%h' -n 1",
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+            shell=True,
+            cwd=repo_dir,
+            universal_newlines=True, )
+        return git_log.communicate()[0]
+        
 
     @classmethod
     @functools.lru_cache()

@@ -156,6 +156,8 @@
         <xs:attribute name="catalogId" type="xs:NCName"/>
         <xs:attribute name="format" type="xs:string"/>
         <xs:attribute name="colspan" type="xs:integer"/>
+        <!-- where to get the information from. -->
+        <xs:attribute name="source" type="xs:string"/>
     </xs:complexType>
     <xs:complexType name="NonstructuredData">
         <xs:sequence>

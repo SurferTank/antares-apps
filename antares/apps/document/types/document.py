@@ -34,11 +34,15 @@ from antares.apps.flow.models.operation.flow_activity import FlowActivity
 from prompt_toolkit.key_binding.bindings.named_commands import self_insert
 from antares.apps.document.exceptions.document_validation_exception import DocumentValidationException
 from antares.apps.document.exceptions.document_required_exception import DocumentRequiredException
+from typing import Dict
 
 logger = logging.getLogger(__name__)
 
 
 class Document(object):
+    """ Contains and manages a Document entity
+    
+    """
 
     IMMUTABLE_HEADER_FIELDS = [
         'document_id',
@@ -47,9 +51,12 @@ class Document(object):
     ]
 
     def __init__(self, *args, **kwargs):
-        # args -- tuple of anonymous arguments
-        # kwargs -- dictionary of named arguments
-
+        """ Creates or loads a document. 
+        
+        To create a document, the call would be document = new Document({document_id: <<form_id>>}) and to load a document 
+        the call would be document = new Document({"document_id": <<document_id>>}) 
+        
+        """
         self.fields = {}
         self.header_fields = {}
         self.document_xml = None
@@ -65,11 +72,11 @@ class Document(object):
                 self._init_with_form_id(
                     kwargs.get('form_id'), kwargs.get('header_fields_dict'))
 
-    def _init_with_id(self, document_id):
-        """
-        Starts a document instance based on the document id
+    def _init_with_id(self, document_id:str):
+        """ Instantiates a document instance based on the document id
 
-        :param documentId: The document ID, which has to exist on the database
+        :param document_id: The document ID, which has to exist on the database
+        :returns: the document instance
         """
         if isinstance(document_id, uuid.UUID):
             document_uuid = document_id
@@ -99,8 +106,15 @@ class Document(object):
         self._evaluate_field_calculation()
         self._process_external_function_events(
             DocumentEventType.DRAFT_MODIFICATION)
+        
 
-    def _init_with_form_id(self, form_id, header_fields_dict=None):
+    def _init_with_form_id(self, form_id:str, header_fields_dict:Dict[str, str]=None):
+        """ Instantiates a document instance based on the document id
+
+        :param document_id: The document ID, which has to exist on the database
+        :returns: the document instance
+        """
+
         form_definition = FormDefinition.find_one(form_id)
         if form_definition is None:
             raise FormDefinitionNotFoundException(
@@ -122,7 +136,7 @@ class Document(object):
         self.header.active_version = True
         self.header.origin = DocumentOriginType.UNKNOWN
         self.header.document_version = 0
-        self.header.hash = "draft document"
+        self.header.hash = ""
         self.header.save()
 
         self.document_id = self.header.id
@@ -148,19 +162,26 @@ class Document(object):
 
         if (header_fields_dict is not None):
             self.set_header_fields(header_fields_dict)
-        self._map_header_fields()
+        self._map_header_fields_to_fields()
+        self._process_field_sources()
+        self._evaluate_field_calculation()
         self._process_functions(DocumentEventType.CREATION)
         self._process_hrn_script(DocumentEventType.CREATION)
+        self._map_fields_to_header_fields()
         self._hibernate_document()
 
     def _hydrate_document(self):
-        """
-        Sets all the values on the database on the XML object
+        """ Sets all the values on the database on the XML object
+        
         """
         self._hydrate_header()
         self._hydrate_body()
+        self._process_field_sources()
 
     def _hydrate_header(self):
+        """ Sets the header fields onto the XML object
+        
+        """
         headerElements = self.document_xml.find('headerElements')
         accountingElements = headerElements.find('accountingElements')
 
@@ -272,10 +293,7 @@ class Document(object):
                                 if fieldDb.string_value is not None:
                                     field.text = fieldDb.string_value
                             else:
-                                raise NotImplementedError
-                    else:
-                        # WTF, exception here !!!!
-                        pass
+                                raise NotImplementedError(_(__name__ + ".messages.field_type_not_implemented_yet"))
 
     def _hibernate_document(self):
         self._hibernate_header()
@@ -609,10 +627,9 @@ class Document(object):
                                     indexedDb.data_type = str(
                                         FieldDataType.DATE)
                                     indexedDb.save()
-                        else:
-                            raise NotImplementedError
+                        
 
-    def get_field_data_type(self, key):
+    def get_field_data_type(self, key: str) -> str:
         for page in self.document_xml.iterfind('structuredData/page'):
             for line in page.iterfind('line'):
                 for field in line.iterfind('field'):
@@ -622,6 +639,19 @@ class Document(object):
                             and field.get('id') == key
                             and field.get('type').lower() != 'label'):
                         return FieldDataType.to_enum(field.get('dataType'))
+        raise DocumentFieldNotFound(
+            _(__name__ + ".exceptions.document_field_not_found"))
+
+    def get_field_source(self, key: str) -> str:
+        for page in self.document_xml.iterfind('structuredData/page'):
+            for line in page.iterfind('line'):
+                for field in line.iterfind('field'):
+                    if (field.get('id') is not None
+                            and field.get('source') is not None
+                            and field.get('type') is not None
+                            and field.get('id') == key
+                            and field.get('type').lower() != 'label'):
+                        return field.get('source')
         raise DocumentFieldNotFound(
             _(__name__ + ".exceptions.document_field_not_found"))
 
@@ -636,13 +666,11 @@ class Document(object):
                             and field.get('type').lower() != 'label'):
                         return field.text
 
-    def get_field_id_by_messagemap(self, message_map):
-        """ 
-            Gets the id of the field based on the messageMap attribute or None if no key is found
+    def get_field_id_by_messagemap(self, message_map: str) -> str:
+        """ Gets the id of the field based on the messageMap attribute or None if no key is found
             
-            :param str message_map: message key
-            :return: the field id
-            :rtype: string
+            :param message_map: message key
+            :returns: the field id
         """
         for page in self.document_xml.iterfind('structuredData/page'):
             for line in page.iterfind('line'):
@@ -1619,6 +1647,16 @@ class Document(object):
             return int(float(node.get('calculationOrder')))
         except ValueError:
             return 0
+    
+    
+    def __get_source_definition(self, node):
+        """
+        
+        """
+        try:
+            return node.get('source')
+        except ValueError:
+            return None
 
     def get_client(self):
         return self.get_header_field('client')
@@ -1642,9 +1680,8 @@ class Document(object):
         if (base_document is not None and isinstance(base_document, Document)):
             self.set_header_field('account_type', base_document.header)
 
-    def _map_header_fields(self):
-        """
-        This simply maps the header fields into the body
+    def _map_header_fields_to_fields(self):
+        """ This simply maps the header fields into the body
         """
         for field in self.document_xml.iterfind(
                 'structuredData/page/line/field[@headerField]'):
@@ -1654,8 +1691,20 @@ class Document(object):
                 if (header_value):
                     field.text = str(header_value)
 
+    def _map_fields_to_header_fields(self):
+        """ This simply maps the fields into the header
+        """
+        for field in self.document_xml.iterfind(
+                'structuredData/page/line/field[@headerField]'):
+            header_field_id = field.get("headerField")
+            if (header_field_id):
+                header_value = self.get_header_field(header_field_id, True)
+                if (header_value):
+                    header_value = field.text
+
+
     def _process_hrn_script(self, event_type):
-        from antares.apps.core.models import HrnCode
+       
         HrnCode.process_document_hrn_script(self, event_type)
 
     def _process_functions(self, event_type):
@@ -1723,3 +1772,22 @@ class Document(object):
             obligation.status = ObligationStatusType.COMPLIANT
             obligation.compliance_date = self.get_save_date()
             obligation.save()
+
+    def _process_field_sources(self):
+        """ Gathers information from the system and plugs it to the fields
+        
+        """
+        #we only do this if the document is in DRAFTED status. 
+        if self.get_status() != DocumentStatusType.DRAFTED:
+            return None
+        fields = {}
+        fields['client'] = get_request().user.get_on_behalf_client()
+        fields['user'] = get_request().user
+        context = js2py.EvalJs(fields)
+        for field_node in self.document_xml.iterfind("structuredData/page/line/field[@type!='label'][@source]"):
+            context.execute("result = " + field_node.get('source'))
+            if context.get('result') is not None:
+                self.set_field_value(field_node.get('id'), context.get('result'))
+                
+                
+                

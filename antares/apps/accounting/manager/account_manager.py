@@ -8,6 +8,7 @@ import logging
 
 from django.utils import timezone
 from django.utils.translation import ugettext as _
+from typing import List, Dict
 
 from antares.apps.client.models import Client
 from antares.apps.core.constants import FieldDataType
@@ -81,7 +82,7 @@ class AccountManager(object):
     def _create_transactions_from_rules(cls,
                                         account_document: AccountDocument,
                                         document: Document,
-                                        account_rules: [AccountRule]):
+                                        account_rules: List[AccountRule]) -> List[AccountTransaction]:
         """ Processes the rules one by one and produces the required transactions.
         
         :param account_document: Account document to process
@@ -146,7 +147,7 @@ class AccountManager(object):
     @classmethod
     def _process_payment_transaction(cls,
                                      transaction: AccountTransaction,
-                                     document: Document):
+                                     document: Document) -> AccountTransaction:
         """
         Processes a payment transaction to assign the proper values to the accounts. 
         TODO: Needs to be implemented. 
@@ -159,9 +160,15 @@ class AccountManager(object):
         paymentApplicationMethod = SystemParameter.find_one(
             "DEFAULT_PAYMENT_APPLICATION_METHOD", FieldDataType.STRING,
             'PRINCIPAL_INTEREST_PENALTIES')
+        return transaction;
 
     @classmethod
-    def _is_transaction_to_be_applied(cls, transaction):
+    def _is_transaction_to_be_applied(cls, transaction) -> bool:
+        """ determine if the transaction would be applied, even if zero transactions are found
+        :param transaction: the working transaction
+        :returns: a boolean value to determine if the transaction needs to be filtered out or not
+        
+        """
         if (transaction.transaction_type.post_zeros == True
                 or transaction.total_amount > 0):
             return True
@@ -405,14 +412,14 @@ class AccountManager(object):
     @classmethod
     def _get_account_document_string(cls,
                                      account_document: AccountDocument,
-                                     transactions):
+                                     transactions) -> str:
         """
          TODO: Implement me.
         """
         return None
 
     @classmethod
-    def _get_cancelled_document(cls, document: Document):
+    def _get_cancelled_document(cls, document: Document) -> AccountDocument:
         """
          TODO: Implement me.
         """
