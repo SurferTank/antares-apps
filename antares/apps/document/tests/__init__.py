@@ -1,5 +1,5 @@
-from .document_type_test import DocumentTypeTest
+from .general_document_test import GeneralDocumentTest
 
 __all__ = [
-    'DocumentTypeTest',
+    'GeneralDocumentTest',
 ]
