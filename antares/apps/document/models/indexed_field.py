@@ -83,6 +83,11 @@ class IndexedField(models.Model):
         null=True,
         verbose_name=_(__name__ + ".text_value"),
         help_text=_(__name__ + ".text_value_help"))
+    uuid_value = models.UUIDField(
+        blank=True,
+        null=True,
+        verbose_name=_(__name__ + ".uuid_value"),
+        help_text=_(__name__ + ".uuid_value_help"))
 
     @classmethod
     def find_one(cls, document_header, definition):

@@ -98,29 +98,36 @@ class User(AbstractUser):
             raise UserException(
                 _(__name__ + ".the_user_has_no_client_associated"))
 
-    @staticmethod
-    def find_one(user_id):
+    @classmethod
+    def find_one(cls, user_id):
+        if isinstance(user_id, str):
+            user_uuid = uuid.UUID(user_id)
+        elif isinstance(user_id, uuid.UUID):
+            user_uuid = user_id
+        elif isinstance(user_id, User):
+            return user_id
         try:
-            return User.objects.get(id=user_id)
+            return User.objects.get(id=user_uuid)
         except User.DoesNotExist:
             return None
 
-    @staticmethod
-    def find_one_by_user_name(username):
+    @classmethod
+    def find_one_by_user_name(cls, username):
+        
         try:
             return User.objects.get(username=username)
         except User.DoesNotExist:
             return None
 
-    @staticmethod
-    def find_one_by_username(username):
+    @classmethod
+    def find_one_by_username(cls, username):
         try:
             return User.objects.get(username=username)
         except User.DoesNotExist:
             return None
 
-    @staticmethod
-    def get_system_user():
+    @classmethod
+    def get_system_user(cls):
         from antares.apps.core.models import SystemParameter
         from antares.apps.core.constants import FieldDataType
         """

@@ -289,9 +289,18 @@ class Document(object):
                             elif datatype == FieldDataType.DATE:
                                 if fieldDb.date_value is not None:
                                     field.text = fieldDb.date_value.isoformat()
+                            elif datatype == FieldDataType.DATETIME:
+                                if fieldDb.date_value is not None:
+                                    field.text = fieldDb.date_value.isoformat()
                             elif datatype == FieldDataType.UUID:
-                                if fieldDb.string_value is not None:
-                                    field.text = fieldDb.string_value
+                                if fieldDb.uuid_value is not None:
+                                    field.text = fieldDb.uuid_value
+                            elif datatype == FieldDataType.CLIENT:
+                                if fieldDb.uuid_value is not None:
+                                    field.text = fieldDb.uuid_value
+                            elif datatype == FieldDataType.USER:
+                                if fieldDb.uuid_value is not None:
+                                    field.text = fieldDb.uuid_value
                             else:
                                 raise NotImplementedError(_(__name__ + ".messages.field_type_not_implemented_yet"))
 
@@ -597,25 +606,28 @@ class Document(object):
                                         FieldDataType.FLOAT)
                                     indexedDb.save()
                         elif datatype == FieldDataType.DATE:
+                            #lets truncate and serialize it. 
+                            dt = dateparser.parse(field.text)
+                            date_value = datetime(dt.year, dt.month, dt.day)
                             if (fieldDb is not None
-                                    and fieldDb.date_value != field.text):
-                                fieldDb.date_value = field.text
+                                    and fieldDb.date_value != date_value):
+                                fieldDb.date_value = date_value
                                 fieldDb.save()
                             elif (fieldDb is None):
                                 fieldDb = DocumentField()
                                 fieldDb.definition = field.get('id')
                                 fieldDb.document = self.header
                                 fieldDb.form_definition = self.header.form_definition
-                                if (field.text is not None):
-                                    fieldDb.date_value = field.text
+                                if (date_value is not None):
+                                    fieldDb.date_value = date_value
                                 fieldDb.data_type = str(FieldDataType.DATE)
                                 fieldDb.save()
                             if (field.get('indexed') and
                                 (field.get('indexed').lower() == 'true'
                                  or field.get('indexed').lower() == 'yes')):
                                 if (indexedDb is not None and
-                                        indexedDb.date_value != field.text):
-                                    indexedDb.date_value = field.text
+                                        indexedDb.date_value != date_value):
+                                    indexedDb.date_value = date_value
                                     indexedDb.save()
                                 elif (indexedDb is None):
                                     indexedDb = IndexedField()
@@ -623,11 +635,140 @@ class Document(object):
                                     indexedDb.document = self.header
                                     indexedDb.form_definition = self.header.form_definition
                                     if (field.text is not None):
-                                        indexedDb.date_value = field.text
+                                        indexedDb.date_value = date_value
                                     indexedDb.data_type = str(
                                         FieldDataType.DATE)
                                     indexedDb.save()
-                        
+                        elif datatype == FieldDataType.DATETIME:
+                            #lets truncate and serialize it. 
+                            date_value = dateparser.parse(field.text)
+                            if (fieldDb is not None
+                                    and fieldDb.date_value != date_value):
+                                fieldDb.date_value = date_value
+                                fieldDb.save()
+                            elif (fieldDb is None):
+                                fieldDb = DocumentField()
+                                fieldDb.definition = field.get('id')
+                                fieldDb.document = self.header
+                                fieldDb.form_definition = self.header.form_definition
+                                if (field.text is not None):
+                                    fieldDb.date_value = date_value
+                                fieldDb.data_type = str(FieldDataType.DATE)
+                                fieldDb.save()
+                            if (field.get('indexed') and
+                                (field.get('indexed').lower() == 'true'
+                                 or field.get('indexed').lower() == 'yes')):
+                                if (indexedDb is not None and
+                                        indexedDb.date_value != date_value):
+                                    indexedDb.date_value = date_value
+                                    indexedDb.save()
+                                elif (indexedDb is None):
+                                    indexedDb = IndexedField()
+                                    indexedDb.definition = field.get('id')
+                                    indexedDb.document = self.header
+                                    indexedDb.form_definition = self.header.form_definition
+                                    if (date_value is not None):
+                                        indexedDb.date_value = date_value
+                                    indexedDb.data_type = str(
+                                        FieldDataType.DATE)
+                                    indexedDb.save()
+                        elif datatype == FieldDataType.UUID:
+                            if (fieldDb is not None
+                                    and str(fieldDb.uuid_value) != str(field.text)):
+                                fieldDb.uuid_value = str(field.text)
+                                fieldDb.save()
+                            elif (fieldDb is None):
+                                fieldDb = DocumentField()
+                                fieldDb.definition = field.get('id')
+                                fieldDb.document = self.header
+                                fieldDb.form_definition = self.header.form_definition
+                                if (field.text is not None):
+                                    fieldDb.uuid_value = str(field.text)
+                                fieldDb.data_type = str(FieldDataType.UUID)
+                                fieldDb.save()
+                            if (field.get('indexed') and
+                                (field.get('indexed').lower() == 'true'
+                                 or field.get('indexed').lower() == 'yes')):
+                                if (indexedDb is not None and
+                                        str(indexedDb.uuid_value) != str(field.text)):
+                                    indexedDb.uuid_value = str(field.text)
+                                    indexedDb.save()
+                                elif (indexedDb is None):
+                                    indexedDb = IndexedField()
+                                    indexedDb.definition = field.get('id')
+                                    indexedDb.document = self.header
+                                    indexedDb.form_definition = self.header.form_definition
+                                    if (field.text is not None):
+                                        indexedDb.uuid_value = str(field.text)
+                                    indexedDb.data_type = str(
+                                        FieldDataType.UUID)
+                                    indexedDb.save()
+                        elif datatype == FieldDataType.CLIENT:
+                            #This is an special case, we have to get first the proper object and then we serialize it as an UUID
+                            client_obj = Client.find_one(field.text)
+                            if (fieldDb is not None
+                                    and str(fieldDb.uuid_value) != str(client_obj.id)):
+                                fieldDb.uuid_value = str(client_obj.id)
+                                fieldDb.save()
+                            elif (fieldDb is None):
+                                fieldDb = DocumentField()
+                                fieldDb.definition = field.get('id')
+                                fieldDb.document = self.header
+                                fieldDb.form_definition = self.header.form_definition
+                                if (field.text is not None):
+                                    fieldDb.uuid_value = str(client_obj.id)
+                                fieldDb.data_type = str(FieldDataType.CLIENT)
+                                fieldDb.save()
+                            if (field.get('indexed') and
+                                (field.get('indexed').lower() == 'true'
+                                 or field.get('indexed').lower() == 'yes')):
+                                if (indexedDb is not None and
+                                        str(indexedDb.uuid_value) != str(client_obj.id)):
+                                    indexedDb.uuid_value = str(client_obj.id)
+                                    indexedDb.save()
+                                elif (indexedDb is None):
+                                    indexedDb = IndexedField()
+                                    indexedDb.definition = field.get('id')
+                                    indexedDb.document = self.header
+                                    indexedDb.form_definition = self.header.form_definition
+                                    if (field.text is not None):
+                                        indexedDb.uuid_value = str(client_obj.id)
+                                    indexedDb.data_type = str(
+                                        FieldDataType.CLIENT)
+                                    indexedDb.save()
+                        elif datatype == FieldDataType.USER:
+                            #This is an special case, we have to get first the proper object and then we serialize it as an UUID
+                            user_obj = User.find_one(field.text)
+                            if (fieldDb is not None
+                                    and str(fieldDb.uuid_value) != str(user_obj.id)):
+                                fieldDb.uuid_value = str(user_obj.id)
+                                fieldDb.save()
+                            elif (fieldDb is None):
+                                fieldDb = DocumentField()
+                                fieldDb.definition = field.get('id')
+                                fieldDb.document = self.header
+                                fieldDb.form_definition = self.header.form_definition
+                                if (field.text is not None):
+                                    fieldDb.uuid_value = str(user_obj.id)
+                                fieldDb.data_type = str(FieldDataType.USER)
+                                fieldDb.save()
+                            if (field.get('indexed') and
+                                (field.get('indexed').lower() == 'true'
+                                 or field.get('indexed').lower() == 'yes')):
+                                if (indexedDb is not None and
+                                        str(indexedDb.uuid_value) != str(user_obj.id)):
+                                    indexedDb.uuid_value = str(user_obj.id)
+                                    indexedDb.save()
+                                elif (indexedDb is None):
+                                    indexedDb = IndexedField()
+                                    indexedDb.definition = field.get('id')
+                                    indexedDb.document = self.header
+                                    indexedDb.form_definition = self.header.form_definition
+                                    if (field.text is not None):
+                                        indexedDb.uuid_value = str(user_obj.id)
+                                    indexedDb.data_type = str(
+                                        FieldDataType.USER)
+                                    indexedDb.save()
 
     def get_field_data_type(self, key: str) -> str:
         for page in self.document_xml.iterfind('structuredData/page'):
@@ -664,7 +805,20 @@ class Document(object):
                             and field.get('type') is not None
                             and field.get('id') == key
                             and field.get('type').lower() != 'label'):
-                        return field.text
+                        if FieldDataType.to_enum(field.get('type')) == FieldDataType.CLIENT:
+                            return Client.find_one(field.text)
+                        elif FieldDataType.to_enum(field.get('type')) == FieldDataType.USER:
+                            return User.find_one(field.text)
+                        elif FieldDataType.to_enum(field.get('type')) == FieldDataType.INTEGER:
+                            return int(float(field.text))
+                        elif FieldDataType.to_enum(field.get('type')) == FieldDataType.FLOAT:
+                            return float(field.text)
+                        elif FieldDataType.to_enum(field.get('type')) == FieldDataType.DATE:
+                            return dateparser.parse(field.text)
+                        elif FieldDataType.to_enum(field.get('type')) == FieldDataType.DATETIME:
+                            return dateparser.parse(field.text)
+                        else:
+                            return field.text
 
     def get_field_id_by_messagemap(self, message_map: str) -> str:
         """ Gets the id of the field based on the messageMap attribute or None if no key is found
@@ -723,10 +877,20 @@ class Document(object):
                             elif (value == False):
                                 field.text = 'no'
                             return
+                        elif datatype == FieldDataType.USER:
+                            if not isinstance(value, User):
+                                raise ValueError(_(__name__ + ".exceptions.user_field_does_not_understand_anything_but_User_objects"))
+                            field.text = str(value.id)
+                            return 
+                        elif datatype == FieldDataType.CLIENT:
+                            if not isinstance(value, Client):
+                                raise ValueError(_(__name__ + ".exceptions.client_field_does_not_understand_anything_but_Client_objects"))
+                            field.text = str(value.id)
+                            return
                         else:
                             raise DocumentFieldNotFound(
                                 _(__name__ +
-                                  ".exceptions.document_field_type_not_found"))
+                                  ".exceptions.document_field_type_not_found ") + key)
         raise DocumentFieldNotFound(
             _(__name__ + ".exceptions.document_field_not_found"))
 
@@ -1783,11 +1947,13 @@ class Document(object):
         fields = {}
         fields['client'] = get_request().user.get_on_behalf_client()
         fields['user'] = get_request().user
+        fields['sysdate'] = datetime.now()
         context = js2py.EvalJs(fields)
-        for field_node in self.document_xml.iterfind("structuredData/page/line/field[@type!='label'][@source]"):
+        for field_node in self.document_xml.xpath("//field[@type!='label' and @source]"):
             context.execute("result = " + field_node.get('source'))
-            if context.get('result') is not None:
-                self.set_field_value(field_node.get('id'), context.get('result'))
+            result = context['result']
+            if result is not None:
+                self.set_field_value(field_node.get('id'), result)
                 
                 
                 

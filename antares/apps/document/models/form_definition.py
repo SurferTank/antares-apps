@@ -226,7 +226,7 @@ class FormDefinition(models.Model):
         return definition_obj
 
     def verify_and_create_supporting_files(self, creating_forms=False):
-        template_home = os.path.join(settings.BASE_DIR, 'antares', 'templates',
+        template_home = os.path.join(settings.BASE_DIR, settings.BASE_APP_DIR, 'templates',
                                      self.DOC_DEFAULT_TEMPLATE_OS_HOME,
                                      self.id)
         if not os.path.isdir(template_home):

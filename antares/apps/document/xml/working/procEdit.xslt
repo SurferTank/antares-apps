@@ -224,10 +224,10 @@ $(document).ready(function() {
 					</div>
 				</div>
 				<div id="documentSaveDialog" style="display:none;">
-					<div id="documentSaveDialogContent">The document has been submitted to the system</div>
+					<div id="documentSaveDialogContent">{% trans 'antares.apps.document.messages.document_drafted' %}</div>
 				</div>
 				<div id="documentDraftDialog" style="display:none;">
-					<div id="documentDraftDialogContent">The document has been Drafted</div>
+					<div id="documentDraftDialogContent">{% trans 'antares.apps.document.messages.document_saved' %}</div>
 				</div>
 				<div id="documentHelpDialog" style="display:none;">
 					<div id="documentSaveHelpContent">
@@ -258,8 +258,6 @@ $(document).ready(function() {
                             </xsl:attribute>
 						</xsl:otherwise>
 					</xsl:choose>
-					<!--<xsl:if test="@rowspan>1"> <xsl:attribute name="rowspan"> <xsl:value-of 
-						select="@rowspan" /> </xsl:attribute> </xsl:if> -->
 					<xsl:choose>
 						<xsl:when test="@type='label'">
 							<xsl:call-template name="label-processing" />
@@ -276,8 +274,8 @@ $(document).ready(function() {
 						<xsl:when test="@type='list' and @dataType='string'">
 							<xsl:call-template name="list-string-processing" />
 						</xsl:when>
-						<xsl:when test="@type='date' and @dataType='date'">
-							<xsl:call-template name="date-processing" />
+						<xsl:when test="@type='input' and @dataType='date'">
+							<xsl:call-template name="input-date-processing" />
 						</xsl:when>
 						<xsl:when test="@type='checkbox' and @dataType='string'">
 							<xsl:call-template name="checkbox-string-processing" />
@@ -294,6 +292,13 @@ $(document).ready(function() {
 						<xsl:when test="@type='autocomplete' and @dataType='string'">
 							<xsl:call-template name="autocomplete-string-processing" />
 						</xsl:when>
+						<!--  new stuff going on 
+						<xsl:when test="@type='input' and @dataType='user'">
+							<xsl:call-template name="input-user-processing" />
+						</xsl:when>
+						<xsl:when test="@type='input' and @dataType='client'">
+							<xsl:call-template name="input-client-processing" />
+						</xsl:when>-->
 					</xsl:choose>
 				</div>
 			</xsl:for-each>
@@ -377,7 +382,7 @@ $(document).ready(function() {
 			</xsl:if>
 		</input>
 	</xsl:template>
-	<xsl:template name="date-processing">
+	<xsl:template name="input-date-processing">
 		<xsl:if test="@fieldCode">
 			<div class="input-group">
 				<span class="input-group-addon">

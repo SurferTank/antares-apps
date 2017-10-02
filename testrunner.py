@@ -81,6 +81,7 @@ THIRD_PARTY_APPS = (
 INSTALLED_APPS = DJANGO_APPS + LOCAL_APPS + THIRD_PARTY_APPS
 
 settings.configure(
+    AUTH_USER_MODEL = 'user.User',
     DEBUG=True,
     DATABASES={
         'default': {
@@ -290,7 +291,7 @@ settings.configure(
 django.setup()
 from django.test.runner import DiscoverRunner
 test_runner = DiscoverRunner(verbosity=1)
-
-failures = test_runner.run_tests(['myapp'])
+#['antares']
+failures = test_runner.run_tests(['antares'])
 if failures:
     sys.exit(failures)

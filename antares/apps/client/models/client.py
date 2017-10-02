@@ -81,8 +81,14 @@ class Client(models.Model):
 
     @staticmethod
     def find_one(client_id):
+        if isinstance(client_id, str):
+            client_uuid = uuid.UUID(client_id)
+        elif isinstance(client_id, uuid.UUID):
+            client_uuid = client_id
+        elif isinstance(client_id, Client):
+            return client_id
         try:
-            return Client.objects.get(id=client_id)
+            return Client.objects.get(id=client_uuid)
         except Client.DoesNotExist:
             return None
 

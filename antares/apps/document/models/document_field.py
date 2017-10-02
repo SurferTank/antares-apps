@@ -77,6 +77,11 @@ class DocumentField(models.Model):
         null=True,
         verbose_name=_(__name__ + ".text_value"),
         help_text=_(__name__ + ".text_value_help"))
+    uuid_value = models.UUIDField(
+        blank=True,
+        null=True,
+        verbose_name=_(__name__ + ".uuid_value"),
+        help_text=_(__name__ + ".uuid_value_help"))
     comments = models.TextField(
         blank=True,
         null=True,

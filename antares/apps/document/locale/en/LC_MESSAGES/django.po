@@ -155,3 +155,8 @@ msgstr "Production"
 msgid "antares.apps.document.constants.FormDefinitionStatusType.DEACTIVATED"
 msgstr "Deactivated"
 
+msgid "antares.apps.document.messages.document_saved"
+msgstr "The document has been submitted to the system"
+
+msgid "antares.apps.document.messages.document_drafted"
+msgstr "The document has been Drafted"
