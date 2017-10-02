@@ -13,4 +13,19 @@ def get_request():
 
 class RequestMiddleware(MiddlewareMixin):
     def process_request(self, request):
+        from django.conf import settings
+        from django.test.client import RequestFactory
+        from antares.apps.user.models.user import User
+        
+        try:
+            settings.TEST_MODE
+        except:
+            settings.TEST_MODE = False
+        
+        if settings.TEST_MODE == True:
+            request_factory = RequestFactory()
+            request = request_factory.post("/")
+            request.user = User.get_test_user()
+        
         _requests[current_thread()] = request
+    

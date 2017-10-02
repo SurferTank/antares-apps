@@ -280,6 +280,64 @@ settings.configure(
             },
         },
     },
+    LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'filters': {
+        'require_debug_false': {
+            '()': 'django.utils.log.RequireDebugFalse',
+        },
+        'require_debug_true': {
+            '()': 'django.utils.log.RequireDebugTrue',
+        },
+    },
+    'formatters': {
+        'simple': {
+            'format': '[%(asctime)s] %(levelname)s %(message)s',
+            'datefmt': '%Y-%m-%d %H:%M:%S'
+        },
+        'verbose': {
+            'format':
+            '[%(asctime)s] %(levelname)s [%(name)s.%(funcName)s:%(lineno)d] %(message)s',
+            'datefmt':
+            '%Y-%m-%d %H:%M:%S'
+        },
+    },
+    'handlers': {
+        'console': {
+            'level': 'DEBUG',
+            'class': 'logging.StreamHandler',
+            'formatter': 'verbose'
+        },
+        
+    },
+    'loggers': {
+        'root': {
+            'handlers': ['console'],
+            'level': 'INFO',
+            'propagate': True,
+            'formatter': 'verbose'
+        },
+        'django': {
+            'handlers': ['console'],
+            'level': 'INFO',
+            'propagate': True,
+            'formatter': 'verbose'
+        },
+        'antares': {
+            'handlers': ['console'],
+            'level': 'DEBUG',
+            'formatter': 'verbose',
+            'propagate': True,
+        },
+        'antares.apps.flow': {
+            'handlers': ['console'],
+            'level': 'DEBUG',
+            'formatter': 'verbose',
+            'propagate': True,
+        }
+    }
+},
     LOCALE_PATHS=(os.path.join(BASE_DIR, 'locale'), ),
     LANGUAGES=(('en', _('English')), ('es', _('Spanish')), ),
     CKEDITOR_JQUERY_URL=

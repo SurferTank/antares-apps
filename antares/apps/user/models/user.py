@@ -10,6 +10,7 @@ from django.db import models
 from django.db.models import Q
 from django.utils import timezone
 from django.utils.translation import ugettext_lazy as _
+from django.conf import settings
 
 from antares.apps.client.constants import ClientRelationType
 from antares.apps.core.middleware.request import get_request
@@ -18,6 +19,7 @@ from ..exceptions import UserException
 from .user_role import UserRole
 from .user_org_unit import UserOrgUnit
 from .role_application import RoleApplication
+
 
 logger = logging.getLogger(__name__)
 
@@ -152,6 +154,30 @@ class User(AbstractUser):
         system_user.save()
 
         return system_user
+    
+    @classmethod
+    def get_test_user(cls):
+        """
+        Returns a test user for executing tests. If we are not running 
+        """
+        try:
+            settings.TEST_MODE
+        except:
+            settings.TEST_MODE = False
+        if(settings.TEST_MODE == True):    
+            test_user = cls.find_one_by_user_name("testuser")
+            if(test_user is None):
+                test_user  = User.objects.create(
+                   username="testuser",
+                   email="testuser@surfertank.com",
+                   is_staff=True,
+                   is_active=False)
+            # we don't want anyone to take over, so an UUID would be random enough
+            test_user.set_password("12345")
+            test_user.save()
+        else:
+            test_user = None
+        return test_user
 
     def get_role_list(self, include_children=True):
         """

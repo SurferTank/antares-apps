@@ -128,11 +128,11 @@ class FormDefinition(models.Model):
         schema = etree.XMLSchema(schema_root)
 
         parser = etree.XMLParser(schema=schema)
-        #try:
-        #    root = etree.fromstring(form_def.definition, parser)
-        #except Exception as e:
-        #    raise InvalidFormDefinitionException(
-        #        _(__name__ + ".exceptions.form_is_invalid"))
+        try:
+            etree.fromstring(form_def.definition, parser)
+        except Exception:
+            raise InvalidFormDefinitionException(
+                _(__name__ + ".exceptions.form_is_invalid"))
 
     @classmethod
     def set_blank_header_xml(cls, definition_obj):

@@ -10,6 +10,7 @@ from antares.apps.core.middleware.request import get_request
 from enumfields import EnumField
 from django.conf import settings
 
+
 logger = logging.getLogger(__name__)
 
 
@@ -89,6 +90,7 @@ class SystemParameter(models.Model):
         self.update_date = timezone.now()
         if get_request() is not None:
             self.author = get_request().user
+            
         super(SystemParameter, self).save(*args, **kwargs)
 
     def __str__(self):

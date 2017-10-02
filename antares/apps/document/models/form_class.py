@@ -57,7 +57,8 @@ class FormClass(models.Model):
         if self.creation_date is None:
             self.creation_date = timezone.now()
         self.update_date = timezone.now()
-        self.author = get_request().user
+        if get_request() is not None:
+            self.author = get_request().user
         super(FormClass, self).save(*args, **kwargs)
 
     def __str__(self):
