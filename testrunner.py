@@ -4,6 +4,7 @@ import django, sys
 from django.conf import settings
 import os
 from django.utils.translation import ugettext_lazy as _
+from antares.apps.core.middleware import RequestMiddleware 
 import platform
 
 STATIC_ROOT = '/docs/projects/www/cdbdemo/public/'
@@ -82,6 +83,7 @@ INSTALLED_APPS = DJANGO_APPS + LOCAL_APPS + THIRD_PARTY_APPS
 
 settings.configure(
     AUTH_USER_MODEL = 'user.User',
+    TEST_MODE = True,
     DEBUG=True,
     DATABASES={
         'default': {
@@ -345,9 +347,15 @@ settings.configure(
     STATIC_ROOT=STATIC_ROOT,
     STATIC_URL=STATIC_URL, )
 
+
 # Django >= 1.8
 django.setup()
 from django.test.runner import DiscoverRunner
+
+#so we can have a minimal user functionality going
+request_middleware = RequestMiddleware()
+request_middleware.process_request_test()
+
 test_runner = DiscoverRunner(verbosity=1)
 #['antares']
 failures = test_runner.run_tests(['antares'])

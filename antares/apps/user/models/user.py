@@ -152,7 +152,6 @@ class User(AbstractUser):
         # we don't want anyone to take over, so an UUID would be random enough
         system_user.set_password(str(uuid.uuid4()))
         system_user.save()
-
         return system_user
     
     @classmethod

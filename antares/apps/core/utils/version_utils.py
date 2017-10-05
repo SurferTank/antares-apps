@@ -26,7 +26,7 @@ class VersionUtils(object):
             #    sub = '.dev%s' % git_changeset
             git_hash = cls.get_last_git_hash()
             if git_hash:
-                sub = '.dev%s' % git_hash
+                sub = '.%s.dev' % git_hash
             
         elif version[3] != 'final':
             mapping = {'alpha': 'a', 'beta': 'b', 'rc': 'rc'}

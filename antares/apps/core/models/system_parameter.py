@@ -88,8 +88,7 @@ class SystemParameter(models.Model):
         if self.creation_date is None:
             self.creation_date = timezone.now()
         self.update_date = timezone.now()
-        if get_request() is not None:
-            self.author = get_request().user
+        self.author = get_request().user
             
         super(SystemParameter, self).save(*args, **kwargs)
 
