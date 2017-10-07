@@ -9,6 +9,7 @@ from antares.apps.core.constants import FieldDataType
 from antares.apps.core.middleware.request import get_request
 from enumfields import EnumField
 from django.conf import settings
+from django.core.exceptions import ObjectDoesNotExist
 
 
 logger = logging.getLogger(__name__)
@@ -119,7 +120,7 @@ class SystemParameter(models.Model):
                 return system_param.boolean_value
             else:
                 return None
-        except SystemParameter.DoesNotExist:
+        except Exception:
             system_param = SystemParameter(id=system_paramId)
             logger.info("creating system parameter")
             if (description is not None):

@@ -171,9 +171,9 @@ class User(AbstractUser):
                    email="testuser@surfertank.com",
                    is_staff=True,
                    is_active=False)
-            # we don't want anyone to take over, so an UUID would be random enough
-            test_user.set_password("12345")
-            test_user.save()
+                # we don't want anyone to take over, so an UUID would be random enough
+                test_user.set_password("12345")
+                test_user.save()
         else:
             test_user = None
         return test_user
