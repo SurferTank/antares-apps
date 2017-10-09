@@ -53,8 +53,8 @@ class Document(object):
     def __init__(self, *args, **kwargs):
         """ Creates or loads a document. 
         
-        To create a document, the call would be document = new Document({document_id: <<form_id>>}) and to load a document 
-        the call would be document = new Document({"document_id": <<document_id>>}) 
+        To create a document, the call would be document = new Document(form_id=<<form_id>>) and to load a document 
+        the call would be document = new Document(document_id=<<document_id>>) 
         
         """
         self.fields = {}
@@ -71,6 +71,8 @@ class Document(object):
             else:
                 self._init_with_form_id(
                     kwargs.get('form_id'), kwargs.get('header_fields_dict'))
+        else:
+            raise ValueError(__name__ + ".exceptions.couldnt_create_document")
 
     def _init_with_id(self, document_id:str):
         """ Instantiates a document instance based on the document id
@@ -477,298 +479,299 @@ class Document(object):
                             self.header, field.get('id'))
                         indexedDb = IndexedField.find_one(
                             self.header, field.get('id'))
-                        if datatype == FieldDataType.STRING:
-                            if (fieldDb is not None
-                                    and fieldDb.string_value != field.text):
-                                fieldDb.string_value = field.text
-                                fieldDb.save()
-                            elif (fieldDb is None):
-                                fieldDb = DocumentField()
-                                fieldDb.definition = field.get('id')
-                                fieldDb.document = self.header
-                                fieldDb.form_definition = self.header.form_definition
-                                if (field.text is not None):
+                        if field.text is not None:
+                            if datatype == FieldDataType.STRING:
+                                if (fieldDb is not None
+                                        and fieldDb.string_value != field.text):
                                     fieldDb.string_value = field.text
-                                fieldDb.data_type = str(FieldDataType.STRING)
-                                fieldDb.save()
-                            if (field.get('indexed') and
-                                (field.get('indexed').lower() == 'true'
-                                 or field.get('indexed').lower() == 'yes')):
-                                if (indexedDb is not None and
-                                        indexedDb.string_value != field.text):
-                                    indexedDb.string_value = field.text
-                                    indexedDb.save()
-                                elif (indexedDb is None):
-                                    indexedDb = IndexedField()
-                                    indexedDb.definition = field.get('id')
-                                    indexedDb.document = self.header
-                                    indexedDb.form_definition = self.header.form_definition
+                                    fieldDb.save()
+                                elif (fieldDb is None):
+                                    fieldDb = DocumentField()
+                                    fieldDb.definition = field.get('id')
+                                    fieldDb.document = self.header
+                                    fieldDb.form_definition = self.header.form_definition
                                     if (field.text is not None):
+                                        fieldDb.string_value = field.text
+                                    fieldDb.data_type = str(FieldDataType.STRING)
+                                    fieldDb.save()
+                                if (field.get('indexed') and
+                                    (field.get('indexed').lower() == 'true'
+                                     or field.get('indexed').lower() == 'yes')):
+                                    if (indexedDb is not None and
+                                            indexedDb.string_value != field.text):
                                         indexedDb.string_value = field.text
-                                    indexedDb.data_type = str(
-                                        FieldDataType.STRING)
-                                    indexedDb.save()
-                        elif datatype == FieldDataType.TEXT:
-                            if (fieldDb is not None
-                                    and fieldDb.text_value != field.text):
-                                fieldDb.text_value = field.text
-                                fieldDb.save()
-                            elif (fieldDb is None):
-                                fieldDb = DocumentField()
-                                fieldDb.definition = field.get('id')
-                                fieldDb.document = self.header
-                                fieldDb.form_definition = self.header.form_definition
-                                if (field.text is not None):
+                                        indexedDb.save()
+                                    elif (indexedDb is None):
+                                        indexedDb = IndexedField()
+                                        indexedDb.definition = field.get('id')
+                                        indexedDb.document = self.header
+                                        indexedDb.form_definition = self.header.form_definition
+                                        if (field.text is not None):
+                                            indexedDb.string_value = field.text
+                                        indexedDb.data_type = str(
+                                            FieldDataType.STRING)
+                                        indexedDb.save()
+                            elif datatype == FieldDataType.TEXT:
+                                if (fieldDb is not None
+                                        and fieldDb.text_value != field.text):
                                     fieldDb.text_value = field.text
-                                fieldDb.data_type = str(FieldDataType.TEXT)
-                                fieldDb.save()
-                            if (field.get('indexed') and
-                                (field.get('indexed').lower() == 'true'
-                                 or field.get('indexed').lower() == 'yes')):
-                                if (indexedDb is not None and
-                                        indexedDb.text_value != field.text):
-                                    indexedDb.text_value = field.text
-                                    indexedDb.save()
-                                elif (indexedDb is None):
-                                    indexedDb = IndexedField()
-                                    indexedDb.definition = field.get('id')
-                                    indexedDb.document = self.header
-                                    indexedDb.form_definition = self.header.form_definition
+                                    fieldDb.save()
+                                elif (fieldDb is None):
+                                    fieldDb = DocumentField()
+                                    fieldDb.definition = field.get('id')
+                                    fieldDb.document = self.header
+                                    fieldDb.form_definition = self.header.form_definition
                                     if (field.text is not None):
+                                        fieldDb.text_value = field.text
+                                    fieldDb.data_type = str(FieldDataType.TEXT)
+                                    fieldDb.save()
+                                if (field.get('indexed') and
+                                    (field.get('indexed').lower() == 'true'
+                                     or field.get('indexed').lower() == 'yes')):
+                                    if (indexedDb is not None and
+                                            indexedDb.text_value != field.text):
                                         indexedDb.text_value = field.text
-                                    indexedDb.data_type = str(
-                                        FieldDataType.TEXT)
-                                    indexedDb.save()
-                        elif datatype == FieldDataType.INTEGER:
-                            if (fieldDb is not None
-                                    and fieldDb.string_value != field.text):
-                                fieldDb.integer_value = int(float(field.text))
-                                fieldDb.save()
-                            elif (fieldDb is None):
-                                fieldDb = DocumentField()
-                                fieldDb.definition = field.get('id')
-                                fieldDb.document = self.header
-                                fieldDb.form_definition = self.header.form_definition
-                                if (field.text is not None):
-                                    fieldDb.integer_value = int(
-                                        float(field.text))
-                                fieldDb.data_type = str(FieldDataType.INTEGER)
-                                fieldDb.save()
-                            if (field.get('indexed') and
-                                (field.get('indexed').lower() == 'true'
-                                 or field.get('indexed').lower() == 'yes')):
-                                if (indexedDb is not None and
-                                        indexedDb.integer_value != field.text):
-                                    indexedDb.integer_value = int(
-                                        float(field.text))
-                                    indexedDb.save()
-                                elif (indexedDb is None):
-                                    indexedDb = IndexedField()
-                                    indexedDb.definition = field.get('id')
-                                    indexedDb.document = self.header
-                                    indexedDb.form_definition = self.header.form_definition
+                                        indexedDb.save()
+                                    elif (indexedDb is None):
+                                        indexedDb = IndexedField()
+                                        indexedDb.definition = field.get('id')
+                                        indexedDb.document = self.header
+                                        indexedDb.form_definition = self.header.form_definition
+                                        if (field.text is not None):
+                                            indexedDb.text_value = field.text
+                                        indexedDb.data_type = str(
+                                            FieldDataType.TEXT)
+                                        indexedDb.save()
+                            elif datatype == FieldDataType.INTEGER:
+                                if (fieldDb is not None
+                                        and fieldDb.string_value != field.text):
+                                    fieldDb.integer_value = int(float(field.text))
+                                    fieldDb.save()
+                                elif (fieldDb is None):
+                                    fieldDb = DocumentField()
+                                    fieldDb.definition = field.get('id')
+                                    fieldDb.document = self.header
+                                    fieldDb.form_definition = self.header.form_definition
                                     if (field.text is not None):
+                                        fieldDb.integer_value = int(
+                                            float(field.text))
+                                    fieldDb.data_type = str(FieldDataType.INTEGER)
+                                    fieldDb.save()
+                                if (field.get('indexed') and
+                                    (field.get('indexed').lower() == 'true'
+                                     or field.get('indexed').lower() == 'yes')):
+                                    if (indexedDb is not None and
+                                            indexedDb.integer_value != field.text):
                                         indexedDb.integer_value = int(
                                             float(field.text))
-                                    indexedDb.data_type = str(
-                                        FieldDataType.INTEGER)
-                                    indexedDb.save()
-                        elif datatype == FieldDataType.FLOAT:
-                            if (fieldDb is not None
-                                    and fieldDb.float_value != field.text):
-                                fieldDb.float_value = float(field.text)
-                                fieldDb.save()
-                            elif (fieldDb is None):
-                                fieldDb = DocumentField()
-                                fieldDb.definition = field.get('id')
-                                fieldDb.document = self.header
-                                fieldDb.form_definition = self.header.form_definition
-                                if (field.text is not None):
+                                        indexedDb.save()
+                                    elif (indexedDb is None):
+                                        indexedDb = IndexedField()
+                                        indexedDb.definition = field.get('id')
+                                        indexedDb.document = self.header
+                                        indexedDb.form_definition = self.header.form_definition
+                                        if (field.text is not None):
+                                            indexedDb.integer_value = int(
+                                                float(field.text))
+                                        indexedDb.data_type = str(
+                                            FieldDataType.INTEGER)
+                                        indexedDb.save()
+                            elif datatype == FieldDataType.FLOAT:
+                                if (fieldDb is not None
+                                        and fieldDb.float_value != field.text):
                                     fieldDb.float_value = float(field.text)
-                                fieldDb.data_type = str(FieldDataType.FLOAT)
-                                fieldDb.save()
-                            if (field.get('indexed') and
-                                (field.get('indexed').lower() == 'true'
-                                 or field.get('indexed').lower() == 'yes')):
-                                if (indexedDb is not None and
-                                        indexedDb.float_value != field.text):
-                                    indexedDb.float_value = float(field.text)
-                                    indexedDb.save()
-                                elif (indexedDb is None):
-                                    indexedDb = IndexedField()
-                                    indexedDb.definition = field.get('id')
-                                    indexedDb.document = self.header
-                                    indexedDb.form_definition = self.header.form_definition
+                                    fieldDb.save()
+                                elif (fieldDb is None):
+                                    fieldDb = DocumentField()
+                                    fieldDb.definition = field.get('id')
+                                    fieldDb.document = self.header
+                                    fieldDb.form_definition = self.header.form_definition
                                     if (field.text is not None):
-                                        indexedDb.float_value = float(
-                                            field.text)
-                                    indexedDb.data_type = str(
-                                        FieldDataType.FLOAT)
-                                    indexedDb.save()
-                        elif datatype == FieldDataType.DATE:
-                            #lets truncate and serialize it. 
-                            dt = dateparser.parse(field.text)
-                            date_value = datetime(dt.year, dt.month, dt.day)
-                            if (fieldDb is not None
-                                    and fieldDb.date_value != date_value):
-                                fieldDb.date_value = date_value
-                                fieldDb.save()
-                            elif (fieldDb is None):
-                                fieldDb = DocumentField()
-                                fieldDb.definition = field.get('id')
-                                fieldDb.document = self.header
-                                fieldDb.form_definition = self.header.form_definition
-                                if (date_value is not None):
+                                        fieldDb.float_value = float(field.text)
+                                    fieldDb.data_type = str(FieldDataType.FLOAT)
+                                    fieldDb.save()
+                                if (field.get('indexed') and
+                                    (field.get('indexed').lower() == 'true'
+                                     or field.get('indexed').lower() == 'yes')):
+                                    if (indexedDb is not None and
+                                            indexedDb.float_value != field.text):
+                                        indexedDb.float_value = float(field.text)
+                                        indexedDb.save()
+                                    elif (indexedDb is None):
+                                        indexedDb = IndexedField()
+                                        indexedDb.definition = field.get('id')
+                                        indexedDb.document = self.header
+                                        indexedDb.form_definition = self.header.form_definition
+                                        if (field.text is not None):
+                                            indexedDb.float_value = float(
+                                                field.text)
+                                        indexedDb.data_type = str(
+                                            FieldDataType.FLOAT)
+                                        indexedDb.save()
+                            elif datatype == FieldDataType.DATE:
+                                #lets truncate and serialize it. 
+                                dt = dateparser.parse(field.text)
+                                date_value = datetime(dt.year, dt.month, dt.day)
+                                if (fieldDb is not None
+                                        and fieldDb.date_value != date_value):
                                     fieldDb.date_value = date_value
-                                fieldDb.data_type = str(FieldDataType.DATE)
-                                fieldDb.save()
-                            if (field.get('indexed') and
-                                (field.get('indexed').lower() == 'true'
-                                 or field.get('indexed').lower() == 'yes')):
-                                if (indexedDb is not None and
-                                        indexedDb.date_value != date_value):
-                                    indexedDb.date_value = date_value
-                                    indexedDb.save()
-                                elif (indexedDb is None):
-                                    indexedDb = IndexedField()
-                                    indexedDb.definition = field.get('id')
-                                    indexedDb.document = self.header
-                                    indexedDb.form_definition = self.header.form_definition
-                                    if (field.text is not None):
-                                        indexedDb.date_value = date_value
-                                    indexedDb.data_type = str(
-                                        FieldDataType.DATE)
-                                    indexedDb.save()
-                        elif datatype == FieldDataType.DATETIME:
-                            #lets truncate and serialize it. 
-                            date_value = dateparser.parse(field.text)
-                            if (fieldDb is not None
-                                    and fieldDb.date_value != date_value):
-                                fieldDb.date_value = date_value
-                                fieldDb.save()
-                            elif (fieldDb is None):
-                                fieldDb = DocumentField()
-                                fieldDb.definition = field.get('id')
-                                fieldDb.document = self.header
-                                fieldDb.form_definition = self.header.form_definition
-                                if (field.text is not None):
-                                    fieldDb.date_value = date_value
-                                fieldDb.data_type = str(FieldDataType.DATE)
-                                fieldDb.save()
-                            if (field.get('indexed') and
-                                (field.get('indexed').lower() == 'true'
-                                 or field.get('indexed').lower() == 'yes')):
-                                if (indexedDb is not None and
-                                        indexedDb.date_value != date_value):
-                                    indexedDb.date_value = date_value
-                                    indexedDb.save()
-                                elif (indexedDb is None):
-                                    indexedDb = IndexedField()
-                                    indexedDb.definition = field.get('id')
-                                    indexedDb.document = self.header
-                                    indexedDb.form_definition = self.header.form_definition
+                                    fieldDb.save()
+                                elif (fieldDb is None):
+                                    fieldDb = DocumentField()
+                                    fieldDb.definition = field.get('id')
+                                    fieldDb.document = self.header
+                                    fieldDb.form_definition = self.header.form_definition
                                     if (date_value is not None):
+                                        fieldDb.date_value = date_value
+                                    fieldDb.data_type = str(FieldDataType.DATE)
+                                    fieldDb.save()
+                                if (field.get('indexed') and
+                                    (field.get('indexed').lower() == 'true'
+                                     or field.get('indexed').lower() == 'yes')):
+                                    if (indexedDb is not None and
+                                            indexedDb.date_value != date_value):
                                         indexedDb.date_value = date_value
-                                    indexedDb.data_type = str(
-                                        FieldDataType.DATE)
-                                    indexedDb.save()
-                        elif datatype == FieldDataType.UUID:
-                            if (fieldDb is not None
-                                    and str(fieldDb.uuid_value) != str(field.text)):
-                                fieldDb.uuid_value = str(field.text)
-                                fieldDb.save()
-                            elif (fieldDb is None):
-                                fieldDb = DocumentField()
-                                fieldDb.definition = field.get('id')
-                                fieldDb.document = self.header
-                                fieldDb.form_definition = self.header.form_definition
-                                if (field.text is not None):
+                                        indexedDb.save()
+                                    elif (indexedDb is None):
+                                        indexedDb = IndexedField()
+                                        indexedDb.definition = field.get('id')
+                                        indexedDb.document = self.header
+                                        indexedDb.form_definition = self.header.form_definition
+                                        if (field.text is not None):
+                                            indexedDb.date_value = date_value
+                                        indexedDb.data_type = str(
+                                            FieldDataType.DATE)
+                                        indexedDb.save()
+                            elif datatype == FieldDataType.DATETIME:
+                                #lets truncate and serialize it. 
+                                date_value = dateparser.parse(field.text)
+                                if (fieldDb is not None
+                                        and fieldDb.date_value != date_value):
+                                    fieldDb.date_value = date_value
+                                    fieldDb.save()
+                                elif (fieldDb is None):
+                                    fieldDb = DocumentField()
+                                    fieldDb.definition = field.get('id')
+                                    fieldDb.document = self.header
+                                    fieldDb.form_definition = self.header.form_definition
+                                    if (field.text is not None):
+                                        fieldDb.date_value = date_value
+                                    fieldDb.data_type = str(FieldDataType.DATE)
+                                    fieldDb.save()
+                                if (field.get('indexed') and
+                                    (field.get('indexed').lower() == 'true'
+                                     or field.get('indexed').lower() == 'yes')):
+                                    if (indexedDb is not None and
+                                            indexedDb.date_value != date_value):
+                                        indexedDb.date_value = date_value
+                                        indexedDb.save()
+                                    elif (indexedDb is None):
+                                        indexedDb = IndexedField()
+                                        indexedDb.definition = field.get('id')
+                                        indexedDb.document = self.header
+                                        indexedDb.form_definition = self.header.form_definition
+                                        if (date_value is not None):
+                                            indexedDb.date_value = date_value
+                                        indexedDb.data_type = str(
+                                            FieldDataType.DATE)
+                                        indexedDb.save()
+                            elif datatype == FieldDataType.UUID:
+                                if (fieldDb is not None
+                                        and str(fieldDb.uuid_value) != str(field.text)):
                                     fieldDb.uuid_value = str(field.text)
-                                fieldDb.data_type = str(FieldDataType.UUID)
-                                fieldDb.save()
-                            if (field.get('indexed') and
-                                (field.get('indexed').lower() == 'true'
-                                 or field.get('indexed').lower() == 'yes')):
-                                if (indexedDb is not None and
-                                        str(indexedDb.uuid_value) != str(field.text)):
-                                    indexedDb.uuid_value = str(field.text)
-                                    indexedDb.save()
-                                elif (indexedDb is None):
-                                    indexedDb = IndexedField()
-                                    indexedDb.definition = field.get('id')
-                                    indexedDb.document = self.header
-                                    indexedDb.form_definition = self.header.form_definition
+                                    fieldDb.save()
+                                elif (fieldDb is None):
+                                    fieldDb = DocumentField()
+                                    fieldDb.definition = field.get('id')
+                                    fieldDb.document = self.header
+                                    fieldDb.form_definition = self.header.form_definition
                                     if (field.text is not None):
+                                        fieldDb.uuid_value = str(field.text)
+                                    fieldDb.data_type = str(FieldDataType.UUID)
+                                    fieldDb.save()
+                                if (field.get('indexed') and
+                                    (field.get('indexed').lower() == 'true'
+                                     or field.get('indexed').lower() == 'yes')):
+                                    if (indexedDb is not None and
+                                            str(indexedDb.uuid_value) != str(field.text)):
                                         indexedDb.uuid_value = str(field.text)
-                                    indexedDb.data_type = str(
-                                        FieldDataType.UUID)
-                                    indexedDb.save()
-                        elif datatype == FieldDataType.CLIENT:
-                            #This is an special case, we have to get first the proper object and then we serialize it as an UUID
-                            client_obj = Client.find_one(field.text)
-                            if (fieldDb is not None
-                                    and str(fieldDb.uuid_value) != str(client_obj.id)):
-                                fieldDb.uuid_value = str(client_obj.id)
-                                fieldDb.save()
-                            elif (fieldDb is None):
-                                fieldDb = DocumentField()
-                                fieldDb.definition = field.get('id')
-                                fieldDb.document = self.header
-                                fieldDb.form_definition = self.header.form_definition
-                                if (field.text is not None):
+                                        indexedDb.save()
+                                    elif (indexedDb is None):
+                                        indexedDb = IndexedField()
+                                        indexedDb.definition = field.get('id')
+                                        indexedDb.document = self.header
+                                        indexedDb.form_definition = self.header.form_definition
+                                        if (field.text is not None):
+                                            indexedDb.uuid_value = str(field.text)
+                                        indexedDb.data_type = str(
+                                            FieldDataType.UUID)
+                                        indexedDb.save()
+                            elif datatype == FieldDataType.CLIENT:
+                                #This is an special case, we have to get first the proper object and then we serialize it as an UUID
+                                client_obj = Client.find_one(field.text)
+                                if (fieldDb is not None
+                                        and str(fieldDb.uuid_value) != str(client_obj.id)):
                                     fieldDb.uuid_value = str(client_obj.id)
-                                fieldDb.data_type = str(FieldDataType.CLIENT)
-                                fieldDb.save()
-                            if (field.get('indexed') and
-                                (field.get('indexed').lower() == 'true'
-                                 or field.get('indexed').lower() == 'yes')):
-                                if (indexedDb is not None and
-                                        str(indexedDb.uuid_value) != str(client_obj.id)):
-                                    indexedDb.uuid_value = str(client_obj.id)
-                                    indexedDb.save()
-                                elif (indexedDb is None):
-                                    indexedDb = IndexedField()
-                                    indexedDb.definition = field.get('id')
-                                    indexedDb.document = self.header
-                                    indexedDb.form_definition = self.header.form_definition
+                                    fieldDb.save()
+                                elif (fieldDb is None):
+                                    fieldDb = DocumentField()
+                                    fieldDb.definition = field.get('id')
+                                    fieldDb.document = self.header
+                                    fieldDb.form_definition = self.header.form_definition
                                     if (field.text is not None):
+                                        fieldDb.uuid_value = str(client_obj.id)
+                                    fieldDb.data_type = str(FieldDataType.CLIENT)
+                                    fieldDb.save()
+                                if (field.get('indexed') and
+                                    (field.get('indexed').lower() == 'true'
+                                     or field.get('indexed').lower() == 'yes')):
+                                    if (indexedDb is not None and
+                                            str(indexedDb.uuid_value) != str(client_obj.id)):
                                         indexedDb.uuid_value = str(client_obj.id)
-                                    indexedDb.data_type = str(
-                                        FieldDataType.CLIENT)
-                                    indexedDb.save()
-                        elif datatype == FieldDataType.USER:
-                            #This is an special case, we have to get first the proper object and then we serialize it as an UUID
-                            user_obj = User.find_one(field.text)
-                            if (fieldDb is not None
-                                    and str(fieldDb.uuid_value) != str(user_obj.id)):
-                                fieldDb.uuid_value = str(user_obj.id)
-                                fieldDb.save()
-                            elif (fieldDb is None):
-                                fieldDb = DocumentField()
-                                fieldDb.definition = field.get('id')
-                                fieldDb.document = self.header
-                                fieldDb.form_definition = self.header.form_definition
-                                if (field.text is not None):
+                                        indexedDb.save()
+                                    elif (indexedDb is None):
+                                        indexedDb = IndexedField()
+                                        indexedDb.definition = field.get('id')
+                                        indexedDb.document = self.header
+                                        indexedDb.form_definition = self.header.form_definition
+                                        if (field.text is not None):
+                                            indexedDb.uuid_value = str(client_obj.id)
+                                        indexedDb.data_type = str(
+                                            FieldDataType.CLIENT)
+                                        indexedDb.save()
+                            elif datatype == FieldDataType.USER:
+                                #This is an special case, we have to get first the proper object and then we serialize it as an UUID
+                                user_obj = User.find_one(field.text)
+                                if (fieldDb is not None
+                                        and str(fieldDb.uuid_value) != str(user_obj.id)):
                                     fieldDb.uuid_value = str(user_obj.id)
-                                fieldDb.data_type = str(FieldDataType.USER)
-                                fieldDb.save()
-                            if (field.get('indexed') and
-                                (field.get('indexed').lower() == 'true'
-                                 or field.get('indexed').lower() == 'yes')):
-                                if (indexedDb is not None and
-                                        str(indexedDb.uuid_value) != str(user_obj.id)):
-                                    indexedDb.uuid_value = str(user_obj.id)
-                                    indexedDb.save()
-                                elif (indexedDb is None):
-                                    indexedDb = IndexedField()
-                                    indexedDb.definition = field.get('id')
-                                    indexedDb.document = self.header
-                                    indexedDb.form_definition = self.header.form_definition
+                                    fieldDb.save()
+                                elif (fieldDb is None):
+                                    fieldDb = DocumentField()
+                                    fieldDb.definition = field.get('id')
+                                    fieldDb.document = self.header
+                                    fieldDb.form_definition = self.header.form_definition
                                     if (field.text is not None):
+                                        fieldDb.uuid_value = str(user_obj.id)
+                                    fieldDb.data_type = str(FieldDataType.USER)
+                                    fieldDb.save()
+                                if (field.get('indexed') and
+                                    (field.get('indexed').lower() == 'true'
+                                     or field.get('indexed').lower() == 'yes')):
+                                    if (indexedDb is not None and
+                                            str(indexedDb.uuid_value) != str(user_obj.id)):
                                         indexedDb.uuid_value = str(user_obj.id)
-                                    indexedDb.data_type = str(
-                                        FieldDataType.USER)
-                                    indexedDb.save()
+                                        indexedDb.save()
+                                    elif (indexedDb is None):
+                                        indexedDb = IndexedField()
+                                        indexedDb.definition = field.get('id')
+                                        indexedDb.document = self.header
+                                        indexedDb.form_definition = self.header.form_definition
+                                        if (field.text is not None):
+                                            indexedDb.uuid_value = str(user_obj.id)
+                                        indexedDb.data_type = str(
+                                            FieldDataType.USER)
+                                        indexedDb.save()
 
     def get_field_data_type(self, key: str) -> str:
         for page in self.document_xml.iterfind('structuredData/page'):

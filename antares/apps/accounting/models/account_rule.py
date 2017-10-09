@@ -73,11 +73,11 @@ class AccountRule(models.Model):
     def __str__(self):
         return str(self.id)
 
-    @staticmethod
-    def find_active_by_form_definition(form_definition):
+    @classmethod
+    def find_active_by_form_definition(cls, form_definition):
         try:
-            return AccountRule.objects.filter(form_definition=form_definition)
-        except AccountRule.DoesNotExist:
+            return cls.objects.filter(form_definition=form_definition)
+        except cls.DoesNotExist:
             return []
 
     class Meta:

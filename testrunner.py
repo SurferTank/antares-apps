@@ -82,6 +82,9 @@ THIRD_PARTY_APPS = (
 INSTALLED_APPS = DJANGO_APPS + LOCAL_APPS + THIRD_PARTY_APPS
 
 settings.configure(
+    BASE_DIR = os.path.dirname(
+        os.path.dirname(os.path.dirname(os.path.abspath(__file__)))),
+    BASE_APP_DIR = "antares-tests",
     AUTH_USER_MODEL = 'user.User',
     TEST_MODE = True,
     DEBUG=True,

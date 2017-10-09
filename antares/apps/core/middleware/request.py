@@ -19,6 +19,7 @@ def get_request():
         request_factory = RequestFactory()
         request = request_factory.post("/")
         request.user = User.get_test_user()
+        request.session = {}
         return request
     else:
         t = current_thread()

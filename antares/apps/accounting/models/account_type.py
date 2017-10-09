@@ -40,11 +40,11 @@ class AccountType(models.Model):
     def __str__(self):
         return self.id
 
-    @staticmethod
-    def find_one(account_type_id):
+    @classmethod
+    def find_one(cls, account_type_id):
         try:
-            return AccountType.objects.get(id=account_type_id)
-        except AccountType.DoesNotExist:
+            return cls.objects.get(id=account_type_id)
+        except cls.DoesNotExist:
             return None
 
     class Meta:

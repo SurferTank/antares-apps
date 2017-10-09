@@ -89,50 +89,46 @@ class FormDefinition(models.Model):
     DOC_VIEW_FILE_NAME = "view.html"
     DOC_PRINT_FILE_NAME = "print.po"
 
-    @classmethod
-    def process_form_definition_loading(cls, form_def):
-        from antares.apps.core.models import SystemParameter
-        from antares.apps.core.constants import FieldDataType
+    def process_form_definition_loading(self):
         separator = SystemParameter.find_one("DEFAULT_FORM_NAME_SEPARATOR",
                                              FieldDataType.STRING, '-')
-        definition_obj = etree.fromstring(form_def.definition)
-        FormDefinition.verify_xml_against_schema(form_def)
+        definition_obj = etree.fromstring(self.definition)
+        self.verify_xml_against_schema()
         form_name = definition_obj.find('headerElements/formName')
         form_version = definition_obj.find('headerElements/formVersion')
         if (form_name is not None and form_name.text
                 and form_version is not None and form_version.text):
-            form_def.form_name = form_name.text
-            form_def.form_version = form_version.text
-            form_def.id = "{form_name}{separator}{form_version}".format(
-                form_name=form_def.form_name,
+            self.form_name = form_name.text
+            self.form_version = form_version.text
+            self.id = "{form_name}{separator}{form_version}".format(
+                form_name=self.form_name,
                 separator=separator,
-                form_version=form_def.form_version)
+                form_version=self.form_version)
         else:
             raise InvalidFormDefinitionException(
                 _(__name__ + ".incomplete_form_id_definition"))
 
         definition_obj = FormDefinition.set_blank_header_xml(definition_obj)
-        form_def.definition = etree.tostring(
+        self.definition = etree.tostring(
             definition_obj, encoding='UTF-8', xml_declaration=False)
-        form_def.verify_and_create_supporting_files(True)
-        return form_def
+        self.verify_and_create_supporting_files(True)
+        return self
 
-    @classmethod
-    def verify_xml_against_schema(cls, form_def):
-        path = os.path.isfile(cls.DOC_SCHEMA_LOCATION)
+    def verify_xml_against_schema(self):
+        path = os.path.isfile(self.DOC_SCHEMA_LOCATION)
         if not path:
             raise FileNotFoundError(
                 _(__name__ + ".exceptions.schema_not_found"))
 
-        schema_root = etree.parse(cls.DOC_SCHEMA_LOCATION)
+        schema_root = etree.parse(self.DOC_SCHEMA_LOCATION)
         schema = etree.XMLSchema(schema_root)
 
         parser = etree.XMLParser(schema=schema)
-        try:
-            etree.fromstring(form_def.definition, parser)
-        except Exception:
-            raise InvalidFormDefinitionException(
-                _(__name__ + ".exceptions.form_is_invalid"))
+        #try:
+        #    etree.fromstring(self.definition, parser)
+        #except Exception as e:
+        #    raise InvalidFormDefinitionException(
+        #        _(__name__ + ".exceptions.form_is_invalid"))
 
     @classmethod
     def set_blank_header_xml(cls, definition_obj):
@@ -236,7 +232,7 @@ class FormDefinition(models.Model):
             'js')
         if not os.path.exists(template_media_home):
             os.makedirs(template_media_home)
-        # FormDefinition.verify_xml_against_schema(form_def)
+        self.verify_xml_against_schema()
         param_creating_form = SystemParameter.find_one(
             "DOC_DEFAULT_SUPPORTING_FILES_CREATION", FieldDataType.BOOLEAN,
             False)

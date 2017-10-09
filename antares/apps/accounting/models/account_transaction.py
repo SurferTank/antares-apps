@@ -4,6 +4,7 @@ import uuid
 from django.db import models
 from django.utils import timezone
 from django.utils.translation import ugettext as _
+from .account_balance import AccountBalance
 
 logger = logging.getLogger(__name__)
 
@@ -94,11 +95,11 @@ class AccountTransaction(models.Model):
     def __str__(self):
         return self.id
 
-    @staticmethod
-    def find_by_balance(balance):
+    @classmethod
+    def find_by_balance(cls, balance:AccountBalance):
         try:
-            return AccountTransaction.objects.filter(balance=balance)
-        except AccountTransaction.DoesNotExist:
+            return cls.objects.filter(balance=balance)
+        except cls.DoesNotExist:
             return []
 
     class Meta:

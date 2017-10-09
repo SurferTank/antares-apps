@@ -8,7 +8,7 @@ from .models import FormDefinitionACL
 
 class FormDefinitionAdmin(admin.ModelAdmin):
     def save_model(self, request, obj, form, change):
-        obj = FormDefinition.process_form_definition_loading(obj)
+        obj.process_form_definition_loading()
         obj.save()
 
 

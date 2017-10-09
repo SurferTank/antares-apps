@@ -34,14 +34,14 @@ class AccountDocument(models.Model):
     def __str__(self) -> str:
         return str(self.id)
 
-    @staticmethod
-    def find_or_create_by_document(document_header:DocumentHeader):
+    @classmethod
+    def find_or_create_by_document(cls, document_header:DocumentHeader):
         """ Finds the corresponding AccountDocument record or creates a new one with status PENDING
         
         :param document: the document header that will be used to create the account
         :returns: the account document that corresponds to the document header passed
         """
-        document = AccountDocument._find_one_by_document_header(
+        document = cls._find_one_by_document_header(
             document_header)
         if (document is None):
             document = AccountDocument()
@@ -50,8 +50,8 @@ class AccountDocument(models.Model):
             document.save()
         return document
 
-    @staticmethod
-    def _find_one_by_document_header(document_header:DocumentHeader) :
+    @classmethod
+    def _find_one_by_document_header(cls, document_header:DocumentHeader) :
         """ finds the account document based on the document header passed
         
         :param document_header: the document header
@@ -59,8 +59,8 @@ class AccountDocument(models.Model):
         """
         
         try:
-            return AccountDocument.objects.get(document=document_header)
-        except AccountDocument.DoesNotExist:
+            return cls.objects.get(document=document_header)
+        except cls.DoesNotExist:
             return None
 
     class Meta:
