@@ -799,7 +799,7 @@ class Document(object):
         raise DocumentFieldNotFound(
             _(__name__ + ".exceptions.document_field_not_found"))
 
-    def get_field_value(self, key):
+    def get_field_value(self, key: str):
         for page in self.document_xml.iterfind('structuredData/page'):
             for line in page.iterfind('line'):
                 for field in line.iterfind('field'):
@@ -808,17 +808,18 @@ class Document(object):
                             and field.get('type') is not None
                             and field.get('id') == key
                             and field.get('type').lower() != 'label'):
-                        if FieldDataType.to_enum(field.get('type')) == FieldDataType.CLIENT:
+                        field_data_type = FieldDataType.to_enum(field.get('dataType'))
+                        if field_data_type == FieldDataType.CLIENT:
                             return Client.find_one(field.text)
-                        elif FieldDataType.to_enum(field.get('type')) == FieldDataType.USER:
+                        elif field_data_type == FieldDataType.USER:
                             return User.find_one(field.text)
-                        elif FieldDataType.to_enum(field.get('type')) == FieldDataType.INTEGER:
+                        elif field_data_type == FieldDataType.INTEGER:
                             return int(float(field.text))
-                        elif FieldDataType.to_enum(field.get('type')) == FieldDataType.FLOAT:
+                        elif field_data_type == FieldDataType.FLOAT:
                             return float(field.text)
-                        elif FieldDataType.to_enum(field.get('type')) == FieldDataType.DATE:
+                        elif field_data_type == FieldDataType.DATE:
                             return dateparser.parse(field.text)
-                        elif FieldDataType.to_enum(field.get('type')) == FieldDataType.DATETIME:
+                        elif field_data_type == FieldDataType.DATETIME:
                             return dateparser.parse(field.text)
                         else:
                             return field.text

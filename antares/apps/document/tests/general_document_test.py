@@ -36,7 +36,7 @@ class GeneralDocumentTest(TransactionTestCase):
         client.user = get_request().user
         client.first_name = "test"
         client.last_name = "user"
-        client.creation_date = datetime.now().date()
+        client.registration_date = datetime.now().date()
         client.save()
         get_request().user.refresh_from_db()
         return client
@@ -75,7 +75,11 @@ class GeneralDocumentTest(TransactionTestCase):
         
     def test_document_creation(self):
         self.create_form_definition()
+        self.setup_testuser_client()
         document = Document(form_id="AccountForm-1")
         document.set_field_value("aPeriod", 200101)
-        #document.save(DocumentStatusType.DRAFTED)
+        document.save(DocumentStatusType.DRAFTED)
+        
+        period = document.get_field_value("aPeriod")
+        self.assertEqual(period, 200101, "Unexpected period found")
         

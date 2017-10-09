@@ -93,20 +93,20 @@ class User(AbstractUser):
         except Exception as e:
             raise UserException(
                 _(__name__ + ".the_user_has_no_client_associated"))
-        try:
-            settings.TEST_MODE
-        except:
-            settings.TEST_MODE = False
+        #try:
+        #    settings.TEST_MODE
+        #except:
+        #    settings.TEST_MODE = False
         
-        if settings.TEST_MODE == False:
-            try:
-                if (self.client is not None):
-                    return self.client
-            except:
-                raise UserException(
-                    _(__name__ + ".the_user_has_no_client_associated"))
-        else:
-            return None
+        #if settings.TEST_MODE == False:
+        try:
+            if (self.client is not None):
+                return self.client
+        except:
+            raise UserException(
+                _(__name__ + ".the_user_has_no_client_associated"))
+        #else:
+        #    return None
         
     @classmethod
     def find_one(cls, user_id):
