@@ -9,7 +9,6 @@ import js2py
 from antares.apps.accounting.models import AccountBalance
 from antares.apps.accounting.models import AccountTransaction
 from antares.apps.core.middleware.request import get_request
-from antares.apps.flow.models import FlowCase
 from django.conf import settings
 from enumfields import EnumField
 
