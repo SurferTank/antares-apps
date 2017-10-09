@@ -28,6 +28,7 @@ class GeneralDocumentTest(TransactionTestCase):
         form_class.status = FormClassStatusType.DEVELOPMENT
         form_class.author = User.get_test_user()
         form_class.save()
+        logger.info("form class with name" + form_class.name + " created")
     
         form_def = FormDefinition()
         form_def.definition = self.form_xml
@@ -37,6 +38,6 @@ class GeneralDocumentTest(TransactionTestCase):
         form_def.author = User.get_test_user()
         #FormDefinition.process_form_definition_loading(form_def)
         form_def.save()
-    
+        logger.info("form definition with id " + form_def.id + " created")
         
     

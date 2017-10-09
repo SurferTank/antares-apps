@@ -1,5 +1,7 @@
 import logging
+import datetime
 
+from uuid import UUID
 from ckeditor.fields import RichTextField
 from django.db import models
 from django.utils import timezone
@@ -9,7 +11,6 @@ from antares.apps.core.constants import FieldDataType
 from antares.apps.core.middleware.request import get_request
 from enumfields import EnumField
 from django.conf import settings
-from django.core.exceptions import ObjectDoesNotExist
 
 
 logger = logging.getLogger(__name__)
@@ -96,74 +97,87 @@ class SystemParameter(models.Model):
     def __str__(self):
         return self.id
 
-    @staticmethod
-    def find_one(system_paramId,
+    @classmethod
+    def find_one(cls, 
+                 system_paramId,
                  paramType=None,
                  default=None,
                  description=None):
         try:
             system_param = SystemParameter.objects.get(id=system_paramId)
-            logger.info("we have it! " + system_param.id)
+            logger.debug("The param " + system_param.id + " does exist. Returning the value")
             if system_param.data_type == FieldDataType.STRING:
                 return system_param.string_value
             elif system_param.data_type == FieldDataType.TEXT:
                 return system_param.text_value
             elif system_param.data_type == FieldDataType.DATE:
-                return system_param.date_value
+                if isinstance(system_param.date_value, datetime.datetime):
+                    return system_param.date_value.date()
+                if isinstance(system_param.date_value, datetime.date):
+                    return system_param.date_value
+            elif system_param.data_type == FieldDataType.DATETIME:
+                if isinstance(system_param.date_value, datetime.datetime):
+                    return system_param.date_value
+                elif isinstance(system_param.date_value, datetime.date):
+                    return datetime.datetime.combine(system_param.date_value, datetime.datetime.min.time())
+                
             elif system_param.data_type == FieldDataType.INTEGER:
                 return system_param.integer_value
             elif system_param.data_type == FieldDataType.FLOAT:
-                return system_param.decimal_value
+                return float(system_param.float_value)
             elif system_param.data_type == FieldDataType.UUID:
-                return system_param.string_value
+                try:
+                    return UUID(system_param.string_value)
+                except:
+                    return None
             elif system_param.data_type == FieldDataType.BOOLEAN:
                 return system_param.boolean_value
             else:
                 return None
-        except Exception:
-            system_param = SystemParameter(id=system_paramId)
-            logger.info("creating system parameter")
-            if (description is not None):
-                system_param.description = description
-
-            if paramType == FieldDataType.STRING:
-                system_param.string_value = default
+        except cls.DoesNotExist:
+            if default is not None:
+                system_param = SystemParameter(id=system_paramId)
+                logger.debug("Creating the parameter with id " + system_paramId + " since it does not exist")
                 system_param.data_type = paramType
-                system_param.save()
-                return default
-            elif paramType == FieldDataType.TEXT:
-                system_param.text_value = default
-                system_param.data_type = paramType
-                system_param.save()
-                return default
-            elif paramType == FieldDataType.DATE:
-                system_param.date_value = default
-                system_param.data_type = paramType
-                system_param.save()
-                return default
-            elif paramType == FieldDataType.INTEGER:
-                system_param.integer_value = default
-                system_param.data_type = paramType
-                system_param.save()
-                return default
-            elif paramType == FieldDataType.FLOAT:
-                system_param.float_value = default
-                system_param.data_type = paramType
-                system_param.save()
-                return default
-            elif paramType == FieldDataType.UUID:
-                system_param.string_value = default
-                system_param.data_type = paramType
-                system_param.save()
-                return default
-            elif paramType == FieldDataType.BOOLEAN:
-                system_param.boolean_value = default
-                system_param.data_type = paramType
-                system_param.save()
-                return default
-            else:
-                return None
-
+                if (description is not None):
+                    system_param.description = description
+    
+                if paramType == FieldDataType.STRING:
+                    system_param.string_value = default
+                    system_param.save()
+                    return default
+                elif paramType == FieldDataType.TEXT:
+                    system_param.text_value = default
+                    system_param.save()
+                    return default
+                elif paramType == FieldDataType.DATE:
+                    system_param.date_value = default
+                    system_param.save()
+                    return default
+                elif paramType == FieldDataType.DATETIME:
+                    system_param.date_value = default
+                    system_param.save()
+                    return default
+                elif paramType == FieldDataType.INTEGER:
+                    system_param.integer_value = default
+                    system_param.save()
+                    return default
+                elif paramType == FieldDataType.FLOAT:
+                    system_param.float_value = default
+                    system_param.save()
+                    return default
+                elif paramType == FieldDataType.UUID:
+                    system_param.string_value = str(default)
+                    system_param.save()
+                    return default
+                elif paramType == FieldDataType.BOOLEAN:
+                    system_param.boolean_value = default
+                    system_param.save()
+                    return default
+                else:
+                    return None
+            return None
+        
     class Meta:
         app_label = 'core'
         db_table = 'core_system_parameter'

@@ -1,4 +1,6 @@
 import logging
+import datetime
+from uuid import UUID
 
 from ckeditor.fields import RichTextField
 from django.db import models
@@ -96,84 +98,87 @@ class UserParameter(models.Model):
 
     @classmethod
     def find_one(cls,
-                 user,
-                 userParamId,
+                 user_paramId,
                  paramType=None,
                  default=None,
-                 fall_down_on_system_params=True):
+                 fall_down_on_user_params=True):
         """
         Retrieves a parameter from the user parameter database
         """
         try:
-            userParam = cls.objects.get(id=userParamId, user=user)
-            logger.info("we have it! " + userParam.id)
-            if userParam.data_type == FieldDataType.STRING:
-                return userParam.string_value
-            elif userParam.data_type == FieldDataType.TEXT:
-                return userParam.text_value
-            elif userParam.data_type == FieldDataType.DATE:
-                return userParam.date_value
-            elif userParam.data_type == FieldDataType.INTEGER:
-                return userParam.integer_value
-            elif userParam.data_type == FieldDataType.FLOAT:
-                return userParam.decimal_value
-            elif userParam.data_type == FieldDataType.UUID:
-                return userParam.string_value
-            elif userParam.data_type == FieldDataType.BOOLEAN:
-                return userParam.boolean_value
+            user_param = cls.objects.get(id=user_paramId, user=get_request().user)
+            logger.debug("The param " + user_param.id + " does exist. Returning the value")
+            if user_param.data_type == FieldDataType.STRING:
+                return user_param.string_value
+            elif user_param.data_type == FieldDataType.TEXT:
+                return user_param.text_value
+            elif user_param.data_type == FieldDataType.DATE:
+                if isinstance(user_param.date_value, datetime.datetime):
+                    return user_param.date_value.date()
+                if isinstance(user_param.date_value, datetime.date):
+                    return user_param.date_value
+            elif user_param.data_type == FieldDataType.DATETIME:
+                if isinstance(user_param.date_value, datetime.datetime):
+                    return user_param.date_value
+                elif isinstance(user_param.date_value, datetime.date):
+                    return datetime.datetime.combine(user_param.date_value, datetime.datetime.min.time())
+                
+            elif user_param.data_type == FieldDataType.INTEGER:
+                return user_param.integer_value
+            elif user_param.data_type == FieldDataType.FLOAT:
+                return float(user_param.float_value)
+            elif user_param.data_type == FieldDataType.UUID:
+                try:
+                    return UUID(user_param.string_value)
+                except:
+                    return None
+            elif user_param.data_type == FieldDataType.BOOLEAN:
+                return user_param.boolean_value
             else:
                 return None
         except cls.DoesNotExist:
-            if (fall_down_on_system_params == True and default is not None):
-                system_parameter = SystemParameter.find_one(
-                    userParamId, paramType, default)
-                return UserParameter.find_one(get_request().user, userParamId,
-                                              paramType, system_parameter,
+            if (fall_down_on_user_params == True and default is not None):
+                user_parameter = SystemParameter.find_one(
+                    user_paramId, paramType, default)
+                return UserParameter.find_one(get_request().user, user_paramId,
+                                              paramType, user_parameter,
                                               False)
             if (default is not None):
-                userParam = UserParameter(id=userParamId)
-                logger.info("creating userParam")
+                user_param = UserParameter(id=user_paramId)
+                logger.debug("Creating the parameter with id " + user_paramId + " since it does not exist")
+                user_param.data_type = paramType
+                user_param.user = get_request().user
                 if paramType == FieldDataType.STRING:
-                    userParam.string_value = default
-                    userParam.user = user
-                    userParam.data_type = paramType
-                    userParam.save()
+                    user_param.string_value = default
+                    user_param.save()
                     return default
                 elif paramType == FieldDataType.TEXT:
-                    userParam.text_value = default
-                    userParam.user = user
-                    userParam.data_type = paramType
-                    userParam.save()
+                    user_param.text_value = default
+                    user_param.save()
                     return default
                 elif paramType == FieldDataType.DATE:
-                    userParam.date_value = default
-                    userParam.user = user
-                    userParam.data_type = paramType
-                    userParam.save()
+                    user_param.date_value = default
+                    user_param.save()
+                    return default
+                elif paramType == FieldDataType.DATETIME:
+                    user_param.date_value = default
+                    user_param.save()
                     return default
                 elif paramType == FieldDataType.INTEGER:
-                    userParam.string_value = default
-                    userParam.user = user
-                    userParam.data_type = paramType
-                    userParam.save()
+                    user_param.integer_value = default
+                    user_param.save()
                     return default
                 elif paramType == FieldDataType.FLOAT:
-                    userParam.float_value = default
-                    userParam.user = user
-                    userParam.data_type = paramType
-                    userParam.save()
+                    user_param.float_value = default
+                    user_param.save()
                     return default
                 elif paramType == FieldDataType.UUID:
-                    userParam.string_value = default
-                    userParam.user = user
-                    userParam.data_type = paramType
-                    userParam.save()
+                    user_param.string_value = str(default)
+                    user_param.save()
                     return default
                 elif paramType == FieldDataType.BOOLEAN:
-                    userParam.boolean_value = default
-                    userParam.user = user
-                    userParam.data_type = paramType
-                    userParam.save()
+                    user_param.boolean_value = default
+                    user_param.save()
                     return default
                 else:
                     return None
