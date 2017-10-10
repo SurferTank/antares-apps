@@ -1,6 +1,7 @@
 from datetime import datetime
 import logging
 import uuid
+import hashlib
 
 from dateutil import parser as dateparser
 from django.utils import timezone
@@ -1722,8 +1723,7 @@ class Document(object):
 
         if (isinstance(status_type, str)):
             status_type = DocumentStatusType.to_enum(status_type)
-        if (status_type is not None):
-            self.set_status(status_type)
+        
         self._evaluate_field_calculation()
         self._validate_fields()
         self._check_required_fields()
@@ -1734,6 +1734,49 @@ class Document(object):
             self._validate_fields()
             self._check_required_fields()
             self._process_modules_hooks()
+            self._produce_hash_digest(status_type)
+        if (status_type is not None):
+            self.set_status(status_type)
+            
+    def _produce_hash_digest(self, new_status):
+        """Produces a hash out of the XML representation """
+        if ((self.get_status() == DocumentStatusType.DRAFTED and 
+             new_status == DocumentStatusType.SAVED) or 
+            (self.get_status() == DocumentStatusType.SAVED and 
+             new_status != DocumentStatusType.DRAFTED)):
+            doc_xml = etree.fromstring(etree.tostring(self.document_xml))
+            headerElements = doc_xml.find('headerElements')
+            
+            doc_hash = headerElements.find('hash')
+            if (doc_hash is not None):
+                doc_hash.text = None
+            
+            doc_status = headerElements.find('status')
+            if (doc_status is not None):
+                doc_status.text = str(new_status)
+
+            digest = hashlib.new('ripemd160')
+            digest.update(etree.tostring(doc_xml))
+            self.set_hash(digest.hexdigest())
+            self.header.hash = digest.hexdigest()
+        else:
+            raise ValueError(__name__ + ".exceptions.incorrect_status_to_produce_hash_digest")
+        
+    def _verify_hash_digest(self):
+        """verifies the hash with the hydrated XML """
+        doc_xml = etree.fromstring(etree.tostring(self.document_xml))
+        headerElements = doc_xml.find('headerElements')
+        doc_hash = headerElements.find('hash')
+        if (doc_hash is not None):
+            doc_hash.text = None
+        digest = hashlib.new('ripemd160')
+        digest.update(etree.tostring(self.document_xml))
+        logger.debug("calculated hash is " + digest.hexdigest() + " and stored hash is " + self.header.hash)
+        if self.header.hash == digest.hexdigest():
+            return True
+        else:
+            return False
+        
 
     def _evaluate_field_calculation(self):
         fields = self.get_field_dict()

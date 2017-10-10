@@ -82,4 +82,8 @@ class GeneralDocumentTest(TransactionTestCase):
         
         period = document.get_field_value("aPeriod")
         self.assertEqual(period, 200101, "Unexpected period found")
+        document.set_author(get_request().user)
+        document.save(DocumentStatusType.SAVED)
+        #self.assertEqual(document._verify_hash_digest(), True , " Hash is incorrect for some reason")
+        
         
