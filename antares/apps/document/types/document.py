@@ -1728,51 +1728,38 @@ class Document(object):
         self._validate_fields()
         self._check_required_fields()
         self._hibernate_document()
-
+        
+        if (status_type is not None):
+            self.set_status(status_type)
+            
         if (status_type == DocumentStatusType.SAVED):
             #field validation
             self._validate_fields()
             self._check_required_fields()
             self._process_modules_hooks()
-            self._produce_hash_digest(status_type)
-        if (status_type is not None):
-            self.set_status(status_type)
-            
-    def _produce_hash_digest(self, new_status):
-        """Produces a hash out of the XML representation """
-        if ((self.get_status() == DocumentStatusType.DRAFTED and 
-             new_status == DocumentStatusType.SAVED) or 
-            (self.get_status() == DocumentStatusType.SAVED and 
-             new_status != DocumentStatusType.DRAFTED)):
-            doc_xml = etree.fromstring(etree.tostring(self.document_xml))
-            headerElements = doc_xml.find('headerElements')
-            
-            doc_hash = headerElements.find('hash')
-            if (doc_hash is not None):
-                doc_hash.text = None
-            
-            doc_status = headerElements.find('status')
-            if (doc_status is not None):
-                doc_status.text = str(new_status)
-
-            digest = hashlib.new('ripemd160')
-            digest.update(etree.tostring(doc_xml))
-            self.set_hash(digest.hexdigest())
-            self.header.hash = digest.hexdigest()
-        else:
-            raise ValueError(__name__ + ".exceptions.incorrect_status_to_produce_hash_digest")
-        
-    def _verify_hash_digest(self):
-        """verifies the hash with the hydrated XML """
+            self.header.hash = self.hash()
+            self.header.save()
+    
+    def hash(self):
         doc_xml = etree.fromstring(etree.tostring(self.document_xml))
         headerElements = doc_xml.find('headerElements')
+        
+        #we need to exclude hash as it produces different results
         doc_hash = headerElements.find('hash')
         if (doc_hash is not None):
             doc_hash.text = None
-        digest = hashlib.new('ripemd160')
-        digest.update(etree.tostring(self.document_xml))
-        logger.debug("calculated hash is " + digest.hexdigest() + " and stored hash is " + self.header.hash)
-        if self.header.hash == digest.hexdigest():
+    
+    
+        digest = hashlib.sha256(etree.tostring(self.document_xml, pretty_print=True))
+        self.set_hash(digest.hexdigest())
+        return digest.hexdigest()
+           
+    def verify_hash_digest(self):
+        """verifies the hash with the hydrated XML """
+        doc_hash = self.hash()
+        
+        logger.info("calculated hash is " + doc_hash + " and stored hash is " + self.header.hash)
+        if self.header.hash == doc_hash:
             return True
         else:
             return False
