@@ -1,15 +1,9 @@
 import logging
-import os
 
 from django.test import TransactionTestCase
-from ..models import FormDefinition, FormClass
-from ..types import Document
-from ..constants import FormClassType, FormClassStatusType, FormDefinitionStatusType
-from antares.apps.user.models import User
-from datetime import datetime
-from antares.apps.document.constants import DocumentStatusType
 
-from antares.apps.client.constants import ClientArchetype
+from ..types import Document
+from antares.apps.document.constants import DocumentStatusType
 from antares.apps.core.middleware import get_request
 from .document_test_helper import DocumentTestHelper
 

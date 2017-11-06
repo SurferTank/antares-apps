@@ -4,17 +4,9 @@ Created on Nov 5, 2017
 @author: leobelen
 '''
 import logging
-import os
-from datetime import datetime
 
 from django.test import TransactionTestCase
 from ..service import MessageManager
-from antares.apps.document.constants import DocumentStatusType, FormClassType, FormClassStatusType, FormDefinitionStatusType
-from antares.apps.document.models import FormClass, FormDefinition
-from antares.apps.client.models import Client, ClientType
-from antares.apps.client.constants import ClientArchetype
-from antares.apps.user.models import User
-from antares.apps.core.middleware import get_request
 from antares.apps.document.tests.document_test_helper import DocumentTestHelper
 
 logger = logging.getLogger(__name__)
@@ -25,21 +17,21 @@ class TestMessageManager(TransactionTestCase):
     runs = 0
     message = """
     {
+        "action": "create",
         "documents": [
             {
                 "type": "account_form", 
                     "post_date": "2001-01-01T00:00:00+3",
                  "create_summary": false,
-                "header": [
+                "header": 
                     {
                         "period": 2001
                     }
-                ],
-            "fields": [
+                ,
+            "fields": 
                 {
                     "someVariableOnMessage": 100.1
                 }
-            ]
             }
         ]
     }
@@ -53,4 +45,4 @@ class TestMessageManager(TransactionTestCase):
 
     def test_document_creation(self):
         self.doc_helper.create_test_form_definition()
-        MessageManager.create_docs_from_message(self.message)
+        MessageManager.process_message(self.message)
