@@ -28,7 +28,8 @@ class Migration(migrations.Migration):
             field=models.ForeignKey(
                 on_delete=django.db.models.deletion.PROTECT,
                 related_name='flow_reassigment_log_signer_set',
-                to=settings.AUTH_USER_MODEL), ),
+                to=settings.AUTH_USER_MODEL),
+        ),
         migrations.AddField(
             model_name='reassigmentlog',
             name='flow_activity',
@@ -36,7 +37,8 @@ class Migration(migrations.Migration):
                 db_column='flow_activity',
                 on_delete=django.db.models.deletion.PROTECT,
                 related_name='reassigment_set',
-                to='flow.FlowActivity'), ),
+                to='flow.FlowActivity'),
+        ),
         migrations.AddField(
             model_name='reassigmentlog',
             name='flow_case',
@@ -44,21 +46,24 @@ class Migration(migrations.Migration):
                 db_column='flow_case',
                 on_delete=django.db.models.deletion.PROTECT,
                 related_name='reassigment_set',
-                to='flow.FlowCase'), ),
+                to='flow.FlowCase'),
+        ),
         migrations.AddField(
             model_name='reassigmentlog',
             name='new_user',
             field=models.ForeignKey(
                 on_delete=django.db.models.deletion.PROTECT,
                 related_name='flow_reassigment_log_new_user_set',
-                to=settings.AUTH_USER_MODEL), ),
+                to=settings.AUTH_USER_MODEL),
+        ),
         migrations.AddField(
             model_name='reassigmentlog',
             name='original_user',
             field=models.ForeignKey(
                 on_delete=django.db.models.deletion.PROTECT,
                 related_name='flow_reassigment_log_original_user_set',
-                to=settings.AUTH_USER_MODEL), ),
+                to=settings.AUTH_USER_MODEL),
+        ),
         migrations.AddField(
             model_name='propertydefinition',
             name='flow_definition',
@@ -68,7 +73,8 @@ class Migration(migrations.Migration):
                 null=True,
                 on_delete=django.db.models.deletion.PROTECT,
                 related_name='property_definition_set',
-                to='flow.FlowDefinition'), ),
+                to='flow.FlowDefinition'),
+        ),
         migrations.AddField(
             model_name='participantdefinition',
             name='flow_definition',
@@ -78,7 +84,8 @@ class Migration(migrations.Migration):
                 null=True,
                 on_delete=django.db.models.deletion.PROTECT,
                 related_name='participant_definition_set',
-                to='flow.FlowDefinition'), ),
+                to='flow.FlowDefinition'),
+        ),
         migrations.AddField(
             model_name='participantdefinition',
             name='org_unit',
@@ -88,7 +95,8 @@ class Migration(migrations.Migration):
                 null=True,
                 on_delete=django.db.models.deletion.PROTECT,
                 related_name='flow_participant_definition_set',
-                to='user.OrgUnit'), ),
+                to='user.OrgUnit'),
+        ),
         migrations.AddField(
             model_name='participantdefinition',
             name='role',
@@ -98,7 +106,8 @@ class Migration(migrations.Migration):
                 null=True,
                 on_delete=django.db.models.deletion.PROTECT,
                 related_name='flow_participant_definition_set',
-                to='user.Role'), ),
+                to='user.Role'),
+        ),
         migrations.AddField(
             model_name='participantdefinition',
             name='user',
@@ -106,7 +115,8 @@ class Migration(migrations.Migration):
                 blank=True,
                 null=True,
                 on_delete=django.db.models.deletion.PROTECT,
-                to=settings.AUTH_USER_MODEL), ),
+                to=settings.AUTH_USER_MODEL),
+        ),
         migrations.AddField(
             model_name='flowusernotificationoption',
             name='flow_case',
@@ -114,7 +124,8 @@ class Migration(migrations.Migration):
                 db_column='flow_case',
                 on_delete=django.db.models.deletion.PROTECT,
                 related_name='user_notification_option_set',
-                to='flow.FlowCase'), ),
+                to='flow.FlowCase'),
+        ),
         migrations.AddField(
             model_name='flowusernotificationoption',
             name='performer',
@@ -122,7 +133,8 @@ class Migration(migrations.Migration):
                 db_column='perfomer',
                 on_delete=django.db.models.deletion.PROTECT,
                 related_name='user_notification_option_set',
-                to=settings.AUTH_USER_MODEL), ),
+                to=settings.AUTH_USER_MODEL),
+        ),
         migrations.AddField(
             model_name='flowproperty',
             name='flow_case',
@@ -130,7 +142,8 @@ class Migration(migrations.Migration):
                 db_column='flow_case',
                 on_delete=django.db.models.deletion.PROTECT,
                 related_name='property_set',
-                to='flow.FlowCase'), ),
+                to='flow.FlowCase'),
+        ),
         migrations.AddField(
             model_name='flowproperty',
             name='property_definition',
@@ -138,7 +151,8 @@ class Migration(migrations.Migration):
                 db_column='property_definition',
                 on_delete=django.db.models.deletion.PROTECT,
                 related_name='property_set',
-                to='flow.PropertyDefinition'), ),
+                to='flow.PropertyDefinition'),
+        ),
         migrations.AddField(
             model_name='flowpackage',
             name='author',
@@ -146,7 +160,8 @@ class Migration(migrations.Migration):
                 blank=True,
                 null=True,
                 on_delete=django.db.models.deletion.PROTECT,
-                to=settings.AUTH_USER_MODEL), ),
+                to=settings.AUTH_USER_MODEL),
+        ),
         migrations.AddField(
             model_name='flownote',
             name='author',
@@ -154,7 +169,8 @@ class Migration(migrations.Migration):
                 db_column='author',
                 on_delete=django.db.models.deletion.PROTECT,
                 related_name='flow_note_author_set',
-                to=settings.AUTH_USER_MODEL), ),
+                to=settings.AUTH_USER_MODEL),
+        ),
         migrations.AddField(
             model_name='flownote',
             name='flow_case',
@@ -162,7 +178,8 @@ class Migration(migrations.Migration):
                 db_column='flow_case',
                 on_delete=django.db.models.deletion.PROTECT,
                 related_name='note_set',
-                to='flow.FlowCase'), ),
+                to='flow.FlowCase'),
+        ),
         migrations.AddField(
             model_name='flowdocument',
             name='document',
@@ -170,7 +187,8 @@ class Migration(migrations.Migration):
                 db_column='document',
                 on_delete=django.db.models.deletion.PROTECT,
                 related_name='flow_document_set',
-                to='document.DocumentHeader'), ),
+                to='document.DocumentHeader'),
+        ),
         migrations.AddField(
             model_name='flowdocument',
             name='flow_case',
@@ -178,7 +196,8 @@ class Migration(migrations.Migration):
                 db_column='flow_case',
                 on_delete=django.db.models.deletion.PROTECT,
                 related_name='document_set',
-                to='flow.FlowCase'), ),
+                to='flow.FlowCase'),
+        ),
         migrations.AddField(
             model_name='flowdefinition',
             name='flow_package',
@@ -188,7 +207,8 @@ class Migration(migrations.Migration):
                 null=True,
                 on_delete=django.db.models.deletion.PROTECT,
                 related_name='flow_definition_set',
-                to='flow.FlowPackage'), ),
+                to='flow.FlowPackage'),
+        ),
         migrations.AddField(
             model_name='flowcase',
             name='client',
@@ -197,7 +217,8 @@ class Migration(migrations.Migration):
                 db_column='client',
                 null=True,
                 on_delete=django.db.models.deletion.PROTECT,
-                to='client.Client'), ),
+                to='client.Client'),
+        ),
         migrations.AddField(
             model_name='flowcase',
             name='flow_definition',
@@ -207,7 +228,8 @@ class Migration(migrations.Migration):
                 null=True,
                 on_delete=django.db.models.deletion.PROTECT,
                 related_name='flow_case_set',
-                to='flow.FlowDefinition'), ),
+                to='flow.FlowDefinition'),
+        ),
         migrations.AddField(
             model_name='flowcase',
             name='source',
@@ -216,7 +238,8 @@ class Migration(migrations.Migration):
                 db_column='source',
                 null=True,
                 on_delete=django.db.models.deletion.PROTECT,
-                to='message.Message'), ),
+                to='message.Message'),
+        ),
         migrations.AddField(
             model_name='flowattachment',
             name='author',
@@ -224,7 +247,8 @@ class Migration(migrations.Migration):
                 db_column='author',
                 on_delete=django.db.models.deletion.PROTECT,
                 related_name='flow_attachment_author_set',
-                to=settings.AUTH_USER_MODEL), ),
+                to=settings.AUTH_USER_MODEL),
+        ),
         migrations.AddField(
             model_name='flowattachment',
             name='flow_case',
@@ -233,7 +257,8 @@ class Migration(migrations.Migration):
                 null=True,
                 on_delete=django.db.models.deletion.PROTECT,
                 related_name='attachment_set',
-                to='flow.FlowCase'), ),
+                to='flow.FlowCase'),
+        ),
         migrations.AddField(
             model_name='flowactivityvalidation',
             name='activity_definition',
@@ -241,7 +266,8 @@ class Migration(migrations.Migration):
                 db_column='activity_definition',
                 on_delete=django.db.models.deletion.PROTECT,
                 related_name='validation_set',
-                to='flow.ActivityDefinition'), ),
+                to='flow.ActivityDefinition'),
+        ),
         migrations.AddField(
             model_name='flowactivityformparameter',
             name='form',
@@ -249,7 +275,8 @@ class Migration(migrations.Migration):
                 db_column='form_definition',
                 on_delete=django.db.models.deletion.PROTECT,
                 related_name='parameter_set',
-                to='flow.FlowActivityForm'), ),
+                to='flow.FlowActivityForm'),
+        ),
         migrations.AddField(
             model_name='flowactivityform',
             name='activity_definition',
@@ -257,7 +284,8 @@ class Migration(migrations.Migration):
                 db_column='activity_definition',
                 on_delete=django.db.models.deletion.PROTECT,
                 related_name='form_set',
-                to='flow.ActivityDefinition'), ),
+                to='flow.ActivityDefinition'),
+        ),
         migrations.AddField(
             model_name='flowactivityform',
             name='form_definition',
@@ -265,7 +293,8 @@ class Migration(migrations.Migration):
                 db_column='form_definition',
                 on_delete=django.db.models.deletion.PROTECT,
                 related_name='flow_activity_form_set',
-                to='document.FormDefinition'), ),
+                to='document.FormDefinition'),
+        ),
         migrations.AddField(
             model_name='flowactivityextratabparameter',
             name='tab',
@@ -273,7 +302,8 @@ class Migration(migrations.Migration):
                 db_column='tab',
                 on_delete=django.db.models.deletion.PROTECT,
                 related_name='parameter_set',
-                to='flow.FlowActivityExtraTab'), ),
+                to='flow.FlowActivityExtraTab'),
+        ),
         migrations.AddField(
             model_name='flowactivityextratab',
             name='activity_definition',
@@ -281,7 +311,8 @@ class Migration(migrations.Migration):
                 db_column='activity_definition',
                 on_delete=django.db.models.deletion.PROTECT,
                 related_name='extra_tab_set',
-                to='flow.ActivityDefinition'), ),
+                to='flow.ActivityDefinition'),
+        ),
         migrations.AddField(
             model_name='flowactivity',
             name='activity_definition',
@@ -289,7 +320,8 @@ class Migration(migrations.Migration):
                 db_column='activity_definition',
                 on_delete=django.db.models.deletion.PROTECT,
                 related_name='activity_set',
-                to='flow.ActivityDefinition'), ),
+                to='flow.ActivityDefinition'),
+        ),
         migrations.AddField(
             model_name='flowactivity',
             name='flow_case',
@@ -297,7 +329,8 @@ class Migration(migrations.Migration):
                 db_column='flow_case',
                 on_delete=django.db.models.deletion.PROTECT,
                 related_name='activity_set',
-                to='flow.FlowCase'), ),
+                to='flow.FlowCase'),
+        ),
         migrations.AddField(
             model_name='flowactivity',
             name='participant_definition',
@@ -307,7 +340,8 @@ class Migration(migrations.Migration):
                 null=True,
                 on_delete=django.db.models.deletion.PROTECT,
                 related_name='activity_set',
-                to='flow.ParticipantDefinition'), ),
+                to='flow.ParticipantDefinition'),
+        ),
         migrations.AddField(
             model_name='flowactivity',
             name='performer',
@@ -317,7 +351,8 @@ class Migration(migrations.Migration):
                 null=True,
                 on_delete=django.db.models.deletion.PROTECT,
                 related_name='flow_activity_set',
-                to=settings.AUTH_USER_MODEL), ),
+                to=settings.AUTH_USER_MODEL),
+        ),
         migrations.AddField(
             model_name='flowactiondefinitionparametermap',
             name='action_definition',
@@ -325,14 +360,16 @@ class Migration(migrations.Migration):
                 db_column='action_definition',
                 on_delete=django.db.models.deletion.PROTECT,
                 related_name='parameter_set',
-                to='flow.FlowActionDefinition'), ),
+                to='flow.FlowActionDefinition'),
+        ),
         migrations.AddField(
             model_name='flowactiondefinitionparametermap',
             name='parameter_definition',
             field=models.ForeignKey(
                 db_column='action_parameter_definition',
                 on_delete=django.db.models.deletion.PROTECT,
-                to='core.ActionParameterDefinition'), ),
+                to='core.ActionParameterDefinition'),
+        ),
         migrations.AddField(
             model_name='flowactiondefinition',
             name='action_definition',
@@ -341,7 +378,8 @@ class Migration(migrations.Migration):
                 db_column='action_definition',
                 null=True,
                 on_delete=django.db.models.deletion.PROTECT,
-                to='core.ActionDefinition'), ),
+                to='core.ActionDefinition'),
+        ),
         migrations.AddField(
             model_name='flowactiondefinition',
             name='activity_definition',
@@ -349,7 +387,8 @@ class Migration(migrations.Migration):
                 db_column='activity_definition',
                 on_delete=django.db.models.deletion.PROTECT,
                 related_name='action_definition_set',
-                to='flow.ActivityDefinition'), ),
+                to='flow.ActivityDefinition'),
+        ),
         migrations.AddField(
             model_name='assignmentlist',
             name='activity_definition',
@@ -358,7 +397,8 @@ class Migration(migrations.Migration):
                 db_column='activity_definition',
                 null=True,
                 on_delete=django.db.models.deletion.PROTECT,
-                to='flow.ActivityDefinition'), ),
+                to='flow.ActivityDefinition'),
+        ),
         migrations.AddField(
             model_name='assignmentlist',
             name='flow_case',
@@ -367,7 +407,8 @@ class Migration(migrations.Migration):
                 db_column='flow_case',
                 null=True,
                 on_delete=django.db.models.deletion.PROTECT,
-                to='flow.FlowCase'), ),
+                to='flow.FlowCase'),
+        ),
         migrations.AddField(
             model_name='assignmentlist',
             name='flow_definition',
@@ -376,7 +417,8 @@ class Migration(migrations.Migration):
                 db_column='flow_definition',
                 null=True,
                 on_delete=django.db.models.deletion.PROTECT,
-                to='flow.FlowDefinition'), ),
+                to='flow.FlowDefinition'),
+        ),
         migrations.AddField(
             model_name='assignmentlist',
             name='user',
@@ -384,7 +426,8 @@ class Migration(migrations.Migration):
                 blank=True,
                 null=True,
                 on_delete=django.db.models.deletion.PROTECT,
-                to=settings.AUTH_USER_MODEL), ),
+                to=settings.AUTH_USER_MODEL),
+        ),
         migrations.AddField(
             model_name='applicationparameterdefinition',
             name='application_definition',
@@ -394,7 +437,8 @@ class Migration(migrations.Migration):
                 null=True,
                 on_delete=django.db.models.deletion.PROTECT,
                 related_name='parameter_definition_set',
-                to='flow.ApplicationDefinition'), ),
+                to='flow.ApplicationDefinition'),
+        ),
         migrations.AddField(
             model_name='applicationdefinition',
             name='flow_definition',
@@ -404,7 +448,8 @@ class Migration(migrations.Migration):
                 null=True,
                 on_delete=django.db.models.deletion.PROTECT,
                 related_name='application_definition_set',
-                to='flow.FlowDefinition'), ),
+                to='flow.FlowDefinition'),
+        ),
         migrations.AddField(
             model_name='activitylog',
             name='flow_activity',
@@ -412,7 +457,8 @@ class Migration(migrations.Migration):
                 db_column='flow_activity',
                 on_delete=django.db.models.deletion.PROTECT,
                 related_name='activity_log_set',
-                to='flow.FlowActivity'), ),
+                to='flow.FlowActivity'),
+        ),
         migrations.AddField(
             model_name='activitylog',
             name='performer',
@@ -420,7 +466,8 @@ class Migration(migrations.Migration):
                 db_column='performer',
                 on_delete=django.db.models.deletion.PROTECT,
                 related_name='flow_activity_log_performer_set',
-                to=settings.AUTH_USER_MODEL), ),
+                to=settings.AUTH_USER_MODEL),
+        ),
         migrations.AddField(
             model_name='activitydefinition',
             name='flow_definition',
@@ -430,12 +477,14 @@ class Migration(migrations.Migration):
                 null=True,
                 on_delete=django.db.models.deletion.PROTECT,
                 related_name='activity_definition_set',
-                to='flow.FlowDefinition'), ),
+                to='flow.FlowDefinition'),
+        ),
         migrations.AddField(
             model_name='activitydefinition',
             name='participant_definition_set',
             field=models.ManyToManyField(
-                blank=True, to='flow.ParticipantDefinition'), ),
+                blank=True, to='flow.ParticipantDefinition'),
+        ),
         migrations.AddField(
             model_name='activityapplicationparameterdefinition',
             name='activity_application',
@@ -445,7 +494,8 @@ class Migration(migrations.Migration):
                 null=True,
                 on_delete=django.db.models.deletion.PROTECT,
                 related_name='parameter_definition_set',
-                to='flow.ActivityApplicationDefinition'), ),
+                to='flow.ActivityApplicationDefinition'),
+        ),
         migrations.AddField(
             model_name='activityapplicationparameterdefinition',
             name='application_parameter_definition',
@@ -455,7 +505,8 @@ class Migration(migrations.Migration):
                 null=True,
                 on_delete=django.db.models.deletion.PROTECT,
                 related_name='parameter_definition_set',
-                to='flow.ApplicationParameterDefinition'), ),
+                to='flow.ApplicationParameterDefinition'),
+        ),
         migrations.AddField(
             model_name='activityapplicationdefinition',
             name='activity_definition',
@@ -465,7 +516,8 @@ class Migration(migrations.Migration):
                 null=True,
                 on_delete=django.db.models.deletion.PROTECT,
                 related_name='activity_application_definition_set',
-                to='flow.ActivityDefinition'), ),
+                to='flow.ActivityDefinition'),
+        ),
         migrations.AddField(
             model_name='activityapplicationdefinition',
             name='application_definition',
@@ -475,21 +527,26 @@ class Migration(migrations.Migration):
                 null=True,
                 on_delete=django.db.models.deletion.PROTECT,
                 related_name='activity_application_definition_set',
-                to='flow.ApplicationDefinition'), ),
+                to='flow.ApplicationDefinition'),
+        ),
         migrations.AlterUniqueTogether(
             name='flowproperty',
-            unique_together=set([('flow_case', 'property_definition')]), ),
+            unique_together=set([('flow_case', 'property_definition')]),
+        ),
         migrations.AlterUniqueTogether(
             name='flowpackage',
-            unique_together=set([('package_id', 'package_version')]), ),
+            unique_together=set([('package_id', 'package_version')]),
+        ),
         migrations.AlterUniqueTogether(
             name='flowdocument',
-            unique_together=set([('flow_case', 'document')]), ),
+            unique_together=set([('flow_case', 'document')]),
+        ),
         migrations.AlterUniqueTogether(
             name='flowdefinition',
             unique_together=set([('flow_package', 'flow_id', 'flow_version')]),
         ),
         migrations.AlterUniqueTogether(
             name='applicationdefinition',
-            unique_together=set([('flow_definition', 'application_id')]), ),
+            unique_together=set([('flow_definition', 'application_id')]),
+        ),
     ]

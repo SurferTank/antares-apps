@@ -96,7 +96,7 @@ class AccountTransaction(models.Model):
         return self.id
 
     @classmethod
-    def find_by_balance(cls, balance:AccountBalance):
+    def find_by_balance(cls, balance: AccountBalance):
         try:
             return cls.objects.filter(balance=balance)
         except cls.DoesNotExist:

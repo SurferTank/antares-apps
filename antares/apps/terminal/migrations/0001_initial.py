@@ -49,5 +49,6 @@ class Migration(migrations.Migration):
                 'adm_terminal_log',
                 'verbose_name_plural':
                 'antares.apps.terminal.models.terminal_log.table_name_plural',
-            }, ),
+            },
+        ),
     ]

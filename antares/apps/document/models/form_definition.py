@@ -221,9 +221,9 @@ class FormDefinition(models.Model):
         return definition_obj
 
     def verify_and_create_supporting_files(self, creating_forms=False):
-        template_home = os.path.join(settings.BASE_DIR, settings.BASE_APP_DIR, 'templates',
-                                     self.DOC_DEFAULT_TEMPLATE_OS_HOME,
-                                     self.id)
+        template_home = os.path.join(
+            settings.BASE_DIR, settings.BASE_APP_DIR, 'templates',
+            self.DOC_DEFAULT_TEMPLATE_OS_HOME, self.id)
         if not os.path.isdir(template_home):
             os.makedirs(template_home)
         template_media_home = os.path.join(
@@ -239,8 +239,9 @@ class FormDefinition(models.Model):
             creating_forms = True
 
         if os.path.isfile(
-                os.path.join(template_home, self.DOC_EDIT_FILE_NAME)
-        ) and creating_forms == True:
+                os.path.join(
+                    template_home,
+                    self.DOC_EDIT_FILE_NAME)) and creating_forms == True:
             os.remove(os.path.join(template_home, self.DOC_EDIT_FILE_NAME))
 
         if not os.path.isfile(
@@ -287,8 +288,9 @@ class FormDefinition(models.Model):
                 print(contents, file=text_file)
 
         if os.path.isfile(
-                os.path.join(template_home, self.DOC_VIEW_FILE_NAME)
-        ) and creating_forms == True:
+                os.path.join(
+                    template_home,
+                    self.DOC_VIEW_FILE_NAME)) and creating_forms == True:
             os.remove(os.path.join(template_home, self.DOC_VIEW_FILE_NAME))
 
         if not os.path.isfile(
@@ -352,9 +354,9 @@ class FormDefinition(models.Model):
 
         try:
             return FormDefinition.objects.filter(
-                Q(form_class__concept_type__id=concept_type) & Q(
-                    start_date__lgt=period_date) &
-                (Q(end_date__gte=period_date) | Q(end_date=None)))
+                Q(form_class__concept_type__id=concept_type) &
+                Q(start_date__lgt=period_date) & (Q(end_date__gte=period_date)
+                                                  | Q(end_date=None)))
         except:
             return None
 

@@ -102,7 +102,8 @@ class Migration(migrations.Migration):
             },
             managers=[
                 ('objects', django.contrib.auth.models.UserManager()),
-            ], ),
+            ],
+        ),
         migrations.CreateModel(
             name='Application',
             fields=[
@@ -148,7 +149,8 @@ class Migration(migrations.Migration):
                 'verbose_name': 'Application',
                 'db_table': 'user_application',
                 'verbose_name_plural': 'Applications',
-            }, ),
+            },
+        ),
         migrations.CreateModel(
             name='ApplicationParameter',
             fields=[
@@ -204,7 +206,8 @@ class Migration(migrations.Migration):
                 'verbose_name': 'Application Parameter',
                 'db_table': 'user_application_parameter',
                 'verbose_name_plural': 'Application Parameters',
-            }, ),
+            },
+        ),
         migrations.CreateModel(
             name='OrgUnit',
             fields=[
@@ -252,7 +255,8 @@ class Migration(migrations.Migration):
                 'user_org_unit',
                 'verbose_name_plural':
                 'antares.apps.user.models.org_unit.table_name_plural',
-            }, ),
+            },
+        ),
         migrations.CreateModel(
             name='Role',
             fields=[
@@ -300,7 +304,8 @@ class Migration(migrations.Migration):
                 'user_role',
                 'verbose_name_plural':
                 'antares.apps.user.models.role.table_name_plural',
-            }, ),
+            },
+        ),
         migrations.CreateModel(
             name='RoleApplication',
             fields=[
@@ -334,7 +339,8 @@ class Migration(migrations.Migration):
                 'user_role_application',
                 'verbose_name_plural':
                 'antares.apps.user.models.role_application.table_name_plural',
-            }, ),
+            },
+        ),
         migrations.CreateModel(
             name='UserOrgUnit',
             fields=[
@@ -372,7 +378,8 @@ class Migration(migrations.Migration):
                 'user_user_org_unit',
                 'verbose_name_plural':
                 'antares.apps.user.models.user_org_unit.table_name_plural',
-            }, ),
+            },
+        ),
         migrations.CreateModel(
             name='UserRole',
             fields=[
@@ -406,5 +413,6 @@ class Migration(migrations.Migration):
                 'user_user_role',
                 'verbose_name_plural':
                 'antares.apps.user.models.user_role.table_name_plural',
-            }, ),
+            },
+        ),
     ]

@@ -47,7 +47,8 @@ class Migration(migrations.Migration):
                 'verbose_name': 'Address Item',
                 'db_table': 'cli_address_item',
                 'verbose_name_plural': 'Address Items',
-            }, ),
+            },
+        ),
         migrations.CreateModel(
             name='AttributeDefinition',
             fields=[
@@ -68,7 +69,8 @@ class Migration(migrations.Migration):
                 'verbose_name': 'Attribute Definition',
                 'db_table': 'cli_attribute_definition',
                 'verbose_name_plural': 'Attribute Definitions',
-            }, ),
+            },
+        ),
         migrations.CreateModel(
             name='Client',
             fields=[
@@ -108,7 +110,8 @@ class Migration(migrations.Migration):
                 'verbose_name': 'Client',
                 'db_table': 'cli_client',
                 'verbose_name_plural': 'Clients',
-            }, ),
+            },
+        ),
         migrations.CreateModel(
             name='ClientAttribute',
             fields=[
@@ -139,7 +142,8 @@ class Migration(migrations.Migration):
                 'cli_client_attribute',
                 'verbose_name_plural':
                 'antares.apps.client.models.client_attribute.table_name_plural',
-            }, ),
+            },
+        ),
         migrations.CreateModel(
             name='ClientBranch',
             fields=[
@@ -164,7 +168,8 @@ class Migration(migrations.Migration):
                 'db_table': 'cli_client_branch',
                 'verbose_name': 'Client Branch',
                 'verbose_name_plural': 'Client Branches',
-            }, ),
+            },
+        ),
         migrations.CreateModel(
             name='ClientBusinessClassification',
             fields=[
@@ -184,7 +189,8 @@ class Migration(migrations.Migration):
                 'verbose_name': 'Client Business Classification',
                 'db_table': 'cli_client_business_classification',
                 'verbose_name_plural': 'Client Business Classifications',
-            }, ),
+            },
+        ),
         migrations.CreateModel(
             name='ClientIdentificationType',
             fields=[
@@ -200,7 +206,8 @@ class Migration(migrations.Migration):
                 'verbose_name': 'Identification Type',
                 'db_table': 'cli_identification_type',
                 'verbose_name_plural': 'Identification Types',
-            }, ),
+            },
+        ),
         migrations.CreateModel(
             name='ClientType',
             fields=[
@@ -220,7 +227,8 @@ class Migration(migrations.Migration):
                 'verbose_name': 'Client Type',
                 'db_table': 'cli_client_type',
                 'verbose_name_plural': 'Client Types',
-            }, ),
+            },
+        ),
         migrations.CreateModel(
             name='ClientUserRelation',
             fields=[
@@ -245,7 +253,8 @@ class Migration(migrations.Migration):
                 'cli_user_client_relation',
                 'verbose_name_plural':
                 'antares.apps.client.models.client_user_relation.table_name_plural',
-            }, ),
+            },
+        ),
         migrations.CreateModel(
             name='ClientUserRelationPermission',
             fields=[
@@ -270,7 +279,8 @@ class Migration(migrations.Migration):
                 'cli_client_user_relation_permission',
                 'verbose_name_plural':
                 'antares.apps.client.models.client_user_relation_permission.table_name_plural',
-            }, ),
+            },
+        ),
         migrations.CreateModel(
             name='EmailItem',
             fields=[
@@ -294,7 +304,8 @@ class Migration(migrations.Migration):
                 'verbose_name': 'Email Item',
                 'db_table': 'cli_email_item',
                 'verbose_name_plural': 'Email Items',
-            }, ),
+            },
+        ),
         migrations.CreateModel(
             name='IdentificationItem',
             fields=[
@@ -313,7 +324,8 @@ class Migration(migrations.Migration):
                 'verbose_name': 'Identification Item',
                 'db_table': 'cli_identification_item',
                 'verbose_name_plural': 'Identification Items',
-            }, ),
+            },
+        ),
         migrations.CreateModel(
             name='IsicPosition',
             fields=[
@@ -355,7 +367,8 @@ class Migration(migrations.Migration):
                 'db_table': 'cli_isic_position',
                 'verbose_name': 'Isic Position',
                 'verbose_name_plural': 'Isic Positions',
-            }, ),
+            },
+        ),
         migrations.CreateModel(
             name='SocialNetworkItem',
             fields=[
@@ -382,7 +395,8 @@ class Migration(migrations.Migration):
                 'verbose_name': 'Social Network Item',
                 'db_table': 'cli_social_network_item',
                 'verbose_name_plural': 'Social Network Items',
-            }, ),
+            },
+        ),
         migrations.CreateModel(
             name='TelephoneItem',
             fields=[
@@ -409,5 +423,6 @@ class Migration(migrations.Migration):
                 'verbose_name': 'Telephone Item',
                 'db_table': 'cli_telephone_item',
                 'verbose_name_plural': 'Telephone Items',
-            }, ),
+            },
+        ),
     ]

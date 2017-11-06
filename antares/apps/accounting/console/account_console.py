@@ -21,7 +21,7 @@ class AccountConsole(object):
     """
 
     @classmethod
-    def process_commands(cls, params:List[str], html: bool=False) -> str:
+    def process_commands(cls, params: List[str], html: bool = False) -> str:
         """ Processes the commands handled off by the terminal module
             
             :param params: the list of parameters to use
@@ -39,7 +39,7 @@ class AccountConsole(object):
         return message
 
     @classmethod
-    def _post_document(cls, params:List[str]) -> str:
+    def _post_document(cls, params: List[str]) -> str:
         """ Posts a document to the current account
             
             :param params: the list of parameters to use

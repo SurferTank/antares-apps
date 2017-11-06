@@ -27,14 +27,16 @@ class Migration(migrations.Migration):
                 db_column='author',
                 editable=False,
                 on_delete=django.db.models.deletion.PROTECT,
-                to=settings.AUTH_USER_MODEL), ),
+                to=settings.AUTH_USER_MODEL),
+        ),
         migrations.AddField(
             model_name='notificationrule',
             name='form_definition',
             field=models.ForeignKey(
                 on_delete=django.db.models.deletion.CASCADE,
                 related_name='notification_rule_set',
-                to='document.FormDefinition'), ),
+                to='document.FormDefinition'),
+        ),
         migrations.AddField(
             model_name='notificationrule',
             name='target_role',
@@ -43,7 +45,8 @@ class Migration(migrations.Migration):
                 db_column='target_role',
                 null=True,
                 on_delete=django.db.models.deletion.PROTECT,
-                to='user.Role'), ),
+                to='user.Role'),
+        ),
         migrations.AddField(
             model_name='notificationrule',
             name='target_unit',
@@ -52,7 +55,8 @@ class Migration(migrations.Migration):
                 db_column='target_unit',
                 null=True,
                 on_delete=django.db.models.deletion.PROTECT,
-                to='user.OrgUnit'), ),
+                to='user.OrgUnit'),
+        ),
         migrations.AddField(
             model_name='notificationrule',
             name='target_user',
@@ -62,7 +66,8 @@ class Migration(migrations.Migration):
                 null=True,
                 on_delete=django.db.models.deletion.PROTECT,
                 related_name='notification_rule_target_user_set',
-                to=settings.AUTH_USER_MODEL), ),
+                to=settings.AUTH_USER_MODEL),
+        ),
         migrations.AddField(
             model_name='notificationrecord',
             name='author',
@@ -71,7 +76,8 @@ class Migration(migrations.Migration):
                 db_column='author',
                 null=True,
                 on_delete=django.db.models.deletion.PROTECT,
-                to=settings.AUTH_USER_MODEL), ),
+                to=settings.AUTH_USER_MODEL),
+        ),
         migrations.AddField(
             model_name='notificationrecord',
             name='document',
@@ -80,7 +86,8 @@ class Migration(migrations.Migration):
                 db_column='document_header',
                 null=True,
                 on_delete=django.db.models.deletion.PROTECT,
-                to='document.DocumentHeader'), ),
+                to='document.DocumentHeader'),
+        ),
         migrations.AddField(
             model_name='notificationrecord',
             name='flow_case',
@@ -89,7 +96,8 @@ class Migration(migrations.Migration):
                 db_column='flow_case',
                 null=True,
                 on_delete=django.db.models.deletion.PROTECT,
-                to='flow.FlowCase'), ),
+                to='flow.FlowCase'),
+        ),
         migrations.AddField(
             model_name='notificationrecord',
             name='recipient',
@@ -99,5 +107,6 @@ class Migration(migrations.Migration):
                 null=True,
                 on_delete=django.db.models.deletion.PROTECT,
                 related_name='notification_recipient_set',
-                to=settings.AUTH_USER_MODEL), ),
+                to=settings.AUTH_USER_MODEL),
+        ),
     ]

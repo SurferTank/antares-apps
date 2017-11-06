@@ -9,6 +9,7 @@ from ..models import Message
 
 logger = logging.getLogger(__name__)
 
+
 class MessageSerializer(serializers.ModelSerializer):
     """Serializer to map the Model instance into JSON format."""
 

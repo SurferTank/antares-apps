@@ -27,7 +27,7 @@ class VersionUtils(object):
             git_hash = cls.get_last_git_hash()
             if git_hash:
                 sub = '.%s.dev' % git_hash
-            
+
         elif version[3] != 'final':
             mapping = {'alpha': 'a', 'beta': 'b', 'rc': 'rc'}
             sub = mapping[version[3]] + str(version[4])
@@ -76,9 +76,9 @@ class VersionUtils(object):
             stderr=subprocess.PIPE,
             shell=True,
             cwd=repo_dir,
-            universal_newlines=True, )
+            universal_newlines=True,
+        )
         return git_log.communicate()[0]
-        
 
     @classmethod
     @functools.lru_cache()
@@ -95,7 +95,8 @@ class VersionUtils(object):
             stderr=subprocess.PIPE,
             shell=True,
             cwd=repo_dir,
-            universal_newlines=True, )
+            universal_newlines=True,
+        )
         timestamp = git_log.communicate()[0]
         try:
             timestamp = datetime.datetime.utcfromtimestamp(int(timestamp))

@@ -31,7 +31,8 @@ class Migration(migrations.Migration):
                 null=True,
                 on_delete=django.db.models.deletion.PROTECT,
                 related_name='form_defintion_acl_author_set',
-                to=settings.AUTH_USER_MODEL), ),
+                to=settings.AUTH_USER_MODEL),
+        ),
         migrations.AddField(
             model_name='formdefinitionacl',
             name='form_definition',
@@ -39,7 +40,8 @@ class Migration(migrations.Migration):
                 db_column='form_definition',
                 on_delete=django.db.models.deletion.PROTECT,
                 related_name='form_defintion_acl_set',
-                to='document.FormDefinition'), ),
+                to='document.FormDefinition'),
+        ),
         migrations.AddField(
             model_name='formdefinitionacl',
             name='org_unit',
@@ -49,7 +51,8 @@ class Migration(migrations.Migration):
                 null=True,
                 on_delete=django.db.models.deletion.PROTECT,
                 related_name='form_defintion_acl_set',
-                to='user.OrgUnit'), ),
+                to='user.OrgUnit'),
+        ),
         migrations.AddField(
             model_name='formdefinitionacl',
             name='role',
@@ -59,7 +62,8 @@ class Migration(migrations.Migration):
                 null=True,
                 on_delete=django.db.models.deletion.PROTECT,
                 related_name='form_defintion_acl_set',
-                to='user.Role'), ),
+                to='user.Role'),
+        ),
         migrations.AddField(
             model_name='formdefinitionacl',
             name='user',
@@ -69,7 +73,8 @@ class Migration(migrations.Migration):
                 null=True,
                 on_delete=django.db.models.deletion.PROTECT,
                 related_name='form_defintion_acl_set',
-                to=settings.AUTH_USER_MODEL), ),
+                to=settings.AUTH_USER_MODEL),
+        ),
         migrations.AddField(
             model_name='formdefinition',
             name='author',
@@ -79,7 +84,8 @@ class Migration(migrations.Migration):
                 null=True,
                 on_delete=django.db.models.deletion.PROTECT,
                 related_name='form_definition_author_set',
-                to=settings.AUTH_USER_MODEL), ),
+                to=settings.AUTH_USER_MODEL),
+        ),
         migrations.AddField(
             model_name='formdefinition',
             name='form_class',
@@ -87,7 +93,8 @@ class Migration(migrations.Migration):
                 db_column='form_class',
                 on_delete=django.db.models.deletion.PROTECT,
                 related_name='form_definition_set',
-                to='document.FormClass'), ),
+                to='document.FormClass'),
+        ),
         migrations.AddField(
             model_name='formclass',
             name='account_type',
@@ -96,7 +103,8 @@ class Migration(migrations.Migration):
                 db_column='account_type',
                 null=True,
                 on_delete=django.db.models.deletion.PROTECT,
-                to='accounting.AccountType'), ),
+                to='accounting.AccountType'),
+        ),
         migrations.AddField(
             model_name='formclass',
             name='author',
@@ -105,7 +113,8 @@ class Migration(migrations.Migration):
                 editable=False,
                 null=True,
                 on_delete=django.db.models.deletion.PROTECT,
-                to=settings.AUTH_USER_MODEL), ),
+                to=settings.AUTH_USER_MODEL),
+        ),
         migrations.AddField(
             model_name='formclass',
             name='concept_type',
@@ -114,7 +123,8 @@ class Migration(migrations.Migration):
                 db_column='concept_type',
                 null=True,
                 on_delete=django.db.models.deletion.PROTECT,
-                to='core.ConceptType'), ),
+                to='core.ConceptType'),
+        ),
         migrations.AddField(
             model_name='formclass',
             name='third_party_summary_type',
@@ -123,7 +133,8 @@ class Migration(migrations.Migration):
                 db_column='third_party_summary_type',
                 null=True,
                 on_delete=django.db.models.deletion.PROTECT,
-                to='document.FormClass'), ),
+                to='document.FormClass'),
+        ),
         migrations.AddField(
             model_name='formactionmap',
             name='action_definition',
@@ -132,7 +143,8 @@ class Migration(migrations.Migration):
                 db_column='action_definition',
                 null=True,
                 on_delete=django.db.models.deletion.PROTECT,
-                to='core.ActionDefinition'), ),
+                to='core.ActionDefinition'),
+        ),
         migrations.AddField(
             model_name='formactionmap',
             name='author',
@@ -140,7 +152,8 @@ class Migration(migrations.Migration):
                 blank=True,
                 null=True,
                 on_delete=django.db.models.deletion.PROTECT,
-                to=settings.AUTH_USER_MODEL), ),
+                to=settings.AUTH_USER_MODEL),
+        ),
         migrations.AddField(
             model_name='formactionmap',
             name='form_definition',
@@ -149,7 +162,8 @@ class Migration(migrations.Migration):
                 db_column='form_definition',
                 null=True,
                 on_delete=django.db.models.deletion.PROTECT,
-                to='document.FormDefinition'), ),
+                to='document.FormDefinition'),
+        ),
         migrations.AddField(
             model_name='documenttablecontent',
             name='document',
@@ -159,7 +173,8 @@ class Migration(migrations.Migration):
                 null=True,
                 on_delete=django.db.models.deletion.PROTECT,
                 related_name='table_content_set',
-                to='document.DocumentHeader'), ),
+                to='document.DocumentHeader'),
+        ),
         migrations.AddField(
             model_name='documenttablecontent',
             name='form_definition',
@@ -168,7 +183,8 @@ class Migration(migrations.Migration):
                 db_column='form_definition',
                 null=True,
                 on_delete=django.db.models.deletion.PROTECT,
-                to='document.FormDefinition'), ),
+                to='document.FormDefinition'),
+        ),
         migrations.AddField(
             model_name='documenthrn',
             name='document',
@@ -180,7 +196,8 @@ class Migration(migrations.Migration):
                 related_name='document_hrn_set',
                 to='document.DocumentHeader',
                 verbose_name=
-                'antares.apps.document.models.document_hrn.document'), ),
+                'antares.apps.document.models.document_hrn.document'),
+        ),
         migrations.AddField(
             model_name='documentheader',
             name='account_document',
@@ -194,7 +211,8 @@ class Migration(migrations.Migration):
                 to='accounting.AccountDocument',
                 verbose_name=
                 'antares.apps.document.models.document_header.account_document'
-            ), ),
+            ),
+        ),
         migrations.AddField(
             model_name='documentheader',
             name='account_type',
@@ -223,7 +241,8 @@ class Migration(migrations.Migration):
                 to='flow.FlowCase',
                 verbose_name=
                 'antares.apps.document.models.document_header.associated_case'
-            ), ),
+            ),
+        ),
         migrations.AddField(
             model_name='documentheader',
             name='associated_to',
@@ -251,7 +270,8 @@ class Migration(migrations.Migration):
                 related_name='document_header_author_set',
                 to=settings.AUTH_USER_MODEL,
                 verbose_name=
-                'antares.apps.document.models.document_header.author'), ),
+                'antares.apps.document.models.document_header.author'),
+        ),
         migrations.AddField(
             model_name='documentheader',
             name='base_document',
@@ -279,7 +299,8 @@ class Migration(migrations.Migration):
                 related_name='document_header_branch_set',
                 to='client.ClientBranch',
                 verbose_name=
-                'antares.apps.document.models.document_header.branch'), ),
+                'antares.apps.document.models.document_header.branch'),
+        ),
         migrations.AddField(
             model_name='documentheader',
             name='cancel_case',
@@ -293,7 +314,8 @@ class Migration(migrations.Migration):
                 related_name='document_header_cancel_case_set',
                 to='flow.FlowCase',
                 verbose_name=
-                'antares.apps.document.models.document_header.cancel_case'), ),
+                'antares.apps.document.models.document_header.cancel_case'),
+        ),
         migrations.AddField(
             model_name='documentheader',
             name='client',
@@ -307,7 +329,8 @@ class Migration(migrations.Migration):
                 related_name='document_header_client_set',
                 to='client.Client',
                 verbose_name=
-                'antares.apps.document.models.document_header.client'), ),
+                'antares.apps.document.models.document_header.client'),
+        ),
         migrations.AddField(
             model_name='documentheader',
             name='concept_type',
@@ -335,7 +358,8 @@ class Migration(migrations.Migration):
                 related_name='document_header_delete_case_set',
                 to='flow.FlowCase',
                 verbose_name=
-                'antares.apps.document.models.document_header.delete_case'), ),
+                'antares.apps.document.models.document_header.delete_case'),
+        ),
         migrations.AddField(
             model_name='documentheader',
             name='form_definition',
@@ -349,7 +373,8 @@ class Migration(migrations.Migration):
                 to='document.FormDefinition',
                 verbose_name=
                 'antares.apps.document.models.document_header.form_definition'
-            ), ),
+            ),
+        ),
         migrations.AddField(
             model_name='documentheader',
             name='related_case',
@@ -379,7 +404,8 @@ class Migration(migrations.Migration):
                 to='client.Client',
                 verbose_name=
                 'antares.apps.document.models.document_header.secondary_client'
-            ), ),
+            ),
+        ),
         migrations.AddField(
             model_name='documentheader',
             name='user_referral',
@@ -405,7 +431,8 @@ class Migration(migrations.Migration):
                 related_name='field_set',
                 to='document.DocumentHeader',
                 verbose_name=
-                'antares.apps.document.models.document_field.document'), ),
+                'antares.apps.document.models.document_field.document'),
+        ),
         migrations.AddField(
             model_name='documentfield',
             name='form_definition',
@@ -430,7 +457,8 @@ class Migration(migrations.Migration):
                 related_name='document_acl_author_set',
                 to=settings.AUTH_USER_MODEL,
                 verbose_name='antares.apps.document.models.document_acl.author'
-            ), ),
+            ),
+        ),
         migrations.AddField(
             model_name='documentacl',
             name='document',
@@ -442,7 +470,8 @@ class Migration(migrations.Migration):
                 related_name='document_acl_set',
                 to='document.DocumentHeader',
                 verbose_name=
-                'antares.apps.document.models.document_acl.document'), ),
+                'antares.apps.document.models.document_acl.document'),
+        ),
         migrations.AddField(
             model_name='documentacl',
             name='org_unit',
@@ -456,7 +485,8 @@ class Migration(migrations.Migration):
                 related_name='document_acl_set',
                 to='user.OrgUnit',
                 verbose_name=
-                'antares.apps.document.models.document_acl.org_unit'), ),
+                'antares.apps.document.models.document_acl.org_unit'),
+        ),
         migrations.AddField(
             model_name='documentacl',
             name='role',
@@ -485,15 +515,19 @@ class Migration(migrations.Migration):
         ),
         migrations.AlterUniqueTogether(
             name='indexedfield',
-            unique_together=set([('definition', 'document')]), ),
+            unique_together=set([('definition', 'document')]),
+        ),
         migrations.AlterUniqueTogether(
             name='documenttablecontent',
             unique_together=set([('document', 'table_definition', 'row_number',
-                                  'definition')]), ),
+                                  'definition')]),
+        ),
         migrations.AlterUniqueTogether(
             name='documenthrn',
-            unique_together=set([('document', 'status')]), ),
+            unique_together=set([('document', 'status')]),
+        ),
         migrations.AlterUniqueTogether(
             name='documentfield',
-            unique_together=set([('definition', 'document')]), ),
+            unique_together=set([('definition', 'document')]),
+        ),
     ]

@@ -22,5 +22,6 @@ class Migration(migrations.Migration):
                 editable=False,
                 null=True,
                 on_delete=django.db.models.deletion.CASCADE,
-                to=settings.AUTH_USER_MODEL), ),
+                to=settings.AUTH_USER_MODEL),
+        ),
     ]

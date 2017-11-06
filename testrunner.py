@@ -46,18 +46,32 @@ BASE_DIR = os.path.dirname(
 
 # A default site for the apps who need it.
 
-DJANGO_APPS = ('django.contrib.admin', 'django.contrib.auth',
-               'django.contrib.contenttypes', 'django.contrib.sessions',
-               'django.contrib.messages', 'django.contrib.staticfiles',
-               'django.contrib.sites', 'django.contrib.humanize', )
+DJANGO_APPS = (
+    'django.contrib.admin',
+    'django.contrib.auth',
+    'django.contrib.contenttypes',
+    'django.contrib.sessions',
+    'django.contrib.messages',
+    'django.contrib.staticfiles',
+    'django.contrib.sites',
+    'django.contrib.humanize',
+)
 
-LOCAL_APPS = ('antares.apps.core', 'antares.apps.accounting',
-              'antares.apps.client', 'antares.apps.document',
-              'antares.apps.flow', 'antares.apps.obligation',
-              'antares.apps.initialsettings', 'antares.apps.subscription',
-              'antares.apps.notifications', 'antares.apps.thirdparty',
-              'antares.apps.user', 'antares.apps.message',
-              'antares.apps.terminal', )
+LOCAL_APPS = (
+    'antares.apps.core',
+    'antares.apps.accounting',
+    'antares.apps.client',
+    'antares.apps.document',
+    'antares.apps.flow',
+    'antares.apps.obligation',
+    'antares.apps.initialsettings',
+    'antares.apps.subscription',
+    'antares.apps.notifications',
+    'antares.apps.thirdparty',
+    'antares.apps.user',
+    'antares.apps.message',
+    'antares.apps.terminal',
+)
 
 THIRD_PARTY_APPS = (
     'mptt',
@@ -77,16 +91,17 @@ THIRD_PARTY_APPS = (
     #'allauth.socialaccount.providers.google',
     'debug_toolbar',
     'django_extensions',
-    'django_markdown', )
+    'django_markdown',
+)
 
 INSTALLED_APPS = DJANGO_APPS + LOCAL_APPS + THIRD_PARTY_APPS
 
 settings.configure(
-    BASE_DIR = os.path.dirname(
+    BASE_DIR=os.path.dirname(
         os.path.dirname(os.path.dirname(os.path.abspath(__file__)))),
-    BASE_APP_DIR = "antares-tests",
-    AUTH_USER_MODEL = 'user.User',
-    TEST_MODE = True,
+    BASE_APP_DIR="antares-tests",
+    AUTH_USER_MODEL='user.User',
+    TEST_MODE=True,
     DEBUG=True,
     DATABASES={
         'default': {
@@ -122,14 +137,18 @@ settings.configure(
     ],
     MEDIA_URL='/media/',
     MEDIA_ROOT=os.path.join(BASE_DIR, 'media'),
-    STATICFILES_DIRS=(os.path.join(BASE_DIR, 'bower_components'), os.path.join(
-        BASE_DIR, "static"), ),
+    STATICFILES_DIRS=(
+        os.path.join(BASE_DIR, 'bower_components'),
+        os.path.join(BASE_DIR, "static"),
+    ),
     STATICFILES_STORAGE='pipeline.storage.PipelineStorage',
     STATICFILES_FINDERS=(
         'django.contrib.staticfiles.finders.FileSystemFinder',
         'django.contrib.staticfiles.finders.AppDirectoriesFinder',
-        'djangobower.finders.BowerFinder', 'pipeline.finders.PipelineFinder',
-        'pipeline.finders.CachedFileFinder', ),
+        'djangobower.finders.BowerFinder',
+        'pipeline.finders.PipelineFinder',
+        'pipeline.finders.CachedFileFinder',
+    ),
     PIPELINE={
         'PIPELINE_ENABLED':
         False,
@@ -151,36 +170,42 @@ settings.configure(
         os.path.join(BASE_DIR, 'node_modules', '.bin', 'coffee'),
         'JAVASCRIPT': {
             'common_js': {
-                'source_filenames':
-                ('jquery/dist/jquery.js', 'jquery.cookie/jquery.cookie.js',
-                 'select2/dist/js/select2.full.js',
-                 'bootstrap-sass/assets/javascripts/bootstrap.js',
-                 'bootstrap-toggle/js/bootstrap-toggle.min.js',
-                 'jquery/external/sizzle/dist/sizzle.js', 'angular/angular.js',
-                 'djng/js/django-angular.js', 'js/core.js', ),
+                'source_filenames': (
+                    'jquery/dist/jquery.js',
+                    'jquery.cookie/jquery.cookie.js',
+                    'select2/dist/js/select2.full.js',
+                    'bootstrap-sass/assets/javascripts/bootstrap.js',
+                    'bootstrap-toggle/js/bootstrap-toggle.min.js',
+                    'jquery/external/sizzle/dist/sizzle.js',
+                    'angular/angular.js',
+                    'djng/js/django-angular.js',
+                    'js/core.js',
+                ),
                 'output_filename':
                 'js/common_js.js',
             },
             'jquery_terminal': {
-                'source_filenames':
-                ('jquery.terminal/js/jquery.terminal.js',
-                 'jquery.terminal/js/jquery.mousewheel-min.js',
-                 'angular-terminal/angular-terminal.js', ),
+                'source_filenames': (
+                    'jquery.terminal/js/jquery.terminal.js',
+                    'jquery.terminal/js/jquery.mousewheel-min.js',
+                    'angular-terminal/angular-terminal.js',
+                ),
                 'output_filename':
                 'js/jquery-terminal.js',
             },
             'datatables_js': {
-                'source_filenames':
-                ('datatables.net/js/jquery.dataTables.js',
-                 'datatables.net-bs/js/dataTables.bootstrap.js',
-                 'datatables.net-colreorder/js/dataTables.colReorder.js',
-                 'datatables.net-fixedcolumns/js/dataTables.fixedColumns.js',
-                 'datatables.net-keytable/js/dataTables.keyTable.js',
-                 'datatables.net-responsive/js/dataTables.responsive.js',
-                 'datatables.net-responsive-bs/js/responsive.bootstrap.js',
-                 'datatables.net-scroller/js/dataTables.scroller.js',
-                 'datatables.net-select/js/dataTables.select.js',
-                 'datatables.net-bs/js/dataTables.bootstrap.js', ),
+                'source_filenames': (
+                    'datatables.net/js/jquery.dataTables.js',
+                    'datatables.net-bs/js/dataTables.bootstrap.js',
+                    'datatables.net-colreorder/js/dataTables.colReorder.js',
+                    'datatables.net-fixedcolumns/js/dataTables.fixedColumns.js',
+                    'datatables.net-keytable/js/dataTables.keyTable.js',
+                    'datatables.net-responsive/js/dataTables.responsive.js',
+                    'datatables.net-responsive-bs/js/responsive.bootstrap.js',
+                    'datatables.net-scroller/js/dataTables.scroller.js',
+                    'datatables.net-select/js/dataTables.select.js',
+                    'datatables.net-bs/js/dataTables.bootstrap.js',
+                ),
                 'output_filename':
                 'js/datatables_js.js',
             },
@@ -196,8 +221,10 @@ settings.configure(
                 'js/x_editable.js',
             },
             'ckeditor_js': {
-                'source_filenames': ('ckeditor/ckeditor.js',
-                                     'ckeditor/skins/kama/skin.js', ),
+                'source_filenames': (
+                    'ckeditor/ckeditor.js',
+                    'ckeditor/skins/kama/skin.js',
+                ),
                 'output_filename':
                 'js/ckeditor.js',
             },
@@ -251,22 +278,25 @@ settings.configure(
                 'extra_context': {},
             },
             'datatables_css': {
-                'source_filenames':
-                ('datatables.net-bs/css/dataTables.bootstrap.css',
-                 'datatables.net-colreorder-bs/css/colReorder.bootstrap.css',
-                 'datatables.net-fixedcolumns-bs/css/fixedColumns.bootstrap.css',
-                 'datatables.net-keytable-bs/css/keyTable.bootstrap.css',
-                 'datatables.net-responsive-bs/css/responsive.bootstrap.css',
-                 'datatables.net-scroller-bs/css/scroller.bootstrap.css',
-                 'datatables.net-select-bs/css/select.bootstrap.css',
-                 'datatables.net-bs/css/dataTables.bootstrap.css', ),
+                'source_filenames': (
+                    'datatables.net-bs/css/dataTables.bootstrap.css',
+                    'datatables.net-colreorder-bs/css/colReorder.bootstrap.css',
+                    'datatables.net-fixedcolumns-bs/css/fixedColumns.bootstrap.css',
+                    'datatables.net-keytable-bs/css/keyTable.bootstrap.css',
+                    'datatables.net-responsive-bs/css/responsive.bootstrap.css',
+                    'datatables.net-scroller-bs/css/scroller.bootstrap.css',
+                    'datatables.net-select-bs/css/select.bootstrap.css',
+                    'datatables.net-bs/css/dataTables.bootstrap.css',
+                ),
                 'output_filename':
                 'css/datatables.css',
                 'extra_context': {},
             },
             'jquery_ui_css': {
-                'source_filenames': ('jquery-ui/themes/base/jquery-ui.css',
-                                     'jquery-ui/themes/base/theme.css', ),
+                'source_filenames': (
+                    'jquery-ui/themes/base/jquery-ui.css',
+                    'jquery-ui/themes/base/theme.css',
+                ),
                 'output_filename':
                 'css/jquery_ui.css',
                 'extra_context': {},
@@ -285,78 +315,79 @@ settings.configure(
             },
         },
     },
-    LOGGING = {
-    'version': 1,
-    'disable_existing_loggers': False,
-    'filters': {
-        'require_debug_false': {
-            '()': 'django.utils.log.RequireDebugFalse',
+    LOGGING={
+        'version': 1,
+        'disable_existing_loggers': False,
+        'filters': {
+            'require_debug_false': {
+                '()': 'django.utils.log.RequireDebugFalse',
+            },
+            'require_debug_true': {
+                '()': 'django.utils.log.RequireDebugTrue',
+            },
         },
-        'require_debug_true': {
-            '()': 'django.utils.log.RequireDebugTrue',
+        'formatters': {
+            'simple': {
+                'format': '[%(asctime)s] %(levelname)s %(message)s',
+                'datefmt': '%Y-%m-%d %H:%M:%S'
+            },
+            'verbose': {
+                'format':
+                '[%(asctime)s] %(levelname)s [%(name)s.%(funcName)s:%(lineno)d] %(message)s',
+                'datefmt':
+                '%Y-%m-%d %H:%M:%S'
+            },
         },
-    },
-    'formatters': {
-        'simple': {
-            'format': '[%(asctime)s] %(levelname)s %(message)s',
-            'datefmt': '%Y-%m-%d %H:%M:%S'
+        'handlers': {
+            'console': {
+                'level': 'DEBUG',
+                'class': 'logging.StreamHandler',
+                'formatter': 'verbose'
+            },
         },
-        'verbose': {
-            'format':
-            '[%(asctime)s] %(levelname)s [%(name)s.%(funcName)s:%(lineno)d] %(message)s',
-            'datefmt':
-            '%Y-%m-%d %H:%M:%S'
-        },
-    },
-    'handlers': {
-        'console': {
-            'level': 'DEBUG',
-            'class': 'logging.StreamHandler',
-            'formatter': 'verbose'
-        },
-        
-    },
-    'loggers': {
-        'root': {
-            'handlers': ['console'],
-            'level': 'INFO',
-            'propagate': True,
-            'formatter': 'verbose'
-        },
-        'django': {
-            'handlers': ['console'],
-            'level': 'INFO',
-            'propagate': True,
-            'formatter': 'verbose'
-        },
-        'antares': {
-            'handlers': ['console'],
-            'level': 'DEBUG',
-            'formatter': 'verbose',
-            'propagate': True,
-        },
-        'antares.apps.flow': {
-            'handlers': ['console'],
-            'level': 'DEBUG',
-            'formatter': 'verbose',
-            'propagate': True,
+        'loggers': {
+            'root': {
+                'handlers': ['console'],
+                'level': 'INFO',
+                'propagate': True,
+                'formatter': 'verbose'
+            },
+            'django': {
+                'handlers': ['console'],
+                'level': 'INFO',
+                'propagate': True,
+                'formatter': 'verbose'
+            },
+            'antares': {
+                'handlers': ['console'],
+                'level': 'DEBUG',
+                'formatter': 'verbose',
+                'propagate': True,
+            },
+            'antares.apps.flow': {
+                'handlers': ['console'],
+                'level': 'DEBUG',
+                'formatter': 'verbose',
+                'propagate': True,
+            }
         }
-    }
-},
+    },
     LOCALE_PATHS=(os.path.join(BASE_DIR, 'locale'), ),
-    LANGUAGES=(('en', _('English')), ('es', _('Spanish')), ),
+    LANGUAGES=(
+        ('en', _('English')),
+        ('es', _('Spanish')),
+    ),
     CKEDITOR_JQUERY_URL=
     '//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js',
     STATIC_ROOT=STATIC_ROOT,
-    STATIC_URL=STATIC_URL, )
-
+    STATIC_URL=STATIC_URL,
+)
 
 # Django >= 1.8
 django.setup()
 from django.test.runner import DiscoverRunner
 
 test_runner = DiscoverRunner(verbosity=1)
-
 
 #['antares']
 failures = test_runner.run_tests(['antares'])

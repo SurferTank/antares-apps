@@ -67,9 +67,9 @@ class NotificationManager(object):
                             _(__name__ + ".exceptions.no_title_available"))
             else:
                 notification_title = _(
-                    SystemParameter.find_one("DEFAULT_NOTIFICATION_TITLE",
-                                             FieldDataType.STRING, __name__ +
-                                             ".default.notification_title"))
+                    SystemParameter.find_one(
+                        "DEFAULT_NOTIFICATION_TITLE", FieldDataType.STRING,
+                        __name__ + ".default.notification_title"))
 
             if document.get_author() is None:
                 raise ValueError(
@@ -87,5 +87,5 @@ class NotificationManager(object):
         status.set_status(MessageStatusType.PROCESSED)
 
     @classmethod
-    def get_unread_notifications(max_days: int=7):
+    def get_unread_notifications(max_days: int = 7):
         pass

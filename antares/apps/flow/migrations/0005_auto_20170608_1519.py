@@ -18,5 +18,6 @@ class Migration(migrations.Migration):
             model_name='flowdefinition',
             name='time_unit',
             field=enumfields.fields.EnumField(
-                blank=True, enum=TimeUnitType, max_length=10, null=True), ),
+                blank=True, enum=TimeUnitType, max_length=10, null=True),
+        ),
     ]

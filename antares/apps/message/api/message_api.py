@@ -9,6 +9,7 @@ from ..models import Message
 from rest_framework import permissions
 from ..constants import MessageType
 
+
 class MessageApi(generics.ListCreateAPIView):
     """This class defines the create behavior of our rest api."""
     queryset = Message.objects.all()

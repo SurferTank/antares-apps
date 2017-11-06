@@ -40,7 +40,8 @@ class Migration(migrations.Migration):
                 'flow_activity_application_definition',
                 'verbose_name_plural':
                 'antares.apps.flow.models.definition.activity_application_definition.table_name_plural',
-            }, ),
+            },
+        ),
         migrations.CreateModel(
             name='ActivityApplicationParameterDefinition',
             fields=[
@@ -59,7 +60,8 @@ class Migration(migrations.Migration):
                 'flow_activity_application_parameter_definition',
                 'verbose_name_plural':
                 'antares.apps.flow.models.definition.activity_application_parameter_definition.table_name_plural',
-            }, ),
+            },
+        ),
         migrations.CreateModel(
             name='ActivityDefinition',
             fields=[
@@ -97,7 +99,8 @@ class Migration(migrations.Migration):
                 'flow_activity_definition',
                 'verbose_name_plural':
                 'antares.apps.flow.models.definition.activity_definition.table_name_plural',
-            }, ),
+            },
+        ),
         migrations.CreateModel(
             name='ActivityLog',
             fields=[
@@ -119,7 +122,8 @@ class Migration(migrations.Migration):
                 'flow_activity_log',
                 'verbose_name_plural':
                 'antares.apps.flow.models.operation.activity_log.table_name_plural',
-            }, ),
+            },
+        ),
         migrations.CreateModel(
             name='ApplicationDefinition',
             fields=[
@@ -147,7 +151,8 @@ class Migration(migrations.Migration):
                 'antares.apps.flow.models.definition.application_definition.table_name',
                 'verbose_name_plural':
                 'antares.apps.flow.models.definition.application_definition.table_name_plural',
-            }, ),
+            },
+        ),
         migrations.CreateModel(
             name='ApplicationParameterDefinition',
             fields=[
@@ -179,7 +184,8 @@ class Migration(migrations.Migration):
                 'flow_application_parameter_definition',
                 'verbose_name_plural':
                 'antares.apps.flow.models.definition.application_parameter_definition.table_name_plural',
-            }, ),
+            },
+        ),
         migrations.CreateModel(
             name='AssignmentList',
             fields=[
@@ -199,7 +205,8 @@ class Migration(migrations.Migration):
                 'flow_assignment_list',
                 'verbose_name_plural':
                 'antares.apps.flow.models.operation.assignment_list.table_name_plural',
-            }, ),
+            },
+        ),
         migrations.CreateModel(
             name='FlowActionDefinition',
             fields=[
@@ -222,7 +229,8 @@ class Migration(migrations.Migration):
                 'flow_action_definition',
                 'verbose_name_plural':
                 'antares.apps.flow.models.definition.flow_action_definition.table_name_plural',
-            }, ),
+            },
+        ),
         migrations.CreateModel(
             name='FlowActionDefinitionParameterMap',
             fields=[
@@ -241,7 +249,8 @@ class Migration(migrations.Migration):
                 'flow_action_definition_parameter_definition',
                 'verbose_name_plural':
                 'antares.apps.flow.models.definition.flow_action_definition_parameter_map.table_name_plural',
-            }, ),
+            },
+        ),
         migrations.CreateModel(
             name='FlowActivity',
             fields=[
@@ -275,7 +284,8 @@ class Migration(migrations.Migration):
                 'flow_activity',
                 'verbose_name_plural':
                 'antares.apps.flow.models.operation.flow_activity.table_name_plural',
-            }, ),
+            },
+        ),
         migrations.CreateModel(
             name='FlowActivityExtraTab',
             fields=[
@@ -299,7 +309,8 @@ class Migration(migrations.Migration):
                 'flow_activity_extra_tab',
                 'verbose_name_plural':
                 'antares.apps.flow.models.definition.flow_activity_extra_tab.table_name_plural',
-            }, ),
+            },
+        ),
         migrations.CreateModel(
             name='FlowActivityExtraTabParameter',
             fields=[
@@ -318,7 +329,8 @@ class Migration(migrations.Migration):
                 'flow_activity_extra_tab_parameter',
                 'verbose_name_plural':
                 'antares.apps.flow.models.definition.flow_activity_extra_tab_parameter.table_name_plural',
-            }, ),
+            },
+        ),
         migrations.CreateModel(
             name='FlowActivityForm',
             fields=[
@@ -337,7 +349,8 @@ class Migration(migrations.Migration):
                 'flow_activity_form',
                 'verbose_name_plural':
                 'antares.apps.flow.models.definition.flow_activity_form.table_name_plural',
-            }, ),
+            },
+        ),
         migrations.CreateModel(
             name='FlowActivityFormParameter',
             fields=[
@@ -356,7 +369,8 @@ class Migration(migrations.Migration):
                 'flow_activity_form_parameter',
                 'verbose_name_plural':
                 'antares.apps.flow.models.definition.flow_activity_form_parameter.table_name_plural',
-            }, ),
+            },
+        ),
         migrations.CreateModel(
             name='FlowActivityValidation',
             fields=[
@@ -379,7 +393,8 @@ class Migration(migrations.Migration):
                 'flow_activity_validation',
                 'verbose_name_plural':
                 'antares.apps.flow.models.definition.flow_activity_validation.table_name_plural',
-            }, ),
+            },
+        ),
         migrations.CreateModel(
             name='FlowAttachment',
             fields=[
@@ -400,7 +415,8 @@ class Migration(migrations.Migration):
                 'flow_attachment',
                 'verbose_name_plural':
                 'antares.apps.flow.models.operation.flow_attachment.table_name_plural',
-            }, ),
+            },
+        ),
         migrations.CreateModel(
             name='FlowCase',
             fields=[
@@ -435,7 +451,8 @@ class Migration(migrations.Migration):
                 'flow_case',
                 'verbose_name_plural':
                 'antares.apps.flow.models.operation.flow_case.table_name_plural',
-            }, ),
+            },
+        ),
         migrations.CreateModel(
             name='FlowDefinition',
             fields=[
@@ -470,7 +487,8 @@ class Migration(migrations.Migration):
                 'antares.apps.flow.models.definition.flow_definition.table_name',
                 'verbose_name_plural':
                 'antares.apps.flow.models.definition.flow_definition.table_name_plural',
-            }, ),
+            },
+        ),
         migrations.CreateModel(
             name='FlowDocument',
             fields=[
@@ -491,7 +509,8 @@ class Migration(migrations.Migration):
                 'antares.apps.flow.models.operation.flow_document.table_name',
                 'verbose_name_plural':
                 'antares.apps.flow.models.operation.flow_document.table_name_plural',
-            }, ),
+            },
+        ),
         migrations.CreateModel(
             name='FlowNote',
             fields=[
@@ -514,7 +533,8 @@ class Migration(migrations.Migration):
                 'flow_note',
                 'verbose_name_plural':
                 'antares.apps.flow.models.operation.flow_note.table_name_plural',
-            }, ),
+            },
+        ),
         migrations.CreateModel(
             name='FlowPackage',
             fields=[
@@ -537,7 +557,8 @@ class Migration(migrations.Migration):
                 'antares.apps.flow.models.definition.flow_package.table_name',
                 'verbose_name_plural':
                 'antares.apps.flow.models.definition.flow_package.table_name_plural',
-            }, ),
+            },
+        ),
         migrations.CreateModel(
             name='FlowProperty',
             fields=[
@@ -569,7 +590,8 @@ class Migration(migrations.Migration):
                 'antares.apps.flow.models.operation.flow_property.table_name',
                 'verbose_name_plural':
                 'antares.apps.flow.models.operation.flow_property.table_name_plural',
-            }, ),
+            },
+        ),
         migrations.CreateModel(
             name='FlowUserNotificationOption',
             fields=[
@@ -589,7 +611,8 @@ class Migration(migrations.Migration):
                 'flow_user_notification_option',
                 'verbose_name_plural':
                 'antares.apps.flow.models.operation.flow_user_notification_option.table_name_plural',
-            }, ),
+            },
+        ),
         migrations.CreateModel(
             name='ParticipantDefinition',
             fields=[
@@ -612,7 +635,8 @@ class Migration(migrations.Migration):
                 'flow_participant_definition',
                 'verbose_name_plural':
                 'antares.apps.flow.models.definition.participant_definition.table_name_plural',
-            }, ),
+            },
+        ),
         migrations.CreateModel(
             name='PropertyDefinition',
             fields=[
@@ -651,7 +675,8 @@ class Migration(migrations.Migration):
                 'flow_property_definition',
                 'verbose_name_plural':
                 'antares.apps.flow.models.definition.property_definition.table_name_plural',
-            }, ),
+            },
+        ),
         migrations.CreateModel(
             name='ReassigmentLog',
             fields=[
@@ -672,7 +697,8 @@ class Migration(migrations.Migration):
                 'flow_reassignment_log',
                 'verbose_name_plural':
                 'antares.apps.flow.models.operation.reassigment_log.table_name_plural',
-            }, ),
+            },
+        ),
         migrations.CreateModel(
             name='TransitionDefinition',
             fields=[
@@ -716,5 +742,6 @@ class Migration(migrations.Migration):
                 'flow_transition_definition',
                 'verbose_name_plural':
                 'antares.apps.flow.models.definition.transition_definition.table_name_plural',
-            }, ),
+            },
+        ),
     ]

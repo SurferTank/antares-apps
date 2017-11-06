@@ -37,7 +37,8 @@ class Migration(migrations.Migration):
                 'antares.apps.obligation.models.client_obligation.table_name',
                 'verbose_name_plural':
                 'antares.apps.obligation.models.client_obligation.table_name_plural',
-            }, ),
+            },
+        ),
         migrations.CreateModel(
             name='ObligationRule',
             fields=[
@@ -84,7 +85,8 @@ class Migration(migrations.Migration):
                 'obl_rule',
                 'verbose_name_plural':
                 'antares.apps.obligation.models.obligation_rule.table_name_plural',
-            }, ),
+            },
+        ),
         migrations.CreateModel(
             name='ObligationVector',
             fields=[
@@ -112,7 +114,8 @@ class Migration(migrations.Migration):
                 'antares.apps.obligation.models.obligation_vector.table_name',
                 'verbose_name_plural':
                 'antares.apps.obligation.models.obligation_vector.table_name_plural',
-            }, ),
+            },
+        ),
         migrations.CreateModel(
             name='ObligationVectorLog',
             fields=[
@@ -133,5 +136,6 @@ class Migration(migrations.Migration):
                 'obl_vector_log',
                 'verbose_name_plural':
                 'antares.apps.obligation.models.obligation_vector_log.table_name_plural',
-            }, ),
+            },
+        ),
     ]

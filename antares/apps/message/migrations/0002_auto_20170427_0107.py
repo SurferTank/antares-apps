@@ -32,7 +32,8 @@ class Migration(migrations.Migration):
                 on_delete=django.db.models.deletion.PROTECT,
                 to=settings.AUTH_USER_MODEL,
                 verbose_name='antares.apps.message.models.message_status.author'
-            ), ),
+            ),
+        ),
         migrations.AddField(
             model_name='messagestatus',
             name='core_object',
@@ -40,7 +41,8 @@ class Migration(migrations.Migration):
                 db_column='message',
                 on_delete=django.db.models.deletion.PROTECT,
                 related_name='status_set',
-                to='message.Message'), ),
+                to='message.Message'),
+        ),
         migrations.AddField(
             model_name='message',
             name='account_type',
@@ -49,7 +51,8 @@ class Migration(migrations.Migration):
                 db_column='account_type',
                 null=True,
                 on_delete=django.db.models.deletion.PROTECT,
-                to='accounting.AccountType'), ),
+                to='accounting.AccountType'),
+        ),
         migrations.AddField(
             model_name='message',
             name='client',
@@ -58,7 +61,8 @@ class Migration(migrations.Migration):
                 db_column='client',
                 null=True,
                 on_delete=django.db.models.deletion.PROTECT,
-                to='client.Client'), ),
+                to='client.Client'),
+        ),
         migrations.AddField(
             model_name='message',
             name='concept_type',
@@ -67,7 +71,8 @@ class Migration(migrations.Migration):
                 db_column='concept_type',
                 null=True,
                 on_delete=django.db.models.deletion.PROTECT,
-                to='core.ConceptType'), ),
+                to='core.ConceptType'),
+        ),
         migrations.AddField(
             model_name='message',
             name='document',
@@ -76,7 +81,8 @@ class Migration(migrations.Migration):
                 db_column='document',
                 null=True,
                 on_delete=django.db.models.deletion.PROTECT,
-                to='document.DocumentHeader'), ),
+                to='document.DocumentHeader'),
+        ),
         migrations.AddField(
             model_name='message',
             name='flow_case',
@@ -85,7 +91,8 @@ class Migration(migrations.Migration):
                 db_column='flow_case',
                 null=True,
                 on_delete=django.db.models.deletion.PROTECT,
-                to='flow.FlowCase'), ),
+                to='flow.FlowCase'),
+        ),
         migrations.AddField(
             model_name='message',
             name='flow_definition',
@@ -94,7 +101,8 @@ class Migration(migrations.Migration):
                 db_column='flow_definition',
                 null=True,
                 on_delete=django.db.models.deletion.PROTECT,
-                to='flow.FlowDefinition'), ),
+                to='flow.FlowDefinition'),
+        ),
         migrations.AddField(
             model_name='message',
             name='form_definition',
@@ -103,5 +111,6 @@ class Migration(migrations.Migration):
                 db_column='form_definition',
                 null=True,
                 on_delete=django.db.models.deletion.PROTECT,
-                to='document.FormDefinition'), ),
+                to='document.FormDefinition'),
+        ),
     ]

@@ -106,8 +106,10 @@ class UserParameter(models.Model):
         Retrieves a parameter from the user parameter database
         """
         try:
-            user_param = cls.objects.get(id=user_paramId, user=get_request().user)
-            logger.debug("The param " + user_param.id + " does exist. Returning the value")
+            user_param = cls.objects.get(
+                id=user_paramId, user=get_request().user)
+            logger.debug("The param " + user_param.id +
+                         " does exist. Returning the value")
             if user_param.data_type == FieldDataType.STRING:
                 return user_param.string_value
             elif user_param.data_type == FieldDataType.TEXT:
@@ -121,8 +123,9 @@ class UserParameter(models.Model):
                 if isinstance(user_param.date_value, datetime.datetime):
                     return user_param.date_value
                 elif isinstance(user_param.date_value, datetime.date):
-                    return datetime.datetime.combine(user_param.date_value, datetime.datetime.min.time())
-                
+                    return datetime.datetime.combine(
+                        user_param.date_value, datetime.datetime.min.time())
+
             elif user_param.data_type == FieldDataType.INTEGER:
                 return user_param.integer_value
             elif user_param.data_type == FieldDataType.FLOAT:
@@ -141,11 +144,11 @@ class UserParameter(models.Model):
                 user_parameter = SystemParameter.find_one(
                     user_paramId, paramType, default)
                 return UserParameter.find_one(get_request().user, user_paramId,
-                                              paramType, user_parameter,
-                                              False)
+                                              paramType, user_parameter, False)
             if (default is not None):
                 user_param = UserParameter(id=user_paramId)
-                logger.debug("Creating the parameter with id " + user_paramId + " since it does not exist")
+                logger.debug("Creating the parameter with id " + user_paramId +
+                             " since it does not exist")
                 user_param.data_type = paramType
                 user_param.user = get_request().user
                 if paramType == FieldDataType.STRING:

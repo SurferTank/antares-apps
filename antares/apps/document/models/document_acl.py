@@ -84,7 +84,8 @@ class DocumentACL(models.Model):
         editable=False,
         verbose_name=_(__name__ + ".author"),
         help_text=_(__name__ + ".author_help"),
-        related_name='document_acl_author_set', )
+        related_name='document_acl_author_set',
+    )
 
     def save(self, *args, **kwargs):
         if self.creation_date is None:

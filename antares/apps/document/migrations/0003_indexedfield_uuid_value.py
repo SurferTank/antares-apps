@@ -15,6 +15,12 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='indexedfield',
             name='uuid_value',
-            field=models.UUIDField(blank=True, help_text='antares.apps.document.models.indexed_field.uuid_value_help', null=True, verbose_name='antares.apps.document.models.indexed_field.uuid_value'),
+            field=models.UUIDField(
+                blank=True,
+                help_text=
+                'antares.apps.document.models.indexed_field.uuid_value_help',
+                null=True,
+                verbose_name=
+                'antares.apps.document.models.indexed_field.uuid_value'),
         ),
     ]

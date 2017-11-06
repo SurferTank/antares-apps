@@ -31,7 +31,8 @@ class StatusLog(models.Model):
         blank=True)
     document_id = models.UUIDField(
         verbose_name=_(__name__ + ".document_id"),
-        help_text=_(__name__ + ".document_id_help"), )
+        help_text=_(__name__ + ".document_id_help"),
+    )
 
     class Meta:
         app_label = 'document'

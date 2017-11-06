@@ -12,7 +12,6 @@ from antares.apps.core.middleware.request import get_request
 from enumfields import EnumField
 from django.conf import settings
 
-
 logger = logging.getLogger(__name__)
 
 
@@ -91,21 +90,22 @@ class SystemParameter(models.Model):
             self.creation_date = timezone.now()
         self.update_date = timezone.now()
         self.author = get_request().user
-            
+
         super(SystemParameter, self).save(*args, **kwargs)
 
     def __str__(self):
         return self.id
 
     @classmethod
-    def find_one(cls, 
+    def find_one(cls,
                  system_paramId,
                  paramType=None,
                  default=None,
                  description=None):
         try:
             system_param = SystemParameter.objects.get(id=system_paramId)
-            logger.debug("The param " + system_param.id + " does exist. Returning the value")
+            logger.debug("The param " + system_param.id +
+                         " does exist. Returning the value")
             if system_param.data_type == FieldDataType.STRING:
                 return system_param.string_value
             elif system_param.data_type == FieldDataType.TEXT:
@@ -119,8 +119,9 @@ class SystemParameter(models.Model):
                 if isinstance(system_param.date_value, datetime.datetime):
                     return system_param.date_value
                 elif isinstance(system_param.date_value, datetime.date):
-                    return datetime.datetime.combine(system_param.date_value, datetime.datetime.min.time())
-                
+                    return datetime.datetime.combine(
+                        system_param.date_value, datetime.datetime.min.time())
+
             elif system_param.data_type == FieldDataType.INTEGER:
                 return system_param.integer_value
             elif system_param.data_type == FieldDataType.FLOAT:
@@ -137,11 +138,12 @@ class SystemParameter(models.Model):
         except cls.DoesNotExist:
             if default is not None:
                 system_param = SystemParameter(id=system_paramId)
-                logger.debug("Creating the parameter with id " + system_paramId + " since it does not exist")
+                logger.debug("Creating the parameter with id " + system_paramId
+                             + " since it does not exist")
                 system_param.data_type = paramType
                 if (description is not None):
                     system_param.description = description
-    
+
                 if paramType == FieldDataType.STRING:
                     system_param.string_value = default
                     system_param.save()
@@ -177,7 +179,7 @@ class SystemParameter(models.Model):
                 else:
                     return None
             return None
-        
+
     class Meta:
         app_label = 'core'
         db_table = 'core_system_parameter'

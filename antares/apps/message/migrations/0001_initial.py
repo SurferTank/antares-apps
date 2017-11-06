@@ -36,7 +36,8 @@ class Migration(migrations.Migration):
                 'msg_message',
                 'verbose_name_plural':
                 'antares.apps.message.models.message.table_name_plural',
-            }, ),
+            },
+        ),
         migrations.CreateModel(
             name='MessageStatus',
             fields=[
@@ -70,5 +71,6 @@ class Migration(migrations.Migration):
                 'msg_message_status',
                 'verbose_name_plural':
                 'antares.apps.message.models.message_status.table_name_plural',
-            }, ),
+            },
+        ),
     ]

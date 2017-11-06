@@ -75,7 +75,7 @@ class Document(object):
         else:
             raise ValueError(__name__ + ".exceptions.couldnt_create_document")
 
-    def _init_with_id(self, document_id:str):
+    def _init_with_id(self, document_id: str):
         """ Instantiates a document instance based on the document id
 
         :param document_id: The document ID, which has to exist on the database
@@ -109,9 +109,10 @@ class Document(object):
         self._evaluate_field_calculation()
         self._process_external_function_events(
             DocumentEventType.DRAFT_MODIFICATION)
-        
 
-    def _init_with_form_id(self, form_id:str, header_fields_dict:Dict[str, str]=None):
+    def _init_with_form_id(self,
+                           form_id: str,
+                           header_fields_dict: Dict[str, str] = None):
         """ Instantiates a document instance based on the document id
 
         :param document_id: The document ID, which has to exist on the database
@@ -173,9 +174,6 @@ class Document(object):
         self._map_fields_to_header_fields()
         self._hibernate_document()
 
-   
-    
-    
     def _hydrate_document(self):
         """ Sets all the values on the database on the XML object
         
@@ -308,7 +306,10 @@ class Document(object):
                                 if fieldDb.uuid_value is not None:
                                     field.text = fieldDb.uuid_value
                             else:
-                                raise NotImplementedError(_(__name__ + ".messages.field_type_not_implemented_yet"))
+                                raise NotImplementedError(
+                                    _(__name__ +
+                                      ".messages.field_type_not_implemented_yet"
+                                      ))
 
     def _hibernate_document(self):
         self._hibernate_header()
@@ -485,8 +486,8 @@ class Document(object):
                             self.header, field.get('id'))
                         if field.text is not None:
                             if datatype == FieldDataType.STRING:
-                                if (fieldDb is not None
-                                        and fieldDb.string_value != field.text):
+                                if (fieldDb is not None and
+                                        fieldDb.string_value != field.text):
                                     fieldDb.string_value = field.text
                                     fieldDb.save()
                                 elif (fieldDb is None):
@@ -496,13 +497,15 @@ class Document(object):
                                     fieldDb.form_definition = self.header.form_definition
                                     if (field.text is not None):
                                         fieldDb.string_value = field.text
-                                    fieldDb.data_type = str(FieldDataType.STRING)
+                                    fieldDb.data_type = str(
+                                        FieldDataType.STRING)
                                     fieldDb.save()
                                 if (field.get('indexed') and
-                                    (field.get('indexed').lower() == 'true'
-                                     or field.get('indexed').lower() == 'yes')):
-                                    if (indexedDb is not None and
-                                            indexedDb.string_value != field.text):
+                                    (field.get('indexed').lower() == 'true' or
+                                     field.get('indexed').lower() == 'yes')):
+                                    if (indexedDb is not None
+                                            and indexedDb.string_value !=
+                                            field.text):
                                         indexedDb.string_value = field.text
                                         indexedDb.save()
                                     elif (indexedDb is None):
@@ -530,10 +533,11 @@ class Document(object):
                                     fieldDb.data_type = str(FieldDataType.TEXT)
                                     fieldDb.save()
                                 if (field.get('indexed') and
-                                    (field.get('indexed').lower() == 'true'
-                                     or field.get('indexed').lower() == 'yes')):
-                                    if (indexedDb is not None and
-                                            indexedDb.text_value != field.text):
+                                    (field.get('indexed').lower() == 'true' or
+                                     field.get('indexed').lower() == 'yes')):
+                                    if (indexedDb is not None
+                                            and indexedDb.text_value !=
+                                            field.text):
                                         indexedDb.text_value = field.text
                                         indexedDb.save()
                                     elif (indexedDb is None):
@@ -547,9 +551,10 @@ class Document(object):
                                             FieldDataType.TEXT)
                                         indexedDb.save()
                             elif datatype == FieldDataType.INTEGER:
-                                if (fieldDb is not None
-                                        and fieldDb.string_value != field.text):
-                                    fieldDb.integer_value = int(float(field.text))
+                                if (fieldDb is not None and
+                                        fieldDb.string_value != field.text):
+                                    fieldDb.integer_value = int(
+                                        float(field.text))
                                     fieldDb.save()
                                 elif (fieldDb is None):
                                     fieldDb = DocumentField()
@@ -559,13 +564,15 @@ class Document(object):
                                     if (field.text is not None):
                                         fieldDb.integer_value = int(
                                             float(field.text))
-                                    fieldDb.data_type = str(FieldDataType.INTEGER)
+                                    fieldDb.data_type = str(
+                                        FieldDataType.INTEGER)
                                     fieldDb.save()
                                 if (field.get('indexed') and
-                                    (field.get('indexed').lower() == 'true'
-                                     or field.get('indexed').lower() == 'yes')):
-                                    if (indexedDb is not None and
-                                            indexedDb.integer_value != field.text):
+                                    (field.get('indexed').lower() == 'true' or
+                                     field.get('indexed').lower() == 'yes')):
+                                    if (indexedDb is not None
+                                            and indexedDb.integer_value !=
+                                            field.text):
                                         indexedDb.integer_value = int(
                                             float(field.text))
                                         indexedDb.save()
@@ -592,14 +599,17 @@ class Document(object):
                                     fieldDb.form_definition = self.header.form_definition
                                     if (field.text is not None):
                                         fieldDb.float_value = float(field.text)
-                                    fieldDb.data_type = str(FieldDataType.FLOAT)
+                                    fieldDb.data_type = str(
+                                        FieldDataType.FLOAT)
                                     fieldDb.save()
                                 if (field.get('indexed') and
-                                    (field.get('indexed').lower() == 'true'
-                                     or field.get('indexed').lower() == 'yes')):
-                                    if (indexedDb is not None and
-                                            indexedDb.float_value != field.text):
-                                        indexedDb.float_value = float(field.text)
+                                    (field.get('indexed').lower() == 'true' or
+                                     field.get('indexed').lower() == 'yes')):
+                                    if (indexedDb is not None
+                                            and indexedDb.float_value !=
+                                            field.text):
+                                        indexedDb.float_value = float(
+                                            field.text)
                                         indexedDb.save()
                                     elif (indexedDb is None):
                                         indexedDb = IndexedField()
@@ -613,9 +623,10 @@ class Document(object):
                                             FieldDataType.FLOAT)
                                         indexedDb.save()
                             elif datatype == FieldDataType.DATE:
-                                #lets truncate and serialize it. 
+                                #lets truncate and serialize it.
                                 dt = dateparser.parse(field.text)
-                                date_value = datetime(dt.year, dt.month, dt.day)
+                                date_value = datetime(dt.year, dt.month,
+                                                      dt.day)
                                 if (fieldDb is not None
                                         and fieldDb.date_value != date_value):
                                     fieldDb.date_value = date_value
@@ -630,10 +641,11 @@ class Document(object):
                                     fieldDb.data_type = str(FieldDataType.DATE)
                                     fieldDb.save()
                                 if (field.get('indexed') and
-                                    (field.get('indexed').lower() == 'true'
-                                     or field.get('indexed').lower() == 'yes')):
-                                    if (indexedDb is not None and
-                                            indexedDb.date_value != date_value):
+                                    (field.get('indexed').lower() == 'true' or
+                                     field.get('indexed').lower() == 'yes')):
+                                    if (indexedDb is not None
+                                            and indexedDb.date_value !=
+                                            date_value):
                                         indexedDb.date_value = date_value
                                         indexedDb.save()
                                     elif (indexedDb is None):
@@ -647,7 +659,7 @@ class Document(object):
                                             FieldDataType.DATE)
                                         indexedDb.save()
                             elif datatype == FieldDataType.DATETIME:
-                                #lets truncate and serialize it. 
+                                #lets truncate and serialize it.
                                 date_value = dateparser.parse(field.text)
                                 if (fieldDb is not None
                                         and fieldDb.date_value != date_value):
@@ -663,10 +675,11 @@ class Document(object):
                                     fieldDb.data_type = str(FieldDataType.DATE)
                                     fieldDb.save()
                                 if (field.get('indexed') and
-                                    (field.get('indexed').lower() == 'true'
-                                     or field.get('indexed').lower() == 'yes')):
-                                    if (indexedDb is not None and
-                                            indexedDb.date_value != date_value):
+                                    (field.get('indexed').lower() == 'true' or
+                                     field.get('indexed').lower() == 'yes')):
+                                    if (indexedDb is not None
+                                            and indexedDb.date_value !=
+                                            date_value):
                                         indexedDb.date_value = date_value
                                         indexedDb.save()
                                     elif (indexedDb is None):
@@ -681,7 +694,8 @@ class Document(object):
                                         indexedDb.save()
                             elif datatype == FieldDataType.UUID:
                                 if (fieldDb is not None
-                                        and str(fieldDb.uuid_value) != str(field.text)):
+                                        and str(fieldDb.uuid_value) != str(
+                                            field.text)):
                                     fieldDb.uuid_value = str(field.text)
                                     fieldDb.save()
                                 elif (fieldDb is None):
@@ -694,10 +708,11 @@ class Document(object):
                                     fieldDb.data_type = str(FieldDataType.UUID)
                                     fieldDb.save()
                                 if (field.get('indexed') and
-                                    (field.get('indexed').lower() == 'true'
-                                     or field.get('indexed').lower() == 'yes')):
-                                    if (indexedDb is not None and
-                                            str(indexedDb.uuid_value) != str(field.text)):
+                                    (field.get('indexed').lower() == 'true' or
+                                     field.get('indexed').lower() == 'yes')):
+                                    if (indexedDb is not None
+                                            and str(indexedDb.uuid_value) !=
+                                            str(field.text)):
                                         indexedDb.uuid_value = str(field.text)
                                         indexedDb.save()
                                     elif (indexedDb is None):
@@ -706,7 +721,8 @@ class Document(object):
                                         indexedDb.document = self.header
                                         indexedDb.form_definition = self.header.form_definition
                                         if (field.text is not None):
-                                            indexedDb.uuid_value = str(field.text)
+                                            indexedDb.uuid_value = str(
+                                                field.text)
                                         indexedDb.data_type = str(
                                             FieldDataType.UUID)
                                         indexedDb.save()
@@ -714,7 +730,8 @@ class Document(object):
                                 #This is an special case, we have to get first the proper object and then we serialize it as an UUID
                                 client_obj = Client.find_one(field.text)
                                 if (fieldDb is not None
-                                        and str(fieldDb.uuid_value) != str(client_obj.id)):
+                                        and str(fieldDb.uuid_value) != str(
+                                            client_obj.id)):
                                     fieldDb.uuid_value = str(client_obj.id)
                                     fieldDb.save()
                                 elif (fieldDb is None):
@@ -724,14 +741,17 @@ class Document(object):
                                     fieldDb.form_definition = self.header.form_definition
                                     if (field.text is not None):
                                         fieldDb.uuid_value = str(client_obj.id)
-                                    fieldDb.data_type = str(FieldDataType.CLIENT)
+                                    fieldDb.data_type = str(
+                                        FieldDataType.CLIENT)
                                     fieldDb.save()
                                 if (field.get('indexed') and
-                                    (field.get('indexed').lower() == 'true'
-                                     or field.get('indexed').lower() == 'yes')):
-                                    if (indexedDb is not None and
-                                            str(indexedDb.uuid_value) != str(client_obj.id)):
-                                        indexedDb.uuid_value = str(client_obj.id)
+                                    (field.get('indexed').lower() == 'true' or
+                                     field.get('indexed').lower() == 'yes')):
+                                    if (indexedDb is not None
+                                            and str(indexedDb.uuid_value) !=
+                                            str(client_obj.id)):
+                                        indexedDb.uuid_value = str(
+                                            client_obj.id)
                                         indexedDb.save()
                                     elif (indexedDb is None):
                                         indexedDb = IndexedField()
@@ -739,7 +759,8 @@ class Document(object):
                                         indexedDb.document = self.header
                                         indexedDb.form_definition = self.header.form_definition
                                         if (field.text is not None):
-                                            indexedDb.uuid_value = str(client_obj.id)
+                                            indexedDb.uuid_value = str(
+                                                client_obj.id)
                                         indexedDb.data_type = str(
                                             FieldDataType.CLIENT)
                                         indexedDb.save()
@@ -747,7 +768,8 @@ class Document(object):
                                 #This is an special case, we have to get first the proper object and then we serialize it as an UUID
                                 user_obj = User.find_one(field.text)
                                 if (fieldDb is not None
-                                        and str(fieldDb.uuid_value) != str(user_obj.id)):
+                                        and str(fieldDb.uuid_value) != str(
+                                            user_obj.id)):
                                     fieldDb.uuid_value = str(user_obj.id)
                                     fieldDb.save()
                                 elif (fieldDb is None):
@@ -760,10 +782,11 @@ class Document(object):
                                     fieldDb.data_type = str(FieldDataType.USER)
                                     fieldDb.save()
                                 if (field.get('indexed') and
-                                    (field.get('indexed').lower() == 'true'
-                                     or field.get('indexed').lower() == 'yes')):
-                                    if (indexedDb is not None and
-                                            str(indexedDb.uuid_value) != str(user_obj.id)):
+                                    (field.get('indexed').lower() == 'true' or
+                                     field.get('indexed').lower() == 'yes')):
+                                    if (indexedDb is not None
+                                            and str(indexedDb.uuid_value) !=
+                                            str(user_obj.id)):
                                         indexedDb.uuid_value = str(user_obj.id)
                                         indexedDb.save()
                                     elif (indexedDb is None):
@@ -772,7 +795,8 @@ class Document(object):
                                         indexedDb.document = self.header
                                         indexedDb.form_definition = self.header.form_definition
                                         if (field.text is not None):
-                                            indexedDb.uuid_value = str(user_obj.id)
+                                            indexedDb.uuid_value = str(
+                                                user_obj.id)
                                         indexedDb.data_type = str(
                                             FieldDataType.USER)
                                         indexedDb.save()
@@ -812,7 +836,8 @@ class Document(object):
                             and field.get('type') is not None
                             and field.get('id') == key
                             and field.get('type').lower() != 'label'):
-                        field_data_type = FieldDataType.to_enum(field.get('dataType'))
+                        field_data_type = FieldDataType.to_enum(
+                            field.get('dataType'))
                         if field_data_type == FieldDataType.CLIENT:
                             return Client.find_one(field.text)
                         elif field_data_type == FieldDataType.USER:
@@ -887,18 +912,25 @@ class Document(object):
                             return
                         elif datatype == FieldDataType.USER:
                             if not isinstance(value, User):
-                                raise ValueError(_(__name__ + ".exceptions.user_field_does_not_understand_anything_but_User_objects"))
+                                raise ValueError(
+                                    _(__name__ +
+                                      ".exceptions.user_field_does_not_understand_anything_but_User_objects"
+                                      ))
                             field.text = str(value.id)
-                            return 
+                            return
                         elif datatype == FieldDataType.CLIENT:
                             if not isinstance(value, Client):
-                                raise ValueError(_(__name__ + ".exceptions.client_field_does_not_understand_anything_but_Client_objects"))
+                                raise ValueError(
+                                    _(__name__ +
+                                      ".exceptions.client_field_does_not_understand_anything_but_Client_objects"
+                                      ))
                             field.text = str(value.id)
                             return
                         else:
                             raise DocumentFieldNotFound(
                                 _(__name__ +
-                                  ".exceptions.document_field_type_not_found ") + key)
+                                  ".exceptions.document_field_type_not_found ")
+                                + key)
         raise DocumentFieldNotFound(
             _(__name__ + ".exceptions.document_field_not_found"))
 
@@ -1578,7 +1610,9 @@ class Document(object):
         else:
             raise ValueError(
                 _('antares.app.document.manager.invalid_header_field %(key)s')
-                % {'key': key})
+                % {
+                    'key': key
+                })
 
     def set_header_fields(self, fields):
         for key, value in fields.items():
@@ -1726,15 +1760,15 @@ class Document(object):
 
         if (isinstance(status_type, str)):
             status_type = DocumentStatusType.to_enum(status_type)
-        
+
         self._evaluate_field_calculation()
         self._validate_fields()
         self._check_required_fields()
         self._hibernate_document()
-        
+
         if (status_type is not None):
             self.set_status(status_type)
-            
+
         if (status_type == DocumentStatusType.SAVED):
             #field validation
             self._validate_fields()
@@ -1742,31 +1776,31 @@ class Document(object):
             self._process_modules_hooks()
             self.header.hash = self.hash()
             self.header.save()
-    
+
     def hash(self):
         doc_xml = etree.fromstring(etree.tostring(self.document_xml))
         headerElements = doc_xml.find('headerElements')
-        
+
         #we need to exclude hash as it produces different results
         doc_hash = headerElements.find('hash')
         if (doc_hash is not None):
             doc_hash.text = None
-    
-    
-        digest = hashlib.sha256(etree.tostring(self.document_xml, pretty_print=True))
+
+        digest = hashlib.sha256(
+            etree.tostring(self.document_xml, pretty_print=True))
         self.set_hash(digest.hexdigest())
         return digest.hexdigest()
-           
+
     def verify_hash_digest(self):
         """verifies the hash with the hydrated XML """
         doc_hash = self.hash()
-        
-        logger.info("calculated hash is " + doc_hash + " and stored hash is " + self.header.hash)
+
+        logger.info("calculated hash is " + doc_hash + " and stored hash is " +
+                    self.header.hash)
         if self.header.hash == doc_hash:
             return True
         else:
             return False
-        
 
     def _evaluate_field_calculation(self):
         fields = self.get_field_dict()
@@ -1848,8 +1882,7 @@ class Document(object):
             return int(float(node.get('calculationOrder')))
         except ValueError:
             return 0
-    
-    
+
     def __get_source_definition(self, node):
         """
         
@@ -1903,9 +1936,8 @@ class Document(object):
                 if (header_value):
                     header_value = field.text
 
-
     def _process_hrn_script(self, event_type):
-       
+
         HrnCode.process_document_hrn_script(self, event_type)
 
     def _process_functions(self, event_type):
@@ -1978,7 +2010,7 @@ class Document(object):
         """ Gathers information from the system and plugs it to the fields
         
         """
-        #we only do this if the document is in DRAFTED status. 
+        #we only do this if the document is in DRAFTED status.
         if self.get_status() != DocumentStatusType.DRAFTED:
             return None
         fields = {}
@@ -1986,11 +2018,9 @@ class Document(object):
         fields['user'] = get_request().user
         fields['sysdate'] = datetime.now()
         context = js2py.EvalJs(fields)
-        for field_node in self.document_xml.xpath("//field[@type!='label' and @source]"):
+        for field_node in self.document_xml.xpath(
+                "//field[@type!='label' and @source]"):
             context.execute("result = " + field_node.get('source'))
             result = context['result']
             if result is not None:
                 self.set_field_value(field_node.get('id'), result)
-                
-                
-                

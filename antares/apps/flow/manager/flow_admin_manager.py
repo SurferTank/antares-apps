@@ -91,8 +91,8 @@ class FlowAdminManager(object):
         script_type = self.xpdl.find('xpdl:Script', namespaces=NS_MAP)
         if (not (script_type is not None
                  and script_type.get('Type') is not None
-                 and ScriptEngineType.to_enum(script_type.get('Type')) is
-                 not None)):
+                 and ScriptEngineType.to_enum(
+                     script_type.get('Type')) is not None)):
             raise InvalidXPDLException(
                 _(__name__ + ".exceptions.invalid_script_engine"))
 
@@ -197,8 +197,9 @@ class FlowAdminManager(object):
             else:
                 flow_def.access_level = FlowDefinitionAccessLevelType.to_enum(
                     SystemParameter.find_one(
-                        "FLOW_DEFINITION_DEFAULT_ACCESS_LEVEL", FieldDataType.
-                        STRING, FlowDefinitionAccessLevelType.PUBLIC))
+                        "FLOW_DEFINITION_DEFAULT_ACCESS_LEVEL",
+                        FieldDataType.STRING,
+                        FlowDefinitionAccessLevelType.PUBLIC))
             flow_version = workflow_node.find(
                 'xpdl:RedefinableHeader/xpdl:Version', namespaces=NS_MAP)
             if (flow_version is not None and flow_version.text):
@@ -206,9 +207,9 @@ class FlowAdminManager(object):
 
             access_level = workflow_node.find(
                 'xpdl:RedefinableHeader/xpdl:Version', namespaces=NS_MAP)
-            if (access_level is not None and access_level.text
-                    and FlowAccessLevelType.to_enum(access_level.text) is
-                    not None):
+            if (access_level is not None
+                    and access_level.text and FlowAccessLevelType.to_enum(
+                        access_level.text) is not None):
                 flow_def.access_level = str(
                     FlowAccessLevelType.to_enum(access_level.text))
 
@@ -243,8 +244,9 @@ class FlowAdminManager(object):
                 if priority is None:
                     priority = FlowPriorityType.to_enum(
                         SystemParameter.find_one(
-                            "FLOW_DEFINITION_DEFAULT_PRIORITY", FieldDataType.
-                            STRING, FlowPriorityType.STANDARD.value))
+                            "FLOW_DEFINITION_DEFAULT_PRIORITY",
+                            FieldDataType.STRING,
+                            FlowPriorityType.STANDARD.value))
                 flow_def.priority = priority
             else:
                 flow_def.priority = FlowPriorityType.to_enum(
@@ -511,8 +513,10 @@ class FlowAdminManager(object):
                         raise InvalidXPDLException(
                             _(__name__ +
                               '.exceptions.role_was_not_found_on_system %(role_id)s'
-                              ) %
-                            {'role_id': extended_attribute_node.get('Value')})
+                              ) % {
+                                  'role_id':
+                                  extended_attribute_node.get('Value')
+                              })
                 elif (extended_attribute_node.get('Name') and
                       (extended_attribute_node.get('Name').lower() == 'unit' or
                        extended_attribute_node.get('Name').lower() == 'orgunit'
@@ -538,8 +542,10 @@ class FlowAdminManager(object):
                         raise InvalidXPDLException(
                             _(__name__ +
                               '.exceptions.username_was_not_found_on_system  %(username)s'
-                              ) %
-                            {'username': extended_attribute_node.get('Value')})
+                              ) % {
+                                  'username':
+                                  extended_attribute_node.get('Value')
+                              })
         participant_def.save()
         flow_def.participant_definition_set.add(participant_def)
 
@@ -871,9 +877,8 @@ class FlowAdminManager(object):
             condition_node = transition_node.find(
                 'xpdl:Condition', namespaces=NS_MAP)
             if (condition_node is not None):
-                if (condition_node.get('Type')
-                        and TransitionType.to_enum(condition_node.get('Type'))
-                        is not None):
+                if (condition_node.get('Type') and TransitionType.to_enum(
+                        condition_node.get('Type')) is not None):
                     trans_def.transition_type = TransitionType.to_enum(
                         condition_node.get('Type'))
                 if (condition_node.text):

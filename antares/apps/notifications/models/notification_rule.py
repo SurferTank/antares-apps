@@ -26,11 +26,13 @@ class NotificationRule(models.Model):
     user_code_variable = models.CharField(
         max_length=200,
         blank=True,
-        null=True, )
+        null=True,
+    )
     date_variable = models.CharField(
         max_length=200,
         blank=True,
-        null=True, )
+        null=True,
+    )
     content_variable = models.CharField(max_length=200, blank=True, null=True)
     content_template = RichTextField(blank=True, null=True)
     title_variable = models.CharField(max_length=200, blank=True, null=True)

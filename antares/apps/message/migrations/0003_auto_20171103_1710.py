@@ -18,19 +18,34 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='message',
             name='author',
-            field=models.ForeignKey(editable=False, help_text='antares.apps.message.models.message.author_help', on_delete=django.db.models.deletion.PROTECT, to=settings.AUTH_USER_MODEL, verbose_name='antares.apps.message.models.message.author'),
+            field=models.ForeignKey(
+                editable=False,
+                help_text='antares.apps.message.models.message.author_help',
+                on_delete=django.db.models.deletion.PROTECT,
+                to=settings.AUTH_USER_MODEL,
+                verbose_name='antares.apps.message.models.message.author'),
             preserve_default=False,
         ),
         migrations.AddField(
             model_name='message',
             name='creation_date',
-            field=models.DateTimeField(editable=False, help_text='antares.apps.message.models.message.creation_name_help', verbose_name='antares.apps.message.models.message.creation_name'),
+            field=models.DateTimeField(
+                editable=False,
+                help_text=
+                'antares.apps.message.models.message.creation_name_help',
+                verbose_name='antares.apps.message.models.message.creation_name'
+            ),
             preserve_default=False,
         ),
         migrations.AddField(
             model_name='message',
             name='update_date',
-            field=models.DateTimeField(editable=False, help_text='antares.apps.message.models.message.update_date_help', verbose_name='antares.apps.message.models.message.update_date'),
+            field=models.DateTimeField(
+                editable=False,
+                help_text=
+                'antares.apps.message.models.message.update_date_help',
+                verbose_name='antares.apps.message.models.message.update_date'
+            ),
             preserve_default=False,
         ),
     ]

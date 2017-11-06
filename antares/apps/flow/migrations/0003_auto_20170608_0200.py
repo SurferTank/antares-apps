@@ -18,11 +18,13 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='activitydefinition',
             name='cost',
-            field=models.FloatField(blank=True, null=True), ),
+            field=models.FloatField(blank=True, null=True),
+        ),
         migrations.AddField(
             model_name='activitydefinition',
             name='duration',
-            field=models.FloatField(blank=True, null=True), ),
+            field=models.FloatField(blank=True, null=True),
+        ),
         migrations.AddField(
             model_name='activitydefinition',
             name='instantation',
@@ -30,34 +32,42 @@ class Migration(migrations.Migration):
                 blank=True,
                 enum=FlowActivityInstantiationType,
                 max_length=10,
-                null=True), ),
+                null=True),
+        ),
         migrations.AddField(
             model_name='activitydefinition',
             name='waiting_time',
-            field=models.FloatField(blank=True, null=True), ),
+            field=models.FloatField(blank=True, null=True),
+        ),
         migrations.AddField(
             model_name='activitydefinition',
             name='working_time',
-            field=models.FloatField(blank=True, null=True), ),
+            field=models.FloatField(blank=True, null=True),
+        ),
         migrations.AddField(
             model_name='flowdefinition',
             name='duration',
-            field=models.FloatField(blank=True, null=True), ),
+            field=models.FloatField(blank=True, null=True),
+        ),
         migrations.AddField(
             model_name='flowdefinition',
             name='priority',
-            field=models.CharField(blank=True, max_length=100, null=True), ),
+            field=models.CharField(blank=True, max_length=100, null=True),
+        ),
         migrations.AddField(
             model_name='flowdefinition',
             name='time_unit',
             field=enumfields.fields.EnumField(
-                blank=True, enum=TimeUnitType, max_length=10, null=True), ),
+                blank=True, enum=TimeUnitType, max_length=10, null=True),
+        ),
         migrations.AddField(
             model_name='flowdefinition',
             name='waiting_time',
-            field=models.FloatField(blank=True, null=True), ),
+            field=models.FloatField(blank=True, null=True),
+        ),
         migrations.AddField(
             model_name='flowdefinition',
             name='working_time',
-            field=models.FloatField(blank=True, null=True), ),
+            field=models.FloatField(blank=True, null=True),
+        ),
     ]

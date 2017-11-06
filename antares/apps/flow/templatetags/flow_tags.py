@@ -67,13 +67,17 @@ def doc_create_dropdown_menu(context):
                 activity_id=activity.id,
                 next=reverse(
                     'antares.apps.flow:dashboard_view',
-                    kwargs={'activity_id': str(activity.id)}))
+                    kwargs={
+                        'activity_id': str(activity.id)
+                    }))
         else:
             standard_params = '&activity_id={activity_id}&next={next}&ss=true'.format(
                 activity_id=activity.id,
                 next=reverse(
                     'antares.apps.flow:dashboard_view',
-                    kwargs={'activity_id': str(activity.id)}))
+                    kwargs={
+                        'activity_id': str(activity.id)
+                    }))
         for param in form.parameter_set.select_related().all():
             param_value = _eval_form_value(activity, param.value)
             if (param_value):
@@ -83,7 +87,9 @@ def doc_create_dropdown_menu(context):
             documents += '<li><a href="{doc_route}?{params_str}{standard_params}">{form_name}</a></li>'.format(
                 doc_route=reverse(
                     'antares.apps.document:create_view',
-                    kwargs={'form_id': form.form_definition.id}),
+                    kwargs={
+                        'form_id': form.form_definition.id
+                    }),
                 params_str=params_str,
                 standard_params=standard_params,
                 form_name=form.form_definition.id)

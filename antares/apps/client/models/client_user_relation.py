@@ -79,8 +79,8 @@ class ClientUserRelation(models.Model):
                     client_list.append(client_relation.child_client)
         else:
             for client_relation in ClientUserRelation.objects.filter(
-                    Q(parent_user=get_request().user) & Q(
-                        start_date__lte=timezone.now()) &
+                    Q(parent_user=get_request().user) &
+                    Q(start_date__lte=timezone.now()) &
                 (Q(end_date__gte=timezone.now()) | Q(end_date__isnull=True))):
                 if ((only_executive == True and
                      ClientRelationType.to_enum(client_relation.relation_type)

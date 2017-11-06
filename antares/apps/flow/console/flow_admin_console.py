@@ -236,9 +236,8 @@ class FlowAdminConsole(object):
         except ObjectDoesNotExist:
             return _(__name__ + ".console.flow_does_not_exist_in_package")
 
-        if ('withstatus' in params
-                and FlowDefinitionStatusType.to_enum(params['withstatus']) is
-                not None):
+        if ('withstatus' in params and FlowDefinitionStatusType.to_enum(
+                params['withstatus']) is not None):
             flow_status = FlowDefinitionStatusType.to_enum(
                 params['withstatus'])
         else:

@@ -116,11 +116,8 @@ class AccountBalance(models.Model):
         return str(self.id)
 
     @classmethod
-    def find_or_create_by_CCPAD(cls,
-                                client: Client,
-                                concept_type: ConceptType,
-                                period: int,
-                                account_type: AccountType,
+    def find_or_create_by_CCPAD(cls, client: Client, concept_type: ConceptType,
+                                period: int, account_type: AccountType,
                                 document: DocumentHeader):
         """ Returns the account balance that matches the unique identifiers - COPAD
         (Client, Concept type, Period, Account type and Document). If none is
@@ -150,11 +147,8 @@ class AccountBalance(models.Model):
             return balance
 
     @classmethod
-    def find_by_CCPAD(cls,
-                      client: Client,
-                      concept_type: ConceptType,
-                      period: int,
-                      account_type: AccountType,
+    def find_by_CCPAD(cls, client: Client, concept_type: ConceptType,
+                      period: int, account_type: AccountType,
                       document: DocumentHeader):
         """ Retrieves a balance by Client, concept type, Period, Account Type or, if a document based 
             document, by Client, Document, Period, Account type. It infers the document based account 
@@ -214,7 +208,11 @@ class AccountBalance(models.Model):
         db_table = 'acc_account_balance'
         #unique_together = (('client', 'concept_type', 'period', 'account_type',
         #                    'base_document', ), )
-        unique_together = (('client', 'concept_type', 'period',
-                            'account_type', ), )
+        unique_together = ((
+            'client',
+            'concept_type',
+            'period',
+            'account_type',
+        ), )
         verbose_name = _(__name__ + ".table_name")
         verbose_name_plural = _(__name__ + ".table_name_plural")

@@ -59,9 +59,8 @@ class InitialSettingsConsole(object):
         if ('withfile' in params):
             xpdl_file = os.path.join(package, params['withfile'])
             if os.path.isfile(xpdl_file) is False:
-                return _(__name__ +
-                         ".package_leads_to_inexistent_file {file}").format(
-                             file=xpdl_file)
+                return _(__name__ + ".package_leads_to_inexistent_file {file}"
+                         ).format(file=xpdl_file)
             manager = FlowAdminManager(xpdl_file=xpdl_file)
         else:
             return _(__name__ + ".missing_parameter {parameter}").format(

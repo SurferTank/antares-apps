@@ -85,7 +85,8 @@ class Migration(migrations.Migration):
                 'verbose_name': 'Action Definition',
                 'db_table': 'core_action_definition',
                 'verbose_name_plural': 'Action Definition',
-            }, ),
+            },
+        ),
         migrations.CreateModel(
             name='ActionParameterDefinition',
             fields=[
@@ -132,7 +133,8 @@ class Migration(migrations.Migration):
                 'core_action_parameter_definition',
                 'verbose_name_plural':
                 'antares.apps.core.models.action_parameter_definition.table_name_plural',
-            }, ),
+            },
+        ),
         migrations.CreateModel(
             name='Catalog',
             fields=[
@@ -171,7 +173,8 @@ class Migration(migrations.Migration):
                 'verbose_name': 'Catalog',
                 'db_table': 'core_catalog',
                 'verbose_name_plural': 'Catalogs',
-            }, ),
+            },
+        ),
         migrations.CreateModel(
             name='ConceptType',
             fields=[
@@ -221,7 +224,8 @@ class Migration(migrations.Migration):
                 'verbose_name': 'Concept Type',
                 'db_table': 'core_concept_type',
                 'verbose_name_plural': 'Concept Types',
-            }, ),
+            },
+        ),
         migrations.CreateModel(
             name='Currency',
             fields=[
@@ -263,7 +267,8 @@ class Migration(migrations.Migration):
                 'verbose_name': 'Currency',
                 'db_table': 'core_currency',
                 'verbose_name_plural': 'Currencies',
-            }, ),
+            },
+        ),
         migrations.CreateModel(
             name='CurrencyExchangeRate',
             fields=[
@@ -316,7 +321,8 @@ class Migration(migrations.Migration):
                 'core_currency_exchange_rate',
                 'verbose_name_plural':
                 'antares.apps.core.models.currency_exchange_rate.table_name_plural',
-            }, ),
+            },
+        ),
         migrations.CreateModel(
             name='Holiday',
             fields=[
@@ -374,7 +380,8 @@ class Migration(migrations.Migration):
                 'verbose_name': 'Holiday',
                 'db_table': 'core_holiday',
                 'verbose_name_plural': 'Holidays',
-            }, ),
+            },
+        ),
         migrations.CreateModel(
             name='HrnCode',
             fields=[
@@ -434,7 +441,8 @@ class Migration(migrations.Migration):
                 'verbose_name': 'Human Readable Code',
                 'db_table': 'core_hrn_code',
                 'verbose_name_plural': 'Human Readable Codes',
-            }, ),
+            },
+        ),
         migrations.CreateModel(
             name='I18nString',
             fields=[
@@ -489,7 +497,8 @@ class Migration(migrations.Migration):
                 'core_i18n_string',
                 'verbose_name_plural':
                 'antares.apps.core.models.i18n_string.table_name_plural',
-            }, ),
+            },
+        ),
         migrations.CreateModel(
             name='Log',
             fields=[
@@ -555,7 +564,8 @@ class Migration(migrations.Migration):
                 'core_log',
                 'verbose_name_plural':
                 'antares.apps.core.models.log.table_name_plural',
-            }, ),
+            },
+        ),
         migrations.CreateModel(
             name='StoredFile',
             fields=[
@@ -612,7 +622,8 @@ class Migration(migrations.Migration):
                 'core_stored_file',
                 'verbose_name_plural':
                 'antares.apps.core.models.stored_file.table_name_plural',
-            }, ),
+            },
+        ),
         migrations.CreateModel(
             name='SystemParameter',
             fields=[
@@ -701,7 +712,8 @@ class Migration(migrations.Migration):
                 'verbose_name': 'System Parameter',
                 'db_table': 'core_system_parameter',
                 'verbose_name_plural': 'System Parameters',
-            }, ),
+            },
+        ),
         migrations.CreateModel(
             name='Tag',
             fields=[
@@ -733,7 +745,8 @@ class Migration(migrations.Migration):
                 'core_tag',
                 'verbose_name_plural':
                 'antares.apps.core.models.tag.table_name_plural',
-            }, ),
+            },
+        ),
         migrations.CreateModel(
             name='UserParameter',
             fields=[
@@ -819,5 +832,6 @@ class Migration(migrations.Migration):
                 'db_table': 'core_user_parameter',
                 'verbose_name': 'User Parameter',
                 'verbose_name_plural': 'User Parameters',
-            }, ),
+            },
+        ),
     ]

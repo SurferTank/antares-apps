@@ -197,8 +197,8 @@ class ObligationConsole(object):
             else:
                 result += "<td>&nbsp;</td>"
             if (obligation_vector.status is not None
-                    and ObligationStatusType.to_enum(obligation_vector.status)
-                    is not None):
+                    and ObligationStatusType.to_enum(
+                        obligation_vector.status) is not None):
                 result += "<td>" + ObligationStatusType.to_enum(
                     obligation_vector.status).get_label() + "</td>"
             else:

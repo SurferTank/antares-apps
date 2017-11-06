@@ -79,9 +79,8 @@ class MessageStatus(models.Model):
             status_object.module = kwargs.get('module')
             status_object.save()
 
-        if ('status' in kwargs
-                and MessageStatusType.to_enum(status_object.status) !=
-                kwargs.get('status')):
+        if ('status' in kwargs and MessageStatusType.to_enum(
+                status_object.status) != kwargs.get('status')):
             status_object.status = kwargs.get('status')
             status_object.save()
         return status_object

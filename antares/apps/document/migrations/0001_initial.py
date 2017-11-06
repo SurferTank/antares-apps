@@ -53,7 +53,8 @@ class Migration(migrations.Migration):
                 'verbose_name': 'Document Access Control List',
                 'db_table': 'doc_document_acl',
                 'verbose_name_plural': 'Document Access Control Lists',
-            }, ),
+            },
+        ),
         migrations.CreateModel(
             name='DocumentField',
             fields=[
@@ -149,7 +150,8 @@ class Migration(migrations.Migration):
                 'antares.apps.document.models.document_field.table_name',
                 'verbose_name_plural':
                 'antares.apps.document.models.document_field.table_name_plural',
-            }, ),
+            },
+        ),
         migrations.CreateModel(
             name='DocumentHeader',
             fields=[
@@ -286,7 +288,8 @@ class Migration(migrations.Migration):
                 'doc_header',
                 'verbose_name_plural':
                 'antares.apps.document.models.document_header.table_name_plural',
-            }, ),
+            },
+        ),
         migrations.CreateModel(
             name='DocumentHrn',
             fields=[
@@ -338,7 +341,8 @@ class Migration(migrations.Migration):
                 'antares.apps.document.models.document_hrn.table_name',
                 'verbose_name_plural':
                 'antares.apps.document.models.document_hrn.table_name_plural',
-            }, ),
+            },
+        ),
         migrations.CreateModel(
             name='DocumentTableContent',
             fields=[
@@ -370,7 +374,8 @@ class Migration(migrations.Migration):
                 'antares.apps.document.models.document_table_content.table_name',
                 'verbose_name_plural':
                 'antares.apps.document.models.document_table_content.table_name_plural',
-            }, ),
+            },
+        ),
         migrations.CreateModel(
             name='FormActionMap',
             fields=[
@@ -391,7 +396,8 @@ class Migration(migrations.Migration):
                 'doc_action_map',
                 'verbose_name_plural':
                 'antares.apps.document.models.form_action_map.table_name_plural',
-            }, ),
+            },
+        ),
         migrations.CreateModel(
             name='FormClass',
             fields=[
@@ -420,7 +426,8 @@ class Migration(migrations.Migration):
                 'verbose_name': 'Form Class',
                 'db_table': 'doc_form_class',
                 'verbose_name_plural': 'Form Classes',
-            }, ),
+            },
+        ),
         migrations.CreateModel(
             name='FormDefinition',
             fields=[
@@ -455,7 +462,8 @@ class Migration(migrations.Migration):
                 'verbose_name': 'Form Definition',
                 'db_table': 'doc_form_definition',
                 'verbose_name_plural': 'Form Definitions',
-            }, ),
+            },
+        ),
         migrations.CreateModel(
             name='FormDefinitionACL',
             fields=[
@@ -479,7 +487,8 @@ class Migration(migrations.Migration):
                 'verbose_name': 'Form Definition Access Control List',
                 'db_table': 'doc_form_definition_acl',
                 'verbose_name_plural': 'Form Definition Access Control Lists',
-            }, ),
+            },
+        ),
         migrations.CreateModel(
             name='IndexedField',
             fields=[
@@ -589,7 +598,8 @@ class Migration(migrations.Migration):
                 'antares.apps.document.models.indexed_field.table_name',
                 'verbose_name_plural':
                 'antares.apps.document.models.indexed_field.table_name_plural',
-            }, ),
+            },
+        ),
         migrations.CreateModel(
             name='StatusLog',
             fields=[
@@ -634,5 +644,6 @@ class Migration(migrations.Migration):
                 'doc_status_log',
                 'verbose_name_plural':
                 'antares.apps.document.models.status_log.table_name_plural',
-            }, ),
+            },
+        ),
     ]

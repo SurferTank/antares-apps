@@ -24,7 +24,7 @@ class MessageType(EnumUtilsMixin, Enum):
         CURRENT_ACCOUNT = _(__name__ + '.MessageType.' + 'CURRENT_ACCOUNT')
         FLOW_CASE = _(__name__ + '.MessageType.' + 'FLOW_CASE')
         DOCUMENT = _(__name__ + '.MessageType.' + 'DOCUMENT')
-        EXTERNAL_SYSTEM = _(__name__ + '.MessageType.' + 'EXTERNAL_SYSTEM') 
+        EXTERNAL_SYSTEM = _(__name__ + '.MessageType.' + 'EXTERNAL_SYSTEM')
 
 
 class MessageStatusType(EnumUtilsMixin, Enum):

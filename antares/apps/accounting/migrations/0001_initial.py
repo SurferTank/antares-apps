@@ -60,7 +60,8 @@ class Migration(migrations.Migration):
                 'antares.apps.accounting.models.account_balance.table_name',
                 'verbose_name_plural':
                 'antares.apps.accounting.models.account_balance.table_name_plural',
-            }, ),
+            },
+        ),
         migrations.CreateModel(
             name='AccountDocument',
             fields=[
@@ -86,7 +87,8 @@ class Migration(migrations.Migration):
                 'acc_account_document',
                 'verbose_name_plural':
                 'antares.apps.accounting.models.account_document.table_name_plural',
-            }, ),
+            },
+        ),
         migrations.CreateModel(
             name='AccountRule',
             fields=[
@@ -123,7 +125,8 @@ class Migration(migrations.Migration):
                 'verbose_name': 'Account Rule',
                 'db_table': 'acc_account_rule',
                 'verbose_name_plural': 'Account Rules',
-            }, ),
+            },
+        ),
         migrations.CreateModel(
             name='AccountTransaction',
             fields=[
@@ -169,7 +172,8 @@ class Migration(migrations.Migration):
                 'acc_transaction',
                 'verbose_name_plural':
                 'antares.apps.accounting.models.account_transaction.table_name_plural',
-            }, ),
+            },
+        ),
         migrations.CreateModel(
             name='AccountType',
             fields=[
@@ -193,7 +197,8 @@ class Migration(migrations.Migration):
                 'verbose_name': 'Account Type',
                 'db_table': 'acc_account_type',
                 'verbose_name_plural': 'Account Types',
-            }, ),
+            },
+        ),
         migrations.CreateModel(
             name='GLAccountType',
             fields=[
@@ -219,7 +224,8 @@ class Migration(migrations.Migration):
                 'verbose_name': 'General Ledger Account Type',
                 'db_table': 'acc_gl_account_type',
                 'verbose_name_plural': 'General Ledger Account Types',
-            }, ),
+            },
+        ),
         migrations.CreateModel(
             name='GLBalance',
             fields=[
@@ -246,7 +252,8 @@ class Migration(migrations.Migration):
                 'acc_gl_balance',
                 'verbose_name_plural':
                 'antares.apps.accounting.models.gl_balance.table_name_plural',
-            }, ),
+            },
+        ),
         migrations.CreateModel(
             name='GLTransaction',
             fields=[
@@ -273,7 +280,8 @@ class Migration(migrations.Migration):
                 'acc_gl_transaction',
                 'verbose_name_plural':
                 'antares.apps.accounting.models.gl_transaction.table_name_plural',
-            }, ),
+            },
+        ),
         migrations.CreateModel(
             name='TransactionType',
             fields=[
@@ -297,5 +305,6 @@ class Migration(migrations.Migration):
                 'verbose_name': 'Transaction Type',
                 'db_table': 'acc_transaction_type',
                 'verbose_name_plural': 'Transaction Types',
-            }, ),
+            },
+        ),
     ]

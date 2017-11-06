@@ -40,7 +40,8 @@ class Migration(migrations.Migration):
                 help_text='antares.apps.core.models.tag.author_help',
                 on_delete=django.db.models.deletion.PROTECT,
                 to=settings.AUTH_USER_MODEL,
-                verbose_name='antares.apps.core.models.tag.author'), ),
+                verbose_name='antares.apps.core.models.tag.author'),
+        ),
         migrations.AddField(
             model_name='systemparameter',
             name='author',
@@ -51,7 +52,8 @@ class Migration(migrations.Migration):
                 on_delete=django.db.models.deletion.PROTECT,
                 to=settings.AUTH_USER_MODEL,
                 verbose_name='antares.apps.core.models.system_parameter.author'
-            ), ),
+            ),
+        ),
         migrations.AddField(
             model_name='storedfile',
             name='author',
@@ -60,7 +62,8 @@ class Migration(migrations.Migration):
                 help_text='antares.apps.core.models.stored_file.author_help',
                 on_delete=django.db.models.deletion.PROTECT,
                 to=settings.AUTH_USER_MODEL,
-                verbose_name='antares.apps.core.models.stored_file.author'), ),
+                verbose_name='antares.apps.core.models.stored_file.author'),
+        ),
         migrations.AddField(
             model_name='i18nstring',
             name='author',
@@ -69,7 +72,8 @@ class Migration(migrations.Migration):
                 help_text='antares.apps.core.models.i18n_string.author_help',
                 on_delete=django.db.models.deletion.PROTECT,
                 to=settings.AUTH_USER_MODEL,
-                verbose_name='antares.apps.core.models.i18n_string.author'), ),
+                verbose_name='antares.apps.core.models.i18n_string.author'),
+        ),
         migrations.AddField(
             model_name='hrncode',
             name='author',
@@ -78,7 +82,8 @@ class Migration(migrations.Migration):
                 help_text='antares.apps.core.models.hrn_code.author_help',
                 on_delete=django.db.models.deletion.PROTECT,
                 to=settings.AUTH_USER_MODEL,
-                verbose_name='antares.apps.core.models.hrn_code.author'), ),
+                verbose_name='antares.apps.core.models.hrn_code.author'),
+        ),
         migrations.AddField(
             model_name='hrncode',
             name='flow_definition',
@@ -91,7 +96,8 @@ class Migration(migrations.Migration):
                 on_delete=django.db.models.deletion.PROTECT,
                 to='flow.FlowDefinition',
                 verbose_name='antares.apps.core.models.hrn_code.flow_definition'
-            ), ),
+            ),
+        ),
         migrations.AddField(
             model_name='hrncode',
             name='form_definition',
@@ -104,7 +110,8 @@ class Migration(migrations.Migration):
                 on_delete=django.db.models.deletion.PROTECT,
                 to='document.FormDefinition',
                 verbose_name='antares.apps.core.models.hrn_code.form_definition'
-            ), ),
+            ),
+        ),
         migrations.AddField(
             model_name='hrncode',
             name='organizational_unit',
@@ -117,7 +124,8 @@ class Migration(migrations.Migration):
                 on_delete=django.db.models.deletion.PROTECT,
                 to='user.OrgUnit',
                 verbose_name=
-                'antares.apps.core.models.hrn_code.organizational_unit'), ),
+                'antares.apps.core.models.hrn_code.organizational_unit'),
+        ),
         migrations.AddField(
             model_name='holiday',
             name='author',
@@ -126,7 +134,8 @@ class Migration(migrations.Migration):
                 help_text='antares.apps.core.models.holiday.author_help',
                 on_delete=django.db.models.deletion.PROTECT,
                 to=settings.AUTH_USER_MODEL,
-                verbose_name='antares.apps.core.models.holiday.author'), ),
+                verbose_name='antares.apps.core.models.holiday.author'),
+        ),
         migrations.AddField(
             model_name='currencyexchangerate',
             name='author',
@@ -137,7 +146,8 @@ class Migration(migrations.Migration):
                 on_delete=django.db.models.deletion.PROTECT,
                 to=settings.AUTH_USER_MODEL,
                 verbose_name=
-                'antares.apps.core.models.currency_exchange_rate.author'), ),
+                'antares.apps.core.models.currency_exchange_rate.author'),
+        ),
         migrations.AddField(
             model_name='currencyexchangerate',
             name='from_currency',
@@ -150,7 +160,8 @@ class Migration(migrations.Migration):
                 to='core.Currency',
                 verbose_name=
                 'antares.apps.core.models.currency_exchange_rate.from_currency'
-            ), ),
+            ),
+        ),
         migrations.AddField(
             model_name='currencyexchangerate',
             name='to_currency',
@@ -172,7 +183,8 @@ class Migration(migrations.Migration):
                 help_text='antares.apps.core.models.currency.author_help',
                 on_delete=django.db.models.deletion.PROTECT,
                 to=settings.AUTH_USER_MODEL,
-                verbose_name='antares.apps.core.models.currency.author'), ),
+                verbose_name='antares.apps.core.models.currency.author'),
+        ),
         migrations.AddField(
             model_name='concepttype',
             name='author',
@@ -203,7 +215,8 @@ class Migration(migrations.Migration):
                 help_text='antares.apps.core.models.catalog.author_help',
                 on_delete=django.db.models.deletion.PROTECT,
                 to=settings.AUTH_USER_MODEL,
-                verbose_name='antares.apps.core.models.catalog.author'), ),
+                verbose_name='antares.apps.core.models.catalog.author'),
+        ),
         migrations.AddField(
             model_name='catalog',
             name='document_header',
@@ -216,7 +229,8 @@ class Migration(migrations.Migration):
                 on_delete=django.db.models.deletion.PROTECT,
                 to='document.DocumentHeader',
                 verbose_name='antares.apps.core.models.catalog.document_header'
-            ), ),
+            ),
+        ),
         migrations.AddField(
             model_name='actionparameterdefinition',
             name='action_definition',
@@ -230,7 +244,8 @@ class Migration(migrations.Migration):
                 to='core.ActionDefinition',
                 verbose_name=
                 'antares.apps.core.models.action_parameter_definition.action_definition'
-            ), ),
+            ),
+        ),
         migrations.AddField(
             model_name='actiondefinition',
             name='author',
@@ -241,8 +256,10 @@ class Migration(migrations.Migration):
                 on_delete=django.db.models.deletion.PROTECT,
                 to=settings.AUTH_USER_MODEL,
                 verbose_name='antares.apps.core.models.action_definition.author'
-            ), ),
+            ),
+        ),
         migrations.AlterUniqueTogether(
             name='userparameter',
-            unique_together=set([('id', 'user')]), ),
+            unique_together=set([('id', 'user')]),
+        ),
     ]

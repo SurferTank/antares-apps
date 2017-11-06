@@ -6,6 +6,7 @@ logger = logging.getLogger(__name__)
 
 _requests = {}
 
+
 def get_request():
     """this includes a dirty hack for testing  """
     from django.conf import settings
@@ -29,8 +30,5 @@ def get_request():
 
 
 class RequestMiddleware(MiddlewareMixin):
-    
     def process_request(self, request):
         _requests[current_thread()] = request
-        
-    

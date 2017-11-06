@@ -29,7 +29,8 @@ class Migration(migrations.Migration):
                 editable=False,
                 null=True,
                 on_delete=django.db.models.deletion.PROTECT,
-                to=settings.AUTH_USER_MODEL), ),
+                to=settings.AUTH_USER_MODEL),
+        ),
         migrations.AddField(
             model_name='transactiontype',
             name='inverse_transaction_type',
@@ -38,7 +39,8 @@ class Migration(migrations.Migration):
                 db_column='inverse_transaction_type',
                 null=True,
                 on_delete=django.db.models.deletion.PROTECT,
-                to='accounting.TransactionType'), ),
+                to='accounting.TransactionType'),
+        ),
         migrations.AddField(
             model_name='gltransaction',
             name='gl_account_type',
@@ -47,7 +49,8 @@ class Migration(migrations.Migration):
                 db_column='gl_account_type',
                 null=True,
                 on_delete=django.db.models.deletion.PROTECT,
-                to='accounting.GLAccountType'), ),
+                to='accounting.GLAccountType'),
+        ),
         migrations.AddField(
             model_name='gltransaction',
             name='transaction',
@@ -56,7 +59,8 @@ class Migration(migrations.Migration):
                 db_column='gl_transaction',
                 null=True,
                 on_delete=django.db.models.deletion.PROTECT,
-                to='accounting.AccountTransaction'), ),
+                to='accounting.AccountTransaction'),
+        ),
         migrations.AddField(
             model_name='glbalance',
             name='client',
@@ -65,7 +69,8 @@ class Migration(migrations.Migration):
                 db_column='client',
                 null=True,
                 on_delete=django.db.models.deletion.PROTECT,
-                to='client.Client'), ),
+                to='client.Client'),
+        ),
         migrations.AddField(
             model_name='glbalance',
             name='gl_account_type',
@@ -74,7 +79,8 @@ class Migration(migrations.Migration):
                 db_column='gl_account_type',
                 null=True,
                 on_delete=django.db.models.deletion.PROTECT,
-                to='accounting.GLAccountType'), ),
+                to='accounting.GLAccountType'),
+        ),
         migrations.AddField(
             model_name='glbalance',
             name='last_transaction',
@@ -83,7 +89,8 @@ class Migration(migrations.Migration):
                 db_column='last_gl_transaction',
                 null=True,
                 on_delete=django.db.models.deletion.PROTECT,
-                to='accounting.GLTransaction'), ),
+                to='accounting.GLTransaction'),
+        ),
         migrations.AddField(
             model_name='glaccounttype',
             name='author',
@@ -92,7 +99,8 @@ class Migration(migrations.Migration):
                 editable=False,
                 null=True,
                 on_delete=django.db.models.deletion.PROTECT,
-                to=settings.AUTH_USER_MODEL), ),
+                to=settings.AUTH_USER_MODEL),
+        ),
         migrations.AddField(
             model_name='glaccounttype',
             name='parent',
@@ -101,7 +109,8 @@ class Migration(migrations.Migration):
                 null=True,
                 on_delete=django.db.models.deletion.CASCADE,
                 related_name='children',
-                to='accounting.GLAccountType'), ),
+                to='accounting.GLAccountType'),
+        ),
         migrations.AddField(
             model_name='accounttype',
             name='author',
@@ -110,7 +119,8 @@ class Migration(migrations.Migration):
                 editable=False,
                 null=True,
                 on_delete=django.db.models.deletion.PROTECT,
-                to=settings.AUTH_USER_MODEL), ),
+                to=settings.AUTH_USER_MODEL),
+        ),
         migrations.AddField(
             model_name='accounttransaction',
             name='account_document',
@@ -119,7 +129,8 @@ class Migration(migrations.Migration):
                 db_column='account_document',
                 null=True,
                 on_delete=django.db.models.deletion.PROTECT,
-                to='accounting.AccountDocument'), ),
+                to='accounting.AccountDocument'),
+        ),
         migrations.AddField(
             model_name='accounttransaction',
             name='account_type',
@@ -128,7 +139,8 @@ class Migration(migrations.Migration):
                 db_column='account_type',
                 null=True,
                 on_delete=django.db.models.deletion.PROTECT,
-                to='accounting.AccountType'), ),
+                to='accounting.AccountType'),
+        ),
         migrations.AddField(
             model_name='accounttransaction',
             name='balance',
@@ -137,7 +149,8 @@ class Migration(migrations.Migration):
                 db_column='balance',
                 null=True,
                 on_delete=django.db.models.deletion.PROTECT,
-                to='accounting.AccountBalance'), ),
+                to='accounting.AccountBalance'),
+        ),
         migrations.AddField(
             model_name='accounttransaction',
             name='client',
@@ -146,7 +159,8 @@ class Migration(migrations.Migration):
                 db_column='client',
                 null=True,
                 on_delete=django.db.models.deletion.PROTECT,
-                to='client.Client'), ),
+                to='client.Client'),
+        ),
         migrations.AddField(
             model_name='accounttransaction',
             name='concept_type',
@@ -155,7 +169,8 @@ class Migration(migrations.Migration):
                 db_column='concept_type',
                 null=True,
                 on_delete=django.db.models.deletion.PROTECT,
-                to='core.ConceptType'), ),
+                to='core.ConceptType'),
+        ),
         migrations.AddField(
             model_name='accounttransaction',
             name='currency',
@@ -164,7 +179,8 @@ class Migration(migrations.Migration):
                 db_column='currency',
                 null=True,
                 on_delete=django.db.models.deletion.PROTECT,
-                to='core.Currency'), ),
+                to='core.Currency'),
+        ),
         migrations.AddField(
             model_name='accounttransaction',
             name='document',
@@ -173,7 +189,8 @@ class Migration(migrations.Migration):
                 db_column='document',
                 null=True,
                 on_delete=django.db.models.deletion.PROTECT,
-                to='document.DocumentHeader'), ),
+                to='document.DocumentHeader'),
+        ),
         migrations.AddField(
             model_name='accounttransaction',
             name='transaction_type',
@@ -182,7 +199,8 @@ class Migration(migrations.Migration):
                 db_column='transaction_type',
                 null=True,
                 on_delete=django.db.models.deletion.PROTECT,
-                to='accounting.TransactionType'), ),
+                to='accounting.TransactionType'),
+        ),
         migrations.AddField(
             model_name='accountrule',
             name='account_type',
@@ -191,7 +209,8 @@ class Migration(migrations.Migration):
                 db_column='account_type',
                 null=True,
                 on_delete=django.db.models.deletion.PROTECT,
-                to='accounting.AccountType'), ),
+                to='accounting.AccountType'),
+        ),
         migrations.AddField(
             model_name='accountrule',
             name='author',
@@ -200,7 +219,8 @@ class Migration(migrations.Migration):
                 editable=False,
                 null=True,
                 on_delete=django.db.models.deletion.PROTECT,
-                to=settings.AUTH_USER_MODEL), ),
+                to=settings.AUTH_USER_MODEL),
+        ),
         migrations.AddField(
             model_name='accountrule',
             name='concept_type',
@@ -209,7 +229,8 @@ class Migration(migrations.Migration):
                 db_column='concept_type',
                 null=True,
                 on_delete=django.db.models.deletion.PROTECT,
-                to='core.ConceptType'), ),
+                to='core.ConceptType'),
+        ),
         migrations.AddField(
             model_name='accountrule',
             name='fixed_client',
@@ -217,7 +238,8 @@ class Migration(migrations.Migration):
                 blank=True,
                 null=True,
                 on_delete=django.db.models.deletion.CASCADE,
-                to='client.Client'), ),
+                to='client.Client'),
+        ),
         migrations.AddField(
             model_name='accountrule',
             name='form_definition',
@@ -225,28 +247,32 @@ class Migration(migrations.Migration):
                 db_column='form_definition',
                 on_delete=django.db.models.deletion.PROTECT,
                 related_name='account_rule_set',
-                to='document.FormDefinition'), ),
+                to='document.FormDefinition'),
+        ),
         migrations.AddField(
             model_name='accountrule',
             name='transaction_type',
             field=models.ForeignKey(
                 db_column='transaction_type',
                 on_delete=django.db.models.deletion.PROTECT,
-                to='accounting.TransactionType'), ),
+                to='accounting.TransactionType'),
+        ),
         migrations.AddField(
             model_name='accountdocument',
             name='document',
             field=models.OneToOneField(
                 db_column='document_header',
                 on_delete=django.db.models.deletion.PROTECT,
-                to='document.DocumentHeader'), ),
+                to='document.DocumentHeader'),
+        ),
         migrations.AddField(
             model_name='accountbalance',
             name='account_type',
             field=models.ForeignKey(
                 db_column='account_type',
                 on_delete=django.db.models.deletion.PROTECT,
-                to='accounting.AccountType'), ),
+                to='accounting.AccountType'),
+        ),
         migrations.AddField(
             model_name='accountbalance',
             name='base_document',
@@ -256,14 +282,16 @@ class Migration(migrations.Migration):
                 null=True,
                 on_delete=django.db.models.deletion.PROTECT,
                 related_name='account_document_base_document_set',
-                to='document.DocumentHeader'), ),
+                to='document.DocumentHeader'),
+        ),
         migrations.AddField(
             model_name='accountbalance',
             name='client',
             field=models.ForeignKey(
                 db_column='client',
                 on_delete=django.db.models.deletion.PROTECT,
-                to='client.Client'), ),
+                to='client.Client'),
+        ),
         migrations.AddField(
             model_name='accountbalance',
             name='compliance_document',
@@ -273,7 +301,8 @@ class Migration(migrations.Migration):
                 null=True,
                 on_delete=django.db.models.deletion.PROTECT,
                 related_name='account_document_compliance_document_set',
-                to='document.DocumentHeader'), ),
+                to='document.DocumentHeader'),
+        ),
         migrations.AddField(
             model_name='accountbalance',
             name='concept_type',
@@ -282,7 +311,8 @@ class Migration(migrations.Migration):
                 db_column='concept_type',
                 null=True,
                 on_delete=django.db.models.deletion.PROTECT,
-                to='core.ConceptType'), ),
+                to='core.ConceptType'),
+        ),
         migrations.AddField(
             model_name='accountbalance',
             name='default_currency',
@@ -291,9 +321,11 @@ class Migration(migrations.Migration):
                 db_column='default_currency',
                 null=True,
                 on_delete=django.db.models.deletion.PROTECT,
-                to='core.Currency'), ),
+                to='core.Currency'),
+        ),
         migrations.AlterUniqueTogether(
             name='accountbalance',
             unique_together=set([('client', 'concept_type', 'period',
-                                  'account_type')]), ),
+                                  'account_type')]),
+        ),
     ]

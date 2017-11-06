@@ -13,8 +13,9 @@ class DateUtils(object):
 
         if time_unit is None:
             time_unit = TimeUnitType.to_enum(
-                SystemParameter.find_one("DEFAULT_TIME_UNIT", FieldDataType.
-                                         STRING, TimeUnitType.HOUR.value))
+                SystemParameter.find_one("DEFAULT_TIME_UNIT",
+                                         FieldDataType.STRING,
+                                         TimeUnitType.HOUR.value))
 
         if time_unit == TimeUnitType.YEAR:
             return days / 365

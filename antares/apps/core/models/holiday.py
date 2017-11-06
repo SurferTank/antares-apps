@@ -76,7 +76,7 @@ class Holiday(models.Model):
         return str(self.id)
 
     @classmethod
-    def next_day(cls, 
+    def next_day(cls,
                  day,
                  consider_saturdays=True,
                  consider_sundays=True,
@@ -84,36 +84,31 @@ class Holiday(models.Model):
         """
         Gets the next available working day.
         """
-        #so we only work with full days. 
+        #so we only work with full days.
         if isinstance(day, datetime):
             day = day.date()
         day = day + timedelta(days=1)
         if ((consider_saturdays == True and day.isoweekday() == 6)
                 or (consider_sundays == True and day.isoweekday() == 7)):
-            return Holiday.next_day(
-                day,
-                consider_saturdays,
-                consider_sundays,
-                consider_holidays)
+            return Holiday.next_day(day, consider_saturdays, consider_sundays,
+                                    consider_holidays)
         elif consider_holidays == True:
             try:
-                holiday = Holiday.objects.get(
-                    holiday_date=day, active=True)
+                holiday = Holiday.objects.get(holiday_date=day, active=True)
                 logger.info(
                     _(__name__ +
-                      ".skiping_found_holiday_in_database %(holiday)d ") %
-                    {'holiday': holiday})
-                Holiday.next_day(day,
-                    consider_saturdays,
-                    consider_sundays,
-                    consider_holidays)
+                      ".skiping_found_holiday_in_database %(holiday)d ") % {
+                          'holiday': holiday
+                      })
+                Holiday.next_day(day, consider_saturdays, consider_sundays,
+                                 consider_holidays)
             except Holiday.DoesNotExist:
                 return day
         else:
             return day
 
     @classmethod
-    def prev_day(cls, 
+    def prev_day(cls,
                  day,
                  consider_saturdays=True,
                  consider_sundays=True,
@@ -121,7 +116,7 @@ class Holiday(models.Model):
         """
         Gets the previous available working day.
         """
-        
+
         if isinstance(day, datetime):
             day = day.date()
         day = day - timedelta(days=1)
@@ -134,17 +129,14 @@ class Holiday(models.Model):
                 consider_holidays)
         elif consider_holidays == True:
             try:
-                holiday = Holiday.objects.get(
-                    holiday_date=day, active=True)
+                holiday = Holiday.objects.get(holiday_date=day, active=True)
                 logger.info(
                     _(__name__ +
-                      ".skiping_found_holiday_in_database %(holiday)d ") %
-                    {'holiday': holiday})
-                Holiday.prev_day(
-                    day,
-                    consider_saturdays,
-                    consider_sundays,
-                    consider_holidays)
+                      ".skiping_found_holiday_in_database %(holiday)d ") % {
+                          'holiday': holiday
+                      })
+                Holiday.prev_day(day, consider_saturdays, consider_sundays,
+                                 consider_holidays)
             except Holiday.DoesNotExist:
                 return day
         else:

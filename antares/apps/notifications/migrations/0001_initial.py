@@ -42,7 +42,8 @@ class Migration(migrations.Migration):
                 'not_record',
                 'verbose_name_plural':
                 'antares.apps.notifications.models.notification_record.table_name_plural',
-            }, ),
+            },
+        ),
         migrations.CreateModel(
             name='NotificationRule',
             fields=[
@@ -72,5 +73,6 @@ class Migration(migrations.Migration):
                 'not_rule',
                 'verbose_name_plural':
                 'antares.apps.notifications.models.notification_rule.table_name_plural',
-            }, ),
+            },
+        ),
     ]

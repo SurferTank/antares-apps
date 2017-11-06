@@ -26,7 +26,8 @@ class Migration(migrations.Migration):
                 editable=False,
                 null=True,
                 on_delete=django.db.models.deletion.PROTECT,
-                to=settings.AUTH_USER_MODEL), ),
+                to=settings.AUTH_USER_MODEL),
+        ),
         migrations.AddField(
             model_name='telephoneitem',
             name='client_branch',
@@ -35,7 +36,8 @@ class Migration(migrations.Migration):
                 db_column='client_branch',
                 null=True,
                 on_delete=django.db.models.deletion.PROTECT,
-                to='client.ClientBranch'), ),
+                to='client.ClientBranch'),
+        ),
         migrations.AddField(
             model_name='socialnetworkitem',
             name='author',
@@ -44,7 +46,8 @@ class Migration(migrations.Migration):
                 editable=False,
                 null=True,
                 on_delete=django.db.models.deletion.PROTECT,
-                to=settings.AUTH_USER_MODEL), ),
+                to=settings.AUTH_USER_MODEL),
+        ),
         migrations.AddField(
             model_name='socialnetworkitem',
             name='client_branch',
@@ -53,7 +56,8 @@ class Migration(migrations.Migration):
                 db_column='client_branch',
                 null=True,
                 on_delete=django.db.models.deletion.PROTECT,
-                to='client.ClientBranch'), ),
+                to='client.ClientBranch'),
+        ),
         migrations.AddField(
             model_name='isicposition',
             name='author',
@@ -64,7 +68,8 @@ class Migration(migrations.Migration):
                 on_delete=django.db.models.deletion.PROTECT,
                 to=settings.AUTH_USER_MODEL,
                 verbose_name='antares.apps.client.models.isic_position.author'
-            ), ),
+            ),
+        ),
         migrations.AddField(
             model_name='isicposition',
             name='parent',
@@ -77,28 +82,32 @@ class Migration(migrations.Migration):
                 related_name='children',
                 to='client.IsicPosition',
                 verbose_name='antares.apps.client.models.isic_position.parent'
-            ), ),
+            ),
+        ),
         migrations.AddField(
             model_name='identificationitem',
             name='author',
             field=models.ForeignKey(
                 editable=False,
                 on_delete=django.db.models.deletion.PROTECT,
-                to=settings.AUTH_USER_MODEL), ),
+                to=settings.AUTH_USER_MODEL),
+        ),
         migrations.AddField(
             model_name='identificationitem',
             name='client',
             field=models.ForeignKey(
                 db_column='client',
                 on_delete=django.db.models.deletion.PROTECT,
-                to='client.Client'), ),
+                to='client.Client'),
+        ),
         migrations.AddField(
             model_name='identificationitem',
             name='type',
             field=models.ForeignKey(
                 db_column='type',
                 on_delete=django.db.models.deletion.PROTECT,
-                to='client.ClientIdentificationType'), ),
+                to='client.ClientIdentificationType'),
+        ),
         migrations.AddField(
             model_name='emailitem',
             name='author',
@@ -107,7 +116,8 @@ class Migration(migrations.Migration):
                 editable=False,
                 null=True,
                 on_delete=django.db.models.deletion.PROTECT,
-                to=settings.AUTH_USER_MODEL), ),
+                to=settings.AUTH_USER_MODEL),
+        ),
         migrations.AddField(
             model_name='emailitem',
             name='client_branch',
@@ -116,7 +126,8 @@ class Migration(migrations.Migration):
                 db_column='client_branch',
                 null=True,
                 on_delete=django.db.models.deletion.PROTECT,
-                to='client.ClientBranch'), ),
+                to='client.ClientBranch'),
+        ),
         migrations.AddField(
             model_name='clientuserrelationpermission',
             name='author',
@@ -126,7 +137,8 @@ class Migration(migrations.Migration):
                 null=True,
                 on_delete=django.db.models.deletion.PROTECT,
                 related_name='client_user_relation_permission_author_set',
-                to=settings.AUTH_USER_MODEL), ),
+                to=settings.AUTH_USER_MODEL),
+        ),
         migrations.AddField(
             model_name='clientuserrelationpermission',
             name='client_relation',
@@ -134,7 +146,8 @@ class Migration(migrations.Migration):
                 db_column='client_user_relation',
                 on_delete=django.db.models.deletion.PROTECT,
                 related_name='permission_set',
-                to='client.ClientUserRelation'), ),
+                to='client.ClientUserRelation'),
+        ),
         migrations.AddField(
             model_name='clientuserrelation',
             name='author',
@@ -144,7 +157,8 @@ class Migration(migrations.Migration):
                 null=True,
                 on_delete=django.db.models.deletion.PROTECT,
                 related_name='client_user_relation_author_set',
-                to=settings.AUTH_USER_MODEL), ),
+                to=settings.AUTH_USER_MODEL),
+        ),
         migrations.AddField(
             model_name='clientuserrelation',
             name='child_client',
@@ -152,7 +166,8 @@ class Migration(migrations.Migration):
                 db_column='child_client',
                 on_delete=django.db.models.deletion.PROTECT,
                 related_name='child_client_relation_set',
-                to='client.Client'), ),
+                to='client.Client'),
+        ),
         migrations.AddField(
             model_name='clientuserrelation',
             name='parent_user',
@@ -161,7 +176,8 @@ class Migration(migrations.Migration):
                 null=True,
                 on_delete=django.db.models.deletion.PROTECT,
                 related_name='client_user_relation_set',
-                to=settings.AUTH_USER_MODEL), ),
+                to=settings.AUTH_USER_MODEL),
+        ),
         migrations.AddField(
             model_name='clienttype',
             name='author',
@@ -170,14 +186,16 @@ class Migration(migrations.Migration):
                 editable=False,
                 null=True,
                 on_delete=django.db.models.deletion.PROTECT,
-                to=settings.AUTH_USER_MODEL), ),
+                to=settings.AUTH_USER_MODEL),
+        ),
         migrations.AddField(
             model_name='clientidentificationtype',
             name='author',
             field=models.ForeignKey(
                 editable=False,
                 on_delete=django.db.models.deletion.PROTECT,
-                to=settings.AUTH_USER_MODEL), ),
+                to=settings.AUTH_USER_MODEL),
+        ),
         migrations.AddField(
             model_name='clientbusinessclassification',
             name='author',
@@ -186,21 +204,24 @@ class Migration(migrations.Migration):
                 editable=False,
                 null=True,
                 on_delete=django.db.models.deletion.PROTECT,
-                to=settings.AUTH_USER_MODEL), ),
+                to=settings.AUTH_USER_MODEL),
+        ),
         migrations.AddField(
             model_name='clientbusinessclassification',
             name='business_classification',
             field=mptt.fields.TreeForeignKey(
                 db_column='isic_position',
                 on_delete=django.db.models.deletion.PROTECT,
-                to='client.IsicPosition'), ),
+                to='client.IsicPosition'),
+        ),
         migrations.AddField(
             model_name='clientbusinessclassification',
             name='client_branch',
             field=models.ForeignKey(
                 db_column='client_branch',
                 on_delete=django.db.models.deletion.PROTECT,
-                to='client.ClientBranch'), ),
+                to='client.ClientBranch'),
+        ),
         migrations.AddField(
             model_name='clientbranch',
             name='author',
@@ -209,7 +230,8 @@ class Migration(migrations.Migration):
                 editable=False,
                 null=True,
                 on_delete=django.db.models.deletion.PROTECT,
-                to=settings.AUTH_USER_MODEL), ),
+                to=settings.AUTH_USER_MODEL),
+        ),
         migrations.AddField(
             model_name='clientbranch',
             name='client',
@@ -217,7 +239,8 @@ class Migration(migrations.Migration):
                 db_column='client',
                 on_delete=django.db.models.deletion.PROTECT,
                 related_name='branch_set',
-                to='client.Client'), ),
+                to='client.Client'),
+        ),
         migrations.AddField(
             model_name='clientattribute',
             name='attribute_definition',
@@ -226,7 +249,8 @@ class Migration(migrations.Migration):
                 db_column='attribute_definition',
                 null=True,
                 on_delete=django.db.models.deletion.PROTECT,
-                to='client.AttributeDefinition'), ),
+                to='client.AttributeDefinition'),
+        ),
         migrations.AddField(
             model_name='clientattribute',
             name='author',
@@ -235,7 +259,8 @@ class Migration(migrations.Migration):
                 editable=False,
                 null=True,
                 on_delete=django.db.models.deletion.PROTECT,
-                to=settings.AUTH_USER_MODEL), ),
+                to=settings.AUTH_USER_MODEL),
+        ),
         migrations.AddField(
             model_name='clientattribute',
             name='client',
@@ -244,7 +269,8 @@ class Migration(migrations.Migration):
                 db_column='client',
                 null=True,
                 on_delete=django.db.models.deletion.PROTECT,
-                to='client.Client'), ),
+                to='client.Client'),
+        ),
         migrations.AddField(
             model_name='client',
             name='author',
@@ -254,14 +280,16 @@ class Migration(migrations.Migration):
                 null=True,
                 on_delete=django.db.models.deletion.PROTECT,
                 related_name='client_author_set',
-                to=settings.AUTH_USER_MODEL), ),
+                to=settings.AUTH_USER_MODEL),
+        ),
         migrations.AddField(
             model_name='client',
             name='client_type',
             field=models.ForeignKey(
                 db_column='client_type',
                 on_delete=django.db.models.deletion.PROTECT,
-                to='client.ClientType'), ),
+                to='client.ClientType'),
+        ),
         migrations.AddField(
             model_name='client',
             name='user',
@@ -270,7 +298,8 @@ class Migration(migrations.Migration):
                 null=True,
                 on_delete=django.db.models.deletion.PROTECT,
                 related_name='client',
-                to=settings.AUTH_USER_MODEL), ),
+                to=settings.AUTH_USER_MODEL),
+        ),
         migrations.AddField(
             model_name='attributedefinition',
             name='author',
@@ -279,7 +308,8 @@ class Migration(migrations.Migration):
                 editable=False,
                 null=True,
                 on_delete=django.db.models.deletion.PROTECT,
-                to=settings.AUTH_USER_MODEL), ),
+                to=settings.AUTH_USER_MODEL),
+        ),
         migrations.AddField(
             model_name='addressitem',
             name='author',
@@ -288,7 +318,8 @@ class Migration(migrations.Migration):
                 editable=False,
                 null=True,
                 on_delete=django.db.models.deletion.PROTECT,
-                to=settings.AUTH_USER_MODEL), ),
+                to=settings.AUTH_USER_MODEL),
+        ),
         migrations.AddField(
             model_name='addressitem',
             name='client_branch',
@@ -297,11 +328,14 @@ class Migration(migrations.Migration):
                 db_column='client_branch',
                 null=True,
                 on_delete=django.db.models.deletion.PROTECT,
-                to='client.ClientBranch'), ),
+                to='client.ClientBranch'),
+        ),
         migrations.AlterUniqueTogether(
             name='isicposition',
-            unique_together=set([('isic_code', 'language')]), ),
+            unique_together=set([('isic_code', 'language')]),
+        ),
         migrations.AlterUniqueTogether(
             name='clientbranch',
-            unique_together=set([('client', 'branch_number')]), ),
+            unique_together=set([('client', 'branch_number')]),
+        ),
     ]

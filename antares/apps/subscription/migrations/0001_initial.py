@@ -42,7 +42,8 @@ class Migration(migrations.Migration):
                 'subs_action',
                 'verbose_name_plural':
                 'antares.apps.subscription.models.subscription_action.table_name_plural',
-            }, ),
+            },
+        ),
         migrations.CreateModel(
             name='SubscriptionActionParameterMap',
             fields=[
@@ -77,7 +78,8 @@ class Migration(migrations.Migration):
                 'subs_action_parameter_map',
                 'verbose_name_plural':
                 'antares.apps.subscription.models.subscription_action_parameter_map.table_name_plural',
-            }, ),
+            },
+        ),
         migrations.CreateModel(
             name='SubscriptionEvent',
             fields=[
@@ -114,7 +116,8 @@ class Migration(migrations.Migration):
                 'subs_event',
                 'verbose_name_plural':
                 'antares.apps.subscription.models.subscription_event.table_name_plural',
-            }, ),
+            },
+        ),
         migrations.AddField(
             model_name='subscriptionaction',
             name='event',
@@ -123,5 +126,6 @@ class Migration(migrations.Migration):
                 null=True,
                 on_delete=django.db.models.deletion.PROTECT,
                 related_name='action_set',
-                to='subscription.SubscriptionEvent'), ),
+                to='subscription.SubscriptionEvent'),
+        ),
     ]

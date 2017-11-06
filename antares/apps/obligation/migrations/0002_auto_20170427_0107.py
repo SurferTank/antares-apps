@@ -29,7 +29,8 @@ class Migration(migrations.Migration):
                 null=True,
                 on_delete=django.db.models.deletion.PROTECT,
                 related_name='obligation_vector_log_author_set',
-                to=settings.AUTH_USER_MODEL), ),
+                to=settings.AUTH_USER_MODEL),
+        ),
         migrations.AddField(
             model_name='obligationvectorlog',
             name='obligation_status',
@@ -39,7 +40,8 @@ class Migration(migrations.Migration):
                 null=True,
                 on_delete=django.db.models.deletion.PROTECT,
                 related_name='obligation_vector_log_set',
-                to='obligation.ObligationVector'), ),
+                to='obligation.ObligationVector'),
+        ),
         migrations.AddField(
             model_name='obligationvector',
             name='account_type',
@@ -47,14 +49,16 @@ class Migration(migrations.Migration):
                 db_column='account_type',
                 on_delete=django.db.models.deletion.PROTECT,
                 related_name='obligation_status_account_type_set',
-                to='accounting.AccountType'), ),
+                to='accounting.AccountType'),
+        ),
         migrations.AddField(
             model_name='obligationvector',
             name='author',
             field=models.ForeignKey(
                 on_delete=django.db.models.deletion.PROTECT,
                 related_name='obligation_vector_author_set',
-                to=settings.AUTH_USER_MODEL), ),
+                to=settings.AUTH_USER_MODEL),
+        ),
         migrations.AddField(
             model_name='obligationvector',
             name='base_document',
@@ -64,7 +68,8 @@ class Migration(migrations.Migration):
                 null=True,
                 on_delete=django.db.models.deletion.PROTECT,
                 related_name='obligation_status_base_document_set',
-                to='document.DocumentHeader'), ),
+                to='document.DocumentHeader'),
+        ),
         migrations.AddField(
             model_name='obligationvector',
             name='client',
@@ -74,7 +79,8 @@ class Migration(migrations.Migration):
                 null=True,
                 on_delete=django.db.models.deletion.PROTECT,
                 related_name='obligation_status_client_set',
-                to='client.Client'), ),
+                to='client.Client'),
+        ),
         migrations.AddField(
             model_name='obligationvector',
             name='client_obligation',
@@ -84,7 +90,8 @@ class Migration(migrations.Migration):
                 null=True,
                 on_delete=django.db.models.deletion.PROTECT,
                 related_name='obligation_status_client_obligation_set',
-                to='obligation.ClientObligation'), ),
+                to='obligation.ClientObligation'),
+        ),
         migrations.AddField(
             model_name='obligationvector',
             name='compliance_document',
@@ -94,7 +101,8 @@ class Migration(migrations.Migration):
                 null=True,
                 on_delete=django.db.models.deletion.PROTECT,
                 related_name='obligation_vector_compliance_document_set',
-                to='document.DocumentHeader'), ),
+                to='document.DocumentHeader'),
+        ),
         migrations.AddField(
             model_name='obligationvector',
             name='concept_type',
@@ -103,7 +111,8 @@ class Migration(migrations.Migration):
                 db_column='concept_type',
                 null=True,
                 on_delete=django.db.models.deletion.PROTECT,
-                to='core.ConceptType'), ),
+                to='core.ConceptType'),
+        ),
         migrations.AddField(
             model_name='obligationvector',
             name='source_document',
@@ -113,7 +122,8 @@ class Migration(migrations.Migration):
                 null=True,
                 on_delete=django.db.models.deletion.PROTECT,
                 related_name='obligation_vector_source_document_set',
-                to='document.DocumentHeader'), ),
+                to='document.DocumentHeader'),
+        ),
         migrations.AddField(
             model_name='obligationrule',
             name='account_type',
@@ -122,7 +132,8 @@ class Migration(migrations.Migration):
                 db_column='account_type',
                 null=True,
                 on_delete=django.db.models.deletion.PROTECT,
-                to='accounting.AccountType'), ),
+                to='accounting.AccountType'),
+        ),
         migrations.AddField(
             model_name='obligationrule',
             name='author',
@@ -131,7 +142,8 @@ class Migration(migrations.Migration):
                 editable=False,
                 null=True,
                 on_delete=django.db.models.deletion.PROTECT,
-                to=settings.AUTH_USER_MODEL), ),
+                to=settings.AUTH_USER_MODEL),
+        ),
         migrations.AddField(
             model_name='obligationrule',
             name='concept_type',
@@ -140,7 +152,8 @@ class Migration(migrations.Migration):
                 db_column='concept_type',
                 null=True,
                 on_delete=django.db.models.deletion.PROTECT,
-                to='core.ConceptType'), ),
+                to='core.ConceptType'),
+        ),
         migrations.AddField(
             model_name='obligationrule',
             name='form_definition',
@@ -149,7 +162,8 @@ class Migration(migrations.Migration):
                 db_column='form_definition',
                 null=True,
                 on_delete=django.db.models.deletion.PROTECT,
-                to='document.FormDefinition'), ),
+                to='document.FormDefinition'),
+        ),
         migrations.AddField(
             model_name='clientobligation',
             name='account_type',
@@ -158,14 +172,16 @@ class Migration(migrations.Migration):
                 db_column='account_type',
                 null=True,
                 on_delete=django.db.models.deletion.PROTECT,
-                to='accounting.AccountType'), ),
+                to='accounting.AccountType'),
+        ),
         migrations.AddField(
             model_name='clientobligation',
             name='author',
             field=models.ForeignKey(
                 db_column='author',
                 on_delete=django.db.models.deletion.PROTECT,
-                to=settings.AUTH_USER_MODEL), ),
+                to=settings.AUTH_USER_MODEL),
+        ),
         migrations.AddField(
             model_name='clientobligation',
             name='base_document',
@@ -175,7 +191,8 @@ class Migration(migrations.Migration):
                 null=True,
                 on_delete=django.db.models.deletion.PROTECT,
                 related_name='client_obligation_base_document_set',
-                to='document.DocumentHeader'), ),
+                to='document.DocumentHeader'),
+        ),
         migrations.AddField(
             model_name='clientobligation',
             name='client',
@@ -184,7 +201,8 @@ class Migration(migrations.Migration):
                 db_column='client',
                 null=True,
                 on_delete=django.db.models.deletion.PROTECT,
-                to='client.Client'), ),
+                to='client.Client'),
+        ),
         migrations.AddField(
             model_name='clientobligation',
             name='concept_type',
@@ -193,7 +211,8 @@ class Migration(migrations.Migration):
                 db_column='concept_type',
                 null=True,
                 on_delete=django.db.models.deletion.PROTECT,
-                to='core.ConceptType'), ),
+                to='core.ConceptType'),
+        ),
         migrations.AddField(
             model_name='clientobligation',
             name='obligation_rule',
@@ -202,12 +221,15 @@ class Migration(migrations.Migration):
                 db_column='obligation_rule',
                 null=True,
                 on_delete=django.db.models.deletion.PROTECT,
-                to='obligation.ObligationRule'), ),
+                to='obligation.ObligationRule'),
+        ),
         migrations.AlterUniqueTogether(
             name='obligationvector',
             unique_together=set([('client', 'concept_type', 'period',
-                                  'account_type', 'base_document')]), ),
+                                  'account_type', 'base_document')]),
+        ),
         migrations.AlterUniqueTogether(
             name='clientobligation',
-            unique_together=set([('client', 'concept_type')]), ),
+            unique_together=set([('client', 'concept_type')]),
+        ),
     ]

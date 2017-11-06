@@ -54,8 +54,8 @@ class Application(MPTTModel):
                     result += " " + param.parameter_name + "=\"" + str(
                         self._evaluate_param(param.value)) + "\""
                 else:
-                    result += " \"" + str(
-                        self._evaluate_param(param.value)) + "\""
+                    result += " \"" + str(self._evaluate_param(
+                        param.value)) + "\""
             elif (param.is_route_parameter == False and only_routes == False):
                 if first_one == True:
                     first_one = False

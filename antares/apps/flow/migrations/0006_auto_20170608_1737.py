@@ -17,7 +17,8 @@ class Migration(migrations.Migration):
         migrations.RenameField(
             model_name='activitydefinition',
             old_name='instantation',
-            new_name='instantiation', ),
+            new_name='instantiation',
+        ),
         migrations.AlterField(
             model_name='flowdefinition',
             name='priority',

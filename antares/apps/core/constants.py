@@ -88,14 +88,14 @@ class FieldDataType(EnumUtilsMixin, Enum):
         STRING = _(__name__ + '.FieldDataType.' + 'STRING')
         TEXT = _(__name__ + '.FieldDataType.' + 'TEXT')
         DATE = _(__name__ + '.FieldDataType.' + 'DATE')
-        DATETIME =  _(__name__ + '.FieldDataType.' + 'DATETIME')
+        DATETIME = _(__name__ + '.FieldDataType.' + 'DATETIME')
         INTEGER = _(__name__ + '.FieldDataType.' + 'INTEGER')
         FLOAT = _(__name__ + '.FieldDataType.' + 'FLOAT')
         UUID = _(__name__ + '.FieldDataType.' + 'UUID')
         BOOLEAN = _(__name__ + '.FieldDataType.' + 'BOOLEAN')
         USER = _(__name__ + '.FieldDataType.' + 'USER')
         CLIENT = _(__name__ + '.FieldDataType.' + 'CLIENT')
-        
+
 
 class HrnModuleType(EnumUtilsMixin, Enum):
     DOCUMENT = "Document"

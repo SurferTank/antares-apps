@@ -26,5 +26,6 @@ class Migration(migrations.Migration):
                 on_delete=django.db.models.deletion.PROTECT,
                 to=settings.AUTH_USER_MODEL,
                 verbose_name='antares.apps.terminal.models.terminal_log.author'
-            ), ),
+            ),
+        ),
     ]

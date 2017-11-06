@@ -20,7 +20,6 @@ from .user_role import UserRole
 from .user_org_unit import UserOrgUnit
 from .role_application import RoleApplication
 
-
 logger = logging.getLogger(__name__)
 
 
@@ -97,7 +96,7 @@ class User(AbstractUser):
         #    settings.TEST_MODE
         #except:
         #    settings.TEST_MODE = False
-        
+
         #if settings.TEST_MODE == False:
         try:
             if (self.client is not None):
@@ -107,7 +106,7 @@ class User(AbstractUser):
                 _(__name__ + ".the_user_has_no_client_associated"))
         #else:
         #    return None
-        
+
     @classmethod
     def find_one(cls, user_id):
         if isinstance(user_id, str):
@@ -123,7 +122,7 @@ class User(AbstractUser):
 
     @classmethod
     def find_one_by_user_name(cls, username):
-        
+
         try:
             return User.objects.get(username=username)
         except User.DoesNotExist:
@@ -161,7 +160,7 @@ class User(AbstractUser):
         system_user.set_password(str(uuid.uuid4()))
         system_user.save()
         return system_user
-    
+
     @classmethod
     def get_test_user(cls):
         """
@@ -171,14 +170,14 @@ class User(AbstractUser):
             settings.TEST_MODE
         except:
             settings.TEST_MODE = False
-        if(settings.TEST_MODE == True):    
+        if (settings.TEST_MODE == True):
             test_user = cls.find_one_by_user_name("testuser")
-            if(test_user is None):
-                test_user  = User.objects.create(
-                   username="testuser",
-                   email="testuser@surfertank.com",
-                   is_staff=True,
-                   is_active=False)
+            if (test_user is None):
+                test_user = User.objects.create(
+                    username="testuser",
+                    email="testuser@surfertank.com",
+                    is_staff=True,
+                    is_active=False)
                 # we don't want anyone to take over, so an UUID would be random enough
                 test_user.set_password("12345")
                 test_user.save()
