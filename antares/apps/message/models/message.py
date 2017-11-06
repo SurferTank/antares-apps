@@ -5,6 +5,7 @@ Created on Jul 9, 2016
 '''
 import logging
 import uuid
+from django.utils import timezone
 
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
@@ -13,6 +14,9 @@ from enumfields import EnumField
 
 from ..constants import MessageType
 from antares.apps.document.models.document_header import DocumentHeader
+from antares.apps.core.middleware.request import get_request
+from enumfields import EnumField
+from django.conf import settings
 
 logger = logging.getLogger(__name__)
 
@@ -64,12 +68,36 @@ class Message(models.Model):
     period = models.IntegerField(blank=True, null=True)
     message_type = EnumField(MessageType, max_length=30)
     content = models.TextField(blank=True, null=True)
+    creation_date = models.DateTimeField(
+        blank=False,
+        null=False,
+        editable=False,
+        verbose_name=_(__name__ + ".creation_name"),
+        help_text=_(__name__ + ".creation_name_help"))
+    update_date = models.DateTimeField(
+        blank=False,
+        null=False,
+        editable=False,
+        verbose_name=_(__name__ + ".update_date"),
+        help_text=_(__name__ + ".update_date_help"))
+    author = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        on_delete=models.PROTECT,
+        blank=False,
+        null=False,
+        editable=False,
+        verbose_name=_(__name__ + ".author"),
+        help_text=_(__name__ + ".author_help"))
+
+    def save(self, *args, **kwargs):
+        if self.creation_date is None:
+            self.creation_date = timezone.now()
+        self.update_date = timezone.now()
+        self.author = get_request().user
+        super(Message, self).save(*args, **kwargs)
 
     def __str__(self):
         return str(self.id)
-
-    def save(self, *args, **kwargs):
-        super(Message, self).save(*args, **kwargs)
 
     @classmethod
     def validate_value(cls, obj):

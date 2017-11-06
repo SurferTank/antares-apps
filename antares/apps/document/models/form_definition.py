@@ -14,7 +14,6 @@ from antares.apps.core.constants import FieldDataType
 from antares.apps.core.middleware.request import get_request
 from antares.apps.core.models.system_parameter import SystemParameter
 from enumfields import EnumField
-from django.conf import settings
 
 from ..constants import FormDefinitionStatusType
 from ..exceptions import InvalidFormDefinitionException

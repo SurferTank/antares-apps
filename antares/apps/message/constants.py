@@ -10,6 +10,7 @@ class MessageType(EnumUtilsMixin, Enum):
     CURRENT_ACCOUNT = "Current Account"
     FLOW_CASE = "Flow Case"
     DOCUMENT = "Document"
+    EXTERNAL_SYSTEM = "External System"
 
     def __str__(self):
         """
@@ -23,6 +24,7 @@ class MessageType(EnumUtilsMixin, Enum):
         CURRENT_ACCOUNT = _(__name__ + '.MessageType.' + 'CURRENT_ACCOUNT')
         FLOW_CASE = _(__name__ + '.MessageType.' + 'FLOW_CASE')
         DOCUMENT = _(__name__ + '.MessageType.' + 'DOCUMENT')
+        EXTERNAL_SYSTEM = _(__name__ + '.MessageType.' + 'EXTERNAL_SYSTEM') 
 
 
 class MessageStatusType(EnumUtilsMixin, Enum):
@@ -31,6 +33,7 @@ class MessageStatusType(EnumUtilsMixin, Enum):
     WITH_ERRORS = "With Errors"
     ON_HOLD = "On hold"
     CANCELLED = "Cancelled"
+    EXTERNAL_SYSTEM = "External System"
 
     def __str__(self):
         """

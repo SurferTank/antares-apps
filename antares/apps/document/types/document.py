@@ -173,6 +173,9 @@ class Document(object):
         self._map_fields_to_header_fields()
         self._hibernate_document()
 
+   
+    
+    
     def _hydrate_document(self):
         """ Sets all the values on the database on the XML object
         
