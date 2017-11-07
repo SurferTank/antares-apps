@@ -19,7 +19,7 @@ class GeneralDocumentTest(TransactionTestCase):
         if self.runs == 0:
             self.doc_helper = DocumentTestHelper()
             self.runs = self.runs + 1
-    
+
     def test_form_class_creation(self):
         self.doc_helper.create_test_form_class()
 

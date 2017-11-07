@@ -12,6 +12,7 @@ from antares.apps.core.middleware import get_request
 
 logger = logging.getLogger(__name__)
 
+
 class ClientTestHelper:
     def create_test_user_client(self):
         client_type = ClientType()

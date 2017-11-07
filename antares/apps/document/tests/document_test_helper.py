@@ -14,6 +14,7 @@ from antares.apps.client.tests.client_test_helper import ClientTestHelper
 
 logger = logging.getLogger(__name__)
 
+
 class DocumentTestHelper(object):
     '''
     Defines functions to help on the document tests, so we dont have to write the same stuff over and over again. 
@@ -22,11 +23,11 @@ class DocumentTestHelper(object):
     def __init__(self):
         with open(
                 os.path.join(
-                os.path.dirname(__file__), "..", "xml", "working",
-                "AccountForm-1.xml"), "r") as xml:
+                    os.path.dirname(__file__), "..", "xml", "working",
+                    "AccountForm-1.xml"), "r") as xml:
             self.form_xml = xml.read()
             self.client_helper = ClientTestHelper()
-            
+
     def create_test_form_class(self):
         logger.info("we are testing if we can create a form class")
         self.client_helper.create_test_user_client()
@@ -40,7 +41,7 @@ class DocumentTestHelper(object):
         form_class.save()
         logger.info("form class with name" + form_class.name + " created")
         return form_class
-    
+
     def create_test_form_definition(self):
         form_class = self.create_test_form_class()
         form_def = FormDefinition()
@@ -53,6 +54,6 @@ class DocumentTestHelper(object):
         form_def.save()
         logger.info("form definition with id " + form_def.id + " created")
         return form_def
-    
+
     def get_test_form_id(self):
         return "AccountForm-1"
