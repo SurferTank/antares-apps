@@ -23,7 +23,8 @@ class MessageApi(mixins.ListModelMixin, mixins.CreateModelMixin,
         return self.list(request, *args, **kwargs)
 
     def post(self, request, *args, **kwargs):
-        MessageManager.process_message(self.request.data)
+        self.request.data['message_type'] = str(MessageType.EXTERNAL_SYSTEM)
+        MessageManager.process_message(self.request.data['content'])
         return self.create(request, *args, **kwargs)
 
     def delete(self, request, *args, **kwargs):
