@@ -140,3 +140,29 @@ msgstr "New Window"
 
 msgid "antares.apps.user.constants.ApplicationScopeType.DIALOG"
 msgstr "Dialog"
+
+msgid "antares.apps.user.login.template.signup"
+msgstr "Sign Up"
+
+msgid "antares.user.web.already_have_an_account"
+msgstr "Do you have an user already? Please "
+
+msgid "antares.user.web.login_here"
+msgstr "Log in here"
+
+msgid "antares.user.web.dont_have_an_account"
+msgstr "If you have not created an account yet, please"
+
+msgid "antares.user.web.signup_here"
+msgstr "sign up here"
+
+msgid "antares.apps.user.constants.UserClassType.SCRAPER"
+msgstr "Scraper"
+
+msgid "antares.apps.user.constants.UserClassType.USER"
+msgstr "User"
+
+
+
+
+

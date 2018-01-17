@@ -129,3 +129,27 @@ msgstr "Ventana nueva"
 
 msgid "antares.apps.user.constants.ApplicationScopeType.DIALOG"
 msgstr "Cuadro de diálogo"
+
+msgid "antares.apps.user.login.template.signup"
+msgstr "Registrarse"
+
+msgid "antares.user.web.already_have_an_account"
+msgstr "Tienes una cuenta? Por favor "
+
+msgid "antares.user.web.login_here"
+msgstr "ingresa aquí"
+
+msgid "antares.user.web.signup_here"
+msgstr "regístrate aquí"
+
+msgid "antares.user.web.dont_have_an_account"
+msgstr "Si todavia no tiene una cuenta, por favor "
+
+msgid "antares.apps.user.constants.UserClassType.SCRAPER"
+msgstr "Scraper"
+
+msgid "antares.apps.user.constants.UserClassType.GENERAL_USER"
+msgstr "Usuario General"
+
+msgid "antares.apps.user.constants.UserClassType.SPECIALIST"
+msgstr "Especialista"

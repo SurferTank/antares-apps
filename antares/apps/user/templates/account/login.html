@@ -23,7 +23,7 @@
     </div>
   {% else %}
   <div class="col-lg-12">
-    <p>{% blocktrans %}If you have not created an account yet, please <a href="{{ signup_url }}">sign up</a> first.{% endblocktrans %}</p>
+    <p>{% trans "antares.user.web.dont_have_an_account" %}<a href="{{ signup_url }}">{% trans "antares.user.web.signup_here" %}</a>.</p>
   </div>
   {% endif %}
   <form method="POST" action="{% url 'account_login' %}">

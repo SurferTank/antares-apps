@@ -11,6 +11,7 @@ from antares.apps.core.constants import FieldDataType
 from antares.apps.core.middleware.request import get_request
 from enumfields import EnumField
 from django.conf import settings
+from django.contrib.auth.models import AnonymousUser
 
 logger = logging.getLogger(__name__)
 
@@ -79,8 +80,8 @@ class SystemParameter(models.Model):
     author = models.ForeignKey(
         settings.AUTH_USER_MODEL,
         on_delete=models.PROTECT,
-        blank=False,
-        null=False,
+        blank=True,
+        null=True,
         editable=False,
         verbose_name=_(__name__ + ".author"),
         help_text=_(__name__ + ".author_help"))
@@ -89,7 +90,10 @@ class SystemParameter(models.Model):
         if self.creation_date is None:
             self.creation_date = timezone.now()
         self.update_date = timezone.now()
-        self.author = get_request().user
+        if(isinstance(get_request().user, AnonymousUser)==False and self.author is None):
+            self.author = get_request().user
+        if(isinstance(get_request().user, AnonymousUser)==True):
+            self.author = None
 
         super(SystemParameter, self).save(*args, **kwargs)
 

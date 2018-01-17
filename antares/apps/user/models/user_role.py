@@ -14,6 +14,9 @@ from mptt.fields import TreeForeignKey
 
 from antares.apps.core.middleware.request import get_request
 from django.conf import settings
+from django.contrib.auth.models import AnonymousUser
+from django.utils import timezone
+
 
 logger = logging.getLogger(__name__)
 
@@ -37,10 +40,14 @@ class UserRole(models.Model):
         editable=False)
 
     def save(self, *args, **kwargs):
+        from .user import User
         if self.creation_date is None:
-            self.creation_date = datetime.now()
-        self.update_date = datetime.now()
-        self.author = get_request().user
+            self.creation_date = timezone.now()
+        self.update_date = timezone.now()
+        if(isinstance(get_request().user,  AnonymousUser)==False and self.author is None):
+            self.author = get_request().user
+        elif(isinstance(get_request().user,  AnonymousUser)==True and self.author is None):
+            self.author = User.get_system_user()
         super(UserRole, self).save(*args, **kwargs)
 
     def __str__(self):
