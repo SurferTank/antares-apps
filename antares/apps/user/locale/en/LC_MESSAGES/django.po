@@ -159,9 +159,12 @@ msgstr "sign up here"
 msgid "antares.apps.user.constants.UserClassType.SCRAPER"
 msgstr "Scraper"
 
-msgid "antares.apps.user.constants.UserClassType.USER"
-msgstr "User"
+msgid "antares.apps.user.constants.UserClassType.GENERAL_USER"
+msgstr "General User"
 
+
+msgid "antares.apps.user.constants.UserClassType.SPECIALIST"
+msgstr "Specialist"
 
 
 
