@@ -90,9 +90,12 @@ class SystemParameter(models.Model):
         if self.creation_date is None:
             self.creation_date = timezone.now()
         self.update_date = timezone.now()
-        if(isinstance(get_request().user, AnonymousUser)==False and self.author is None):
+        if(get_request() is not None and 
+           isinstance(get_request().user, AnonymousUser)==False 
+           and self.author is None):
             self.author = get_request().user
-        if(isinstance(get_request().user, AnonymousUser)==True):
+        elif(get_request() is None or
+             isinstance(get_request().user, AnonymousUser)==True):
             self.author = None
 
         super(SystemParameter, self).save(*args, **kwargs)
