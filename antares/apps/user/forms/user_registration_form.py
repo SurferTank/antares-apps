@@ -5,13 +5,23 @@ from django import forms
 from django.contrib.auth import get_user_model
 from ..constants import UserClassType
 from ..models import Role, UserRole, User
+from captcha.fields import ReCaptchaField
 
 class UserRegistrationForm(forms.Form):
     first_name = forms.CharField(max_length=30, required=False, help_text='Optional.')
     last_name = forms.CharField(max_length=30, required=False, help_text='Optional.')
     email = forms.EmailField(max_length=254, help_text='Required. Inform a valid email address.')
     user_class = forms.TypedChoiceField(choices=UserClassType.choices())
-
+    captcha = ReCaptchaField()
+    field_order=['first_name', 
+                    'last_name',
+                    'email',
+                    'username',
+                    'password',
+                    'user_class', 
+                    'captcha'
+        ]
+    
     def signup(self, request, user):
         user.first_name = self.cleaned_data['first_name']
         user.last_name = self.cleaned_data['last_name']
@@ -24,7 +34,6 @@ class UserRegistrationForm(forms.Form):
         user_role.start_date = datetime.now()
         user_role.save()
         
-    
     #def save(self):
     #    from antares.apps.user.models import Role
     #    role = Role.find_one_by_code(self.user_role)
