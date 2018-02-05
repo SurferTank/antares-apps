@@ -1,5 +1,6 @@
 /**
- * 
+ * Copyright 2013-2017 SurferTank Inc. 
+ * Original version by Leonardo Belen<leobelen@gmail.com> 
  */
 function display_accounting_panel(client_id, client_name = null, document = null, document_name = null, concept_type_id = null, concept_type_name = null,
     period = null, account_type_id = null, account_type_name = null) {
@@ -291,8 +292,8 @@ function build_breadcrumbs(client_id, client_name = null, document = null, docum
     }
 }
 
-function viewAccountingDocument(document_id) {
-	console.log("viewAccountingDocument called with document_id=" + document_id);
+function view_accounting_document(document_id) {
+	console.log("view_accounting_document called with document_id=" + document_id);
     if (!$('#accountDocumentDialog_' + document_id).length) {
         $('<div id="accountDocumentDialog_' + document_id + '" />').dialog({
             'title': 'Document',

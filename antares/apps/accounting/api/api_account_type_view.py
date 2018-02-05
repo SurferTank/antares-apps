@@ -81,7 +81,7 @@ class ApiAccountTypeView(BaseDatatableView):
             else:
                 return str(row.id)
         if column == 'document_id':
-            row_string = '{document_name}&nbsp;<a href="#" onClick="viewAccountingDocument(\''+\
+            row_string = '{document_name}&nbsp;<a href="#" onClick="view_accounting_document(\''+\
                 '{document_id}\');"><i class="fa fa-eye" aria-hidden="true"></i></a>'
             if (row.account_document.document is not None):
                 if row.account_document.document.hrn_code:

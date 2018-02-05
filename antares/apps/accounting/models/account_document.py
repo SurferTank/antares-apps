@@ -32,7 +32,7 @@ class AccountDocument(models.Model):
         super(AccountDocument, self).save(*args, **kwargs)
 
     def __str__(self) -> str:
-        return str(self.id)
+        return str(self.id) + "(" + str(self.status.label) + ")"
 
     @classmethod
     def find_or_create_by_document(cls, document_header: DocumentHeader):

@@ -3,6 +3,7 @@
  * 
  */
 function display_client_panel(client_id, main_branch_id) {
+
 	if (client_id && client_id.length>0) {
         $("#clientPanel").show();
     }

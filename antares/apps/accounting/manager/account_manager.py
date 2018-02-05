@@ -72,7 +72,7 @@ class AccountManager(object):
                 account_document, transactions)
             account_document.status = AccountDocumentStatusType.PROCESSED
 
-        except Exception as e:
+        except Exception as e: 
             account_document.status = AccountDocumentStatusType.WITH_ERRORS
 
         account_document.save()
@@ -182,7 +182,7 @@ class AccountManager(object):
         :param document: the document object. 
         """
 
-        logger.debug(
+        logger.info(
             _(__name__ +
               ".manager.account_manager.starting_to_balance_the_account"))
         principal = 0
@@ -196,21 +196,20 @@ class AccountManager(object):
 
         for trans in transaction_list:
             if (trans.transaction_type.effect == TransactionEffectType.CREDIT):
-                principal = principal + transaction.principal_amount
-                interest = interest + transaction.interest_amount
-                penalties = penalties + transaction.penalties_amount
+                principal = principal + trans.principal_amount
+                interest = interest + trans.interest_amount
+                penalties = penalties + trans.penalties_amount
             elif (trans.transaction_type.effect == TransactionEffectType.DEBIT
                   ):
-                principal = principal - transaction.principal_amount
-                interest = interest - transaction.interest_amount
-                penalties = penalties - transaction.penalties_amount
-
-        logger.debug(
+                principal = principal - trans.principal_amount
+                interest = interest - trans.interest_amount
+                penalties = penalties - trans.penalties_amount
+        logger.info(
             _('antares.app.accounting.manager.apply_transaction_to_balance_info1 %(principal)d %(interest)d %(penalties)d'
               ) % {
                   'principal': principal,
                   'interest': interest,
-                  'penalties': penalties
+                  'penalties': penalties 
               })
 
         transaction.balance.principal_balance = principal
