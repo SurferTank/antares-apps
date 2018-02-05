@@ -34,6 +34,13 @@ class ClientType(models.Model):
         self.update_date = timezone.now()
         self.author = get_request().user
         super(ClientType, self).save(*args, **kwargs)
+     
+    @classmethod   
+    def find_one(cls, type_id):
+        try: 
+            return cls.objects.get(id=type_id)
+        except cls.DoesNotExist:
+            return None
 
     def __str__(self):
         return self.id

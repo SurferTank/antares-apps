@@ -13,6 +13,7 @@ from django.utils.translation import ugettext as _
 
 from antares.apps.core.middleware.request import get_request
 from django.conf import settings
+from django.contrib.auth.models import AnonymousUser
 
 logger = logging.getLogger(__name__)
 
@@ -42,7 +43,13 @@ class ClientBranch(models.Model):
         if self.creation_date is None:
             self.creation_date = timezone.now()
         self.update_date = timezone.now()
-        self.author = get_request().user
+        if (get_request() is not None
+                and isinstance(get_request().user, AnonymousUser) == False
+                and self.author is None):
+            self.author = get_request().user
+        elif (get_request() is None
+              or isinstance(get_request().user, AnonymousUser) == True):
+            self.author = self.client.user
         super(ClientBranch, self).save(*args, **kwargs)
 
     def __str__(self):

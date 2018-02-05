@@ -6,6 +6,8 @@ from django.contrib.auth import get_user_model
 from ..constants import UserClassType
 from ..models import Role, UserRole, User
 from captcha.fields import ReCaptchaField
+from django.utils import timezone
+from antares.apps.client.models import Client, ClientType
 
 
 class UserRegistrationForm(forms.Form):
@@ -34,6 +36,15 @@ class UserRegistrationForm(forms.Form):
         user_role.role = role
         user_role.start_date = datetime.now()
         user_role.save()
+        client = Client()
+        client.user = user
+        client.first_name = user.first_name
+        client.last_name = user.last_name
+        client.registration_date = timezone.now()
+        client_type = ClientType.find_one("Individual")
+        client.client_type=client_type
+        client.save()
+        
 
     #def save(self):
     #    from antares.apps.user.models import Role

@@ -6,6 +6,7 @@ from django.utils.translation import ugettext as _
 from enumfields import EnumField
 import logging
 import uuid
+from django.contrib.auth.models import AnonymousUser
 
 from ..constants import ClientStatusType, ClientGenderType
 
@@ -58,7 +59,13 @@ class Client(models.Model):
         if (self.registration_date is None):
             self.registration = timezone.now().date()
         self.update_date = timezone.now()
-        self.author = get_request().user
+        if (get_request() is not None
+                and isinstance(get_request().user, AnonymousUser) == False
+                and self.author is None):
+            self.author = get_request().user
+        elif (get_request() is None
+              or isinstance(get_request().user, AnonymousUser) == True):
+            self.author = self.user
         super(Client, self).save(*args, **kwargs)
 
         # lets create the client branch 0 for the client, if it does not exist.
