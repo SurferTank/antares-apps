@@ -23,17 +23,19 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='SubscriptionAction',
             fields=[
-                ('id', models.UUIDField(
-                    default=uuid.uuid4,
-                    editable=False,
-                    primary_key=True,
-                    serialize=False)),
+                ('id',
+                 models.UUIDField(
+                     default=uuid.uuid4,
+                     editable=False,
+                     primary_key=True,
+                     serialize=False)),
                 ('order_number', models.IntegerField(blank=True, null=True)),
-                ('action_definition', models.ForeignKey(
-                    db_column='action_definition',
-                    on_delete=django.db.models.deletion.PROTECT,
-                    related_name='subscription_action_set',
-                    to='core.ActionDefinition')),
+                ('action_definition',
+                 models.ForeignKey(
+                     db_column='action_definition',
+                     on_delete=django.db.models.deletion.PROTECT,
+                     related_name='subscription_action_set',
+                     to='core.ActionDefinition')),
             ],
             options={
                 'verbose_name':
@@ -47,29 +49,32 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='SubscriptionActionParameterMap',
             fields=[
-                ('id', models.UUIDField(
-                    default=uuid.uuid4,
-                    editable=False,
-                    primary_key=True,
-                    serialize=False)),
-                ('content_text', models.CharField(
-                    blank=True, max_length=255, null=True)),
-                ('parameter_name', models.CharField(
-                    blank=True, max_length=255, null=True)),
-                ('parameter_definition', models.ForeignKey(
-                    blank=True,
-                    db_column='parameter_definition',
-                    null=True,
-                    on_delete=django.db.models.deletion.PROTECT,
-                    related_name='subscription_action_parameter_map_set',
-                    to='core.ActionParameterDefinition')),
-                ('subscription_action', models.ForeignKey(
-                    blank=True,
-                    db_column='subscription_action',
-                    null=True,
-                    on_delete=django.db.models.deletion.PROTECT,
-                    related_name='parameter_set',
-                    to='subscription.SubscriptionAction')),
+                ('id',
+                 models.UUIDField(
+                     default=uuid.uuid4,
+                     editable=False,
+                     primary_key=True,
+                     serialize=False)),
+                ('content_text',
+                 models.CharField(blank=True, max_length=255, null=True)),
+                ('parameter_name',
+                 models.CharField(blank=True, max_length=255, null=True)),
+                ('parameter_definition',
+                 models.ForeignKey(
+                     blank=True,
+                     db_column='parameter_definition',
+                     null=True,
+                     on_delete=django.db.models.deletion.PROTECT,
+                     related_name='subscription_action_parameter_map_set',
+                     to='core.ActionParameterDefinition')),
+                ('subscription_action',
+                 models.ForeignKey(
+                     blank=True,
+                     db_column='subscription_action',
+                     null=True,
+                     on_delete=django.db.models.deletion.PROTECT,
+                     related_name='parameter_set',
+                     to='subscription.SubscriptionAction')),
             ],
             options={
                 'verbose_name':
@@ -83,31 +88,34 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='SubscriptionEvent',
             fields=[
-                ('id', models.UUIDField(
-                    default=uuid.uuid4,
-                    editable=False,
-                    primary_key=True,
-                    serialize=False)),
+                ('id',
+                 models.UUIDField(
+                     default=uuid.uuid4,
+                     editable=False,
+                     primary_key=True,
+                     serialize=False)),
                 ('script_engine', models.CharField(max_length=255)),
-                ('condition_text', models.CharField(
-                    blank=True, max_length=4000, null=True)),
-                ('event_type', enumfields.fields.EnumField(
-                    enum=EventType, max_length=30)),
+                ('condition_text',
+                 models.CharField(blank=True, max_length=4000, null=True)),
+                ('event_type',
+                 enumfields.fields.EnumField(enum=EventType, max_length=30)),
                 ('subscription_id', models.CharField(max_length=255)),
-                ('source', models.ForeignKey(
-                    blank=True,
-                    db_column='source',
-                    null=True,
-                    on_delete=django.db.models.deletion.PROTECT,
-                    related_name='source_event_set',
-                    to='message.Message')),
-                ('subscriber', models.ForeignKey(
-                    blank=True,
-                    db_column='subscriber',
-                    null=True,
-                    on_delete=django.db.models.deletion.PROTECT,
-                    related_name='subscriber_event_set',
-                    to='message.Message')),
+                ('source',
+                 models.ForeignKey(
+                     blank=True,
+                     db_column='source',
+                     null=True,
+                     on_delete=django.db.models.deletion.PROTECT,
+                     related_name='source_event_set',
+                     to='message.Message')),
+                ('subscriber',
+                 models.ForeignKey(
+                     blank=True,
+                     db_column='subscriber',
+                     null=True,
+                     on_delete=django.db.models.deletion.PROTECT,
+                     related_name='subscriber_event_set',
+                     to='message.Message')),
             ],
             options={
                 'verbose_name':

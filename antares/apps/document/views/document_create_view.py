@@ -73,18 +73,19 @@ class DocumentCreateView(View):
         fields = document.get_field_dict()
         header_fields = document.get_header_field_dict()
 
-        return render(request,
-                      document.get_form_definition().get_edit_site_path(), {
-                          'document': document.header,
-                          'headerFields': header_fields,
-                          'fields': fields,
-                          'formType': 'CREATION',
-                          'showSubmit': show_submit,
-                          'template': template,
-                          'next_place': next_place,
-                          'edit_js_path': edit_js_path,
-                          'is_inner': is_inner,
-                      })
+        return render(
+            request,
+            document.get_form_definition().get_edit_site_path(), {
+                'document': document.header,
+                'headerFields': header_fields,
+                'fields': fields,
+                'formType': 'CREATION',
+                'showSubmit': show_submit,
+                'template': template,
+                'next_place': next_place,
+                'edit_js_path': edit_js_path,
+                'is_inner': is_inner,
+            })
 
     def _get_headers_from_request(self, request):
         header_fields_dict = {}
@@ -114,8 +115,8 @@ class DocumentCreateView(View):
         if (request.GET.get('branch')):
             header_fields_dict['branch'] = request.GET.get('branch')
         if (request.GET.get('secondary_client')):
-            if (request.GET.get('secondary_client') ==
-                    'current'):  # special signal
+            if (request.GET.get('secondary_client') == 'current'
+                ):  # special signal
                 header_fields_dict[
                     'secondary_client'] = request.user.get_on_behalf_client()
             else:

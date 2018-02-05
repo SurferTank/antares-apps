@@ -21,17 +21,19 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='ActivityApplicationDefinition',
             fields=[
-                ('id', models.UUIDField(
-                    default=uuid.uuid4,
-                    editable=False,
-                    primary_key=True,
-                    serialize=False)),
-                ('scope', enumfields.fields.EnumField(
-                    default='Same',
-                    enum=ActivityApplicationDefinitionScopeType,
-                    max_length=30)),
-                ('description', models.CharField(
-                    blank=True, max_length=1000, null=True)),
+                ('id',
+                 models.UUIDField(
+                     default=uuid.uuid4,
+                     editable=False,
+                     primary_key=True,
+                     serialize=False)),
+                ('scope',
+                 enumfields.fields.EnumField(
+                     default='Same',
+                     enum=ActivityApplicationDefinitionScopeType,
+                     max_length=30)),
+                ('description',
+                 models.CharField(blank=True, max_length=1000, null=True)),
             ],
             options={
                 'verbose_name':
@@ -45,13 +47,14 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='ActivityApplicationParameterDefinition',
             fields=[
-                ('id', models.UUIDField(
-                    default=uuid.uuid4,
-                    editable=False,
-                    primary_key=True,
-                    serialize=False)),
-                ('content', models.CharField(
-                    blank=True, max_length=2000, null=True)),
+                ('id',
+                 models.UUIDField(
+                     default=uuid.uuid4,
+                     editable=False,
+                     primary_key=True,
+                     serialize=False)),
+                ('content',
+                 models.CharField(blank=True, max_length=2000, null=True)),
             ],
             options={
                 'verbose_name':
@@ -65,32 +68,37 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='ActivityDefinition',
             fields=[
-                ('id', models.UUIDField(
-                    default=uuid.uuid4,
-                    editable=False,
-                    primary_key=True,
-                    serialize=False)),
+                ('id',
+                 models.UUIDField(
+                     default=uuid.uuid4,
+                     editable=False,
+                     primary_key=True,
+                     serialize=False)),
                 ('activity_id', models.CharField(max_length=255)),
-                ('activity_type', enumfields.fields.EnumField(
-                    enum=ActivityType, max_length=30)),
-                ('assignment_strategy', enumfields.fields.EnumField(
-                    blank=True,
-                    enum=AssignmentStrategyType,
-                    max_length=30,
-                    null=True)),
+                ('activity_type',
+                 enumfields.fields.EnumField(enum=ActivityType,
+                                             max_length=30)),
+                ('assignment_strategy',
+                 enumfields.fields.EnumField(
+                     blank=True,
+                     enum=AssignmentStrategyType,
+                     max_length=30,
+                     null=True)),
                 ('description', models.TextField(blank=True, null=True)),
-                ('display_name', models.CharField(
-                    blank=True, max_length=255, null=True)),
-                ('finish_mode', enumfields.fields.EnumField(
-                    enum=ExecutionModeType, max_length=30)),
-                ('hrn_script', models.CharField(
-                    blank=True, max_length=2000, null=True)),
-                ('start_mode', enumfields.fields.EnumField(
-                    enum=ExecutionModeType, max_length=30)),
-                ('property_strategy_definition', models.CharField(
-                    blank=True, max_length=100, null=True)),
-                ('activity_strategy_definition', models.CharField(
-                    blank=True, max_length=100, null=True)),
+                ('display_name',
+                 models.CharField(blank=True, max_length=255, null=True)),
+                ('finish_mode',
+                 enumfields.fields.EnumField(
+                     enum=ExecutionModeType, max_length=30)),
+                ('hrn_script',
+                 models.CharField(blank=True, max_length=2000, null=True)),
+                ('start_mode',
+                 enumfields.fields.EnumField(
+                     enum=ExecutionModeType, max_length=30)),
+                ('property_strategy_definition',
+                 models.CharField(blank=True, max_length=100, null=True)),
+                ('activity_strategy_definition',
+                 models.CharField(blank=True, max_length=100, null=True)),
             ],
             options={
                 'verbose_name':
@@ -104,15 +112,17 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='ActivityLog',
             fields=[
-                ('id', models.UUIDField(
-                    default=uuid.uuid4,
-                    editable=False,
-                    primary_key=True,
-                    serialize=False)),
+                ('id',
+                 models.UUIDField(
+                     default=uuid.uuid4,
+                     editable=False,
+                     primary_key=True,
+                     serialize=False)),
                 ('activity_id', models.CharField(max_length=255)),
                 ('contents', models.TextField(blank=True, null=True)),
-                ('status', enumfields.fields.EnumField(
-                    enum=FlowActivityStatusType, max_length=30)),
+                ('status',
+                 enumfields.fields.EnumField(
+                     enum=FlowActivityStatusType, max_length=30)),
                 ('status_date', models.DateTimeField()),
             ],
             options={
@@ -127,22 +137,24 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='ApplicationDefinition',
             fields=[
-                ('id', models.UUIDField(
-                    default=uuid.uuid4,
-                    editable=False,
-                    primary_key=True,
-                    serialize=False)),
-                ('application_id', models.CharField(
-                    blank=True, max_length=100, null=True)),
-                ('definition_site', enumfields.fields.EnumField(
-                    enum=DefinitionSiteType, max_length=30)),
+                ('id',
+                 models.UUIDField(
+                     default=uuid.uuid4,
+                     editable=False,
+                     primary_key=True,
+                     serialize=False)),
+                ('application_id',
+                 models.CharField(blank=True, max_length=100, null=True)),
+                ('definition_site',
+                 enumfields.fields.EnumField(
+                     enum=DefinitionSiteType, max_length=30)),
                 ('description', models.TextField(blank=True, null=True)),
-                ('application_name', models.CharField(
-                    blank=True, max_length=100, null=True)),
+                ('application_name',
+                 models.CharField(blank=True, max_length=100, null=True)),
                 ('url', models.CharField(
                     blank=True, max_length=255, null=True)),
-                ('route', models.CharField(
-                    blank=True, max_length=255, null=True)),
+                ('route',
+                 models.CharField(blank=True, max_length=255, null=True)),
             ],
             options={
                 'db_table':
@@ -156,26 +168,32 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='ApplicationParameterDefinition',
             fields=[
-                ('id', models.UUIDField(
-                    default=uuid.uuid4,
-                    editable=False,
-                    primary_key=True,
-                    serialize=False)),
-                ('data_type', enumfields.fields.EnumField(
-                    enum=FlowDataType, max_length=30)),
-                ('definition_site', enumfields.fields.EnumField(
-                    enum=DefinitionSiteType, max_length=30)),
-                ('display_name', models.CharField(
-                    blank=True, max_length=200, null=True)),
-                ('initial_value', models.CharField(
-                    blank=True, max_length=255, null=True)),
+                ('id',
+                 models.UUIDField(
+                     default=uuid.uuid4,
+                     editable=False,
+                     primary_key=True,
+                     serialize=False)),
+                ('data_type',
+                 enumfields.fields.EnumField(enum=FlowDataType,
+                                             max_length=30)),
+                ('definition_site',
+                 enumfields.fields.EnumField(
+                     enum=DefinitionSiteType, max_length=30)),
+                ('display_name',
+                 models.CharField(blank=True, max_length=200, null=True)),
+                ('initial_value',
+                 models.CharField(blank=True, max_length=255, null=True)),
                 ('length', models.IntegerField(blank=True, null=True)),
                 ('order_number', models.IntegerField(blank=True, null=True)),
                 ('parameter_id', models.CharField(max_length=200)),
-                ('property_type', enumfields.fields.EnumField(
-                    enum=PropertyType, max_length=30)),
-                ('sub_data_type', enumfields.fields.EnumField(
-                    blank=True, enum=FieldDataType, max_length=30, null=True)),
+                ('property_type',
+                 enumfields.fields.EnumField(enum=PropertyType,
+                                             max_length=30)),
+                ('sub_data_type',
+                 enumfields.fields.EnumField(
+                     blank=True, enum=FieldDataType, max_length=30,
+                     null=True)),
             ],
             options={
                 'verbose_name':
@@ -189,13 +207,15 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='AssignmentList',
             fields=[
-                ('id', models.UUIDField(
-                    default=uuid.uuid4,
-                    editable=False,
-                    primary_key=True,
-                    serialize=False)),
-                ('assigment_strategy', enumfields.fields.EnumField(
-                    enum=AssignmentStrategyType, max_length=30)),
+                ('id',
+                 models.UUIDField(
+                     default=uuid.uuid4,
+                     editable=False,
+                     primary_key=True,
+                     serialize=False)),
+                ('assigment_strategy',
+                 enumfields.fields.EnumField(
+                     enum=AssignmentStrategyType, max_length=30)),
                 ('creation_date', models.DateTimeField()),
             ],
             options={
@@ -210,17 +230,20 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='FlowActionDefinition',
             fields=[
-                ('id', models.UUIDField(
-                    default=uuid.uuid4,
-                    editable=False,
-                    primary_key=True,
-                    serialize=False)),
-                ('action_type', enumfields.fields.EnumField(
-                    default='Postaction', enum=ActionType, max_length=30)),
-                ('script_engine', enumfields.fields.EnumField(
-                    enum=ScriptEngineType, max_length=30)),
-                ('content', models.CharField(
-                    blank=True, max_length=2000, null=True)),
+                ('id',
+                 models.UUIDField(
+                     default=uuid.uuid4,
+                     editable=False,
+                     primary_key=True,
+                     serialize=False)),
+                ('action_type',
+                 enumfields.fields.EnumField(
+                     default='Postaction', enum=ActionType, max_length=30)),
+                ('script_engine',
+                 enumfields.fields.EnumField(
+                     enum=ScriptEngineType, max_length=30)),
+                ('content',
+                 models.CharField(blank=True, max_length=2000, null=True)),
             ],
             options={
                 'verbose_name':
@@ -234,13 +257,14 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='FlowActionDefinitionParameterMap',
             fields=[
-                ('id', models.UUIDField(
-                    default=uuid.uuid4,
-                    editable=False,
-                    primary_key=True,
-                    serialize=False)),
-                ('content', models.CharField(
-                    blank=True, max_length=2000, null=True)),
+                ('id',
+                 models.UUIDField(
+                     default=uuid.uuid4,
+                     editable=False,
+                     primary_key=True,
+                     serialize=False)),
+                ('content',
+                 models.CharField(blank=True, max_length=2000, null=True)),
             ],
             options={
                 'verbose_name':
@@ -254,28 +278,31 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='FlowActivity',
             fields=[
-                ('id', models.UUIDField(
-                    default=uuid.uuid4,
-                    editable=False,
-                    primary_key=True,
-                    serialize=False)),
-                ('activity_number', models.CharField(
-                    blank=True, max_length=255, null=True)),
+                ('id',
+                 models.UUIDField(
+                     default=uuid.uuid4,
+                     editable=False,
+                     primary_key=True,
+                     serialize=False)),
+                ('activity_number',
+                 models.CharField(blank=True, max_length=255, null=True)),
                 ('completion_date', models.DateTimeField(
                     blank=True, null=True)),
                 ('creation_date', models.DateTimeField()),
                 ('start_date', models.DateTimeField(blank=True, null=True)),
-                ('status', enumfields.fields.EnumField(
-                    enum=FlowActivityStatusType, max_length=30)),
+                ('status',
+                 enumfields.fields.EnumField(
+                     enum=FlowActivityStatusType, max_length=30)),
                 ('status_date', models.DateTimeField()),
-                ('hrn_code', models.CharField(
-                    help_text=
-                    'antares.apps.flow.models.operation.flow_activity.hrn_code_help',
-                    max_length=50,
-                    unique=True,
-                    verbose_name=
-                    'antares.apps.flow.models.operation.flow_activity.hrn_code'
-                )),
+                ('hrn_code',
+                 models.CharField(
+                     help_text=
+                     'antares.apps.flow.models.operation.flow_activity.hrn_code_help',
+                     max_length=50,
+                     unique=True,
+                     verbose_name=
+                     'antares.apps.flow.models.operation.flow_activity.hrn_code'
+                 )),
             ],
             options={
                 'verbose_name':
@@ -289,16 +316,17 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='FlowActivityExtraTab',
             fields=[
-                ('id', models.UUIDField(
-                    default=uuid.uuid4,
-                    editable=False,
-                    primary_key=True,
-                    serialize=False)),
-                ('tab_name', models.CharField(
-                    blank=True, max_length=2000, null=True)),
+                ('id',
+                 models.UUIDField(
+                     default=uuid.uuid4,
+                     editable=False,
+                     primary_key=True,
+                     serialize=False)),
+                ('tab_name',
+                 models.CharField(blank=True, max_length=2000, null=True)),
                 ('tab_id', models.CharField(max_length=200)),
-                ('route', models.CharField(
-                    blank=True, max_length=200, null=True)),
+                ('route',
+                 models.CharField(blank=True, max_length=200, null=True)),
                 ('url', models.CharField(
                     blank=True, max_length=200, null=True)),
             ],
@@ -314,11 +342,12 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='FlowActivityExtraTabParameter',
             fields=[
-                ('id', models.UUIDField(
-                    default=uuid.uuid4,
-                    editable=False,
-                    primary_key=True,
-                    serialize=False)),
+                ('id',
+                 models.UUIDField(
+                     default=uuid.uuid4,
+                     editable=False,
+                     primary_key=True,
+                     serialize=False)),
                 ('param_id', models.CharField(max_length=200)),
                 ('value', models.CharField(max_length=200)),
             ],
@@ -334,11 +363,12 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='FlowActivityForm',
             fields=[
-                ('id', models.UUIDField(
-                    default=uuid.uuid4,
-                    editable=False,
-                    primary_key=True,
-                    serialize=False)),
+                ('id',
+                 models.UUIDField(
+                     default=uuid.uuid4,
+                     editable=False,
+                     primary_key=True,
+                     serialize=False)),
                 ('can_save', models.BooleanField(default=False)),
                 ('can_create', models.BooleanField(default=False)),
             ],
@@ -354,11 +384,12 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='FlowActivityFormParameter',
             fields=[
-                ('id', models.UUIDField(
-                    default=uuid.uuid4,
-                    editable=False,
-                    primary_key=True,
-                    serialize=False)),
+                ('id',
+                 models.UUIDField(
+                     default=uuid.uuid4,
+                     editable=False,
+                     primary_key=True,
+                     serialize=False)),
                 ('param_id', models.CharField(max_length=200)),
                 ('value', models.CharField(max_length=200)),
             ],
@@ -374,17 +405,20 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='FlowActivityValidation',
             fields=[
-                ('id', models.UUIDField(
-                    default=uuid.uuid4,
-                    editable=False,
-                    primary_key=True,
-                    serialize=False)),
+                ('id',
+                 models.UUIDField(
+                     default=uuid.uuid4,
+                     editable=False,
+                     primary_key=True,
+                     serialize=False)),
                 ('validation_id', models.CharField(max_length=2000)),
                 ('validation', models.CharField(max_length=2000)),
                 ('message', models.CharField(max_length=2000)),
-                ('script_type', enumfields.fields.EnumField(
-                    default='Javascript', enum=ScriptEngineType,
-                    max_length=30)),
+                ('script_type',
+                 enumfields.fields.EnumField(
+                     default='Javascript',
+                     enum=ScriptEngineType,
+                     max_length=30)),
             ],
             options={
                 'verbose_name':
@@ -398,11 +432,12 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='FlowAttachment',
             fields=[
-                ('id', models.UUIDField(
-                    default=uuid.uuid4,
-                    editable=False,
-                    primary_key=True,
-                    serialize=False)),
+                ('id',
+                 models.UUIDField(
+                     default=uuid.uuid4,
+                     editable=False,
+                     primary_key=True,
+                     serialize=False)),
                 ('content', models.BinaryField()),
                 ('file_name', models.CharField(max_length=400)),
                 ('mime_type', models.CharField(max_length=100)),
@@ -420,29 +455,32 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='FlowCase',
             fields=[
-                ('id', models.UUIDField(
-                    default=uuid.uuid4,
-                    editable=False,
-                    primary_key=True,
-                    serialize=False)),
-                ('case_name', models.CharField(
-                    blank=True, max_length=255, null=True)),
-                ('case_number', models.CharField(
-                    blank=True, max_length=255, null=True)),
+                ('id',
+                 models.UUIDField(
+                     default=uuid.uuid4,
+                     editable=False,
+                     primary_key=True,
+                     serialize=False)),
+                ('case_name',
+                 models.CharField(blank=True, max_length=255, null=True)),
+                ('case_number',
+                 models.CharField(blank=True, max_length=255, null=True)),
                 ('completion_date', models.DateTimeField(
                     blank=True, null=True)),
                 ('creation_date', models.DateTimeField()),
                 ('priority', models.CharField(max_length=30)),
                 ('start_date', models.DateTimeField(blank=True, null=True)),
-                ('status', enumfields.fields.EnumField(
-                    enum=FlowCaseStatusType, max_length=30)),
-                ('hrn_code', models.CharField(
-                    help_text=
-                    'antares.apps.flow.models.operation.flow_case.hrn_code_help',
-                    max_length=50,
-                    unique=True,
-                    verbose_name=
-                    'antares.apps.flow.models.operation.flow_case.hrn_code')),
+                ('status',
+                 enumfields.fields.EnumField(
+                     enum=FlowCaseStatusType, max_length=30)),
+                ('hrn_code',
+                 models.CharField(
+                     help_text=
+                     'antares.apps.flow.models.operation.flow_case.hrn_code_help',
+                     max_length=50,
+                     unique=True,
+                     verbose_name=
+                     'antares.apps.flow.models.operation.flow_case.hrn_code')),
             ],
             options={
                 'verbose_name':
@@ -456,27 +494,29 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='FlowDefinition',
             fields=[
-                ('id', models.UUIDField(
-                    default=uuid.uuid4,
-                    editable=False,
-                    primary_key=True,
-                    serialize=False)),
+                ('id',
+                 models.UUIDField(
+                     default=uuid.uuid4,
+                     editable=False,
+                     primary_key=True,
+                     serialize=False)),
                 ('access_level', models.CharField(max_length=7)),
                 ('creation_date', models.DateTimeField()),
                 ('description', models.TextField(blank=True, null=True)),
-                ('display_name', models.CharField(
-                    blank=True, max_length=200, null=True)),
-                ('flow_id', models.CharField(
-                    blank=True, max_length=255, null=True)),
-                ('flow_name', models.CharField(
-                    blank=True, max_length=255, null=True)),
-                ('flow_version', models.CharField(
-                    blank=True, max_length=255, null=True)),
-                ('hrn_script', models.CharField(
-                    blank=True, max_length=2000, null=True)),
+                ('display_name',
+                 models.CharField(blank=True, max_length=200, null=True)),
+                ('flow_id',
+                 models.CharField(blank=True, max_length=255, null=True)),
+                ('flow_name',
+                 models.CharField(blank=True, max_length=255, null=True)),
+                ('flow_version',
+                 models.CharField(blank=True, max_length=255, null=True)),
+                ('hrn_script',
+                 models.CharField(blank=True, max_length=2000, null=True)),
                 ('update_date', models.DateTimeField(blank=True, null=True)),
-                ('status', enumfields.fields.EnumField(
-                    enum=FlowDefinitionStatusType, max_length=30)),
+                ('status',
+                 enumfields.fields.EnumField(
+                     enum=FlowDefinitionStatusType, max_length=30)),
                 ('valid_from', models.DateTimeField(blank=True, null=True)),
                 ('valid_to', models.DateTimeField(blank=True, null=True)),
             ],
@@ -492,15 +532,17 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='FlowDocument',
             fields=[
-                ('id', models.UUIDField(
-                    default=uuid.uuid4,
-                    editable=False,
-                    primary_key=True,
-                    serialize=False)),
+                ('id',
+                 models.UUIDField(
+                     default=uuid.uuid4,
+                     editable=False,
+                     primary_key=True,
+                     serialize=False)),
                 ('creation_date', models.DateTimeField()),
                 ('update_date', models.DateTimeField()),
-                ('relationship', enumfields.fields.EnumField(
-                    enum=FlowDocumentRelationshipType, max_length=30)),
+                ('relationship',
+                 enumfields.fields.EnumField(
+                     enum=FlowDocumentRelationshipType, max_length=30)),
             ],
             options={
                 'db_table':
@@ -514,17 +556,18 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='FlowNote',
             fields=[
-                ('id', models.UUIDField(
-                    default=uuid.uuid4,
-                    editable=False,
-                    primary_key=True,
-                    serialize=False)),
+                ('id',
+                 models.UUIDField(
+                     default=uuid.uuid4,
+                     editable=False,
+                     primary_key=True,
+                     serialize=False)),
                 ('content', ckeditor.fields.RichTextField(
                     blank=True, null=True)),
                 ('post_date', models.DateTimeField(blank=True, null=True)),
                 ('update_date', models.DateTimeField(blank=True, null=True)),
-                ('title', models.CharField(
-                    blank=True, max_length=2000, null=True)),
+                ('title',
+                 models.CharField(blank=True, max_length=2000, null=True)),
             ],
             options={
                 'verbose_name':
@@ -538,11 +581,12 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='FlowPackage',
             fields=[
-                ('id', models.UUIDField(
-                    default=uuid.uuid4,
-                    editable=False,
-                    primary_key=True,
-                    serialize=False)),
+                ('id',
+                 models.UUIDField(
+                     default=uuid.uuid4,
+                     editable=False,
+                     primary_key=True,
+                     serialize=False)),
                 ('creation_date', models.DateTimeField()),
                 ('update_date', models.DateTimeField(blank=True, null=True)),
                 ('package_id', models.CharField(max_length=100)),
@@ -562,24 +606,28 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='FlowProperty',
             fields=[
-                ('id', models.UUIDField(
-                    default=uuid.uuid4,
-                    editable=False,
-                    primary_key=True,
-                    serialize=False)),
+                ('id',
+                 models.UUIDField(
+                     default=uuid.uuid4,
+                     editable=False,
+                     primary_key=True,
+                     serialize=False)),
                 ('clob_value', models.BinaryField(blank=True, null=True)),
-                ('data_type', enumfields.fields.EnumField(
-                    enum=FlowDataType, max_length=30)),
+                ('data_type',
+                 enumfields.fields.EnumField(enum=FlowDataType,
+                                             max_length=30)),
                 ('date_value', models.DateTimeField(blank=True, null=True)),
-                ('decimal_value', models.DecimalField(
-                    blank=True, decimal_places=2, max_digits=19, null=True)),
+                ('decimal_value',
+                 models.DecimalField(
+                     blank=True, decimal_places=2, max_digits=19, null=True)),
                 ('integer_value', models.BigIntegerField(
                     blank=True, null=True)),
                 ('property_id', models.CharField(max_length=100)),
-                ('string_value', models.CharField(
-                    blank=True, max_length=2000, null=True)),
-                ('sub_data_type', enumfields.fields.EnumField(
-                    enum=FlowBasicDataSubtype, max_length=30)),
+                ('string_value',
+                 models.CharField(blank=True, max_length=2000, null=True)),
+                ('sub_data_type',
+                 enumfields.fields.EnumField(
+                     enum=FlowBasicDataSubtype, max_length=30)),
                 ('text_value', models.TextField(blank=True, null=True)),
                 ('boolean_value', models.NullBooleanField()),
             ],
@@ -595,11 +643,12 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='FlowUserNotificationOption',
             fields=[
-                ('id', models.UUIDField(
-                    default=uuid.uuid4,
-                    editable=False,
-                    primary_key=True,
-                    serialize=False)),
+                ('id',
+                 models.UUIDField(
+                     default=uuid.uuid4,
+                     editable=False,
+                     primary_key=True,
+                     serialize=False)),
                 ('active', models.BooleanField(default=False)),
                 ('creation_date', models.DateTimeField(blank=True, null=True)),
                 ('update_date', models.DateTimeField(blank=True, null=True)),
@@ -616,17 +665,19 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='ParticipantDefinition',
             fields=[
-                ('id', models.UUIDField(
-                    default=uuid.uuid4,
-                    editable=False,
-                    primary_key=True,
-                    serialize=False)),
+                ('id',
+                 models.UUIDField(
+                     default=uuid.uuid4,
+                     editable=False,
+                     primary_key=True,
+                     serialize=False)),
                 ('definition_site', models.CharField(max_length=7)),
                 ('participant_id', models.CharField(max_length=255)),
-                ('participant_name', models.CharField(
-                    blank=True, max_length=255, null=True)),
-                ('participant_type', enumfields.fields.EnumField(
-                    enum=ParticipantType, max_length=30)),
+                ('participant_name',
+                 models.CharField(blank=True, max_length=255, null=True)),
+                ('participant_type',
+                 enumfields.fields.EnumField(
+                     enum=ParticipantType, max_length=30)),
             ],
             options={
                 'verbose_name':
@@ -640,33 +691,40 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='PropertyDefinition',
             fields=[
-                ('id', models.UUIDField(
-                    default=uuid.uuid4,
-                    editable=False,
-                    primary_key=True,
-                    serialize=False)),
-                ('data_type', enumfields.fields.EnumField(
-                    enum=FlowDataType, max_length=30)),
+                ('id',
+                 models.UUIDField(
+                     default=uuid.uuid4,
+                     editable=False,
+                     primary_key=True,
+                     serialize=False)),
+                ('data_type',
+                 enumfields.fields.EnumField(enum=FlowDataType,
+                                             max_length=30)),
                 ('definition_site', models.CharField(max_length=7)),
-                ('display_name', models.CharField(
-                    blank=True, max_length=200, null=True)),
-                ('initial_value', models.CharField(
-                    blank=True, max_length=255, null=True)),
+                ('display_name',
+                 models.CharField(blank=True, max_length=200, null=True)),
+                ('initial_value',
+                 models.CharField(blank=True, max_length=255, null=True)),
                 ('length', models.IntegerField(blank=True, null=True)),
                 ('property_id', models.CharField(max_length=200)),
-                ('property_type', enumfields.fields.EnumField(
-                    enum=PropertyType, max_length=30)),
-                ('script_engine', enumfields.fields.EnumField(
-                    enum=ScriptEngineType, max_length=30)),
-                ('sub_data_type', enumfields.fields.EnumField(
-                    blank=True, enum=FieldDataType, max_length=30, null=True)),
-                ('mode', enumfields.fields.EnumField(
-                    blank=True,
-                    enum=FormalParameterModeType,
-                    max_length=30,
-                    null=True)),
-                ('catalog', models.CharField(
-                    blank=True, max_length=200, null=True)),
+                ('property_type',
+                 enumfields.fields.EnumField(enum=PropertyType,
+                                             max_length=30)),
+                ('script_engine',
+                 enumfields.fields.EnumField(
+                     enum=ScriptEngineType, max_length=30)),
+                ('sub_data_type',
+                 enumfields.fields.EnumField(
+                     blank=True, enum=FieldDataType, max_length=30,
+                     null=True)),
+                ('mode',
+                 enumfields.fields.EnumField(
+                     blank=True,
+                     enum=FormalParameterModeType,
+                     max_length=30,
+                     null=True)),
+                ('catalog',
+                 models.CharField(blank=True, max_length=200, null=True)),
             ],
             options={
                 'verbose_name':
@@ -680,11 +738,12 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='ReassigmentLog',
             fields=[
-                ('id', models.UUIDField(
-                    default=uuid.uuid4,
-                    editable=False,
-                    primary_key=True,
-                    serialize=False)),
+                ('id',
+                 models.UUIDField(
+                     default=uuid.uuid4,
+                     editable=False,
+                     primary_key=True,
+                     serialize=False)),
                 ('original_date', models.DateTimeField()),
                 ('reason', ckeditor.fields.RichTextField()),
                 ('reassigment_date', models.DateTimeField()),
@@ -702,38 +761,43 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='TransitionDefinition',
             fields=[
-                ('id', models.UUIDField(
-                    default=uuid.uuid4,
-                    editable=False,
-                    primary_key=True,
-                    serialize=False)),
+                ('id',
+                 models.UUIDField(
+                     default=uuid.uuid4,
+                     editable=False,
+                     primary_key=True,
+                     serialize=False)),
                 ('condition_text', models.TextField(blank=True, null=True)),
                 ('transition_id', models.CharField(max_length=255)),
-                ('transition_name', models.CharField(
-                    blank=True, max_length=255, null=True)),
-                ('transition_type', enumfields.fields.EnumField(
-                    enum=TransitionType, max_length=30)),
-                ('flow_definition', models.ForeignKey(
-                    blank=True,
-                    db_column='flow_definition',
-                    null=True,
-                    on_delete=django.db.models.deletion.PROTECT,
-                    related_name='transition_definition_set',
-                    to='flow.FlowDefinition')),
-                ('from_activity_definition', models.ForeignKey(
-                    blank=True,
-                    db_column='from_activity_definition',
-                    null=True,
-                    on_delete=django.db.models.deletion.PROTECT,
-                    related_name='transition_definition_from_activity_set',
-                    to='flow.ActivityDefinition')),
-                ('to_activity_definition', models.ForeignKey(
-                    blank=True,
-                    db_column='to_activity_definition',
-                    null=True,
-                    on_delete=django.db.models.deletion.PROTECT,
-                    related_name='transition_definition_to_activity_set',
-                    to='flow.ActivityDefinition')),
+                ('transition_name',
+                 models.CharField(blank=True, max_length=255, null=True)),
+                ('transition_type',
+                 enumfields.fields.EnumField(
+                     enum=TransitionType, max_length=30)),
+                ('flow_definition',
+                 models.ForeignKey(
+                     blank=True,
+                     db_column='flow_definition',
+                     null=True,
+                     on_delete=django.db.models.deletion.PROTECT,
+                     related_name='transition_definition_set',
+                     to='flow.FlowDefinition')),
+                ('from_activity_definition',
+                 models.ForeignKey(
+                     blank=True,
+                     db_column='from_activity_definition',
+                     null=True,
+                     on_delete=django.db.models.deletion.PROTECT,
+                     related_name='transition_definition_from_activity_set',
+                     to='flow.ActivityDefinition')),
+                ('to_activity_definition',
+                 models.ForeignKey(
+                     blank=True,
+                     db_column='to_activity_definition',
+                     null=True,
+                     on_delete=django.db.models.deletion.PROTECT,
+                     related_name='transition_definition_to_activity_set',
+                     to='flow.ActivityDefinition')),
             ],
             options={
                 'verbose_name':

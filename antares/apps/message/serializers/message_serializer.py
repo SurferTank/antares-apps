@@ -21,7 +21,8 @@ class MessageSerializer(serializers.ModelSerializer):
     #concept_type = serializers.UUIDField()
     #account_type = serializers.UUIDField()
     #period = serializers.IntegerField()
-    message_type = serializers.CharField(default=str(MessageType.EXTERNAL_SYSTEM))
+    message_type = serializers.CharField(
+        default=str(MessageType.EXTERNAL_SYSTEM))
     content = serializers.JSONField()
 
     #creation_date = serializers.DateTimeField()

@@ -25,6 +25,7 @@ class ApplicationScopeType(EnumUtilsMixin, Enum):
         NEW_WINDOW = _(__name__ + '.ApplicationScopeType.' + 'NEW_WINDOW')
         DIALOG = _(__name__ + '.ApplicationScopeType.' + 'DIALOG')
 
+
 class UserClassType(EnumUtilsMixin, Enum):
     SCRAPER = "Scraper"
     GENERAL_USER = "General User"
@@ -40,4 +41,3 @@ class UserClassType(EnumUtilsMixin, Enum):
         SCRAPER = _(__name__ + '.UserClassType.SCRAPER')
         GENERAL_USER = _(__name__ + '.UserClassType.GENERAL_USER')
         SPECIALIST = _(__name__ + '.UserClassType.SPECIALIST')
-

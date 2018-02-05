@@ -19,14 +19,15 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Message',
             fields=[
-                ('id', models.UUIDField(
-                    default=uuid.uuid4,
-                    editable=False,
-                    primary_key=True,
-                    serialize=False)),
+                ('id',
+                 models.UUIDField(
+                     default=uuid.uuid4,
+                     editable=False,
+                     primary_key=True,
+                     serialize=False)),
                 ('period', models.IntegerField(blank=True, null=True)),
-                ('message_type', enumfields.fields.EnumField(
-                    enum=MessageType, max_length=30)),
+                ('message_type',
+                 enumfields.fields.EnumField(enum=MessageType, max_length=30)),
                 ('content', models.TextField(blank=True, null=True)),
             ],
             options={
@@ -41,28 +42,35 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='MessageStatus',
             fields=[
-                ('id', models.UUIDField(
-                    default=uuid.uuid4,
-                    editable=False,
-                    primary_key=True,
-                    serialize=False)),
-                ('module', enumfields.fields.EnumField(
-                    enum=SystemModuleType, max_length=30)),
-                ('status', enumfields.fields.EnumField(
-                    default='Pending', enum=MessageStatusType, max_length=30)),
-                ('creation_date', models.DateTimeField(
-                    editable=False,
-                    help_text=
-                    'antares.apps.message.models.message_status.creation_name_help',
-                    verbose_name=
-                    'antares.apps.message.models.message_status.creation_name')
+                ('id',
+                 models.UUIDField(
+                     default=uuid.uuid4,
+                     editable=False,
+                     primary_key=True,
+                     serialize=False)),
+                ('module',
+                 enumfields.fields.EnumField(
+                     enum=SystemModuleType, max_length=30)),
+                ('status',
+                 enumfields.fields.EnumField(
+                     default='Pending', enum=MessageStatusType,
+                     max_length=30)),
+                ('creation_date',
+                 models.DateTimeField(
+                     editable=False,
+                     help_text=
+                     'antares.apps.message.models.message_status.creation_name_help',
+                     verbose_name=
+                     'antares.apps.message.models.message_status.creation_name'
+                 )),
+                ('update_date',
+                 models.DateTimeField(
+                     editable=False,
+                     help_text=
+                     'antares.apps.message.models.message_status.update_date_help',
+                     verbose_name=
+                     'antares.apps.message.models.message_status.update_date')
                  ),
-                ('update_date', models.DateTimeField(
-                    editable=False,
-                    help_text=
-                    'antares.apps.message.models.message_status.update_date_help',
-                    verbose_name=
-                    'antares.apps.message.models.message_status.update_date')),
             ],
             options={
                 'verbose_name':

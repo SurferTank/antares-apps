@@ -20,28 +20,31 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='AddressItem',
             fields=[
-                ('id', models.UUIDField(
-                    default=uuid.uuid4,
-                    editable=False,
-                    primary_key=True,
-                    serialize=False)),
-                ('address_type', enumfields.fields.EnumField(
-                    default='Real', enum=AddressType, max_length=30)),
-                ('country_code', models.CharField(
-                    blank=True, max_length=2, null=True)),
-                ('status', enumfields.fields.EnumField(
-                    default='Active', enum=ItemStatusType, max_length=20)),
+                ('id',
+                 models.UUIDField(
+                     default=uuid.uuid4,
+                     editable=False,
+                     primary_key=True,
+                     serialize=False)),
+                ('address_type',
+                 enumfields.fields.EnumField(
+                     default='Real', enum=AddressType, max_length=30)),
+                ('country_code',
+                 models.CharField(blank=True, max_length=2, null=True)),
+                ('status',
+                 enumfields.fields.EnumField(
+                     default='Active', enum=ItemStatusType, max_length=20)),
                 ('is_principal', models.BooleanField(default=True)),
-                ('line_1', models.CharField(
-                    blank=True, max_length=100, null=True)),
-                ('line_2', models.CharField(
-                    blank=True, max_length=100, null=True)),
-                ('postal_code', models.CharField(
-                    blank=True, max_length=10, null=True)),
-                ('creation_date', models.DateTimeField(
-                    blank=True, editable=False, null=True)),
-                ('update_date', models.DateTimeField(
-                    blank=True, editable=False, null=True)),
+                ('line_1',
+                 models.CharField(blank=True, max_length=100, null=True)),
+                ('line_2',
+                 models.CharField(blank=True, max_length=100, null=True)),
+                ('postal_code',
+                 models.CharField(blank=True, max_length=10, null=True)),
+                ('creation_date',
+                 models.DateTimeField(blank=True, editable=False, null=True)),
+                ('update_date',
+                 models.DateTimeField(blank=True, editable=False, null=True)),
             ],
             options={
                 'verbose_name': 'Address Item',
@@ -52,18 +55,20 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='AttributeDefinition',
             fields=[
-                ('id', models.CharField(
-                    max_length=50, primary_key=True, serialize=False)),
-                ('description', ckeditor.fields.RichTextField(
-                    blank=True, null=True)),
+                ('id',
+                 models.CharField(
+                     max_length=50, primary_key=True, serialize=False)),
+                ('description',
+                 ckeditor.fields.RichTextField(blank=True, null=True)),
                 ('display_name', models.CharField(max_length=200)),
                 ('active', models.BooleanField(default=True)),
-                ('data_type', enumfields.fields.EnumField(
-                    enum=FieldDataType, max_length=20)),
-                ('creation_date', models.DateTimeField(
-                    blank=True, editable=False, null=True)),
-                ('update_date', models.DateTimeField(
-                    blank=True, editable=False, null=True)),
+                ('data_type',
+                 enumfields.fields.EnumField(
+                     enum=FieldDataType, max_length=20)),
+                ('creation_date',
+                 models.DateTimeField(blank=True, editable=False, null=True)),
+                ('update_date',
+                 models.DateTimeField(blank=True, editable=False, null=True)),
             ],
             options={
                 'verbose_name': 'Attribute Definition',
@@ -74,37 +79,40 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Client',
             fields=[
-                ('id', models.UUIDField(
-                    default=uuid.uuid4,
-                    editable=False,
-                    primary_key=True,
-                    serialize=False)),
+                ('id',
+                 models.UUIDField(
+                     default=uuid.uuid4,
+                     editable=False,
+                     primary_key=True,
+                     serialize=False)),
                 ('code', models.CharField(max_length=255, unique=True)),
-                ('full_name', models.CharField(
-                    blank=True, max_length=200, null=True)),
-                ('first_name', models.CharField(
-                    blank=True, max_length=200, null=True)),
-                ('middle_name', models.CharField(
-                    blank=True, max_length=200, null=True)),
-                ('last_name', models.CharField(
-                    blank=True, max_length=200, null=True)),
-                ('title', models.CharField(
-                    blank=True, max_length=200, null=True)),
+                ('full_name',
+                 models.CharField(blank=True, max_length=200, null=True)),
+                ('first_name',
+                 models.CharField(blank=True, max_length=200, null=True)),
+                ('middle_name',
+                 models.CharField(blank=True, max_length=200, null=True)),
+                ('last_name',
+                 models.CharField(blank=True, max_length=200, null=True)),
+                ('title',
+                 models.CharField(blank=True, max_length=200, null=True)),
                 ('registration_date', models.DateTimeField()),
                 ('birth_date', models.DateTimeField(blank=True, null=True)),
                 ('defunction_date', models.DateTimeField(
                     blank=True, null=True)),
-                ('gender', enumfields.fields.EnumField(
-                    blank=True,
-                    enum=ClientGenderType,
-                    max_length=17,
-                    null=True)),
-                ('status', enumfields.fields.EnumField(
-                    default='Active', enum=ClientStatusType, max_length=17)),
-                ('creation_date', models.DateTimeField(
-                    blank=True, editable=False, null=True)),
-                ('update_date', models.DateTimeField(
-                    blank=True, editable=False, null=True)),
+                ('gender',
+                 enumfields.fields.EnumField(
+                     blank=True,
+                     enum=ClientGenderType,
+                     max_length=17,
+                     null=True)),
+                ('status',
+                 enumfields.fields.EnumField(
+                     default='Active', enum=ClientStatusType, max_length=17)),
+                ('creation_date',
+                 models.DateTimeField(blank=True, editable=False, null=True)),
+                ('update_date',
+                 models.DateTimeField(blank=True, editable=False, null=True)),
             ],
             options={
                 'verbose_name': 'Client',
@@ -115,25 +123,27 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='ClientAttribute',
             fields=[
-                ('id', models.UUIDField(
-                    default=uuid.uuid4,
-                    editable=False,
-                    primary_key=True,
-                    serialize=False)),
+                ('id',
+                 models.UUIDField(
+                     default=uuid.uuid4,
+                     editable=False,
+                     primary_key=True,
+                     serialize=False)),
                 ('boolean_value', models.NullBooleanField()),
-                ('data_type', enumfields.fields.EnumField(
-                    enum=FieldDataType, max_length=20)),
+                ('data_type',
+                 enumfields.fields.EnumField(
+                     enum=FieldDataType, max_length=20)),
                 ('date_value', models.DateTimeField(blank=True, null=True)),
                 ('float_value', models.FloatField(blank=True, null=True)),
                 ('integer_value', models.BigIntegerField(
                     blank=True, null=True)),
-                ('string_value', models.CharField(
-                    blank=True, max_length=2000, null=True)),
+                ('string_value',
+                 models.CharField(blank=True, max_length=2000, null=True)),
                 ('text_value', models.TextField(blank=True, null=True)),
-                ('creation_date', models.DateTimeField(
-                    blank=True, editable=False, null=True)),
-                ('update_date', models.DateTimeField(
-                    blank=True, editable=False, null=True)),
+                ('creation_date',
+                 models.DateTimeField(blank=True, editable=False, null=True)),
+                ('update_date',
+                 models.DateTimeField(blank=True, editable=False, null=True)),
             ],
             options={
                 'verbose_name':
@@ -147,22 +157,23 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='ClientBranch',
             fields=[
-                ('id', models.UUIDField(
-                    default=uuid.uuid4,
-                    editable=False,
-                    primary_key=True,
-                    serialize=False)),
+                ('id',
+                 models.UUIDField(
+                     default=uuid.uuid4,
+                     editable=False,
+                     primary_key=True,
+                     serialize=False)),
                 ('branch_name', models.CharField(max_length=200)),
                 ('branch_number', models.IntegerField(default=0)),
-                ('description', ckeditor.fields.RichTextField(
-                    blank=True, null=True)),
+                ('description',
+                 ckeditor.fields.RichTextField(blank=True, null=True)),
                 ('registration_date', models.DateTimeField()),
-                ('occupation_description', ckeditor.fields.RichTextField(
-                    blank=True, null=True)),
-                ('creation_date', models.DateTimeField(
-                    blank=True, editable=False, null=True)),
-                ('update_date', models.DateTimeField(
-                    blank=True, editable=False, null=True)),
+                ('occupation_description',
+                 ckeditor.fields.RichTextField(blank=True, null=True)),
+                ('creation_date',
+                 models.DateTimeField(blank=True, editable=False, null=True)),
+                ('update_date',
+                 models.DateTimeField(blank=True, editable=False, null=True)),
             ],
             options={
                 'db_table': 'cli_client_branch',
@@ -173,17 +184,18 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='ClientBusinessClassification',
             fields=[
-                ('id', models.UUIDField(
-                    default=uuid.uuid4,
-                    editable=False,
-                    primary_key=True,
-                    serialize=False)),
+                ('id',
+                 models.UUIDField(
+                     default=uuid.uuid4,
+                     editable=False,
+                     primary_key=True,
+                     serialize=False)),
                 ('start_date', models.DateTimeField()),
                 ('end_date', models.DateTimeField(blank=True, null=True)),
-                ('creation_date', models.DateTimeField(
-                    blank=True, editable=False, null=True)),
-                ('update_date', models.DateTimeField(
-                    blank=True, editable=False, null=True)),
+                ('creation_date',
+                 models.DateTimeField(blank=True, editable=False, null=True)),
+                ('update_date',
+                 models.DateTimeField(blank=True, editable=False, null=True)),
             ],
             options={
                 'verbose_name': 'Client Business Classification',
@@ -194,11 +206,12 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='ClientIdentificationType',
             fields=[
-                ('id', models.CharField(
-                    max_length=100, primary_key=True, serialize=False)),
+                ('id',
+                 models.CharField(
+                     max_length=100, primary_key=True, serialize=False)),
                 ('display_name', models.CharField(max_length=100)),
-                ('description', ckeditor.fields.RichTextField(
-                    blank=True, null=True)),
+                ('description',
+                 ckeditor.fields.RichTextField(blank=True, null=True)),
                 ('creation_date', models.DateTimeField(editable=False)),
                 ('update_date', models.DateTimeField(editable=False)),
             ],
@@ -211,17 +224,19 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='ClientType',
             fields=[
-                ('id', models.CharField(
-                    max_length=255, primary_key=True, serialize=False)),
-                ('archetype', enumfields.fields.EnumField(
-                    enum=ClientArchetype, max_length=20)),
+                ('id',
+                 models.CharField(
+                     max_length=255, primary_key=True, serialize=False)),
+                ('archetype',
+                 enumfields.fields.EnumField(
+                     enum=ClientArchetype, max_length=20)),
                 ('short_name', models.CharField(max_length=1000)),
-                ('description', ckeditor.fields.RichTextField(
-                    blank=True, null=True)),
-                ('creation_date', models.DateTimeField(
-                    blank=True, editable=False, null=True)),
-                ('update_date', models.DateTimeField(
-                    blank=True, editable=False, null=True)),
+                ('description',
+                 ckeditor.fields.RichTextField(blank=True, null=True)),
+                ('creation_date',
+                 models.DateTimeField(blank=True, editable=False, null=True)),
+                ('update_date',
+                 models.DateTimeField(blank=True, editable=False, null=True)),
             ],
             options={
                 'verbose_name': 'Client Type',
@@ -232,19 +247,21 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='ClientUserRelation',
             fields=[
-                ('id', models.UUIDField(
-                    default=uuid.uuid4,
-                    editable=False,
-                    primary_key=True,
-                    serialize=False)),
-                ('relation_type', enumfields.fields.EnumField(
-                    enum=ClientRelationType, max_length=20)),
+                ('id',
+                 models.UUIDField(
+                     default=uuid.uuid4,
+                     editable=False,
+                     primary_key=True,
+                     serialize=False)),
+                ('relation_type',
+                 enumfields.fields.EnumField(
+                     enum=ClientRelationType, max_length=20)),
                 ('start_date', models.DateField()),
                 ('end_date', models.DateField(blank=True, null=True)),
-                ('creation_date', models.DateTimeField(
-                    blank=True, editable=False, null=True)),
-                ('update_date', models.DateTimeField(
-                    blank=True, editable=False, null=True)),
+                ('creation_date',
+                 models.DateTimeField(blank=True, editable=False, null=True)),
+                ('update_date',
+                 models.DateTimeField(blank=True, editable=False, null=True)),
             ],
             options={
                 'verbose_name':
@@ -258,19 +275,21 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='ClientUserRelationPermission',
             fields=[
-                ('id', models.UUIDField(
-                    default=uuid.uuid4,
-                    editable=False,
-                    primary_key=True,
-                    serialize=False)),
-                ('relation_type', enumfields.fields.EnumField(
-                    enum=ClientRelationPermissionType, max_length=20)),
+                ('id',
+                 models.UUIDField(
+                     default=uuid.uuid4,
+                     editable=False,
+                     primary_key=True,
+                     serialize=False)),
+                ('relation_type',
+                 enumfields.fields.EnumField(
+                     enum=ClientRelationPermissionType, max_length=20)),
                 ('start_date', models.DateField()),
                 ('end_date', models.DateField(null=True)),
-                ('creation_date', models.DateTimeField(
-                    blank=True, editable=False, null=True)),
-                ('update_date', models.DateTimeField(
-                    blank=True, editable=False, null=True)),
+                ('creation_date',
+                 models.DateTimeField(blank=True, editable=False, null=True)),
+                ('update_date',
+                 models.DateTimeField(blank=True, editable=False, null=True)),
             ],
             options={
                 'verbose_name':
@@ -284,21 +303,23 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='EmailItem',
             fields=[
-                ('id', models.UUIDField(
-                    default=uuid.uuid4,
-                    editable=False,
-                    primary_key=True,
-                    serialize=False)),
-                ('status', enumfields.fields.EnumField(
-                    default='Active', enum=ItemStatusType, max_length=20)),
+                ('id',
+                 models.UUIDField(
+                     default=uuid.uuid4,
+                     editable=False,
+                     primary_key=True,
+                     serialize=False)),
+                ('status',
+                 enumfields.fields.EnumField(
+                     default='Active', enum=ItemStatusType, max_length=20)),
                 ('is_principal', models.BooleanField(default=True)),
-                ('email_type', enumfields.fields.EnumField(
-                    enum=EmailType, max_length=20)),
+                ('email_type',
+                 enumfields.fields.EnumField(enum=EmailType, max_length=20)),
                 ('email', models.CharField(max_length=256)),
-                ('creation_date', models.DateTimeField(
-                    blank=True, editable=False, null=True)),
-                ('update_date', models.DateTimeField(
-                    blank=True, editable=False, null=True)),
+                ('creation_date',
+                 models.DateTimeField(blank=True, editable=False, null=True)),
+                ('update_date',
+                 models.DateTimeField(blank=True, editable=False, null=True)),
             ],
             options={
                 'verbose_name': 'Email Item',
@@ -309,14 +330,16 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='IdentificationItem',
             fields=[
-                ('id', models.UUIDField(
-                    default=uuid.uuid4,
-                    editable=False,
-                    primary_key=True,
-                    serialize=False)),
+                ('id',
+                 models.UUIDField(
+                     default=uuid.uuid4,
+                     editable=False,
+                     primary_key=True,
+                     serialize=False)),
                 ('code', models.CharField(max_length=100)),
-                ('status', enumfields.fields.EnumField(
-                    default='Active', enum=ItemStatusType, max_length=20)),
+                ('status',
+                 enumfields.fields.EnumField(
+                     default='Active', enum=ItemStatusType, max_length=20)),
                 ('creation_date', models.DateTimeField(editable=False)),
                 ('update_date', models.DateTimeField(editable=False)),
             ],
@@ -329,39 +352,44 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='IsicPosition',
             fields=[
-                ('id', models.UUIDField(
-                    default=uuid.uuid4,
-                    editable=False,
-                    help_text=
-                    'antares.apps.client.models.isic_position.primary_key_help',
-                    primary_key=True,
-                    serialize=False)),
+                ('id',
+                 models.UUIDField(
+                     default=uuid.uuid4,
+                     editable=False,
+                     help_text=
+                     'antares.apps.client.models.isic_position.primary_key_help',
+                     primary_key=True,
+                     serialize=False)),
                 ('isic_name', models.CharField(max_length=2000)),
                 ('isic_code', models.CharField(max_length=200)),
-                ('language', enumfields.fields.EnumField(
-                    enum=LanguageType, max_length=20)),
-                ('description', ckeditor.fields.RichTextField(
-                    blank=True, null=True)),
-                ('creation_date', models.DateTimeField(
-                    editable=False,
-                    help_text=
-                    'antares.apps.client.models.isic_position.creation_name_help',
-                    verbose_name=
-                    'antares.apps.client.models.isic_position.creation_name')),
-                ('update_date', models.DateTimeField(
-                    editable=False,
-                    help_text=
-                    'antares.apps.client.models.isic_position.update_date_help',
-                    verbose_name=
-                    'antares.apps.client.models.isic_position.update_date')),
-                ('lft', models.PositiveIntegerField(
-                    db_index=True, editable=False)),
-                ('rght', models.PositiveIntegerField(
-                    db_index=True, editable=False)),
-                ('tree_id', models.PositiveIntegerField(
-                    db_index=True, editable=False)),
-                ('level', models.PositiveIntegerField(
-                    db_index=True, editable=False)),
+                ('language',
+                 enumfields.fields.EnumField(enum=LanguageType,
+                                             max_length=20)),
+                ('description',
+                 ckeditor.fields.RichTextField(blank=True, null=True)),
+                ('creation_date',
+                 models.DateTimeField(
+                     editable=False,
+                     help_text=
+                     'antares.apps.client.models.isic_position.creation_name_help',
+                     verbose_name=
+                     'antares.apps.client.models.isic_position.creation_name')
+                 ),
+                ('update_date',
+                 models.DateTimeField(
+                     editable=False,
+                     help_text=
+                     'antares.apps.client.models.isic_position.update_date_help',
+                     verbose_name=
+                     'antares.apps.client.models.isic_position.update_date')),
+                ('lft',
+                 models.PositiveIntegerField(db_index=True, editable=False)),
+                ('rght',
+                 models.PositiveIntegerField(db_index=True, editable=False)),
+                ('tree_id',
+                 models.PositiveIntegerField(db_index=True, editable=False)),
+                ('level',
+                 models.PositiveIntegerField(db_index=True, editable=False)),
             ],
             options={
                 'db_table': 'cli_isic_position',
@@ -372,24 +400,27 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='SocialNetworkItem',
             fields=[
-                ('id', models.UUIDField(
-                    default=uuid.uuid4,
-                    editable=False,
-                    primary_key=True,
-                    serialize=False)),
-                ('status', enumfields.fields.EnumField(
-                    default='Active', enum=ItemStatusType, max_length=20)),
+                ('id',
+                 models.UUIDField(
+                     default=uuid.uuid4,
+                     editable=False,
+                     primary_key=True,
+                     serialize=False)),
+                ('status',
+                 enumfields.fields.EnumField(
+                     default='Active', enum=ItemStatusType, max_length=20)),
                 ('is_principal', models.BooleanField(default=True)),
                 ('item', models.CharField(
                     blank=True, max_length=100, null=True)),
-                ('social_network_type', enumfields.fields.EnumField(
-                    default='Skype',
-                    enum=SocialNetworkItemType,
-                    max_length=100)),
-                ('creation_date', models.DateTimeField(
-                    blank=True, editable=False, null=True)),
-                ('update_date', models.DateTimeField(
-                    blank=True, editable=False, null=True)),
+                ('social_network_type',
+                 enumfields.fields.EnumField(
+                     default='Skype',
+                     enum=SocialNetworkItemType,
+                     max_length=100)),
+                ('creation_date',
+                 models.DateTimeField(blank=True, editable=False, null=True)),
+                ('update_date',
+                 models.DateTimeField(blank=True, editable=False, null=True)),
             ],
             options={
                 'verbose_name': 'Social Network Item',
@@ -400,24 +431,27 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='TelephoneItem',
             fields=[
-                ('id', models.UUIDField(
-                    default=uuid.uuid4,
-                    editable=False,
-                    primary_key=True,
-                    serialize=False)),
-                ('status', enumfields.fields.EnumField(
-                    default='Active', enum=ItemStatusType, max_length=20)),
+                ('id',
+                 models.UUIDField(
+                     default=uuid.uuid4,
+                     editable=False,
+                     primary_key=True,
+                     serialize=False)),
+                ('status',
+                 enumfields.fields.EnumField(
+                     default='Active', enum=ItemStatusType, max_length=20)),
                 ('is_principal', models.BooleanField(default=True)),
-                ('telephone', models.CharField(
-                    blank=True, max_length=100, null=True)),
-                ('telephone_type', models.CharField(
-                    default=TelephoneItemType('Home'),
-                    max_length=9,
-                    verbose_name=TelephoneItemType)),
-                ('creation_date', models.DateTimeField(
-                    blank=True, editable=False, null=True)),
-                ('update_date', models.DateTimeField(
-                    blank=True, editable=False, null=True)),
+                ('telephone',
+                 models.CharField(blank=True, max_length=100, null=True)),
+                ('telephone_type',
+                 models.CharField(
+                     default=TelephoneItemType('Home'),
+                     max_length=9,
+                     verbose_name=TelephoneItemType)),
+                ('creation_date',
+                 models.DateTimeField(blank=True, editable=False, null=True)),
+                ('update_date',
+                 models.DateTimeField(blank=True, editable=False, null=True)),
             ],
             options={
                 'verbose_name': 'Telephone Item',

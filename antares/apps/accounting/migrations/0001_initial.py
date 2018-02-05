@@ -20,37 +20,44 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='AccountBalance',
             fields=[
-                ('id', models.UUIDField(
-                    default=uuid.uuid4,
-                    editable=False,
-                    primary_key=True,
-                    serialize=False)),
-                ('balance_status', enumfields.fields.EnumField(
-                    default='Balanced', enum=BalanceStatusType,
-                    max_length=10)),
+                ('id',
+                 models.UUIDField(
+                     default=uuid.uuid4,
+                     editable=False,
+                     primary_key=True,
+                     serialize=False)),
+                ('balance_status',
+                 enumfields.fields.EnumField(
+                     default='Balanced', enum=BalanceStatusType,
+                     max_length=10)),
                 ('calculation_date', models.DateTimeField()),
                 ('compliance_date', models.DateTimeField(
                     blank=True, null=True)),
-                ('interest_balance', models.DecimalField(
-                    decimal_places=2, default=0, max_digits=19)),
-                ('penalties_balance', models.DecimalField(
-                    decimal_places=2, default=0, max_digits=19)),
+                ('interest_balance',
+                 models.DecimalField(
+                     decimal_places=2, default=0, max_digits=19)),
+                ('penalties_balance',
+                 models.DecimalField(
+                     decimal_places=2, default=0, max_digits=19)),
                 ('period', models.IntegerField()),
-                ('principal_balance', models.DecimalField(
-                    decimal_places=2, default=0, max_digits=19)),
-                ('creation_date', models.DateTimeField(
-                    blank=True, editable=False, null=True)),
-                ('update_date', models.DateTimeField(
-                    blank=True, editable=False, null=True)),
-                ('total_balance', models.DecimalField(
-                    decimal_places=2, default=0, max_digits=19)),
-                ('hrn_code', models.CharField(
-                    help_text=
-                    'antares.apps.accounting.models.account_balance.hrn_code_help',
-                    max_length=50,
-                    unique=True,
-                    verbose_name=
-                    'antares.apps.accounting.models.account_balance.hrn_code')
+                ('principal_balance',
+                 models.DecimalField(
+                     decimal_places=2, default=0, max_digits=19)),
+                ('creation_date',
+                 models.DateTimeField(blank=True, editable=False, null=True)),
+                ('update_date',
+                 models.DateTimeField(blank=True, editable=False, null=True)),
+                ('total_balance',
+                 models.DecimalField(
+                     decimal_places=2, default=0, max_digits=19)),
+                ('hrn_code',
+                 models.CharField(
+                     help_text=
+                     'antares.apps.accounting.models.account_balance.hrn_code_help',
+                     max_length=50,
+                     unique=True,
+                     verbose_name=
+                     'antares.apps.accounting.models.account_balance.hrn_code')
                  ),
             ],
             options={
@@ -65,20 +72,22 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='AccountDocument',
             fields=[
-                ('id', models.UUIDField(
-                    default=uuid.uuid4,
-                    editable=False,
-                    primary_key=True,
-                    serialize=False)),
+                ('id',
+                 models.UUIDField(
+                     default=uuid.uuid4,
+                     editable=False,
+                     primary_key=True,
+                     serialize=False)),
                 ('content', models.TextField(blank=True, null=True)),
                 ('reversed_by', models.TextField(blank=True, null=True)),
                 ('reverses_document', models.TextField(blank=True, null=True)),
-                ('status', enumfields.fields.EnumField(
-                    enum=AccountDocumentStatusType, max_length=30)),
-                ('creation_date', models.DateTimeField(
-                    blank=True, editable=False, null=True)),
-                ('update_date', models.DateTimeField(
-                    blank=True, editable=False, null=True)),
+                ('status',
+                 enumfields.fields.EnumField(
+                     enum=AccountDocumentStatusType, max_length=30)),
+                ('creation_date',
+                 models.DateTimeField(blank=True, editable=False, null=True)),
+                ('update_date',
+                 models.DateTimeField(blank=True, editable=False, null=True)),
             ],
             options={
                 'verbose_name':
@@ -92,34 +101,36 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='AccountRule',
             fields=[
-                ('id', models.UUIDField(
-                    default=uuid.uuid4,
-                    editable=False,
-                    primary_key=True,
-                    serialize=False)),
-                ('description', ckeditor.fields.RichTextField(
-                    blank=True, null=True)),
-                ('account_type_field', models.CharField(
-                    blank=True, max_length=100, null=True)),
+                ('id',
+                 models.UUIDField(
+                     default=uuid.uuid4,
+                     editable=False,
+                     primary_key=True,
+                     serialize=False)),
+                ('description',
+                 ckeditor.fields.RichTextField(blank=True, null=True)),
+                ('account_type_field',
+                 models.CharField(blank=True, max_length=100, null=True)),
                 ('active', models.BooleanField(default=True)),
                 ('amount_field', models.CharField(max_length=100)),
-                ('client_id_field', models.CharField(
-                    blank=True, max_length=100, null=True)),
-                ('concept_type_field', models.CharField(
-                    blank=True, max_length=100, null=True)),
-                ('document_field', models.CharField(
-                    blank=True, max_length=100, null=True)),
-                ('external_function', models.CharField(
-                    blank=True, max_length=100, null=True)),
+                ('client_id_field',
+                 models.CharField(blank=True, max_length=100, null=True)),
+                ('concept_type_field',
+                 models.CharField(blank=True, max_length=100, null=True)),
+                ('document_field',
+                 models.CharField(blank=True, max_length=100, null=True)),
+                ('external_function',
+                 models.CharField(blank=True, max_length=100, null=True)),
                 ('fixed_period', models.IntegerField(blank=True, null=True)),
-                ('period_field', models.CharField(
-                    blank=True, max_length=100, null=True)),
-                ('value_affected', enumfields.fields.EnumField(
-                    enum=TransactionAffectedValueType, max_length=20)),
-                ('creation_date', models.DateTimeField(
-                    blank=True, editable=False, null=True)),
-                ('update_date', models.DateTimeField(
-                    blank=True, editable=False, null=True)),
+                ('period_field',
+                 models.CharField(blank=True, max_length=100, null=True)),
+                ('value_affected',
+                 enumfields.fields.EnumField(
+                     enum=TransactionAffectedValueType, max_length=20)),
+                ('creation_date',
+                 models.DateTimeField(blank=True, editable=False, null=True)),
+                ('update_date',
+                 models.DateTimeField(blank=True, editable=False, null=True)),
             ],
             options={
                 'verbose_name': 'Account Rule',
@@ -130,40 +141,45 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='AccountTransaction',
             fields=[
-                ('id', models.UUIDField(
-                    default=uuid.uuid4,
-                    editable=False,
-                    primary_key=True,
-                    serialize=False)),
+                ('id',
+                 models.UUIDField(
+                     default=uuid.uuid4,
+                     editable=False,
+                     primary_key=True,
+                     serialize=False)),
                 ('compliance_date', models.DateTimeField(
                     blank=True, null=True)),
-                ('credit_format', models.CharField(
-                    blank=True, max_length=40, null=True)),
+                ('credit_format',
+                 models.CharField(blank=True, max_length=40, null=True)),
                 ('due_date', models.DateTimeField(blank=True, null=True)),
-                ('external_function', models.CharField(
-                    blank=True, max_length=1000, null=True)),
+                ('external_function',
+                 models.CharField(blank=True, max_length=1000, null=True)),
                 ('fiscal_year', models.IntegerField(blank=True, null=True)),
-                ('interest_amount', models.DecimalField(
-                    decimal_places=2, default=0, max_digits=19)),
-                ('penalties_amount', models.DecimalField(
-                    decimal_places=2, default=0, max_digits=19)),
+                ('interest_amount',
+                 models.DecimalField(
+                     decimal_places=2, default=0, max_digits=19)),
+                ('penalties_amount',
+                 models.DecimalField(
+                     decimal_places=2, default=0, max_digits=19)),
                 ('period', models.IntegerField()),
                 ('posted_date', models.DateTimeField()),
-                ('principal_amount', models.DecimalField(
-                    decimal_places=2, default=0, max_digits=19)),
-                ('total_amount', models.DecimalField(
-                    decimal_places=2, max_digits=19)),
+                ('principal_amount',
+                 models.DecimalField(
+                     decimal_places=2, default=0, max_digits=19)),
+                ('total_amount',
+                 models.DecimalField(decimal_places=2, max_digits=19)),
                 ('transaction_date', models.DateTimeField()),
-                ('creation_date', models.DateTimeField(
-                    blank=True, editable=False, null=True)),
-                ('hrn_code', models.CharField(
-                    help_text=
-                    'antares.apps.accounting.models.account_transaction.hrn_code_help',
-                    max_length=50,
-                    unique=True,
-                    verbose_name=
-                    'antares.apps.accounting.models.account_transaction.hrn_code'
-                )),
+                ('creation_date',
+                 models.DateTimeField(blank=True, editable=False, null=True)),
+                ('hrn_code',
+                 models.CharField(
+                     help_text=
+                     'antares.apps.accounting.models.account_transaction.hrn_code_help',
+                     max_length=50,
+                     unique=True,
+                     verbose_name=
+                     'antares.apps.accounting.models.account_transaction.hrn_code'
+                 )),
             ],
             options={
                 'verbose_name':
@@ -177,21 +193,22 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='AccountType',
             fields=[
-                ('id', models.SlugField(
-                    max_length=255, primary_key=True, serialize=False)),
+                ('id',
+                 models.SlugField(
+                     max_length=255, primary_key=True, serialize=False)),
                 ('active', models.BooleanField(default=True)),
                 ('auxiliary_account', models.BooleanField(default=False)),
-                ('description', ckeditor.fields.RichTextField(
-                    blank=True, null=True)),
+                ('description',
+                 ckeditor.fields.RichTextField(blank=True, null=True)),
                 ('exigible', models.BooleanField(default=False)),
                 ('include_interest', models.BooleanField(default=False)),
                 ('include_penalties', models.BooleanField(default=False)),
                 ('account_type_name', models.CharField(max_length=100)),
                 ('hrn_script', models.TextField(blank=True, null=True)),
-                ('creation_date', models.DateTimeField(
-                    blank=True, editable=False, null=True)),
-                ('update_date', models.DateTimeField(
-                    blank=True, editable=False, null=True)),
+                ('creation_date',
+                 models.DateTimeField(blank=True, editable=False, null=True)),
+                ('update_date',
+                 models.DateTimeField(blank=True, editable=False, null=True)),
             ],
             options={
                 'verbose_name': 'Account Type',
@@ -202,23 +219,24 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='GLAccountType',
             fields=[
-                ('id', models.SlugField(
-                    max_length=200, primary_key=True, serialize=False)),
+                ('id',
+                 models.SlugField(
+                     max_length=200, primary_key=True, serialize=False)),
                 ('account_type_name', models.CharField(max_length=200)),
-                ('description', ckeditor.fields.RichTextField(
-                    blank=True, null=True)),
-                ('creation_date', models.DateTimeField(
-                    blank=True, editable=False, null=True)),
-                ('update_date', models.DateTimeField(
-                    blank=True, editable=False, null=True)),
-                ('lft', models.PositiveIntegerField(
-                    db_index=True, editable=False)),
-                ('rght', models.PositiveIntegerField(
-                    db_index=True, editable=False)),
-                ('tree_id', models.PositiveIntegerField(
-                    db_index=True, editable=False)),
-                ('level', models.PositiveIntegerField(
-                    db_index=True, editable=False)),
+                ('description',
+                 ckeditor.fields.RichTextField(blank=True, null=True)),
+                ('creation_date',
+                 models.DateTimeField(blank=True, editable=False, null=True)),
+                ('update_date',
+                 models.DateTimeField(blank=True, editable=False, null=True)),
+                ('lft',
+                 models.PositiveIntegerField(db_index=True, editable=False)),
+                ('rght',
+                 models.PositiveIntegerField(db_index=True, editable=False)),
+                ('tree_id',
+                 models.PositiveIntegerField(db_index=True, editable=False)),
+                ('level',
+                 models.PositiveIntegerField(db_index=True, editable=False)),
             ],
             options={
                 'verbose_name': 'General Ledger Account Type',
@@ -229,21 +247,22 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='GLBalance',
             fields=[
-                ('id', models.UUIDField(
-                    default=uuid.uuid4,
-                    editable=False,
-                    primary_key=True,
-                    serialize=False)),
+                ('id',
+                 models.UUIDField(
+                     default=uuid.uuid4,
+                     editable=False,
+                     primary_key=True,
+                     serialize=False)),
                 ('period', models.IntegerField()),
-                ('debit_balance', models.DecimalField(
-                    decimal_places=2, max_digits=19)),
-                ('credit_balance', models.DecimalField(
-                    decimal_places=2, max_digits=19)),
+                ('debit_balance',
+                 models.DecimalField(decimal_places=2, max_digits=19)),
+                ('credit_balance',
+                 models.DecimalField(decimal_places=2, max_digits=19)),
                 ('fiscal_year', models.IntegerField()),
-                ('creation_date', models.DateTimeField(
-                    blank=True, editable=False, null=True)),
-                ('update_date', models.DateTimeField(
-                    blank=True, editable=False, null=True)),
+                ('creation_date',
+                 models.DateTimeField(blank=True, editable=False, null=True)),
+                ('update_date',
+                 models.DateTimeField(blank=True, editable=False, null=True)),
             ],
             options={
                 'verbose_name':
@@ -257,21 +276,22 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='GLTransaction',
             fields=[
-                ('id', models.UUIDField(
-                    default=uuid.uuid4,
-                    editable=False,
-                    primary_key=True,
-                    serialize=False)),
+                ('id',
+                 models.UUIDField(
+                     default=uuid.uuid4,
+                     editable=False,
+                     primary_key=True,
+                     serialize=False)),
                 ('period', models.IntegerField()),
-                ('debit_balance', models.DecimalField(
-                    decimal_places=2, max_digits=19)),
-                ('credit_balance', models.DecimalField(
-                    decimal_places=2, max_digits=19)),
+                ('debit_balance',
+                 models.DecimalField(decimal_places=2, max_digits=19)),
+                ('credit_balance',
+                 models.DecimalField(decimal_places=2, max_digits=19)),
                 ('fiscal_year', models.IntegerField()),
-                ('creation_date', models.DateTimeField(
-                    blank=True, editable=False, null=True)),
-                ('update_date', models.DateTimeField(
-                    blank=True, editable=False, null=True)),
+                ('creation_date',
+                 models.DateTimeField(blank=True, editable=False, null=True)),
+                ('update_date',
+                 models.DateTimeField(blank=True, editable=False, null=True)),
             ],
             options={
                 'verbose_name':
@@ -285,19 +305,21 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='TransactionType',
             fields=[
-                ('id', models.SlugField(
-                    max_length=40, primary_key=True, serialize=False)),
+                ('id',
+                 models.SlugField(
+                     max_length=40, primary_key=True, serialize=False)),
                 ('active', models.BooleanField(default=True)),
                 ('calculate_charges', models.BooleanField(default=True)),
-                ('description', ckeditor.fields.RichTextField(
-                    blank=True, null=True)),
-                ('effect', enumfields.fields.EnumField(
-                    enum=TransactionEffectType, max_length=6)),
+                ('description',
+                 ckeditor.fields.RichTextField(blank=True, null=True)),
+                ('effect',
+                 enumfields.fields.EnumField(
+                     enum=TransactionEffectType, max_length=6)),
                 ('transaction_type_name', models.CharField(max_length=100)),
                 ('post_zeros', models.BooleanField(default=True)),
                 ('hrn_script', models.TextField(blank=True, null=True)),
-                ('creation_date', models.DateTimeField(
-                    editable=False, null=True)),
+                ('creation_date',
+                 models.DateTimeField(editable=False, null=True)),
                 ('update_date', models.DateTimeField(
                     editable=False, null=True)),
             ],

@@ -55,6 +55,6 @@ class AccountConsole(object):
             return _(__name__ + ".missing_parameter {parameter}").format(
                 parameter='withdocumentid')
         AccountManager.post_document(document)
-        return _(__name__ +
-                 ".document_successfully_posted_to_cca {document_id}").format(
-                     document_id=document.document_id)
+        return _(
+            __name__ + ".document_successfully_posted_to_cca {document_id}"
+        ).format(document_id=document.document_id)

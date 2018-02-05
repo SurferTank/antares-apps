@@ -249,8 +249,8 @@ class User(AbstractUser):
         """
         for user_role in self.role_set.select_related().filter(
                 Q(start_date__lte=timezone.now()) &
-            (Q(end_date__gte=timezone.now()) | Q(end_date=None))).filter(
-                role__code=role_code):
+            (Q(end_date__gte=timezone.now())
+             | Q(end_date=None))).filter(role__code=role_code):
             return True
         return False
 

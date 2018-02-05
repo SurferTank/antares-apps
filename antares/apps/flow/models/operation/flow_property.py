@@ -177,8 +177,8 @@ class FlowProperty(models.Model):
                     except FlowProperty.DoesNotExist:
                         prop_def = None
                     if prop_def is not None:
-                        context.execute('result_value =' +
-                                        param_def.content_text)
+                        context.execute(
+                            'result_value =' + param_def.content_text)
                         if (hasattr(context, 'result_value')
                                 and prop_def.data_type == FlowDataType.BASIC
                                 and context.result_value is not None):

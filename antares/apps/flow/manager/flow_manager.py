@@ -231,8 +231,8 @@ class FlowManager(object):
             properties['logger'] = logger
             context = js2py.EvalJs(properties)
             # here we return the values as it is, jst hrn_script and hrn_title
-            context.execute('return_value = ' +
-                            transition_definition.condition_text)
+            context.execute(
+                'return_value = ' + transition_definition.condition_text)
             if (hasattr(context, 'return_value')):
                 return bool(context.return_value)
             else:

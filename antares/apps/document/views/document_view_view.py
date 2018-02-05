@@ -40,12 +40,13 @@ class DocumentViewView(View):
         document.get_form_definition().verify_and_create_supporting_files(
             settings.DEBUG)
 
-        return render(request,
-                      document.get_form_definition().get_view_site_path(), {
-                          'document': document.header,
-                          'headerFields': document.get_header_field_dict(),
-                          'fields': document.get_field_dict(),
-                          'template': template,
-                          'next_place': next_place,
-                          'is_inner': is_inner,
-                      })
+        return render(
+            request,
+            document.get_form_definition().get_view_site_path(), {
+                'document': document.header,
+                'headerFields': document.get_header_field_dict(),
+                'fields': document.get_field_dict(),
+                'template': template,
+                'next_place': next_place,
+                'is_inner': is_inner,
+            })

@@ -74,7 +74,7 @@ class ApiPeriodView(BaseDatatableView):
         if column == 'period':
             link_string = '<a onClick="display_accounting_panel(\'{client_id}\' , '+\
                    ' \'{full_name}\', null, null, \'{concept_type_id}\','+\
-                '\'{concept_type_name}\', {period}, \'{account_type_id}\', \'{account_type_name}\');\">{period}</a>'
+                '\'{concept_type_name}\', {period}, \'{account_type_id}\', \'{account_type_name}\');\">{account_type_name}</a>'
             return link_string.format(
                 client_id=self.client.id,
                 full_name=self.client.full_name,

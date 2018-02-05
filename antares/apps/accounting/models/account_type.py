@@ -21,6 +21,7 @@ class AccountType(models.Model):
     include_penalties = models.BooleanField(default=False)
     account_type_name = models.CharField(max_length=100)
     hrn_script = models.TextField(blank=True, null=True)
+    is_document_based = models.BooleanField(default=False)
     author = models.ForeignKey(
         settings.AUTH_USER_MODEL,
         on_delete=models.PROTECT,

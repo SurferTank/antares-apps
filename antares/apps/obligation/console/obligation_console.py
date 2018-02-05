@@ -55,8 +55,8 @@ class ObligationConsole(object):
                 if (client is None):
                     return _(__name__ + ".console.client_was_not_found")
             else:
-                return _(__name__ +
-                         ".console.either_client_id_or_code_are_missing")
+                return _(
+                    __name__ + ".console.either_client_id_or_code_are_missing")
 
         if ('withconcepttype' in params):
             concept_type = ConceptType.find_one(params['withconcepttype'])
@@ -119,8 +119,8 @@ class ObligationConsole(object):
                 if (client is None):
                     return _(__name__ + ".console.client_was_not_found")
             else:
-                return _(__name__ +
-                         ".console.either_client_id_or_code_are_missing")
+                return _(
+                    __name__ + ".console.either_client_id_or_code_are_missing")
 
         if ('withobligationtype' in params):
             obligation_type = ObligationType.to_enum(

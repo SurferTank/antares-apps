@@ -20,66 +20,76 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='ActionDefinition',
             fields=[
-                ('id', models.SlugField(
-                    help_text=
-                    'antares.apps.core.models.action_definition.primary_key_help',
-                    max_length=200,
-                    primary_key=True,
-                    serialize=False,
-                    verbose_name='antares.apps.core.models.action_definition.id'
-                )),
-                ('active', models.BooleanField(
-                    default=True,
-                    help_text=
-                    'antares.apps.core.models.action_definition.wether_the_row_activated_or_not',
-                    verbose_name=
-                    'antares.apps.core.models.action_definition.active')),
-                ('definition_content', models.TextField(
-                    blank=True,
-                    help_text=
-                    'antares.apps.core.models.action_definition.action_definition_contents',
-                    null=True,
-                    verbose_name=
-                    'antares.apps.core.models.action_definition.definition_content'
-                )),
-                ('environment', enumfields.fields.EnumField(
-                    default='Local',
-                    enum=EnvironmentType,
-                    help_text=
-                    'antares.apps.core.models.action_definition.environment_help',
-                    max_length=10,
-                    verbose_name=
-                    'antares.apps.core.models.action_definition.environment')),
-                ('executable_name', models.CharField(
-                    blank=True,
-                    help_text=
-                    'antares.apps.core.models.action_definition.executable_name_help',
-                    max_length=200,
-                    verbose_name=
-                    'antares.apps.core.models.action_definition.executable_name'
-                )),
-                ('target_module', enumfields.fields.EnumField(
-                    default='Document',
-                    enum=ActionTargetModuleType,
-                    help_text=
-                    'antares.apps.core.models.action_definition.target_module_help',
-                    max_length=30,
-                    verbose_name=
-                    'antares.apps.core.models.action_definition.target_module')
+                ('id',
+                 models.SlugField(
+                     help_text=
+                     'antares.apps.core.models.action_definition.primary_key_help',
+                     max_length=200,
+                     primary_key=True,
+                     serialize=False,
+                     verbose_name=
+                     'antares.apps.core.models.action_definition.id')),
+                ('active',
+                 models.BooleanField(
+                     default=True,
+                     help_text=
+                     'antares.apps.core.models.action_definition.wether_the_row_activated_or_not',
+                     verbose_name=
+                     'antares.apps.core.models.action_definition.active')),
+                ('definition_content',
+                 models.TextField(
+                     blank=True,
+                     help_text=
+                     'antares.apps.core.models.action_definition.action_definition_contents',
+                     null=True,
+                     verbose_name=
+                     'antares.apps.core.models.action_definition.definition_content'
+                 )),
+                ('environment',
+                 enumfields.fields.EnumField(
+                     default='Local',
+                     enum=EnvironmentType,
+                     help_text=
+                     'antares.apps.core.models.action_definition.environment_help',
+                     max_length=10,
+                     verbose_name=
+                     'antares.apps.core.models.action_definition.environment')
                  ),
-                ('creation_date', models.DateTimeField(
-                    editable=False,
-                    help_text=
-                    'antares.apps.core.models.action_definition.creation_name_help',
-                    verbose_name=
-                    'antares.apps.core.models.action_definition.creation_name')
+                ('executable_name',
+                 models.CharField(
+                     blank=True,
+                     help_text=
+                     'antares.apps.core.models.action_definition.executable_name_help',
+                     max_length=200,
+                     verbose_name=
+                     'antares.apps.core.models.action_definition.executable_name'
+                 )),
+                ('target_module',
+                 enumfields.fields.EnumField(
+                     default='Document',
+                     enum=ActionTargetModuleType,
+                     help_text=
+                     'antares.apps.core.models.action_definition.target_module_help',
+                     max_length=30,
+                     verbose_name=
+                     'antares.apps.core.models.action_definition.target_module'
+                 )),
+                ('creation_date',
+                 models.DateTimeField(
+                     editable=False,
+                     help_text=
+                     'antares.apps.core.models.action_definition.creation_name_help',
+                     verbose_name=
+                     'antares.apps.core.models.action_definition.creation_name'
+                 )),
+                ('update_date',
+                 models.DateTimeField(
+                     editable=False,
+                     help_text=
+                     'antares.apps.core.models.action_definition.update_date_help',
+                     verbose_name=
+                     'antares.apps.core.models.action_definition.update_date')
                  ),
-                ('update_date', models.DateTimeField(
-                    editable=False,
-                    help_text=
-                    'antares.apps.core.models.action_definition.update_date_help',
-                    verbose_name=
-                    'antares.apps.core.models.action_definition.update_date')),
             ],
             options={
                 'verbose_name': 'Action Definition',
@@ -90,41 +100,45 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='ActionParameterDefinition',
             fields=[
-                ('id', models.UUIDField(
-                    default=uuid.uuid4,
-                    editable=False,
-                    help_text=
-                    'antares.apps.core.models.action_parameter_definition.primary_key_help',
-                    primary_key=True,
-                    serialize=False,
-                    verbose_name=
-                    'antares.apps.core.models.action_parameter_definition.id')
+                ('id',
+                 models.UUIDField(
+                     default=uuid.uuid4,
+                     editable=False,
+                     help_text=
+                     'antares.apps.core.models.action_parameter_definition.primary_key_help',
+                     primary_key=True,
+                     serialize=False,
+                     verbose_name=
+                     'antares.apps.core.models.action_parameter_definition.id')
                  ),
-                ('data_type', enumfields.fields.EnumField(
-                    default='String',
-                    enum=FieldDataType,
-                    help_text=
-                    'antares.apps.core.models.action_parameter_definition.data_type_help',
-                    max_length=7,
-                    verbose_name=
-                    'antares.apps.core.models.action_parameter_definition.data_type'
-                )),
-                ('direction', enumfields.fields.EnumField(
-                    default='In',
-                    enum=ActionParameterDirectionType,
-                    help_text=
-                    'antares.apps.core.models.action_parameter_definition.direction_help',
-                    max_length=6,
-                    verbose_name=
-                    'antares.apps.core.models.action_parameter_definition.direction'
-                )),
-                ('parameter_name', models.CharField(
-                    help_text=
-                    'antares.apps.core.models.action_parameter_definition.parameter_name_help',
-                    max_length=255,
-                    verbose_name=
-                    'antares.apps.core.models.action_parameter_definition.parameter_name'
-                )),
+                ('data_type',
+                 enumfields.fields.EnumField(
+                     default='String',
+                     enum=FieldDataType,
+                     help_text=
+                     'antares.apps.core.models.action_parameter_definition.data_type_help',
+                     max_length=7,
+                     verbose_name=
+                     'antares.apps.core.models.action_parameter_definition.data_type'
+                 )),
+                ('direction',
+                 enumfields.fields.EnumField(
+                     default='In',
+                     enum=ActionParameterDirectionType,
+                     help_text=
+                     'antares.apps.core.models.action_parameter_definition.direction_help',
+                     max_length=6,
+                     verbose_name=
+                     'antares.apps.core.models.action_parameter_definition.direction'
+                 )),
+                ('parameter_name',
+                 models.CharField(
+                     help_text=
+                     'antares.apps.core.models.action_parameter_definition.parameter_name_help',
+                     max_length=255,
+                     verbose_name=
+                     'antares.apps.core.models.action_parameter_definition.parameter_name'
+                 )),
             ],
             options={
                 'verbose_name':
@@ -138,36 +152,42 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Catalog',
             fields=[
-                ('id', models.SlugField(
-                    help_text=
-                    'antares.apps.core.models.catalog.primary_key_help',
-                    max_length=200,
-                    primary_key=True,
-                    serialize=False,
-                    verbose_name='antares.apps.core.models.catalog.id')),
-                ('content', models.TextField(
-                    blank=True,
-                    help_text='antares.apps.core.models.catalog.content',
-                    null=True,
-                    verbose_name='antares.apps.core.models.catalog.content')),
-                ('sql_text', models.CharField(
-                    blank=True,
-                    help_text='antares.apps.core.models.catalog.sql_text_help',
-                    max_length=3000,
-                    null=True,
-                    verbose_name='antares.apps.core.models.catalog.sql_text')),
-                ('creation_date', models.DateTimeField(
-                    editable=False,
-                    help_text=
-                    'antares.apps.core.models.catalog.creation_name_help',
-                    verbose_name=
-                    'antares.apps.core.models.catalog.creation_name')),
-                ('update_date', models.DateTimeField(
-                    editable=False,
-                    help_text=
-                    'antares.apps.core.models.catalog.update_date_help',
-                    verbose_name='antares.apps.core.models.catalog.update_date'
-                )),
+                ('id',
+                 models.SlugField(
+                     help_text=
+                     'antares.apps.core.models.catalog.primary_key_help',
+                     max_length=200,
+                     primary_key=True,
+                     serialize=False,
+                     verbose_name='antares.apps.core.models.catalog.id')),
+                ('content',
+                 models.TextField(
+                     blank=True,
+                     help_text='antares.apps.core.models.catalog.content',
+                     null=True,
+                     verbose_name='antares.apps.core.models.catalog.content')),
+                ('sql_text',
+                 models.CharField(
+                     blank=True,
+                     help_text='antares.apps.core.models.catalog.sql_text_help',
+                     max_length=3000,
+                     null=True,
+                     verbose_name='antares.apps.core.models.catalog.sql_text')
+                 ),
+                ('creation_date',
+                 models.DateTimeField(
+                     editable=False,
+                     help_text=
+                     'antares.apps.core.models.catalog.creation_name_help',
+                     verbose_name=
+                     'antares.apps.core.models.catalog.creation_name')),
+                ('update_date',
+                 models.DateTimeField(
+                     editable=False,
+                     help_text=
+                     'antares.apps.core.models.catalog.update_date_help',
+                     verbose_name='antares.apps.core.models.catalog.update_date'
+                 )),
             ],
             options={
                 'verbose_name': 'Catalog',
@@ -178,47 +198,52 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='ConceptType',
             fields=[
-                ('id', models.SlugField(
-                    help_text=
-                    'antares.apps.core.models.concept_type.primary_key_help',
-                    max_length=200,
-                    primary_key=True,
-                    serialize=False,
-                    verbose_name='antares.apps.core.models.concept_type.id')),
-                ('concept_type_name', models.CharField(
-                    help_text=
-                    'antares.apps.core.models.concept_type.concept_type_name_help',
-                    max_length=200,
-                    verbose_name=
-                    'antares.apps.core.models.concept_type.concept_type_name')
+                ('id',
+                 models.SlugField(
+                     help_text=
+                     'antares.apps.core.models.concept_type.primary_key_help',
+                     max_length=200,
+                     primary_key=True,
+                     serialize=False,
+                     verbose_name='antares.apps.core.models.concept_type.id')),
+                ('concept_type_name',
+                 models.CharField(
+                     help_text=
+                     'antares.apps.core.models.concept_type.concept_type_name_help',
+                     max_length=200,
+                     verbose_name=
+                     'antares.apps.core.models.concept_type.concept_type_name')
                  ),
-                ('description', ckeditor.fields.RichTextField(
-                    blank=True,
-                    help_text=
-                    'antares.apps.core.models.concept_type.description_help',
-                    null=True,
-                    verbose_name=
-                    'antares.apps.core.models.concept_type.description')),
-                ('creation_date', models.DateTimeField(
-                    editable=False,
-                    help_text=
-                    'antares.apps.core.models.concept_type.creation_name_help',
-                    verbose_name=
-                    'antares.apps.core.models.concept_type.creation_name')),
-                ('update_date', models.DateTimeField(
-                    editable=False,
-                    help_text=
-                    'antares.apps.core.models.concept_type.update_date_help',
-                    verbose_name=
-                    'antares.apps.core.models.concept_type.update_date')),
-                ('lft', models.PositiveIntegerField(
-                    db_index=True, editable=False)),
-                ('rght', models.PositiveIntegerField(
-                    db_index=True, editable=False)),
-                ('tree_id', models.PositiveIntegerField(
-                    db_index=True, editable=False)),
-                ('level', models.PositiveIntegerField(
-                    db_index=True, editable=False)),
+                ('description',
+                 ckeditor.fields.RichTextField(
+                     blank=True,
+                     help_text=
+                     'antares.apps.core.models.concept_type.description_help',
+                     null=True,
+                     verbose_name=
+                     'antares.apps.core.models.concept_type.description')),
+                ('creation_date',
+                 models.DateTimeField(
+                     editable=False,
+                     help_text=
+                     'antares.apps.core.models.concept_type.creation_name_help',
+                     verbose_name=
+                     'antares.apps.core.models.concept_type.creation_name')),
+                ('update_date',
+                 models.DateTimeField(
+                     editable=False,
+                     help_text=
+                     'antares.apps.core.models.concept_type.update_date_help',
+                     verbose_name=
+                     'antares.apps.core.models.concept_type.update_date')),
+                ('lft',
+                 models.PositiveIntegerField(db_index=True, editable=False)),
+                ('rght',
+                 models.PositiveIntegerField(db_index=True, editable=False)),
+                ('tree_id',
+                 models.PositiveIntegerField(db_index=True, editable=False)),
+                ('level',
+                 models.PositiveIntegerField(db_index=True, editable=False)),
             ],
             options={
                 'verbose_name': 'Concept Type',
@@ -229,39 +254,45 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Currency',
             fields=[
-                ('id', models.SlugField(
-                    help_text=
-                    'antares.apps.core.models.currency.primary_key_help',
-                    max_length=10,
-                    primary_key=True,
-                    serialize=False,
-                    verbose_name='antares.apps.core.models.currency.id')),
-                ('active', models.BooleanField(
-                    default=True,
-                    help_text='antares.apps.core.models.currency.active_help',
-                    verbose_name='antares.apps.core.models.currency.active')),
-                ('format', models.CharField(
-                    help_text='antares.apps.core.models.currency.format_help',
-                    max_length=100,
-                    verbose_name='antares.apps.core.models.currency.format')),
-                ('short_name', models.CharField(
-                    help_text=
-                    'antares.apps.core.models.currency.short_name_help',
-                    max_length=100,
-                    verbose_name='antares.apps.core.models.currency.short_name'
-                )),
-                ('creation_date', models.DateTimeField(
-                    editable=False,
-                    help_text=
-                    'antares.apps.core.models.currency.creation_name_help',
-                    verbose_name=
-                    'antares.apps.core.models.currency.creation_name')),
-                ('update_date', models.DateTimeField(
-                    editable=False,
-                    help_text=
-                    'antares.apps.core.models.currency.update_date_help',
-                    verbose_name='antares.apps.core.models.currency.update_date'
-                )),
+                ('id',
+                 models.SlugField(
+                     help_text=
+                     'antares.apps.core.models.currency.primary_key_help',
+                     max_length=10,
+                     primary_key=True,
+                     serialize=False,
+                     verbose_name='antares.apps.core.models.currency.id')),
+                ('active',
+                 models.BooleanField(
+                     default=True,
+                     help_text='antares.apps.core.models.currency.active_help',
+                     verbose_name='antares.apps.core.models.currency.active')),
+                ('format',
+                 models.CharField(
+                     help_text='antares.apps.core.models.currency.format_help',
+                     max_length=100,
+                     verbose_name='antares.apps.core.models.currency.format')),
+                ('short_name',
+                 models.CharField(
+                     help_text=
+                     'antares.apps.core.models.currency.short_name_help',
+                     max_length=100,
+                     verbose_name='antares.apps.core.models.currency.short_name'
+                 )),
+                ('creation_date',
+                 models.DateTimeField(
+                     editable=False,
+                     help_text=
+                     'antares.apps.core.models.currency.creation_name_help',
+                     verbose_name=
+                     'antares.apps.core.models.currency.creation_name')),
+                ('update_date',
+                 models.DateTimeField(
+                     editable=False,
+                     help_text=
+                     'antares.apps.core.models.currency.update_date_help',
+                     verbose_name=
+                     'antares.apps.core.models.currency.update_date')),
             ],
             options={
                 'verbose_name': 'Currency',
@@ -272,47 +303,53 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='CurrencyExchangeRate',
             fields=[
-                ('id', models.UUIDField(
-                    default=uuid.uuid4,
-                    editable=False,
-                    help_text=
-                    'antares.apps.core.models.currency_exchange_rate.primary_key_help',
-                    primary_key=True,
-                    serialize=False,
-                    verbose_name=
-                    'antares.apps.core.models.currency_exchange_rate.id')),
-                ('rate', models.FloatField(
-                    help_text=
-                    'antares.apps.core.models.currency_exchange_rate.rate_help',
-                    verbose_name=
-                    'antares.apps.core.models.currency_exchange_rate.rate')),
-                ('start_date', models.DateTimeField(
-                    help_text=
-                    'antares.apps.core.models.currency_exchange_rate.start_date_help',
-                    verbose_name=
-                    'antares.apps.core.models.currency_exchange_rate.start_date'
-                )),
-                ('end_date', models.DateTimeField(
-                    blank=True,
-                    help_text=
-                    'antares.apps.core.models.currency_exchange_rate.end_date_help',
-                    verbose_name=
-                    'antares.apps.core.models.currency_exchange_rate.end_date')
-                 ),
-                ('creation_date', models.DateTimeField(
-                    editable=False,
-                    help_text=
-                    'antares.apps.core.models.currency_exchange_rate.creation_name_help',
-                    verbose_name=
-                    'antares.apps.core.models.currency_exchange_rate.creation_name'
-                )),
-                ('update_date', models.DateTimeField(
-                    editable=False,
-                    help_text=
-                    'antares.apps.core.models.currency_exchange_rate.update_date_help',
-                    verbose_name=
-                    'antares.apps.core.models.currency_exchange_rate.update_date'
-                )),
+                ('id',
+                 models.UUIDField(
+                     default=uuid.uuid4,
+                     editable=False,
+                     help_text=
+                     'antares.apps.core.models.currency_exchange_rate.primary_key_help',
+                     primary_key=True,
+                     serialize=False,
+                     verbose_name=
+                     'antares.apps.core.models.currency_exchange_rate.id')),
+                ('rate',
+                 models.FloatField(
+                     help_text=
+                     'antares.apps.core.models.currency_exchange_rate.rate_help',
+                     verbose_name=
+                     'antares.apps.core.models.currency_exchange_rate.rate')),
+                ('start_date',
+                 models.DateTimeField(
+                     help_text=
+                     'antares.apps.core.models.currency_exchange_rate.start_date_help',
+                     verbose_name=
+                     'antares.apps.core.models.currency_exchange_rate.start_date'
+                 )),
+                ('end_date',
+                 models.DateTimeField(
+                     blank=True,
+                     help_text=
+                     'antares.apps.core.models.currency_exchange_rate.end_date_help',
+                     verbose_name=
+                     'antares.apps.core.models.currency_exchange_rate.end_date'
+                 )),
+                ('creation_date',
+                 models.DateTimeField(
+                     editable=False,
+                     help_text=
+                     'antares.apps.core.models.currency_exchange_rate.creation_name_help',
+                     verbose_name=
+                     'antares.apps.core.models.currency_exchange_rate.creation_name'
+                 )),
+                ('update_date',
+                 models.DateTimeField(
+                     editable=False,
+                     help_text=
+                     'antares.apps.core.models.currency_exchange_rate.update_date_help',
+                     verbose_name=
+                     'antares.apps.core.models.currency_exchange_rate.update_date'
+                 )),
             ],
             options={
                 'verbose_name':
@@ -326,55 +363,63 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Holiday',
             fields=[
-                ('id', models.UUIDField(
-                    default=uuid.uuid4,
-                    editable=False,
-                    help_text=
-                    'antares.apps.core.models.holiday.primary_key_help',
-                    primary_key=True,
-                    serialize=False,
-                    verbose_name='antares.apps.core.models.holiday.id')),
-                ('holiday_name', models.CharField(
-                    help_text=
-                    'antares.apps.core.models.holiday.holiday_name_help',
-                    max_length=300,
-                    verbose_name='antares.apps.core.models.holiday.holiday_name'
-                )),
-                ('description', ckeditor.fields.RichTextField(
-                    blank=True,
-                    help_text=
-                    'antares.apps.core.models.holiday.description_help',
-                    null=True,
-                    verbose_name='antares.apps.core.models.holiday.description'
-                )),
-                ('holiday_date', models.DateField(
-                    help_text=
-                    'antares.apps.core.models.holiday.holiday_date_help',
-                    unique=True,
-                    verbose_name='antares.apps.core.models.holiday.holiday_date'
-                )),
-                ('recurrent_every_year', models.BooleanField(
-                    default=False,
-                    help_text=
-                    'antares.apps.core.models.holiday.recurrent_every_year_help',
-                    verbose_name=
-                    'antares.apps.core.models.holiday.recurrent_every_year')),
-                ('active', models.BooleanField(
-                    default=True,
-                    help_text='antares.apps.core.models.holiday.active_help',
-                    verbose_name='antares.apps.core.models.holiday.active')),
-                ('creation_date', models.DateTimeField(
-                    editable=False,
-                    help_text=
-                    'antares.apps.core.models.holiday.creation_name_help',
-                    verbose_name=
-                    'antares.apps.core.models.holiday.creation_name')),
-                ('update_date', models.DateTimeField(
-                    editable=False,
-                    help_text=
-                    'antares.apps.core.models.holiday.update_date_help',
-                    verbose_name='antares.apps.core.models.holiday.update_date'
-                )),
+                ('id',
+                 models.UUIDField(
+                     default=uuid.uuid4,
+                     editable=False,
+                     help_text=
+                     'antares.apps.core.models.holiday.primary_key_help',
+                     primary_key=True,
+                     serialize=False,
+                     verbose_name='antares.apps.core.models.holiday.id')),
+                ('holiday_name',
+                 models.CharField(
+                     help_text=
+                     'antares.apps.core.models.holiday.holiday_name_help',
+                     max_length=300,
+                     verbose_name=
+                     'antares.apps.core.models.holiday.holiday_name')),
+                ('description',
+                 ckeditor.fields.RichTextField(
+                     blank=True,
+                     help_text=
+                     'antares.apps.core.models.holiday.description_help',
+                     null=True,
+                     verbose_name='antares.apps.core.models.holiday.description'
+                 )),
+                ('holiday_date',
+                 models.DateField(
+                     help_text=
+                     'antares.apps.core.models.holiday.holiday_date_help',
+                     unique=True,
+                     verbose_name=
+                     'antares.apps.core.models.holiday.holiday_date')),
+                ('recurrent_every_year',
+                 models.BooleanField(
+                     default=False,
+                     help_text=
+                     'antares.apps.core.models.holiday.recurrent_every_year_help',
+                     verbose_name=
+                     'antares.apps.core.models.holiday.recurrent_every_year')),
+                ('active',
+                 models.BooleanField(
+                     default=True,
+                     help_text='antares.apps.core.models.holiday.active_help',
+                     verbose_name='antares.apps.core.models.holiday.active')),
+                ('creation_date',
+                 models.DateTimeField(
+                     editable=False,
+                     help_text=
+                     'antares.apps.core.models.holiday.creation_name_help',
+                     verbose_name=
+                     'antares.apps.core.models.holiday.creation_name')),
+                ('update_date',
+                 models.DateTimeField(
+                     editable=False,
+                     help_text=
+                     'antares.apps.core.models.holiday.update_date_help',
+                     verbose_name='antares.apps.core.models.holiday.update_date'
+                 )),
             ],
             options={
                 'verbose_name': 'Holiday',
@@ -385,57 +430,66 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='HrnCode',
             fields=[
-                ('id', models.SlugField(
-                    help_text=
-                    'antares.apps.core.models.hrn_code.primary_key_help',
-                    primary_key=True,
-                    serialize=False,
-                    verbose_name='antares.apps.core.models.hrn_code.id')),
-                ('hrn_name', models.CharField(
-                    blank=True,
-                    help_text='antares.apps.core.models.hrn_code.hrn_name_help',
-                    max_length=100,
-                    null=True,
-                    verbose_name='antares.apps.core.models.hrn_code.hrn_name')
+                ('id',
+                 models.SlugField(
+                     help_text=
+                     'antares.apps.core.models.hrn_code.primary_key_help',
+                     primary_key=True,
+                     serialize=False,
+                     verbose_name='antares.apps.core.models.hrn_code.id')),
+                ('hrn_name',
+                 models.CharField(
+                     blank=True,
+                     help_text=
+                     'antares.apps.core.models.hrn_code.hrn_name_help',
+                     max_length=100,
+                     null=True,
+                     verbose_name='antares.apps.core.models.hrn_code.hrn_name')
                  ),
-                ('description', ckeditor.fields.RichTextField(
-                    blank=True,
-                    help_text=
-                    'antares.apps.core.models.hrn_code.description_help',
-                    null=True,
-                    verbose_name='antares.apps.core.models.hrn_code.description'
-                )),
-                ('module_type', enumfields.fields.EnumField(
-                    enum=HrnModuleType,
-                    help_text=
-                    'antares.apps.core.models.hrn_code.module_type_help',
-                    max_length=40,
-                    verbose_name='antares.apps.core.models.hrn_code.module_type'
-                )),
-                ('number_code', models.BigIntegerField(
-                    blank=True,
-                    help_text=
-                    'antares.apps.core.models.hrn_code.number_code_help',
-                    null=True,
-                    verbose_name='antares.apps.core.models.hrn_code.number_code'
-                )),
-                ('period', models.IntegerField(
-                    blank=True,
-                    help_text='antares.apps.core.models.hrn_code.period_help',
-                    null=True,
-                    verbose_name='antares.apps.core.models.hrn_code.period')),
-                ('creation_date', models.DateTimeField(
-                    editable=False,
-                    help_text=
-                    'antares.apps.core.models.hrn_code.creation_name_help',
-                    verbose_name=
-                    'antares.apps.core.models.hrn_code.creation_name')),
-                ('update_date', models.DateTimeField(
-                    editable=False,
-                    help_text=
-                    'antares.apps.core.models.hrn_code.update_date_help',
-                    verbose_name='antares.apps.core.models.hrn_code.update_date'
-                )),
+                ('description',
+                 ckeditor.fields.RichTextField(
+                     blank=True,
+                     help_text=
+                     'antares.apps.core.models.hrn_code.description_help',
+                     null=True,
+                     verbose_name=
+                     'antares.apps.core.models.hrn_code.description')),
+                ('module_type',
+                 enumfields.fields.EnumField(
+                     enum=HrnModuleType,
+                     help_text=
+                     'antares.apps.core.models.hrn_code.module_type_help',
+                     max_length=40,
+                     verbose_name=
+                     'antares.apps.core.models.hrn_code.module_type')),
+                ('number_code',
+                 models.BigIntegerField(
+                     blank=True,
+                     help_text=
+                     'antares.apps.core.models.hrn_code.number_code_help',
+                     null=True,
+                     verbose_name=
+                     'antares.apps.core.models.hrn_code.number_code')),
+                ('period',
+                 models.IntegerField(
+                     blank=True,
+                     help_text='antares.apps.core.models.hrn_code.period_help',
+                     null=True,
+                     verbose_name='antares.apps.core.models.hrn_code.period')),
+                ('creation_date',
+                 models.DateTimeField(
+                     editable=False,
+                     help_text=
+                     'antares.apps.core.models.hrn_code.creation_name_help',
+                     verbose_name=
+                     'antares.apps.core.models.hrn_code.creation_name')),
+                ('update_date',
+                 models.DateTimeField(
+                     editable=False,
+                     help_text=
+                     'antares.apps.core.models.hrn_code.update_date_help',
+                     verbose_name=
+                     'antares.apps.core.models.hrn_code.update_date')),
             ],
             options={
                 'verbose_name': 'Human Readable Code',
@@ -446,49 +500,56 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='I18nString',
             fields=[
-                ('id', models.UUIDField(
-                    default=uuid.uuid4,
-                    editable=False,
-                    help_text=
-                    'antares.apps.core.models.i18n_string.primary_key_help',
-                    primary_key=True,
-                    serialize=False,
-                    verbose_name='antares.apps.core.models.i18n_string.id')),
-                ('language', models.CharField(
-                    help_text=
-                    'antares.apps.core.models.i18n_string.language_name_help',
-                    max_length=2,
-                    verbose_name=
-                    'antares.apps.core.models.i18n_string.language_name')),
-                ('code', models.CharField(
-                    help_text=
-                    'antares.apps.core.models.i18n_string.code_name_help',
-                    max_length=100,
-                    verbose_name=
-                    'antares.apps.core.models.i18n_string.code_name')),
-                ('is_default', models.BooleanField(
-                    default=True,
-                    help_text=
-                    'antares.apps.core.models.i18n_string.is_default_name_help',
-                    verbose_name=
-                    'antares.apps.core.models.i18n_string.is_default_name')),
-                ('content', ckeditor.fields.RichTextField(
-                    help_text=
-                    'antares.apps.core.models.i18n_string.content_name_help',
-                    verbose_name=
-                    'antares.apps.core.models.i18n_string.content_name')),
-                ('creation_date', models.DateTimeField(
-                    editable=False,
-                    help_text=
-                    'antares.apps.core.models.i18n_string.creation_name_help',
-                    verbose_name=
-                    'antares.apps.core.models.i18n_string.creation_name')),
-                ('update_date', models.DateTimeField(
-                    editable=False,
-                    help_text=
-                    'antares.apps.core.models.i18n_string.update_date_help',
-                    verbose_name=
-                    'antares.apps.core.models.i18n_string.update_date')),
+                ('id',
+                 models.UUIDField(
+                     default=uuid.uuid4,
+                     editable=False,
+                     help_text=
+                     'antares.apps.core.models.i18n_string.primary_key_help',
+                     primary_key=True,
+                     serialize=False,
+                     verbose_name='antares.apps.core.models.i18n_string.id')),
+                ('language',
+                 models.CharField(
+                     help_text=
+                     'antares.apps.core.models.i18n_string.language_name_help',
+                     max_length=2,
+                     verbose_name=
+                     'antares.apps.core.models.i18n_string.language_name')),
+                ('code',
+                 models.CharField(
+                     help_text=
+                     'antares.apps.core.models.i18n_string.code_name_help',
+                     max_length=100,
+                     verbose_name=
+                     'antares.apps.core.models.i18n_string.code_name')),
+                ('is_default',
+                 models.BooleanField(
+                     default=True,
+                     help_text=
+                     'antares.apps.core.models.i18n_string.is_default_name_help',
+                     verbose_name=
+                     'antares.apps.core.models.i18n_string.is_default_name')),
+                ('content',
+                 ckeditor.fields.RichTextField(
+                     help_text=
+                     'antares.apps.core.models.i18n_string.content_name_help',
+                     verbose_name=
+                     'antares.apps.core.models.i18n_string.content_name')),
+                ('creation_date',
+                 models.DateTimeField(
+                     editable=False,
+                     help_text=
+                     'antares.apps.core.models.i18n_string.creation_name_help',
+                     verbose_name=
+                     'antares.apps.core.models.i18n_string.creation_name')),
+                ('update_date',
+                 models.DateTimeField(
+                     editable=False,
+                     help_text=
+                     'antares.apps.core.models.i18n_string.update_date_help',
+                     verbose_name=
+                     'antares.apps.core.models.i18n_string.update_date')),
             ],
             options={
                 'verbose_name':
@@ -502,60 +563,71 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Log',
             fields=[
-                ('id', models.UUIDField(
-                    default=uuid.uuid4,
-                    editable=False,
-                    help_text='antares.apps.core.models.log.primary_key_help',
-                    primary_key=True,
-                    serialize=False,
-                    verbose_name='antares.apps.core.models.log.id')),
-                ('client', models.UUIDField(
-                    blank=True,
-                    help_text='antares.apps.core.models.log.client_help',
-                    null=True,
-                    verbose_name='antares.apps.core.models.log.client')),
-                ('log_content', models.TextField(
-                    blank=True,
-                    help_text='antares.apps.core.models.log.primary_key_help',
-                    null=True,
-                    verbose_name='antares.apps.core.models.log.log_content')),
-                ('document_header', models.UUIDField(
-                    blank=True,
-                    help_text=
-                    'antares.apps.core.models.log.document_header_help',
-                    null=True,
-                    verbose_name='antares.apps.core.models.log.document_header'
-                )),
-                ('flow_case', models.UUIDField(
-                    blank=True,
-                    help_text='antares.apps.core.models.log.flow_case_help',
-                    null=True,
-                    verbose_name='antares.apps.core.models.log.flow_case')),
-                ('author', models.UUIDField(
-                    blank=True,
-                    help_text='antares.apps.core.models.log.author_help',
-                    null=True,
-                    verbose_name='antares.apps.core.models.log.author')),
-                ('log_date', models.DateTimeField(
-                    blank=True,
-                    help_text='antares.apps.core.models.log.log_date_help',
-                    null=True,
-                    verbose_name='antares.apps.core.models.log.log_date')),
-                ('log_key', models.CharField(
-                    help_text='antares.apps.core.models.log.log_key_help',
-                    max_length=400,
-                    verbose_name='antares.apps.core.models.log.log_key')),
-                ('system_module', models.CharField(
-                    help_text='antares.apps.core.models.log.system_module_help',
-                    max_length=400,
-                    verbose_name='antares.apps.core.models.log.system_module')
+                ('id',
+                 models.UUIDField(
+                     default=uuid.uuid4,
+                     editable=False,
+                     help_text='antares.apps.core.models.log.primary_key_help',
+                     primary_key=True,
+                     serialize=False,
+                     verbose_name='antares.apps.core.models.log.id')),
+                ('client',
+                 models.UUIDField(
+                     blank=True,
+                     help_text='antares.apps.core.models.log.client_help',
+                     null=True,
+                     verbose_name='antares.apps.core.models.log.client')),
+                ('log_content',
+                 models.TextField(
+                     blank=True,
+                     help_text='antares.apps.core.models.log.primary_key_help',
+                     null=True,
+                     verbose_name='antares.apps.core.models.log.log_content')),
+                ('document_header',
+                 models.UUIDField(
+                     blank=True,
+                     help_text=
+                     'antares.apps.core.models.log.document_header_help',
+                     null=True,
+                     verbose_name='antares.apps.core.models.log.document_header'
+                 )),
+                ('flow_case',
+                 models.UUIDField(
+                     blank=True,
+                     help_text='antares.apps.core.models.log.flow_case_help',
+                     null=True,
+                     verbose_name='antares.apps.core.models.log.flow_case')),
+                ('author',
+                 models.UUIDField(
+                     blank=True,
+                     help_text='antares.apps.core.models.log.author_help',
+                     null=True,
+                     verbose_name='antares.apps.core.models.log.author')),
+                ('log_date',
+                 models.DateTimeField(
+                     blank=True,
+                     help_text='antares.apps.core.models.log.log_date_help',
+                     null=True,
+                     verbose_name='antares.apps.core.models.log.log_date')),
+                ('log_key',
+                 models.CharField(
+                     help_text='antares.apps.core.models.log.log_key_help',
+                     max_length=400,
+                     verbose_name='antares.apps.core.models.log.log_key')),
+                ('system_module',
+                 models.CharField(
+                     help_text=
+                     'antares.apps.core.models.log.system_module_help',
+                     max_length=400,
+                     verbose_name='antares.apps.core.models.log.system_module')
                  ),
-                ('post_date', models.DateTimeField(
-                    blank=True,
-                    editable=False,
-                    help_text='antares.apps.core.models.log.post_date_help',
-                    null=True,
-                    verbose_name='antares.apps.core.models.log.post_date')),
+                ('post_date',
+                 models.DateTimeField(
+                     blank=True,
+                     editable=False,
+                     help_text='antares.apps.core.models.log.post_date_help',
+                     null=True,
+                     verbose_name='antares.apps.core.models.log.post_date')),
             ],
             options={
                 'verbose_name':
@@ -569,51 +641,58 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='StoredFile',
             fields=[
-                ('id', models.UUIDField(
-                    default=uuid.uuid4,
-                    editable=False,
-                    help_text=
-                    'antares.apps.core.models.stored_file.primary_key_help',
-                    primary_key=True,
-                    serialize=False,
-                    verbose_name='antares.apps.core.models.stored_file.id')),
-                ('file_name', models.CharField(
-                    help_text=
-                    'antares.apps.core.models.stored_file.file_name_help',
-                    max_length=255,
-                    verbose_name=
-                    'antares.apps.core.models.stored_file.file_name')),
-                ('mime_type', models.CharField(
-                    help_text=
-                    'antares.apps.core.models.stored_file.mime_type_help',
-                    max_length=50,
-                    verbose_name=
-                    'antares.apps.core.models.stored_file.mime_type')),
-                ('file_content', models.BinaryField(
-                    help_text=
-                    'antares.apps.core.models.stored_file.file_content_help',
-                    verbose_name=
-                    'antares.apps.core.models.stored_file.file_content')),
-                ('alternate_text', models.CharField(
-                    blank=True,
-                    help_text=
-                    'antares.apps.core.models.stored_file.alternate_text_help',
-                    max_length=200,
-                    null=True,
-                    verbose_name=
-                    'antares.apps.core.models.stored_file.alternate_text')),
-                ('creation_date', models.DateTimeField(
-                    editable=False,
-                    help_text=
-                    'antares.apps.core.models.stored_file.creation_name_help',
-                    verbose_name=
-                    'antares.apps.core.models.stored_file.creation_name')),
-                ('update_date', models.DateTimeField(
-                    editable=False,
-                    help_text=
-                    'antares.apps.core.models.stored_file.update_date_help',
-                    verbose_name=
-                    'antares.apps.core.models.stored_file.update_date')),
+                ('id',
+                 models.UUIDField(
+                     default=uuid.uuid4,
+                     editable=False,
+                     help_text=
+                     'antares.apps.core.models.stored_file.primary_key_help',
+                     primary_key=True,
+                     serialize=False,
+                     verbose_name='antares.apps.core.models.stored_file.id')),
+                ('file_name',
+                 models.CharField(
+                     help_text=
+                     'antares.apps.core.models.stored_file.file_name_help',
+                     max_length=255,
+                     verbose_name=
+                     'antares.apps.core.models.stored_file.file_name')),
+                ('mime_type',
+                 models.CharField(
+                     help_text=
+                     'antares.apps.core.models.stored_file.mime_type_help',
+                     max_length=50,
+                     verbose_name=
+                     'antares.apps.core.models.stored_file.mime_type')),
+                ('file_content',
+                 models.BinaryField(
+                     help_text=
+                     'antares.apps.core.models.stored_file.file_content_help',
+                     verbose_name=
+                     'antares.apps.core.models.stored_file.file_content')),
+                ('alternate_text',
+                 models.CharField(
+                     blank=True,
+                     help_text=
+                     'antares.apps.core.models.stored_file.alternate_text_help',
+                     max_length=200,
+                     null=True,
+                     verbose_name=
+                     'antares.apps.core.models.stored_file.alternate_text')),
+                ('creation_date',
+                 models.DateTimeField(
+                     editable=False,
+                     help_text=
+                     'antares.apps.core.models.stored_file.creation_name_help',
+                     verbose_name=
+                     'antares.apps.core.models.stored_file.creation_name')),
+                ('update_date',
+                 models.DateTimeField(
+                     editable=False,
+                     help_text=
+                     'antares.apps.core.models.stored_file.update_date_help',
+                     verbose_name=
+                     'antares.apps.core.models.stored_file.update_date')),
             ],
             options={
                 'verbose_name':
@@ -627,86 +706,98 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='SystemParameter',
             fields=[
-                ('id', models.SlugField(
-                    help_text=
-                    'antares.apps.core.models.system_parameter.primary_key_help',
-                    max_length=255,
-                    primary_key=True,
-                    serialize=False,
-                    verbose_name='antares.apps.core.models.system_parameter.id'
-                )),
-                ('description', ckeditor.fields.RichTextField(
-                    blank=True,
-                    help_text=
-                    'antares.apps.core.models.system_parameter.description_help',
-                    null=True,
-                    verbose_name=
-                    'antares.apps.core.models.system_parameter.description')),
-                ('boolean_value', models.NullBooleanField(
-                    help_text=
-                    'antares.apps.core.models.system_parameter.boolean_value_help',
-                    verbose_name=
-                    'antares.apps.core.models.system_parameter.boolean_value')
+                ('id',
+                 models.SlugField(
+                     help_text=
+                     'antares.apps.core.models.system_parameter.primary_key_help',
+                     max_length=255,
+                     primary_key=True,
+                     serialize=False,
+                     verbose_name='antares.apps.core.models.system_parameter.id'
+                 )),
+                ('description',
+                 ckeditor.fields.RichTextField(
+                     blank=True,
+                     help_text=
+                     'antares.apps.core.models.system_parameter.description_help',
+                     null=True,
+                     verbose_name=
+                     'antares.apps.core.models.system_parameter.description')),
+                ('boolean_value',
+                 models.NullBooleanField(
+                     help_text=
+                     'antares.apps.core.models.system_parameter.boolean_value_help',
+                     verbose_name=
+                     'antares.apps.core.models.system_parameter.boolean_value')
                  ),
-                ('data_type', enumfields.fields.EnumField(
-                    enum=FieldDataType,
-                    help_text=
-                    'antares.apps.core.models.system_parameter.data_type_help',
-                    max_length=20,
-                    verbose_name=
-                    'antares.apps.core.models.system_parameter.data_type')),
-                ('date_value', models.DateTimeField(
-                    blank=True,
-                    help_text=
-                    'antares.apps.core.models.system_parameter.date_value_help',
-                    null=True,
-                    verbose_name=
-                    'antares.apps.core.models.system_parameter.date_value')),
-                ('float_value', models.DecimalField(
-                    blank=True,
-                    decimal_places=2,
-                    help_text=
-                    'antares.apps.core.models.system_parameter.float_value_help',
-                    max_digits=19,
-                    null=True,
-                    verbose_name=
-                    'antares.apps.core.models.system_parameter.float_value')),
-                ('integer_value', models.BigIntegerField(
-                    blank=True,
-                    help_text=
-                    'antares.apps.core.models.system_parameter.integer_value_help',
-                    null=True,
-                    verbose_name=
-                    'antares.apps.core.models.system_parameter.integer_value')
+                ('data_type',
+                 enumfields.fields.EnumField(
+                     enum=FieldDataType,
+                     help_text=
+                     'antares.apps.core.models.system_parameter.data_type_help',
+                     max_length=20,
+                     verbose_name=
+                     'antares.apps.core.models.system_parameter.data_type')),
+                ('date_value',
+                 models.DateTimeField(
+                     blank=True,
+                     help_text=
+                     'antares.apps.core.models.system_parameter.date_value_help',
+                     null=True,
+                     verbose_name=
+                     'antares.apps.core.models.system_parameter.date_value')),
+                ('float_value',
+                 models.DecimalField(
+                     blank=True,
+                     decimal_places=2,
+                     help_text=
+                     'antares.apps.core.models.system_parameter.float_value_help',
+                     max_digits=19,
+                     null=True,
+                     verbose_name=
+                     'antares.apps.core.models.system_parameter.float_value')),
+                ('integer_value',
+                 models.BigIntegerField(
+                     blank=True,
+                     help_text=
+                     'antares.apps.core.models.system_parameter.integer_value_help',
+                     null=True,
+                     verbose_name=
+                     'antares.apps.core.models.system_parameter.integer_value')
                  ),
-                ('string_value', models.CharField(
-                    blank=True,
-                    help_text=
-                    'antares.apps.core.models.system_parameter.string_value_help',
-                    max_length=2000,
-                    null=True,
-                    verbose_name=
-                    'antares.apps.core.models.system_parameter.string_value')),
-                ('text_value', models.TextField(
-                    blank=True,
-                    help_text=
-                    'antares.apps.core.models.system_parameter.text_value_help',
-                    null=True,
-                    verbose_name=
-                    'antares.apps.core.models.system_parameter.text_value')),
-                ('creation_date', models.DateTimeField(
-                    editable=False,
-                    help_text=
-                    'antares.apps.core.models.system_parameter.creation_name_help',
-                    verbose_name=
-                    'antares.apps.core.models.system_parameter.creation_name')
+                ('string_value',
+                 models.CharField(
+                     blank=True,
+                     help_text=
+                     'antares.apps.core.models.system_parameter.string_value_help',
+                     max_length=2000,
+                     null=True,
+                     verbose_name=
+                     'antares.apps.core.models.system_parameter.string_value')
                  ),
-                ('update_date', models.DateTimeField(
-                    editable=False,
-                    help_text=
-                    'antares.apps.core.models.system_parameter.update_date_help',
-                    verbose_name=
-                    'antares.apps.core.models.system_parameter.update_date')),
+                ('text_value',
+                 models.TextField(
+                     blank=True,
+                     help_text=
+                     'antares.apps.core.models.system_parameter.text_value_help',
+                     null=True,
+                     verbose_name=
+                     'antares.apps.core.models.system_parameter.text_value')),
+                ('creation_date',
+                 models.DateTimeField(
+                     editable=False,
+                     help_text=
+                     'antares.apps.core.models.system_parameter.creation_name_help',
+                     verbose_name=
+                     'antares.apps.core.models.system_parameter.creation_name')
+                 ),
+                ('update_date',
+                 models.DateTimeField(
+                     editable=False,
+                     help_text=
+                     'antares.apps.core.models.system_parameter.update_date_help',
+                     verbose_name=
+                     'antares.apps.core.models.system_parameter.update_date')),
             ],
             options={
                 'verbose_name': 'System Parameter',
@@ -717,26 +808,31 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Tag',
             fields=[
-                ('id', models.SlugField(
-                    help_text='antares.apps.core.models.tag.primary_key_help',
-                    max_length=255,
-                    primary_key=True,
-                    serialize=False,
-                    verbose_name='antares.apps.core.models.tag.id')),
-                ('description', ckeditor.fields.RichTextField(
-                    blank=True,
-                    help_text='antares.apps.core.models.tag.description_help',
-                    null=True,
-                    verbose_name='antares.apps.core.models.tag.description')),
-                ('creation_date', models.DateTimeField(
-                    editable=False,
-                    help_text='antares.apps.core.models.tag.creation_name_help',
-                    verbose_name='antares.apps.core.models.tag.creation_name')
+                ('id',
+                 models.SlugField(
+                     help_text='antares.apps.core.models.tag.primary_key_help',
+                     max_length=255,
+                     primary_key=True,
+                     serialize=False,
+                     verbose_name='antares.apps.core.models.tag.id')),
+                ('description',
+                 ckeditor.fields.RichTextField(
+                     blank=True,
+                     help_text='antares.apps.core.models.tag.description_help',
+                     null=True,
+                     verbose_name='antares.apps.core.models.tag.description')),
+                ('creation_date',
+                 models.DateTimeField(
+                     editable=False,
+                     help_text=
+                     'antares.apps.core.models.tag.creation_name_help',
+                     verbose_name='antares.apps.core.models.tag.creation_name')
                  ),
-                ('update_date', models.DateTimeField(
-                    editable=False,
-                    help_text='antares.apps.core.models.tag.update_date_help',
-                    verbose_name='antares.apps.core.models.tag.update_date')),
+                ('update_date',
+                 models.DateTimeField(
+                     editable=False,
+                     help_text='antares.apps.core.models.tag.update_date_help',
+                     verbose_name='antares.apps.core.models.tag.update_date')),
             ],
             options={
                 'verbose_name':
@@ -750,83 +846,94 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='UserParameter',
             fields=[
-                ('id', models.SlugField(
-                    help_text=
-                    'antares.apps.core.models.user_parameter.primary_key_help',
-                    max_length=255,
-                    primary_key=True,
-                    serialize=False,
-                    verbose_name='antares.apps.core.models.user_parameter.id')
+                ('id',
+                 models.SlugField(
+                     help_text=
+                     'antares.apps.core.models.user_parameter.primary_key_help',
+                     max_length=255,
+                     primary_key=True,
+                     serialize=False,
+                     verbose_name='antares.apps.core.models.user_parameter.id')
                  ),
-                ('description', ckeditor.fields.RichTextField(
-                    blank=True,
-                    help_text=
-                    'antares.apps.core.models.user_parameter.description_help',
-                    null=True,
-                    verbose_name=
-                    'antares.apps.core.models.user_parameter.description')),
-                ('data_type', enumfields.fields.EnumField(
-                    enum=FieldDataType,
-                    help_text=
-                    'antares.apps.core.models.user_parameter.data_type_help',
-                    max_length=20,
-                    verbose_name=
-                    'antares.apps.core.models.user_parameter.data_type')),
-                ('boolean_value', models.NullBooleanField(
-                    help_text=
-                    'antares.apps.core.models.user_parameter.boolean_value_help',
-                    verbose_name=
-                    'antares.apps.core.models.user_parameter.boolean_value')),
-                ('date_value', models.DateTimeField(
-                    blank=True,
-                    help_text=
-                    'antares.apps.core.models.user_parameter.date_value_help',
-                    null=True,
-                    verbose_name=
-                    'antares.apps.core.models.user_parameter.date_value')),
-                ('float_value', models.DecimalField(
-                    blank=True,
-                    decimal_places=2,
-                    help_text=
-                    'antares.apps.core.models.user_parameter.float_value_help',
-                    max_digits=19,
-                    null=True,
-                    verbose_name=
-                    'antares.apps.core.models.user_parameter.float_value')),
-                ('integer_value', models.BigIntegerField(
-                    blank=True,
-                    help_text=
-                    'antares.apps.core.models.user_parameter.integer_value_help',
-                    null=True,
-                    verbose_name=
-                    'antares.apps.core.models.user_parameter.integer_value')),
-                ('string_value', models.CharField(
-                    blank=True,
-                    help_text=
-                    'antares.apps.core.models.user_parameter.string_value_help',
-                    max_length=2000,
-                    null=True,
-                    verbose_name=
-                    'antares.apps.core.models.user_parameter.string_value')),
-                ('text_value', models.TextField(
-                    blank=True,
-                    help_text=
-                    'antares.apps.core.models.user_parameter.text_value_help',
-                    null=True,
-                    verbose_name=
-                    'antares.apps.core.models.user_parameter.text_value')),
-                ('creation_date', models.DateTimeField(
-                    editable=False,
-                    help_text=
-                    'antares.apps.core.models.user_parameter.creation_name_help',
-                    verbose_name=
-                    'antares.apps.core.models.user_parameter.creation_name')),
-                ('update_date', models.DateTimeField(
-                    editable=False,
-                    help_text=
-                    'antares.apps.core.models.user_parameter.update_date_help',
-                    verbose_name=
-                    'antares.apps.core.models.user_parameter.update_date')),
+                ('description',
+                 ckeditor.fields.RichTextField(
+                     blank=True,
+                     help_text=
+                     'antares.apps.core.models.user_parameter.description_help',
+                     null=True,
+                     verbose_name=
+                     'antares.apps.core.models.user_parameter.description')),
+                ('data_type',
+                 enumfields.fields.EnumField(
+                     enum=FieldDataType,
+                     help_text=
+                     'antares.apps.core.models.user_parameter.data_type_help',
+                     max_length=20,
+                     verbose_name=
+                     'antares.apps.core.models.user_parameter.data_type')),
+                ('boolean_value',
+                 models.NullBooleanField(
+                     help_text=
+                     'antares.apps.core.models.user_parameter.boolean_value_help',
+                     verbose_name=
+                     'antares.apps.core.models.user_parameter.boolean_value')),
+                ('date_value',
+                 models.DateTimeField(
+                     blank=True,
+                     help_text=
+                     'antares.apps.core.models.user_parameter.date_value_help',
+                     null=True,
+                     verbose_name=
+                     'antares.apps.core.models.user_parameter.date_value')),
+                ('float_value',
+                 models.DecimalField(
+                     blank=True,
+                     decimal_places=2,
+                     help_text=
+                     'antares.apps.core.models.user_parameter.float_value_help',
+                     max_digits=19,
+                     null=True,
+                     verbose_name=
+                     'antares.apps.core.models.user_parameter.float_value')),
+                ('integer_value',
+                 models.BigIntegerField(
+                     blank=True,
+                     help_text=
+                     'antares.apps.core.models.user_parameter.integer_value_help',
+                     null=True,
+                     verbose_name=
+                     'antares.apps.core.models.user_parameter.integer_value')),
+                ('string_value',
+                 models.CharField(
+                     blank=True,
+                     help_text=
+                     'antares.apps.core.models.user_parameter.string_value_help',
+                     max_length=2000,
+                     null=True,
+                     verbose_name=
+                     'antares.apps.core.models.user_parameter.string_value')),
+                ('text_value',
+                 models.TextField(
+                     blank=True,
+                     help_text=
+                     'antares.apps.core.models.user_parameter.text_value_help',
+                     null=True,
+                     verbose_name=
+                     'antares.apps.core.models.user_parameter.text_value')),
+                ('creation_date',
+                 models.DateTimeField(
+                     editable=False,
+                     help_text=
+                     'antares.apps.core.models.user_parameter.creation_name_help',
+                     verbose_name=
+                     'antares.apps.core.models.user_parameter.creation_name')),
+                ('update_date',
+                 models.DateTimeField(
+                     editable=False,
+                     help_text=
+                     'antares.apps.core.models.user_parameter.update_date_help',
+                     verbose_name=
+                     'antares.apps.core.models.user_parameter.update_date')),
             ],
             options={
                 'db_table': 'core_user_parameter',

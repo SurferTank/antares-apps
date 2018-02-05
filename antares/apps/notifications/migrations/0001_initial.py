@@ -20,17 +20,19 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='NotificationRecord',
             fields=[
-                ('id', models.UUIDField(
-                    default=uuid.uuid4,
-                    editable=False,
-                    primary_key=True,
-                    serialize=False)),
+                ('id',
+                 models.UUIDField(
+                     default=uuid.uuid4,
+                     editable=False,
+                     primary_key=True,
+                     serialize=False)),
                 ('content', models.CharField(max_length=2000)),
                 ('title', models.CharField(max_length=2000)),
-                ('status', enumfields.fields.EnumField(
-                    default='Posted',
-                    enum=NotificationStatusType,
-                    max_length=30)),
+                ('status',
+                 enumfields.fields.EnumField(
+                     default='Posted',
+                     enum=NotificationStatusType,
+                     max_length=30)),
                 ('update_date', models.DateTimeField()),
                 ('creation_date', models.DateTimeField()),
                 ('post_date', models.DateTimeField()),
@@ -47,21 +49,22 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='NotificationRule',
             fields=[
-                ('id', models.UUIDField(
-                    default=uuid.uuid4,
-                    editable=False,
-                    primary_key=True,
-                    serialize=False)),
-                ('user_code_variable', models.CharField(
-                    blank=True, max_length=200, null=True)),
-                ('date_variable', models.CharField(
-                    blank=True, max_length=200, null=True)),
-                ('content_variable', models.CharField(
-                    blank=True, max_length=200, null=True)),
-                ('content_template', ckeditor.fields.RichTextField(
-                    blank=True, null=True)),
-                ('title_variable', models.CharField(
-                    blank=True, max_length=200, null=True)),
+                ('id',
+                 models.UUIDField(
+                     default=uuid.uuid4,
+                     editable=False,
+                     primary_key=True,
+                     serialize=False)),
+                ('user_code_variable',
+                 models.CharField(blank=True, max_length=200, null=True)),
+                ('date_variable',
+                 models.CharField(blank=True, max_length=200, null=True)),
+                ('content_variable',
+                 models.CharField(blank=True, max_length=200, null=True)),
+                ('content_template',
+                 ckeditor.fields.RichTextField(blank=True, null=True)),
+                ('title_variable',
+                 models.CharField(blank=True, max_length=200, null=True)),
                 ('update_date', models.DateTimeField(editable=False)),
                 ('creation_date', models.DateTimeField(editable=False)),
                 ('active', models.BooleanField(default='true')),

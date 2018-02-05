@@ -41,8 +41,8 @@ class MessageManager:
                 msgdoc['type'])
             if form_def is None:
                 raise ValueError(
-                    _(__name__ +
-                      ".exceptions.third_party_form_does_not_exist"))
+                    _(__name__ + ".exceptions.third_party_form_does_not_exist")
+                )
             document = Document(form_id=form_def.id)
             if document is None:
                 raise ValueError(
@@ -53,9 +53,9 @@ class MessageManager:
                              " value is " + str(value))
                 document.set_header_field(key, value)
             for key, value in msgdoc['fields'].items():
-                logger.debug("Body fields => 3p=" + str(key) + " id=" +
-                             (document.get_field_id_by_messagemap(key) or
-                              'None') + " value=" + str(value))
+                logger.debug("Body fields => 3p=" + str(key) + " id=" + (
+                    document.get_field_id_by_messagemap(key) or 'None'
+                ) + " value=" + str(value))
                 document.set_field_value(
                     document.get_field_id_by_messagemap(key), value)
 

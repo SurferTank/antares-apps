@@ -24,8 +24,8 @@ class DocumentEventType(EnumUtilsMixin, Enum):
 
     class Labels:
         CREATION = _(__name__ + '.DocumentEventType.' + 'CREATION')
-        DRAFT_MODIFICATION = _(__name__ + '.DocumentEventType.' +
-                               'DRAFT_MODIFICATION')
+        DRAFT_MODIFICATION = _(
+            __name__ + '.DocumentEventType.' + 'DRAFT_MODIFICATION')
         SAVE = _(__name__ + '.DocumentEventType.' + 'SAVE')
         CANCELLATION = _(__name__ + '.DocumentEventType.' + 'CANCELLATION')
 
@@ -94,16 +94,16 @@ class ExternalFunctionExecutionModeType(EnumUtilsMixin, Enum):
     SAVE_TIME = "SAVE_TIME"
 
     class Labels:
-        DRAFT_LOAD = _(__name__ + '.ExternalFunctionExecutionModeType.' +
-                       'DRAFT_LOAD')
-        CREATION_TIME = _(__name__ + '.ExternalFunctionExecutionModeType.' +
-                          'CREATION_TIME')
-        RUNTIME = _(__name__ + '.ExternalFunctionExecutionModeType.' +
-                    'RUNTIME')
-        INACTIVE = _(__name__ + '.ExternalFunctionExecutionModeType.' +
-                     'INACTIVE')
-        SAVE_TIME = _(__name__ + '.ExternalFunctionExecutionModeType.' +
-                      'SAVE_TIME')
+        DRAFT_LOAD = _(
+            __name__ + '.ExternalFunctionExecutionModeType.' + 'DRAFT_LOAD')
+        CREATION_TIME = _(
+            __name__ + '.ExternalFunctionExecutionModeType.' + 'CREATION_TIME')
+        RUNTIME = _(
+            __name__ + '.ExternalFunctionExecutionModeType.' + 'RUNTIME')
+        INACTIVE = _(
+            __name__ + '.ExternalFunctionExecutionModeType.' + 'INACTIVE')
+        SAVE_TIME = _(
+            __name__ + '.ExternalFunctionExecutionModeType.' + 'SAVE_TIME')
 
 
 class FormClassStatusType(EnumUtilsMixin, Enum):
@@ -123,11 +123,11 @@ class FormDefinitionStatusType(EnumUtilsMixin, Enum):
     DEACTIVATED = "Deactivated"
 
     class Labels:
-        DEVELOPMENT = _(__name__ + '.FormDefinitionStatusType.' +
-                        'DEVELOPMENT')
+        DEVELOPMENT = _(
+            __name__ + '.FormDefinitionStatusType.' + 'DEVELOPMENT')
         PRODUCTION = _(__name__ + '.FormDefinitionStatusType.' + 'PRODUCTION')
-        DEACTIVATED = _(__name__ + '.FormDefinitionStatusType.' +
-                        'DEACTIVATED')
+        DEACTIVATED = _(
+            __name__ + '.FormDefinitionStatusType.' + 'DEACTIVATED')
 
 
 class FormClassType(EnumUtilsMixin, Enum):

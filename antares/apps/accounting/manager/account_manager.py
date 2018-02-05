@@ -72,7 +72,7 @@ class AccountManager(object):
                 account_document, transactions)
             account_document.status = AccountDocumentStatusType.PROCESSED
 
-        except Exception:
+        except Exception as e:
             account_document.status = AccountDocumentStatusType.WITH_ERRORS
 
         account_document.save()
@@ -199,8 +199,8 @@ class AccountManager(object):
                 principal = principal + transaction.principal_amount
                 interest = interest + transaction.interest_amount
                 penalties = penalties + transaction.penalties_amount
-            elif (trans.transaction_type.effect ==
-                  TransactionEffectType.DEBIT):
+            elif (trans.transaction_type.effect == TransactionEffectType.DEBIT
+                  ):
                 principal = principal - transaction.principal_amount
                 interest = interest - transaction.interest_amount
                 penalties = penalties - transaction.penalties_amount
@@ -329,15 +329,14 @@ class AccountManager(object):
         :returns: the period that will be used to create the account
         :raises MissingAccountHeaderInformationException: the period was not defined properly
         """
-        if (rule.fixed_period or rule.fixed_period != 0):
+        if rule.fixed_period is not None:
             return rule.fixed_period
         else:
-            period = int(float(document.get_field_value(rule.period_field)))
-            if (period):
-                return period
+            period = document.get_field_value(rule.period_field)
+            if period is not None:
+                return int(float(period))
             else:
-                raise MissingAccountHeaderInformationException(
-                    _(__name__ + ".manager.account_manager.missing_period"))
+                return 0
 
     @classmethod
     def _process_transaction_type(cls, account_document: AccountDocument,

@@ -16,6 +16,9 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='notificationrule',
             name='form_definition',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='notification_rule_set', to='document.FormDefinition'),
+            field=models.ForeignKey(
+                on_delete=django.db.models.deletion.CASCADE,
+                related_name='notification_rule_set',
+                to='document.FormDefinition'),
         ),
     ]

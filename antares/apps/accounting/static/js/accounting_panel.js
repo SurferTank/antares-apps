@@ -3,25 +3,31 @@
  */
 function display_accounting_panel(client_id, client_name = null, document = null, document_name = null, concept_type_id = null, concept_type_name = null,
     period = null, account_type_id = null, account_type_name = null) {
+    console.log("display_accounting_panel called with client_id=" + client_id + " client_name=" + client_name + " document=" 
+    + document + " document_name=" + document_name + " concept_type_id=" + concept_type_id + " concept_type_name=" + concept_type_name + 
+    " period="  + period + " account_type_id=" + account_type_id + "account_type_name=" + account_type_name);
     if (client_id && client_id.length>0) {
         $("#accountingPanel").show();
     }
 
     if (client_id && document == null && concept_type_id == null && period == null && account_type_id == null) {
         process_client_level(client_id, client_name);
-    } else if (client_id && document == null && concept_type_id && period == null && account_type_id == null) {
+    } else if (client_id && document == null && concept_type_id != null && period == null && account_type_id == null) {
         process_concept_type_level(client_id, client_name, concept_type_id, concept_type_name);
-    } else if (client_id && document == null && concept_type_id && period && account_type_id == null) {
+    } else if (client_id && document == null && concept_type_id !=null && period != null && account_type_id == null) {
         process_period_level(client_id, client_name, concept_type_id, concept_type_name, period);
-    } else if (client_id && document == null && concept_type_id && period && account_type_id) {
+    } else if (client_id && document == null && concept_type_id!= null && period!= null && account_type_id!= null) {
         process_account_type_level(client_id, client_name, concept_type_id, concept_type_name, period, 
         		account_type_id, account_type_name);
+    }else{
+    	 console.log("nothing gets processed");
     }
 
 
 }
 
 function process_client_level(client_id) {
+	console.log("process_client_level called with client_id=" + client_id);
     if ($.fn.dataTable.isDataTable('#clientAccountingTable')) {
         $('#clientAccountingTable').DataTable().destroy();
     }
@@ -75,6 +81,7 @@ function process_client_level(client_id) {
 }
 
 function process_concept_type_level(client_id, client_name, concept_type_id, concept_type_name) {
+	console.log("process_concept_type_level called with client_id=" + client_id + " client_name=" + client_name +  "concept_type_id=");
     if ($.fn.dataTable.isDataTable('#conceptTypeAccountingTable')) {
         $('#conceptTypeAccountingTable').DataTable().destroy();
     }
@@ -124,6 +131,7 @@ function process_concept_type_level(client_id, client_name, concept_type_id, con
 }
 
 function process_period_level(client_id, client_name, concept_type_id, concept_type_name, period) {
+    console.log("process_period_level called with client_id=" + client_id + " client_name=" + client_name +  " concept_type_id=" + " period =" + period);
     if ($.fn.dataTable.isDataTable('#periodAccountingTable')) {
         $('#periodAccountingTable').DataTable().destroy();
     }
@@ -174,6 +182,8 @@ function process_period_level(client_id, client_name, concept_type_id, concept_t
 }
 
 function process_account_type_level(client_id, client_name, concept_type_id, concept_type_name, period, account_type_id, account_type_name) {
+    console.log("process_period_level called with client_id=" + client_id + " client_name=" + client_name +  " concept_type_id=" + 
+    " period =" + period + " account_type_id=" + account_type_id +  " account_type_name="+account_type_name);
     if ($.fn.dataTable.isDataTable('#accountTypeAccountingTable')) {
         $('#accountTypeAccountingTable').DataTable().destroy();
     }
@@ -232,6 +242,9 @@ function process_account_type_level(client_id, client_name, concept_type_id, con
 
 function build_breadcrumbs(client_id, client_name = null, document = null, document_name = null, concept_type_id = null, concept_type_name = null,
     period = null, account_type_id = null, account_type_name = null) {
+    console.log("build_breadcrumbs called with client_id=" + client_id + " client_name=" + client_name + " document=" 
+    + document + " document_name=" + document_name + " concept_type_id=" + concept_type_id + " concept_type_name=" + concept_type_name + 
+    " period="  + period + " account_type_id=" + account_type_id + " account_type_name=" + account_type_name);
     $("#breadcrumsAccountingPanel").html("");
     if (client_id && document == null && concept_type_id == null && period == null && account_type_id == null) {
         $("#breadcrumsAccountingPanel").append('<a onClick="display_accounting_panel(\'' +
@@ -246,7 +259,7 @@ function build_breadcrumbs(client_id, client_name = null, document = null, docum
             client_id + '\', \'' + client_name + '\', null, null, \'' + concept_type_id + '\', \'' + concept_type_name + '\');">' +
             concept_type_name + '</a>');
 
-    } else if (client_id && document == null && concept_type_id && period && account_type_id == null) {
+    } else if (client_id && document == null && concept_type_id!= null && period != null && account_type_id == null) {
         $("#breadcrumsAccountingPanel").append('<a onClick="display_accounting_panel(\'' +
             client_id + '\', \'' + client_name + '\');">' +
             client_name + '</a>');
@@ -258,7 +271,7 @@ function build_breadcrumbs(client_id, client_name = null, document = null, docum
         $("#breadcrumsAccountingPanel").append('<a onClick="display_accounting_panel(\'' +
             client_id + '\', \'' + client_name + '\', null, null, \'' + concept_type_id + '\', \'' + concept_type_name + '\', ' + period + ');">' +
             period + '</a>');
-    } else if (client_id && document == null && concept_type_id && period && account_type_id) {
+    } else if (client_id && document == null && concept_type_id!= null && period!= null && account_type_id!= null) {
         $("#breadcrumsAccountingPanel").append('<a onClick="display_accounting_panel(\'' +
             client_id + '\', \'' + client_name + '\');">' +
             client_name + '</a>');
@@ -279,6 +292,7 @@ function build_breadcrumbs(client_id, client_name = null, document = null, docum
 }
 
 function viewAccountingDocument(document_id) {
+	console.log("viewAccountingDocument called with document_id=" + document_id);
     if (!$('#accountDocumentDialog_' + document_id).length) {
         $('<div id="accountDocumentDialog_' + document_id + '" />').dialog({
             'title': 'Document',

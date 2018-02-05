@@ -39,8 +39,8 @@ class ApiDocumentUploadView(AjaxResponseMixin, JSONResponseMixin, View):
             json_document["general"]['type'])
         if form_definition is None:
             response_dict["status"] = "Error"
-            response_dict["message"] = _(__name__ +
-                                         ".errors.no_form_definition_found")
+            response_dict["message"] = _(
+                __name__ + ".errors.no_form_definition_found")
 
         author = User.find_one_by_username(json_document["general"]["author"])
         if author is None:

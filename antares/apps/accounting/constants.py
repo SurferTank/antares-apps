@@ -25,8 +25,8 @@ class AccountDocumentStatusType(EnumUtilsMixin, Enum):
     class Labels:
         PENDING = _(__name__ + '.AccountDocumentStatusType.' + "PENDING")
         PROCESSED = _(__name__ + '.AccountDocumentStatusType.' + "PROCESSED")
-        WITH_ERRORS = _(__name__ + '.AccountDocumentStatusType.' +
-                        "WITH_ERRORS")
+        WITH_ERRORS = _(
+            __name__ + '.AccountDocumentStatusType.' + "WITH_ERRORS")
         ON_HOLD = _(__name__ + '.AccountDocumentStatusType.' + "ON_HOLD")
         CANCELLED = _(__name__ + '.AccountDocumentStatusType.' + "CANCELLED")
 
@@ -75,8 +75,8 @@ class TransactionAffectedValueType(EnumUtilsMixin, Enum):
         return str(self.value)
 
     class Labels:
-        PRINCIPAL = _(__name__ + '.TransactionAffectedValueType.' +
-                      "PRINCIPAL")
+        PRINCIPAL = _(
+            __name__ + '.TransactionAffectedValueType.' + "PRINCIPAL")
         INTEREST = _(__name__ + '.TransactionAffectedValueType.' + "INTEREST")
-        PENALTIES = _(__name__ + '.TransactionAffectedValueType.' +
-                      "PENALTIES")
+        PENALTIES = _(
+            __name__ + '.TransactionAffectedValueType.' + "PENALTIES")

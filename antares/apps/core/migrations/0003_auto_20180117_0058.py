@@ -17,6 +17,15 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='systemparameter',
             name='author',
-            field=models.ForeignKey(blank=True, editable=False, help_text='antares.apps.core.models.system_parameter.author_help', null=True, on_delete=django.db.models.deletion.PROTECT, to=settings.AUTH_USER_MODEL, verbose_name='antares.apps.core.models.system_parameter.author'),
+            field=models.ForeignKey(
+                blank=True,
+                editable=False,
+                help_text=
+                'antares.apps.core.models.system_parameter.author_help',
+                null=True,
+                on_delete=django.db.models.deletion.PROTECT,
+                to=settings.AUTH_USER_MODEL,
+                verbose_name='antares.apps.core.models.system_parameter.author'
+            ),
         ),
     ]

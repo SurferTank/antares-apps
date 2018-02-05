@@ -95,15 +95,16 @@ class DocumentEditView(TemplateView):
         fields = document.get_field_dict()
         header_fields = document.get_header_field_dict()
 
-        return render(request,
-                      document.get_form_definition().get_edit_site_path(), {
-                          'document': document.header,
-                          'headerFields': header_fields,
-                          'fields': fields,
-                          'formType': 'CREATION',
-                          'showSubmit': show_submit,
-                          'template': template,
-                          'next_place': next_place,
-                          'edit_js_path': edit_js_path,
-                          'is_inner': is_inner,
-                      })
+        return render(
+            request,
+            document.get_form_definition().get_edit_site_path(), {
+                'document': document.header,
+                'headerFields': header_fields,
+                'fields': fields,
+                'formType': 'CREATION',
+                'showSubmit': show_submit,
+                'template': template,
+                'next_place': next_place,
+                'edit_js_path': edit_js_path,
+                'is_inner': is_inner,
+            })

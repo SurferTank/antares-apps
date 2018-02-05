@@ -344,8 +344,8 @@ class FlowAdminManager(object):
         app_def.flow_definition = flow_def
         app_def.definition_site = DefinitionSiteType.SYSTEM
         app_def.application_id = 'updateproperty'
-        app_def.application_name = _(__name__ +
-                                     ".manager.default_apps.update_property")
+        app_def.application_name = _(
+            __name__ + ".manager.default_apps.update_property")
         app_def.save()
         flow_def.application_definition_set.add(app_def)
 
@@ -367,8 +367,8 @@ class FlowAdminManager(object):
         app_def.flow_definition = flow_def
         app_def.definition_site = DefinitionSiteType.SYSTEM
         app_def.application_id = 'currentaccount'
-        app_def.application_name = _(__name__ +
-                                     ".manager.default_apps.current_account")
+        app_def.application_name = _(
+            __name__ + ".manager.default_apps.current_account")
         app_def.route = 'surfertank_antares_account_status_by_client'
         app_def.save()
         flow_def.application_definition_set.add(app_def)
@@ -517,10 +517,11 @@ class FlowAdminManager(object):
                                   'role_id':
                                   extended_attribute_node.get('Value')
                               })
-                elif (extended_attribute_node.get('Name') and
-                      (extended_attribute_node.get('Name').lower() == 'unit' or
-                       extended_attribute_node.get('Name').lower() == 'orgunit'
-                       )):
+                elif (
+                        extended_attribute_node.get('Name') and
+                    (extended_attribute_node.get('Name').lower() == 'unit' or
+                     extended_attribute_node.get('Name').lower() == 'orgunit')
+                ):
                     participant_org_unit = OrgUnit.find_one_by_code(
                         extended_attribute_node.get('Value'))
                     if (participant_org_unit is not None):
@@ -833,8 +834,8 @@ class FlowAdminManager(object):
                       ActivityType.NO_IMPLEMENTATION):
                     activity_def.assignment_strategy = SystemParameter.find_one(
                         'FLOW_DEFAULT_ACTIVITY_ASSIGNMENT_STRATEGY',
-                        FieldDataType.STRING,
-                        str(AssignmentStrategyType.RANDOM))
+                        FieldDataType.STRING, str(
+                            AssignmentStrategyType.RANDOM))
 
             if (activity_def.start_mode is None):
                 if (activity_def.activity_type == ActivityType.ROUTE):

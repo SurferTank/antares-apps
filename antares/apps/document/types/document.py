@@ -1329,14 +1329,14 @@ class Document(object):
                 obligation = ObligationVector.find_one(uuid.UUID(value))
                 if (obligation is None):
                     raise InvalidDocumentValueException(
-                        _(__name__ +
-                          ".exceptions.invalid_obligation_specified"))
+                        _(__name__ + ".exceptions.invalid_obligation_specified"
+                          ))
             elif isinstance(value, uuid.UUID):
                 obligation = ObligationVector.find_one(value)
                 if (obligation is None):
                     raise InvalidDocumentValueException(
-                        _(__name__ +
-                          ".exceptions.invalid_obligation_specified"))
+                        _(__name__ + ".exceptions.invalid_obligation_specified"
+                          ))
             else:
                 obligation = value
             if (obligation.compliance_document is not None):
@@ -1368,8 +1368,8 @@ class Document(object):
                 activity = FlowActivity.find_one(value)
                 if (activity is None):
                     raise InvalidDocumentValueException(
-                        _(__name__ +
-                          ".exceptions.invalid_obligation_specified"))
+                        _(__name__ + ".exceptions.invalid_obligation_specified"
+                          ))
             else:
                 activity = value
             self.set_header_field('flow_case', activity.flow_case)
@@ -1823,8 +1823,8 @@ class Document(object):
             context.execute(
                 calculated_node.get('id') + ' = ' +
                 calculated_node.get('calculate'))
-            fields[calculated_node.get('id')] = eval('context.' +
-                                                     calculated_node.get('id'))
+            fields[calculated_node.get('id')] = eval(
+                'context.' + calculated_node.get('id'))
             self.set_field_value(
                 calculated_node.get('id'), fields[calculated_node.get('id')])
             logger.debug(
@@ -1848,8 +1848,8 @@ class Document(object):
         for validation_node in self.document_xml.iterfind(
                 'structuredData/page/line/field[@validate]'):
             #we need to declare the context each time to allow for nested calculations
-            context.execute('return_value = ' +
-                            validation_node.get('validate'))
+            context.execute(
+                'return_value = ' + validation_node.get('validate'))
             logger.debug(
                 _(__name__ +
                   ".validation_result {field_id} {validation_result} {validation}"

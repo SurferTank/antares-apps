@@ -49,9 +49,9 @@ class InitialSettingsConsole(object):
                                        'initialsettings'),
                                    params['withpackage'], 'flow', 'xpdl')
             if os.path.isdir(package) is False:
-                return _(__name__ +
-                         ".package_leads_to_inexistent_path {package}").format(
-                             package=package)
+                return _(
+                    __name__ + ".package_leads_to_inexistent_path {package}"
+                ).format(package=package)
         else:
             return _(__name__ + ".missing_parameter {parameter}").format(
                 parameter='withpackage')

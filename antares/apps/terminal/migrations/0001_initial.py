@@ -16,31 +16,35 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='TerminalLog',
             fields=[
-                ('id', models.UUIDField(
-                    default=uuid.uuid4,
-                    editable=False,
-                    help_text=
-                    'antares.apps.terminal.models.terminal_log.id_help',
-                    primary_key=True,
-                    serialize=False,
-                    verbose_name='antares.apps.terminal.models.terminal_log.id'
-                )),
-                ('post_date', models.DateTimeField(
-                    help_text=
-                    'antares.apps.terminal.models.terminal_log.post_date_help',
-                    verbose_name=
-                    'antares.apps.terminal.models.terminal_log.post_date')),
-                ('command', models.CharField(
-                    help_text=
-                    'antares.apps.terminal.models.terminal_log.command_help',
-                    max_length=2000,
-                    verbose_name=
-                    'antares.apps.terminal.models.terminal_log.command')),
-                ('result', models.TextField(
-                    help_text=
-                    'antares.apps.terminal.models.terminal_log.result_help',
-                    verbose_name=
-                    'antares.apps.terminal.models.terminal_log.result')),
+                ('id',
+                 models.UUIDField(
+                     default=uuid.uuid4,
+                     editable=False,
+                     help_text=
+                     'antares.apps.terminal.models.terminal_log.id_help',
+                     primary_key=True,
+                     serialize=False,
+                     verbose_name='antares.apps.terminal.models.terminal_log.id'
+                 )),
+                ('post_date',
+                 models.DateTimeField(
+                     help_text=
+                     'antares.apps.terminal.models.terminal_log.post_date_help',
+                     verbose_name=
+                     'antares.apps.terminal.models.terminal_log.post_date')),
+                ('command',
+                 models.CharField(
+                     help_text=
+                     'antares.apps.terminal.models.terminal_log.command_help',
+                     max_length=2000,
+                     verbose_name=
+                     'antares.apps.terminal.models.terminal_log.command')),
+                ('result',
+                 models.TextField(
+                     help_text=
+                     'antares.apps.terminal.models.terminal_log.result_help',
+                     verbose_name=
+                     'antares.apps.terminal.models.terminal_log.result')),
             ],
             options={
                 'verbose_name':

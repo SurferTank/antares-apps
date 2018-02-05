@@ -22,10 +22,10 @@ class ActivityApplicationDefinitionScopeType(EnumUtilsMixin, Enum):
 
     class Label:
         SAME = _(__name__ + 'ActivityApplicationDefinitionScopeType.' + 'SAME')
-        BLANK = _(__name__ + 'ActivityApplicationDefinitionScopeType.' +
-                  'BLANK')
-        DIALOG = _(__name__ + 'ActivityApplicationDefinitionScopeType.' +
-                   'DIALOG')
+        BLANK = _(
+            __name__ + 'ActivityApplicationDefinitionScopeType.' + 'BLANK')
+        DIALOG = _(
+            __name__ + 'ActivityApplicationDefinitionScopeType.' + 'DIALOG')
 
 
 class ActivityType(EnumUtilsMixin, Enum):
@@ -43,8 +43,8 @@ class ActivityType(EnumUtilsMixin, Enum):
     class Labels:
         ROUTE = _(__name__ + '.ActivityType.' + 'ROUTE')
         TASK = _(__name__ + '.ActivityType.' + 'TASK')
-        NO_IMPLEMENTATION = _(__name__ + '.ActivityType.' +
-                              'NO_IMPLEMENTATION')
+        NO_IMPLEMENTATION = _(
+            __name__ + '.ActivityType.' + 'NO_IMPLEMENTATION')
         SUBFLOW = _(__name__ + '.ActivityType.' + 'SUBFLOW')
 
 
@@ -63,8 +63,8 @@ class AssignmentStrategyType(EnumUtilsMixin, Enum):
         return str(self.value)
 
     class Labels:
-        DIRTY_RANDOM = _(__name__ + '.AssignmentStrategyType.' +
-                         'DIRTY_RANDOM')
+        DIRTY_RANDOM = _(
+            __name__ + '.AssignmentStrategyType.' + 'DIRTY_RANDOM')
         RANDOM = _(__name__ + '.AssignmentStrategyType.' + 'RANDOM')
         PROPERTY = _(__name__ + '.AssignmentStrategyType.' + 'PROPERTY')
         ACTIVITY = _(__name__ + '.AssignmentStrategyType.' + 'ACTIVITY')
@@ -233,8 +233,8 @@ class FlowDefinitionStatusType(EnumUtilsMixin, Enum):
     class Labels:
         CREATED = _(__name__ + '.FlowDefinitionStatusType.' + 'CREATED')
         UNDER_TEST = _(__name__ + '.FlowDefinitionStatusType.' + 'UNDER_TEST')
-        UNDER_REVISION = _(__name__ + '.FlowDefinitionStatusType.' +
-                           'UNDER_REVISION')
+        UNDER_REVISION = _(
+            __name__ + '.FlowDefinitionStatusType.' + 'UNDER_REVISION')
         RELEASED = _(__name__ + '.FlowDefinitionStatusType.' + 'RELEASED')
         PHASED_OUT = _(__name__ + '.FlowDefinitionStatusType.' + 'PHASED_OUT')
         CANCELLED = _(__name__ + '.FlowDefinitionStatusType.' + 'CANCELLED')
@@ -312,8 +312,8 @@ class ParticipantType(EnumUtilsMixin, Enum):
         RESOURCE_SET = _(__name__ + '.ParticipantType.' + 'RESOURCE_SET')
         HUMAN = _(__name__ + '.ParticipantType.' + 'HUMAN')
         RESOURCE = _(__name__ + '.ParticipantType.' + 'RESOURCE')
-        ORGANIZATIONAL_UNIT = _(__name__ + '.ParticipantType.' +
-                                'ORGANIZATIONAL_UNIT')
+        ORGANIZATIONAL_UNIT = _(
+            __name__ + '.ParticipantType.' + 'ORGANIZATIONAL_UNIT')
         SYSTEM = _(__name__ + '.ParticipantType.' + 'SYSTEM')
 
 
@@ -347,8 +347,8 @@ class TransitionType(EnumUtilsMixin, Enum):
 
     class Labels:
         CONDITION = _(__name__ + '.TransitionType.' + 'CONDITION')
-        DEFAULT_EXCEPTION = _(__name__ + '.TransitionType.' +
-                              'DEFAULT_EXCEPTION')
+        DEFAULT_EXCEPTION = _(
+            __name__ + '.TransitionType.' + 'DEFAULT_EXCEPTION')
         EXCEPTION = _(__name__ + '.TransitionType.' + 'EXCEPTION')
         OTHERWISE = _(__name__ + '.TransitionType.' + 'OTHERWISE')
         NONE = _(__name__ + '.TransitionType.' + 'NONE')

@@ -20,8 +20,8 @@ class ThirdPartyRecordStatusType(EnumUtilsMixin, Enum):
 
     class Labels:
         OPEN = _(__name__ + '.ThirdPartyRecordStatusType.' + 'OPEN')
-        PROCESSING = _(__name__ + '.ThirdPartyRecordStatusType.' +
-                       'PROCESSING')
+        PROCESSING = _(
+            __name__ + '.ThirdPartyRecordStatusType.' + 'PROCESSING')
         PROCESSED = _(__name__ + '.ThirdPartyRecordStatusType.' + 'PROCESSED')
         CLOSED = _(__name__ + '.ThirdPartyRecordStatusType.' + 'CLOSED')
         ERROR = _(__name__ + '.ThirdPartyRecordStatusType.' + 'ERROR')
@@ -44,8 +44,8 @@ class ThirdPartyDetailStatusType(EnumUtilsMixin, Enum):
 
     class Labels:
         OPEN = _(__name__ + '.ThirdPartyDetailStatusType.' + 'OPEN')
-        PROCESSING = _(__name__ + '.ThirdPartyDetailStatusType.' +
-                       'PROCESSING')
+        PROCESSING = _(
+            __name__ + '.ThirdPartyDetailStatusType.' + 'PROCESSING')
         PROCESSED = _(__name__ + '.ThirdPartyDetailStatusType.' + 'PROCESSED')
         CLOSED = _(__name__ + '.ThirdPartyDetailStatusType.' + 'CLOSED')
         ERROR = _(__name__ + '.ThirdPartyDetailStatusType.' + 'ERROR')

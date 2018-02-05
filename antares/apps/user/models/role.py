@@ -17,7 +17,6 @@ from .user import User
 from antares.apps.core.middleware.request import get_request
 from django.conf import settings
 
-
 logger = logging.getLogger(__name__)
 
 
@@ -42,9 +41,11 @@ class Role(MPTTModel):
         if self.creation_date is None:
             self.creation_date = timezone.now()
         self.update_date = timezone.now()
-        if(isinstance(get_request().user,  AnonymousUser)==False and self.author is None):
+        if (isinstance(get_request().user, AnonymousUser) == False
+                and self.author is None):
             self.author = get_request().user
-        elif(isinstance(get_request().user,  AnonymousUser)==True and self.author is None):
+        elif (isinstance(get_request().user, AnonymousUser) == True
+              and self.author is None):
             self.author = User.get_system_user()
         super(Role, self).save(*args, **kwargs)
 

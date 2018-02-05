@@ -367,10 +367,9 @@ class FlowAdminConsole(object):
         flow_activity.performer = performer
         flow_activity.save()
 
-        return _(__name__ +
-                 ".activity_reassigned_to {activity} {username}").format(
-                     activity=flow_activity.hrn_code,
-                     username=performer.username)
+        return _(
+            __name__ + ".activity_reassigned_to {activity} {username}").format(
+                activity=flow_activity.hrn_code, username=performer.username)
 
     @classmethod
     def _update_estimation(cls, params, html):

@@ -284,8 +284,8 @@ class ObligationManager(object):
             for i in range(0, units_before + units_after):
                 period_list.append(
                     int(
-                        str(base_date.year) + str(base_date.month) + str(
-                            base_date.day)))
+                        str(base_date.year) + str(base_date.month) +
+                        str(base_date.day)))
                 base_date = base_date + relativedelta(months=1)
         else:
             raise NotImplementedError

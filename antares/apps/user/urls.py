@@ -5,7 +5,6 @@ from .api import ApiOnBehalfChangeClientView
 from .api import ApiOnBehalfSelectorView
 from .views import AntaresAuthView
 
-
 app_name = 'antares.apps.user'
 
 urlpatterns = [
@@ -17,5 +16,4 @@ urlpatterns = [
     url(r'^api/on_behalf_change_client$',
         ApiOnBehalfChangeClientView.as_view(),
         name="api_on_behalf_change_client"),
-    
 ]
