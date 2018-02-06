@@ -292,13 +292,18 @@ $(document).ready(function() {
 						<xsl:when test="@type='autocomplete' and @dataType='string'">
 							<xsl:call-template name="autocomplete-string-processing" />
 						</xsl:when>
-						<!--  new stuff going on 
 						<xsl:when test="@type='input' and @dataType='user'">
-							<xsl:call-template name="input-user-processing" />
+							<xsl:call-template name="user-processing" />
 						</xsl:when>
 						<xsl:when test="@type='input' and @dataType='client'">
-							<xsl:call-template name="input-client-processing" />
-						</xsl:when>-->
+							<xsl:call-template name="client-processing" />
+						</xsl:when>
+						<xsl:when test="@type='input' and @dataType='uuid'">
+							<xsl:call-template name="uuid-processing" />
+						</xsl:when>
+						<xsl:when test="@type='input' and @dataType='document'">
+							<xsl:call-template name="document-processing" />
+						</xsl:when>
 					</xsl:choose>
 				</div>
 			</xsl:for-each>
@@ -523,6 +528,247 @@ $(document).ready(function() {
                 <xsl:text disable-output-escaping="yes">{{fields.</xsl:text>
                 <xsl:value-of select="@id" />
                 <xsl:text disable-output-escaping="yes">|default_if_none:''}}</xsl:text>
+            </xsl:attribute>
+			<xsl:attribute name="id">
+                <xsl:text>fields[</xsl:text>
+                <xsl:value-of select="@id" />
+                <xsl:text>]</xsl:text>
+            </xsl:attribute>
+			<xsl:attribute name="name">
+                <xsl:text>fields[</xsl:text>
+                <xsl:value-of select="@id" />
+                <xsl:text>]</xsl:text>
+            </xsl:attribute>
+			<xsl:if test="@readonly='yes' or @readonly='true'">
+				<xsl:attribute name="readonly">true</xsl:attribute>
+			</xsl:if>
+			<xsl:attribute name="onblur">
+                <xsl:text>evaluateDocument(false);</xsl:text>
+            </xsl:attribute>
+			<xsl:attribute name="class">
+                <xsl:text>form-control</xsl:text>
+            </xsl:attribute>
+			<xsl:if test="@tooltip">
+				<xsl:attribute name="title">
+                    <xsl:value-of select="@tooltip" />
+                </xsl:attribute>
+				<xsl:attribute name="data-toggle">
+                    <xsl:value-of select="tooltip" />
+                </xsl:attribute>
+			</xsl:if>
+			<xsl:if test="@fieldCode">
+				<xsl:attribute name="aria-describedby">
+                    <xsl:text disable-output-escaping="yes">fieldCode_</xsl:text>
+                    <xsl:value-of select="@id" />
+                </xsl:attribute>
+			</xsl:if>
+		</input>
+	</xsl:template>
+	
+	
+	<xsl:template name="user-processing">
+		<xsl:if test="@fieldCode">
+			<div class="input-group">
+				<span class="input-group-addon">
+					<xsl:attribute name="id">
+                        <xsl:text disable-output-escaping="yes">fieldCode_</xsl:text>
+                        <xsl:value-of select="@id" />
+                    </xsl:attribute>
+					<xsl:value-of select="@fieldCode" />
+				</span>
+				<xsl:call-template name="user-processing-inner" />
+			</div>
+		</xsl:if>
+		<xsl:if test="not(@fieldCode)">
+			<xsl:call-template name="user-processing-inner" />
+		</xsl:if>
+	</xsl:template>
+	<xsl:template name="user-processing-inner">
+		<input>
+			<xsl:attribute name="value">
+                <xsl:text disable-output-escaping="yes">{{fields.</xsl:text>
+                <xsl:value-of select="@id" />
+                <xsl:text disable-output-escaping="yes">|default_if_none:''}}</xsl:text>
+            </xsl:attribute>
+			<xsl:attribute name="id">
+                <xsl:text>fields[</xsl:text>
+                <xsl:value-of select="@id" />
+                <xsl:text>]</xsl:text>
+            </xsl:attribute>
+			<xsl:attribute name="name">
+                <xsl:text>fields[</xsl:text>
+                <xsl:value-of select="@id" />
+                <xsl:text>]</xsl:text>
+            </xsl:attribute>
+			<xsl:if test="@readonly='yes' or @readonly='true'">
+				<xsl:attribute name="readonly">true</xsl:attribute>
+			</xsl:if>
+			<xsl:attribute name="onblur">
+                <xsl:text>evaluateDocument(false);</xsl:text>
+            </xsl:attribute>
+			<xsl:attribute name="class">
+                <xsl:text>form-control</xsl:text>
+            </xsl:attribute>
+			<xsl:if test="@tooltip">
+				<xsl:attribute name="title">
+                    <xsl:value-of select="@tooltip" />
+                </xsl:attribute>
+				<xsl:attribute name="data-toggle">
+                    <xsl:value-of select="tooltip" />
+                </xsl:attribute>
+			</xsl:if>
+			<xsl:if test="@fieldCode">
+				<xsl:attribute name="aria-describedby">
+                    <xsl:text disable-output-escaping="yes">fieldCode_</xsl:text>
+                    <xsl:value-of select="@id" />
+                </xsl:attribute>
+			</xsl:if>
+		</input>
+	</xsl:template>
+	
+	<xsl:template name="client-processing">
+		<xsl:if test="@fieldCode">
+			<div class="input-group">
+				<span class="input-group-addon">
+					<xsl:attribute name="id">
+                        <xsl:text disable-output-escaping="yes">fieldCode_</xsl:text>
+                        <xsl:value-of select="@id" />
+                    </xsl:attribute>
+					<xsl:value-of select="@fieldCode" />
+				</span>
+				<xsl:call-template name="client-processing-inner" />
+			</div>
+		</xsl:if>
+		<xsl:if test="not(@fieldCode)">
+			<xsl:call-template name="client-processing-inner" />
+		</xsl:if>
+	</xsl:template>
+	<xsl:template name="client-processing-inner">
+		<input>
+			<xsl:attribute name="value">
+                <xsl:text disable-output-escaping="yes">{{fields.</xsl:text>
+                <xsl:value-of select="@id" />
+                <xsl:text disable-output-escaping="yes">|default_if_none:''}}</xsl:text>
+            </xsl:attribute>
+			<xsl:attribute name="id">
+                <xsl:text>fields[</xsl:text>
+                <xsl:value-of select="@id" />
+                <xsl:text>]</xsl:text>
+            </xsl:attribute>
+			<xsl:attribute name="name">
+                <xsl:text>fields[</xsl:text>
+                <xsl:value-of select="@id" />
+                <xsl:text>]</xsl:text>
+            </xsl:attribute>
+			<xsl:if test="@readonly='yes' or @readonly='true'">
+				<xsl:attribute name="readonly">true</xsl:attribute>
+			</xsl:if>
+			<xsl:attribute name="onblur">
+                <xsl:text>evaluateDocument(false);</xsl:text>
+            </xsl:attribute>
+			<xsl:attribute name="class">
+                <xsl:text>form-control</xsl:text>
+            </xsl:attribute>
+			<xsl:if test="@tooltip">
+				<xsl:attribute name="title">
+                    <xsl:value-of select="@tooltip" />
+                </xsl:attribute>
+				<xsl:attribute name="data-toggle">
+                    <xsl:value-of select="tooltip" />
+                </xsl:attribute>
+			</xsl:if>
+			<xsl:if test="@fieldCode">
+				<xsl:attribute name="aria-describedby">
+                    <xsl:text disable-output-escaping="yes">fieldCode_</xsl:text>
+                    <xsl:value-of select="@id" />
+                </xsl:attribute>
+			</xsl:if>
+		</input>
+	</xsl:template>
+	
+	<xsl:template name="uuid-processing">
+		<xsl:if test="@fieldCode">
+			<div class="input-group">
+				<span class="input-group-addon">
+					<xsl:attribute name="id">
+                        <xsl:text disable-output-escaping="yes">fieldCode_</xsl:text>
+                        <xsl:value-of select="@id" />
+                    </xsl:attribute>
+					<xsl:value-of select="@fieldCode" />
+				</span>
+				<xsl:call-template name="uuid-processing-inner" />
+			</div>
+		</xsl:if>
+		<xsl:if test="not(@fieldCode)">
+			<xsl:call-template name="uuid-processing-inner" />
+		</xsl:if>
+	</xsl:template>
+	<xsl:template name="uuid-processing-inner">
+		<input>
+			<xsl:attribute name="value">
+                <xsl:text disable-output-escaping="yes">{{fields.</xsl:text>
+                <xsl:value-of select="@id" />
+                <xsl:text disable-output-escaping="yes">|default_if_none:''}}</xsl:text>
+            </xsl:attribute>
+			<xsl:attribute name="id">
+                <xsl:text>fields[</xsl:text>
+                <xsl:value-of select="@id" />
+                <xsl:text>]</xsl:text>
+            </xsl:attribute>
+			<xsl:attribute name="name">
+                <xsl:text>fields[</xsl:text>
+                <xsl:value-of select="@id" />
+                <xsl:text>]</xsl:text>
+            </xsl:attribute>
+			<xsl:if test="@readonly='yes' or @readonly='true'">
+				<xsl:attribute name="readonly">true</xsl:attribute>
+			</xsl:if>
+			<xsl:attribute name="onblur">
+                <xsl:text>evaluateDocument(false);</xsl:text>
+            </xsl:attribute>
+			<xsl:attribute name="class">
+                <xsl:text>form-control</xsl:text>
+            </xsl:attribute>
+			<xsl:if test="@tooltip">
+				<xsl:attribute name="title">
+                    <xsl:value-of select="@tooltip" />
+                </xsl:attribute>
+				<xsl:attribute name="data-toggle">
+                    <xsl:value-of select="tooltip" />
+                </xsl:attribute>
+			</xsl:if>
+			<xsl:if test="@fieldCode">
+				<xsl:attribute name="aria-describedby">
+                    <xsl:text disable-output-escaping="yes">fieldCode_</xsl:text>
+                    <xsl:value-of select="@id" />
+                </xsl:attribute>
+			</xsl:if>
+		</input>
+	</xsl:template>
+	
+	<xsl:template name="document-processing">
+		<xsl:if test="@fieldCode">
+			<div class="input-group">
+				<span class="input-group-addon">
+					<xsl:attribute name="id">
+                        <xsl:text disable-output-escaping="yes">fieldCode_</xsl:text>
+                        <xsl:value-of select="@id" />
+                    </xsl:attribute>
+					<xsl:value-of select="@fieldCode" />
+				</span>
+				<xsl:call-template name="document-processing-inner" />
+			</div>
+		</xsl:if>
+		<xsl:if test="not(@fieldCode)">
+			<xsl:call-template name="document-processing-inner" />
+		</xsl:if>
+	</xsl:template>
+	<xsl:template name="document-processing-inner">
+		<input>
+			<xsl:attribute name="value">
+                <xsl:text disable-output-escaping="yes">{{fields.</xsl:text>
+                <xsl:value-of select="@id" />
+                <xsl:text disable-output-escaping="yes">header.hrn_code|default_if_none:''}}</xsl:text>
             </xsl:attribute>
 			<xsl:attribute name="id">
                 <xsl:text>fields[</xsl:text>
