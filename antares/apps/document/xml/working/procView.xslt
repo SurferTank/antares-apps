@@ -102,6 +102,18 @@
                         <xsl:when test="@type='autocomplete' and @dataType='string'">
                             <xsl:call-template name="autocomplete-string-processing"/>
                         </xsl:when>
+                        <xsl:when test="@dataType='uuid'">
+                            <xsl:call-template name="uuid-processing"/>
+                        </xsl:when>
+                        <xsl:when test="@dataType='client'">
+                            <xsl:call-template name="client-processing"/>
+                        </xsl:when>
+                        <xsl:when test="@dataType='user'">
+                            <xsl:call-template name="user-processing"/>
+                        </xsl:when>
+                        <xsl:when test="@dataType='document'">
+                            <xsl:call-template name="document-processing"/>
+                        </xsl:when>
                     </xsl:choose>
                 </div>
             </xsl:for-each>
@@ -151,6 +163,34 @@
             <xsl:text disable-output-escaping="yes">{{fields.</xsl:text>
             <xsl:value-of select="@id"/>
             <xsl:text disable-output-escaping="yes">|default_if_none:''}}</xsl:text>
+        </div>
+    </xsl:template>
+    <xsl:template name="user-processing">
+        <div>
+            <xsl:text disable-output-escaping="yes">{{fields.</xsl:text>
+            <xsl:value-of select="@id"/>
+            <xsl:text disable-output-escaping="yes">|default_if_none:''}}</xsl:text>
+        </div>
+    </xsl:template>
+    <xsl:template name="uuid-processing">
+        <div>
+            <xsl:text disable-output-escaping="yes">{{fields.</xsl:text>
+            <xsl:value-of select="@id"/>
+            <xsl:text disable-output-escaping="yes">|default_if_none:''}}</xsl:text>
+        </div>
+    </xsl:template>
+    <xsl:template name="client-processing">
+        <div>
+            <xsl:text disable-output-escaping="yes">{{fields.</xsl:text>
+            <xsl:value-of select="@id"/>
+            <xsl:text disable-output-escaping="yes">|default_if_none:''}}</xsl:text>
+        </div>
+    </xsl:template>
+    <xsl:template name="document-processing">
+        <div>
+            <xsl:text disable-output-escaping="yes">{{fields.</xsl:text>
+            <xsl:value-of select="@id"/>
+            <xsl:text disable-output-escaping="yes">.header.hrn_code|default_if_none:''}}</xsl:text>
         </div>
     </xsl:template>
     <xsl:template name="list-string-processing">

@@ -301,10 +301,20 @@ class Document(object):
                                     field.text = fieldDb.uuid_value
                             elif datatype == FieldDataType.CLIENT:
                                 if fieldDb.uuid_value is not None:
+                                    client_obj = Client.find_one(fieldDb.uuid_value)
                                     field.text = fieldDb.uuid_value
+                                    field.attrib['displayValue'] = str(client_obj)
                             elif datatype == FieldDataType.USER:
                                 if fieldDb.uuid_value is not None:
+                                    user_obj = User.find_one(fieldDb.uuid_value)
                                     field.text = fieldDb.uuid_value
+                                    field.attrib['displayValue'] = str(user_obj)
+                            elif datatype == FieldDataType.DOCUMENT:
+                                if fieldDb.uuid_value is not None:
+                                    document_obj = Document(document_id=fieldDb.uuid_value) 
+                                    field.text = fieldDb.uuid_value
+                                    if(document_obj.header.hrn_code is not None):
+                                        field.attrib['displayValue'] = document_obj.header.hrn_code
                             else:
                                 raise NotImplementedError(
                                     _(__name__ +
@@ -800,6 +810,45 @@ class Document(object):
                                         indexedDb.data_type = str(
                                             FieldDataType.USER)
                                         indexedDb.save()
+                            elif datatype == FieldDataType.DOCUMENT:
+                                #This is an special case, we have to get first the proper 
+                                # object and then we serialize it as an UUID
+                                document_obj = Document(document_id = uuid(field.text))
+                                if (fieldDb is not None
+                                        and str(fieldDb.uuid_value) != str(
+                                            document_obj.id)):
+                                    fieldDb.uuid_value = str(document_obj.id)
+                                    fieldDb.save()
+                                elif (fieldDb is None):
+                                    fieldDb = DocumentField()
+                                    fieldDb.definition = field.get('id')
+                                    fieldDb.document = self.header
+                                    fieldDb.form_definition = self.header.form_definition
+                                    if (field.text is not None):
+                                        fieldDb.uuid_value = str(document_obj.id)
+                                    fieldDb.data_type = str(
+                                        FieldDataType.DOCUMENT)
+                                    fieldDb.save()
+                                if (field.get('indexed') and
+                                    (field.get('indexed').lower() == 'true' or
+                                     field.get('indexed').lower() == 'yes')):
+                                    if (indexedDb is not None
+                                            and str(indexedDb.uuid_value) !=
+                                            str(document_obj.id)):
+                                        indexedDb.uuid_value = str(
+                                            document_obj.id)
+                                        indexedDb.save()
+                                    elif (indexedDb is None):
+                                        indexedDb = IndexedField()
+                                        indexedDb.definition = field.get('id')
+                                        indexedDb.document = self.header
+                                        indexedDb.form_definition = self.header.form_definition
+                                        if (field.text is not None):
+                                            indexedDb.uuid_value = str(
+                                                document_obj.id)
+                                        indexedDb.data_type = str(
+                                            FieldDataType.DOCUMENT)
+                                        indexedDb.save()
 
     def get_field_data_type(self, key: str) -> str:
         for page in self.document_xml.iterfind('structuredData/page'):
@@ -839,9 +888,13 @@ class Document(object):
                         field_data_type = FieldDataType.to_enum(
                             field.get('dataType'))
                         if field_data_type == FieldDataType.CLIENT:
-                            return Client.find_one(field.text)
+                            return Client.find_one(uuid(field.text))
+                        if field_data_type == FieldDataType.UUID:
+                            return uuid(field.text)
                         elif field_data_type == FieldDataType.USER:
-                            return User.find_one(field.text)
+                            return User.find_one(uuid(field.text))
+                        elif field_data_type == FieldDataType.DOCUMENT:
+                            return Document(document_id=uuid(field.text))
                         elif field_data_type == FieldDataType.INTEGER:
                             return int(float(field.text))
                         elif field_data_type == FieldDataType.FLOAT:

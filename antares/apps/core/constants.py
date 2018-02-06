@@ -77,6 +77,7 @@ class FieldDataType(EnumUtilsMixin, Enum):
     BOOLEAN = "Boolean"
     USER = "User"
     CLIENT = "client"
+    DOCUMENT = "document"
 
     def __str__(self):
         """
@@ -85,16 +86,17 @@ class FieldDataType(EnumUtilsMixin, Enum):
         return str(self.value)
 
     class Labels:
-        STRING = _(__name__ + '.FieldDataType.' + 'STRING')
-        TEXT = _(__name__ + '.FieldDataType.' + 'TEXT')
-        DATE = _(__name__ + '.FieldDataType.' + 'DATE')
-        DATETIME = _(__name__ + '.FieldDataType.' + 'DATETIME')
-        INTEGER = _(__name__ + '.FieldDataType.' + 'INTEGER')
-        FLOAT = _(__name__ + '.FieldDataType.' + 'FLOAT')
-        UUID = _(__name__ + '.FieldDataType.' + 'UUID')
-        BOOLEAN = _(__name__ + '.FieldDataType.' + 'BOOLEAN')
-        USER = _(__name__ + '.FieldDataType.' + 'USER')
-        CLIENT = _(__name__ + '.FieldDataType.' + 'CLIENT')
+        STRING = _(__name__ + '.FieldDataType.STRING')
+        TEXT = _(__name__ + '.FieldDataType.TEXT')
+        DATE = _(__name__ + '.FieldDataType.DATE')
+        DATETIME = _(__name__ + '.FieldDataType.DATETIME')
+        INTEGER = _(__name__ + '.FieldDataType.INTEGER')
+        FLOAT = _(__name__ + '.FieldDataType.FLOAT')
+        UUID = _(__name__ + '.FieldDataType.UUID')
+        BOOLEAN = _(__name__ + '.FieldDataType.BOOLEAN')
+        USER = _(__name__ + '.FieldDataType.USER')
+        CLIENT = _(__name__ + '.FieldDataType.CLIENT')
+        DOCUMENT = _(__name__ + '.FieldDataType.DOCUMENT')
 
 
 class HrnModuleType(EnumUtilsMixin, Enum):
