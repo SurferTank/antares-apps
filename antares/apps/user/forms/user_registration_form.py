@@ -28,14 +28,25 @@ class UserRegistrationForm(forms.Form):
         user.first_name = self.cleaned_data['first_name']
         user.last_name = self.cleaned_data['last_name']
         user.save()
-        role = Role.find_one_by_code(
-            self.cleaned_data.get('user_class').upper() + "_ROLE")
+        if(self.cleaned_data.get('user_class') is not None):
+            role = Role.find_one_by_code(
+                self.cleaned_data.get('user_class').upper() + "_ROLE")
+            user_role = UserRole()
+            user_role.author = user
+            user_role.user = user
+            user_role.role = role
+            user_role.start_date = datetime.now()
+            user_role.save()
+        #the role to which all users pertain
+        basic_role = Role.find_one_by_code("BASIC_ROLE")
         user_role = UserRole()
         user_role.author = user
         user_role.user = user
-        user_role.role = role
+        user_role.role = basic_role
         user_role.start_date = datetime.now()
         user_role.save()
+        
+        # simple client so the accounts and documents work. 
         client = Client()
         client.user = user
         client.first_name = user.first_name

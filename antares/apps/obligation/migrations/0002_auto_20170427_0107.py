@@ -223,13 +223,13 @@ class Migration(migrations.Migration):
                 on_delete=django.db.models.deletion.PROTECT,
                 to='obligation.ObligationRule'),
         ),
-        #migrations.AlterUniqueTogether(
-        #    name='obligationvector',
-        #    unique_together=set([('client', 'concept_type', 'period',
-        #                          'account_type', 'base_document')]),
-        #),
-        #migrations.AlterUniqueTogether(
-        #    name='clientobligation',
-        #    unique_together=set([('client', 'concept_type')]),
-        #),
+        migrations.AlterUniqueTogether(
+            name='obligationvector',
+            unique_together=set([('client', 'concept_type', 'period',
+                                  'account_type', 'base_document')]),
+        ),
+        migrations.AlterUniqueTogether(
+            name='clientobligation',
+            unique_together=set([('client', 'concept_type')]),
+        ),
     ]

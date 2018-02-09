@@ -323,9 +323,9 @@ class Migration(migrations.Migration):
                 on_delete=django.db.models.deletion.PROTECT,
                 to='core.Currency'),
         ),
-        #migrations.AlterUniqueTogether(
-        #    name='accountbalance',
-        #    unique_together=set([('client', 'concept_type', 'period',
-        #                          'account_type')]),
-        #),
+        migrations.AlterUniqueTogether(
+            name='accountbalance',
+            unique_together=set([('client', 'concept_type', 'period',
+                                  'account_type')]),
+        ),
     ]
