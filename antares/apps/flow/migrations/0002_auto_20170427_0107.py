@@ -529,24 +529,24 @@ class Migration(migrations.Migration):
                 related_name='activity_application_definition_set',
                 to='flow.ApplicationDefinition'),
         ),
-        migrations.AlterUniqueTogether(
-            name='flowproperty',
-            unique_together=set([('flow_case', 'property_definition')]),
-        ),
-        migrations.AlterUniqueTogether(
-            name='flowpackage',
-            unique_together=set([('package_id', 'package_version')]),
-        ),
-        migrations.AlterUniqueTogether(
-            name='flowdocument',
-            unique_together=set([('flow_case', 'document')]),
-        ),
-        migrations.AlterUniqueTogether(
-            name='flowdefinition',
-            unique_together=set([('flow_package', 'flow_id', 'flow_version')]),
-        ),
-        migrations.AlterUniqueTogether(
-            name='applicationdefinition',
-            unique_together=set([('flow_definition', 'application_id')]),
-        ),
+        #migrations.AlterUniqueTogether(
+        #    name='flowproperty',
+        #    unique_together=set([('flow_case', 'property_definition')]),
+        #),
+        #migrations.AlterUniqueTogether(
+        #    name='flowpackage',
+        #    unique_together=set([('package_id', 'package_version')]),
+        #),
+        #migrations.AlterUniqueTogether(
+        #    name='flowdocument',
+        #    unique_together=set([('flow_case', 'document')]),
+        #),
+        #migrations.AlterUniqueTogether(
+        #    name='flowdefinition',
+        #    unique_together=set([('flow_package', 'flow_id', 'flow_version')]),
+        #),
+        #migrations.AlterUniqueTogether(
+        #    name='applicationdefinition',
+        #    unique_together=set([('flow_definition', 'application_id')]),
+        #),
     ]
