@@ -43,16 +43,17 @@ class UserRole(models.Model):
         if self.creation_date is None:
             self.creation_date = timezone.now()
         self.update_date = timezone.now()
-        if (isinstance(get_request().user, AnonymousUser) == False
-                and self.author is None):
-            self.author = get_request().user
-        elif (isinstance(get_request().user, AnonymousUser) == True
-              and self.author is None):
-            self.author = User.get_system_user()
+        try:
+            self.author
+        except Exception as e:
+            if (isinstance(get_request().user, AnonymousUser) == False):
+                self.author = get_request().user
+            elif (isinstance(get_request().user, AnonymousUser) == True):
+                self.author = User.get_system_user()
         super(UserRole, self).save(*args, **kwargs)
 
     def __str__(self):
-        return str(self.id)
+        return self.user.username + ":" + self.role.name
 
     class Meta:
         app_label = 'user'
