@@ -585,6 +585,26 @@ $(document).ready(function() {
 	</xsl:template>
 	<xsl:template name="user-processing-inner">
 		<input>
+			<xsl:attribute name="type">
+                <xsl:text disable-output-escaping="yes">hidden</xsl:text>
+            </xsl:attribute>
+			<xsl:attribute name="value">
+                <xsl:text disable-output-escaping="yes">{{fields.</xsl:text>
+                <xsl:value-of select="@id" />
+                <xsl:text disable-output-escaping="yes">.id|default_if_none:''}}</xsl:text>
+            </xsl:attribute>
+            <xsl:attribute name="id">
+                <xsl:text>fields[</xsl:text>
+                <xsl:value-of select="@id" />
+                <xsl:text>]</xsl:text>
+            </xsl:attribute>
+            <xsl:attribute name="name">
+                <xsl:text>fields[</xsl:text>
+                <xsl:value-of select="@id" />
+                <xsl:text>]</xsl:text>
+            </xsl:attribute>
+		</input>
+		<input>
 			<xsl:attribute name="value">
                 <xsl:text disable-output-escaping="yes">{{fields.</xsl:text>
                 <xsl:value-of select="@id" />
@@ -593,12 +613,12 @@ $(document).ready(function() {
 			<xsl:attribute name="id">
                 <xsl:text>fields[</xsl:text>
                 <xsl:value-of select="@id" />
-                <xsl:text>]</xsl:text>
+                <xsl:text>_inner_value]</xsl:text>
             </xsl:attribute>
 			<xsl:attribute name="name">
                 <xsl:text>fields[</xsl:text>
                 <xsl:value-of select="@id" />
-                <xsl:text>]</xsl:text>
+                <xsl:text>_inner_value]</xsl:text>
             </xsl:attribute>
 			<xsl:if test="@readonly='yes' or @readonly='true'">
 				<xsl:attribute name="readonly">true</xsl:attribute>
@@ -645,20 +665,40 @@ $(document).ready(function() {
 	</xsl:template>
 	<xsl:template name="client-processing-inner">
 		<input>
+			<xsl:attribute name="type">
+                <xsl:text disable-output-escaping="yes">hidden</xsl:text>
+            </xsl:attribute>
 			<xsl:attribute name="value">
                 <xsl:text disable-output-escaping="yes">{{fields.</xsl:text>
                 <xsl:value-of select="@id" />
-                <xsl:text disable-output-escaping="yes">|default_if_none:''}}</xsl:text>
+                <xsl:text disable-output-escaping="yes">.id|default_if_none:''}}</xsl:text>
+            </xsl:attribute>
+            <xsl:attribute name="id">
+                <xsl:text>fields[</xsl:text>
+                <xsl:value-of select="@id" />
+                <xsl:text>]</xsl:text>
+            </xsl:attribute>
+            <xsl:attribute name="name">
+                <xsl:text>fields[</xsl:text>
+                <xsl:value-of select="@id" />
+                <xsl:text>]</xsl:text>
+            </xsl:attribute>
+		</input>
+		<input>
+			<xsl:attribute name="value">
+                <xsl:text disable-output-escaping="yes">{{fields.</xsl:text>
+                <xsl:value-of select="@id" />
+                <xsl:text disable-output-escaping="yes">.code|default_if_none:''}}</xsl:text>
             </xsl:attribute>
 			<xsl:attribute name="id">
                 <xsl:text>fields[</xsl:text>
                 <xsl:value-of select="@id" />
-                <xsl:text>]</xsl:text>
+                <xsl:text>_inner_value]</xsl:text>
             </xsl:attribute>
 			<xsl:attribute name="name">
                 <xsl:text>fields[</xsl:text>
                 <xsl:value-of select="@id" />
-                <xsl:text>]</xsl:text>
+                <xsl:text>_inner_value]</xsl:text>
             </xsl:attribute>
 			<xsl:if test="@readonly='yes' or @readonly='true'">
 				<xsl:attribute name="readonly">true</xsl:attribute>
@@ -765,6 +805,26 @@ $(document).ready(function() {
 	</xsl:template>
 	<xsl:template name="document-processing-inner">
 		<input>
+			<xsl:attribute name="type">
+                <xsl:text disable-output-escaping="yes">hidden</xsl:text>
+            </xsl:attribute>
+			<xsl:attribute name="value">
+                <xsl:text disable-output-escaping="yes">{{fields.</xsl:text>
+                <xsl:value-of select="@id" />
+                <xsl:text disable-output-escaping="yes">.id|default_if_none:''}}</xsl:text>
+            </xsl:attribute>
+            <xsl:attribute name="id">
+                <xsl:text>fields[</xsl:text>
+                <xsl:value-of select="@id" />
+                <xsl:text>]</xsl:text>
+            </xsl:attribute>
+            <xsl:attribute name="name">
+                <xsl:text>fields[</xsl:text>
+                <xsl:value-of select="@id" />
+                <xsl:text>]</xsl:text>
+            </xsl:attribute>
+		</input>
+		<input>
 			<xsl:attribute name="value">
                 <xsl:text disable-output-escaping="yes">{{fields.</xsl:text>
                 <xsl:value-of select="@id" />
@@ -773,12 +833,12 @@ $(document).ready(function() {
 			<xsl:attribute name="id">
                 <xsl:text>fields[</xsl:text>
                 <xsl:value-of select="@id" />
-                <xsl:text>]</xsl:text>
+                <xsl:text>_inner_value]</xsl:text>
             </xsl:attribute>
 			<xsl:attribute name="name">
                 <xsl:text>fields[</xsl:text>
                 <xsl:value-of select="@id" />
-                <xsl:text>]</xsl:text>
+                <xsl:text>_inner_value]</xsl:text>
             </xsl:attribute>
 			<xsl:if test="@readonly='yes' or @readonly='true'">
 				<xsl:attribute name="readonly">true</xsl:attribute>

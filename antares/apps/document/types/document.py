@@ -302,17 +302,17 @@ class Document(object):
                             elif datatype == FieldDataType.CLIENT:
                                 if fieldDb.uuid_value is not None:
                                     client_obj = Client.find_one(fieldDb.uuid_value)
-                                    field.text = fieldDb.uuid_value
+                                    field.text = str(client_obj.id)
                                     field.attrib['displayValue'] = str(client_obj)
                             elif datatype == FieldDataType.USER:
                                 if fieldDb.uuid_value is not None:
                                     user_obj = User.find_one(fieldDb.uuid_value)
-                                    field.text = fieldDb.uuid_value
+                                    field.text = str(user_obj.id)
                                     field.attrib['displayValue'] = str(user_obj)
                             elif datatype == FieldDataType.DOCUMENT:
                                 if fieldDb.uuid_value is not None:
                                     document_obj = Document(document_id=fieldDb.uuid_value) 
-                                    field.text = fieldDb.uuid_value
+                                    field.text = str(document_obj.id)
                                     if(document_obj.header.hrn_code is not None):
                                         field.attrib['displayValue'] = document_obj.header.hrn_code
                             else:
@@ -888,7 +888,7 @@ class Document(object):
                         field_data_type = FieldDataType.to_enum(
                             field.get('dataType'))
                         if field_data_type == FieldDataType.CLIENT:
-                            return Client.find_one(uuid(field.text))
+                            return Client.find_one(field.text)
                         if field_data_type == FieldDataType.UUID:
                             return uuid(field.text)
                         elif field_data_type == FieldDataType.USER:
@@ -923,7 +923,7 @@ class Document(object):
                         return field.get('id')
         return None
 
-    def set_field_value(self, key, value):
+    def set_field_value(self, key, value, display_value = None):
         for page in self.document_xml.iterfind('structuredData/page'):
             for line in page.iterfind('line'):
                 for field in line.iterfind('field'):
@@ -964,20 +964,41 @@ class Document(object):
                                 field.text = 'no'
                             return
                         elif datatype == FieldDataType.USER:
-                            if not isinstance(value, User):
-                                raise ValueError(
-                                    _(__name__ +
-                                      ".exceptions.user_field_does_not_understand_anything_but_User_objects"
-                                      ))
-                            field.text = str(value.id)
+                            if value != False:
+                                if isinstance(value, str):
+                                    value = User.find_one(uuid.UUID(value))
+                                elif isinstance(value, uuid.UUID):
+                                    value = User.find_one(value)
+                                elif isinstance(value, User) == False:
+                                    raise ValueError(
+                                        _(__name__ +
+                                          ".exceptions.user_field_does_not_understand_anything_but_User_objects"
+                                          ))
+                                field.text = str(value.id)
+                            return
+                        elif datatype == FieldDataType.DOCUMENT:
+                            if value != False and value != "":
+                                if isinstance(value, str) or isinstance(value, uuid):
+                                    value = Document(document_id = value)
+                                elif isinstance(value, Document) == False:
+                                    raise ValueError(
+                                        _(__name__ +
+                                          ".exceptions.user_field_does_not_understand_anything_but_Document_objects"
+                                          ))
+                                field.text = str(value.id)
                             return
                         elif datatype == FieldDataType.CLIENT:
-                            if not isinstance(value, Client):
-                                raise ValueError(
-                                    _(__name__ +
-                                      ".exceptions.client_field_does_not_understand_anything_but_Client_objects"
-                                      ))
-                            field.text = str(value.id)
+                            if value != False:
+                                if isinstance(value, str):
+                                    value = Client.find_one(uuid.UUID(value))
+                                elif isinstance(value, uuid.UUID):
+                                    value = Client.find_one(value)
+                                elif isinstance(value, Client) == False:
+                                    raise ValueError(
+                                        _(__name__ +
+                                          ".exceptions.client_field_does_not_understand_anything_but_Client_objects"
+                                          ))
+                                field.text = str(value.id)
                             return
                         else:
                             raise DocumentFieldNotFound(
@@ -985,11 +1006,12 @@ class Document(object):
                                   ".exceptions.document_field_type_not_found ")
                                 + key)
         raise DocumentFieldNotFound(
-            _(__name__ + ".exceptions.document_field_not_found"))
+            _(__name__ + ".exceptions.document_field_not_found" + key))
 
     def set_fields(self, fields):
         for key, value in fields.items():
-            self.set_field_value(key, value)
+            if key[-12:] != "_inner_value":
+                self.set_field_value(key, value)
 
     def get_field_dict(self):
         fields = {}
@@ -1013,6 +1035,26 @@ class Document(object):
                             if field.text is not None:
                                 fields[field.attrib['id']] = uuid.UUID(
                                     field.text)
+                            else:
+                                fields[field.attrib['id']] = None
+                        elif (data_type == FieldDataType.CLIENT):
+                            if field.text is not None:
+                                client = Client.find_one(uuid.UUID(
+                                    field.text))
+                                fields[field.attrib['id']] = client
+                            else:
+                                fields[field.attrib['id']] = None
+                        elif (data_type == FieldDataType.USER):
+                            if field.text is not None:
+                                user = User.find_one(uuid.UUID(
+                                    field.text))
+                                fields[field.attrib['id']] = user
+                            else:
+                                fields[field.attrib['id']] = None
+                        elif (data_type == FieldDataType.DOCUMENT):
+                            if field.text is not None:
+                                document = Document(document_id=field.text)
+                                fields[field.attrib['id']] = document
                             else:
                                 fields[field.attrib['id']] = None
                         elif (data_type == FieldDataType.FLOAT):
@@ -1807,9 +1849,9 @@ class Document(object):
         self.set_header_field('client', value)
 
     def save(self, status_type=None):
-        from antares.apps.obligation.constants import ObligationStatusType
         from antares.apps.accounting.manager import AccountManager
         from antares.apps.notifications.manager import NotificationManager
+        from antares.apps.subscription.manager import SubscriptionManager
 
         if (isinstance(status_type, str)):
             status_type = DocumentStatusType.to_enum(status_type)
@@ -1829,7 +1871,10 @@ class Document(object):
             self._process_modules_hooks()
             self.header.hash = self.hash()
             self.header.save()
-
+            AccountManager.post_document(self)
+            SubscriptionManager.process_document_subscriptions(self)
+            NotificationManager.post_document(self)
+            
     def hash(self):
         doc_xml = etree.fromstring(etree.tostring(self.document_xml))
         headerElements = doc_xml.find('headerElements')
@@ -2017,6 +2062,7 @@ class Document(object):
             # remember to access the document directly
             eval(code)
         elif (language == ScriptEngineType.JAVASCRIPT):
+            fields['user'] = get_request().user
             fields['event_type'] = event_type
             fields['header_fields'] = header_fields
             fields['document'] = self
