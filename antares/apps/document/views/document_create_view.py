@@ -28,7 +28,7 @@ class DocumentCreateView(View):
         pass
 
     def get(self, request, form_id):
-        header_field_dict = self._get_headers_from_request(request)
+        header_fields = self._get_headers_from_request(request)
         form_definition = FormDefinition.find_one(form_id)
         show_submit = request.GET.get('ss')
         if (show_submit is not None and
@@ -61,7 +61,7 @@ class DocumentCreateView(View):
         # TODO: Auth is missing here
 
         document = Document(
-            form_id=form_id, header_fields_dict=header_field_dict)
+            form_id=form_id, header_fields=header_fields)
 
         document.set_author(get_request().user)
         document.save()

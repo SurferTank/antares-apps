@@ -67,11 +67,8 @@ class Document(object):
         if kwargs.get('document_id') is not None:
             self._init_with_id(kwargs.get('document_id'))
         elif kwargs.get('form_id') is not None:
-            if (kwargs.get('header_fields_dict') is None):
-                self._init_with_form_id(kwargs.get('form_id'))
-            else:
-                self._init_with_form_id(
-                    kwargs.get('form_id'), kwargs.get('header_fields_dict'))
+            self._init_with_form_id(
+                    kwargs.get('form_id'), kwargs.get('header_fields'), kwargs.get('fields'))
         else:
             raise ValueError(__name__ + ".exceptions.couldnt_create_document")
 
@@ -112,10 +109,13 @@ class Document(object):
 
     def _init_with_form_id(self,
                            form_id: str,
-                           header_fields_dict: Dict[str, str] = None):
-        """ Instantiates a document instance based on the document id
+                           header_fields: Dict[str, str] = None, 
+                           fields: Dict[str, str] = None):
+        """ Instantiates a document instance based on the form id
 
-        :param document_id: The document ID, which has to exist on the database
+        :param form_id: The form ID, which has to exist on the database
+        :param header_fields: The header fields to be map onto the new document
+        :param fields: The fields to be map into the new document
         :returns: the document instance
         """
 
@@ -164,8 +164,11 @@ class Document(object):
             self.set_header_field('account_type',
                                   form_definition.form_class.account_type)
 
-        if (header_fields_dict is not None):
-            self.set_header_fields(header_fields_dict)
+        if (header_fields is not None):
+            self.set_header_fields(header_fields)
+        if (fields is not None):
+            self.set_fields(fields)
+        self._hibernate_document()
         self._map_header_fields_to_fields()
         self._process_field_sources()
         self._evaluate_field_calculation()
@@ -311,8 +314,8 @@ class Document(object):
                                     field.attrib['displayValue'] = str(user_obj)
                             elif datatype == FieldDataType.DOCUMENT:
                                 if fieldDb.uuid_value is not None:
-                                    document_obj = Document(document_id=fieldDb.uuid_value) 
-                                    field.text = str(document_obj.id)
+                                    document_obj = Document(document_id=str(fieldDb.uuid_value)) 
+                                    field.text = str(document_obj.document_id)
                                     if(document_obj.header.hrn_code is not None):
                                         field.attrib['displayValue'] = document_obj.header.hrn_code
                             else:
@@ -333,11 +336,11 @@ class Document(object):
         base_document_node = accountingElements.find('baseDocument')
         if (base_document_node is not None and base_document_node.text):
             try:
-                document = Document(uuid.UUID(base_document_node.text))
+                document = Document(document_id=uuid.UUID(base_document_node.text))
             except ValueError:
                 document = None
             if (document is not None):
-                self.header.account_base_document = document.header
+                self.header.base_document = document.header
         period_node = accountingElements.find('period')
         if (period_node is not None and period_node.text
                 and period_node.text != ''):
@@ -813,10 +816,10 @@ class Document(object):
                             elif datatype == FieldDataType.DOCUMENT:
                                 #This is an special case, we have to get first the proper 
                                 # object and then we serialize it as an UUID
-                                document_obj = Document(document_id = uuid(field.text))
+                                document_obj = Document(document_id = field.text)
                                 if (fieldDb is not None
                                         and str(fieldDb.uuid_value) != str(
-                                            document_obj.id)):
+                                            document_obj.document_id)):
                                     fieldDb.uuid_value = str(document_obj.id)
                                     fieldDb.save()
                                 elif (fieldDb is None):
@@ -825,7 +828,7 @@ class Document(object):
                                     fieldDb.document = self.header
                                     fieldDb.form_definition = self.header.form_definition
                                     if (field.text is not None):
-                                        fieldDb.uuid_value = str(document_obj.id)
+                                        fieldDb.uuid_value = str(document_obj.document_id)
                                     fieldDb.data_type = str(
                                         FieldDataType.DOCUMENT)
                                     fieldDb.save()
@@ -834,9 +837,9 @@ class Document(object):
                                      field.get('indexed').lower() == 'yes')):
                                     if (indexedDb is not None
                                             and str(indexedDb.uuid_value) !=
-                                            str(document_obj.id)):
+                                            str(document_obj.document_id)):
                                         indexedDb.uuid_value = str(
-                                            document_obj.id)
+                                            document_obj.document_id)
                                         indexedDb.save()
                                     elif (indexedDb is None):
                                         indexedDb = IndexedField()
@@ -845,7 +848,7 @@ class Document(object):
                                         indexedDb.form_definition = self.header.form_definition
                                         if (field.text is not None):
                                             indexedDb.uuid_value = str(
-                                                document_obj.id)
+                                                document_obj.document_id)
                                         indexedDb.data_type = str(
                                             FieldDataType.DOCUMENT)
                                         indexedDb.save()
@@ -1132,7 +1135,8 @@ class Document(object):
 
         if (key.lower() == 'base_document'):
             base_document_node = accountingElements.find('baseDocument')
-            if (base_document_node is not None and base_document_node):
+            if (base_document_node is not None 
+                    and base_document_node.text):
                 try:
                     base_document_id = uuid.UUID(base_document_node.text)
                     if (shallow is False):
@@ -1448,7 +1452,7 @@ class Document(object):
             if obligation.account_type:
                 self.set_header_field('account_type', obligation.account_type)
             if obligation.base_document:
-                self.set_header_field('account_document',
+                self.set_header_field('base_document',
                                       obligation.base_document)
             obligation.compliance_document = self.header
             obligation.save()
@@ -1468,17 +1472,14 @@ class Document(object):
             else:
                 activity = value
             self.set_header_field('flow_case', activity.flow_case)
-        elif key.lower() == 'account_document':
+        elif key.lower() == 'base_document':
             base_document_node = accountingElements.find('baseDocument')
             if (isinstance(value, Document)):
                 base_document_node.text = str(value.document_id)
             elif (isinstance(value, uuid.UUID)):
                 base_document_node.text = str(value)
             elif (isinstance(value, str)):
-                try:
-                    base_document_node.text = str(uuid.UUID(value))
-                except:
-                    pass
+                base_document_node.text = str(uuid.UUID(value))
             else:
                 raise InvalidDocumentValueException(
                     _(__name__ +
@@ -2032,7 +2033,7 @@ class Document(object):
             if (header_field_id):
                 header_value = self.get_header_field(header_field_id, True)
                 if (header_value):
-                    header_value = field.text
+                    field.text = str(header_value)
 
     def _process_hrn_script(self, event_type):
 
