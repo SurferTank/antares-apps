@@ -36,6 +36,7 @@
             <xs:element name="hash" type="xs:string" minOccurs="1" maxOccurs="1"/>
             <xs:element name="hrnCode" type="xs:string" minOccurs="0" maxOccurs="1"/>
             <xs:element name="hrnTitle" type="xs:string" minOccurs="0" maxOccurs="1"/>
+            <xs:element name="defaultCurrency" type="xs:string" minOccurs="0" maxOccurs="1"/>
             <xs:element name="tags" type="Tags" minOccurs="0" maxOccurs="1"/>
             <xs:element name="externalReference" type="ExternalReference" minOccurs="0" maxOccurs="1"/>
             <xs:element name="options" type="DocumentOptions" minOccurs="0" maxOccurs="1"/>

@@ -21,6 +21,7 @@ from antares.apps.core.models import HrnCode
 from antares.apps.flow.models import FlowCase
 from antares.apps.user.models import User
 from antares.apps.obligation.models import ObligationVector
+from djmoney.money import Money
 
 from ..constants import DocumentEventType, FormClassType
 from ..constants import DocumentStatusType, DocumentOriginType, DocumentAssociationType
@@ -36,6 +37,7 @@ from prompt_toolkit.key_binding.bindings.named_commands import self_insert
 from antares.apps.document.exceptions.document_validation_exception import DocumentValidationException
 from antares.apps.document.exceptions.document_required_exception import DocumentRequiredException
 from typing import Dict
+from antares.apps.core.models.system_parameter import SystemParameter
 
 logger = logging.getLogger(__name__)
 
@@ -235,6 +237,9 @@ class Document(object):
                 self.document_xml.set('documentId', str(self.header.id))
                 self.document_xml.set('formDefinition',
                                       str(self.header.form_definition.id))
+            if self.header.default_currency is not None:
+                default_currency = headerElements.find('defaultCurrency')
+                default_currency.text = self.header.default_currency
             if self.header.document_version is not None:
                 document_version = headerElements.find('documentVersion')
                 document_version.text = str(self.header.document_version)
@@ -302,6 +307,15 @@ class Document(object):
                             elif datatype == FieldDataType.UUID:
                                 if fieldDb.uuid_value is not None:
                                     field.text = fieldDb.uuid_value
+                            elif datatype == FieldDataType.MONEY:
+                                if fieldDb.float_value is not None:
+                                    amount = fieldDb.float_value
+                                if fieldDb.string_value is not None:
+                                    currency = fieldDb.string_value
+                                else: 
+                                    currency = self.get_default_currency()
+                                if(amount is not None): 
+                                    field.text = str(amount) + "-" + currency
                             elif datatype == FieldDataType.CLIENT:
                                 if fieldDb.uuid_value is not None:
                                     client_obj = Client.find_one(fieldDb.uuid_value)
@@ -391,7 +405,9 @@ class Document(object):
                 self.header.active_version = True
             else:
                 self.header.active_version = False
-
+        default_currency_node = headerElements.find('defaultCurrency')
+        if (default_currency_node is not None and default_currency_node.text):
+            self.header.default_currency = default_currency_node
         associated_to_node = headerElements.find('associatedTo')
         if (associated_to_node is not None and associated_to_node.text):
             try:
@@ -852,7 +868,52 @@ class Document(object):
                                         indexedDb.data_type = str(
                                             FieldDataType.DOCUMENT)
                                         indexedDb.save()
-
+                            elif datatype == FieldDataType.MONEY:
+                                (amount, currency) = self._get_money_components_from_xml(field.text)
+                                if (fieldDb is not None
+                                        and fieldDb.float_value != amount 
+                                        and fieldDb.string_value != currency):
+                                    fieldDb.float_value = amount
+                                    fieldDb.string_value = currency
+                                    fieldDb.save()
+                                elif (fieldDb is None):
+                                    fieldDb = DocumentField()
+                                    fieldDb.definition = field.get('id')
+                                    fieldDb.document = self.header
+                                    fieldDb.form_definition = self.header.form_definition
+                                    if (amount is not None):
+                                        fieldDb.float_value = amount
+                                        fieldDb.string_value = currency
+                                    fieldDb.data_type = str(FieldDataType.MONEY)
+                                    fieldDb.save()
+                                if (field.get('indexed') and
+                                    (field.get('indexed').lower() == 'true' or
+                                     field.get('indexed').lower() == 'yes')):
+                                    if (indexedDb is not None
+                                            and fieldDb.float_value != amount 
+                                            and fieldDb.string_value != currency):
+                                        fieldDb.float_value = amount
+                                        fieldDb.string_value = currency
+                                        indexedDb.save()
+                                    elif (indexedDb is None):
+                                        indexedDb = IndexedField()
+                                        indexedDb.definition = field.get('id')
+                                        indexedDb.document = self.header
+                                        indexedDb.form_definition = self.header.form_definition
+                                        if (amount is not None):
+                                            fieldDb.float_value = amount
+                                            fieldDb.string_value = currency
+                                        indexedDb.data_type = str(
+                                            FieldDataType.MONEY)
+                                        indexedDb.save()
+    def _get_money_components_from_xml(self, xml_value):
+        if xml_value is not None:
+            components = xml_value.split("-")
+            amount = float(components[0])
+            currency = components[1]
+            return (amount, currency)
+        return (None, None)
+    
     def get_field_data_type(self, key: str) -> str:
         for page in self.document_xml.iterfind('structuredData/page'):
             for line in page.iterfind('line'):
@@ -1107,7 +1168,8 @@ class Document(object):
             'association_type', shallow)
         fields['creation_date'] = self.get_header_field(
             'creation_date', shallow)
-
+        fields['default_currency'] = self.get_header_field(
+            'default_currency', shallow)
         fields['draft_date'] = self.get_header_field('draft_date', shallow)
         fields['delete_case'] = self.get_header_field('delete_case', shallow)
         fields['related_case'] = self.get_header_field('related_case', shallow)
@@ -1415,6 +1477,13 @@ class Document(object):
             else:
                 return None
 
+        elif (key.lower() == 'default_currency'):
+            dc_node = headerElements.find('defaultCurrency')
+            if (dc_node is not None and dc_node.text):
+                return dc_node.text
+            else:
+                return SystemParameter("DEFAULT_CURRENCY", FieldDataType.STRING, "USD") #default currency
+            
         raise ValueError(
             _('antares.app.document.manager.invalid_header_field'))
 
@@ -1545,7 +1614,10 @@ class Document(object):
             else:
                 raise InvalidDocumentValueException(
                     _(__name__ + ".exceptions.invalid_account_type_specified"))
-
+        elif (key.lower() == 'default_currency'):
+            dc_node = headerElements.find('default_currency')
+            if(dc_node is not None and dc_node.text):
+                dc_node.text = value    
         elif (key.lower() == 'active_version'):
             active_version_node = headerElements.find('activeVersion')
             if (isinstance(value, bool)):
@@ -1774,6 +1846,9 @@ class Document(object):
 
     def get_save_date(self):
         return self.get_header_field('save_date')
+    
+    def get_default_currency(self):
+        return self.get_header_field('default_currency')
 
     def set_save_date(self, date):
         return self.set_header_field('save_date', date)

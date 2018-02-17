@@ -78,6 +78,7 @@ class FieldDataType(EnumUtilsMixin, Enum):
     USER = "User"
     CLIENT = "client"
     DOCUMENT = "document"
+    MONEY = "Money"
 
     def __str__(self):
         """
@@ -97,6 +98,7 @@ class FieldDataType(EnumUtilsMixin, Enum):
         USER = _(__name__ + '.FieldDataType.USER')
         CLIENT = _(__name__ + '.FieldDataType.CLIENT')
         DOCUMENT = _(__name__ + '.FieldDataType.DOCUMENT')
+        MONEY = _(__name__ + '.FieldDataType.MONEY')
 
 
 class HrnModuleType(EnumUtilsMixin, Enum):
