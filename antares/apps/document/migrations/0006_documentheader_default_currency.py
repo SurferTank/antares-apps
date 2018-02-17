@@ -15,6 +15,14 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='documentheader',
             name='default_currency',
-            field=models.CharField(blank=True, help_text='antares.apps.document.models.document_header.default_currency_help', max_length=30, null=True, verbose_name='antares.apps.document.models.document_header.default_currency'),
+            field=models.CharField(
+                blank=True,
+                help_text=
+                'antares.apps.document.models.document_header.default_currency_help',
+                max_length=30,
+                null=True,
+                verbose_name=
+                'antares.apps.document.models.document_header.default_currency'
+            ),
         ),
     ]

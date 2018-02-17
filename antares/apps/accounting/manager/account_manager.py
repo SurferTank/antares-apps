@@ -60,9 +60,8 @@ class AccountManager(object):
                 document)
             if (cancelled_document is not None):
                 logger.error(
-                    _(__name__ + '.cancelling_document %(document_id)s') % {
-                        'document_id': document.document_id
-                    })
+                    _(__name__ + '.cancelling_document %(document_id)s') %
+                    {'document_id': document.document_id})
                 AccountManager._cancel_document(cancelled_document, document)
 
             transactions = AccountManager._create_transactions_from_rules(
@@ -72,7 +71,7 @@ class AccountManager(object):
                 account_document, transactions)
             account_document.status = AccountDocumentStatusType.PROCESSED
 
-        except Exception as e: 
+        except Exception as e:
             account_document.status = AccountDocumentStatusType.WITH_ERRORS
 
         account_document.save()
@@ -209,7 +208,7 @@ class AccountManager(object):
               ) % {
                   'principal': principal,
                   'interest': interest,
-                  'penalties': penalties 
+                  'penalties': penalties
               })
 
         transaction.balance.principal_balance = principal

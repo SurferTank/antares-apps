@@ -45,9 +45,8 @@ urlpatterns = i18n_patterns(
     url(r'^antares/terminal/', include(terminalUrls)),
     # url(r'^antares/thirdparty/', include(thirdpartyUrls)),
     url(r'^auth/', include(user_urls)),
-    url(r'^static/(?P<path>.*)$', staticServe, {
-        'document_root': settings.STATIC_ROOT
-    }),
+    url(r'^static/(?P<path>.*)$', staticServe,
+        {'document_root': settings.STATIC_ROOT}),
     url(r'^media/(?P<path>.*)$', staticServe, {
         'document_root': settings.MEDIA_ROOT,
     }),

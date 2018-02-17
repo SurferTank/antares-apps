@@ -97,9 +97,8 @@ class Holiday(models.Model):
                 holiday = Holiday.objects.get(holiday_date=day, active=True)
                 logger.info(
                     _(__name__ +
-                      ".skiping_found_holiday_in_database %(holiday)d ") % {
-                          'holiday': holiday
-                      })
+                      ".skiping_found_holiday_in_database %(holiday)d ") %
+                    {'holiday': holiday})
                 Holiday.next_day(day, consider_saturdays, consider_sundays,
                                  consider_holidays)
             except Holiday.DoesNotExist:
@@ -132,9 +131,8 @@ class Holiday(models.Model):
                 holiday = Holiday.objects.get(holiday_date=day, active=True)
                 logger.info(
                     _(__name__ +
-                      ".skiping_found_holiday_in_database %(holiday)d ") % {
-                          'holiday': holiday
-                      })
+                      ".skiping_found_holiday_in_database %(holiday)d ") %
+                    {'holiday': holiday})
                 Holiday.prev_day(day, consider_saturdays, consider_sundays,
                                  consider_holidays)
             except Holiday.DoesNotExist:

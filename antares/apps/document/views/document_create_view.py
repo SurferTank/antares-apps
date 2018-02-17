@@ -60,8 +60,7 @@ class DocumentCreateView(View):
 
         # TODO: Auth is missing here
 
-        document = Document(
-            form_id=form_id, header_fields=header_fields)
+        document = Document(form_id=form_id, header_fields=header_fields)
 
         document.set_author(get_request().user)
         document.save()

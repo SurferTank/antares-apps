@@ -70,7 +70,8 @@ class Document(object):
             self._init_with_id(kwargs.get('document_id'))
         elif kwargs.get('form_id') is not None:
             self._init_with_form_id(
-                    kwargs.get('form_id'), kwargs.get('header_fields'), kwargs.get('fields'))
+                kwargs.get('form_id'), kwargs.get('header_fields'),
+                kwargs.get('fields'))
         else:
             raise ValueError(__name__ + ".exceptions.couldnt_create_document")
 
@@ -111,7 +112,7 @@ class Document(object):
 
     def _init_with_form_id(self,
                            form_id: str,
-                           header_fields: Dict[str, str] = None, 
+                           header_fields: Dict[str, str] = None,
                            fields: Dict[str, str] = None):
         """ Instantiates a document instance based on the form id
 
@@ -312,26 +313,33 @@ class Document(object):
                                     amount = fieldDb.float_value
                                 if fieldDb.string_value is not None:
                                     currency = fieldDb.string_value
-                                else: 
+                                else:
                                     currency = self.get_default_currency()
-                                if(amount is not None): 
+                                if (amount is not None):
                                     field.text = str(amount) + "-" + currency
                             elif datatype == FieldDataType.CLIENT:
                                 if fieldDb.uuid_value is not None:
-                                    client_obj = Client.find_one(fieldDb.uuid_value)
+                                    client_obj = Client.find_one(
+                                        fieldDb.uuid_value)
                                     field.text = str(client_obj.id)
-                                    field.attrib['displayValue'] = str(client_obj)
+                                    field.attrib['displayValue'] = str(
+                                        client_obj)
                             elif datatype == FieldDataType.USER:
                                 if fieldDb.uuid_value is not None:
-                                    user_obj = User.find_one(fieldDb.uuid_value)
+                                    user_obj = User.find_one(
+                                        fieldDb.uuid_value)
                                     field.text = str(user_obj.id)
-                                    field.attrib['displayValue'] = str(user_obj)
+                                    field.attrib['displayValue'] = str(
+                                        user_obj)
                             elif datatype == FieldDataType.DOCUMENT:
                                 if fieldDb.uuid_value is not None:
-                                    document_obj = Document(document_id=str(fieldDb.uuid_value)) 
+                                    document_obj = Document(
+                                        document_id=str(fieldDb.uuid_value))
                                     field.text = str(document_obj.document_id)
-                                    if(document_obj.header.hrn_code is not None):
-                                        field.attrib['displayValue'] = document_obj.header.hrn_code
+                                    if (document_obj.header.hrn_code is
+                                            not None):
+                                        field.attrib[
+                                            'displayValue'] = document_obj.header.hrn_code
                             else:
                                 raise NotImplementedError(
                                     _(__name__ +
@@ -350,7 +358,8 @@ class Document(object):
         base_document_node = accountingElements.find('baseDocument')
         if (base_document_node is not None and base_document_node.text):
             try:
-                document = Document(document_id=uuid.UUID(base_document_node.text))
+                document = Document(
+                    document_id=uuid.UUID(base_document_node.text))
             except ValueError:
                 document = None
             if (document is not None):
@@ -830,9 +839,9 @@ class Document(object):
                                             FieldDataType.USER)
                                         indexedDb.save()
                             elif datatype == FieldDataType.DOCUMENT:
-                                #This is an special case, we have to get first the proper 
+                                #This is an special case, we have to get first the proper
                                 # object and then we serialize it as an UUID
-                                document_obj = Document(document_id = field.text)
+                                document_obj = Document(document_id=field.text)
                                 if (fieldDb is not None
                                         and str(fieldDb.uuid_value) != str(
                                             document_obj.document_id)):
@@ -844,7 +853,8 @@ class Document(object):
                                     fieldDb.document = self.header
                                     fieldDb.form_definition = self.header.form_definition
                                     if (field.text is not None):
-                                        fieldDb.uuid_value = str(document_obj.document_id)
+                                        fieldDb.uuid_value = str(
+                                            document_obj.document_id)
                                     fieldDb.data_type = str(
                                         FieldDataType.DOCUMENT)
                                     fieldDb.save()
@@ -869,9 +879,11 @@ class Document(object):
                                             FieldDataType.DOCUMENT)
                                         indexedDb.save()
                             elif datatype == FieldDataType.MONEY:
-                                (amount, currency) = self._get_money_components_from_xml(field.text)
+                                (amount, currency
+                                 ) = self._get_money_components_from_xml(
+                                     field.text)
                                 if (fieldDb is not None
-                                        and fieldDb.float_value != amount 
+                                        and fieldDb.float_value != amount
                                         and fieldDb.string_value != currency):
                                     fieldDb.float_value = amount
                                     fieldDb.string_value = currency
@@ -884,14 +896,16 @@ class Document(object):
                                     if (amount is not None):
                                         fieldDb.float_value = amount
                                         fieldDb.string_value = currency
-                                    fieldDb.data_type = str(FieldDataType.MONEY)
+                                    fieldDb.data_type = str(
+                                        FieldDataType.MONEY)
                                     fieldDb.save()
                                 if (field.get('indexed') and
                                     (field.get('indexed').lower() == 'true' or
                                      field.get('indexed').lower() == 'yes')):
                                     if (indexedDb is not None
-                                            and fieldDb.float_value != amount 
-                                            and fieldDb.string_value != currency):
+                                            and fieldDb.float_value != amount
+                                            and
+                                            fieldDb.string_value != currency):
                                         fieldDb.float_value = amount
                                         fieldDb.string_value = currency
                                         indexedDb.save()
@@ -906,6 +920,7 @@ class Document(object):
                                         indexedDb.data_type = str(
                                             FieldDataType.MONEY)
                                         indexedDb.save()
+
     def _get_money_components_from_xml(self, xml_value):
         if xml_value is not None:
             components = xml_value.split("-")
@@ -913,7 +928,7 @@ class Document(object):
             currency = components[1]
             return (amount, currency)
         return (None, None)
-    
+
     def get_field_data_type(self, key: str) -> str:
         for page in self.document_xml.iterfind('structuredData/page'):
             for line in page.iterfind('line'):
@@ -987,7 +1002,7 @@ class Document(object):
                         return field.get('id')
         return None
 
-    def set_field_value(self, key, value, display_value = None):
+    def set_field_value(self, key, value, display_value=None):
         for page in self.document_xml.iterfind('structuredData/page'):
             for line in page.iterfind('line'):
                 for field in line.iterfind('field'):
@@ -1042,8 +1057,9 @@ class Document(object):
                             return
                         elif datatype == FieldDataType.DOCUMENT:
                             if value != False and value != "":
-                                if isinstance(value, str) or isinstance(value, uuid):
-                                    value = Document(document_id = value)
+                                if isinstance(value, str) or isinstance(
+                                        value, uuid):
+                                    value = Document(document_id=value)
                                 elif isinstance(value, Document) == False:
                                     raise ValueError(
                                         _(__name__ +
@@ -1103,15 +1119,13 @@ class Document(object):
                                 fields[field.attrib['id']] = None
                         elif (data_type == FieldDataType.CLIENT):
                             if field.text is not None:
-                                client = Client.find_one(uuid.UUID(
-                                    field.text))
+                                client = Client.find_one(uuid.UUID(field.text))
                                 fields[field.attrib['id']] = client
                             else:
                                 fields[field.attrib['id']] = None
                         elif (data_type == FieldDataType.USER):
                             if field.text is not None:
-                                user = User.find_one(uuid.UUID(
-                                    field.text))
+                                user = User.find_one(uuid.UUID(field.text))
                                 fields[field.attrib['id']] = user
                             else:
                                 fields[field.attrib['id']] = None
@@ -1197,8 +1211,7 @@ class Document(object):
 
         if (key.lower() == 'base_document'):
             base_document_node = accountingElements.find('baseDocument')
-            if (base_document_node is not None 
-                    and base_document_node.text):
+            if (base_document_node is not None and base_document_node.text):
                 try:
                     base_document_id = uuid.UUID(base_document_node.text)
                     if (shallow is False):
@@ -1482,8 +1495,10 @@ class Document(object):
             if (dc_node is not None and dc_node.text):
                 return dc_node.text
             else:
-                return SystemParameter("DEFAULT_CURRENCY", FieldDataType.STRING, "USD") #default currency
-            
+                return SystemParameter("DEFAULT_CURRENCY",
+                                       FieldDataType.STRING,
+                                       "USD")  #default currency
+
         raise ValueError(
             _('antares.app.document.manager.invalid_header_field'))
 
@@ -1616,8 +1631,8 @@ class Document(object):
                     _(__name__ + ".exceptions.invalid_account_type_specified"))
         elif (key.lower() == 'default_currency'):
             dc_node = headerElements.find('default_currency')
-            if(dc_node is not None and dc_node.text):
-                dc_node.text = value    
+            if (dc_node is not None and dc_node.text):
+                dc_node.text = value
         elif (key.lower() == 'active_version'):
             active_version_node = headerElements.find('activeVersion')
             if (isinstance(value, bool)):
@@ -1778,9 +1793,7 @@ class Document(object):
         else:
             raise ValueError(
                 _('antares.app.document.manager.invalid_header_field %(key)s')
-                % {
-                    'key': key
-                })
+                % {'key': key})
 
     def set_header_fields(self, fields):
         for key, value in fields.items():
@@ -1846,7 +1859,7 @@ class Document(object):
 
     def get_save_date(self):
         return self.get_header_field('save_date')
-    
+
     def get_default_currency(self):
         return self.get_header_field('default_currency')
 
@@ -1950,7 +1963,7 @@ class Document(object):
             AccountManager.post_document(self)
             SubscriptionManager.process_document_subscriptions(self)
             NotificationManager.post_document(self)
-            
+
     def hash(self):
         doc_xml = etree.fromstring(etree.tostring(self.document_xml))
         headerElements = doc_xml.find('headerElements')

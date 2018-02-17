@@ -14,10 +14,16 @@ class Migration(migrations.Migration):
     operations = [
         migrations.AlterModelOptions(
             name='application',
-            options={'verbose_name': 'Aplicación', 'verbose_name_plural': 'Aplicaciones'},
+            options={
+                'verbose_name': 'Aplicación',
+                'verbose_name_plural': 'Aplicaciones'
+            },
         ),
         migrations.AlterModelOptions(
             name='applicationparameter',
-            options={'verbose_name': 'Parámetro de Aplicación', 'verbose_name_plural': 'Parámetros de Aplicación'},
+            options={
+                'verbose_name': 'Parámetro de Aplicación',
+                'verbose_name_plural': 'Parámetros de Aplicación'
+            },
         ),
     ]

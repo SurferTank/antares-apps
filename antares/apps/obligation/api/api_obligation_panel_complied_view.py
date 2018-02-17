@@ -112,9 +112,7 @@ class ApiObligationPanelCompliedView(BaseDatatableView):
                             }),
                         obligation_panel=reverse(
                             'antares.apps.flow:dashboard_view',
-                            kwargs={
-                                'activity_id': str(self.activity.id)
-                            }),
+                            kwargs={'activity_id': str(self.activity.id)}),
                         activity_ref='&activity_id={activity_id}'.format(
                             activity_id=self.activity.id))
             else:

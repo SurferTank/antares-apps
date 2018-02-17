@@ -14,34 +14,74 @@ class Migration(migrations.Migration):
     operations = [
         migrations.AlterModelOptions(
             name='actiondefinition',
-            options={'verbose_name': 'antares.apps.core.models.action_definition.table_name', 'verbose_name_plural': 'antares.apps.core.models.action_definition.table_name_plural'},
+            options={
+                'verbose_name':
+                'antares.apps.core.models.action_definition.table_name',
+                'verbose_name_plural':
+                'antares.apps.core.models.action_definition.table_name_plural'
+            },
         ),
         migrations.AlterModelOptions(
             name='catalog',
-            options={'verbose_name': 'antares.apps.core.models.catalog.table_name', 'verbose_name_plural': 'antares.apps.core.models.catalog.table_name_plural'},
+            options={
+                'verbose_name':
+                'antares.apps.core.models.catalog.table_name',
+                'verbose_name_plural':
+                'antares.apps.core.models.catalog.table_name_plural'
+            },
         ),
         migrations.AlterModelOptions(
             name='concepttype',
-            options={'verbose_name': 'antares.apps.core.models.concept_type.table_name', 'verbose_name_plural': 'antares.apps.core.models.concept_type.table_name_plural'},
+            options={
+                'verbose_name':
+                'antares.apps.core.models.concept_type.table_name',
+                'verbose_name_plural':
+                'antares.apps.core.models.concept_type.table_name_plural'
+            },
         ),
         migrations.AlterModelOptions(
             name='currency',
-            options={'verbose_name': 'antares.apps.core.models.currency.table_name', 'verbose_name_plural': 'antares.apps.core.models.currency.table_name_plural'},
+            options={
+                'verbose_name':
+                'antares.apps.core.models.currency.table_name',
+                'verbose_name_plural':
+                'antares.apps.core.models.currency.table_name_plural'
+            },
         ),
         migrations.AlterModelOptions(
             name='holiday',
-            options={'verbose_name': 'antares.apps.core.models.holiday.table_name', 'verbose_name_plural': 'antares.apps.core.models.holiday.table_name_plural'},
+            options={
+                'verbose_name':
+                'antares.apps.core.models.holiday.table_name',
+                'verbose_name_plural':
+                'antares.apps.core.models.holiday.table_name_plural'
+            },
         ),
         migrations.AlterModelOptions(
             name='hrncode',
-            options={'verbose_name': 'antares.apps.core.models.hrn_code.table_name', 'verbose_name_plural': 'antares.apps.core.models.hrn_code.table_name_plural'},
+            options={
+                'verbose_name':
+                'antares.apps.core.models.hrn_code.table_name',
+                'verbose_name_plural':
+                'antares.apps.core.models.hrn_code.table_name_plural'
+            },
         ),
         migrations.AlterModelOptions(
             name='systemparameter',
-            options={'verbose_name': 'antares.apps.core.models.system_parameter.table_name', 'verbose_name_plural': 'antares.apps.core.models.system_parameter.table_name_plural'},
+            options={
+                'verbose_name':
+                'antares.apps.core.models.system_parameter.table_name',
+                'verbose_name_plural':
+                'antares.apps.core.models.system_parameter.table_name_plural'
+            },
         ),
         migrations.AlterModelOptions(
             name='userparameter',
-            options={'verbose_name': 'antares.apps.core.models.user_parameter.table_name', 'verbose_name_plural': 'antares.apps.core.models.user_parameter.table_name_plural'},
+            options={
+                'verbose_name':
+                'antares.apps.core.models.user_parameter.table_name',
+                'verbose_name_plural':
+                'antares.apps.core.models.user_parameter.table_name_plural'
+            },
         ),
     ]

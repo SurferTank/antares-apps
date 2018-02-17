@@ -513,10 +513,8 @@ class FlowAdminManager(object):
                         raise InvalidXPDLException(
                             _(__name__ +
                               '.exceptions.role_was_not_found_on_system %(role_id)s'
-                              ) % {
-                                  'role_id':
-                                  extended_attribute_node.get('Value')
-                              })
+                              ) %
+                            {'role_id': extended_attribute_node.get('Value')})
                 elif (
                         extended_attribute_node.get('Name') and
                     (extended_attribute_node.get('Name').lower() == 'unit' or
@@ -543,10 +541,8 @@ class FlowAdminManager(object):
                         raise InvalidXPDLException(
                             _(__name__ +
                               '.exceptions.username_was_not_found_on_system  %(username)s'
-                              ) % {
-                                  'username':
-                                  extended_attribute_node.get('Value')
-                              })
+                              ) %
+                            {'username': extended_attribute_node.get('Value')})
         participant_def.save()
         flow_def.participant_definition_set.add(participant_def)
 

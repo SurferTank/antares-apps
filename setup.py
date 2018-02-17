@@ -102,6 +102,4 @@ antares apps. This is known to cause a variety of problems. You
 should manually remove the
 %(existing_path)s
 directory and re-install antares-apps.
-""" % {
-        "existing_path": existing_path
-    })
+""" % {"existing_path": existing_path})

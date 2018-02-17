@@ -14,18 +14,30 @@ class Migration(migrations.Migration):
     operations = [
         migrations.AlterModelOptions(
             name='documentacl',
-            options={'verbose_name': 'ACL de Documento', 'verbose_name_plural': 'ACLs de Documento'},
+            options={
+                'verbose_name': 'ACL de Documento',
+                'verbose_name_plural': 'ACLs de Documento'
+            },
         ),
         migrations.AlterModelOptions(
             name='formclass',
-            options={'verbose_name': 'Clase de Formulario', 'verbose_name_plural': 'Clases de Formulario'},
+            options={
+                'verbose_name': 'Clase de Formulario',
+                'verbose_name_plural': 'Clases de Formulario'
+            },
         ),
         migrations.AlterModelOptions(
             name='formdefinition',
-            options={'verbose_name': 'Definición de Formulario', 'verbose_name_plural': 'Definiciones de Formulario'},
+            options={
+                'verbose_name': 'Definición de Formulario',
+                'verbose_name_plural': 'Definiciones de Formulario'
+            },
         ),
         migrations.AlterModelOptions(
             name='formdefinitionacl',
-            options={'verbose_name': 'ACL de la Definición de Formulario', 'verbose_name_plural': 'ACLs de la Definición de Formulario'},
+            options={
+                'verbose_name': 'ACL de la Definición de Formulario',
+                'verbose_name_plural': 'ACLs de la Definición de Formulario'
+            },
         ),
     ]

@@ -228,7 +228,7 @@ class DocumentHeader(models.Model):
         help_text=_(__name__ + ".status_help"))
     default_currency = models.CharField(
         max_length=30,
-        blank=True, 
+        blank=True,
         null=True,
         verbose_name=_(__name__ + ".default_currency"),
         help_text=_(__name__ + ".default_currency_help"))

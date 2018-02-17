@@ -14,18 +14,30 @@ class Migration(migrations.Migration):
     operations = [
         migrations.AlterModelOptions(
             name='accountrule',
-            options={'verbose_name': 'Regla de Cuenta Corriente', 'verbose_name_plural': 'Reglas de Cuenta Corriente'},
+            options={
+                'verbose_name': 'Regla de Cuenta Corriente',
+                'verbose_name_plural': 'Reglas de Cuenta Corriente'
+            },
         ),
         migrations.AlterModelOptions(
             name='accounttype',
-            options={'verbose_name': 'Tipo de Cuenta Corriente', 'verbose_name_plural': 'Tipos de Cuenta Corriente'},
+            options={
+                'verbose_name': 'Tipo de Cuenta Corriente',
+                'verbose_name_plural': 'Tipos de Cuenta Corriente'
+            },
         ),
         migrations.AlterModelOptions(
             name='glaccounttype',
-            options={'verbose_name': 'Tipo de Cuenta de Libro Mayor', 'verbose_name_plural': 'Tipos de Cuenta de Libro Mayor'},
+            options={
+                'verbose_name': 'Tipo de Cuenta de Libro Mayor',
+                'verbose_name_plural': 'Tipos de Cuenta de Libro Mayor'
+            },
         ),
         migrations.AlterModelOptions(
             name='transactiontype',
-            options={'verbose_name': 'Tipo de Transacción', 'verbose_name_plural': 'Tipo de Transacción'},
+            options={
+                'verbose_name': 'Tipo de Transacción',
+                'verbose_name_plural': 'Tipo de Transacción'
+            },
         ),
     ]
