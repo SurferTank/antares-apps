@@ -96,6 +96,9 @@
                         <xsl:when test="@type='textarea'">
                             <xsl:call-template name="textarea-processing"/>
                         </xsl:when>
+                        <xsl:when test="@type='money'">
+                            <xsl:call-template name="money-processing"/>
+                        </xsl:when>
                         <xsl:when test="@type='textarea-editor'">
                             <xsl:call-template name="textarea-editor-processing"/>
                         </xsl:when>
@@ -159,6 +162,13 @@
         </div>
     </xsl:template>
     <xsl:template name="string-processing">
+        <div>
+            <xsl:text disable-output-escaping="yes">{{fields.</xsl:text>
+            <xsl:value-of select="@id"/>
+            <xsl:text disable-output-escaping="yes">|default_if_none:''}}</xsl:text>
+        </div>
+    </xsl:template>
+    <xsl:template name="money-processing">
         <div>
             <xsl:text disable-output-escaping="yes">{{fields.</xsl:text>
             <xsl:value-of select="@id"/>

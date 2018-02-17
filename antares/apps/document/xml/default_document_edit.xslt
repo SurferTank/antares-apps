@@ -136,6 +136,11 @@ $(document).ready(function() {
                     <xsl:text disable-output-escaping="yes">{{headerFields.period|default_if_none:''}}</xsl:text>
                 </xsl:attribute>
 				</input>
+				<input type="hidden" id="headerFields[default_currency]" name="default_currency">
+					<xsl:attribute name="value">
+                    	<xsl:text disable-output-escaping="yes">{{headerFields.default_currency|default_if_none:''}}</xsl:text>
+                		</xsl:attribute>
+				</input>
 				<input type="hidden" id="headerFields[account_document]" name="headerFields[account_document]">
 					<xsl:attribute name="value">
                     <xsl:text disable-output-escaping="yes">{{headerFields.account_document.id|default_if_none:''}}</xsl:text>
@@ -303,6 +308,9 @@ $(document).ready(function() {
 						</xsl:when>
 						<xsl:when test="@type='input' and @dataType='document'">
 							<xsl:call-template name="document-processing" />
+						</xsl:when>
+						<xsl:when test="@type='input' and @dataType='money'">
+							<xsl:call-template name="money-processing" />
 						</xsl:when>
 					</xsl:choose>
 				</div>
@@ -565,7 +573,65 @@ $(document).ready(function() {
 		</input>
 	</xsl:template>
 	
-	
+	<xsl:template name="money-processing">
+		<xsl:if test="@fieldCode">
+			<div class="input-group">
+				<span class="input-group-addon">
+					<xsl:attribute name="id">
+                        <xsl:text disable-output-escaping="yes">fieldCode_</xsl:text>
+                        <xsl:value-of select="@id" />
+                    </xsl:attribute>
+					<xsl:value-of select="@fieldCode" />
+				</span>
+				<xsl:call-template name="money-processing-inner" />
+			</div>
+		</xsl:if>
+		<xsl:if test="not(@fieldCode)">
+			<xsl:call-template name="money-processing-inner" />
+		</xsl:if>
+	</xsl:template>
+	<xsl:template name="money-processing-inner">
+		<input>
+			<xsl:attribute name="value">
+                <xsl:text disable-output-escaping="yes">{{fields.</xsl:text>
+                <xsl:value-of select="@id" />
+                <xsl:text disable-output-escaping="yes">.amount|default_if_none:''}}</xsl:text>
+            </xsl:attribute>
+			<xsl:attribute name="id">
+                <xsl:text>fields[</xsl:text>
+                <xsl:value-of select="@id" />
+                <xsl:text>]</xsl:text>
+            </xsl:attribute>
+			<xsl:attribute name="name">
+                <xsl:text>fields[</xsl:text>
+                <xsl:value-of select="@id" />
+                <xsl:text>]</xsl:text>
+            </xsl:attribute>
+			<xsl:if test="@readonly='yes' or @readonly='true'">
+				<xsl:attribute name="readonly">true</xsl:attribute>
+			</xsl:if>
+			<xsl:attribute name="onblur">
+                <xsl:text>evaluateDocument(false);</xsl:text>
+            </xsl:attribute>
+			<xsl:attribute name="class">
+                <xsl:text>form-control</xsl:text>
+            </xsl:attribute>
+			<xsl:if test="@tooltip">
+				<xsl:attribute name="title">
+                    <xsl:value-of select="@tooltip" />
+                </xsl:attribute>
+				<xsl:attribute name="data-toggle">
+                    <xsl:value-of select="tooltip" />
+                </xsl:attribute>
+			</xsl:if>
+			<xsl:if test="@fieldCode">
+				<xsl:attribute name="aria-describedby">
+                    <xsl:text disable-output-escaping="yes">fieldCode_</xsl:text>
+                    <xsl:value-of select="@id" />
+                </xsl:attribute>
+			</xsl:if>
+		</input>
+	</xsl:template>
 	<xsl:template name="user-processing">
 		<xsl:if test="@fieldCode">
 			<div class="input-group">
