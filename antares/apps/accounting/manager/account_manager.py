@@ -377,7 +377,6 @@ class AccountManager(object):
         if field_value < 0:
             raise NegativeAmountException(
                 _(__name__ + ".exceptions.negative_amount_exception"))
-
         if not is_cancelled_document:
             if value_affected == TransactionAffectedValueType.PRINCIPAL:
                 transaction.principal_amount = Money(field_value, (document.get_default_currency() or cls.default_currency))
