@@ -5,6 +5,8 @@ from django.db import models
 from django.utils import timezone
 from django.utils.translation import ugettext as _
 from .account_balance import AccountBalance
+from djmoney.models.fields import MoneyField
+from djmoney.money import Money
 
 logger = logging.getLogger(__name__)
 
@@ -65,15 +67,12 @@ class AccountTransaction(models.Model):
     external_function = models.CharField(
         max_length=1000, blank=True, null=True)
     fiscal_year = models.IntegerField(blank=True, null=True)
-    interest_amount = models.DecimalField(
-        max_digits=19, decimal_places=2, default=0)
-    penalties_amount = models.DecimalField(
-        max_digits=19, decimal_places=2, default=0)
+    interest_amount = MoneyField(max_digits=10, decimal_places=2, default_currency='USD', default=0)
+    penalties_amount = MoneyField(max_digits=10, decimal_places=2, default_currency='USD', default=0)
     period = models.IntegerField()
     posted_date = models.DateTimeField()
-    principal_amount = models.DecimalField(
-        max_digits=19, decimal_places=2, default=0)
-    total_amount = models.DecimalField(max_digits=19, decimal_places=2)
+    principal_amount = MoneyField(max_digits=10, decimal_places=2, default_currency='USD', default=0)
+    total_amount = MoneyField(max_digits=10, decimal_places=2, default_currency='USD', default=0)
     transaction_date = models.DateTimeField()
     creation_date = models.DateTimeField(blank=True, null=True, editable=False)
     hrn_code = models.CharField(

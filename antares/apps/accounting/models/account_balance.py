@@ -18,6 +18,9 @@ from antares.apps.client.models.client import Client
 from antares.apps.document.models.document_header import DocumentHeader
 
 from enumfields import EnumField
+from djmoney.models.fields import MoneyField
+from djmoney.money import Money
+
 
 logger = logging.getLogger(__name__)
 
@@ -82,17 +85,13 @@ class AccountBalance(models.Model):
 
     calculation_date = models.DateTimeField()
     compliance_date = models.DateTimeField(blank=True, null=True)
-    interest_balance = models.DecimalField(
-        max_digits=19, decimal_places=2, default=0)
-    penalties_balance = models.DecimalField(
-        max_digits=19, decimal_places=2, default=0)
+    interest_balance = MoneyField(max_digits=10, decimal_places=2, default_currency='USD', default=0)
+    penalties_balance = MoneyField(max_digits=10, decimal_places=2, default_currency='USD', default=0)
     period = models.IntegerField()
-    principal_balance = models.DecimalField(
-        max_digits=19, decimal_places=2, default=0)
+    principal_balance = MoneyField(max_digits=10, decimal_places=2, default_currency='USD', default=0)
     creation_date = models.DateTimeField(blank=True, null=True, editable=False)
     update_date = models.DateTimeField(blank=True, null=True, editable=False)
-    total_balance = models.DecimalField(
-        max_digits=19, decimal_places=2, default=0)
+    total_balance = MoneyField(max_digits=10, decimal_places=2, default_currency='USD', default=0)
     hrn_code = models.CharField(
         max_length=50,
         unique=True,
@@ -133,9 +132,9 @@ class AccountBalance(models.Model):
             balance.account_type = account_type
             balance.client = client
             balance.status = str(BalanceStatusType)
-            balance.principal_balance = 0
-            balance.interest_balance = 0
-            balance.penalties_balance = 0
+            balance.principal_balance = Money(0, "USD")
+            balance.interest_balance = Money(0, "USD")
+            balance.penalties_balance = Money(0, "USD")
             balance.calculation_date = timezone.now()
             balance.creation_date = timezone.now()
             if (concept_type is not None):

@@ -7,6 +7,7 @@ from django.utils.safestring import mark_safe
 from antares.apps.core.models import SystemParameter
 from antares.apps.core.constants import FieldDataType
 from ..models import AccountBalance
+from djmoney.money import Money
 
 logger = logging.getLogger(__name__)
 
@@ -21,21 +22,16 @@ def total_accounting_balance(client):
     :returns: the consolidated total balance of the client already formatted. 
     
     """
-    default_currency = SystemParameter.find_one("CORE_DEFAULT_CURRENCY",
+    default_currency = SystemParameter.find_one("DEFAULT_CURRENCY",
                                                 FieldDataType.STRING, 'USD')
     default_locale = SystemParameter.find_one("CORE_DEFAULT_LOCALE",
                                               FieldDataType.STRING, 'en_US')
     result = AccountBalance.get_total_balance_by_client(client)
     if result is None:
-        return babel.numbers.format_currency(
-            decimal.Decimal(0),
-            currency=default_currency,
-            locale=default_locale)
+        return str(Money(0, default_currency))
     else:
-        return babel.numbers.format_currency(
-            decimal.Decimal(result),
-            currency=default_currency,
-            locale=default_locale)
+        return str(Money(result, default_currency))
+            
 
 
 @register.filter

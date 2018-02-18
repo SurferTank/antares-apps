@@ -1495,7 +1495,7 @@ class Document(object):
             if (dc_node is not None and dc_node.text):
                 return dc_node.text
             else:
-                return SystemParameter("DEFAULT_CURRENCY",
+                return SystemParameter.find_one("DEFAULT_CURRENCY",
                                        FieldDataType.STRING,
                                        "USD")  #default currency
 

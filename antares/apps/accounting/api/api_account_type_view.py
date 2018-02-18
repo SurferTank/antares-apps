@@ -68,9 +68,9 @@ class ApiAccountTypeView(BaseDatatableView):
         """ Initial value settings 
         """
         self.default_currency = SystemParameter.find_one(
-            "CORE_DEFAULT_CURRENCY", FieldDataType.STRING, 'USD')
+            "DEFAULT_CURRENCY", FieldDataType.STRING, 'USD')
         self.default_locale = SystemParameter.find_one(
-            "CORE_DEFAULT_LOCALE", FieldDataType.STRING, 'en_US')
+            "DEFAULT_LOCALE", FieldDataType.STRING, 'en_US')
 
     def render_column(self, row, column):
         """ Overriden method to render a column (a hook on BaseDatatableView)
@@ -102,26 +102,13 @@ class ApiAccountTypeView(BaseDatatableView):
         if column == 'effect':
             return row.transaction_type.effect.label
         if column == 'principal_amount':
-            return babel.numbers.format_currency(
-                decimal.Decimal(row.principal_amount),
-                currency=self.default_currency,
-                locale=self.default_locale)
+            return str(row.principal_amount)
         if column == 'interest_amount':
-            return babel.numbers.format_currency(
-                decimal.Decimal(row.interest_amount),
-                currency=self.default_currency,
-                locale=self.default_locale)
+            return str(row.interest_amount)
         if column == 'penalties_amount':
-            return babel.numbers.format_currency(
-                decimal.Decimal(row.penalties_amount),
-                currency=self.default_currency,
-                locale=self.default_locale)
-
+            return str(row.penalties_amount)
         if column == 'total_amount':
-            return babel.numbers.format_currency(
-                decimal.Decimal(row.total_amount),
-                currency=self.default_currency,
-                locale=self.default_locale)
+            return str(row.total_amount)
         else:
             return super(ApiAccountTypeView, self).render_column(row, column)
 

@@ -5,8 +5,7 @@ Original version by Leonardo Belen<leobelen@gmail.com>
 """
 import logging
 import uuid
-import babel.numbers
-import decimal
+
 
 from django.core.urlresolvers import reverse
 from django.db.models import Sum
@@ -20,6 +19,7 @@ from antares.apps.core.middleware.request import get_request
 
 from ..models import AccountBalance
 from antares.apps.user.exceptions.user_exception import UserException
+from djmoney.money import Money
 
 logger = logging.getLogger(__name__)
 
@@ -64,9 +64,9 @@ class ApiClientView(BaseDatatableView):
         """ Initial value settings 
         """
         self.default_currency = SystemParameter.find_one(
-            "CORE_DEFAULT_CURRENCY", FieldDataType.STRING, 'USD')
+            "DEFAULT_CURRENCY", FieldDataType.STRING, 'USD')
         self.default_locale = SystemParameter.find_one(
-            "CORE_DEFAULT_LOCALE", FieldDataType.STRING, 'en_US')
+            "DEFAULT_LOCALE", FieldDataType.STRING, 'en_US')
 
     def render_column(self, row, column):
         """ Overriden method to render a column (a hook on BaseDatatableView)
@@ -85,48 +85,24 @@ class ApiClientView(BaseDatatableView):
 
         if column == 'principal_balance':
             if row.principal_balance__sum:
-                return babel.numbers.format_currency(
-                    decimal.Decimal(row.principal_balance__sum),
-                    currency=self.default_currency,
-                    locale=self.default_locale)
+                return str(Money(row.principal_balance__sum, (row.default_currency or self.default_currency)))
             else:
-                return babel.numbers.format_currency(
-                    decimal.Decimal(0),
-                    currency=self.default_currency,
-                    locale=self.default_locale)
+                return str(Money(0, (row.default_currency or self.default_currency)))
         if column == 'interest_balance':
             if row.interest_balance__sum:
-                return babel.numbers.format_currency(
-                    decimal.Decimal(row.interest_balance__sum),
-                    currency=self.default_currency,
-                    locale=self.default_locale)
+                return str(Money(row.interest_balance__sum, (row.default_currency or self.default_currency)))
             else:
-                return babel.numbers.format_currency(
-                    decimal.Decimal(0),
-                    currency=self.default_currency,
-                    locale=self.default_locale)
+                return str(Money(0, (row.default_currency or self.default_currency)))
         if column == 'penalties_balance':
             if row.penalties_balance__sum:
-                return babel.numbers.format_currency(
-                    decimal.Decimal(row.penalties_balance__sum),
-                    currency=self.default_currency,
-                    locale=self.default_locale)
+                return str(Money(row.penalties_balance__sum, (row.default_currency or self.default_currency)))
             else:
-                return babel.numbers.format_currency(
-                    decimal.Decimal(0),
-                    currency=self.default_currency,
-                    locale=self.default_locale)
+                return str(Money(0, (row.default_currency or self.default_currency)))
         if column == 'total_balance':
             if row.total_balance__sum:
-                return babel.numbers.format_currency(
-                    decimal.Decimal(row.total_balance__sum),
-                    currency=self.default_currency,
-                    locale=self.default_locale)
+                return str(Money(row.total_balance__sum, (row.default_currency or self.default_currency)))
             else:
-                return babel.numbers.format_currency(
-                    decimal.Decimal(0),
-                    currency=self.default_currency,
-                    locale=self.default_locale)
+                return str(Money(0, (row.default_currency or self.default_currency)))
         else:
             return super(ApiClientView, self).render_column(row, column)
 

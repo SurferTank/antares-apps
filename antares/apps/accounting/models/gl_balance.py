@@ -9,6 +9,8 @@ import uuid
 from django.db import models
 from django.utils import timezone
 from django.utils.translation import ugettext as _
+from djmoney.models.fields import MoneyField
+from djmoney.money import Money
 
 logger = logging.getLogger(__name__)
 
@@ -28,8 +30,8 @@ class GLBalance(models.Model):
         blank=True,
         null=True)
     period = models.IntegerField()
-    debit_balance = models.DecimalField(max_digits=19, decimal_places=2)
-    credit_balance = models.DecimalField(max_digits=19, decimal_places=2)
+    debit_balance = MoneyField(max_digits=10, decimal_places=2, default_currency='USD', default=0)
+    credit_balance = MoneyField(max_digits=10, decimal_places=2, default_currency='USD', default=0)
     fiscal_year = models.IntegerField()
     gl_account_type = models.ForeignKey(
         "accounting.GLAccountType",
