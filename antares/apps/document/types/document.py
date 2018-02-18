@@ -1496,8 +1496,8 @@ class Document(object):
                 return dc_node.text
             else:
                 return SystemParameter.find_one("DEFAULT_CURRENCY",
-                                       FieldDataType.STRING,
-                                       "USD")  #default currency
+                                                FieldDataType.STRING,
+                                                "USD")  #default currency
 
         raise ValueError(
             _('antares.app.document.manager.invalid_header_field'))

@@ -34,10 +34,10 @@ class AccountManager(object):
     """
     Processes a document and produces the associated accounting structures. 
     """
-    
-    default_currency = SystemParameter.find_one(
-            "DEFAULT_CURRENCY", FieldDataType.STRING, 'USD')
-    
+
+    default_currency = SystemParameter.find_one("DEFAULT_CURRENCY",
+                                                FieldDataType.STRING, 'USD')
+
     @classmethod
     def post_document(cls, document: Document) -> AccountDocumentStatusType:
         """ Posts a document into the current account, assuming there are rules defined for it. Otherwise it just returns. 
@@ -59,24 +59,24 @@ class AccountManager(object):
             logger.error(_(__name__ + '.document_not_ready_for_posting'))
             return None
 
-        # try:
-        cancelled_document = AccountManager._get_cancelled_document(
-            document)
-        if (cancelled_document is not None):
-            logger.error(
-                _(__name__ + '.cancelling_document %(document_id)s') %
-                {'document_id': document.document_id})
-            AccountManager._cancel_document(cancelled_document, document)
+        try:
+            cancelled_document = AccountManager._get_cancelled_document(
+                document)
+            if (cancelled_document is not None):
+                logger.error(
+                    _(__name__ + '.cancelling_document %(document_id)s') %
+                    {'document_id': document.document_id})
+                AccountManager._cancel_document(cancelled_document, document)
 
-        transactions = AccountManager._create_transactions_from_rules(
-            account_document, document, account_rules)
+            transactions = AccountManager._create_transactions_from_rules(
+                account_document, document, account_rules)
 
-        account_document.content = AccountManager._get_account_document_string(
-            account_document, transactions)
-        account_document.status = AccountDocumentStatusType.PROCESSED
+            account_document.content = AccountManager._get_account_document_string(
+                account_document, transactions)
+            account_document.status = AccountDocumentStatusType.PROCESSED
 
-        #except Exception as e:
-        account_document.status = AccountDocumentStatusType.WITH_ERRORS
+        except Exception as e:
+            account_document.status = AccountDocumentStatusType.WITH_ERRORS
 
         account_document.save()
 
@@ -188,9 +188,12 @@ class AccountManager(object):
         logger.info(
             _(__name__ +
               ".manager.account_manager.starting_to_balance_the_account"))
-        principal = Money(0, (document.get_default_currency() or cls.default_currency))
-        interest = Money(0, (document.get_default_currency() or cls.default_currency))
-        penalties = Money(0, (document.get_default_currency() or cls.default_currency))
+        principal = Money(
+            0, (document.get_default_currency() or cls.default_currency))
+        interest = Money(
+            0, (document.get_default_currency() or cls.default_currency))
+        penalties = Money(
+            0, (document.get_default_currency() or cls.default_currency))
 
         transaction_list = AccountTransaction.find_by_balance(
             transaction.balance)
@@ -379,17 +382,35 @@ class AccountManager(object):
                 _(__name__ + ".exceptions.negative_amount_exception"))
         if not is_cancelled_document:
             if value_affected == TransactionAffectedValueType.PRINCIPAL:
-                transaction.principal_amount = Money(field_value, (document.get_default_currency() or cls.default_currency))
-                transaction.interest_amount = Money(0, (document.get_default_currency() or cls.default_currency))
-                transaction.penalties_amount = Money(0, (document.get_default_currency() or cls.default_currency))
+                transaction.principal_amount = Money(
+                    field_value,
+                    (document.get_default_currency() or cls.default_currency))
+                transaction.interest_amount = Money(
+                    0,
+                    (document.get_default_currency() or cls.default_currency))
+                transaction.penalties_amount = Money(
+                    0,
+                    (document.get_default_currency() or cls.default_currency))
             elif value_affected == TransactionAffectedValueType.INTEREST:
-                transaction.principal_amount = Money(0, (document.get_default_currency() or cls.default_currency))
-                transaction.interest_amount = Money(field_value, (document.get_default_currency() or cls.default_currency))
-                transaction.penalties_amount = Money(0, (document.get_default_currency() or cls.default_currency))
+                transaction.principal_amount = Money(
+                    0,
+                    (document.get_default_currency() or cls.default_currency))
+                transaction.interest_amount = Money(
+                    field_value,
+                    (document.get_default_currency() or cls.default_currency))
+                transaction.penalties_amount = Money(
+                    0,
+                    (document.get_default_currency() or cls.default_currency))
             elif value_affected == TransactionAffectedValueType.PENALTIES:
-                transaction.principal_amount = Money(0, (document.get_default_currency() or cls.default_currency))
-                transaction.interest_amount = Money(0, (document.get_default_currency() or cls.default_currency))
-                transaction.penalties_amount = Money(field_value, (document.get_default_currency() or cls.default_currency))
+                transaction.principal_amount = Money(
+                    0,
+                    (document.get_default_currency() or cls.default_currency))
+                transaction.interest_amount = Money(
+                    0,
+                    (document.get_default_currency() or cls.default_currency))
+                transaction.penalties_amount = Money(
+                    field_value,
+                    (document.get_default_currency() or cls.default_currency))
         else:
             raise NotImplementedError
 

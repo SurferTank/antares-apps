@@ -85,24 +85,36 @@ class ApiPeriodView(BaseDatatableView):
 
         if column == 'principal_balance':
             if row.principal_balance__sum:
-                return str(Money(row.principal_balance__sum, (row.default_currency or self.default_currency)))
+                return str(
+                    Money(row.principal_balance__sum,
+                          (row.default_currency or self.default_currency)))
             else:
-                return str(Money(0, (row.default_currency or self.default_currency)))
+                return str(
+                    Money(0, (row.default_currency or self.default_currency)))
         if column == 'interest_balance':
             if row.interest_balance__sum:
-                return str(Money(row.interest_balance__sum, (row.default_currency or self.default_currency)))
+                return str(
+                    Money(row.interest_balance__sum,
+                          (row.default_currency or self.default_currency)))
             else:
-                return str(Money(0, (row.default_currency or self.default_currency)))
+                return str(
+                    Money(0, (row.default_currency or self.default_currency)))
         if column == 'penalties_balance':
             if row.penalties_balance__sum:
-                return str(Money(row.penalties_balance__sum, (row.default_currency or self.default_currency)))
+                return str(
+                    Money(row.penalties_balance__sum,
+                          (row.default_currency or self.default_currency)))
             else:
-                return str(Money(0, (row.default_currency or self.default_currency)))
+                return str(
+                    Money(0, (row.default_currency or self.default_currency)))
         if column == 'total_balance':
             if row.total_balance__sum:
-                return str(Money(row.total_balance__sum, (row.default_currency or self.default_currency)))
+                return str(
+                    Money(row.total_balance__sum,
+                          (row.default_currency or self.default_currency)))
             else:
-                return str(Money(0, (row.default_currency or self.default_currency)))
+                return str(
+                    Money(0, (row.default_currency or self.default_currency)))
         else:
             return super(ApiPeriodView, self).render_column(row, column)
 

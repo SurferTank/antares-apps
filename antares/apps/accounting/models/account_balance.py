@@ -21,7 +21,6 @@ from enumfields import EnumField
 from djmoney.models.fields import MoneyField
 from djmoney.money import Money
 
-
 logger = logging.getLogger(__name__)
 
 
@@ -85,13 +84,17 @@ class AccountBalance(models.Model):
 
     calculation_date = models.DateTimeField()
     compliance_date = models.DateTimeField(blank=True, null=True)
-    interest_balance = MoneyField(max_digits=10, decimal_places=2, default_currency='USD', default=0)
-    penalties_balance = MoneyField(max_digits=10, decimal_places=2, default_currency='USD', default=0)
+    interest_balance = MoneyField(
+        max_digits=10, decimal_places=2, default_currency='USD', default=0)
+    penalties_balance = MoneyField(
+        max_digits=10, decimal_places=2, default_currency='USD', default=0)
     period = models.IntegerField()
-    principal_balance = MoneyField(max_digits=10, decimal_places=2, default_currency='USD', default=0)
+    principal_balance = MoneyField(
+        max_digits=10, decimal_places=2, default_currency='USD', default=0)
     creation_date = models.DateTimeField(blank=True, null=True, editable=False)
     update_date = models.DateTimeField(blank=True, null=True, editable=False)
-    total_balance = MoneyField(max_digits=10, decimal_places=2, default_currency='USD', default=0)
+    total_balance = MoneyField(
+        max_digits=10, decimal_places=2, default_currency='USD', default=0)
     hrn_code = models.CharField(
         max_length=50,
         unique=True,

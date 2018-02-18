@@ -31,7 +31,6 @@ def total_accounting_balance(client):
         return str(Money(0, default_currency))
     else:
         return str(Money(result, default_currency))
-            
 
 
 @register.filter
