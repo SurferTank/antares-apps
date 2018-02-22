@@ -143,8 +143,8 @@ class UserParameter(models.Model):
             if (fall_down_on_user_params == True and default is not None):
                 user_parameter = SystemParameter.find_one(
                     user_paramId, paramType, default)
-                return UserParameter.find_one(get_request().user, user_paramId,
-                                              paramType, user_parameter, False)
+                return cls.find_one(user_paramId, paramType, user_parameter,
+                                    False)
             if (default is not None):
                 user_param = UserParameter(id=user_paramId)
                 logger.debug("Creating the parameter with id " + user_paramId +

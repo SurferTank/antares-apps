@@ -982,6 +982,11 @@ class Document(object):
                             return dateparser.parse(field.text)
                         elif field_data_type == FieldDataType.DATETIME:
                             return dateparser.parse(field.text)
+                        elif field_data_type == FieldDataType.MONEY:
+                            (amount,
+                             currency) = self._get_money_components_from_xml(
+                                 field.text)
+                            return Money(amount, currency)
                         else:
                             return field.text
 
@@ -1058,14 +1063,14 @@ class Document(object):
                         elif datatype == FieldDataType.DOCUMENT:
                             if value != False and value != "":
                                 if isinstance(value, str) or isinstance(
-                                        value, uuid):
+                                        value, uuid.UUID):
                                     value = Document(document_id=value)
                                 elif isinstance(value, Document) == False:
                                     raise ValueError(
                                         _(__name__ +
                                           ".exceptions.user_field_does_not_understand_anything_but_Document_objects"
                                           ))
-                                field.text = str(value.id)
+                                field.text = str(value.document_id)
                             return
                         elif datatype == FieldDataType.CLIENT:
                             if value != False:
@@ -1080,13 +1085,23 @@ class Document(object):
                                           ))
                                 field.text = str(value.id)
                             return
+                        elif datatype == FieldDataType.MONEY:
+                            if value != False and value != "":
+                                if isinstance(value, Money) == False:
+                                    raise ValueError(
+                                        _(__name__ +
+                                          ".exceptions.user_field_does_not_understand_anything_but_Document_objects"
+                                          ))
+                                field.text = str(value.amount) + "-" + str(
+                                    value.currency)
+                            return
                         else:
                             raise DocumentFieldNotFound(
                                 _(__name__ +
                                   ".exceptions.document_field_type_not_found ")
                                 + key)
         raise DocumentFieldNotFound(
-            _(__name__ + ".exceptions.document_field_not_found" + key))
+            _(__name__ + ".exceptions.document_field_not_found" + " " + key))
 
     def set_fields(self, fields):
         for key, value in fields.items():

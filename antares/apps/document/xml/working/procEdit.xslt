@@ -894,7 +894,7 @@ $(document).ready(function() {
 			<xsl:attribute name="value">
                 <xsl:text disable-output-escaping="yes">{{fields.</xsl:text>
                 <xsl:value-of select="@id" />
-                <xsl:text disable-output-escaping="yes">header.hrn_code|default_if_none:''}}</xsl:text>
+                <xsl:text disable-output-escaping="yes">.header.hrn_code|default_if_none:''}}</xsl:text>
             </xsl:attribute>
 			<xsl:attribute name="id">
                 <xsl:text>fields[</xsl:text>
