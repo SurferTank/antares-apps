@@ -70,8 +70,8 @@ class ClientStatusType(EnumUtilsMixin, Enum):
     class Labels:
         ACTIVE = _(__name__ + '.ClientStatusType.' + 'ACTIVE')
         DEFUNCT = _(__name__ + '.ClientStatusType.' + 'DEFUNCT')
-        DEFUNCT_CANDIDATE = _(
-            __name__ + '.ClientStatusType.' + 'DEFUNCT_CANDIDATE')
+        DEFUNCT_CANDIDATE = _(__name__ + '.ClientStatusType.' +
+                              'DEFUNCT_CANDIDATE')
 
 
 class TelephoneItemType(EnumUtilsMixin, Enum):
@@ -126,8 +126,8 @@ class ClientRelationType(EnumUtilsMixin, Enum):
         ACCOUNTANT = _(__name__ + '.ClientRelationType.' + 'ACCOUNTANT')
         LAWYER = _(__name__ + '.ClientRelationType.' + 'LAWYER')
         CLERK = _(__name__ + '.ClientRelationType.' + 'CLERK')
-        GENERIC_WORKER = _(
-            __name__ + '.ClientRelationType.' + 'GENERIC_WORKER')
+        GENERIC_WORKER = _(__name__ + '.ClientRelationType.' +
+                           'GENERIC_WORKER')
 
 
 class ClientRelationPermissionType(EnumUtilsMixin, Enum):

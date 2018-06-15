@@ -37,7 +37,9 @@ class NotificationRule(models.Model):
     content_template = RichTextField(blank=True, null=True)
     title_variable = models.CharField(max_length=200, blank=True, null=True)
     form_definition = models.ForeignKey(
-        "document.FormDefinition", related_name='notification_rule_set')
+        "document.FormDefinition",
+        related_name='notification_rule_set',
+        on_delete=models.CASCADE)
     update_date = models.DateTimeField(editable=False)
     target_user = models.ForeignKey(
         settings.AUTH_USER_MODEL,

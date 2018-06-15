@@ -6,7 +6,8 @@ Original version by Leonardo Belen<leobelen@gmail.com>
 import logging
 import uuid
 
-from django.core.urlresolvers import reverse
+from django.urls import reverse
+
 from django.db.models import Sum
 from django.utils.translation import ugettext as _
 from django_datatables_view.base_datatable_view import BaseDatatableView

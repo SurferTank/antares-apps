@@ -42,16 +42,15 @@ class InitialSettingsConsole(object):
             Loads an XPDL to Antares
         """
         if ('withpackage' in params):
-            package = os.path.join(settings.BASE_DIR,
-                                   SystemParameter.find_one(
-                                       "INITIAL_SETTINGS_DEFAULT_FOLDER",
-                                       FieldDataType.STRING,
-                                       'initialsettings'),
-                                   params['withpackage'], 'flow', 'xpdl')
+            package = os.path.join(
+                settings.BASE_DIR,
+                SystemParameter.find_one(
+                    "INITIAL_SETTINGS_DEFAULT_FOLDER", FieldDataType.STRING,
+                    'initialsettings'), params['withpackage'], 'flow', 'xpdl')
             if os.path.isdir(package) is False:
-                return _(
-                    __name__ + ".package_leads_to_inexistent_path {package}"
-                ).format(package=package)
+                return _(__name__ +
+                         ".package_leads_to_inexistent_path {package}").format(
+                             package=package)
         else:
             return _(__name__ + ".missing_parameter {parameter}").format(
                 parameter='withpackage')

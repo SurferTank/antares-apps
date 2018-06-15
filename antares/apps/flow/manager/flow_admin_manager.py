@@ -207,8 +207,8 @@ class FlowAdminManager(object):
 
             access_level = workflow_node.find(
                 'xpdl:RedefinableHeader/xpdl:Version', namespaces=NS_MAP)
-            if (access_level is not None
-                    and access_level.text and FlowAccessLevelType.to_enum(
+            if (access_level is not None and access_level.text
+                    and FlowAccessLevelType.to_enum(
                         access_level.text) is not None):
                 flow_def.access_level = str(
                     FlowAccessLevelType.to_enum(access_level.text))
@@ -344,8 +344,8 @@ class FlowAdminManager(object):
         app_def.flow_definition = flow_def
         app_def.definition_site = DefinitionSiteType.SYSTEM
         app_def.application_id = 'updateproperty'
-        app_def.application_name = _(
-            __name__ + ".manager.default_apps.update_property")
+        app_def.application_name = _(__name__ +
+                                     ".manager.default_apps.update_property")
         app_def.save()
         flow_def.application_definition_set.add(app_def)
 
@@ -367,8 +367,8 @@ class FlowAdminManager(object):
         app_def.flow_definition = flow_def
         app_def.definition_site = DefinitionSiteType.SYSTEM
         app_def.application_id = 'currentaccount'
-        app_def.application_name = _(
-            __name__ + ".manager.default_apps.current_account")
+        app_def.application_name = _(__name__ +
+                                     ".manager.default_apps.current_account")
         app_def.route = 'surfertank_antares_account_status_by_client'
         app_def.save()
         flow_def.application_definition_set.add(app_def)

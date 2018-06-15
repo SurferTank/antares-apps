@@ -1,7 +1,7 @@
 import logging
 import uuid
 
-from django.core.urlresolvers import resolve
+from django.urls import resolve
 from django.db import models
 from django.db.models import Q
 from django.utils import timezone
@@ -264,16 +264,16 @@ class FlowActivity(models.Model):
                                             definition_id=app_definition.id,
                                             flow_case_id=self.flow_case.id,
                                             checked_value='checked',
-                                            button_label=_(
-                                                __name__ + ".buttons.save"))
+                                            button_label=_(__name__ +
+                                                           ".buttons.save"))
                                     else:
                                         command += form_string.format(
                                             parameter_id=param.content,
                                             definition_id=app_definition.id,
                                             flow_case_id=self.flow_case.id,
                                             checked_value='',
-                                            button_label=_(
-                                                __name__ + ".buttons.save"))
+                                            button_label=_(__name__ +
+                                                           ".buttons.save"))
                                 else:
                                     if flow_property.property_definition.catalog:
                                         form_string = """<form><select name="{parameter_id}_{definition_id}" id="{parameter_id}_{definition_id}"><option value=''>--- {default_option_name} ---</option></select>
@@ -314,8 +314,8 @@ class FlowActivity(models.Model):
                                                 __name__ +
                                                 ".selector.default_option_text"
                                             ),
-                                            button_label=_(
-                                                __name__ + ".buttons.save"))
+                                            button_label=_(__name__ +
+                                                           ".buttons.save"))
                                     else:
                                         form_string =  "<form><input type=\"text\" name=\"{parameter_id}_{definition_id}\" id=\"{parameter_id}_{definition_id}\"/>" +\
                                             "<div style=\"text-align: right;\"><a class=\"btn btn-default\" onclick=\"leftToolbarUpdateProperty(event, '{flow_case_id}',"+\
@@ -325,8 +325,8 @@ class FlowActivity(models.Model):
                                             parameter_id=param.content,
                                             definition_id=app_definition.id,
                                             flow_case_id=self.flow_case.id,
-                                            button_label=_(
-                                                __name__ + ".buttons.save"))
+                                            button_label=_(__name__ +
+                                                           ".buttons.save"))
 
             tools.append(command)
 

@@ -175,10 +175,10 @@ class HrnCode(models.Model):
         hrn_node = document.document_xml.find(
             'headerElements/options/hrnScript')
         if hrn_node is None or not hrn_node.text:
-            document.set_header_field('hrn_code',
-                                      HrnCode._get_next_hrn_by_params(
-                                          HrnModuleType.DOCUMENT,
-                                          "GENERAL_DOCUMENT_SEQUENCE"))
+            document.set_header_field(
+                'hrn_code',
+                HrnCode._get_next_hrn_by_params(HrnModuleType.DOCUMENT,
+                                                "GENERAL_DOCUMENT_SEQUENCE"))
             return
 
         language = ScriptEngineType.to_enum(hrn_node.get('language'))
@@ -191,10 +191,10 @@ class HrnCode(models.Model):
                                          FieldDataType.STRING,
                                          ScriptEngineType.JAVASCRIPT.value))
         if execution_string is None:
-            document.set_header_field('hrn_code',
-                                      HrnCode._get_next_hrn_by_params(
-                                          "Document",
-                                          "GENERAL_DOCUMENT_SEQUENCE"))
+            document.set_header_field(
+                'hrn_code',
+                HrnCode._get_next_hrn_by_params("Document",
+                                                "GENERAL_DOCUMENT_SEQUENCE"))
             return document
 
         if language == ScriptEngineType.PYTHON:
@@ -205,10 +205,10 @@ class HrnCode(models.Model):
                 document.set_header_field("hrn_code", value.get('hrn_code'))
             else:
                 # default value
-                document.set_header_field('hrn_code',
-                                          HrnCode._get_next_hrn_by_params(
-                                              HrnModuleType.DOCUMENT,
-                                              "GENERAL_DOCUMENT_SEQUENCE"))
+                document.set_header_field(
+                    'hrn_code',
+                    HrnCode._get_next_hrn_by_params(
+                        HrnModuleType.DOCUMENT, "GENERAL_DOCUMENT_SEQUENCE"))
             if value.get('hrn_title'):
                 document.set_header_field("hrn_title", value.get('hrn_title'))
         elif ScriptEngineType.JAVASCRIPT:
@@ -227,10 +227,10 @@ class HrnCode(models.Model):
                 document.set_header_field("hrn_code", context.hrn_code)
             else:
                 # default value
-                document.set_header_field('hrn_code',
-                                          HrnCode._get_next_hrn_by_params(
-                                              HrnModuleType.DOCUMENT,
-                                              "GENERAL_DOCUMENT_SEQUENCE"))
+                document.set_header_field(
+                    'hrn_code',
+                    HrnCode._get_next_hrn_by_params(
+                        HrnModuleType.DOCUMENT, "GENERAL_DOCUMENT_SEQUENCE"))
 
             if (hasattr(context, 'hrn_title')
                     and context.hrn_title is not None):

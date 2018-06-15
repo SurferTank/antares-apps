@@ -3,7 +3,7 @@ import js2py
 
 from django import template
 from django.utils.safestring import mark_safe
-from django.core.urlresolvers import reverse
+from django.urls import reverse
 
 from antares.apps.core.middleware.request import get_request
 

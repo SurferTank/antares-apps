@@ -21,13 +21,21 @@ logger = logging.getLogger(__name__)
 class GLAccountType(MPTTModel):
     id = models.SlugField(primary_key=True, max_length=200)
     parent = TreeForeignKey(
-        'self', null=True, blank=True, related_name='children')
+        'self',
+        null=True,
+        blank=True,
+        related_name='children',
+        on_delete=models.CASCADE)
     account_type_name = models.CharField(max_length=200)
     description = RichTextField(blank=True, null=True)
     creation_date = models.DateTimeField(blank=True, null=True, editable=False)
     update_date = models.DateTimeField(blank=True, null=True, editable=False)
     author = models.ForeignKey(
-        settings.AUTH_USER_MODEL, blank=True, null=True, editable=False)
+        settings.AUTH_USER_MODEL,
+        blank=True,
+        null=True,
+        editable=False,
+        on_delete=models.CASCADE)
 
     objects = TreeManager()
 

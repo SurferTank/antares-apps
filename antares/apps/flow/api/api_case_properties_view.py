@@ -72,8 +72,8 @@ class ApiCasePropertiesView(BaseDatatableView):
                 else:
                     return ''
             else:
-                raise FlowException(
-                    __name__ + ".exceptions.not_implemented_yet")
+                raise FlowException(__name__ +
+                                    ".exceptions.not_implemented_yet")
         else:
             return super(ApiCasePropertiesView, self).render_column(
                 row, column)

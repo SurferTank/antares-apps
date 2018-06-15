@@ -28,7 +28,8 @@ class IsicPosition(MPTTModel):
         related_name='children',
         db_index=True,
         verbose_name=_(__name__ + ".parent"),
-        help_text=_(__name__ + ".parent_help"))
+        help_text=_(__name__ + ".parent_help"),
+        on_delete=models.CASCADE)
     isic_name = models.CharField(max_length=2000)
     isic_code = models.CharField(max_length=200)
     language = EnumField(LanguageType, max_length=20)

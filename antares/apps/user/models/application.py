@@ -30,7 +30,12 @@ class Application(MPTTModel):
     """
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     parent = TreeForeignKey(
-        'self', null=True, blank=True, related_name='children', db_index=True)
+        'self',
+        null=True,
+        blank=True,
+        related_name='children',
+        db_index=True,
+        on_delete=models.CASCADE)
     description = RichTextField(blank=True, null=True)
     application_name = models.CharField(max_length=200)
     url = models.CharField(max_length=300, blank=True, null=True)

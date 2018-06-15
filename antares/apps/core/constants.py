@@ -119,8 +119,8 @@ class HrnModuleType(EnumUtilsMixin, Enum):
         FLOW_CASE = _(__name__ + '.HrnModuleType.' + 'FLOW_CASE')
         FLOW_ACTIVITY = _(__name__ + '.HrnModuleType.' + 'FLOW_ACTIVITY')
         ACCOUNT_BALANCE = _(__name__ + '.HrnModuleType.' + 'ACCOUNT_BALANCE')
-        ACCOUNT_TRANSACTION = _(
-            __name__ + '.HrnModuleType.' + 'ACCOUNT_BALANCE')
+        ACCOUNT_TRANSACTION = _(__name__ + '.HrnModuleType.' +
+                                'ACCOUNT_BALANCE')
 
 
 class ScriptEngineType(EnumUtilsMixin, Enum):

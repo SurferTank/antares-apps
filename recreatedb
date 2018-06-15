@@ -1,0 +1,118 @@
+#!/bin/bash
+
+pwd
+cd antares/apps/client
+rm -r migrations
+mkdir migrations
+cd migrations 
+touch __init__.py
+
+cd ../..
+pwd
+cd flow
+rm -r migrations
+mkdir migrations
+cd migrations 
+touch __init__.py
+
+cd ../..
+pwd
+cd notifications
+rm -r migrations
+mkdir migrations
+cd migrations 
+touch __init__.py
+
+cd ../..
+pwd
+cd flow
+rm -r terminal
+mkdir migrations
+cd migrations 
+touch __init__.py
+
+cd ../..
+pwd
+cd core
+rm -r migrations
+mkdir migrations
+cd migrations 
+touch __init__.py
+
+cd ../..
+pwd
+cd initialsettings
+rm -r migrations
+mkdir migrations
+cd migrations 
+touch __init__.py
+
+cd ../..
+pwd
+cd obligation
+rm -r migrations
+mkdir migrations
+cd migrations 
+touch __init__.py
+
+cd ../..
+pwd
+cd thirdparty
+rm -r migrations
+mkdir migrations
+cd migrations 
+touch __init__.py
+
+cd ../..
+pwd
+cd accounting
+rm -r migrations
+mkdir migrations
+cd migrations 
+touch __init__.py
+
+cd ../..
+pwd
+cd document
+rm -r migrations
+mkdir migrations
+cd migrations 
+touch __init__.py
+
+cd ../..
+pwd
+cd message
+rm -r migrations
+mkdir migrations
+cd migrations 
+touch __init__.py
+
+cd ../..
+pwd
+cd subscription
+rm -r migrations
+mkdir migrations
+cd migrations 
+touch __init__.py
+
+cd ../..
+pwd
+cd user
+rm -r migrations
+mkdir migrations
+cd migrations 
+touch __init__.py
+
+
+pwd
+cd ../../../..
+pwd
+
+PGPASSWORD=antares10
+DB_USER=antares
+
+psql -U $DB_USER -d postgres -c "drop database antares;"
+psql -U $DB_USER -d postgres -c "create database antares WITH ENCODING='UTF8' OWNER=antares CONNECTION LIMIT=-1;"
+
+./manage makemigrations; 
+./manage migrate;

@@ -52,7 +52,8 @@ class AccountRule(models.Model):
     external_function = models.CharField(max_length=100, blank=True, null=True)
     fixed_period = models.IntegerField(blank=True, null=True)
     period_field = models.CharField(max_length=100, blank=True, null=True)
-    fixed_client = models.ForeignKey("client.client", blank=True, null=True)
+    fixed_client = models.ForeignKey(
+        "client.client", blank=True, null=True, on_delete=models.PROTECT)
     value_affected = EnumField(TransactionAffectedValueType, max_length=20)
     author = models.ForeignKey(
         settings.AUTH_USER_MODEL,

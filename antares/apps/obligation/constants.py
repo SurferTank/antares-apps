@@ -56,10 +56,10 @@ class ObligationPeriodicityType(EnumUtilsMixin, Enum):
 
     class Labels:
         FIXED_DATE = _(__name__ + '.ObligationPeriodicityType.' + 'FIXED_DATE')
-        FIXED_PERIOD = _(
-            __name__ + '.ObligationPeriodicityType.' + 'FIXED_PERIOD')
-        FREE_FORM = _(
-            __name__ + '.ObligationPeriodicityType.' + 'FIXED_PERIOD')
+        FIXED_PERIOD = _(__name__ + '.ObligationPeriodicityType.' +
+                         'FIXED_PERIOD')
+        FREE_FORM = _(__name__ + '.ObligationPeriodicityType.' +
+                      'FIXED_PERIOD')
 
 
 class ObligationType(EnumUtilsMixin, Enum):

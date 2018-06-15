@@ -28,8 +28,8 @@ class ApiDocumentSubmitView(AjaxResponseMixin, JSONResponseMixin, View):
         response_dict = {}
         event = DocumentEventType.to_enum(request.POST.get('_event'))
         if (event is None):
-            response_dict['errorMessage'] = _(
-                __name__ + ".exceptions.event_is_missing")
+            response_dict['errorMessage'] = _(__name__ +
+                                              ".exceptions.event_is_missing")
             return self.render_json_response(response_dict)
         fields = {}
         header_fields = {}

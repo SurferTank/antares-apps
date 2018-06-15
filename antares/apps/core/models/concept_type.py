@@ -25,7 +25,8 @@ class ConceptType(MPTTModel):
         related_name='children',
         db_index=True,
         verbose_name=_(__name__ + ".parent"),
-        help_text=_(__name__ + ".parent_help"))
+        help_text=_(__name__ + ".parent_help"),
+        on_delete=models.CASCADE)
     concept_type_name = models.CharField(
         max_length=200,
         verbose_name=_(__name__ + ".concept_type_name"),

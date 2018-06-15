@@ -39,10 +39,10 @@ class NotificationDocumentStatusType(EnumUtilsMixin, Enum):
 
     class Labels:
         PENDING = _(__name__ + '.NotificationDocumentStatusType.' + 'PENDING')
-        PROCESSED = _(
-            __name__ + '.NotificationDocumentStatusType.' + 'PROCESSED')
-        WITH_ERRORS = _(
-            __name__ + '.NotificationDocumentStatusType.' + 'WITH_ERRORS')
+        PROCESSED = _(__name__ + '.NotificationDocumentStatusType.' +
+                      'PROCESSED')
+        WITH_ERRORS = _(__name__ + '.NotificationDocumentStatusType.' +
+                        'WITH_ERRORS')
         ON_HOLD = _(__name__ + '.NotificationDocumentStatusType.' + 'ON_HOLD')
-        CANCELLED = _(
-            __name__ + '.NotificationDocumentStatusType.' + 'CANCELLED')
+        CANCELLED = _(__name__ + '.NotificationDocumentStatusType.' +
+                      'CANCELLED')
