@@ -64,7 +64,6 @@ class VersionUtils(object):
             return '%d.%d' % version[:2]
 
     @classmethod
-    @functools.lru_cache()
     def get_last_git_hash(cls):
         """Return a string identifier of the latest git commit.
         This value is unique enough to generate the development version numbers.
@@ -81,7 +80,6 @@ class VersionUtils(object):
         return git_log.communicate()[0]
 
     @classmethod
-    @functools.lru_cache()
     def get_git_changeset(cls):
         """Return a numeric identifier of the latest git changeset.
         The result is the UTC timestamp of the changeset in YYYYMMDDHHMMSS format.

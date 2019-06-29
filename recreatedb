@@ -97,6 +97,15 @@ touch __init__.py
 
 cd ../..
 pwd
+cd terminal
+rm -r migrations
+mkdir migrations
+cd migrations 
+touch __init__.py
+
+
+cd ../..
+pwd
 cd user
 rm -r migrations
 mkdir migrations
@@ -108,11 +117,11 @@ pwd
 cd ../../../..
 pwd
 
-PGPASSWORD=antares10
-DB_USER=antares
+#PGPASSWORD=antares10
+#DB_USER=antares
 
-psql -U $DB_USER -d postgres -c "drop database antares;"
-psql -U $DB_USER -d postgres -c "create database antares WITH ENCODING='UTF8' OWNER=antares CONNECTION LIMIT=-1;"
+#psql -U $DB_USER -d postgres -c "drop database antares;"
+#psql -U $DB_USER -d postgres -c "create database antares WITH ENCODING='UTF8' OWNER=antares CONNECTION LIMIT=-1;"
 
-./manage makemigrations; 
-./manage migrate;
+#./manage makemigrations; 
+#./manage migrate;

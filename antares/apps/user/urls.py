@@ -1,5 +1,5 @@
 from django.conf.urls import url
-from django.contrib.auth.views import logout
+from django.contrib.auth.views import LogoutView
 
 from .api import ApiOnBehalfChangeClientView
 from .api import ApiOnBehalfSelectorView
@@ -9,7 +9,7 @@ app_name = 'antares.apps.user'
 
 urlpatterns = [
     url(r'^login$', AntaresAuthView.as_view(), name='account_login'),
-    url(r'^logout$', logout, name="account_logout"),
+    url(r'^logout$', LogoutView, name="account_logout"),
     url(r'^api/on_behalf_selector$',
         ApiOnBehalfSelectorView.as_view(),
         name="api_on_behalf_selector"),

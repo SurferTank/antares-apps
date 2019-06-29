@@ -1,17 +1,3 @@
 eclipse.preferences.version=1
-encoding//antares/apps/accounting/migrations/0001_initial.py=utf-8
-encoding//antares/apps/accounting/migrations/0002_auto_20180614_2029.py=utf-8
-encoding//antares/apps/accounting/migrations/0003_auto_20180614_2029.py=utf-8
 encoding//antares/apps/accounting/models/account_rule.py=utf-8
-encoding//antares/apps/client/migrations/0001_initial.py=utf-8
-encoding//antares/apps/core/migrations/0001_initial.py=utf-8
-encoding//antares/apps/document/migrations/0001_initial.py=utf-8
-encoding//antares/apps/flow/migrations/0001_initial.py=utf-8
-encoding//antares/apps/message/migrations/0001_initial.py=utf-8
-encoding//antares/apps/notifications/migrations/0001_initial.py=utf-8
-encoding//antares/apps/obligation/migrations/0001_initial.py=utf-8
-encoding//antares/apps/subscription/migrations/0001_initial.py=utf-8
-encoding//antares/apps/terminal/migrations/0001_initial.py=utf-8
-encoding//antares/apps/terminal/migrations/0002_terminallog_author.py=utf-8
-encoding//antares/apps/user/migrations/0001_initial.py=utf-8
 encoding//antares/apps/user/models/user.py=utf-8

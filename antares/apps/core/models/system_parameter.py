@@ -12,6 +12,7 @@ from antares.apps.core.middleware.request import get_request
 from enumfields import EnumField
 from django.conf import settings
 from django.contrib.auth.models import AnonymousUser
+from django.db.utils import ProgrammingError
 
 logger = logging.getLogger(__name__)
 
@@ -186,6 +187,9 @@ class SystemParameter(models.Model):
                 else:
                     return None
             return None
+        except ProgrammingError as e:
+                return None
+            
 
     class Meta:
         app_label = 'core'
