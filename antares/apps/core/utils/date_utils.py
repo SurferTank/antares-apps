@@ -5,7 +5,7 @@ class DateUtils(object):
         Converts an amount of days to the specified time unit, as the ORM returns differences in days.
         """
         from ..models import SystemParameter
-        from ..constants import TimeUnitType, FieldDataType
+        from ..enums import TimeUnitType, FieldDataType
         from django.utils.translation import ugettext as _
 
         if isinstance(str, time_unit):
@@ -15,7 +15,7 @@ class DateUtils(object):
             time_unit = TimeUnitType.to_enum(
                 SystemParameter.find_one("DEFAULT_TIME_UNIT",
                                          FieldDataType.STRING,
-                                         TimeUnitType.HOUR.value))
+                                         TimeUnitType.HOUR))
 
         if time_unit == TimeUnitType.YEAR:
             return days / 365

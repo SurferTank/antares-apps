@@ -9,7 +9,7 @@ from antares.apps.flow.manager import FlowAdminManager
 from django.utils.translation import ugettext as _
 import logging
 from django.conf import settings
-from antares.apps.core.constants import FieldDataType
+from antares.apps.core.enums import FieldDataType
 from antares.apps.core.models import SystemParameter
 
 logger = logging.getLogger(__name__)

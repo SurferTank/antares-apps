@@ -8,8 +8,7 @@ from django.utils.translation import ugettext as _
 
 from antares.apps.core.middleware.request import get_request
 from django.conf import settings
-from ..constants import ThirdPartyDetailStatusType
-from enumfields import EnumField
+from ..enums import ThirdPartyDetailStatusType
 
 logger = logging.getLogger(__name__)
 
@@ -34,10 +33,8 @@ class ThirdPartyDetail(models.Model):
         'document.DocumentHeader',
         on_delete=models.PROTECT,
         db_column='document')
-    status = EnumField(
-        ThirdPartyDetailStatusType,
-        max_length=30,
-        default=ThirdPartyDetailStatusType.OPEN)
+    status = models.CharField(choices=ThirdPartyDetailStatusType.choices, max_length=30, 
+                              default=ThirdPartyDetailStatusType.OPEN)
     creation_date = models.DateTimeField()
     update_date = models.DateTimeField()
     author = models.ForeignKey(

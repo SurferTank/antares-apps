@@ -7,11 +7,11 @@ import logging
 
 import js2py
 
-from antares.apps.core.constants import ScriptEngineType
+from antares.apps.core.enums import ScriptEngineType
 from antares.apps.message.models import Message
 from antares.apps.subscription.exceptions.subscription_exception import SubscriptionException
-from antares.apps.message.constants import MessageType
-from ..constants import EventType
+from antares.apps.message.enums import MessageType
+from ..enums import EventType
 from ..models import SubscriptionEvent
 
 logger = logging.getLogger(__name__)

@@ -12,7 +12,7 @@ from django.views.generic import View
 from antares.apps.core.middleware.request import get_request
 from django.conf import settings
 
-from ..constants import FormDefinitionStatusType
+from ..enums import FormDefinitionStatusType
 from ..models import FormDefinition
 from ..types import Document
 

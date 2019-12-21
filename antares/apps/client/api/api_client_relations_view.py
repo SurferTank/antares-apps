@@ -1,4 +1,4 @@
-from antares.apps.core.constants import FieldDataType
+from antares.apps.core.enums import FieldDataType
 from antares.apps.core.middleware.request import get_request
 from antares.apps.core.models import UserParameter
 from django.urls import reverse
@@ -8,7 +8,7 @@ from django_datatables_view.base_datatable_view import BaseDatatableView
 import logging
 import uuid
 
-from ..constants import ClientRelationType
+from ..enums import ClientRelationType
 from ..models import ClientUserRelation, Client
 
 logger = logging.getLogger(__name__)

@@ -5,10 +5,8 @@ from django.db import models
 from django.utils import timezone
 from django.utils.translation import ugettext as _
 
-from enumfields import EnumField
-
-from antares.apps.flow.constants import FlowDefinitionStatusType, FlowPriorityType
-from antares.apps.core.constants import TimeUnitType
+from antares.apps.flow.enums import FlowDefinitionStatusType, FlowPriorityType
+from antares.apps.core.enums import TimeUnitType
 
 logger = logging.getLogger(__name__)
 
@@ -31,15 +29,24 @@ class FlowDefinition(models.Model):
     flow_version = models.CharField(max_length=255, blank=True, null=True)
     hrn_script = models.CharField(max_length=2000, blank=True, null=True)
     update_date = models.DateTimeField(blank=True, null=True)
-    status = EnumField(FlowDefinitionStatusType, max_length=30)
+    status =  models.CharField(
+        max_length=30,
+        choices=FlowDefinitionStatusType.choices
+    )
+    
     valid_from = models.DateTimeField(blank=True, null=True)
     valid_to = models.DateTimeField(blank=True, null=True)
-    time_unit = EnumField(TimeUnitType, blank=True, null=True)
+    time_unit =  models.CharField(
+        max_length=30,
+        choices=TimeUnitType.choices
+    )
     waiting_time = models.FloatField(blank=True, null=True)
     working_time = models.FloatField(blank=True, null=True)
     duration = models.FloatField(blank=True, null=True)
-    priority = EnumField(FlowPriorityType, blank=True, null=True)
-
+    priority = models.CharField(
+        max_length=30,
+        choices=FlowPriorityType.choices
+    )
     def __str__(self):
         if self.display_name:
             return self.display_name

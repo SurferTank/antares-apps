@@ -4,8 +4,7 @@ import uuid
 from django.db import models
 from django.utils.translation import ugettext as _
 
-from ..constants import DocumentStatusType
-from enumfields import EnumField
+from ..enums import DocumentStatusType
 logger = logging.getLogger(__name__)
 
 
@@ -37,12 +36,13 @@ class DocumentHrn(models.Model):
         null=True,
         verbose_name=_(__name__ + ".hrn_title"),
         help_text=_(__name__ + ".hrn_title_help"))
-    status = EnumField(
-        DocumentStatusType,
+    status = models.CharField(
         max_length=30,
-        default=DocumentStatusType.DRAFTED,
+        choices=DocumentStatusType.choices,
+        default=DocumentStatusType.DRAFTED, 
         verbose_name=_(__name__ + ".status"),
-        help_text=_(__name__ + ".status_help"))
+        help_text=_(__name__ + ".status_help")
+    )
     until_date = models.DateTimeField(
         blank=True,
         null=True,

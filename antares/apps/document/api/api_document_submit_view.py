@@ -13,7 +13,7 @@ from django.views.generic import View
 
 from antares.apps.core.middleware.request import get_request
 
-from ..constants import DocumentEventType, DocumentStatusType
+from ..enums import DocumentEventType, DocumentStatusType
 from ..types import Document
 
 logger = logging.getLogger(__name__)

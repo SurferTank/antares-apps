@@ -12,10 +12,9 @@ from django.utils import timezone
 from django.utils.translation import ugettext_lazy as _
 
 from antares.apps.core.middleware.request import get_request
-from enumfields import EnumField
 from django.conf import settings
 
-from ..constants import ObligationStatusType
+from ..enums import ObligationStatusType
 
 logger = logging.getLogger(__name__)
 
@@ -32,7 +31,7 @@ class ObligationVectorLog(models.Model):
         db_column='obligation',
         blank=True,
         null=True)
-    status = models.CharField(ObligationStatusType, max_length=30)
+    status = models.CharField(choices=ObligationStatusType.choices, max_length=30)
     status_date = models.DateTimeField(blank=True, null=True)
     log_date = models.DateTimeField()
     author = models.ForeignKey(

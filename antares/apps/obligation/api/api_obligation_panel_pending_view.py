@@ -5,14 +5,14 @@ from django.utils.translation import ugettext as _
 from django_datatables_view.base_datatable_view import BaseDatatableView
 
 from antares.apps.core.middleware.request import get_request
-from antares.apps.core.constants import FieldDataType
+from antares.apps.core.enums  import FieldDataType
 from antares.apps.core.models import UserParameter
 from antares.apps.flow.models import FlowActivity
 from django.urls import reverse
 
 from antares.apps.client.models import Client
 
-from ..constants import ObligationType, ObligationStatusType
+from ..enums  import ObligationType, ObligationStatusType
 from ..models import ObligationVector
 
 logger = logging.getLogger(__name__)

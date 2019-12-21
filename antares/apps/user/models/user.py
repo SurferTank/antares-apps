@@ -12,7 +12,7 @@ from django.utils import timezone
 from django.utils.translation import ugettext_lazy as _
 from django.conf import settings
 
-from antares.apps.client.constants import ClientRelationType
+from antares.apps.client.enums import ClientRelationType
 from antares.apps.core.middleware.request import get_request
 
 from ..exceptions import UserException
@@ -138,7 +138,7 @@ class User(AbstractUser):
     @classmethod
     def get_system_user(cls):
         from antares.apps.core.models import SystemParameter
-        from antares.apps.core.constants import FieldDataType
+        from antares.apps.core.enums import FieldDataType
         """
         Returns the system user, an special (deactivated) user, which serves as wildcard for actions taken by the system without
         human intervention.

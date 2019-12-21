@@ -8,8 +8,7 @@ from django.utils.translation import ugettext as _
 from antares.apps.core.middleware.request import get_request
 from django.conf import settings
 
-from ..constants import AddressType, ItemStatusType
-from enumfields import EnumField
+from ..enums import AddressType, ItemStatusType
 
 logger = logging.getLogger(__name__)
 
@@ -22,12 +21,19 @@ class AddressItem(models.Model):
         db_column='client_branch',
         blank=True,
         null=True)
-    address_type = EnumField(
-        AddressType, max_length=30, default=AddressType.REAL)
+    address_type  = models.CharField(
+        max_length=10,
+        choices=AddressType.choices,
+        default=AddressType.REAL)
+    
     country_code = models.CharField(max_length=2, blank=True, null=True)
     creation_date = models.DateTimeField(blank=True, null=True)
-    status = EnumField(
-        ItemStatusType, max_length=20, default=ItemStatusType.ACTIVE)
+    
+    status = models.CharField(
+        max_length=20,
+        choices=ItemStatusType.choices,
+        default=ItemStatusType.ACTIVE)
+    
     is_principal = models.BooleanField(default=True)
     line_1 = models.CharField(max_length=100, blank=True, null=True)
     line_2 = models.CharField(max_length=100, blank=True, null=True)

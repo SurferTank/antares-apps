@@ -10,12 +10,9 @@ from django.utils import timezone
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
 
-from enumfields import EnumField
-
-from ..constants import MessageType
+from ..enums import MessageType
 from antares.apps.document.models.document_header import DocumentHeader
 from antares.apps.core.middleware.request import get_request
-from enumfields import EnumField
 from django.conf import settings
 
 logger = logging.getLogger(__name__)
@@ -66,7 +63,7 @@ class Message(models.Model):
         blank=True,
         null=True)
     period = models.IntegerField(blank=True, null=True)
-    message_type = EnumField(MessageType, max_length=30)
+    message_type = models.CharField(choices=MessageType.choices, max_length=30)
     content = models.TextField(blank=True, null=True)
     creation_date = models.DateTimeField(
         blank=False,

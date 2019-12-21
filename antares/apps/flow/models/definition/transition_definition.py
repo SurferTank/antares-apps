@@ -4,9 +4,7 @@ import uuid
 from django.db import models
 from django.utils.translation import ugettext as _
 
-from enumfields import EnumField
-
-from antares.apps.flow.constants import TransitionType
+from antares.apps.flow.enums import TransitionType
 
 logger = logging.getLogger(__name__)
 
@@ -37,8 +35,11 @@ class TransitionDefinition(models.Model):
     condition_text = models.TextField(blank=True, null=True)
     transition_id = models.CharField(max_length=255)
     transition_name = models.CharField(max_length=255, blank=True, null=True)
-    transition_type = EnumField(TransitionType, max_length=30)
-
+    transition_type =  models.CharField(
+        max_length=20,
+        choices=TransitionType.choices
+    ) 
+    
     def save(self, *args, **kwargs):
         super(TransitionDefinition, self).save(*args, **kwargs)
 

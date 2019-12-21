@@ -13,7 +13,7 @@ from antares.apps.client.models import Client
 from antares.apps.core.models import ConceptType
 from antares.apps.document.models import FormDefinition
 
-from ..constants import ObligationType, ObligationStatusType
+from ..enums  import ObligationType, ObligationStatusType
 from ..manager import ObligationManager
 from ..models import ObligationVector
 

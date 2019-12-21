@@ -7,12 +7,11 @@ from ckeditor.fields import RichTextField
 from django.db import models
 from django.utils import timezone
 from django.utils.translation import ugettext as _
-from enumfields import EnumField
 
 from antares.apps.core.middleware.request import get_request
 from django.conf import settings
 
-from ..constants import TransactionAffectedValueType
+from ..enums import TransactionAffectedValueType
 
 logger = logging.getLogger(__name__)
 
@@ -54,7 +53,7 @@ class AccountRule(models.Model):
     period_field = models.CharField(max_length=100, blank=True, null=True)
     fixed_client = models.ForeignKey(
         "client.client", blank=True, null=True, on_delete=models.PROTECT)
-    value_affected = EnumField(TransactionAffectedValueType, max_length=20)
+    value_affected = models.CharField(choices=TransactionAffectedValueType, max_length=20)
     author = models.ForeignKey(
         settings.AUTH_USER_MODEL,
         on_delete=models.PROTECT,

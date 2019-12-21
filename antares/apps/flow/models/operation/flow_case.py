@@ -5,12 +5,10 @@ from django.db import models
 from django.utils import timezone
 from django.utils.translation import ugettext as _
 
-from enumfields import EnumField
-
-from antares.apps.flow.constants import FlowCaseStatusType, FlowDataType,\
+from antares.apps.flow.enums import FlowCaseStatusType, FlowDataType,\
     FlowBasicDataSubtype
-from antares.apps.document.constants import DocumentStatusType
-from antares.apps.core.constants import FieldDataType
+from antares.apps.document.enums import DocumentStatusType
+from antares.apps.core.enums import FieldDataType
 
 logger = logging.getLogger(__name__)
 
@@ -42,7 +40,11 @@ class FlowCase(models.Model):
     creation_date = models.DateTimeField()
     priority = models.CharField(max_length=30)
     start_date = models.DateTimeField(blank=True, null=True)
-    status = EnumField(FlowCaseStatusType, max_length=30)
+    status = models.CharField(
+        max_length=30,
+        choices=FlowCaseStatusType.choices
+    )
+    
     hrn_code = models.CharField(
         max_length=50,
         unique=True,

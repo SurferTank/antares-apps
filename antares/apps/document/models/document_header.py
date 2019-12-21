@@ -5,10 +5,9 @@ from django.db import models
 from django.utils import timezone
 from django.utils.translation import ugettext as _
 
-from enumfields import EnumField
 from django.conf import settings
 
-from ..constants import DocumentAssociationType, DocumentOriginType, DocumentStatusType
+from ..enums import DocumentAssociationType, DocumentOriginType, DocumentStatusType
 
 logger = logging.getLogger(__name__)
 
@@ -157,12 +156,13 @@ class DocumentHeader(models.Model):
         related_name='associated_document_header_set',
         blank=True,
         null=True)
-    association_type = EnumField(
-        DocumentAssociationType,
-        max_length=30,
-        default=DocumentAssociationType.NONE,
+    association_type  = models.CharField(
+        max_length=20,
+        choices=DocumentAssociationType.choices,
+        default=DocumentAssociationType.NONE, 
         verbose_name=_(__name__ + ".association_type"),
-        help_text=_(__name__ + ".association_type_help"))
+        help_text=_(__name__ + ".association_type_help")
+    )
     cancel_date = models.DateTimeField(
         blank=True,
         null=True,
@@ -209,23 +209,25 @@ class DocumentHeader(models.Model):
         null=True,
         verbose_name=_(__name__ + ".hrn_title"),
         help_text=_(__name__ + ".hrn_title_help"))
-    origin = EnumField(
-        DocumentOriginType,
-        max_length=30,
-        default=DocumentOriginType.UNKNOWN,
+    origin  = models.CharField(
+        max_length=20,
+        choices=DocumentOriginType.choices,
+        default=DocumentOriginType.UNKNOWN, 
         verbose_name=_(__name__ + ".origin"),
-        help_text=_(__name__ + ".origin_help"))
+        help_text=_(__name__ + ".origin_help")
+    )
     save_date = models.DateTimeField(
         blank=True,
         null=True,
         verbose_name=_(__name__ + ".save_date"),
         help_text=_(__name__ + ".save_date_help"))
-    status = EnumField(
-        DocumentStatusType,
+    status = models.CharField(
         max_length=30,
-        default=DocumentStatusType.DRAFTED,
+        choices=DocumentStatusType.choices,
+        default=DocumentStatusType.DRAFTED, 
         verbose_name=_(__name__ + ".status"),
-        help_text=_(__name__ + ".status_help"))
+        help_text=_(__name__ + ".status_help")
+    )
     default_currency = models.CharField(
         max_length=30,
         blank=True,

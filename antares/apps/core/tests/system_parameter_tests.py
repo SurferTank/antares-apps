@@ -9,7 +9,7 @@ from uuid import uuid4
 
 from django.test import TransactionTestCase
 from ..models import SystemParameter
-from ..constants import FieldDataType
+from ..enums import FieldDataType
 
 logger = logging.getLogger(__name__)
 

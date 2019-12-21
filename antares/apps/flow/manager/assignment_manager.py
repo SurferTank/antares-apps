@@ -8,7 +8,7 @@ import random
 
 from antares.apps.user.models import User
 
-from ..constants import AssignmentStrategyType
+from ..enums  import AssignmentStrategyType
 
 logger = logging.getLogger(__name__)
 

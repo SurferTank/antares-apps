@@ -3,12 +3,11 @@ from django.conf import settings
 from django.db import models
 from django.utils import timezone
 from django.utils.translation import ugettext as _
-from enumfields import EnumField
 import logging
 import uuid
 from django.contrib.auth.models import AnonymousUser
 
-from ..constants import ClientStatusType, ClientGenderType
+from ..enums import ClientStatusType, ClientGenderType
 
 logger = logging.getLogger(__name__)
 
@@ -30,9 +29,16 @@ class Client(models.Model):
     registration_date = models.DateTimeField()
     birth_date = models.DateTimeField(blank=True, null=True)
     defunction_date = models.DateTimeField(blank=True, null=True)
-    gender = EnumField(ClientGenderType, max_length=17, blank=True, null=True)
-    status = EnumField(
-        ClientStatusType, max_length=17, default=ClientStatusType.ACTIVE)
+    gender =  models.CharField(
+        max_length=20,
+        choices=ClientGenderType.choices
+    )
+    status = models.CharField(
+        max_length=20,
+        choices=ClientStatusType.choices,
+        default=ClientStatusType.ACTIVE 
+    )
+    
     client_type = models.ForeignKey(
         "ClientType", on_delete=models.PROTECT,
         db_column='client_type')  # Field name made lowercase.

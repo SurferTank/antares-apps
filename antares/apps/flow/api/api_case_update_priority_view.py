@@ -8,7 +8,7 @@ from django.views.generic import View
 
 from antares.apps.core.middleware.request import get_request
 
-from ..constants import FlowPriorityType
+from ..enums  import FlowPriorityType
 from ..models import FlowCase
 
 logger = logging.getLogger(__name__)

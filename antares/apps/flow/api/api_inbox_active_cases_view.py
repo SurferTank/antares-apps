@@ -10,12 +10,12 @@ from django.urls import reverse
 from django.utils.translation import ugettext as _
 from django_datatables_view.base_datatable_view import BaseDatatableView
 
-from antares.apps.core.constants import FieldDataType
+from antares.apps.core.enums  import FieldDataType
 from antares.apps.core.middleware.request import get_request
 from antares.apps.core.models import UserParameter
 from antares.apps.flow.exceptions.flow_exception import FlowException
 
-from ..constants import FlowActivityStatusType
+from ..enums  import FlowActivityStatusType
 from ..models import FlowActivity
 
 logger = logging.getLogger(__name__)

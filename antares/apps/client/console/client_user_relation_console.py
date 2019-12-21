@@ -11,7 +11,7 @@ from django.utils.translation import ugettext as _
 
 from antares.apps.core.middleware.request import get_request
 
-from ..constants import ClientRelationType
+from ..enums import ClientRelationType
 from ..models import Client
 from ..models import ClientUserRelation
 

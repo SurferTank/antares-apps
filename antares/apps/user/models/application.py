@@ -9,7 +9,7 @@ import js2py
 import urllib
 
 from ckeditor.fields import RichTextField
-from enumfields import EnumField
+
 from django.db import models
 from django.utils import timezone
 from django.utils.translation import ugettext as _
@@ -18,7 +18,7 @@ from mptt.models import MPTTModel, TreeForeignKey
 from antares.apps.core.middleware.request import get_request
 from django.conf import settings
 
-from ..constants import ApplicationScopeType
+from ..enums import ApplicationScopeType
 from django.urls.base import reverse
 
 logger = logging.getLogger(__name__)
@@ -40,8 +40,8 @@ class Application(MPTTModel):
     application_name = models.CharField(max_length=200)
     url = models.CharField(max_length=300, blank=True, null=True)
     route = models.CharField(max_length=300, blank=True, null=True)
-    scope = EnumField(
-        ApplicationScopeType, max_length=30, default=ApplicationScopeType.SELF)
+    scope = models.CharField(choices=ApplicationScopeType, 
+                             max_length=30, default=ApplicationScopeType.SELF)
     creation_date = models.DateTimeField(blank=True, null=True, editable=False)
     update_date = models.DateTimeField(blank=True, null=True, editable=False)
     author = models.ForeignKey(

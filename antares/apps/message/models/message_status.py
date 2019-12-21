@@ -11,13 +11,11 @@ from django.utils import timezone
 from django.utils.translation import ugettext_lazy as _
 
 from antares.apps.core.middleware.request import get_request
-from enumfields import EnumField
 from django.conf import settings
 
-from ..constants import MessageStatusType
-from antares.apps.core.constants import SystemModuleType
+from ..enums import MessageStatusType
+from antares.apps.core.enums import SystemModuleType
 from ..models.message import Message
-from antares.apps.message.constants import MessageStatusType
 
 logger = logging.getLogger(__name__)
 
@@ -29,9 +27,15 @@ class MessageStatus(models.Model):
         on_delete=models.PROTECT,
         db_column='message',
         related_name="status_set")
-    module = EnumField(SystemModuleType, max_length=30)
-    status = EnumField(
-        MessageStatusType, max_length=30, default=MessageStatusType.PENDING)
+    module =  models.CharField(
+        max_length=30,
+        choices=SystemModuleType.choices
+    )
+    status =  models.CharField(
+        max_length=30,
+        choices=MessageStatusType.choices, 
+        default=MessageStatusType.PENDING
+    )
     creation_date = models.DateTimeField(
         blank=False,
         null=False,

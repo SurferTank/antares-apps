@@ -7,10 +7,8 @@ from django.utils.translation import ugettext as _
 from antares.apps.core.middleware.request import get_request
 from django.conf import settings
 
-from ..constants import ActionTargetModuleType
-from ..constants import EnvironmentType
-from enumfields import EnumField
-from jinja2.environment import Environment
+from antares.apps.core.enums import ActionTargetModuleType
+from antares.apps.core.enums import EnvironmentType
 
 logger = logging.getLogger(__name__)
 
@@ -32,23 +30,27 @@ class ActionDefinition(models.Model):
         verbose_name=_(__name__ + ".definition_content"),
         help_text=_(__name__ + ".action_definition_contents"))
 
-    environment = EnumField(
-        EnvironmentType,
+    environment = models.CharField(
         max_length=10,
+        choices=EnvironmentType.choices,
         default=EnvironmentType.LOCAL,
         verbose_name=_(__name__ + ".environment"),
-        help_text=_(__name__ + ".environment_help"))
+        help_text=_(__name__ + ".environment_help")
+    )
+    
     executable_name = models.CharField(
         max_length=200,
         blank=True,
         verbose_name=_(__name__ + ".executable_name"),
         help_text=_(__name__ + ".executable_name_help"))
-    target_module = EnumField(
-        ActionTargetModuleType,
+    
+    target_module  = models.CharField(
         max_length=30,
+        choices=ActionTargetModuleType.choices,
         default=ActionTargetModuleType.DOCUMENT,
         verbose_name=_(__name__ + ".target_module"),
-        help_text=_(__name__ + ".target_module_help"))
+        help_text=_(__name__ + ".target_module_help")
+    )
     creation_date = models.DateTimeField(
         blank=False,
         null=False,

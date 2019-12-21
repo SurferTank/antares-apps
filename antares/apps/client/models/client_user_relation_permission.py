@@ -11,10 +11,9 @@ from django.utils import timezone
 from django.utils.translation import ugettext_lazy as _
 
 from antares.apps.core.middleware.request import get_request
-from enumfields import EnumField
 from django.conf import settings
 
-from ..constants import ClientRelationPermissionType
+from ..enums import ClientRelationPermissionType
 
 logger = logging.getLogger(__name__)
 
@@ -29,7 +28,10 @@ class ClientUserRelationPermission(models.Model):
         on_delete=models.PROTECT,
         related_name='permission_set',
         db_column='client_user_relation')
-    relation_type = EnumField(ClientRelationPermissionType, max_length=20)
+    relation_type   = models.CharField(
+        max_length=20,
+        choices=ClientRelationPermissionType.choices
+    )
     start_date = models.DateField(null=False)
     end_date = models.DateField(null=True)
     creation_date = models.DateTimeField(blank=True, null=True, editable=False)

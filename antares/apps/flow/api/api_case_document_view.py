@@ -3,10 +3,10 @@ import logging
 from django.utils.translation import ugettext as _
 from django_datatables_view.base_datatable_view import BaseDatatableView
 
-from antares.apps.core.constants import FieldDataType
+from antares.apps.core.enums import FieldDataType
 from antares.apps.core.middleware.request import get_request
 from antares.apps.core.models import UserParameter
-from antares.apps.document.constants import DocumentStatusType
+from antares.apps.document.enums import DocumentStatusType
 
 from ..exceptions import FlowException
 from ..models import FlowActivity

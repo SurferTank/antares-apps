@@ -4,9 +4,8 @@ import uuid
 from django.db import models
 from django.utils import timezone
 from django.utils.translation import ugettext as _
-from enumfields import EnumField
 
-from ..constants import AccountDocumentStatusType
+from ..enums import AccountDocumentStatusType
 from antares.apps.document.models.document_header import DocumentHeader
 
 logger = logging.getLogger(__name__)
@@ -21,7 +20,7 @@ class AccountDocument(models.Model):
     content = models.TextField(blank=True, null=True)
     reversed_by = models.TextField(blank=True, null=True)
     reverses_document = models.TextField(blank=True, null=True)
-    status = EnumField(AccountDocumentStatusType, max_length=30)
+    status = models.CharField(choices=AccountDocumentStatusType, max_length=30)
     creation_date = models.DateTimeField(blank=True, null=True, editable=False)
     update_date = models.DateTimeField(blank=True, null=True, editable=False)
 

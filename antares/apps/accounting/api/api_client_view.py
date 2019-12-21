@@ -12,7 +12,7 @@ from django.db.models import Sum
 from django.utils.translation import ugettext as _
 from django_datatables_view.base_datatable_view import BaseDatatableView
 from antares.apps.core.models import SystemParameter
-from antares.apps.core.constants import FieldDataType
+from antares.apps.core.enums import FieldDataType
 
 from antares.apps.client.models import Client
 from antares.apps.core.middleware.request import get_request

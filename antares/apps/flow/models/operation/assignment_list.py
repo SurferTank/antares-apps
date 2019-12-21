@@ -5,10 +5,9 @@ from django.db import models
 from django.utils import timezone
 from django.utils.translation import ugettext as _
 
-from enumfields import EnumField
 from django.conf import settings
 
-from antares.apps.flow.constants import AssignmentStrategyType
+from antares.apps.flow.enums import AssignmentStrategyType
 
 logger = logging.getLogger(__name__)
 
@@ -39,7 +38,10 @@ class AssignmentList(models.Model):
         db_column='activity_definition',
         blank=True,
         null=True)
-    assigment_strategy = EnumField(AssignmentStrategyType, max_length=30)
+    assigment_strategy =  models.CharField(
+        max_length=20,
+        choices=AssignmentStrategyType.choices
+    ) 
     creation_date = models.DateTimeField()
 
     def save(self, *args, **kwargs):

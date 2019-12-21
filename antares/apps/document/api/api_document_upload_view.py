@@ -17,7 +17,7 @@ from antares.apps.core.middleware.request import get_request
 
 from ..models import FormDefinition
 from ..types import Document
-from ..constants import DocumentStatusType
+from ..enums import DocumentStatusType
 from antares.apps.user.models import User
 
 logger = logging.getLogger(__name__)

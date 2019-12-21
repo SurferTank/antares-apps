@@ -4,10 +4,9 @@ import uuid
 from django.db import models
 from django.utils.translation import ugettext as _
 
-from enumfields import EnumField
 from django.conf import settings
 
-from antares.apps.flow.constants import FlowActivityStatusType
+from antares.apps.flow.enums import FlowActivityStatusType
 
 logger = logging.getLogger(__name__)
 
@@ -26,7 +25,10 @@ class ActivityLog(models.Model):
         related_name="activity_log_set")
     activity_id = models.CharField(max_length=255)
     contents = models.TextField(blank=True, null=True)
-    status = EnumField(FlowActivityStatusType, max_length=30)
+    status =  models.CharField(
+        max_length=20,
+        choices=FlowActivityStatusType.choices
+    ) 
     status_date = models.DateTimeField()
 
     def __str__(self):

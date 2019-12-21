@@ -11,11 +11,10 @@ from django.utils import timezone
 from django.utils.translation import ugettext_lazy as _
 
 from antares.apps.core.middleware.request import get_request
-from enumfields import EnumField
 from django.conf import settings
 
-from ..constants import ObligationType, ObligationStatusType
-from antares.apps.obligation.constants import ObligationStatusType
+from ..enums import ObligationType, ObligationStatusType,\
+        ObligationStatusType
 
 logger = logging.getLogger(__name__)
 
@@ -75,8 +74,8 @@ class ObligationVector(models.Model):
     due_date = models.DateTimeField()
     compliance_date = models.DateTimeField(blank=True, null=True)
     period = models.IntegerField()
-    status = EnumField(ObligationStatusType, max_length=30)
-    obligation_type = EnumField(ObligationType, max_length=30)
+    status = models.CharField(choices=ObligationStatusType.choices, max_length=30)
+    obligation_type = models.CharField(choices=ObligationType.choices, max_length=30)
     status_date = models.DateTimeField()
     creation_date = models.DateTimeField()
     update_date = models.DateTimeField()

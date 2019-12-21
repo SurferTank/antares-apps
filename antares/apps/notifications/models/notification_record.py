@@ -11,10 +11,9 @@ from django.utils import timezone
 from django.utils.translation import ugettext_lazy as _
 
 from antares.apps.core.middleware.request import get_request
-from enumfields import EnumField
 from django.conf import settings
 
-from ..constants import NotificationStatusType
+from ..enums import NotificationStatusType
 
 logger = logging.getLogger(__name__)
 
@@ -47,10 +46,11 @@ class NotificationRecord(models.Model):
         db_column='document_header',
         blank=True,
         null=True)
-    status = EnumField(
-        NotificationStatusType,
+    status = models.CharField(
         max_length=30,
-        default=NotificationStatusType.POSTED)
+        choices=NotificationStatusType.choices,
+        default=NotificationStatusType.POSTED
+    )
     update_date = models.DateTimeField()
     creation_date = models.DateTimeField()
     author = models.ForeignKey(

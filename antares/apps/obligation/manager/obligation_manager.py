@@ -10,13 +10,13 @@ from django.utils import timezone
 from django.utils.translation import ugettext as _
 import js2py
 
-from antares.apps.client.constants import ClientStatusType
+from antares.apps.client.enums  import ClientStatusType
 from antares.apps.client.models.client import Client
-from antares.apps.core.constants import FieldDataType, TimeUnitType
+from antares.apps.core.enums  import FieldDataType, TimeUnitType
 from antares.apps.core.manager.period_manager import PeriodManager
 from antares.apps.core.models import SystemParameter
 
-from ..constants import ObligationStatusType, ObligationType
+from ..enums  import ObligationStatusType, ObligationType
 from ..models import ClientObligation
 from ..models import ObligationRule, ObligationVector
 from builtins import classmethod

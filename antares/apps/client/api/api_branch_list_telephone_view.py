@@ -4,7 +4,7 @@ from django_datatables_view.base_datatable_view import BaseDatatableView
 import logging
 import uuid
 
-from ..constants import ItemStatusType, TelephoneItemType
+from ..enums import ItemStatusType, TelephoneItemType
 from ..models import TelephoneItem, ClientBranch
 
 logger = logging.getLogger(__name__)

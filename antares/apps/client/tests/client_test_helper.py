@@ -7,7 +7,7 @@ import logging
 
 from datetime import datetime
 from antares.apps.client.models import Client, ClientType
-from antares.apps.client.constants import ClientArchetype
+from antares.apps.client.enums import ClientArchetype
 from antares.apps.core.middleware import get_request
 
 logger = logging.getLogger(__name__)

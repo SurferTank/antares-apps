@@ -13,8 +13,8 @@ from lxml import objectify
 from antares.apps.accounting.models import AccountType
 from antares.apps.client.models.client import Client
 from antares.apps.client.models.client_branch import ClientBranch
-from antares.apps.core.constants import FieldDataType
-from antares.apps.core.constants import HrnModuleType, ScriptEngineType
+from antares.apps.core.enums import FieldDataType
+from antares.apps.core.enums import HrnModuleType, ScriptEngineType
 from antares.apps.core.middleware.request import get_request
 from antares.apps.core.models import ConceptType
 from antares.apps.core.models import HrnCode
@@ -23,9 +23,9 @@ from antares.apps.user.models import User
 from antares.apps.obligation.models import ObligationVector
 from djmoney.money import Money
 
-from ..constants import DocumentEventType, FormClassType
-from ..constants import DocumentStatusType, DocumentOriginType, DocumentAssociationType
-from ..constants import FormDefinitionStatusType
+from ..enums import DocumentEventType, FormClassType
+from ..enums import DocumentStatusType, DocumentOriginType, DocumentAssociationType
+from ..enums import FormDefinitionStatusType
 from ..exceptions import DocumentDoesNotExistException
 from ..exceptions import DocumentStatusException, InvalidDocumentValueException
 from ..exceptions import FormDefinitionNotFoundException, FormDefintionIsNotActiveException
@@ -2195,7 +2195,7 @@ class Document(object):
     def _process_modules_hooks(self):
         from antares.apps.accounting.manager import AccountManager
         from antares.apps.subscription.manager import SubscriptionManager
-        from antares.apps.obligation.constants import ObligationStatusType
+        from antares.apps.obligation.enums import ObligationStatusType
 
         SubscriptionManager.process_document_subscriptions(self)
         #if an account rule is set for the form_def we post it to the accounting system

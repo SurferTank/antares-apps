@@ -10,15 +10,13 @@ from lxml import etree
 from datetime import datetime
 from django.conf import settings
 
-from antares.apps.core.constants import FieldDataType
+from antares.apps.core.enums import FieldDataType
+from ..enums import FormDefinitionStatusType
 from antares.apps.core.middleware.request import get_request
 from antares.apps.core.models.system_parameter import SystemParameter
-from enumfields import EnumField
 
-from ..constants import FormDefinitionStatusType
 from ..exceptions import InvalidFormDefinitionException
 from antares.apps.core.manager import PeriodManager
-from antares.apps.document.constants import FormDefinitionStatusType
 
 logger = logging.getLogger(__name__)
 
@@ -47,10 +45,11 @@ class FormDefinition(models.Model):
     hrn_script = models.TextField(blank=True, null=True)
     print_xslt = models.TextField(blank=True, null=True)
     start_date = models.DateTimeField()
-    status = EnumField(
-        FormDefinitionStatusType,
-        max_length=30,
-        default=FormDefinitionStatusType.DEVELOPMENT)
+    status  = models.CharField(
+        max_length=20,
+        choices=FormDefinitionStatusType.choices,
+        default=FormDefinitionStatusType.DEVELOPMENT, 
+    )
     view_xslt = models.TextField(blank=True, null=True)
     creation_date = models.DateTimeField(blank=True, null=True, editable=False)
     update_date = models.DateTimeField(blank=True, null=True, editable=False)

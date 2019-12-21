@@ -4,14 +4,10 @@ import uuid
 from django.db import models
 from django.utils.translation import ugettext as _
 
-from antares.apps.core.constants import ScriptEngineType
-from antares.apps.core.constants import FieldDataType
-from enumfields import EnumField
+from antares.apps.core.enums import ScriptEngineType, FieldDataType
 from antares.apps.core.models.system_parameter import SystemParameter
 
-from antares.apps.flow.constants import PropertyType
-from antares.apps.flow.constants import FlowDataType
-from antares.apps.flow.constants import FormalParameterModeType
+from antares.apps.flow.enums import PropertyType, FlowDataType, FormalParameterModeType
 
 logger = logging.getLogger(__name__)
 
@@ -25,18 +21,31 @@ class PropertyDefinition(models.Model):
         db_column='flow_definition',
         blank=True,
         null=True)
-    data_type = EnumField(FlowDataType, max_length=30)
+    data_type = models.CharField(
+        max_length=20,
+        choices=FlowDataType.choices
+    ) 
     definition_site = models.CharField(max_length=7)
     display_name = models.CharField(max_length=200, blank=True, null=True)
     initial_value = models.CharField(max_length=255, blank=True, null=True)
     length = models.IntegerField(blank=True, null=True)
     property_id = models.CharField(max_length=200)
-    property_type = EnumField(PropertyType, max_length=30)
-    script_engine = EnumField(ScriptEngineType, max_length=30)
-    sub_data_type = EnumField(
-        FieldDataType, max_length=30, blank=True, null=True)
-    mode = EnumField(
-        FormalParameterModeType, max_length=30, blank=True, null=True)
+    property_type = models.CharField(
+        max_length=30,
+        choices=PropertyType.choices
+    ) 
+    script_engine = models.CharField(
+        max_length=30,
+        choices=ScriptEngineType.choices
+    ) 
+    sub_data_type = models.CharField(
+        max_length=20,
+        choices=FieldDataType.choices
+    ) 
+    mode = models.CharField(
+        max_length=20,
+        choices=FormalParameterModeType.choices
+    ) 
     catalog = models.CharField(max_length=200, blank=True, null=True)
 
     def save(self, *args, **kwargs):

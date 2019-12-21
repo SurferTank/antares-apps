@@ -5,13 +5,10 @@ from django.db import models
 from django.utils.translation import ugettext as _
 import js2py
 
-from antares.apps.core.constants import FieldDataType
-from enumfields import EnumField
-from antares.apps.flow.constants import FlowDataType
+from antares.apps.core.enums import FieldDataType
+from antares.apps.flow.enums import FlowDataType,  FlowBasicDataSubtype
 from django.db.transaction import TransactionManagementError
 from antares.apps.client.models import Client
-
-from antares.apps.flow.constants import FlowBasicDataSubtype
 from antares.apps.flow.models.definition import PropertyDefinition
 
 logger = logging.getLogger(__name__)
@@ -30,14 +27,20 @@ class FlowProperty(models.Model):
         db_column='flow_case',
         related_name='property_set')
     clob_value = models.BinaryField(blank=True, null=True)
-    data_type = EnumField(FlowDataType, max_length=30)
+    data_type = models.CharField(
+        max_length=30,
+        choices=FlowDataType.choices
+    )
     date_value = models.DateTimeField(blank=True, null=True)
     decimal_value = models.DecimalField(
         max_digits=19, decimal_places=2, blank=True, null=True)
     integer_value = models.BigIntegerField(blank=True, null=True)
     property_id = models.CharField(max_length=100)
     string_value = models.CharField(max_length=2000, blank=True, null=True)
-    sub_data_type = EnumField(FlowBasicDataSubtype, max_length=30)
+    sub_data_type = models.CharField(
+        max_length=30,
+        choices=FlowBasicDataSubtype.choices
+    )
     text_value = models.TextField(blank=True, null=True)
     boolean_value = models.NullBooleanField()
 

@@ -3,8 +3,7 @@ import uuid
 
 from django.db import models
 from django.utils.translation import ugettext as _
-from enumfields import EnumField
-from ..constants import DocumentStatusType
+from ..enums import DocumentStatusType
 
 logger = logging.getLogger(__name__)
 
@@ -16,11 +15,13 @@ class StatusLog(models.Model):
         editable=False,
         verbose_name=_(__name__ + ".id"),
         help_text=_(__name__ + ".primary_key_help"))
-    status = EnumField(
-        DocumentStatusType,
+    status = models.CharField(
         max_length=30,
+        choices=DocumentStatusType.choices,
+        default=DocumentStatusType.DRAFTED, 
         verbose_name=_(__name__ + ".status"),
-        help_text=_(__name__ + ".status_help"))
+        help_text=_(__name__ + ".status_help")
+    )
     status_date = models.DateTimeField(
         verbose_name=_(__name__ + ".status_date"),
         help_text=_(__name__ + ".status_date_help"))

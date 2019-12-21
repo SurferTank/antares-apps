@@ -10,9 +10,8 @@ from antares.apps.accounting.models import AccountBalance
 from antares.apps.accounting.models import AccountTransaction
 from antares.apps.core.middleware.request import get_request
 from django.conf import settings
-from enumfields import EnumField
 
-from antares.apps.core.constants import HrnModuleType, ScriptEngineType, FieldDataType
+from antares.apps.core.enums import HrnModuleType, ScriptEngineType, FieldDataType
 from antares.apps.core.models.system_parameter import SystemParameter
 
 logger = logging.getLogger(__name__)
@@ -63,11 +62,13 @@ class HrnCode(models.Model):
         help_text=_(__name__ + ".description_help"),
         blank=True,
         null=True)
-    module_type = EnumField(
-        HrnModuleType,
-        max_length=40,
+    module_type  = models.CharField(
+        max_length=20,
+        choices=HrnModuleType.choices,
+        default=HrnModuleType.DOCUMENT,
         verbose_name=_(__name__ + ".module_type"),
-        help_text=_(__name__ + ".module_type_help"))
+        help_text=_(__name__ + ".module_type_help")
+    )
     number_code = models.BigIntegerField(
         verbose_name=_(__name__ + ".number_code"),
         help_text=_(__name__ + ".number_code_help"),
@@ -189,7 +190,7 @@ class HrnCode(models.Model):
             language = ScriptEngineType.to_enum(
                 SystemParameter.find_one('DEFAULT_SCRIPT_ENGINE',
                                          FieldDataType.STRING,
-                                         ScriptEngineType.JAVASCRIPT.value))
+                                         ScriptEngineType.JAVASCRIPT))
         if execution_string is None:
             document.set_header_field(
                 'hrn_code',
@@ -251,7 +252,7 @@ class HrnCode(models.Model):
         language = ScriptEngineType.to_enum(
             SystemParameter.find_one('DEFAULT_SCRIPT_ENGINE',
                                      FieldDataType.STRING,
-                                     ScriptEngineType.JAVASCRIPT.value))
+                                     ScriptEngineType.JAVASCRIPT))
 
         if language == ScriptEngineType.PYTHON:
             # remember to return a dictionary with two values, hrn_string and
@@ -293,7 +294,7 @@ class HrnCode(models.Model):
         language = ScriptEngineType.to_enum(
             SystemParameter.find_one('DEFAULT_SCRIPT_ENGINE',
                                      FieldDataType.STRING,
-                                     ScriptEngineType.JAVASCRIPT.value))
+                                     ScriptEngineType.JAVASCRIPT))
 
         if language == ScriptEngineType.PYTHON:
             # remember to return a dictionary with two values, hrn_string and
@@ -340,7 +341,7 @@ class HrnCode(models.Model):
         language = ScriptEngineType.to_enum(
             SystemParameter.find_one('DEFAULT_SCRIPT_ENGINE',
                                      FieldDataType.STRING,
-                                     ScriptEngineType.JAVASCRIPT.value))
+                                     ScriptEngineType.JAVASCRIPT))
 
         if language == ScriptEngineType.PYTHON:
             # remember to return a dictionary with two values, hrn_string and
@@ -387,7 +388,7 @@ class HrnCode(models.Model):
         language = ScriptEngineType.to_enum(
             SystemParameter.find_one('DEFAULT_SCRIPT_ENGINE',
                                      FieldDataType.STRING,
-                                     ScriptEngineType.JAVASCRIPT.value))
+                                     ScriptEngineType.JAVASCRIPT))
 
         if language == ScriptEngineType.PYTHON:
             # remember to return a dictionary with two values, hrn_string and

@@ -5,9 +5,8 @@ from django.db import models
 from django.utils import timezone
 from django.utils.translation import ugettext as _
 
-from enumfields import EnumField
 
-from antares.apps.flow.constants import FlowDocumentRelationshipType
+from antares.apps.flow.enums import FlowDocumentRelationshipType
 
 logger = logging.getLogger(__name__)
 
@@ -26,7 +25,10 @@ class FlowDocument(models.Model):
         related_name='flow_document_set')
     creation_date = models.DateTimeField()
     update_date = models.DateTimeField()
-    relationship = EnumField(FlowDocumentRelationshipType, max_length=30)
+    relationship =  models.CharField(
+        max_length=30,
+        choices=FlowDocumentRelationshipType.choices
+    )
 
     def __str__(self):
         return str(self.id)

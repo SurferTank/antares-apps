@@ -4,9 +4,7 @@ import uuid
 from django.db import models
 from django.utils.translation import ugettext as _
 
-from enumfields import EnumField
-
-from antares.apps.flow.constants import DefinitionSiteType
+from antares.apps.flow.enums import DefinitionSiteType
 
 logger = logging.getLogger(__name__)
 
@@ -21,7 +19,9 @@ class ApplicationDefinition(models.Model):
         blank=True,
         null=True)
     application_id = models.CharField(max_length=100, blank=True, null=True)
-    definition_site = EnumField(DefinitionSiteType, max_length=30)
+    definition_site = models.CharField(
+        max_length=30,
+        choices = DefinitionSiteType.choices)
     description = models.TextField(blank=True, null=True)
     application_name = models.CharField(max_length=100, blank=True, null=True)
     url = models.CharField(max_length=255, blank=True, null=True)

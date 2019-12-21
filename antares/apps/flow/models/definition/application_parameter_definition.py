@@ -4,9 +4,9 @@ import uuid
 from django.db import models
 from django.utils.translation import ugettext as _
 
-from antares.apps.core.constants import FieldDataType
-from antares.apps.flow.constants import DefinitionSiteType, FlowDataType, PropertyType
-from enumfields import EnumField
+from antares.apps.core.enums import FieldDataType
+from antares.apps.flow.enums import DefinitionSiteType, FlowDataType, PropertyType
+
 
 logger = logging.getLogger(__name__)
 
@@ -20,17 +20,30 @@ class ApplicationParameterDefinition(models.Model):
         db_column='application_definition',
         blank=True,
         null=True)
-    data_type = EnumField(FlowDataType, max_length=30)
-    definition_site = EnumField(DefinitionSiteType, max_length=30)
+    data_type  = models.CharField(
+        max_length=20,
+        choices=FieldDataType.choices,
+        default=FieldDataType.STRING
+    )
+    definition_site = models.CharField(
+        max_length=30,
+        choices=DefinitionSiteType.choices
+    )
     display_name = models.CharField(max_length=200, blank=True, null=True)
     initial_value = models.CharField(max_length=255, blank=True, null=True)
     length = models.IntegerField(blank=True, null=True)
     order_number = models.IntegerField(blank=True, null=True)
     parameter_id = models.CharField(max_length=200)
-    property_type = EnumField(PropertyType, max_length=30)
-    sub_data_type = EnumField(
-        FieldDataType, max_length=30, blank=True, null=True)
-
+    property_type = models.CharField(
+        max_length=30,
+        choices=PropertyType.choices
+    )
+    sub_data_type = models.CharField(
+        max_length=30,
+        choices=FieldDataType.choices, 
+        blank=True, null=True
+    )
+   
     def __str__(self):
         return str(self.id)
 

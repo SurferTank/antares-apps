@@ -1,4 +1,4 @@
-from antares.apps.core.constants import FieldDataType
+from antares.apps.core.enums import FieldDataType
 from antares.apps.core.middleware.request import get_request
 from antares.apps.core.models import UserParameter
 from django.utils.translation import ugettext as _
@@ -6,7 +6,7 @@ from django_datatables_view.base_datatable_view import BaseDatatableView
 import logging
 import uuid
 
-from ..constants import ItemStatusType, AddressType
+from ..enums import ItemStatusType, AddressType
 from ..models import ClientBusinessClassification, ClientBranch
 
 logger = logging.getLogger(__name__)

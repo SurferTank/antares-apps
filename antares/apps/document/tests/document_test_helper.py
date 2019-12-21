@@ -7,7 +7,7 @@ import logging
 import os
 
 from ..models import FormDefinition, FormClass
-from ..constants import FormClassType, FormClassStatusType, FormDefinitionStatusType
+from ..enums import FormClassType, FormClassStatusType, FormDefinitionStatusType
 from antares.apps.user.models import User
 from datetime import datetime
 from antares.apps.client.tests.client_test_helper import ClientTestHelper

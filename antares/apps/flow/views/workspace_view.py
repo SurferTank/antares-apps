@@ -11,7 +11,7 @@ from django.views.generic import TemplateView
 
 from antares.apps.core.middleware.request import get_request
 
-from ..constants import FlowActivityStatusType, FlowPriorityType
+from ..enums  import FlowActivityStatusType, FlowPriorityType
 from ..exceptions import FlowException
 from ..manager import FlowManager
 from ..models import FlowActivity, FlowUserNotificationOption

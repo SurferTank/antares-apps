@@ -12,14 +12,15 @@ from typing import List, Dict
 from djmoney.money import Money
 
 from antares.apps.client.models import Client
-from antares.apps.core.constants import FieldDataType
+from antares.apps.core.enums import FieldDataType
 from antares.apps.core.models import ConceptType
 from antares.apps.core.models import SystemParameter
 from antares.apps.document.types import Document
 
-from ..constants import AccountDocumentStatusType
-from ..constants import TransactionEffectType, TransactionAffectedValueType, BalanceStatusType
-from ..exceptions import MissingAccountHeaderInformationException, NegativeAmountException
+from ..enums import AccountDocumentStatusType, TransactionEffectType,\
+     TransactionAffectedValueType, BalanceStatusType
+from ..exceptions import MissingAccountHeaderInformationException,\
+    NegativeAmountException
 from ..models import AccountBalance
 from ..models import AccountDocument
 from ..models import AccountRule

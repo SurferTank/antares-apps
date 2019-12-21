@@ -7,12 +7,10 @@ from django.utils import timezone
 from django.utils.translation import ugettext_lazy as _
 
 from antares.apps.core.middleware.request import get_request
-from enumfields import EnumField
 from django.conf import settings
 
-from ..constants import ClientRelationType
 from ..exceptions import ClientException
-from antares.apps.client.constants import ClientRelationType
+from antares.apps.client.enums import ClientRelationType
 
 logger = logging.getLogger(__name__)
 
@@ -30,7 +28,10 @@ class ClientUserRelation(models.Model):
         on_delete=models.PROTECT,
         related_name='child_client_relation_set',
         db_column='child_client')
-    relation_type = EnumField(ClientRelationType, max_length=20)
+    relation_type   = models.CharField(
+        max_length=20,
+        choices=ClientRelationType.choices
+    )
     start_date = models.DateField(null=False, blank=False)
     end_date = models.DateField(null=True, blank=True)
     creation_date = models.DateTimeField(blank=True, null=True, editable=False)

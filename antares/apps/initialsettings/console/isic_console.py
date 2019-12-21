@@ -7,7 +7,7 @@ import logging
 
 from django.utils.translation import ugettext as _
 
-from antares.apps.core.constants import LanguageType
+from antares.apps.core.enums import LanguageType
 
 from ..manager import IsicLoader
 

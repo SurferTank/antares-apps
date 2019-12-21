@@ -7,9 +7,8 @@ from django.utils import timezone
 from django.utils.translation import ugettext as _
 from mptt.models import MPTTModel, TreeForeignKey
 
-from antares.apps.core.constants import LanguageType
+from antares.apps.core.enums import LanguageType
 from antares.apps.core.middleware.request import get_request
-from enumfields import EnumField
 from django.conf import settings
 
 logger = logging.getLogger(__name__)
@@ -32,7 +31,11 @@ class IsicPosition(MPTTModel):
         on_delete=models.CASCADE)
     isic_name = models.CharField(max_length=2000)
     isic_code = models.CharField(max_length=200)
-    language = EnumField(LanguageType, max_length=20)
+    language = models.CharField(
+        max_length=20,
+        choices=LanguageType.choices,
+        default=LanguageType.ENGLISH 
+    )
     description = RichTextField(blank=True, null=True)
     creation_date = models.DateTimeField(
         blank=False,

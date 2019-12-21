@@ -12,9 +12,8 @@ from django.utils.translation import ugettext as _
 
 from antares.apps.core.middleware.request import get_request
 from django.conf import settings
-from enumfields import EnumField
 
-from ..constants import FormDefinitionACLAccessType
+from ..enums import FormDefinitionACLAccessType
 
 logger = logging.getLogger(__name__)
 
@@ -51,10 +50,11 @@ class FormDefinitionACL(models.Model):
         related_name='form_defintion_acl_set',
         blank=True,
         null=True)
-    access_type = EnumField(
-        FormDefinitionACLAccessType,
-        max_length=30,
-        default=FormDefinitionACLAccessType.NONE)
+    access_type   = models.CharField(
+        max_length=20,
+        choices=FormDefinitionACLAccessType.choices,
+        default=FormDefinitionACLAccessType.NONE
+    )
     author = models.ForeignKey(
         settings.AUTH_USER_MODEL,
         on_delete=models.PROTECT,

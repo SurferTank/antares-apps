@@ -8,7 +8,7 @@ import logging
 from dateutil import parser as dateparser
 from django.utils.translation import ugettext as _
 
-from antares.apps.core.constants import FieldDataType
+from antares.apps.core.enums import FieldDataType
 
 from ..types import Document
 

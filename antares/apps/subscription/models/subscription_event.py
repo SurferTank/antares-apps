@@ -11,14 +11,13 @@ from django.utils.translation import ugettext as _
 from lxml import objectify
 from lxml import etree
 
-from antares.apps.message.constants import MessageType
-from antares.apps.core.constants import ScriptEngineType, EnvironmentType, ActionTargetModuleType
+from antares.apps.message.enums import MessageType
+from antares.apps.core.enums import ScriptEngineType, EnvironmentType, ActionTargetModuleType
 from antares.apps.core.models import ActionDefinition
 from antares.apps.message.models import Message
-from enumfields import EnumField
 from antares.apps.document.models import FormDefinition
 
-from ..constants import EventType
+from ..enums import EventType
 from ..exceptions import SubscriptionException
 from ..models import SubscriptionAction, SubscriptionActionParameterMap
 
@@ -52,7 +51,7 @@ class SubscriptionEvent(models.Model):
         null=True)
     script_engine = models.CharField(max_length=255)
     condition_text = models.CharField(max_length=4000, blank=True, null=True)
-    event_type = EnumField(EventType, max_length=30)
+    event_type = models.CharField(choices=EventType.choices, max_length=30)
     subscription_id = models.CharField(max_length=255)
 
     def __str__(self):

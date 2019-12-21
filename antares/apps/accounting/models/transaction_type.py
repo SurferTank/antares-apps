@@ -8,8 +8,7 @@ from django.utils.translation import ugettext as _
 from antares.apps.core.middleware.request import get_request
 from django.conf import settings
 
-from ..constants import TransactionEffectType
-from enumfields import EnumField
+from ..enums import TransactionEffectType
 
 logger = logging.getLogger(__name__)
 
@@ -25,7 +24,7 @@ class TransactionType(models.Model):
     active = models.BooleanField(default=True)
     calculate_charges = models.BooleanField(default=True)
     description = RichTextField(blank=True, null=True)
-    effect = EnumField(TransactionEffectType, max_length=6)
+    effect = models.CharField(choices=TransactionEffectType, max_length=6)
     transaction_type_name = models.CharField(max_length=100)
     post_zeros = models.BooleanField(default=True)
     hrn_script = models.TextField(blank=True, null=True)

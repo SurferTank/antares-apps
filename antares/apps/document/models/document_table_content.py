@@ -3,8 +3,7 @@ import logging
 from django.db import models
 from django.utils.translation import ugettext as _
 
-from antares.apps.core.constants import FieldDataType
-from enumfields import EnumField
+from antares.apps.core.enums import FieldDataType
 
 logger = logging.getLogger(__name__)
 
@@ -26,7 +25,13 @@ class DocumentTableContent(models.Model):
         related_name='table_content_set')
     clob_value = models.CharField(max_length=255, blank=True, null=True)
     column_number = models.IntegerField(blank=True, null=True)
-    data_type = EnumField(FieldDataType, max_length=7, blank=True, null=True)
+    data_type  = models.CharField(
+        max_length=20,
+        choices=FieldDataType.choices,
+        default=FieldDataType.STRING, 
+        verbose_name=_(__name__ + ".data_type"),
+        help_text=_(__name__ + ".data_type_help")
+    )
     date_value = models.DateTimeField(blank=True, null=True)
     decimal_value = models.DecimalField(
         max_digits=19, decimal_places=2, blank=True, null=True)

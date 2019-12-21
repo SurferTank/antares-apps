@@ -4,8 +4,7 @@ import uuid
 from django.db import models
 from django.utils.translation import ugettext as _
 
-from antares.apps.core.constants import ActionType, ScriptEngineType, FieldDataType
-from enumfields import EnumField
+from antares.apps.core.enums import ActionType, ScriptEngineType, FieldDataType
 from antares.apps.core.models.system_parameter import SystemParameter
 
 logger = logging.getLogger(__name__)
@@ -24,9 +23,15 @@ class FlowActionDefinition(models.Model):
         db_column='action_definition',
         blank=True,
         null=True)
-    action_type = EnumField(
-        ActionType, max_length=30, default=ActionType.POST_ACTION)
-    script_engine = EnumField(ScriptEngineType, max_length=30)
+    action_type = models.CharField(
+        max_length=30,
+        choices=ActionType.choices, 
+        default=ActionType.POST_ACTION
+    )
+    script_engine =  models.CharField(
+        max_length=30,
+        choices=ScriptEngineType.choices
+    )
     content = models.CharField(max_length=2000, blank=True, null=True)
 
     def __str__(self):

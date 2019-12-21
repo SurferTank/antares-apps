@@ -17,7 +17,7 @@ from antares.apps.client.models import Client
 from antares.apps.core.models import ConceptType
 from antares.apps.accounting.models import AccountType
 
-from ..constants import FormDefinitionStatusType
+from ..enums import FormDefinitionStatusType
 from ..types import Document
 
 logger = logging.getLogger(__name__)

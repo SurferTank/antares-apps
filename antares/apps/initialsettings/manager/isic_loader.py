@@ -9,11 +9,11 @@ import os
 
 from django.utils.translation import ugettext as _
 
-from antares.apps.core.constants import LanguageType
+from antares.apps.core.enums import LanguageType
 
 from antares.apps.client.models import IsicPosition
 from django.conf import settings
-from antares.apps.core.constants import FieldDataType
+from antares.apps.core.enums import FieldDataType
 from antares.apps.core.models import SystemParameter
 
 logger = logging.getLogger(__name__)

@@ -4,8 +4,9 @@ from django.conf import settings
 from django.contrib.auth import REDIRECT_FIELD_NAME
 from ..exceptions import RoleDeniedException
 from django.shortcuts import resolve_url
-from django.utils.decorators import available_attrs
-from django.utils.six.moves.urllib.parse import urlparse
+#from django.utils.decorators import available_attrs
+from six.moves.urllib.parse import urlparse
+#from django.utils.six.moves.urllib.parse import urlparse
 
 
 def antares_user_passes_test(test_func,
@@ -18,7 +19,7 @@ def antares_user_passes_test(test_func,
     """
 
     def decorator(view_func):
-        @wraps(view_func, assigned=available_attrs(view_func))
+        #@wraps(view_func, assigned=available_attrs(view_func))
         def _wrapped_view(request, *args, **kwargs):
             if test_func(request.request.user):
                 return view_func(request, *args, **kwargs)

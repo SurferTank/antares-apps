@@ -11,12 +11,11 @@ from django.db import models
 from django.utils import timezone
 from django.utils.translation import ugettext_lazy as _
 
-from antares.apps.core.constants import ScriptEngineType, TimeUnitType
+from antares.apps.core.enums import ScriptEngineType, TimeUnitType
 from antares.apps.core.middleware.request import get_request
-from enumfields import EnumField
 from django.conf import settings
 
-from ..constants import ObligationOriginType, ObligationPeriodicityType, ObligationType
+from ..enums import ObligationOriginType, ObligationPeriodicityType, ObligationType
 
 logger = logging.getLogger(__name__)
 
@@ -56,11 +55,26 @@ class ObligationRule(models.Model):
     init_date_expression = models.TextField(blank=True, null=True)
     last_run = models.DateTimeField(blank=True, null=True, editable=False)
     next_run = models.DateTimeField(blank=True, null=True, editable=False)
-    obligation_type = EnumField(ObligationType, max_length=30)
-    origin = EnumField(ObligationOriginType, max_length=30)
-    periodicity_type = EnumField(ObligationPeriodicityType, max_length=30)
-    script_engine_type = EnumField(ScriptEngineType, max_length=30)
-    time_unit_type = EnumField(TimeUnitType, max_length=30)
+    obligation_type = models.CharField(
+        max_length=30,
+        choices=ObligationType.choices
+    )
+    origin = models.CharField(
+        max_length=30,
+        choices=ObligationOriginType.choices
+    )
+    periodicity_type = models.CharField(
+        max_length=30,
+        choices=ObligationPeriodicityType.choices
+    )
+    script_engine_type = models.CharField(
+        max_length=30,
+        choices=ScriptEngineType.choices
+    )
+    time_unit_type = models.CharField(
+        max_length=30,
+        choices=TimeUnitType.choices
+    )
     creation_date = models.DateTimeField(editable=False)
     update_date = models.DateTimeField(editable=False)
     saturdays_are_holiday = models.BooleanField(default=False)

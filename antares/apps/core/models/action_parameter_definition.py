@@ -4,9 +4,8 @@ import uuid
 from django.db import models
 from django.utils.translation import ugettext as _
 
-from antares.apps.core.constants import ActionParameterDirectionType
-from antares.apps.core.constants import FieldDataType
-from enumfields import EnumField
+from antares.apps.core.enums import ActionParameterDirectionType
+from antares.apps.core.enums import FieldDataType
 
 logger = logging.getLogger(__name__)
 
@@ -26,18 +25,20 @@ class ActionParameterDefinition(models.Model):
         null=True,
         verbose_name=_(__name__ + ".action_definition"),
         help_text=_(__name__ + ".action_definition_help"))
-    data_type = EnumField(
-        FieldDataType,
-        max_length=7,
+    data_type  = models.CharField(
+        max_length=30,
+        choices=FieldDataType.choices,
         default=FieldDataType.STRING,
         verbose_name=_(__name__ + ".data_type"),
-        help_text=_(__name__ + ".data_type_help"))
-    direction = EnumField(
-        ActionParameterDirectionType,
+        help_text=_(__name__ + ".data_type_help")
+    )
+    direction   = models.CharField(
         max_length=6,
+        choices=ActionParameterDirectionType.choices,
         default=ActionParameterDirectionType.IN,
         verbose_name=_(__name__ + ".direction"),
-        help_text=_(__name__ + ".direction_help"))
+        help_text=_(__name__ + ".direction_help")
+    )
     parameter_name = models.CharField(
         max_length=255,
         verbose_name=_(__name__ + ".parameter_name"),

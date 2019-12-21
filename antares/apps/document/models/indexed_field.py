@@ -4,8 +4,7 @@ import uuid
 from django.db import models
 from django.utils.translation import ugettext as _
 
-from antares.apps.core.constants import FieldDataType
-from enumfields import EnumField
+from antares.apps.core.enums import FieldDataType
 
 logger = logging.getLogger(__name__)
 
@@ -36,12 +35,13 @@ class IndexedField(models.Model):
         null=True,
         verbose_name=_(__name__ + ".clob_value"),
         help_text=_(__name__ + ".clob_value_help"))
-    data_type = EnumField(
-        FieldDataType,
-        max_length=30,
-        null=False,
+    data_type  = models.CharField(
+        max_length=20,
+        choices=FieldDataType.choices,
+        default=FieldDataType.STRING, 
         verbose_name=_(__name__ + ".data_type"),
-        help_text=_(__name__ + ".data_type_help"))
+        help_text=_(__name__ + ".data_type_help")
+    )
     date_value = models.DateTimeField(
         blank=True,
         null=True,

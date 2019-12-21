@@ -119,7 +119,7 @@ settings.configure(
     },
     ROOT_URLCONF='urls',
     INSTALLED_APPS=INSTALLED_APPS,
-    MIDDLEWARE_CLASSES=[
+    MIDDLEWARE=[
         'django.middleware.cache.UpdateCacheMiddleware',
         'django.contrib.sessions.middleware.SessionMiddleware',
         'django.middleware.locale.LocaleMiddleware',
@@ -128,12 +128,44 @@ settings.configure(
         'djng.middleware.AngularUrlMiddleware',
         'django.middleware.security.SecurityMiddleware',
         'django.contrib.auth.middleware.AuthenticationMiddleware',
-        'django.contrib.auth.middleware.SessionAuthenticationMiddleware',
         'django.contrib.messages.middleware.MessageMiddleware',
         'django.middleware.clickjacking.XFrameOptionsMiddleware',
         'antares.apps.core.middleware.request.RequestMiddleware',
         'debug_toolbar.middleware.DebugToolbarMiddleware',
         'django.middleware.cache.FetchFromCacheMiddleware',
+    ],
+    TEMPLATES = [
+        {
+            'BACKEND': 'django.template.backends.django.DjangoTemplates',
+            'DIRS': [os.path.join(os.path.join(BASE_DIR, 'antares'), 'templates')],
+            'APP_DIRS': True,
+            'OPTIONS': {
+                'context_processors': [
+                    'django.template.context_processors.debug',
+                    'django.template.context_processors.request',
+                    'django.contrib.auth.context_processors.auth',
+                    'django.contrib.messages.context_processors.messages',
+                    'django.template.context_processors.i18n',
+                    'django.template.context_processors.media',
+                    'django.template.context_processors.static',
+                    'django.template.context_processors.tz',
+                ],
+                'libraries': {
+                    'accounting_tags':
+                    'antares.apps.accounting.templatetags.accounting_tags',
+                    'core_tags':
+                    'antares.apps.core.templatetags.core_tags',
+                    'web_tags':
+                    'antares.apps.web.templatetags.web_tags',
+                    'notification_tags':
+                    'antares.apps.notifications.templatetags.notification_tags',
+                    'auth_tags':
+                    'antares.apps.user.templatetags.auth_tags',
+                    'flow_tags':
+                    'antares.apps.flow.templatetags.flow_tags',
+                }
+            },
+        },
     ],
     MEDIA_URL='/media/',
     MEDIA_ROOT=os.path.join(BASE_DIR, 'media'),

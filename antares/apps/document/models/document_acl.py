@@ -11,10 +11,9 @@ from django.utils import timezone
 from django.utils.translation import ugettext as _
 
 from antares.apps.core.middleware.request import get_request
-from enumfields import EnumField
 from django.conf import settings
 
-from ..constants import DocumentACLAccessType
+from ..enums import DocumentACLAccessType
 
 logger = logging.getLogger(__name__)
 
@@ -61,8 +60,8 @@ class DocumentACL(models.Model):
         blank=True,
         null=True)
     access_type = models.CharField(
-        DocumentACLAccessType,
         max_length=30,
+        choices = DocumentACLAccessType.choices,
         default=DocumentACLAccessType.NONE)
     creation_date = models.DateTimeField(
         blank=False,

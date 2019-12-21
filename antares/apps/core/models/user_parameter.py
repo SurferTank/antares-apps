@@ -7,9 +7,8 @@ from django.db import models
 from django.utils import timezone
 from django.utils.translation import ugettext as _
 
-from antares.apps.core.constants import FieldDataType
+from antares.apps.core.enums import FieldDataType
 from antares.apps.core.middleware.request import get_request
-from enumfields import EnumField
 from django.conf import settings
 
 from .system_parameter import SystemParameter
@@ -35,11 +34,13 @@ class UserParameter(models.Model):
         null=True,
         verbose_name=_(__name__ + ".description"),
         help_text=_(__name__ + ".description_help"))
-    data_type = EnumField(
-        FieldDataType,
+    data_type  = models.CharField(
         max_length=20,
+        choices=FieldDataType.choices,
+        default=FieldDataType.STRING, 
         verbose_name=_(__name__ + ".data_type"),
-        help_text=_(__name__ + ".data_type_help"))
+        help_text=_(__name__ + ".data_type_help")
+    )
     boolean_value = models.NullBooleanField(
         blank=True,
         null=True,

@@ -8,8 +8,7 @@ from django.utils.translation import ugettext as _
 
 from antares.apps.core.middleware.request import get_request
 from django.conf import settings
-from ..constants import ThirdPartyRecordStatusType, ThirdPartyChannelType
-from enumfields import EnumField
+from ..enums import ThirdPartyRecordStatusType, ThirdPartyChannelType
 
 logger = logging.getLogger(__name__)
 
@@ -21,14 +20,10 @@ class ThirdPartyRecord(models.Model):
         primary_key=True,
         default=uuid.uuid4,
         editable=False)
-    status = EnumField(
-        ThirdPartyRecordStatusType,
-        max_length=30,
-        default=ThirdPartyRecordStatusType.OPEN)
-    channel = EnumField(
-        ThirdPartyChannelType,
-        max_length=30,
-        default=ThirdPartyChannelType.WEB)
+    status = models.CharField(choices=ThirdPartyRecordStatusType.choices, max_length=30, 
+                              default=ThirdPartyRecordStatusType.OPEN)
+    channel = models.CharField(choices=ThirdPartyChannelType.choices, max_length=30, 
+                              default=ThirdPartyChannelType.WEB)
     client_branch = models.ForeignKey(
         'client.ClientBranch',
         on_delete=models.PROTECT,

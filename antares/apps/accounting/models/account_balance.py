@@ -10,14 +10,12 @@ from django.db import models
 from django.utils import timezone
 from django.utils.translation import ugettext as _
 
-from ..constants import BalanceStatusType
+from ..enums import BalanceStatusType
 from ..models.account_type import AccountType
 from antares.apps.core.models.concept_type import ConceptType
 from antares.apps.client.models.client import Client
 
 from antares.apps.document.models.document_header import DocumentHeader
-
-from enumfields import EnumField
 from djmoney.models.fields import MoneyField
 from djmoney.money import Money
 
@@ -79,8 +77,8 @@ class AccountBalance(models.Model):
     account_type = models.ForeignKey(
         "AccountType", on_delete=models.PROTECT, db_column='account_type')
 
-    balance_status = EnumField(
-        BalanceStatusType, max_length=10, default=BalanceStatusType.BALANCED)
+    balance_status = models.CharField(choices=BalanceStatusType, 
+                                      max_length=10, default=BalanceStatusType.BALANCED)
 
     calculation_date = models.DateTimeField()
     compliance_date = models.DateTimeField(blank=True, null=True)
