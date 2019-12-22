@@ -4,4 +4,4 @@ install:
 script:
   - tox
 env:
-  - TOXENV=django11
+  - TOXENV=django22
