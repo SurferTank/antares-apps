@@ -7,15 +7,17 @@ import logging
 import uuid
 
 from ckeditor.fields import RichTextField
+from django.conf import settings
+from django.contrib.auth.models import AnonymousUser
 from django.db import models
 from django.utils import timezone
 from django.utils.translation import ugettext_lazy as _
 from mptt.models import MPTTModel, TreeForeignKey
-from django.contrib.auth.models import AnonymousUser
-from .user import User
 
 from antares.apps.core.middleware.request import get_request
-from django.conf import settings
+
+from .user import User
+
 
 logger = logging.getLogger(__name__)
 

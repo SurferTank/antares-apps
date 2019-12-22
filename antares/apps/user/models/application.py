@@ -4,22 +4,23 @@ Created on Jul 25, 2016
 @author: leobelen
 '''
 import logging
-import uuid
-import js2py
 import urllib
+import uuid
 
 from ckeditor.fields import RichTextField
-from enumfields import EnumField
+from django.conf import settings
 from django.db import models
+from django.urls.base import reverse
 from django.utils import timezone
 from django.utils.translation import ugettext as _
+from enumfields import EnumField
+import js2py
 from mptt.models import MPTTModel, TreeForeignKey
 
 from antares.apps.core.middleware.request import get_request
-from django.conf import settings
 
 from ..constants import ApplicationScopeType
-from django.urls.base import reverse
+
 
 logger = logging.getLogger(__name__)
 

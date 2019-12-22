@@ -3,22 +3,23 @@ import logging
 from uuid import UUID
 import uuid
 
+from django.conf import settings
 from django.contrib.auth.models import AbstractUser
 from django.core.exceptions import PermissionDenied
-from django.urls import reverse
 from django.db import models
 from django.db.models import Q
+from django.urls import reverse
 from django.utils import timezone
 from django.utils.translation import ugettext_lazy as _
-from django.conf import settings
 
 from antares.apps.client.constants import ClientRelationType
 from antares.apps.core.middleware.request import get_request
 
 from ..exceptions import UserException
-from .user_role import UserRole
-from .user_org_unit import UserOrgUnit
 from .role_application import RoleApplication
+from .user_org_unit import UserOrgUnit
+from .user_role import UserRole
+
 
 logger = logging.getLogger(__name__)
 

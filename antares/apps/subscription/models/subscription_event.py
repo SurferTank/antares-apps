@@ -8,19 +8,20 @@ import uuid
 
 from django.db import models
 from django.utils.translation import ugettext as _
-from lxml import objectify
+from enumfields import EnumField
 from lxml import etree
+from lxml import objectify
 
-from antares.apps.message.constants import MessageType
 from antares.apps.core.constants import ScriptEngineType, EnvironmentType, ActionTargetModuleType
 from antares.apps.core.models import ActionDefinition
-from antares.apps.message.models import Message
-from enumfields import EnumField
 from antares.apps.document.models import FormDefinition
+from antares.apps.message.constants import MessageType
+from antares.apps.message.models import Message
 
 from ..constants import EventType
 from ..exceptions import SubscriptionException
 from ..models import SubscriptionAction, SubscriptionActionParameterMap
+
 
 logger = logging.getLogger(__name__)
 

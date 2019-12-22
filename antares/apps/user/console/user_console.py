@@ -10,6 +10,7 @@ from django.utils.translation import ugettext as _
 
 from ..models import User
 
+
 logger = logging.getLogger(__name__)
 
 

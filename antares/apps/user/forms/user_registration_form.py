@@ -1,15 +1,18 @@
 from datetime import datetime
-from django.utils.translation import ugettext as _
-from django import forms
-#from django.contrib.auth.forms import UserCreationForm
-from django.contrib.auth import get_user_model
-from ..constants import UserClassType
-from ..models import Role, UserRole, User
+
 from captcha.fields import ReCaptchaField
+from django import forms
+from django.contrib.auth import get_user_model
 from django.utils import timezone
+from django.utils.translation import ugettext as _
+
 from antares.apps.client.models import Client, ClientType
 
+from ..constants import UserClassType
+from ..models import Role, UserRole, User
 
+
+#from django.contrib.auth.forms import UserCreationForm
 class UserRegistrationForm(forms.Form):
     first_name = forms.CharField(
         max_length=30, required=False, help_text='Optional.')

@@ -17,6 +17,7 @@ from ..constants import ObligationType, ObligationStatusType
 from ..manager import ObligationManager
 from ..models import ObligationVector
 
+
 logger = logging.getLogger(__name__)
 
 

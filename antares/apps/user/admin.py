@@ -3,12 +3,12 @@ from mptt.admin import MPTTModelAdmin
 
 from .models import Application
 from .models import ApplicationParameter
-
 from .models import OrgUnit
 from .models import Role
 from .models import RoleApplication
 from .models import UserOrgUnit
 from .models import UserRole
+
 
 admin.site.register(UserOrgUnit)
 admin.site.register(OrgUnit, MPTTModelAdmin)

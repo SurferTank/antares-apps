@@ -1,11 +1,12 @@
 from functools import wraps
+from urllib.parse import urlparse
 
 from django.conf import settings
 from django.contrib.auth import REDIRECT_FIELD_NAME
-from ..exceptions import RoleDeniedException
 from django.shortcuts import resolve_url
 from django.utils.decorators import available_attrs
-from django.utils.six.moves.urllib.parse import urlparse
+
+from ..exceptions import RoleDeniedException
 
 
 def antares_user_passes_test(test_func,
