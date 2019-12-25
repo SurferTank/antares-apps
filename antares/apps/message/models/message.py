@@ -5,18 +5,18 @@ Created on Jul 9, 2016
 '''
 import logging
 import uuid
-from django.utils import timezone
 
+from django.conf import settings
 from django.db import models
+from django.utils import timezone
 from django.utils.translation import ugettext_lazy as _
-
 from enumfields import EnumField
+
+from antares.apps.core.middleware.request import get_request
+from antares.apps.document.models.document_header import DocumentHeader
 
 from ..constants import MessageType
-from antares.apps.document.models.document_header import DocumentHeader
-from antares.apps.core.middleware.request import get_request
-from enumfields import EnumField
-from django.conf import settings
+
 
 logger = logging.getLogger(__name__)
 

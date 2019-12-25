@@ -3,6 +3,12 @@ Created on Jul 5, 2016
 
 @author: leobelen
 '''
+import logging
+from uuid import UUID
+
+from django.core.exceptions import ObjectDoesNotExist
+from django.utils.translation import ugettext as _
+
 from antares.apps.core.constants import FieldDataType
 from antares.apps.core.middleware.request import get_request
 from antares.apps.core.models import UserParameter
@@ -10,14 +16,11 @@ from antares.apps.flow.constants import FlowActivityStatusType
 from antares.apps.flow.models.operation import FlowCase, FlowActivity
 from antares.apps.subscription.manager import SubscriptionManager
 from antares.apps.user.models import User
-from django.core.exceptions import ObjectDoesNotExist
-from django.utils.translation import ugettext as _
-import logging
-from uuid import UUID
 
 from ..constants import FlowDefinitionStatusType, TimeEstimationMethodType
 from ..manager import FlowAdminManager
 from ..models import FlowPackage
+
 
 logger = logging.getLogger(__name__)
 

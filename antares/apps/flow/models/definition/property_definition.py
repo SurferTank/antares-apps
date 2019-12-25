@@ -3,15 +3,15 @@ import uuid
 
 from django.db import models
 from django.utils.translation import ugettext as _
-
-from antares.apps.core.constants import ScriptEngineType
-from antares.apps.core.constants import FieldDataType
 from enumfields import EnumField
-from antares.apps.core.models.system_parameter import SystemParameter
 
-from antares.apps.flow.constants import PropertyType
+from antares.apps.core.constants import FieldDataType
+from antares.apps.core.constants import ScriptEngineType
+from antares.apps.core.models.system_parameter import SystemParameter
 from antares.apps.flow.constants import FlowDataType
 from antares.apps.flow.constants import FormalParameterModeType
+from antares.apps.flow.constants import PropertyType
+
 
 logger = logging.getLogger(__name__)
 

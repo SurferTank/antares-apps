@@ -6,27 +6,28 @@ Created on Jul 4, 2016
 import logging
 import os
 
+import dateutil.parser
 from django.utils.translation import ugettext as _
 from lxml import etree
 from lxml import objectify
-import dateutil.parser
 
-from antares.apps.core.constants import ScriptEngineType, FieldDataType,\
+from antares.apps.core.constants import ScriptEngineType, FieldDataType, \
     ActionType
+from antares.apps.core.constants import TimeUnitType
 from antares.apps.core.models import SystemParameter
 from antares.apps.document.models.form_definition import FormDefinition
+from antares.apps.flow.constants import FlowDefinitionStatusType, FlowAccessLevelType, DefinitionSiteType, PropertyType, FlowDataType, ParticipantType, ActivityType, FlowDefinitionAccessLevelType, FlowPriorityType
+from antares.apps.flow.exceptions import InvalidXPDLException, InvalidStatusException
 from antares.apps.flow.models.definition.flow_action_definition import FlowActionDefinition
 from antares.apps.user.models import Role, OrgUnit, User
 
-from ..constants import ExecutionModeType, FlowBasicDataSubtype, AssignmentStrategyType, TransitionType, FormalParameterModeType, ActivityApplicationDefinitionScopeType,\
+from ..constants import ExecutionModeType, FlowBasicDataSubtype, AssignmentStrategyType, TransitionType, FormalParameterModeType, ActivityApplicationDefinitionScopeType, \
     FlowActivityInstantiationType, TimeEstimationMethodType
-from antares.apps.flow.constants import FlowDefinitionStatusType, FlowAccessLevelType, DefinitionSiteType, PropertyType, FlowDataType, ParticipantType, ActivityType, FlowDefinitionAccessLevelType, FlowPriorityType
-from antares.apps.flow.exceptions import InvalidXPDLException, InvalidStatusException
 from ..models import ApplicationDefinition, ApplicationParameterDefinition, ParticipantDefinition, ActivityDefinition, ActivityApplicationDefinition
 from ..models import FlowActivityExtraTab, FlowActivityExtraTabParameter, FlowActivityForm, FlowActivityValidation, FlowActivityFormParameter
 from ..models import FlowPackage, FlowDefinition, FlowActivity
 from ..models import TransitionDefinition, PropertyDefinition, ActivityApplicationParameterDefinition
-from antares.apps.core.constants import TimeUnitType
+
 
 NS_MAP = {
     'subs':

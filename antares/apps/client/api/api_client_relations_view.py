@@ -1,15 +1,17 @@
-from antares.apps.core.constants import FieldDataType
-from antares.apps.core.middleware.request import get_request
-from antares.apps.core.models import UserParameter
-from django.urls import reverse
-
-from django.utils.translation import ugettext as _
-from django_datatables_view.base_datatable_view import BaseDatatableView
 import logging
 import uuid
 
+from django.urls import reverse
+from django.utils.translation import ugettext as _
+from django_datatables_view.base_datatable_view import BaseDatatableView
+
+from antares.apps.core.constants import FieldDataType
+from antares.apps.core.middleware.request import get_request
+from antares.apps.core.models import UserParameter
+
 from ..constants import ClientRelationType
 from ..models import ClientUserRelation, Client
+
 
 logger = logging.getLogger(__name__)
 
@@ -34,7 +36,7 @@ class ApiClientUserRelationsView(BaseDatatableView):
 
     def __init__(self):
         self.date_format_string = UserParameter.find_one(
-            get_request().user, 'CORE_TEMPLATE_DATE_FORMAT',
+            'CORE_TEMPLATE_DATE_FORMAT',
             FieldDataType.STRING, '%Y-%m-%d')
 
     def render_column(self, row, column):

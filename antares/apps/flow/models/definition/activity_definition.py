@@ -3,14 +3,15 @@ import uuid
 
 from django.db import models
 from django.utils.translation import ugettext as _
-
 from enumfields import EnumField
 
-from antares.apps.flow.constants import ActivityType, AssignmentStrategyType,\
+from antares.apps.flow.constants import ActivityType, AssignmentStrategyType, \
     ExecutionModeType, FlowActivityInstantiationType, FlowActivityInstantiationType
 from antares.apps.flow.constants import AssignmentStrategyType
 from antares.apps.flow.constants import ExecutionModeType
+
 from .transition_definition import TransitionDefinition
+
 
 logger = logging.getLogger(__name__)
 

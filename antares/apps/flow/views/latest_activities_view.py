@@ -9,6 +9,7 @@ from django.views.generic import TemplateView
 
 from ..constants import FlowActivityStatusType
 
+
 logger = logging.getLogger(__name__)
 
 

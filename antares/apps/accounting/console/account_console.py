@@ -7,11 +7,12 @@ Original version by Leonardo Belen<leobelen@gmail.com>
 import logging
 
 from django.utils.translation import ugettext as _
-
-from antares.apps.document.types import Document
 from typing import List
 
+from antares.apps.document.types import Document
+
 from ..manager import AccountManager
+
 
 logger = logging.getLogger(__name__)
 

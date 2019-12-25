@@ -6,6 +6,7 @@ from .models import AccountType
 from .models import GLAccountType
 from .models import TransactionType
 
+
 admin.site.register(GLAccountType, MPTTModelAdmin)
 admin.site.register(AccountRule)
 admin.site.register(AccountType)

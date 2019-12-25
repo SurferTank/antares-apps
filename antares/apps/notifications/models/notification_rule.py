@@ -7,13 +7,14 @@ import logging
 import uuid
 
 from ckeditor.fields import RichTextField
+from django.conf import settings
 from django.db import models
 from django.utils import timezone
 from django.utils.translation import ugettext_lazy as _
 
 from antares.apps.core.middleware.request import get_request
 from antares.apps.document.models.form_definition import FormDefinition
-from django.conf import settings
+
 
 logger = logging.getLogger(__name__)
 

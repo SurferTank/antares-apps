@@ -2,7 +2,6 @@ import logging
 
 from braces.views import AjaxResponseMixin, JSONResponseMixin
 from django.urls import reverse
-
 from django.utils.translation import ugettext as _
 from django.views.generic import View
 
@@ -10,6 +9,7 @@ from antares.apps.core.middleware.request import get_request
 
 from ..constants import FlowPriorityType
 from ..models import FlowCase
+
 
 logger = logging.getLogger(__name__)
 

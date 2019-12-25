@@ -8,8 +8,8 @@ import logging
 
 from django.utils import timezone
 from django.utils.translation import ugettext as _
-from typing import List, Dict
 from djmoney.money import Money
+from typing import List, Dict
 
 from antares.apps.client.models import Client
 from antares.apps.core.constants import FieldDataType
@@ -26,6 +26,7 @@ from ..models import AccountRule
 from ..models import AccountTransaction
 from ..models import AccountType
 from ..models import TransactionType
+
 
 logger = logging.getLogger(__name__)
 

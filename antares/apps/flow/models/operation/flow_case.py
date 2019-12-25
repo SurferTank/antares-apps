@@ -4,13 +4,13 @@ import uuid
 from django.db import models
 from django.utils import timezone
 from django.utils.translation import ugettext as _
-
 from enumfields import EnumField
 
-from antares.apps.flow.constants import FlowCaseStatusType, FlowDataType,\
-    FlowBasicDataSubtype
-from antares.apps.document.constants import DocumentStatusType
 from antares.apps.core.constants import FieldDataType
+from antares.apps.document.constants import DocumentStatusType
+from antares.apps.flow.constants import FlowCaseStatusType, FlowDataType, \
+    FlowBasicDataSubtype
+
 
 logger = logging.getLogger(__name__)
 

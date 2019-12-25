@@ -5,8 +5,6 @@ Created on 30/7/2016
 '''
 import logging
 
-from django.db.models import Q
-from django.utils import timezone
 from django.utils.translation import ugettext as _
 
 from antares.apps.core.middleware.request import get_request

@@ -4,9 +4,10 @@ Created on Nov 3, 2017
 @author: leobelen
 '''
 from rest_framework import generics
-from ..serializers import MessageSerializer
-from ..models import Message
 from rest_framework import permissions
+
+from ..models import Message
+from ..serializers import MessageSerializer
 
 
 class MessageDetailsApi(generics.RetrieveUpdateDestroyAPIView):

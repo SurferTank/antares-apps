@@ -4,10 +4,10 @@ import uuid
 from django.db import models
 from django.utils import timezone
 from django.utils.translation import ugettext as _
-
 from enumfields import EnumField
 
 from antares.apps.flow.constants import FlowDocumentRelationshipType
+
 
 logger = logging.getLogger(__name__)
 

@@ -3,12 +3,13 @@ Created on Nov 3, 2017
 
 @author: leobelen
 '''
-from rest_framework import mixins
 from rest_framework import generics
-from ..serializers import MessageSerializer
-from ..models import Message
+from rest_framework import mixins
 from rest_framework import permissions
+
 from ..constants import MessageType
+from ..models import Message
+from ..serializers import MessageSerializer
 from ..service import MessageManager
 
 

@@ -1,13 +1,14 @@
+from builtins import classmethod
 import logging
 import uuid
 
+from django.conf import settings
 from django.db import models
 from django.utils import timezone
 from django.utils.translation import ugettext as _
 
 from antares.apps.core.middleware.request import get_request
-from django.conf import settings
-from builtins import classmethod
+
 
 logger = logging.getLogger(__name__)
 

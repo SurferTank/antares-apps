@@ -7,10 +7,11 @@ import logging
 
 from django.utils.translation import ugettext as _
 
-from antares.apps.document.types import Document
 from antares.apps.document.models import DocumentHeader
+from antares.apps.document.types import Document
 
 from ..manager import SubscriptionManager
+
 
 logger = logging.getLogger(__name__)
 

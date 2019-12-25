@@ -3,9 +3,9 @@ Created on Jun 23, 2016
 
 @author: leobelen
 '''
+from django.utils.translation import ugettext as _
 from enumfields import Enum
 
-from django.utils.translation import ugettext as _
 from antares.apps.core.mixins import EnumUtilsMixin
 
 

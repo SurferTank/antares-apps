@@ -4,33 +4,33 @@ Created on Jul 11, 2016
 @author: leobelen
 '''
 import logging
+
+from babel.dates import parse_date
+from django.utils import timezone
+from django.utils.safestring import mark_safe
+from django.utils.translation import ugettext as _
 import js2py
 
-from django.utils import timezone
-from django.utils.translation import ugettext as _
-from babel.dates import parse_date
-
 from antares.apps.core.constants import ActionType
-from antares.apps.core.models import HrnCode
-from .assignment_manager import AssignmentManager
-from ..models import ActivityDefinition
-from ..models import FlowDefinition
-from ..models import TransitionDefinition
-from ..models import FlowActionDefinition
-from antares.apps.message.constants import MessageType
-from antares.apps.message.constants import MessageStatusType
 from antares.apps.core.constants import SystemModuleType, ScriptEngineType
-from django.utils.safestring import mark_safe
+from antares.apps.core.models import HrnCode
+from antares.apps.flow.constants import FlowDataType, FlowBasicDataSubtype
+from antares.apps.message.constants import MessageStatusType
+from antares.apps.message.constants import MessageType
+from antares.apps.message.models.message_status import MessageStatus
 from antares.apps.user.models import User
-
 
 from ..constants import FlowCaseSourceType, FlowCaseStatusType, FlowPriorityType, ActivityType, \
     FlowDocumentRelationshipType, FlowActivityStatusType, ExecutionModeType, TransitionType
 from ..exceptions import FlowException
+from ..models import ActivityDefinition
+from ..models import FlowActionDefinition
 from ..models import FlowCase, FlowActivity
+from ..models import FlowDefinition
 from ..models import FlowDocument, FlowProperty, ActivityLog
-from antares.apps.message.models.message_status import MessageStatus
-from antares.apps.flow.constants import FlowDataType, FlowBasicDataSubtype
+from ..models import TransitionDefinition
+from .assignment_manager import AssignmentManager
+
 
 logger = logging.getLogger(__name__)
 

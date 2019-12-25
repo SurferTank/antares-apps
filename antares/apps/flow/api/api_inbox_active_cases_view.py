@@ -6,7 +6,6 @@ Created on 21/8/2016
 import logging
 
 from django.urls import reverse
-
 from django.utils.translation import ugettext as _
 from django_datatables_view.base_datatable_view import BaseDatatableView
 
@@ -17,6 +16,7 @@ from antares.apps.flow.exceptions.flow_exception import FlowException
 
 from ..constants import FlowActivityStatusType
 from ..models import FlowActivity
+
 
 logger = logging.getLogger(__name__)
 

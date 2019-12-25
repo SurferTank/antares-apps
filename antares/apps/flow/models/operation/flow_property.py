@@ -2,17 +2,17 @@ import logging
 import uuid
 
 from django.db import models
+from django.db.transaction import TransactionManagementError
 from django.utils.translation import ugettext as _
+from enumfields import EnumField
 import js2py
 
-from antares.apps.core.constants import FieldDataType
-from enumfields import EnumField
-from antares.apps.flow.constants import FlowDataType
-from django.db.transaction import TransactionManagementError
 from antares.apps.client.models import Client
-
+from antares.apps.core.constants import FieldDataType
 from antares.apps.flow.constants import FlowBasicDataSubtype
+from antares.apps.flow.constants import FlowDataType
 from antares.apps.flow.models.definition import PropertyDefinition
+
 
 logger = logging.getLogger(__name__)
 

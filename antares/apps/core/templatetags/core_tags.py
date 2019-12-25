@@ -17,9 +17,8 @@ register = template.Library()
 def date_format(value):
     if (value is not None
             and (isinstance(value, datetime) or isinstance(value, date))):
-        if get_request().user.is_anonymous() == False:
-            date_format_string = UserParameter.find_one(
-                get_request().user, 'CORE_TEMPLATE_DATE_FORMAT',
+        if get_request().user.is_anonymous == False:
+            date_format_string = UserParameter.find_one('CORE_TEMPLATE_DATE_FORMAT',
                 FieldDataType.STRING, '%Y-%m-%d')
             if (date_format_string is not None):
                 return value.strftime(date_format_string)

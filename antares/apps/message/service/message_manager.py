@@ -3,14 +3,17 @@ Created on Nov 5, 2017
 
 @author: leobelen
 '''
-import logging
 import json
+import logging
+from typing import List
+
 from django.utils.translation import ugettext as _
+
+from antares.apps.core.middleware import get_request
+from antares.apps.document.constants import DocumentStatusType
 from antares.apps.document.models import FormDefinition
 from antares.apps.document.types import Document
-from antares.apps.document.constants import DocumentStatusType
-from antares.apps.core.middleware import get_request
-from typing import List
+
 
 logger = logging.getLogger(__name__)
 

@@ -1,18 +1,19 @@
-import logging
 import datetime
+import logging
 from uuid import UUID
 
 from ckeditor.fields import RichTextField
+from django.conf import settings
 from django.db import models
 from django.utils import timezone
 from django.utils.translation import ugettext as _
+from enumfields import EnumField
 
 from antares.apps.core.constants import FieldDataType
 from antares.apps.core.middleware.request import get_request
-from enumfields import EnumField
-from django.conf import settings
 
 from .system_parameter import SystemParameter
+
 
 logger = logging.getLogger(__name__)
 
@@ -147,7 +148,7 @@ class UserParameter(models.Model):
                                     False)
             if (default is not None):
                 user_param = UserParameter(id=user_paramId)
-                logger.debug("Creating the parameter with id " + user_paramId +
+                logger.debug("Creating the parameter with id " + str(user_paramId) +
                              " since it does not exist")
                 user_param.data_type = paramType
                 user_param.user = get_request().user

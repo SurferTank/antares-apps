@@ -6,18 +6,19 @@ Created on Jul 9, 2016
 import logging
 import uuid
 
+from django.conf import settings
 from django.db import models
 from django.utils import timezone
 from django.utils.translation import ugettext_lazy as _
-
-from antares.apps.core.middleware.request import get_request
 from enumfields import EnumField
-from django.conf import settings
+
+from antares.apps.core.constants import SystemModuleType
+from antares.apps.core.middleware.request import get_request
+from antares.apps.message.constants import MessageStatusType
 
 from ..constants import MessageStatusType
-from antares.apps.core.constants import SystemModuleType
 from ..models.message import Message
-from antares.apps.message.constants import MessageStatusType
+
 
 logger = logging.getLogger(__name__)
 

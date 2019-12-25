@@ -1,13 +1,13 @@
 import logging
 import uuid
 
+from django.conf import settings
 from django.db import models
 from django.utils.translation import ugettext as _
-
 from enumfields import EnumField
-from django.conf import settings
 
 from antares.apps.flow.constants import FlowActivityStatusType
+
 
 logger = logging.getLogger(__name__)
 

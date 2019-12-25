@@ -6,8 +6,11 @@ Created on Nov 5, 2017
 import logging
 
 from django.test import TransactionTestCase
-from ..service import MessageManager
+
 from antares.apps.document.tests.document_test_helper import DocumentTestHelper
+
+from ..service import MessageManager
+
 
 logger = logging.getLogger(__name__)
 

@@ -7,20 +7,20 @@ Original version by Leonardo Belen<leobelen@gmail.com>
 import logging
 import uuid
 
-from django.urls import reverse
-
 from django.db.models import Sum
+from django.urls import reverse
 from django.utils.translation import ugettext as _
 from django_datatables_view.base_datatable_view import BaseDatatableView
+from djmoney.money import Money
 
-from antares.apps.core.models import SystemParameter
-from antares.apps.core.constants import FieldDataType
 from antares.apps.client.models import Client
+from antares.apps.core.constants import FieldDataType
 from antares.apps.core.middleware.request import get_request
 from antares.apps.core.models import ConceptType
+from antares.apps.core.models import SystemParameter
 
 from ..models import AccountBalance
-from djmoney.money import Money
+
 
 logger = logging.getLogger(__name__)
 

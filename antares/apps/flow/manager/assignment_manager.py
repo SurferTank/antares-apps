@@ -10,6 +10,7 @@ from antares.apps.user.models import User
 
 from ..constants import AssignmentStrategyType
 
+
 logger = logging.getLogger(__name__)
 
 

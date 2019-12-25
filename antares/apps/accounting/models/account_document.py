@@ -6,8 +6,10 @@ from django.utils import timezone
 from django.utils.translation import ugettext as _
 from enumfields import EnumField
 
-from ..constants import AccountDocumentStatusType
 from antares.apps.document.models.document_header import DocumentHeader
+
+from ..constants import AccountDocumentStatusType
+
 
 logger = logging.getLogger(__name__)
 

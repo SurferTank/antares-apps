@@ -4,6 +4,7 @@ import uuid
 from django.db import models
 from django.utils.translation import ugettext as _
 
+
 logger = logging.getLogger(__name__)
 
 

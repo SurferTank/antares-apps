@@ -1,13 +1,16 @@
-import logging
-import babel.numbers
 import decimal
+import logging
 
+import babel.numbers
 from django import template
 from django.utils.safestring import mark_safe
-from antares.apps.core.models import SystemParameter
-from antares.apps.core.constants import FieldDataType
-from ..models import AccountBalance
 from djmoney.money import Money
+
+from antares.apps.core.constants import FieldDataType
+from antares.apps.core.models import SystemParameter
+
+from ..models import AccountBalance
+
 
 logger = logging.getLogger(__name__)
 

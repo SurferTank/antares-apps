@@ -1,9 +1,10 @@
 from django.conf.urls import url
 from django.contrib.auth.decorators import login_required
 
-from .api import ApiObligationPanelPendingView
 from .api import ApiObligationPanelCompliedView
+from .api import ApiObligationPanelPendingView
 from .views import ObligationPanelView
+
 
 app_name = 'antares.apps.obligation'
 

@@ -9,17 +9,17 @@ import uuid
 from django.db import models
 from django.utils import timezone
 from django.utils.translation import ugettext as _
+from djmoney.models.fields import MoneyField
+from djmoney.money import Money
+from enumfields import EnumField
+
+from antares.apps.client.models.client import Client
+from antares.apps.core.models.concept_type import ConceptType
+from antares.apps.document.models.document_header import DocumentHeader
 
 from ..constants import BalanceStatusType
 from ..models.account_type import AccountType
-from antares.apps.core.models.concept_type import ConceptType
-from antares.apps.client.models.client import Client
 
-from antares.apps.document.models.document_header import DocumentHeader
-
-from enumfields import EnumField
-from djmoney.models.fields import MoneyField
-from djmoney.money import Money
 
 logger = logging.getLogger(__name__)
 

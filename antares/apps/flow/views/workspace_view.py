@@ -3,8 +3,8 @@ Created on 18/8/2016
 
 @author: leobelen
 '''
-import logging
 import json
+import logging
 
 from django.utils.translation import ugettext as _
 from django.views.generic import TemplateView
@@ -15,6 +15,7 @@ from ..constants import FlowActivityStatusType, FlowPriorityType
 from ..exceptions import FlowException
 from ..manager import FlowManager
 from ..models import FlowActivity, FlowUserNotificationOption
+
 
 logger = logging.getLogger(__name__)
 

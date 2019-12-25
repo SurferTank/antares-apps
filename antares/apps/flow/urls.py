@@ -5,6 +5,7 @@ from .api import ApiCaseDocumentView
 from .api import ApiCaseHistoryView
 from .api import ApiCaseNoteListView
 from .api import ApiCasePropertiesView
+from .api import ApiCaseSetTrackingOptionView
 from .api import ApiCaseUpdateNameView
 from .api import ApiCaseUpdateNoteView
 from .api import ApiCaseUpdatePriorityView
@@ -13,10 +14,10 @@ from .api import ApiForwardView
 from .api import ApiInboxActiveCasesView
 from .api import ApiInboxCompletedCasesView
 from .api import ApiInboxCreatedCasesView
-from .api import ApiCaseSetTrackingOptionView
 from .views import InboxView
-from .views import WorkspaceView
 from .views import LatestActivitiesView
+from .views import WorkspaceView
+
 
 app_name = 'antares.apps.flow'
 

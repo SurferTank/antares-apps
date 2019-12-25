@@ -1,20 +1,20 @@
 import logging
 import uuid
 
-from django.urls import resolve
+from django.conf import settings
 from django.db import models
+from django.db.models import Avg
+from django.db.models import F
 from django.db.models import Q
+from django.urls import resolve
 from django.utils import timezone
 from django.utils.translation import ugettext as _
-from django.db.models import F
-from django.db.models import Avg
-from antares.apps.core.utils import DateUtils
-
 from enumfields import EnumField
-from django.conf import settings
-from antares.apps.core.constants import FieldDataType
 
+from antares.apps.core.constants import FieldDataType
+from antares.apps.core.utils import DateUtils
 from antares.apps.flow.constants import FlowActivityStatusType, FlowDataType
+
 
 logger = logging.getLogger(__name__)
 

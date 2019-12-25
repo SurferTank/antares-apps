@@ -6,6 +6,7 @@ from django.views.generic import View
 from ..manager import FlowManager
 from ..models import FlowActivity
 
+
 logger = logging.getLogger(__name__)
 
 

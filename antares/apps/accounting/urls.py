@@ -12,6 +12,7 @@ from .api import ApiConceptTypeView
 from .api import ApiPeriodView
 from .views import AccountingPanelView
 
+
 app_name = 'antares.apps.accounting'
 
 urlpatterns = [

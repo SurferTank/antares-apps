@@ -12,6 +12,7 @@ from antares.apps.document.types import Document
 
 from ..manager import NotificationManager
 
+
 logger = logging.getLogger(__name__)
 
 

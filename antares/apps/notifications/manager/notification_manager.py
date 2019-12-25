@@ -4,15 +4,16 @@ from django.utils import timezone
 from django.utils.translation import ugettext as _
 
 from antares.apps.core.constants import FieldDataType
-from antares.apps.message.constants import MessageStatusType
 from antares.apps.core.constants import SystemModuleType
-from antares.apps.message.models import MessageStatus
 from antares.apps.core.models.system_parameter import SystemParameter
 from antares.apps.document.types import Document
+from antares.apps.message.constants import MessageStatusType
+from antares.apps.message.models import MessageStatus
 from antares.apps.user.models import User
 
 from ..models import NotificationRecord
 from ..models import NotificationRule
+
 
 logger = logging.getLogger(__name__)
 

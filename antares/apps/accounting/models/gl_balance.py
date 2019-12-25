@@ -12,6 +12,7 @@ from django.utils.translation import ugettext as _
 from djmoney.models.fields import MoneyField
 from djmoney.money import Money
 
+
 logger = logging.getLogger(__name__)
 
 

@@ -5,6 +5,7 @@ from rest_framework.urlpatterns import format_suffix_patterns
 from .api import MessageApi
 from .api import MessageDetailsApi
 
+
 app_name = 'antares.apps.message'
 
 urlpatterns = [

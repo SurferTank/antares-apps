@@ -4,9 +4,12 @@ Created on Nov 3, 2017
 @author: leobelen
 '''
 import logging
+
 from rest_framework import serializers
-from ..models import Message
+
 from ..constants import MessageType
+from ..models import Message
+
 logger = logging.getLogger(__name__)
 
 

@@ -4,6 +4,7 @@ from django.contrib.auth.decorators import login_required
 from .api import ApiRemoteTerminalView
 from .views import RemoteTerminalView
 
+
 app_name = 'antares.apps.terminal'
 
 urlpatterns = [

@@ -4,9 +4,11 @@ import uuid
 from django.db import models
 from django.utils import timezone
 from django.utils.translation import ugettext as _
-from .account_balance import AccountBalance
 from djmoney.models.fields import MoneyField
 from djmoney.money import Money
+
+from .account_balance import AccountBalance
+
 
 logger = logging.getLogger(__name__)
 
