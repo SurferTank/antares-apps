@@ -50,8 +50,8 @@ class TerminalLog(models.Model):
         log = TerminalLog()
         log.command = actions
         log.result = return_message
-        with transaction.atomic():
-            log.save()
+        #with transaction.atomic():
+        #    log.save()
 
     class Meta:
         app_label = 'terminal'

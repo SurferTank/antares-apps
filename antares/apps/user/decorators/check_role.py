@@ -5,6 +5,7 @@ from django.conf import settings
 from django.contrib.auth import REDIRECT_FIELD_NAME
 from django.shortcuts import resolve_url
 from django.utils.decorators import available_attrs
+from django.contrib.auth.views import redirect_to_login
 
 from ..exceptions import RoleDeniedException
 
@@ -32,9 +33,8 @@ def antares_user_passes_test(test_func,
             if ((not login_scheme or login_scheme == current_scheme)
                     and (not login_netloc or login_netloc == current_netloc)):
                 path = request.request.get_full_path()
-            from django.contrib.auth.views import redirect_to_login
-            return redirect_to_login(path, resolved_login_url,
-                                     redirect_field_name)
+            #return redirect(settings.LOGIN_URL)
+            return redirect_to_login(path, resolved_login_url, None)
 
         return _wrapped_view
 
