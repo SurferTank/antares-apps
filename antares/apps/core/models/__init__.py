@@ -7,12 +7,13 @@ from .currency import Currency
 from .currency_exchange_rate import CurrencyExchangeRate
 from .holiday import Holiday
 from .hrn_code import HrnCode
+from .i18n_string import I18nString
 from .log import Log
 from .stored_file import StoredFile
 from .system_parameter import SystemParameter
 from .tag import Tag
 from .user_parameter import UserParameter
-from .i18n_string import I18nString
+
 
 __all__ = [
     'ActionDefinition',

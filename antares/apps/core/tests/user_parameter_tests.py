@@ -3,13 +3,15 @@ Created on Oct 6, 2017
 
 @author: leobelen
 '''
-import logging
 import datetime
+import logging
 from uuid import uuid4
 
 from django.test import TransactionTestCase
-from ..models import UserParameter
+
 from ..constants import FieldDataType
+from ..models import UserParameter
+
 
 logger = logging.getLogger(__name__)
 

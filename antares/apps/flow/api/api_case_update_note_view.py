@@ -7,6 +7,7 @@ from django.views.generic import View
 from ..models import FlowCase
 from ..models import FlowNote
 
+
 logger = logging.getLogger(__name__)
 
 

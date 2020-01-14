@@ -1,18 +1,18 @@
 import logging
 import uuid
 
+from django.conf import settings
 from django.db import models
 from django.db.models import Q
 from django.utils import timezone
 from django.utils.translation import ugettext_lazy as _
+from enumfields import EnumField
 
 from antares.apps.core.middleware.request import get_request
-from enumfields import EnumField
-from django.conf import settings
 
 from ..constants import ClientRelationType
 from ..exceptions import ClientException
-from antares.apps.client.constants import ClientRelationType
+
 
 logger = logging.getLogger(__name__)
 

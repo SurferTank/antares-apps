@@ -1,10 +1,13 @@
 #!/usr/bin/env python
 
+from distutils.sysconfig import get_python_lib
 import os
 import sys
-from distutils.sysconfig import get_python_lib
+
 from setuptools import setup, find_packages
+
 import antares
+
 
 README = open(os.path.join(os.path.dirname(__file__), 'README.rst')).read()
 

@@ -1,5 +1,5 @@
-import logging
 from datetime import datetime, date
+import logging
 
 from django import template
 
@@ -8,6 +8,7 @@ from antares.apps.core.middleware.request import get_request
 from ..constants import FieldDataType
 from ..models import SystemParameter
 from ..models import UserParameter
+
 
 logger = logging.getLogger(__name__)
 register = template.Library()

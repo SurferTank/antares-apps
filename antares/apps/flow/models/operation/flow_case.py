@@ -119,8 +119,8 @@ class FlowCase(models.Model):
         return properties
 
     def delete_flow_case(self):
-        for property in self.property_set.select_related().all():
-            property.delete()
+        for case_property in self.property_set.select_related().all():
+            case_property.delete()
         for transaction in self.flow_transition_set.select_related().all():
             transaction.delete()
         for doc in self.document_set.select_related().all():

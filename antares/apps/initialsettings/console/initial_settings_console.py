@@ -3,14 +3,16 @@ Created on Jul 5, 2016
 
 @author: leobelen
 """
+import logging
 import os
 
-from antares.apps.flow.manager import FlowAdminManager
-from django.utils.translation import ugettext as _
-import logging
 from django.conf import settings
+from django.utils.translation import ugettext as _
+
 from antares.apps.core.constants import FieldDataType
 from antares.apps.core.models import SystemParameter
+from antares.apps.flow.manager import FlowAdminManager
+
 
 logger = logging.getLogger(__name__)
 

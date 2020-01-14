@@ -3,29 +3,33 @@ Created on Nov 6, 2017
 
 @author: leobelen
 '''
+from datetime import datetime
 import logging
 import os
 
-from ..models import FormDefinition, FormClass
-from ..constants import FormClassType, FormClassStatusType, FormDefinitionStatusType
-from antares.apps.user.models import User
-from datetime import datetime
 from antares.apps.client.tests.client_test_helper import ClientTestHelper
+from antares.apps.user.models import User
+
+from ..constants import FormClassType, FormClassStatusType, FormDefinitionStatusType
+from ..models import FormDefinition, FormClass
 
 logger = logging.getLogger(__name__)
 
-
 class DocumentTestHelper(object):
     '''
-    Defines functions to help on the document tests, so we dont have to write the same stuff over and over again. 
+    Defines functions to help on the document tests, so we don't 
+    have to write the same stuff over and over again. 
     '''
+    def get_test_form_id(self):
+        return "AccountForm-1"
 
     def __init__(self):
-        with open(
-                os.path.join(
+        xmlFile = os.path.join(
                     os.path.dirname(__file__), "..", "xml", "working",
-                    "AccountForm-1.xml"), "r") as xml:
-            self.form_xml = xml.read()
+                    self.get_test_form_id() + ".xml")
+        print("******************" + xmlFile)
+        with open(xmlFile, "r") as xml:
+            self.form_xml = str(xml.read())
             self.client_helper = ClientTestHelper()
 
     def create_test_form_class(self):
@@ -55,5 +59,4 @@ class DocumentTestHelper(object):
         logger.info("form definition with id " + form_def.id + " created")
         return form_def
 
-    def get_test_form_id(self):
-        return "AccountForm-1"
+   

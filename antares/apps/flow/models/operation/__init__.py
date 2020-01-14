@@ -9,6 +9,7 @@ from .flow_property import FlowProperty
 from .flow_user_notification_option import FlowUserNotificationOption
 from .reassigment_log import ReassigmentLog
 
+
 __all__ = [
     'ActivityLog',
     'AssignmentList',

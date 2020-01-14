@@ -5,11 +5,11 @@ Original version by Leonardo Belen<leobelen@gmail.com>
 """
 
 import logging
+from typing import List, Dict
 
 from django.utils import timezone
 from django.utils.translation import ugettext as _
 from djmoney.money import Money
-from typing import List, Dict
 
 from antares.apps.client.models import Client
 from antares.apps.core.constants import FieldDataType

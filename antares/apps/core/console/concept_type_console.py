@@ -9,6 +9,7 @@ from django.utils.translation import ugettext as _
 
 from ..models import ConceptType
 
+
 logger = logging.getLogger(__name__)
 
 

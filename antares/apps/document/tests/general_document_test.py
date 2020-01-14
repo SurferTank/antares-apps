@@ -2,10 +2,12 @@ import logging
 
 from django.test import TransactionTestCase
 
-from ..types import Document
-from antares.apps.document.constants import DocumentStatusType
 from antares.apps.core.middleware import get_request
+from antares.apps.document.constants import DocumentStatusType
+
+from ..types import Document
 from .document_test_helper import DocumentTestHelper
+
 
 logger = logging.getLogger(__name__)
 

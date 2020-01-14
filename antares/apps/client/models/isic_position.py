@@ -2,15 +2,16 @@ import logging
 import uuid
 
 from ckeditor.fields import RichTextField
+from django.conf import settings
 from django.db import models
 from django.utils import timezone
 from django.utils.translation import ugettext as _
+from enumfields import EnumField
 from mptt.models import MPTTModel, TreeForeignKey
 
 from antares.apps.core.constants import LanguageType
 from antares.apps.core.middleware.request import get_request
-from enumfields import EnumField
-from django.conf import settings
+
 
 logger = logging.getLogger(__name__)
 

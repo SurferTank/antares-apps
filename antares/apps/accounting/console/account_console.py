@@ -5,9 +5,9 @@ Original version by Leonardo Belen<leobelen@gmail.com>
 """
 
 import logging
+from typing import List
 
 from django.utils.translation import ugettext as _
-from typing import List
 
 from antares.apps.document.types import Document
 

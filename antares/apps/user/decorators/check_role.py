@@ -3,9 +3,9 @@ from urllib.parse import urlparse
 
 from django.conf import settings
 from django.contrib.auth import REDIRECT_FIELD_NAME
+from django.contrib.auth.views import redirect_to_login
 from django.shortcuts import resolve_url
 from django.utils.decorators import available_attrs
-from django.contrib.auth.views import redirect_to_login
 
 from ..exceptions import RoleDeniedException
 

@@ -3,6 +3,7 @@ Created on Jul 22, 2016
 
 @author: leobelen
 '''
+from builtins import classmethod
 import logging
 
 from dateutil.relativedelta import relativedelta
@@ -19,7 +20,7 @@ from antares.apps.core.models import SystemParameter
 from ..constants import ObligationStatusType, ObligationType
 from ..models import ClientObligation
 from ..models import ObligationRule, ObligationVector
-from builtins import classmethod
+
 
 logger = logging.getLogger(__name__)
 

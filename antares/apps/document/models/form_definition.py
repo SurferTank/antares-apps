@@ -1,24 +1,24 @@
+from datetime import datetime
 import logging
 import os
 
+from django.conf import settings
 from django.db import models
+from django.db.models import Q
 from django.utils import timezone
 from django.utils.translation import ugettext as _
-from django.db.models import Q
-from lxml import objectify
+from enumfields import EnumField
 from lxml import etree
-from datetime import datetime
-from django.conf import settings
+from lxml import objectify
 
 from antares.apps.core.constants import FieldDataType
+from antares.apps.core.manager import PeriodManager
 from antares.apps.core.middleware.request import get_request
 from antares.apps.core.models.system_parameter import SystemParameter
-from enumfields import EnumField
-
-from ..constants import FormDefinitionStatusType
-from ..exceptions import InvalidFormDefinitionException
-from antares.apps.core.manager import PeriodManager
 from antares.apps.document.constants import FormDefinitionStatusType
+
+from ..exceptions import InvalidFormDefinitionException
+
 
 logger = logging.getLogger(__name__)
 
@@ -108,8 +108,7 @@ class FormDefinition(models.Model):
                 _(__name__ + ".incomplete_form_id_definition"))
 
         definition_obj = FormDefinition.set_blank_header_xml(definition_obj)
-        self.definition = etree.tostring(
-            definition_obj, encoding='UTF-8', xml_declaration=False)
+        self.definition = etree.tostring(definition_obj, encoding='unicode', xml_declaration=False)
         self.verify_and_create_supporting_files(True)
         return self
 

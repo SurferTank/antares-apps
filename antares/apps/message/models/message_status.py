@@ -14,7 +14,6 @@ from enumfields import EnumField
 
 from antares.apps.core.constants import SystemModuleType
 from antares.apps.core.middleware.request import get_request
-from antares.apps.message.constants import MessageStatusType
 
 from ..constants import MessageStatusType
 from ..models.message import Message

@@ -3,10 +3,11 @@ import uuid
 
 from django.db import models
 from django.utils.translation import ugettext as _
+from enumfields import EnumField
 
 from antares.apps.core.constants import ActionParameterDirectionType
 from antares.apps.core.constants import FieldDataType
-from enumfields import EnumField
+
 
 logger = logging.getLogger(__name__)
 

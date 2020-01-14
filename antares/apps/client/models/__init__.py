@@ -14,6 +14,7 @@ from .isic_position import IsicPosition
 from .social_network_item import SocialNetworkItem
 from .telephone_item import TelephoneItem
 
+
 __all__ = [
     'AddressItem',
     'AttributeDefinition',

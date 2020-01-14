@@ -16,6 +16,7 @@ from .models import IsicPosition
 from .models import SocialNetworkItem
 from .models import TelephoneItem
 
+
 admin.site.register(ClientIdentificationType)
 admin.site.register(AttributeDefinition)
 admin.site.register(ClientType)

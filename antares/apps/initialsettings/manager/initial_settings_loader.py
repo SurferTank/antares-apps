@@ -4,6 +4,7 @@ from django.utils.translation import ugettext as _
 
 from ..constants import SettingsGroupType
 
+
 logger = logging.getLogger(__name__)
 
 

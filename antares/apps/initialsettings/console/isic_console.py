@@ -11,6 +11,7 @@ from antares.apps.core.constants import LanguageType
 
 from ..manager import IsicLoader
 
+
 logger = logging.getLogger(__name__)
 
 

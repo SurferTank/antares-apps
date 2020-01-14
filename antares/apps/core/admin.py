@@ -10,6 +10,7 @@ from .models import HrnCode
 from .models import SystemParameter
 from .models import UserParameter
 
+
 admin.site.register(ConceptType, MPTTModelAdmin)
 admin.site.register(Currency)
 admin.site.register(Holiday)

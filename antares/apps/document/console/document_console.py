@@ -12,6 +12,7 @@ from antares.apps.core.constants import FieldDataType
 
 from ..types import Document
 
+
 logger = logging.getLogger(__name__)
 
 

@@ -5,9 +5,9 @@ Created on Jul 9, 2016
 '''
 
 from django.utils.translation import ugettext as _
-from antares.apps.core.mixins import EnumUtilsMixin
-
 from enumfields import Enum
+
+from antares.apps.core.mixins import EnumUtilsMixin
 
 
 class EventType(EnumUtilsMixin, Enum):

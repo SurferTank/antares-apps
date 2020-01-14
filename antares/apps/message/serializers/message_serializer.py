@@ -10,6 +10,7 @@ from rest_framework import serializers
 from ..constants import MessageType
 from ..models import Message
 
+
 logger = logging.getLogger(__name__)
 
 

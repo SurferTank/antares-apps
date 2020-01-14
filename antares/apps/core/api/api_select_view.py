@@ -7,7 +7,9 @@ import logging
 
 from braces.views import AjaxResponseMixin, JSONResponseMixin
 from django.views.generic import View
+
 from antares.apps.core.models.catalog import Catalog
+
 
 logger = logging.getLogger(__name__)
 

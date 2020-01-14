@@ -1,11 +1,12 @@
 import logging
 import uuid
 
+from django.conf import settings
 from django.db import models
 from django.utils.translation import ugettext as _
 
 from antares.apps.core.models import ActionDefinition
-from django.conf import settings
+
 
 logger = logging.getLogger(__name__)
 

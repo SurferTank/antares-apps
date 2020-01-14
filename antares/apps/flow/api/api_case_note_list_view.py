@@ -10,6 +10,7 @@ from antares.apps.core.models import UserParameter
 from ..exceptions import FlowException
 from ..models import FlowNote, FlowActivity
 
+
 logger = logging.getLogger(__name__)
 
 

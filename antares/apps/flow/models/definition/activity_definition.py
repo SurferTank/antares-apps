@@ -6,10 +6,8 @@ from django.utils.translation import ugettext as _
 from enumfields import EnumField
 
 from antares.apps.flow.constants import ActivityType, AssignmentStrategyType, \
-    ExecutionModeType, FlowActivityInstantiationType, FlowActivityInstantiationType
-from antares.apps.flow.constants import AssignmentStrategyType
-from antares.apps.flow.constants import ExecutionModeType
-
+    ExecutionModeType, FlowActivityInstantiationType
+    
 from .transition_definition import TransitionDefinition
 
 

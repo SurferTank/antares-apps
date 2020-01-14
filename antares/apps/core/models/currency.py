@@ -1,11 +1,12 @@
 import logging
 
+from django.conf import settings
 from django.db import models
 from django.utils import timezone
 from django.utils.translation import ugettext as _
 
 from antares.apps.core.middleware.request import get_request
-from django.conf import settings
+
 
 logger = logging.getLogger(__name__)
 

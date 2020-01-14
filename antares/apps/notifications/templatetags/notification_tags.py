@@ -5,6 +5,7 @@ Created on 28 sep. 2016
 '''
 from django import template
 
+
 register = template.Library()
 
 

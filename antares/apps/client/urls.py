@@ -11,6 +11,7 @@ from .api import ApiClientIdView
 from .api import ApiClientUserRelationsView
 from .views import ClientPanelView
 
+
 app_name = 'antares.apps.client'
 
 urlpatterns = [

@@ -10,6 +10,7 @@ from .form_definition_acl import FormDefinitionACL
 from .indexed_field import IndexedField
 from .status_log import StatusLog
 
+
 __all__ = [
     'DocumentField',
     'DocumentHeader',

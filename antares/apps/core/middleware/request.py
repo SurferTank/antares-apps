@@ -1,6 +1,8 @@
-from threading import current_thread
-from django.utils.deprecation import MiddlewareMixin
 import logging
+from threading import current_thread
+
+from django.utils.deprecation import MiddlewareMixin
+
 
 logger = logging.getLogger(__name__)
 

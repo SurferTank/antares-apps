@@ -1,15 +1,17 @@
 import logging
 import uuid
 
+from django.conf import settings
 from django.db import models
 from django.db import transaction
 from django.utils import timezone
 from django.utils.translation import ugettext as _
+from enumfields import EnumField
 
 from antares.apps.core.middleware.request import get_request
-from django.conf import settings
+
 from ..constants import ThirdPartyRecordStatusType, ThirdPartyChannelType
-from enumfields import EnumField
+
 
 logger = logging.getLogger(__name__)
 

@@ -13,13 +13,13 @@ Including another URLconf
     1. Import the include() function: from django.conf.urls import url, include
     2. Add a URL to urlpatterns:  url(r'^blog/', include('blog.urls'))
 """
+from django.conf import settings
 from django.conf.urls import url, include
 from django.conf.urls.i18n import i18n_patterns
 from django.contrib import admin
 from django.views.i18n import JavaScriptCatalog
 from django.views.static import serve as staticServe
 
-from django.conf import settings
 from antares.apps.accounting import urls as accountingUrls
 from antares.apps.client import urls as clientUrls
 from antares.apps.core import urls as coreUrls
@@ -30,6 +30,7 @@ from antares.apps.subscription import urls as subscriptionUrls
 from antares.apps.terminal import urls as terminalUrls
 from antares.apps.thirdparty import urls as thirdpartyUrls
 from antares.apps.user import urls as user_urls
+
 
 urlpatterns = i18n_patterns(
     url('^markdown/', include('django_markdown.urls')),

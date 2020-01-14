@@ -8,6 +8,7 @@ from .gl_balance import GLBalance
 from .gl_transaction import GLTransaction
 from .transaction_type import TransactionType
 
+
 __all__ = [
     'AccountBalance',
     'AccountDocument',

@@ -11,6 +11,7 @@ from ..constants import FlowBasicDataSubtype
 from ..exceptions import FlowException
 from ..models import FlowActivity, FlowProperty
 
+
 logger = logging.getLogger(__name__)
 
 

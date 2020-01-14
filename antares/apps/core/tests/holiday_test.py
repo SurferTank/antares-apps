@@ -1,5 +1,7 @@
-from django.test import TransactionTestCase
 from datetime import date
+
+from django.test import TransactionTestCase
+
 from ..models import Holiday
 
 

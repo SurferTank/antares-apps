@@ -1,16 +1,17 @@
 import logging
 
+from django.conf import settings
 from django.db import models
 from django.utils import timezone
 from django.utils.translation import ugettext as _
+from enumfields import EnumField
+from jinja2.environment import Environment
 
 from antares.apps.core.middleware.request import get_request
-from django.conf import settings
 
 from ..constants import ActionTargetModuleType
 from ..constants import EnvironmentType
-from enumfields import EnumField
-from jinja2.environment import Environment
+
 
 logger = logging.getLogger(__name__)
 

@@ -1,14 +1,17 @@
-from antares.apps.core.middleware.request import get_request
+import logging
+import uuid
+
 from django.conf import settings
+from django.contrib.auth.models import AnonymousUser
 from django.db import models
 from django.utils import timezone
 from django.utils.translation import ugettext as _
 from enumfields import EnumField
-import logging
-import uuid
-from django.contrib.auth.models import AnonymousUser
+
+from antares.apps.core.middleware.request import get_request
 
 from ..constants import ClientStatusType, ClientGenderType
+
 
 logger = logging.getLogger(__name__)
 

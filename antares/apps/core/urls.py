@@ -1,8 +1,9 @@
 from django.conf.urls import url
 from django.contrib.auth.decorators import login_required
 
-from .api import ApiSelectView
 from .api import ApiAutocompleteView
+from .api import ApiSelectView
+
 
 app_name = 'antares.apps.core'
 

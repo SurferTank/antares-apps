@@ -6,15 +6,16 @@ Created on 16/8/2016
 
 import logging
 
+from django.conf import settings
 from django.shortcuts import render
 from django.views.generic import View
 
 from antares.apps.core.middleware.request import get_request
-from django.conf import settings
 
 from ..constants import FormDefinitionStatusType
 from ..models import FormDefinition
 from ..types import Document
+
 
 logger = logging.getLogger(__name__)
 

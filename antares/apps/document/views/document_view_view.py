@@ -6,12 +6,12 @@ Created on 16/8/2016
 
 import logging
 
+from django.conf import settings
 from django.shortcuts import render
 from django.views.generic import View
 
-from django.conf import settings
-
 from ..types import Document
+
 
 logger = logging.getLogger(__name__)
 

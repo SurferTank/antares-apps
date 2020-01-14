@@ -1,11 +1,12 @@
 import logging
-import js2py
 
 from django import template
-from django.utils.safestring import mark_safe
 from django.urls import reverse
+from django.utils.safestring import mark_safe
+import js2py
 
 from antares.apps.core.middleware.request import get_request
+
 
 logger = logging.getLogger(__name__)
 register = template.Library()

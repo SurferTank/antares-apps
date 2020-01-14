@@ -5,13 +5,15 @@ Created on Jul 22, 2016
 '''
 import logging
 
+from django.core.exceptions import ObjectDoesNotExist
 from django.utils.translation import ugettext as _
 
-from ..service import NukeService
-from antares.apps.flow.models import FlowDefinition, FlowPackage
-from antares.apps.flow.manager import FlowAdminManager
-from django.core.exceptions import ObjectDoesNotExist
 from antares.apps.document.models import FormDefinition
+from antares.apps.flow.manager import FlowAdminManager
+from antares.apps.flow.models import FlowDefinition, FlowPackage
+
+from ..service import NukeService
+
 
 logger = logging.getLogger(__name__)
 

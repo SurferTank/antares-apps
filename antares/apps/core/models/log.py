@@ -7,6 +7,7 @@ from django.utils.translation import ugettext as _
 
 from antares.apps.core.middleware.request import get_request
 
+
 logger = logging.getLogger(__name__)
 
 

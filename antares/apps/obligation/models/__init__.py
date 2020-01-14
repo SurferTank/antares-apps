@@ -10,6 +10,7 @@ from antares.apps.obligation.models.obligation_vector_log import ObligationVecto
 from .client_obligation import ClientObligation
 from .obligation_rule import ObligationRule
 
+
 __all__ = [
     'ClientObligation',
     'ObligationRule',

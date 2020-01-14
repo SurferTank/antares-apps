@@ -60,8 +60,6 @@ class FlowManager(object):
 
     @classmethod
     def create_document_based_case(cls, subs_event, message):
-        from antares.apps.core.models import HrnCode
-
         flow_case = FlowCase()
         flow_case.flow_definition = subs_event.subscriber.flow_definition
         flow_case.creation_date = timezone.now()

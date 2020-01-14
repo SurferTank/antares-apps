@@ -7,16 +7,17 @@ import logging
 import uuid
 
 from ckeditor.fields import RichTextField
+from django.conf import settings
 from django.db import models
 from django.utils import timezone
 from django.utils.translation import ugettext_lazy as _
+from enumfields import EnumField
 
 from antares.apps.core.constants import ScriptEngineType, TimeUnitType
 from antares.apps.core.middleware.request import get_request
-from enumfields import EnumField
-from django.conf import settings
 
 from ..constants import ObligationOriginType, ObligationPeriodicityType, ObligationType
+
 
 logger = logging.getLogger(__name__)
 

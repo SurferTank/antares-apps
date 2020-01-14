@@ -1,14 +1,17 @@
 from datetime import datetime
-import logging
-import uuid
 import hashlib
+import logging
+from typing import Dict
+import uuid
 
 from dateutil import parser as dateparser
 from django.utils import timezone
 from django.utils.translation import ugettext as _
+from djmoney.money import Money
 import js2py
 from lxml import etree
 from lxml import objectify
+from prompt_toolkit.key_binding.bindings.named_commands import self_insert
 
 from antares.apps.accounting.models import AccountType
 from antares.apps.client.models.client import Client
@@ -18,10 +21,13 @@ from antares.apps.core.constants import HrnModuleType, ScriptEngineType
 from antares.apps.core.middleware.request import get_request
 from antares.apps.core.models import ConceptType
 from antares.apps.core.models import HrnCode
+from antares.apps.core.models.system_parameter import SystemParameter
+from antares.apps.document.exceptions.document_required_exception import DocumentRequiredException
+from antares.apps.document.exceptions.document_validation_exception import DocumentValidationException
 from antares.apps.flow.models import FlowCase
-from antares.apps.user.models import User
+from antares.apps.flow.models.operation.flow_activity import FlowActivity
 from antares.apps.obligation.models import ObligationVector
-from djmoney.money import Money
+from antares.apps.user.models import User
 
 from ..constants import DocumentEventType, FormClassType
 from ..constants import DocumentStatusType, DocumentOriginType, DocumentAssociationType
@@ -32,12 +38,7 @@ from ..exceptions import FormDefinitionNotFoundException, FormDefintionIsNotActi
 from ..exceptions import InvalidDocumentStatusException, DocumentFieldNotFound
 from ..models import DocumentHeader, DocumentField, IndexedField
 from ..models import FormDefinition
-from antares.apps.flow.models.operation.flow_activity import FlowActivity
-from prompt_toolkit.key_binding.bindings.named_commands import self_insert
-from antares.apps.document.exceptions.document_validation_exception import DocumentValidationException
-from antares.apps.document.exceptions.document_required_exception import DocumentRequiredException
-from typing import Dict
-from antares.apps.core.models.system_parameter import SystemParameter
+
 
 logger = logging.getLogger(__name__)
 

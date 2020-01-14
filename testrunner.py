@@ -92,7 +92,7 @@ try:
         #'allauth.socialaccount.providers.google',
         'debug_toolbar',
         'django_extensions',
-        'django_markdown',
+        'django_markdown'
     )
     
     INSTALLED_APPS = DJANGO_APPS + LOCAL_APPS + THIRD_PARTY_APPS
@@ -424,7 +424,7 @@ django.setup()
 def run_tests(*test_args):
     if not test_args:
         test_args = ['antares']
-    test_runner = DiscoverRunner(verbosity=1)
+    test_runner = DiscoverRunner(verbosity=5)
 
     failures = test_runner.run_tests(test_args)
     if failures:

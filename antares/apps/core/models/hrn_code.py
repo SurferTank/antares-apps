@@ -1,19 +1,19 @@
 import logging
 
 from ckeditor.fields import RichTextField
+from django.conf import settings
 from django.db import models
 from django.utils import timezone
 from django.utils.translation import ugettext as _
+from enumfields import EnumField
 import js2py
 
 from antares.apps.accounting.models import AccountBalance
 from antares.apps.accounting.models import AccountTransaction
-from antares.apps.core.middleware.request import get_request
-from django.conf import settings
-from enumfields import EnumField
-
 from antares.apps.core.constants import HrnModuleType, ScriptEngineType, FieldDataType
+from antares.apps.core.middleware.request import get_request
 from antares.apps.core.models.system_parameter import SystemParameter
+
 
 logger = logging.getLogger(__name__)
 

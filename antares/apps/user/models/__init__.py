@@ -1,8 +1,8 @@
 # __init__.py
+from django.conf import settings
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 from rest_framework.authtoken.models import Token
-from django.conf import settings
 
 from .application import Application
 from .application_parameter import ApplicationParameter
@@ -12,6 +12,7 @@ from .role_application import RoleApplication
 from .user import User
 from .user_org_unit import UserOrgUnit
 from .user_role import UserRole
+
 
 __all__ = [
     'User',

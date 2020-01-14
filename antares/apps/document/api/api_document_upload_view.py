@@ -4,21 +4,22 @@ Created on 16/8/2016
 @author: leobelen
 '''
 
-import logging
 import json
-import dateutil.parser
+import logging
 
 from braces.views import AjaxResponseMixin, JSONResponseMixin
+import dateutil.parser
 from django.utils import timezone
 from django.utils.translation import ugettext as _
 from django.views.generic import View
 
 from antares.apps.core.middleware.request import get_request
+from antares.apps.user.models import User
 
+from ..constants import DocumentStatusType
 from ..models import FormDefinition
 from ..types import Document
-from ..constants import DocumentStatusType
-from antares.apps.user.models import User
+
 
 logger = logging.getLogger(__name__)
 

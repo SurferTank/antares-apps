@@ -4,7 +4,9 @@ import uuid
 from django.db import models
 from django.utils.translation import ugettext as _
 from enumfields import EnumField
+
 from ..constants import DocumentStatusType
+
 
 logger = logging.getLogger(__name__)
 

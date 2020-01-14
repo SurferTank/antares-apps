@@ -5,6 +5,7 @@ from django.views.generic import View
 
 from ..models import FlowCase
 
+
 logger = logging.getLogger(__name__)
 
 

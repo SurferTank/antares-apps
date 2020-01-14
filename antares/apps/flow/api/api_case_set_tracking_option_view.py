@@ -5,6 +5,7 @@ from django.views.generic import View
 
 from ..models import FlowCase, FlowUserNotificationOption
 
+
 logger = logging.getLogger(__name__)
 
 

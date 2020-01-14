@@ -1,18 +1,19 @@
-import logging
 import datetime
-
+import logging
 from uuid import UUID
+
 from ckeditor.fields import RichTextField
+from django.conf import settings
+from django.contrib.auth.models import AnonymousUser
 from django.db import models
+from django.db.utils import ProgrammingError
 from django.utils import timezone
 from django.utils.translation import ugettext as _
+from enumfields import EnumField
 
 from antares.apps.core.constants import FieldDataType
 from antares.apps.core.middleware.request import get_request
-from enumfields import EnumField
-from django.conf import settings
-from django.contrib.auth.models import AnonymousUser
-from django.db.utils import ProgrammingError
+
 
 logger = logging.getLogger(__name__)
 
