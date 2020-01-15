@@ -26,6 +26,8 @@ class MessageManager:
         :param msg_json: the message to process in json format
         """
         result = None
+        if(isinstance(msg, str)):
+            msg = json.loads(msg)
         if msg["action"].lower() == "create":
             result = cls.create_docs_from_message(msg)
         return result

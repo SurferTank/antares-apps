@@ -4,6 +4,7 @@ Created on Nov 5, 2017
 @author: leobelen
 '''
 import logging
+import json
 
 from django.test import TransactionTestCase
 
@@ -18,7 +19,7 @@ logger = logging.getLogger(__name__)
 class TestMessageManager(TransactionTestCase):
     multi_db = True
     runs = 0
-    message = """
+    message = json.loads("""
     {
         "action": "create",
         "documents": [
@@ -38,7 +39,7 @@ class TestMessageManager(TransactionTestCase):
             }
         ]
     }
-    """
+    """)
 
     def setUp(self):
         TransactionTestCase.setUp(self)
