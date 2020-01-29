@@ -11,20 +11,21 @@
     <xsl:output method="xml" encoding="utf-8" omit-xml-declaration="yes" indent="yes"/>
     <xsl:template match="/">
         <xsl:text disable-output-escaping="yes"><![CDATA[{% extends template %}
-{% load staticfiles i18n pipeline %} 
+{% load staticfiles i18n  %} 
 
 {% block title %}Antares Document{% endblock %}
 {% block ng_app_name %}{% endblock ng_app_name %}
 {% block bodyId %}Antares Document{% endblock %}
 {% block javascript %} 
     {% if is_inner == 'false' %}
-        {% javascript 'jquery_ui_js' %} 
+        <script type="text/javascript" src="{% static "jquery-ui/jquery-ui.js" %}"></script>
     {% endif %}
 {% endblock javascript %} 
 
 {% block stylesheets %}
     {% if is_inner == 'false' %}
-        {% stylesheet 'jquery_ui_css' %} 
+        <link rel="stylesheet" href="{% static "jquery-ui/themes/base/jquery-ui.css" %}">
+    <link rel="stylesheet" href="{% static "jquery-ui/themes/base/theme.css" %}">
     {% endif %}
 {% endblock stylesheets %} 
  

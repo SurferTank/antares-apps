@@ -1,4 +1,4 @@
-{% extends "base_layout.html" %} {% load staticfiles i18n pipeline %} 
+{% extends "base_layout.html" %} {% load staticfiles i18n %} 
 {% block content %} 
 
 <div class="container">
@@ -23,12 +23,14 @@
 {% endblock %} 
 
 {% block javascript %} 
-    {% javascript 'jquery_terminal' %} 
-    {% javascript 'terminal_panel_js' %} 
+	<script type="text/javascript" src="{% static "jquery.terminal/js/jquery.terminal.js" %}"></script>
+	<script type="text/javascript" src="{% static "jquery.terminal/js/jquery.mousewheel-min.js" %}"></script>
+    <script type="text/javascript" src="{% static "angular-terminal/angular-terminal.js" %}"></script>
+    <script type="text/javascript" src="{% static "js/terminal_panel.js" %}"></script>
 {% endblock javascript %} 
 
 {% block stylesheets %}
-{% stylesheet 'jquery_terminal' %} 
+	<link rel="stylesheet" href="{% static "jquery.terminal/css/jquery.terminal.css" %}">
 {% endblock stylesheets %} 
 
 {% block ng_app_name %}{% endblock ng_app_name %}

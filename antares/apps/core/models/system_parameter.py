@@ -113,8 +113,6 @@ class SystemParameter(models.Model):
                  description=None):
         try:
             system_param = SystemParameter.objects.get(id=system_paramId)
-            logger.debug("The param " + system_param.id +
-                         " does exist. Returning the value")
             if system_param.data_type == FieldDataType.STRING:
                 return system_param.string_value
             elif system_param.data_type == FieldDataType.TEXT:

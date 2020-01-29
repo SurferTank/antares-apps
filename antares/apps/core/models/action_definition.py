@@ -35,7 +35,7 @@ class ActionDefinition(models.Model):
 
     environment = EnumField(
         EnvironmentType,
-        max_length=10,
+        max_length=20,
         default=EnvironmentType.LOCAL,
         verbose_name=_(__name__ + ".environment"),
         help_text=_(__name__ + ".environment_help"))

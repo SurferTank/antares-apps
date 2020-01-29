@@ -27,7 +27,6 @@ class DocumentTestHelper(object):
         xmlFile = os.path.join(
                     os.path.dirname(__file__), "..", "xml", "working",
                     self.get_test_form_id() + ".xml")
-        print("******************" + xmlFile)
         with open(xmlFile, "r") as xml:
             self.form_xml = str(xml.read())
             self.client_helper = ClientTestHelper()

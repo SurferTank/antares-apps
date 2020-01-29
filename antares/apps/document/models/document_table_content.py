@@ -27,7 +27,7 @@ class DocumentTableContent(models.Model):
         related_name='table_content_set')
     clob_value = models.CharField(max_length=255, blank=True, null=True)
     column_number = models.IntegerField(blank=True, null=True)
-    data_type = EnumField(FieldDataType, max_length=7, blank=True, null=True)
+    data_type = EnumField(FieldDataType, max_length=8, blank=True, null=True)
     date_value = models.DateTimeField(blank=True, null=True)
     decimal_value = models.DecimalField(
         max_digits=19, decimal_places=2, blank=True, null=True)

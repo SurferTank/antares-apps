@@ -15,15 +15,16 @@
 {% block bodyId %}Antares Document{% endblock %}
 {% block javascript %} 
     {% if is_inner == 'false' %}
-        {% javascript 'jquery_ui_js' %} 
+        <script type="text/javascript" src="{% static "jquery-ui/jquery-ui.js" %}"></script>
     {% endif %}
-    {% javascript 'document_edit_common_js' %} 
+    <script type="text/javascript" src="{% static "js/document_edit_common.js" %}"></script>
     <script type="text/javascript" src="{% get_media_prefix %}{{edit_js_path}}"></script>
 {% endblock javascript %} 
 
 {% block stylesheets %}
     {% if is_inner == 'false' %}
-        {% stylesheet 'jquery_ui_css' %} 
+        <link rel="stylesheet" href="{% static "jquery-ui/themes/base/jquery-ui.css" %}">
+    <link rel="stylesheet" href="{% static "jquery-ui/themes/base/theme.css" %}">
     {% endif %} 
     
 {% endblock stylesheets %} 

@@ -29,7 +29,7 @@ class ActionParameterDefinition(models.Model):
         help_text=_(__name__ + ".action_definition_help"))
     data_type = EnumField(
         FieldDataType,
-        max_length=7,
+        max_length=8,
         default=FieldDataType.STRING,
         verbose_name=_(__name__ + ".data_type"),
         help_text=_(__name__ + ".data_type_help"))

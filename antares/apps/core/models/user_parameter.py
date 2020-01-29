@@ -109,8 +109,6 @@ class UserParameter(models.Model):
         try:
             user_param = cls.objects.get(
                 id=user_paramId, user=get_request().user)
-            logger.debug("The param " + user_param.id +
-                         " does exist. Returning the value")
             if user_param.data_type == FieldDataType.STRING:
                 return user_param.string_value
             elif user_param.data_type == FieldDataType.TEXT:
