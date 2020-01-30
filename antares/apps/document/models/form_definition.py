@@ -257,7 +257,7 @@ class FormDefinition(models.Model):
             contents = str(newdom)
             with open(
                     os.path.join(template_home, self.DOC_EDIT_FILE_NAME),
-                    'w+',
+                    'w',
                     encoding='utf8') as text_file:
                 print(contents, file=text_file)
 
@@ -282,7 +282,7 @@ class FormDefinition(models.Model):
             with open(
                     os.path.join(template_media_home,
                                  self.DOC_EDIT_JS_FILE_NAME),
-                    'w+',
+                    'w',
                     encoding='utf8') as text_file:
                 print(contents, file=text_file)
 

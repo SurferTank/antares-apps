@@ -43,7 +43,7 @@ class ApiObligationPanelPendingView(BaseDatatableView):
 
     def __init__(self):
         self.date_format_string = UserParameter.find_one(
-            get_request().user, 'CORE_TEMPLATE_DATE_FORMAT',
+            'CORE_TEMPLATE_DATE_FORMAT',
             FieldDataType.STRING, '%Y-%m-%d')
         self.client = None
         self.activity = None

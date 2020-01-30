@@ -60,7 +60,7 @@ class FlowAdminManager(object):
                 xpdl_string = file.read()
 
         self.verify_xml_against_schema(xpdl_string)
-        self.xpdl = etree.fromstring(xpdl_string)
+        self.xpdl = etree.fromstring(xpdl_string.encode("utf-8"))
 
     def load_xpdl(self):
         """
@@ -307,16 +307,14 @@ class FlowAdminManager(object):
                                                 workflow_node)
             self._hibernate_participant_records(package, flow_def,
                                                 workflow_node)
-            try:
-                self._hibernate_activity_records(package, flow_def,
+            
+            self._hibernate_activity_records(package, flow_def,
                                                  workflow_node)
-            except Exception as e:
-                print(e)
-
+            
             self._hibernate_transition_records(package, flow_def,
                                                workflow_node)
             self._hibernate_property_records(package, flow_def, workflow_node)
-            self.update_flow_definition_time_estimation()
+            self.update_flow_definition_time_estimation(flow_def)
             flow_def.save()
             package.flow_definition_set.add(flow_def)
             package.save()
@@ -883,11 +881,11 @@ class FlowAdminManager(object):
                     trans_def.condition_text = condition_node.text
 
             if (transition_node.get('From')):
-                from_activity_definition = flow_def.activity_definition_set.select_related(
-                ).get(activity_id=transition_node.get('From'))
-                if (from_activity_definition):
+                try:
+                    from_activity_definition = flow_def.activity_definition_set.select_related(
+                        ).get(activity_id=transition_node.get('From'))
                     trans_def.from_activity_definition = from_activity_definition
-                else:
+                except ActivityDefinition.DoesNotExist:
                     raise InvalidXPDLException(
                         _(__name__ +
                           '.exceptions.from_activity_id_was_not_found %(transaction_id)s %(activity_id)s'
@@ -897,11 +895,11 @@ class FlowAdminManager(object):
                           })
 
             if (transition_node.get('To')):
-                to_activity_definition = flow_def.activity_definition_set.select_related(
-                ).get(activity_id=transition_node.get('To'))
-                if (from_activity_definition):
+                try:
+                    to_activity_definition = flow_def.activity_definition_set.select_related(
+                        ).get(activity_id=transition_node.get('To'))
                     trans_def.to_activity_definition = to_activity_definition
-                else:
+                except ActivityDefinition.DoesNotExist:
                     raise InvalidXPDLException(
                         _(__name__ +
                           '.exceptions.to_activity_id_was_not_found %(transaction_id)s %(activity_id)s'

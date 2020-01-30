@@ -1,6 +1,5 @@
-<?xml version="1.0"?>
-
-<xpdl:Package xmlns:xpdl="http://www.wfmc.org/2008/XPDL2.1" xmlns="http://www.wfmc.org/2008/XPDL2.1" xmlns:subs="http://www.surfertank.com/antares/flow/xml/subscriptions" xmlns:act="http://www.surfertank.com/antares/flow/xml/activityextendedattributes" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" Id="SamplePackage" Name="Sample Package" xsi:schemaLocation="http://www.wfmc.org/2008/XPDL2.1 http://www.wfmc.org/standards/docs/bpmnxpdl_31.xsd">
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<xpdl:Package xmlns:xpdl="http://www.wfmc.org/2008/XPDL2.1" xmlns="http://www.wfmc.org/2008/XPDL2.1" xmlns:act="http://www.surfertank.com/antares/flow/xml/activityextendedattributes" xmlns:subs="http://www.surfertank.com/antares/flow/xml/subscriptions" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" Id="SamplePackage" Name="Sample Package" xsi:schemaLocation="http://www.wfmc.org/2008/XPDL2.1 http://www.wfmc.org/standards/docs/bpmnxpdl_31.xsd">
     <xpdl:PackageHeader>
         <xpdl:XPDLVersion>2.1</xpdl:XPDLVersion>
         <xpdl:Vendor>(c) Together Teamsolutions Co., Ltd.</xpdl:Vendor>
@@ -145,13 +144,8 @@
                             <xpdl:TaskApplication Id="SamplePackage_app1">
                                 <xpdl:ActualParameters>
                                     <xpdl:ActualParameter/>
+                                    <xpdl:ActualParameter/>
                                 </xpdl:ActualParameters>
-                            </xpdl:TaskApplication>
-                            <xpdl:TaskApplication Id="updateProperty">
-                                <xpdl:ActualParameters>
-                                    <xpdl:ActualParameter>SamplePackage_wp1_fp1</xpdl:ActualParameter>
-                                </xpdl:ActualParameters>
-                                <xpdl:Description>How should we fill this with?</xpdl:Description>
                             </xpdl:TaskApplication>
                         </xpdl:Task>
                     </xpdl:Implementation>
@@ -166,15 +160,10 @@
                             <xpdl:Duration>1</xpdl:Duration>
                         </xpdl:TimeEstimation>
                     </xpdl:SimulationInformation>
-                    <xpdl:NodeGraphicsInfos>
-                        <xpdl:NodeGraphicsInfo BorderColor="0,0,0" FillColor="255,204,204" Height="60" IsVisible="true" LaneId="SamplePackage_pool1_lan1" ToolId="JaWE" Width="90">
-                            <xpdl:Coordinates XCoordinate="240" YCoordinate="22"/>
-                        </xpdl:NodeGraphicsInfo>
-                    </xpdl:NodeGraphicsInfos>
                     <xpdl:ExtendedAttributes>
                         <xpdl:ExtendedAttribute Name="ExtraTabs">
                             <act:ActivityTabs>
-                                <act:ActivityTab name="Current Account" id="current_account_tab" route="antares.apps.accounting:panel">
+                                <act:ActivityTab id="current_account_tab" name="Current Account" route="antares.apps.accounting:panel">
                                     <act:Parameters>
                                         <act:Parameter id="client_id">flow_case.client.id</act:Parameter>
                                     </act:Parameters>
@@ -183,7 +172,7 @@
                         </xpdl:ExtendedAttribute>
                         <xpdl:ExtendedAttribute Name="Forms">
                             <act:Forms>
-                                <act:Form id="AccountForm-1" canSave="false" canCreate="true">
+                                <act:Form canCreate="true" canSave="false" id="AccountForm-1">
                                     <act:Parameters>
                                         <act:Parameter id="client_id">flow_case.client.id</act:Parameter>
                                     </act:Parameters>
@@ -192,10 +181,15 @@
                         </xpdl:ExtendedAttribute>
                         <xpdl:ExtendedAttribute Name="Validations">
                             <act:Validations>
-                                <act:Validation id="document_exists" scriptType="JavaScript" message="Document of Type AccountForm-1 was not created">flow_case.count_documents_by_form_id('AccountForm-1')==0</act:Validation>
+                                <act:Validation id="document_exists" message="Document of Type AccountForm-1 was not created" scriptType="JavaScript">flow_case.count_documents_by_form_id('AccountForm-1')==0</act:Validation>
                             </act:Validations>
                         </xpdl:ExtendedAttribute>
                     </xpdl:ExtendedAttributes>
+                    <xpdl:NodeGraphicsInfos>
+                        <xpdl:NodeGraphicsInfo BorderColor="0,0,0" FillColor="255,204,204" Height="60" IsVisible="true" LaneId="SamplePackage_pool1_lan1" ToolId="JaWE" Width="90">
+                            <xpdl:Coordinates XCoordinate="240" YCoordinate="22"/>
+                        </xpdl:NodeGraphicsInfo>
+                    </xpdl:NodeGraphicsInfos>
                 </xpdl:Activity>
                 <xpdl:Activity FinishMode="Automatic" Id="SamplePackage_wp1_act3" Name="End Activity" StartMode="Automatic">
                     <xpdl:Event>
@@ -247,7 +241,7 @@
     </xpdl:WorkflowProcesses>
     <xpdl:ExtendedAttributes>
         <xpdl:ExtendedAttribute Name="EDITING_TOOL" Value="Together Workflow Editor"/>
-        <xpdl:ExtendedAttribute Name="EDITING_TOOL_VERSION" Value="5.3-1-20160120-2200-TAB-2.9-1"/>
+        <xpdl:ExtendedAttribute Name="EDITING_TOOL_VERSION" Value="5.0-1-20130807-0400-TAB-2.4-1"/>
         <xpdl:ExtendedAttribute Name="JaWE_CONFIGURATION" Value="default"/>
     </xpdl:ExtendedAttributes>
 </xpdl:Package>

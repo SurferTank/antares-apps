@@ -46,6 +46,6 @@ class EnumUtilsMixin:
             return cls
 
         for item in cls:
-            if element.lower() == item.value.lower():
+            if str(element).lower() == str(item.value).lower():
                 return item
         return None
