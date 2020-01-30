@@ -137,8 +137,7 @@ class FlowAdminConsole(object):
                 if (flow_definition.status
                         and FlowDefinitionStatusType.to_enum(
                             flow_definition.status) is not None):
-                    result += "<td>" + FlowDefinitionStatusType.to_enum(
-                        flow_definition.status).get_label() + "</td>"
+                    result += "<td>" + str(flow_definition.status) + "</td>"
                 else:
                     result += "<td>&nbsp;</td>"
                 result += '</tr>'
@@ -245,7 +244,7 @@ class FlowAdminConsole(object):
                 params['withstatus'])
         else:
             return _(__name__ + ".console.missing_parameter %(parameter)s ") % \
-                {'parameter': 'withdefinitionversion'}
+                {'parameter': 'withstatus'}
 
         FlowAdminManager.update_flow_definition_status(flow_definition,
                                                        flow_status)

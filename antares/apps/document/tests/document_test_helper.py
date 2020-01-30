@@ -25,11 +25,11 @@ class DocumentTestHelper(object):
 
     def __init__(self):
         xmlFile = os.path.join(
-                    os.path.dirname(__file__), "..", "xml", "working",
+                    os.path.dirname(__file__), 
                     self.get_test_form_id() + ".xml")
         with open(xmlFile, "r") as xml:
             self.form_xml = str(xml.read())
-            self.client_helper = ClientTestHelper()
+        self.client_helper = ClientTestHelper()
 
     def create_test_form_class(self):
         logger.info("we are testing if we can create a form class")

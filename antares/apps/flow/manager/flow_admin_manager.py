@@ -167,7 +167,7 @@ class FlowAdminManager(object):
         if (package_name):
             package.package_name = package_name
 
-        package.xpdl = etree.tostring(self.xpdl)
+        package.xpdl = etree.tostring(self.xpdl, encoding="unicode")
         package.save()
         self._hibernate_workflows(package)
         package.save()

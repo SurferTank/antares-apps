@@ -1632,7 +1632,20 @@ class Document(object):
             else:
                 raise InvalidDocumentValueException(
                     _(__name__ + ".exceptions.invalid_client_specified"))
-
+        elif (key.lower() == 'account_document'):
+            acc_document_node = accountingElements.find('account_document')
+            if (isinstance(value, Client)):
+                acc_document_node.text = str(value.id)
+            elif (isinstance(acc_document_node, uuid.UUID)):
+                acc_document_node.text = str(value)
+            elif (isinstance(value, str)):
+                try:
+                    acc_document_node.text = str(uuid.UUID(value))
+                except:
+                    pass
+            else:
+                raise InvalidDocumentValueException(
+                    _(__name__ + ".exceptions.invalid_account_type"))
         elif (key.lower() == 'account_type'):
             account_type_node = accountingElements.find('accountType')
             if (isinstance(value, AccountType)):

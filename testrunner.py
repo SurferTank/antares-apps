@@ -254,7 +254,7 @@ django.setup()
 
 def run_tests(*test_args):
     if not test_args:
-        test_args = ['antares.apps']
+        test_args = ['antares.apps.flow']
     test_runner = DiscoverRunner(verbosity=5)
 
     failures = test_runner.run_tests(test_args)
