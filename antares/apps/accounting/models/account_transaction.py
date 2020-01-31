@@ -70,15 +70,15 @@ class AccountTransaction(models.Model):
         max_length=1000, blank=True, null=True)
     fiscal_year = models.IntegerField(blank=True, null=True)
     interest_amount = MoneyField(
-        max_digits=10, decimal_places=2, default_currency='USD', default=0)
+        max_digits=15, decimal_places=2, default_currency='USD', default=0, null=False, blank=False, editable=False)
     penalties_amount = MoneyField(
-        max_digits=10, decimal_places=2, default_currency='USD', default=0)
+        max_digits=15, decimal_places=2, default_currency='USD', default=0, null=False, blank=False, editable=False)
     period = models.IntegerField()
     posted_date = models.DateTimeField()
     principal_amount = MoneyField(
-        max_digits=10, decimal_places=2, default_currency='USD', default=0)
+        max_digits=15, decimal_places=2, default_currency='USD', default=0, null=False, blank=False, editable=False)
     total_amount = MoneyField(
-        max_digits=10, decimal_places=2, default_currency='USD', default=0)
+        max_digits=15, decimal_places=2, default_currency='USD', default=0, null=False, blank=False, editable=False)
     transaction_date = models.DateTimeField()
     creation_date = models.DateTimeField(blank=True, null=True, editable=False)
     hrn_code = models.CharField(

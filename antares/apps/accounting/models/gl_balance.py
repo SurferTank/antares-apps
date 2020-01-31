@@ -32,9 +32,9 @@ class GLBalance(models.Model):
         null=True)
     period = models.IntegerField()
     debit_balance = MoneyField(
-        max_digits=10, decimal_places=2, default_currency='USD', default=0)
+        max_digits=15, decimal_places=2, default_currency='USD', default=0, null=False, blank=False, editable=False)
     credit_balance = MoneyField(
-        max_digits=10, decimal_places=2, default_currency='USD', default=0)
+        max_digits=15, decimal_places=2, default_currency='USD', default=0, null=False, blank=False, editable=False)
     fiscal_year = models.IntegerField()
     gl_account_type = models.ForeignKey(
         "accounting.GLAccountType",

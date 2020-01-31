@@ -7,6 +7,7 @@ Original version by Leonardo Belen<leobelen@gmail.com>
 import logging
 from typing import List, Dict
 
+from django.db import transaction
 from django.utils import timezone
 from django.utils.translation import ugettext as _
 from djmoney.money import Money
@@ -40,6 +41,7 @@ class AccountManager(object):
                                                 FieldDataType.STRING, 'USD')
 
     @classmethod
+    @transaction.atomic
     def post_document(cls, document: Document) -> AccountDocumentStatusType:
         """ Posts a document into the current account, assuming there are rules defined for it. Otherwise it just returns. 
         
@@ -60,24 +62,25 @@ class AccountManager(object):
             logger.error(_(__name__ + '.document_not_ready_for_posting'))
             return None
 
-        try:
-            cancelled_document = AccountManager._get_cancelled_document(
-                document)
-            if (cancelled_document is not None):
-                logger.error(
-                    _(__name__ + '.cancelling_document %(document_id)s') %
-                    {'document_id': document.document_id})
-                AccountManager._cancel_document(cancelled_document, document)
+        #try:
+        cancelled_document = AccountManager._get_cancelled_document(
+            document)
+        if (cancelled_document is not None):
+            logger.error(
+                _(__name__ + '.cancelling_document %(document_id)s') %
+                {'document_id': document.document_id})
+            AccountManager._cancel_document(cancelled_document, document)
 
-            transactions = AccountManager._create_transactions_from_rules(
-                account_document, document, account_rules)
+        transactions = AccountManager._create_transactions_from_rules(
+            account_document, document, account_rules)
 
-            account_document.content = AccountManager._get_account_document_string(
-                account_document, transactions)
-            account_document.status = AccountDocumentStatusType.PROCESSED
+        account_document.content = AccountManager._get_account_document_string(
+            account_document, transactions)
+        account_document.status = AccountDocumentStatusType.PROCESSED
 
-        except Exception as e:
-            account_document.status = AccountDocumentStatusType.WITH_ERRORS
+        #except Exception as e:
+        #    logger.exception(e)
+        #    account_document.status = AccountDocumentStatusType.WITH_ERRORS
 
         account_document.save()
 
