@@ -51,7 +51,7 @@ class ClientUserRelation(models.Model):
         super(ClientUserRelation, self).save(*args, **kwargs)
 
     def __str__(self):
-        return str(self.id)
+        return str(self.parent_user.username) + ": " + str(self.child_client.code)
 
     @staticmethod
     def get_child_client_list(clients_only=True, only_executive=True):

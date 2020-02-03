@@ -59,10 +59,12 @@ function display_inbox_page(status) {
 	case "completed":
 		setup_completed_inbox_cases_view(status);
 		break;
+	case "stats":
+		setup_stats_inbox();
+		break;
 	default:
 		setup_new_inbox_cases_view(status);
 	}
-
 }
 
 /**
@@ -114,6 +116,7 @@ function setup_new_inbox_cases_view(status) {
 	$("#createdCasesInboxPanel").show();
 	$("#activeCasesInboxPanel").hide();
 	$("#completedCasesInboxPanel").hide();
+	$("#statsInboxPanel").hide();
 }
 
 /**
@@ -165,6 +168,7 @@ function setup_active_inbox_cases_view(status) {
 	$("#createdCasesInboxPanel").hide();
 	$("#activeCasesInboxPanel").show();
 	$("#completedCasesInboxPanel").hide();
+	$("#statsInboxPanel").hide();
 }
 
 /**
@@ -216,7 +220,22 @@ function setup_completed_inbox_cases_view(status) {
 	$("#createdCasesInboxPanel").hide();
 	$("#activeCasesInboxPanel").hide();
 	$("#completedCasesInboxPanel").show();
+	$("#statsInboxPanel").hide();
 }
+
+/**
+ * 
+ * @param status
+ * @returns
+ */
+function setup_stats(status) {
+	
+	$("#createdCasesInboxPanel").hide();
+	$("#activeCasesInboxPanel").hide();
+	$("#completedCasesInboxPanel").hide();
+	$("#statsInboxPanel").show();	
+}
+
 
 /**
  * 

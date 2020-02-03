@@ -402,3 +402,10 @@ msgstr "Client does not exist"
 msgid "antares.apps.client.views.client_panel_view.exceptions.user_has_no_client_assigned {username}"
 msgstr "User {username} has no client assigned"
 
+
+msgid "antares.apps.client.constants.ClientRelationPermissionType.ALL"
+msgstr "All"
+
+msgid "antares.apps.client.constants.ClientRelationPermissionType.FILE"
+msgstr "File"
+

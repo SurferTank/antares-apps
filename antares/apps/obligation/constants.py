@@ -59,7 +59,7 @@ class ObligationPeriodicityType(EnumUtilsMixin, Enum):
         FIXED_PERIOD = _(__name__ + '.ObligationPeriodicityType.' +
                          'FIXED_PERIOD')
         FREE_FORM = _(__name__ + '.ObligationPeriodicityType.' +
-                      'FIXED_PERIOD')
+                      'FREE_FORM')
 
 
 class ObligationType(EnumUtilsMixin, Enum):

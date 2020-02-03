@@ -87,6 +87,27 @@ msgstr "Command successfully run"
 msgid "antares.apps.obligation.console.obligation_console.console.dont_now_command"
 msgstr "Do not know command"
 
+msgid "antares.apps.obligation.constants.ObligationType.FILE"
+msgstr "File"
 
+msgid "antares.apps.obligation.constants.ObligationType.PAY"
+msgstr "Pay"
 
+msgid "antares.apps.obligation.constants.ObligationType.INFORM"
+msgstr "Inform"
+
+msgid "antares.apps.obligation.constants.ObligationOriginType.CLIENT_BASE"
+msgstr "Client Base"
+
+msgid "antares.apps.obligation.constants.ObligationOriginType.FORM"
+msgstr "Form"
+
+msgid "antares.apps.obligation.constants.ObligationPeriodicityType.FIXED_DATE"
+msgstr "Fixed Date"
+
+msgid "antares.apps.obligation.constants.ObligationPeriodicityType.FIXED_PERIOD"
+msgstr "Fixed Period"
+
+msgid "antares.apps.obligation.constants.ObligationPeriodicityType.FREE_FORM"
+msgstr "Free Form"
 

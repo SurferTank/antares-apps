@@ -9,11 +9,25 @@ from .models import RoleApplication
 from .models import UserOrgUnit
 from .models import UserRole
 
+@admin.register(UserOrgUnit)
+class UserOrgUnitAdmin(admin.ModelAdmin):
+    list_display = ('user', 'org_unit',
+                    'start_date', 'end_date'
+                    )
 
-admin.site.register(UserOrgUnit)
 admin.site.register(OrgUnit, MPTTModelAdmin)
-admin.site.register(UserRole)
+@admin.register(UserRole)
+class UserRoleAdmin(admin.ModelAdmin):
+    list_display = ('user', 'role',
+                    'start_date', 'end_date'
+                    )
 admin.site.register(Role, MPTTModelAdmin)
-admin.site.register(RoleApplication)
+
+@admin.register(RoleApplication)
+class RoleApplicationAdmin(admin.ModelAdmin):
+    list_display = ('role', 'application',
+                    'start_date', 'end_date'
+                    )
+
 admin.site.register(Application, MPTTModelAdmin)
 admin.site.register(ApplicationParameter)

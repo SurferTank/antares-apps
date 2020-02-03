@@ -85,6 +85,11 @@ msgid "antares.apps.core.constants.TimeUnitType.MONTH"
 msgstr "Month"
 msgid "antares.apps.core.constants.TimeUnitType.DAY"
 msgstr "Day"
+msgid "antares.apps.core.constants.TimeUnitType.MINUTE"
+msgstr "Minute"
+msgid "antares.apps.core.constants.TimeUnitType.SECOND"
+msgstr "Second"
+
 
 msgid "antares.apps.core.constants.WeightUnitType.KILOGRAM"
 msgstr "Kilogram"
@@ -93,4 +98,19 @@ msgstr "Gram"
 msgid "antares.apps.core.constants.WeightUnitType.TON"
 msgstr "Ton"
 
+msgid "antares.apps.core.constants.ScriptEngineType.JAVASCRIPT"
+msgstr "Javascript"
+msgid "antares.apps.core.constants.ScriptEngineType.PYTHON"
+msgstr "Python"
 
+msgid "antares.apps.core.constants.LanguageType.ENGLISH"
+msgstr "English"
+
+msgid "antares.apps.core.constants.LanguageType.SPANISH"
+msgstr "Spanish"
+
+msgid "antares.apps.core.constants.LanguageType.FRENCH"
+msgstr "French"
+
+msgid "antares.apps.core.constants.LanguageType.PORTUGUESE"
+msgstr "Portuguese"

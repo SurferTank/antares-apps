@@ -1,7 +1,9 @@
 {% extends template %} 
 {% load staticfiles i18n  %} 
 {% block content %} 
-    {{error_message}} 
+{% if error_message %}	
+    {{error_message}}
+{% endif %} 
     <div class="container">
         <div class="row"> <!-- client info -->
             {% if is_inner == False %}
