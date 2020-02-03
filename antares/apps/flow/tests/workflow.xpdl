@@ -163,7 +163,7 @@
                     <xpdl:ExtendedAttributes>
                         <xpdl:ExtendedAttribute Name="ExtraTabs">
                             <act:ActivityTabs>
-                                <act:ActivityTab id="current_account_tab" name="Current Account" route="antares.apps.accounting:panel">
+                                <act:ActivityTab id="current_account_tab" name="Current Account" route="antares.apps.accounting:panel_view">
                                     <act:Parameters>
                                         <act:Parameter id="client_id">flow_case.client.id</act:Parameter>
                                     </act:Parameters>

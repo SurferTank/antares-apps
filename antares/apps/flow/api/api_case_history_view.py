@@ -27,8 +27,7 @@ class ApiCaseHistoryView(BaseDatatableView):
     max_display_length = 50
 
     def __init__(self):
-        self.date_format_string = UserParameter.find_one(
-            get_request().user, 'CORE_TEMPLATE_DATE_TIME_FORMAT',
+        self.date_format_string = UserParameter.find_one( 'CORE_TEMPLATE_DATE_TIME_FORMAT',
             FieldDataType.STRING, '%Y-%m-%d %H:%M')
 
     def render_column(self, row, column):

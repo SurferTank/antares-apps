@@ -308,6 +308,10 @@ msgstr "Documents"
 msgid "antares.apps.flow.templates.dashboard.tabs.history"
 msgstr "History"
 
+#: templates/workspace_view/workspace.html:14
+msgid "antares.apps.flow.templates.dashboard.tabs.flowchart"
+msgstr "Flowchart"
+
 
 msgid "antares.apps.flow.constants.FlowDefinitionStatusType.UNDER_TEST"
 msgstr "Under Test"

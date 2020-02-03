@@ -35,8 +35,7 @@ def date_format(value):
 def date_time_format(value):
     if (value is not None
             and (isinstance(value, datetime) or isinstance(value, date))):
-        date_format_string = UserParameter.find_one(
-            get_request().user, 'CORE_TEMPLATE_DATE_TIME_FORMAT',
+        date_format_string = UserParameter.find_one('CORE_TEMPLATE_DATE_TIME_FORMAT',
             FieldDataType.STRING, "%Y-%m-%d %H:%M")
         if (date_format_string is not None):
             return value.strftime(date_format_string)
