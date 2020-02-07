@@ -3,6 +3,6 @@ from .api_on_behalf_selector_view import ApiOnBehalfSelectorView
 
 
 __all__ = [
-    'ApiOnBehalfSelectorView',
-    'ApiOnBehalfChangeClientView',
+    ApiOnBehalfSelectorView,
+    ApiOnBehalfChangeClientView,
 ]

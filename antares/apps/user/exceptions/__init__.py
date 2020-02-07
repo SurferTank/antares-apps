@@ -3,6 +3,6 @@ from .user_exception import UserException
 
 
 __all__ = [
-    'UserException',
-    'RoleDeniedException',
+    UserException,
+    RoleDeniedException,
 ]

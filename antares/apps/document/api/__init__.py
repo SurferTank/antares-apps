@@ -3,6 +3,6 @@ from .api_document_upload_view import ApiDocumentUploadView
 
 
 __all__ = [
-    'ApiDocumentSubmitView',
-    'ApiDocumentUploadView',
+    ApiDocumentSubmitView,
+    ApiDocumentUploadView,
 ]

@@ -5,8 +5,8 @@ from .api_period_view import ApiPeriodView
 
 
 __all__ = [
-    'ApiAccountTypeView',
-    'ApiClientView',
-    'ApiConceptTypeView',
-    'ApiPeriodView',
+    ApiAccountTypeView,
+    ApiClientView,
+    ApiConceptTypeView,
+    ApiPeriodView,
 ]

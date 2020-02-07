@@ -3,6 +3,6 @@ from .api_obligation_panel_pending_view import ApiObligationPanelPendingView
 
 
 __all__ = [
-    'ApiObligationPanelPendingView',
-    'ApiObligationPanelCompliedView',
+    ApiObligationPanelPendingView,
+    ApiObligationPanelCompliedView,
 ]

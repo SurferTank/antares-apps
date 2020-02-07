@@ -4,7 +4,7 @@ from .document_view_view import DocumentViewView
 
 
 __all__ = [
-    'DocumentEditView',
-    'DocumentCreateView',
-    'DocumentViewView',
+    DocumentEditView,
+    DocumentCreateView,
+    DocumentViewView,
 ]

@@ -4,7 +4,7 @@ from .subscription_event import SubscriptionEvent
 
 
 __all__ = [
-    'SubscriptionAction',
-    'SubscriptionActionParameterMap',
-    'SubscriptionEvent',
+    SubscriptionAction,
+    SubscriptionActionParameterMap,
+    SubscriptionEvent,
 ]

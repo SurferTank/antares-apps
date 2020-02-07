@@ -11,14 +11,14 @@ from .reassigment_log import ReassigmentLog
 
 
 __all__ = [
-    'ActivityLog',
-    'AssignmentList',
-    'FlowActivity',
-    'FlowAttachment',
-    'FlowCase',
-    'FlowDocument',
-    'FlowNote',
-    'FlowProperty',
-    'FlowUserNotificationOption',
-    'ReassigmentLog',
+    ActivityLog,
+    AssignmentList,
+    FlowActivity,
+    FlowAttachment,
+    FlowCase,
+    FlowDocument,
+    FlowNote,
+    FlowProperty,
+    FlowUserNotificationOption,
+    ReassigmentLog,
 ]

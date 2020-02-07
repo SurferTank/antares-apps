@@ -7,16 +7,19 @@ from .gl_account_type import GLAccountType
 from .gl_balance import GLBalance
 from .gl_transaction import GLTransaction
 from .transaction_type import TransactionType
-
+from .interest_definition import InterestDefinition
+from .penalty_definition import PenaltyDefinition
 
 __all__ = [
-    'AccountBalance',
-    'AccountDocument',
-    'AccountRule',
-    'AccountTransaction',
-    'AccountType',
-    'TransactionType',
-    'GLAccountType',
-    'GLBalance',
-    'GLTransaction',
+    AccountBalance,
+    AccountDocument,
+    AccountRule,
+    AccountTransaction,
+    AccountType,
+    TransactionType,
+    GLAccountType,
+    GLBalance,
+    GLTransaction,
+    InterestDefinition,
+    PenaltyDefinition
 ]

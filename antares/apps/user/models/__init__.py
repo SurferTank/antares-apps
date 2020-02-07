@@ -15,14 +15,14 @@ from .user_role import UserRole
 
 
 __all__ = [
-    'User',
-    'OrgUnit',
-    'UserOrgUnit',
-    'Role',
-    'UserRole',
-    'Application',
-    'RoleApplication',
-    'ApplicationParameter',
+    User,
+    OrgUnit,
+    UserOrgUnit,
+    Role,
+    UserRole,
+    Application,
+    RoleApplication,
+    ApplicationParameter,
 ]
 
 

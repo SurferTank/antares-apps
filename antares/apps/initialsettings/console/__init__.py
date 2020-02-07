@@ -3,6 +3,6 @@ from .isic_console import IsicConsole
 
 
 __all__ = [
-    'InitialSettingsConsole',
-    'IsicConsole',
+    InitialSettingsConsole,
+    IsicConsole,
 ]

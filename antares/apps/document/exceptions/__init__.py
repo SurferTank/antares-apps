@@ -11,14 +11,14 @@ from .invalid_form_definition_exception import InvalidFormDefinitionException
 
 
 __all__ = [
-    'DocumentDoesNotExistException',
-    'InvalidFormDefinitionException',
-    'FormDefinitionNotFoundException',
-    'FormDefintionIsNotActiveException',
-    'DocumentStatusException',
-    'InvalidDocumentStatusException',
-    'DocumentFieldNotFound',
-    'InvalidDocumentValueException',
-    'DocumentRequiredException',
-    'DocumentValidationException',
+    DocumentDoesNotExistException,
+    InvalidFormDefinitionException,
+    FormDefinitionNotFoundException,
+    FormDefintionIsNotActiveException,
+    DocumentStatusException,
+    InvalidDocumentStatusException,
+    DocumentFieldNotFound,
+    InvalidDocumentValueException,
+    DocumentRequiredException,
+    DocumentValidationException,
 ]

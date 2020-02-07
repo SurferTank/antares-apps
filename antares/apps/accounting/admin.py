@@ -5,10 +5,14 @@ from .models import AccountRule
 from .models import AccountType
 from .models import GLAccountType
 from .models import TransactionType
+from .models import InterestDefinition
+from .models import PenaltyDefinition
 
 
 admin.site.register(GLAccountType, MPTTModelAdmin)
 admin.site.register(AccountRule)
+admin.site.register(InterestDefinition)
+admin.site.register(PenaltyDefinition)
 @admin.register(AccountType)
 class AccountTypeAdmin(admin.ModelAdmin):
     list_display = ('id', 'account_type_name' , 'auxiliary_account', 

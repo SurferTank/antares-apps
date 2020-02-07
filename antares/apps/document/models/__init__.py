@@ -12,15 +12,15 @@ from .status_log import StatusLog
 
 
 __all__ = [
-    'DocumentField',
-    'DocumentHeader',
-    'DocumentHrn',
-    'DocumentTableContent',
-    'FormActionMap',
-    'FormClass',
-    'FormDefinition',
-    'IndexedField',
-    'StatusLog',
-    'FormDefinitionACL',
-    'DocumentACL',
+    DocumentField,
+    DocumentHeader,
+    DocumentHrn,
+    DocumentTableContent,
+    FormActionMap,
+    FormClass,
+    FormDefinition,
+    IndexedField,
+    StatusLog,
+    FormDefinitionACL,
+    DocumentACL,
 ]

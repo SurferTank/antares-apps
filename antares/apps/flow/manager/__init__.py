@@ -4,7 +4,7 @@ from .flow_manager import FlowManager
 
 
 __all__ = [
-    'FlowAdminManager',
-    'FlowManager',
-    'AssignmentManager',
+    FlowAdminManager,
+    FlowManager,
+    AssignmentManager,
 ]

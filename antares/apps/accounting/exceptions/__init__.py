@@ -3,6 +3,6 @@ from .negative_amount_exception import NegativeAmountException
 
 
 __all__ = [
-    'MissingAccountHeaderInformationException',
-    'NegativeAmountException',
+    MissingAccountHeaderInformationException,
+    NegativeAmountException,
 ]

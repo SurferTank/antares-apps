@@ -4,7 +4,7 @@ from .invalid_xpdl_exception import InvalidXPDLException
 
 
 __all__ = [
-    'InvalidXPDLException',
-    'FlowException',
-    'InvalidStatusException',
+    InvalidXPDLException,
+    FlowException,
+    InvalidStatusException,
 ]

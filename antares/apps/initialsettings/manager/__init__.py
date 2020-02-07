@@ -3,6 +3,6 @@ from .isic_loader import IsicLoader
 
 
 __all__ = [
-    'InitialSettingsLoader',
-    'IsicLoader',
+    InitialSettingsLoader,
+    IsicLoader,
 ]

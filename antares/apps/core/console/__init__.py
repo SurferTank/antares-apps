@@ -3,6 +3,6 @@ from .nuke_console import NukeConsole
 
 
 __all__ = [
-    'ConceptTypeConsole',
-    'NukeConsole',
+    ConceptTypeConsole,
+    NukeConsole,
 ]

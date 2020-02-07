@@ -9,12 +9,12 @@ from .api_client_relations_view import ApiClientUserRelationsView
 
 
 __all__ = [
-    'ApiClientUserRelationsView',
-    'ApiClientAttributesView',
-    'ApiClientIdView',
-    'ApiBranchListAddressView',
-    'ApiBranchListSocialNetworkView',
-    'ApiBranchListTelephoneView',
-    'ApiBranchListEmailView',
-    'ApiBranchListBusinessClassificationView',
+    ApiClientUserRelationsView,
+    ApiClientAttributesView,
+    ApiClientIdView,
+    ApiBranchListAddressView,
+    ApiBranchListSocialNetworkView,
+    ApiBranchListTelephoneView,
+    ApiBranchListEmailView,
+    ApiBranchListBusinessClassificationView,
 ]

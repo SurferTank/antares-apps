@@ -4,7 +4,7 @@ from .workspace_view import WorkspaceView
 
 
 __all__ = [
-    'WorkspaceView',
-    'InboxView',
-    'LatestActivitiesView',
+    WorkspaceView,
+    InboxView,
+    LatestActivitiesView,
 ]

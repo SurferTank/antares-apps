@@ -4,7 +4,7 @@ from .version_utils import VersionUtils
 
 
 __all__ = [
-    'StringUtils',
-    'VersionUtils',
-    'DateUtils',
+    StringUtils,
+    VersionUtils,
+    DateUtils,
 ]
