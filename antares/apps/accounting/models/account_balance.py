@@ -16,6 +16,7 @@ from enumfields import EnumField
 from antares.apps.client.models.client import Client
 from antares.apps.core.models.concept_type import ConceptType
 from antares.apps.document.models.document_header import DocumentHeader
+from antares.apps.core.manager import COPAD
 
 from ..constants import BalanceStatusType
 from ..models.account_type import AccountType
@@ -205,6 +206,10 @@ class AccountBalance(models.Model):
                 total_balance=models.Sum(models.F('total_balance')))
         return result['total_balance']
 
+    def get_COPAD(self):
+        return COPAD(self.client.id, self.obligation.id, 
+                     self.period, self.account_type.id, self.base_document.id)
+    
     class Meta:
         app_label = 'accounting'
         db_table = 'acc_account_balance'

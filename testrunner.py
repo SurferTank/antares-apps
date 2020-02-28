@@ -83,7 +83,6 @@ try:
         'braces',
         'django_libs',
         'markdown_deux',
-        'djng',  # django-angular integration
         'allauth',
         'allauth.account',
         'allauth.socialaccount',
@@ -240,7 +239,10 @@ try:
                     'antares.apps.user.templatetags.auth_tags',
                     'flow_tags':
                     'antares.apps.flow.templatetags.flow_tags',
-                }
+                }, 
+                "builtins": [
+                    'django.templatetags.static',
+                    ]
             },
         },
     ]

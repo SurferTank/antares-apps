@@ -230,10 +230,10 @@ $(document).ready(function() {
 					</div>
 				</div>
 				<div id="documentSaveDialog" style="display:none;">
-					<div id="documentSaveDialogContent">{% trans 'antares.apps.document.messages.document_drafted' %}</div>
+					<div id="documentSaveDialogContent">{% trans 'antares.apps.document.messages.document_saved' %}</div>
 				</div>
 				<div id="documentDraftDialog" style="display:none;">
-					<div id="documentDraftDialogContent">{% trans 'antares.apps.document.messages.document_saved' %}</div>
+					<div id="documentDraftDialogContent">{% trans 'antares.apps.document.messages.document_drafted' %}</div>
 				</div>
 				<div id="documentHelpDialog" style="display:none;">
 					<div id="documentSaveHelpContent">

@@ -1,64 +1,64 @@
 <?xml version="1.0"?>
 
 <document defaultLanguage="en" formDefinition="AccountForm-1" documentId="C7ADA348-90F9-45CC-801D-B926560E5971">
-    <headerElements>
-        <formName>AccountForm</formName>
-        <formVersion>1</formVersion>
-        <documentVersion>0</documentVersion>
-        <activeVersion>true</activeVersion>
-        <author/>
-        <authorName/>
-        <saveDate/>
-        <draftDate/>
-        <creationDate/>
-        <deleteDate/>
-        <deleteCase/>
-        <deleteComment/>
-        <associatedTo/>
-        <associationType/>
-        <flowCase/>
-        <origin/>
-        <status/>
-        <userReferralCode/>
-        <accountingElements>
-            <client/>
-            <branch/>
-            <conceptType/>
-            <period/>
-            <accountType/>
-            <baseDocument/>
-        </accountingElements>
-        <hash>0</hash>
-        <hrnCode/>
-        <hrnTitle/>
-        <tags/>
-        <options>
-            <allowCancellation>false</allowCancellation>
-        </options>
-        <externalFunctions>
-            <externalFunction id="aTestPythonFunction" events="DRAFT_LOAD,CREATION">
-                <code language="python">10</code>
-            </externalFunction>
-            <externalFunction id="aTestJavascriptFunction" events="DRAFT_LOAD,CREATION">
-                <code language="javascript">10</code>
-            </externalFunction>
-        </externalFunctions>
-        <helpText>
-            <help language="en" event="edit" markdown="true"><![CDATA[
+	<headerElements>
+		<formName>AccountForm</formName>
+		<formVersion>1</formVersion>
+		<documentVersion>0</documentVersion>
+		<activeVersion>true</activeVersion>
+		<author/>
+		<authorName/>
+		<saveDate/>
+		<draftDate/>
+		<creationDate/>
+		<deleteDate/>
+		<deleteCase/>
+		<deleteComment/>
+		<associatedTo/>
+		<associationType/>
+		<flowCase/>
+		<origin/>
+		<status/>
+		<userReferralCode/>
+		<accountingElements>
+			<client/>
+			<branch/>
+			<conceptType/>
+			<period/>
+			<accountType/>
+			<baseDocument/>
+		</accountingElements>
+		<hash>0</hash>
+		<hrnCode/>
+		<hrnTitle/>
+		<tags/>
+		<options>
+			<allowCancellation>false</allowCancellation>
+		</options>
+		<externalFunctions>
+			<externalFunction id="aTestPythonFunction" events="DRAFT_LOAD,CREATION">
+				<code language="python">10</code>
+			</externalFunction>
+			<externalFunction id="aTestJavascriptFunction" events="DRAFT_LOAD,CREATION">
+				<code language="javascript">10</code>
+			</externalFunction>
+		</externalFunctions>
+		<helpText>
+			<help language="en" event="edit" markdown="true"><![CDATA[
 This is a simple document that hits the accounting module. 
                 ]]></help>
-        </helpText>
-    </headerElements>
-    <structuredData title="An example account document" letterhead="/resource/images/generic_letterhead.jpg">
-        <page pageId="page1" title="Page 1">
-            <line row="1">
-                <field colspan="9" type="label" class="someFieldClass" id="someLabel" dataType="string">Period</field>
-                <field colspan="3" dataType="integer" type="input" id="aPeriod" name="a Period" indexed="false" class="someFieldClass" fieldCode="100" tooltip="The account period">201704</field>
-            </line>
-            <line row="2">
-                <field colspan="9" type="label" class="someFieldClass" id="someLabel" dataType="string">An amount</field>
-                <field colspan="3" dataType="float" type="input" id="anAmount" name="an Amount" indexed="false" class="someFieldClass" fieldCode="100" tooltip="The account Amount">100000000.00</field>
-            </line>
-        </page>
-    </structuredData>
+		</helpText>
+	</headerElements>
+	<structuredData title="An example account document" letterhead="/resource/images/generic_letterhead.jpg">
+		<page pageId="page1" title="Page 1">
+			<line row="1">
+				<field colspan="9" type="label" class="someFieldClass" id="someLabel" dataType="string">Period</field>
+				<field colspan="3" dataType="integer" type="input" id="aPeriod" name="a Period" indexed="false" class="someFieldClass" fieldCode="100" tooltip="The account period">201704</field>
+			</line>
+			<line row="2">
+				<field colspan="9" type="label" class="someFieldClass" id="someLabel" dataType="string">An amount</field>
+				<field colspan="3" dataType="float" type="input" id="anAmount" name="an Amount" indexed="false" class="someFieldClass" fieldCode="100" tooltip="The account Amount">100000000.00</field>
+			</line>
+		</page>
+	</structuredData>
 </document>

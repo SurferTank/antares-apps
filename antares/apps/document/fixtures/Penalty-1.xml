@@ -1,0 +1,62 @@
+<?xml version="1.0"?>
+
+<document defaultLanguage="en" formDefinition="Penalty-1" documentId="C7ADA348-90F9-45CC-801D-B926560E5971">
+	<headerElements>
+		<formName>Penalty</formName>
+		<formVersion>1</formVersion>
+		<documentVersion>0</documentVersion>
+		<activeVersion>true</activeVersion>
+		<author/>
+		<authorName/>
+		<saveDate/>
+		<draftDate/>
+		<creationDate/>
+		<deleteDate/>
+		<deleteCase/>
+		<deleteComment/>
+		<associatedTo/>
+		<associationType/>
+		<flowCase/>
+		<origin/>
+		<status/>
+		<userReferralCode/>
+		<accountingElements>
+			<client/>
+			<branch/>
+			<conceptType/>
+			<period/>
+			<accountType/>
+			<baseDocument/>
+		</accountingElements>
+		<hash>0</hash>
+		<hrnCode/>
+		<hrnTitle/>
+		<tags/>
+		<options>
+			<allowCancellation>true</allowCancellation>
+		</options>
+		<helpText>
+			<help language="en" event="edit" markdown="true"><![CDATA[
+A Penalty document. 
+        		]]></help>
+		</helpText>
+	</headerElements>
+	<structuredData title="Penalty general calculation" letterhead="/resource/images/generic_letterhead.jpg">
+		<page pageId="page1" title="Page 1">
+			<line row="1">
+				<field colspan="2" type="label" class="someFieldClass" id="someLabel" dataType="string">Penalty</field>
+				<field colspan="2" dataType="integer" type="input" id="aAmount" name="An amount" indexed="true" class="someFieldClass" messageMap="someVariableOnMessage" fieldCode="100" tooltip="This is a tooltip">100.00</field>
+				<field colspan="2" dataType="integer" type="input" id="aPeriod" name="A period" readonly="false" indexed="false" class="someFieldClass">200102</field>
+				<field colspan="2" dataType="string" type="input" id="anUserCode" name="An User code" readonly="true" indexed="false" class="someFieldClass"/>
+				<field colspan="2" dataType="string" type="input" id="aConcept" name="A concept" readonly="false" indexed="false" class="someFieldClass"/>
+				<field colspan="2" dataType="string" type="input" id="aType" name="An account type" readonly="false" indexed="false" class="someFieldClass"/>
+			</line>
+			<line row="2">
+				<field colspan="2" type="label" class="someFieldClass">Client</field>
+				<field colspan="2" dataType="string" type="input" id="aClient" name="A client" catalogId="test" readonly="false" indexed="true" class="someFieldClass" tooltip="Client" fieldCode="200"/>
+				<field colspan="2" type="label" class="someFieldClass">Date</field>
+				<field colspan="2" dataType="date" type="date" id="aDate" name="A Date" readonly="false" class="someFieldClass" tooltip="A Client" fieldCode="200"/>
+			</line>
+		</page>
+	</structuredData>
+</document>

@@ -1,64 +1,64 @@
 <?xml version="1.0"?>
 
 <document defaultLanguage="en" formDefinition="GeneralRequest-1" documentId="C7ADA348-90F9-45CC-801D-B926560E5971">
-    <headerElements>
-        <formName>GeneralRequest</formName>
-        <formVersion>1</formVersion>
-        <documentVersion>0</documentVersion>
-        <activeVersion>true</activeVersion>
-        <author/>
-        <authorName/>
-        <saveDate/>
-        <draftDate/>
-        <creationDate/>
-        <deleteDate/>
-        <deleteCase/>
-        <deleteComment/>
-        <associatedTo/>
-        <associationType/>
-        <flowCase/>
-        <origin/>
-        <status/>
-        <userReferralCode/>
-        <accountingElements>
-            <client/>
-            <branch/>
-            <conceptType/>
-            <period/>
-            <accountType/>
-            <baseDocument/>
-        </accountingElements>
-        <hash>0</hash>
-        <hrnCode/>
-        <hrnTitle/>
-        <tags/>
-        <options>
-            <allowCancellation>false</allowCancellation>
-        </options>
-        <externalFunctions>
-            <externalFunction id="aTestPythonFunction" events="DRAFT_LOAD,CREATION">
-                <code language="python">10</code>
-            </externalFunction>
-            <externalFunction id="aTestJavascriptFunction" events="DRAFT_LOAD,CREATION">
-                <code language="javascript">10</code>
-            </externalFunction>
-        </externalFunctions>
-        <helpText>
-            <help language="en" event="edit" markdown="true"><![CDATA[
+	<headerElements>
+		<formName>GeneralRequest</formName>
+		<formVersion>1</formVersion>
+		<documentVersion>0</documentVersion>
+		<activeVersion>true</activeVersion>
+		<author/>
+		<authorName/>
+		<saveDate/>
+		<draftDate/>
+		<creationDate/>
+		<deleteDate/>
+		<deleteCase/>
+		<deleteComment/>
+		<associatedTo/>
+		<associationType/>
+		<flowCase/>
+		<origin/>
+		<status/>
+		<userReferralCode/>
+		<accountingElements>
+			<client/>
+			<branch/>
+			<conceptType/>
+			<period/>
+			<accountType/>
+			<baseDocument/>
+		</accountingElements>
+		<hash>0</hash>
+		<hrnCode/>
+		<hrnTitle/>
+		<tags/>
+		<options>
+			<allowCancellation>false</allowCancellation>
+		</options>
+		<externalFunctions>
+			<externalFunction id="aTestPythonFunction" events="DRAFT_LOAD,CREATION">
+				<code language="python">10</code>
+			</externalFunction>
+			<externalFunction id="aTestJavascriptFunction" events="DRAFT_LOAD,CREATION">
+				<code language="javascript">10</code>
+			</externalFunction>
+		</externalFunctions>
+		<helpText>
+			<help language="en" event="edit" markdown="true"><![CDATA[
 This is a simple document that creates a consultation flow. 
                 ]]></help>
-        </helpText>
-    </headerElements>
-    <structuredData title="An example request document" letterhead="/resource/images/generic_letterhead.jpg">
-        <page pageId="page1" title="Page 1">
-            <line row="1">
-                <field colspan="3" type="label" class="someFieldClass" id="someLabel" dataType="string">Title</field>
-                <field colspan="9" dataType="string" type="input" id="aTitle" name="A Title" indexed="false" class="someFieldClass" fieldCode="100" tooltip="The Title"></field>
-            </line>
-            <line row="2">
-                <field colspan="3" type="label" class="someFieldClass" id="someLabel" dataType="string">Request</field>
-                <field colspan="9" dataType="string" type="input" id="aRequest" name="A Request" indexed="false" class="someFieldClass" fieldCode="101" tooltip="The request"></field>
-            </line>
-        </page>
-    </structuredData>
+		</helpText>
+	</headerElements>
+	<structuredData title="An example request document" letterhead="/resource/images/generic_letterhead.jpg">
+		<page pageId="page1" title="Page 1">
+			<line row="1">
+				<field colspan="3" type="label" class="someFieldClass" id="someLabel" dataType="string">Title</field>
+				<field colspan="9" dataType="string" type="input" id="aTitle" name="A Title" indexed="false" class="someFieldClass" fieldCode="100" tooltip="The Title"/>
+			</line>
+			<line row="2">
+				<field colspan="3" type="label" class="someFieldClass" id="someLabel" dataType="string">Request</field>
+				<field colspan="9" dataType="string" type="input" id="aRequest" name="A Request" indexed="false" class="someFieldClass" fieldCode="101" tooltip="The request"/>
+			</line>
+		</page>
+	</structuredData>
 </document>

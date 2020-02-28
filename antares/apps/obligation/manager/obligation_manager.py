@@ -5,7 +5,6 @@ Created on Jul 22, 2016
 '''
 from builtins import classmethod
 import logging
-
 from dateutil.relativedelta import relativedelta
 from django.utils import timezone
 from django.utils.translation import ugettext as _
@@ -20,6 +19,7 @@ from antares.apps.core.models import SystemParameter
 from ..constants import ObligationStatusType, ObligationType
 from ..models import ClientObligation
 from ..models import ObligationRule, ObligationVector
+
 
 
 logger = logging.getLogger(__name__)
@@ -148,15 +148,14 @@ class ObligationManager(object):
         This method simply calculates the periods and their due dates and
         verifies and updates the obligation status records accordingly.
         """
-        period_list = ObligationManager._find_period_list(
+        period_list = PeriodManager.find_period_list_by_client_obligation(
             client_obligation, timezone.now())
         for period in period_list:
             obligation_status = ObligationVector.find_one_by_COPAD(
                 client_obligation.client, client_obligation.concept_type,
                 period, client_obligation.account_type,
                 client_obligation.base_document)
-            if (obligation_status is None or obligation_status.status ==
-                    ObligationStatusType.CANCELLED):
+            if (obligation_status is None or obligation_status.status == ObligationStatusType.CANCELLED):
                 due_date = PeriodManager.calculate_date_from_period(
                     client_obligation.obligation_rule.base_date, period,
                     TimeUnitType.to_enum(
@@ -171,127 +170,22 @@ class ObligationManager(object):
                     ObligationType.to_enum(
                         client_obligation.obligation_rule.obligation_type),
                     due_date)
+            elif obligation_status.status == ObligationStatusType.PENDING:
+                """ lets update the outdated if they need to be updated """
+                if obligation_status.compliance_date is not None:
+                    obligation_status.status = ObligationStatusType.COMPLIANT
+                    obligation_status.save() 
+                elif obligation_status.due_date < timezone.now():
+                    obligation_status.status = ObligationStatusType.LATE
+                    obligation_status.save()
+                
             else:
                 logger.info(
                     _("antares.apps.obligation.manager.obligation_manager.obligation_status_found_nothing_to_do"
                       ))
 
-    @classmethod
-    def _find_period_list(cls, client_obligation, event_date):
-        """
-        Returns a list of periods for processing, using defaults on a client
-        obligation object.
-        """
-        time_unit = TimeUnitType.to_enum(
-            client_obligation.obligation_rule.time_unit_type)
-        period_list = []
-        from_registration_date = SystemParameter.find_one(
-            'OBLIGATION_CALCULATE_PERIODS_FROM_REGISTRATION',
-            FieldDataType.BOOLEAN, True)
-
-        # if the client is defunct, it does not make sense to continue
-        # calculating anything.
-        if (client_obligation.client.status == ClientStatusType.DEFUNCT):
-            return period_list
-
-        if (client_obligation.client.registration_date >
-                client_obligation.start_date
-                and from_registration_date == True):
-            base_date = client_obligation.start_date
-        else:
-            base_date = client_obligation.client.registration_date
-
-        if (event_date is None):
-            event_date = timezone.now()
-        if (time_unit == TimeUnitType.YEAR):
-            number_of_years_into_future = SystemParameter.find_one(
-                "OBLIGATION_DEFAULT_NUMBER_OF_YEARS_INTO_FUTURE",
-                FieldDataType.INTEGER, 3)
-            require_full_years = SystemParameter.find_one(
-                "OBLIGATION_CALCULATE_PERIODS_REQUIRE_FULL_YEARS",
-                FieldDataType.BOOLEAN, True)
-            if (require_full_years == True):
-                base_date = base_date + relativedelta(years=1)
-
-            interval = relativedelta(
-                event_date, base_date).years + number_of_years_into_future
-
-            for i in range(0, interval):
-                period_list.append(int(str(base_date.year).zfill(4)))
-                base_date = base_date + relativedelta(years=1)
-
-        elif (time_unit == TimeUnitType.MONTH):
-            number_of_months_into_future = SystemParameter.find_one(
-                "OBLIGATION_DEFAULT_NUMBER_OF_MONTHS_INTO_FUTURE",
-                FieldDataType.INTEGER, 3)
-            require_full_months = SystemParameter.find_one(
-                "OBLIGATION_CALCULATE_PERIODS_REQUIRE_FULL_MONTHS",
-                FieldDataType.BOOLEAN, True)
-            if (require_full_months == True):
-                base_date = base_date + relativedelta(months=1)
-
-            delta = relativedelta(event_date, base_date)
-            interval = delta.years * 12 + delta.months + number_of_months_into_future
-
-            for i in range(0, interval):
-                period_list.append(
-                    int(
-                        str(base_date.year).zfill(4) + str(base_date.month)
-                        .zfill(2)))
-                base_date = base_date + relativedelta(months=1)
-
-        elif (time_unit == TimeUnitType.DAY):
-            number_of_days_into_future = SystemParameter.find_one(
-                "OBLIGATION_DEFAULT_NUMBER_OF_DAYS_INTO_FUTURE",
-                FieldDataType.INTEGER, 3)
-
-            delta = relativedelta(event_date, base_date)
-
-            interval = delta.years * 12 + delta.months * 30 + delta.days + number_of_days_into_future
-
-            for i in range(0, interval):
-                period_list.append(
-                    int(
-                        str(base_date.year).zfill(4) + str(base_date.month)
-                        .zfill(2) + str(base_date.day).zfill(2)))
-                base_date = base_date + relativedelta(days=1)
-        else:
-            raise NotImplementedError
-
-        return period_list
-
-    @classmethod
-    def _find_period_list_by_units(cls, base_date, time_unit, units_before,
-                                   units_after):
-        """
-        Returns a list of periods for processing, with units before and after a
-        baseTime
-        """
-        period_list = []
-
-        if (time_unit == TimeUnitType.YEAR):
-            base_date = base_date - relativedelta(years=units_before)
-            for i in range(0, units_before + units_after):
-                period_list.append(base_date.year)
-                base_date = base_date + relativedelta(years=1)
-        elif (time_unit == TimeUnitType.MONTH):
-            base_date = base_date - relativedelta(months=units_before)
-            for i in range(0, units_before + units_after):
-                period_list.append(
-                    int(str(base_date.year) + str(base_date.month)))
-                base_date = base_date + relativedelta(months=1)
-        elif (time_unit == TimeUnitType.DAY):
-            base_date = base_date - relativedelta(days=units_before)
-            for i in range(0, units_before + units_after):
-                period_list.append(
-                    int(
-                        str(base_date.year) + str(base_date.month) +
-                        str(base_date.day)))
-                base_date = base_date + relativedelta(months=1)
-        else:
-            raise NotImplementedError
-
-        return period_list
+   
+   
 
     @classmethod
     def process_obligations(cls, client, concept_type, form_def, when,

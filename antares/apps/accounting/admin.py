@@ -11,8 +11,17 @@ from .models import PenaltyDefinition
 
 admin.site.register(GLAccountType, MPTTModelAdmin)
 admin.site.register(AccountRule)
-admin.site.register(InterestDefinition)
-admin.site.register(PenaltyDefinition)
+@admin.register(InterestDefinition)
+class InterestDefinitionAdmin(admin.ModelAdmin):
+    list_display = ('name', 'rate', 'periodicity', 'first_is_duedate', 
+                    'use_calendar_periods', 'concept_type','active')
+
+@admin.register(PenaltyDefinition)
+class PenaltyDefinitionAdmin(admin.ModelAdmin):
+    list_display = ('name',  'rate', 'fixed_rate',
+                    'periodicity', 'max_rounds', 
+                    'recurring','concept_type', 'active')
+
 @admin.register(AccountType)
 class AccountTypeAdmin(admin.ModelAdmin):
     list_display = ('id', 'account_type_name' , 'auxiliary_account', 

@@ -24,6 +24,8 @@ logger = logging.getLogger(__name__)
 
 class ObligationRule(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    name = models.CharField(
+        max_length=100, blank=False, null=False, unique=True)
     form_definition = models.ForeignKey(
         'document.FormDefinition',
         on_delete=models.PROTECT,
@@ -69,7 +71,7 @@ class ObligationRule(models.Model):
     consider_holidays = models.BooleanField(default=True)
 
     def __str__(self):
-        return str(self.id)
+        return str(self.name)
 
     def save(self, *args, **kwargs):
         if self.creation_date is None:

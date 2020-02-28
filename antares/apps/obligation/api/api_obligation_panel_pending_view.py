@@ -53,7 +53,7 @@ class ApiObligationPanelPendingView(BaseDatatableView):
         if column == 'type':
             if ObligationType.to_enum(row.obligation_type) is not None:
                 return _(
-                    ObligationType.to_enum(row.obligation_type).get_label())
+                    ObligationType.to_enum(row.obligation_type).label)
             else:
                 return None
 
@@ -78,7 +78,7 @@ class ApiObligationPanelPendingView(BaseDatatableView):
                 return None
         if column == 'status':
             if ObligationStatusType.to_enum(row.status) is not None:
-                return _(ObligationStatusType.to_enum(row.status).get_label())
+                return _(ObligationStatusType.to_enum(row.status).label)
             else:
                 return None
         if column == 'actions':
@@ -146,5 +146,5 @@ class ApiObligationPanelPendingView(BaseDatatableView):
             self.client = get_request().user.get_on_behalf_client()
 
         qs = ObligationVector.find_by_client_and_status(
-            self.client, "Pending").order_by('period')
+            self.client, [ObligationStatusType.PENDING, ObligationStatusType.LATE]).order_by('period')
         return qs

@@ -5,13 +5,16 @@ Created on Jul 22, 2016
 '''
 from datetime import datetime
 import logging
+import calendar
+from django.utils import timezone
 
 from django.utils.translation import ugettext as _
 
 from ..constants import FieldDataType, TimeUnitType
 from ..models.holiday import Holiday
 from ..models.system_parameter import SystemParameter
-
+from antares.apps.client.constants import ClientStatusType
+from dateutil.relativedelta import relativedelta
 
 logger = logging.getLogger(__name__)
 
@@ -43,7 +46,9 @@ class PeriodManager(object):
 
     @classmethod
     def validate_period_and_time_unit(cls, period, time_unit=None):
-        """ validates a period to make sure it is pertaining to a valid date """
+        """ 
+        Validates a period to make sure it is pertaining to a valid date 
+        """
         if time_unit is None:
             time_unit = cls.get_time_unit_from_period(period)
         if (time_unit == TimeUnitType.YEAR):
@@ -99,10 +104,10 @@ class PeriodManager(object):
                 "YEAR_PERIOD_STARTS_AT_MIDNIGHT", FieldDataType.BOOLEAN, True)
             year = int(float(str(period)[:4]))
             if (start_at_midnight == True):
-                base_date = datetime(year, base_date.month, base_date.day, 0,
+                base_date = timezone.datetime(year, base_date.month, base_date.day, 0,
                                      0, 0, 0, base_date.tzinfo)
             else:
-                base_date = datetime(year, base_date.month, base_date.day,
+                base_date = timezone.datetime(year, base_date.month, base_date.day,
                                      base_date.hour, base_date.minute,
                                      base_date.second, base_date.microsecond,
                                      base_date.tzinfo)
@@ -113,14 +118,22 @@ class PeriodManager(object):
                 "MONTH_PERIOD_STARTS_AT_MIDNIGHT", FieldDataType.BOOLEAN, True)
             year = int(float(str(period)[:4]))
             month = int(float(str(period)[4:]))
-            if (start_at_midnight == True):
-                base_date = datetime(year, month, base_date.day, 0, 0, 0, 0,
-                                     base_date.tzinfo)
+            month_last_day = calendar.monthrange(year, month)[1]
+            if(base_date.day>month_last_day):
+                day = month_last_day
             else:
-                base_date = datetime(year, month, base_date.day,
+                day = base_date.day
+            if (start_at_midnight == True):
+                base_date = timezone.datetime(year, month, day, 0, 0, 0, 0,
+                                     base_date.tzinfo)
+                
+                
+            else:
+                base_date = timezone.datetime(year, month, day,
                                      base_date.hour, base_date.minute,
                                      base_date.second, base_date.microsecond,
                                      base_date.tzinfo)
+            
             return Holiday.next_day(base_date, consider_saturdays,
                                     consider_sundays, consider_holidays)
         if (time_unit == TimeUnitType.DAY):
@@ -130,10 +143,10 @@ class PeriodManager(object):
             month = int(float(str(period)[2:-4]))
             day = int(float(str(period)[6:]))
             if (start_at_midnight == True):
-                base_date = datetime(year, month, day, 0, 0, 0, 0,
+                base_date = timezone.datetime(year, month, day, 0, 0, 0, 0,
                                      base_date.tzinfo)
             else:
-                base_date = datetime(year, month, day, base_date.hour,
+                base_date = timezone.datetime(year, month, day, base_date.hour,
                                      base_date.minute, base_date.second,
                                      base_date.microsecond, base_date.tzinfo)
             return Holiday.next_day(base_date, consider_saturdays,
@@ -156,3 +169,197 @@ class PeriodManager(object):
         from antares.apps.document.models.form_definition import FormDefinition
         return FormDefinition.get_one_by_concept_type_id_and_period(
             period, concept_type)
+        
+    @classmethod
+    def find_period_list(cls, base_date, event_date, time_unit,  client_status=ClientStatusType.ACTIVE):
+        """
+        Returns a list of periods for processing, using defaults on a client
+        obligation object.
+        """
+        period_list = []
+        from_registration_date = SystemParameter.find_one(
+            'OBLIGATION_CALCULATE_PERIODS_FROM_REGISTRATION',
+            FieldDataType.BOOLEAN, True)
+
+        # if the client is defunct, it does not make sense to continue
+        # calculating anything.
+       
+        if (client_status == ClientStatusType.DEFUNCT):
+            return period_list
+
+        if (event_date is None):
+            event_date = timezone.now()
+        if (time_unit == TimeUnitType.YEAR):
+            number_of_years_into_future = SystemParameter.find_one(
+                "OBLIGATION_DEFAULT_NUMBER_OF_YEARS_INTO_FUTURE",
+                FieldDataType.INTEGER, 3)
+            require_full_years = SystemParameter.find_one(
+                "OBLIGATION_CALCULATE_PERIODS_REQUIRE_FULL_YEARS",
+                FieldDataType.BOOLEAN, True)
+            if (require_full_years == True):
+                base_date = base_date + relativedelta(years=1)
+
+            interval = relativedelta(
+                event_date, base_date).years + number_of_years_into_future
+
+            for i in range(0, interval):
+                period_list.append(int(str(base_date.year).zfill(4)))
+                base_date = base_date + relativedelta(years=1)
+
+        elif (time_unit == TimeUnitType.MONTH):
+            number_of_months_into_future = SystemParameter.find_one(
+                "OBLIGATION_DEFAULT_NUMBER_OF_MONTHS_INTO_FUTURE",
+                FieldDataType.INTEGER, 3)
+            require_full_months = SystemParameter.find_one(
+                "OBLIGATION_CALCULATE_PERIODS_REQUIRE_FULL_MONTHS",
+                FieldDataType.BOOLEAN, True)
+            if (require_full_months == True):
+                base_date = base_date + relativedelta(months=1)
+
+            delta = relativedelta(event_date, base_date)
+            interval = delta.years * 12 + delta.months + number_of_months_into_future
+
+            for i in range(0, interval):
+                period_list.append(
+                    int(
+                        str(base_date.year).zfill(4) + str(base_date.month)
+                        .zfill(2)))
+                base_date = base_date + relativedelta(months=1)
+
+        elif (time_unit == TimeUnitType.DAY):
+            number_of_days_into_future = SystemParameter.find_one(
+                "OBLIGATION_DEFAULT_NUMBER_OF_DAYS_INTO_FUTURE",
+                FieldDataType.INTEGER, 3)
+
+            delta = relativedelta(event_date, base_date)
+
+            interval = delta.years * 12 + delta.months * 30 + delta.days + number_of_days_into_future
+
+            for i in range(0, interval):
+                period_list.append(
+                    int(
+                        str(base_date.year).zfill(4) + str(base_date.month)
+                        .zfill(2) + str(base_date.day).zfill(2)))
+                base_date = base_date + relativedelta(days=1)
+        else:
+            raise NotImplementedError
+
+        return period_list
+    
+    @classmethod
+    def find_period_list_by_client_obligation(cls,  client_obligation,  event_date):
+        """
+        Returns a list of periods for processing, using defaults on a client
+        obligation object.
+        """
+        
+        time_unit = TimeUnitType.to_enum(client_obligation.obligation_rule.time_unit_type)
+        period_list = []
+        from_registration_date = SystemParameter.find_one(
+            'OBLIGATION_CALCULATE_PERIODS_FROM_REGISTRATION',
+            FieldDataType.BOOLEAN, True)
+
+        # if the client is defunct, it does not make sense to continue
+        # calculating anything.
+        if (client_obligation.client.status == ClientStatusType.DEFUNCT):
+            return period_list
+
+        if (client_obligation.client.registration_date >
+                client_obligation.start_date
+                and from_registration_date == True):
+            base_date = client_obligation.start_date
+        else:
+            base_date = client_obligation.client.registration_date
+
+        if (event_date is None):
+            event_date = timezone.now()
+        if (time_unit == TimeUnitType.YEAR):
+            number_of_years_into_future = SystemParameter.find_one(
+                "OBLIGATION_DEFAULT_NUMBER_OF_YEARS_INTO_FUTURE",
+                FieldDataType.INTEGER, 3)
+            require_full_years = SystemParameter.find_one(
+                "OBLIGATION_CALCULATE_PERIODS_REQUIRE_FULL_YEARS",
+                FieldDataType.BOOLEAN, True)
+            if (require_full_years == True):
+                base_date = base_date + relativedelta(years=1)
+
+            interval = relativedelta(
+                event_date, base_date).years + number_of_years_into_future
+
+            for i in range(0, interval):
+                period_list.append(int(str(base_date.year).zfill(4)))
+                base_date = base_date + relativedelta(years=1)
+
+        elif (time_unit == TimeUnitType.MONTH):
+            number_of_months_into_future = SystemParameter.find_one(
+                "OBLIGATION_DEFAULT_NUMBER_OF_MONTHS_INTO_FUTURE",
+                FieldDataType.INTEGER, 3)
+            require_full_months = SystemParameter.find_one(
+                "OBLIGATION_CALCULATE_PERIODS_REQUIRE_FULL_MONTHS",
+                FieldDataType.BOOLEAN, True)
+            if (require_full_months == True):
+                base_date = base_date + relativedelta(months=1)
+
+            delta = relativedelta(event_date, base_date)
+            interval = delta.years * 12 + delta.months + number_of_months_into_future
+
+            for i in range(0, interval):
+                period_list.append(
+                    int(
+                        str(base_date.year).zfill(4) + str(base_date.month)
+                        .zfill(2)))
+                base_date = base_date + relativedelta(months=1)
+
+        elif (time_unit == TimeUnitType.DAY):
+            number_of_days_into_future = SystemParameter.find_one(
+                "OBLIGATION_DEFAULT_NUMBER_OF_DAYS_INTO_FUTURE",
+                FieldDataType.INTEGER, 3)
+
+            delta = relativedelta(event_date, base_date)
+
+            interval = delta.years * 12 + delta.months * 30 + delta.days + number_of_days_into_future
+
+            for i in range(0, interval):
+                period_list.append(
+                    int(
+                        str(base_date.year).zfill(4) + str(base_date.month)
+                        .zfill(2) + str(base_date.day).zfill(2)))
+                base_date = base_date + relativedelta(days=1)
+        else:
+            raise NotImplementedError
+
+        return period_list
+    
+    @classmethod
+    def find_period_list_by_units(cls, base_date, time_unit, units_before,
+                                   units_after):
+        """
+        Returns a list of periods for processing, with units before and after a
+        baseTime
+        """
+        period_list = []
+
+        if (time_unit == TimeUnitType.YEAR):
+            base_date = base_date - relativedelta(years=units_before)
+            for i in range(0, units_before + units_after):
+                period_list.append(base_date.year)
+                base_date = base_date + relativedelta(years=1)
+        elif (time_unit == TimeUnitType.MONTH):
+            base_date = base_date - relativedelta(months=units_before)
+            for i in range(0, units_before + units_after):
+                period_list.append(
+                    int(str(base_date.year) + str(base_date.month)))
+                base_date = base_date + relativedelta(months=1)
+        elif (time_unit == TimeUnitType.DAY):
+            base_date = base_date - relativedelta(days=units_before)
+            for i in range(0, units_before + units_after):
+                period_list.append(
+                    int(
+                        str(base_date.year) + str(base_date.month) +
+                        str(base_date.day)))
+                base_date = base_date + relativedelta(months=1)
+        else:
+            raise NotImplementedError
+
+        return period_list
+    

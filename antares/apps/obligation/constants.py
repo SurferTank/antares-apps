@@ -29,6 +29,7 @@ class ObligationStatusType(EnumUtilsMixin, Enum):
     PENDING = "Pending"
     COMPLIANT = "Compliant"
     CANCELLED = "Cancelled"
+    LATE = "Late"
 
     def __str__(self):
         """
@@ -39,8 +40,9 @@ class ObligationStatusType(EnumUtilsMixin, Enum):
     class Labels:
         NOT_EXIGIBLE = _(__name__ + '.ObligationStatusType.' + 'NOT_EXIGIBLE')
         PENDING = _(__name__ + '.ObligationStatusType.' + 'PENDING')
-        COMPLIANT = _(__name__ + '.ObligationStatusType.' + 'PENDING')
+        COMPLIANT = _(__name__ + '.ObligationStatusType.' + 'COMPLIANT')
         CANCELLED = _(__name__ + '.ObligationStatusType.' + 'CANCELLED')
+        LATE = _(__name__ + '.ObligationStatusType.' + 'LATE')
 
 
 class ObligationPeriodicityType(EnumUtilsMixin, Enum):

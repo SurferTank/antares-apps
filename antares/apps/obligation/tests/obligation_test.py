@@ -6,6 +6,7 @@ Created on Oct 2, 2017
 import logging
 from django.test import TransactionTestCase
 from antares.apps.document.tests import DocumentTestHelper
+from ..models import ObligationRule
 
 logger = logging.getLogger(__name__)
 
@@ -18,7 +19,9 @@ class BalanceTest(TransactionTestCase):
         self.docHelper = DocumentTestHelper()
         TransactionTestCase.setUp(self)
 
-    def test_application(self):
+    def test_obligationRule(self):
+        obligationRule = ObligationRule()
+
         pass
 
             

@@ -9,6 +9,7 @@ from .gl_transaction import GLTransaction
 from .transaction_type import TransactionType
 from .interest_definition import InterestDefinition
 from .penalty_definition import PenaltyDefinition
+from .account_charge import AccountCharge
 
 __all__ = [
     AccountBalance,
@@ -21,5 +22,6 @@ __all__ = [
     GLBalance,
     GLTransaction,
     InterestDefinition,
-    PenaltyDefinition
+    PenaltyDefinition, 
+    AccountCharge
 ]

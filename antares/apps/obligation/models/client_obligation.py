@@ -10,6 +10,7 @@ from django.conf import settings
 from django.db import models
 from django.utils import timezone
 from django.utils.translation import ugettext_lazy as _
+from antares.apps.core.manager import COPAD
 
 from antares.apps.core.middleware.request import get_request
 
@@ -80,6 +81,26 @@ class ClientObligation(models.Model):
                 client=client, concept_type=concept_type)
         except ClientObligation.DoesNotExist:
             return []
+    
+    def get_COPAD(self):
+        return COPAD(self.client.id, self.obligation.id, 
+                     self.period, self.account_type.id, self.base_document.id)
+
+    @classmethod
+    def find_one_by_COPAD(cls, copad):
+        """
+        Looks for an obligation in the obligation's vector by its unique identifiers
+
+        """
+        try:
+            return ClientObligation.objects.get(
+                client=copad.client,
+                concept_type=copad.concept_type,
+                period=copad.period,
+                account_type=copad.account_type,
+                base_document=copad.base_document)
+        except ClientObligation.DoesNotExist:
+            return None
 
     class Meta:
         app_label = 'obligation'

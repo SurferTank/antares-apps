@@ -60,33 +60,6 @@ msgstr "Actions"
 
 
 
-msgid "antares.apps.obligation.constants.ObligationType.File"
-msgstr "File"
-
-msgid "antares.apps.obligation.constants.ObligationType.Pay"
-msgstr "Pay"
-
-msgid "antares.apps.obligation.constants.ObligationType.Inform"
-msgstr "Inform"
-
-msgid "antares.apps.obligation.constants.ObligationStatusType.Not Exigible"
-msgstr "Not Exigible"
-
-msgid "antares.apps.obligation.constants.ObligationStatusType.Pending"
-msgstr "Pending"
-
-msgid "antares.apps.obligation.constants.ObligationStatusType.Compliant"
-msgstr "Compliant"
-
-msgid "antares.apps.obligation.constants.ObligationStatusType.Cancelled"
-msgstr "Cancelled"
-
-msgid "antares.apps.obligation.console.obligation_console.console.command_sucessfully_run"
-msgstr "Command successfully run"
-
-msgid "antares.apps.obligation.console.obligation_console.console.dont_now_command"
-msgstr "Do not know command"
-
 msgid "antares.apps.obligation.constants.ObligationType.FILE"
 msgstr "File"
 
@@ -95,6 +68,27 @@ msgstr "Pay"
 
 msgid "antares.apps.obligation.constants.ObligationType.INFORM"
 msgstr "Inform"
+
+msgid "antares.apps.obligation.constants.ObligationStatusType.NOT_EXIGIBLE"
+msgstr "Not Exigible"
+
+msgid "antares.apps.obligation.constants.ObligationStatusType.PENDING"
+msgstr "Pending"
+
+msgid "antares.apps.obligation.constants.ObligationStatusType.COMPLIANT"
+msgstr "Compliant"
+
+msgid "antares.apps.obligation.constants.ObligationStatusType.CANCELLED"
+msgstr "Cancelled"
+
+msgid "antares.apps.obligation.constants.ObligationStatusType.LATE"
+msgstr "Late"
+
+msgid "antares.apps.obligation.console.obligation_console.console.command_sucessfully_run"
+msgstr "Command successfully run"
+
+msgid "antares.apps.obligation.console.obligation_console.console.dont_now_command"
+msgstr "Do not know command"
 
 msgid "antares.apps.obligation.constants.ObligationOriginType.CLIENT_BASE"
 msgstr "Client Base"

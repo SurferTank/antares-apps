@@ -27,6 +27,7 @@ from ..models import AccountRule
 from ..models import AccountTransaction
 from ..models import AccountType
 from ..models import TransactionType
+from .charges_manager import ChargesManager
 
 
 logger = logging.getLogger(__name__)
@@ -65,6 +66,7 @@ class AccountManager(object):
         #try:
         cancelled_document = AccountManager._get_cancelled_document(
             document)
+    
         if (cancelled_document is not None):
             logger.error(
                 _(__name__ + '.cancelling_document %(document_id)s') %
@@ -76,6 +78,13 @@ class AccountManager(object):
 
         account_document.content = AccountManager._get_account_document_string(
             account_document, transactions)
+        for transaction in transactions:
+            chargesManager = ChargesManager(transaction.balance, timezone.now())
+            if(cancelled_document is None):
+                chargesManager.calculateCharges(False)
+            else:
+                chargesManager.calculateCharges(True)
+        
         account_document.status = AccountDocumentStatusType.PROCESSED
 
         #except Exception as e:
@@ -83,7 +92,7 @@ class AccountManager(object):
         #    account_document.status = AccountDocumentStatusType.WITH_ERRORS
 
         account_document.save()
-
+        
         return account_document.status
 
     @classmethod
@@ -105,6 +114,7 @@ class AccountManager(object):
                 transaction_list.append(transaction)
                 AccountManager._apply_transaction_to_balance(
                     transaction, document)
+                
         return transaction_list
 
     @classmethod
@@ -229,6 +239,8 @@ class AccountManager(object):
             AccountManager._compute_balance_status(principal, interest,
                                                    penalties))
         transaction.balance.save()
+        
+        
 
     @classmethod
     def _compute_balance_status(cls, principal: float, interest: float,

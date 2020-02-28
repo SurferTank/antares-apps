@@ -11,6 +11,9 @@ from django.db import models
 from django.utils import timezone
 from django.utils.translation import ugettext_lazy as _
 from enumfields import EnumField
+from datetime import date
+from .obligation_vector_log import ObligationVectorLog
+from antares.apps.core.manager import COPAD
 
 from antares.apps.core.middleware.request import get_request
 
@@ -89,7 +92,13 @@ class ObligationVector(models.Model):
             self.creation_date = timezone.now()
         self.update_date = timezone.now()
         self.author = get_request().user
+        
         super(ObligationVector, self).save(*args, **kwargs)
+        
+    def get_COPAD(self):
+        return COPAD(self.client.id, self.obligation.id, 
+                     self.period, self.account_type.id, self.base_document.id)
+    
 
     @classmethod
     def find_or_create_status(cls, client, concept_type, period, account_type,
@@ -106,10 +115,12 @@ class ObligationVector(models.Model):
         obligation_status.account_type = account_type
         obligation_status.base_document = base_document
         obligation_status.client_obligation = client_obligation
-        obligation_status.status = ObligationStatusType.PENDING
-        obligation_status.status_date = timezone.now()
         obligation_status.obligation_type = obligation_type
         obligation_status.due_date = due_date
+        if  date.today() > due_date:
+            obligation_status.set_status(ObligationStatusType.LATE, timezone.now())
+        else:
+            obligation_status.set_status(ObligationStatusType.PENDING, timezone.now())
         obligation_status.save()
         return obligation_status
 
@@ -121,19 +132,18 @@ class ObligationVector(models.Model):
             return None
 
     @classmethod
-    def find_one_by_COPAD(cls, client, concept_type, period, account_type,
-                          base_document):
+    def find_one_by_COPAD(cls, copad):
         """
         Looks for an obligation in the obligation's vector by its unique identifiers
 
         """
         try:
             return ObligationVector.objects.get(
-                client=client,
-                concept_type=concept_type,
-                period=period,
-                account_type=account_type,
-                base_document=base_document)
+                client=copad.client,
+                concept_type=copad.concept_type,
+                period=copad.period,
+                account_type=copad.account_type,
+                base_document=copad.base_document)
         except ObligationVector.DoesNotExist:
             return None
 
@@ -168,8 +178,12 @@ class ObligationVector(models.Model):
 
         """
         try:
-            return ObligationVector.objects.filter(
-                client=client, obligation_type=obligation_type, status=status)
+            if type(status) is list:
+                return ObligationVector.objects.filter(
+                    client=client, obligation_type=obligation_type, status__in=status)
+            else:
+                return ObligationVector.objects.filter(
+                    client=client, obligation_type=obligation_type, status=status)
         except ObligationVector.DoesNotExist:
             return []
 
@@ -180,24 +194,29 @@ class ObligationVector(models.Model):
 
         """
         try:
-            return ObligationVector.objects.filter(
-                client=client, status=status)
+            if type(status) is list:
+                return ObligationVector.objects.filter(
+                    client=client, status__in=status)
+            else:
+                return ObligationVector.objects.filter(
+                    client=client, status=status)
         except ObligationVector.DoesNotExist:
             return []
 
-    @classmethod
-    def set_obligation_status(cls,
-                              obligation_status,
+    def set_status(self,
                               status,
+                              status_date = timezone.now(),
                               compliance_document=None):
         """
-        Sets an status on the obligation's vector
+        Sets an status on the obligation's vector. 
+        This function also triggers a save on ObligationVectorLog
         """
-        obligation_status.status = status
-        obligation_status.status_date = timezone.now()
+        self.status = status
+        self.status_date = status_date
         if (compliance_document is not None):
-            obligation_status.compliance_document = compliance_document
-        obligation_status.save()
+            self.compliance_document = compliance_document
+        ObligationVectorLog.post_status_log(self)
+        
 
     class Meta:
         app_label = 'obligation'
