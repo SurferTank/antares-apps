@@ -33,7 +33,7 @@ class PenaltyDefinition(models.Model):
         max_length=100, blank=False, null=False, unique=True)
     description = RichTextField(blank=True, null=True)
     rate = models.FloatField(null=True, blank=True)
-    fixed_rate = MoneyField(
+    fixed_amount = MoneyField(
         max_digits=15, decimal_places=2, default_currency='USD', null=True, blank=True)
     periodicity = EnumField(
         TimeUnitType, max_length=10, default=TimeUnitType.MONTH)

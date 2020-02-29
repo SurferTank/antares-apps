@@ -11,6 +11,7 @@ from django.db import transaction
 from django.utils import timezone
 from django.utils.translation import ugettext as _
 from djmoney.money import Money
+from django.db.models import Sum
 
 from antares.apps.client.models import Client
 from antares.apps.core.constants import FieldDataType
@@ -240,6 +241,9 @@ class AccountManager(object):
                                                    penalties))
         transaction.balance.save()
         
+        #lets create the interest and penalties. 
+        chargesManager = ChargesManager(transaction.balance)
+        chargesManager.calculateCharges()
         
 
     @classmethod
@@ -456,3 +460,55 @@ class AccountManager(object):
          TODO: Implement me.
         """
         pass
+    
+    
+    @classmethod
+    def find_balances_qs_by_COPAD(cls, queryset, copad):
+        if(copad.client is not None):
+            chargesManager = ChargesManager()
+            chargesManager.calculateChargesByClient(copad.client)
+        if(copad.client is not None and 
+           copad.concept_type is None and 
+           copad.period is None and 
+           copad.account_type is None):
+             
+            queryset = queryset.filter(client=copad.client)\
+                .annotate(
+                    principal_balance__sum=Sum('principal_balance'),
+                    interest_balance__sum=Sum('interest_balance'),
+                    penalties_balance__sum=Sum('penalties_balance'),
+                    total_balance__sum=Sum('total_balance'))
+        elif (copad.client is not None and 
+           copad.concept_type is not None and 
+           copad.period is None and 
+           copad.account_type is None):
+            queryset = queryset.filter(client=copad.client, concept_type=copad.concept_type)\
+                .annotate(
+                    principal_balance__sum=Sum('principal_balance'),
+                    interest_balance__sum=Sum('interest_balance'),
+                    penalties_balance__sum=Sum('penalties_balance'),
+                    total_balance__sum=Sum('total_balance'))
+                
+        elif (copad.client is not None and 
+           copad.concept_type is not None and 
+           copad.period is not None and 
+           copad.account_type is None):
+            queryset = queryset.filter(
+                    client=copad.client,
+                    concept_type=copad.concept_type,
+                    period=copad.period)\
+                .annotate(
+                    principal_balance__sum=Sum('principal_balance'),
+                    interest_balance__sum=Sum('interest_balance'),
+                    penalties_balance__sum=Sum('penalties_balance'),
+                    total_balance__sum=Sum('total_balance'))
+        elif (copad.client is not None and 
+           copad.concept_type is not None and 
+           copad.period is not None and 
+           copad.account_type is not None):
+            queryset = queryset.filter(
+                client=copad.client,
+                concept_type=copad.concept_type,
+                period=copad.period,
+                account_type=copad.account_type)
+        return queryset

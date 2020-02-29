@@ -79,7 +79,27 @@ class AccountCharge(models.Model):
         self.creation_date = timezone.now()
         super(AccountCharge, self).save(*args, **kwargs)
 
-    def findByCOPAD(self, copad):
+    def setCOPADPeriodInterestDefinition(self, copad, period, interestDefinition):
+        self.client = copad.client
+        self.concept_type = copad.concept_type
+        self.period = copad.period 
+        self.account_type = copad.account_type
+        self.base_document = copad.base_document 
+        self.charge_period = period
+        self.interest_definition = interestDefinition
+    
+    def setCOPADPeriodPenaltyDefinition(self, copad, period, penaltyDefinition):
+        self.client = copad.client
+        self.concept_type = copad.concept_type
+        self.period = copad.period 
+        self.account_type = copad.account_type
+        self.base_document = copad.base_document 
+        self.charge_period = period
+        self.penalty_definition = penaltyDefinition
+    
+        
+    @classmethod
+    def findByCOPAD(cls, copad):
         try:
             return AccountCharge.objects.get(
                 client=copad.client,
@@ -90,7 +110,8 @@ class AccountCharge(models.Model):
         except AccountCharge.DoesNotExist:
             return None
         
-    def findByCOPADChargePeriodAndInterestDefinition(self, copad, period, interestDefinition):
+    @classmethod
+    def findByCOPADChargePeriodAndInterestDefinition(cls, copad, period, interestDefinition):
         try:
             return AccountCharge.objects.get(
                 client=copad.client,
@@ -101,7 +122,9 @@ class AccountCharge(models.Model):
                 interest_definition=interestDefinition)
         except AccountCharge.DoesNotExist:
             return None
-    def findByCOPADChargePeriodAndPenaltyDefinition(self, copad, period, penaltyDefinition):
+        
+    @classmethod
+    def findByCOPADChargePeriodAndPenaltyDefinition(cls, copad, period, penaltyDefinition):
         try:
             return AccountCharge.objects.get(
                 client=copad.client,

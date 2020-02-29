@@ -1967,7 +1967,7 @@ class Document(object):
 
     def set_client(self, value):
         self.set_header_field('client', value)
-
+    
     def save(self, status_type=None):
         from antares.apps.accounting.manager import AccountManager
         from antares.apps.notifications.manager import NotificationManager
@@ -2130,8 +2130,27 @@ class Document(object):
                 and isinstance(account_type, AccountType)):
             self.set_header_field('account_type', account_type)
         if (base_document is not None and isinstance(base_document, Document)):
-            self.set_header_field('account_type', base_document.header)
-
+            self.set_header_field('base_document', base_document.header)
+    
+    def set_COPAD(self, copad):
+        """
+        A simple method to add the information related to the accounting side in
+        an easy manner.
+        """
+        if (copad.client is not None and isinstance(copad.client, Client)):
+            self.set_header_field('client', copad.client)
+        if (copad.concept_type is not None
+                and isinstance(copad.concept_type, ConceptType)):
+            self.set_header_field('concept_type', copad.concept_type)
+        if (copad.period is not None and isinstance(copad.period, int)):
+            self.set_header_field('period', copad.period)
+        if (copad.account_type is not None
+                and isinstance(copad.account_type, AccountType)):
+            self.set_header_field('account_type', copad.account_type)
+        if (copad.base_document is not None and isinstance(copad.base_document, Document)):
+            self.set_header_field('base_document', copad.base_document.header)        
+    
+   
     def _map_header_fields_to_fields(self):
         """ This simply maps the header fields into the body
         """

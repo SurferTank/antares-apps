@@ -54,7 +54,8 @@ class InterestDefinition(models.Model):
     @classmethod
     def findAllAndByConceptType(cls, conceptType):
         try:
-            return cls.filter(Q(concept_type__isNull=True) | Q(concept_type=conceptType) )
+            return cls.filter(Q(concept_type__isNull=True) | Q(concept_type=conceptType),  
+                              active=True)
         except cls.DoesNotExist:
             return []
     

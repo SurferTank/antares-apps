@@ -20,6 +20,7 @@ from antares.apps.core.manager import COPAD
 
 from ..constants import BalanceStatusType
 from ..models.account_type import AccountType
+from builtins import classmethod
 
 
 logger = logging.getLogger(__name__)
@@ -122,10 +123,10 @@ class AccountBalance(models.Model):
     def find_or_create_by_CCPAD(cls, client: Client, concept_type: ConceptType,
                                 period: int, account_type: AccountType,
                                 document: DocumentHeader):
-        """ Returns the account balance that matches the unique identifiers - COPAD
+        """ 
+        Returns the account balance that matches the unique identifiers - COPAD
         (Client, Concept type, Period, Account type and Document). If none is
         found, it creates one balance with zeroes as principal, interest, penalties and total. 
-        
         """
         balance = AccountBalance.find_by_CCPAD(client, concept_type, period,
                                                account_type, document)
@@ -150,12 +151,23 @@ class AccountBalance(models.Model):
             return balance
 
     @classmethod
+    def findByClient(cls, client):
+        try:
+            balance_list = AccountBalance.objects.filter(
+                        client=client)
+        except AccountBalance.DoesNotExist:
+            balance_list = []
+        return balance_list
+
+
+    @classmethod
     def find_by_CCPAD(cls, client: Client, concept_type: ConceptType,
                       period: int, account_type: AccountType,
                       document: DocumentHeader):
-        """ Retrieves a balance by Client, concept type, Period, Account Type or, if a document based 
-            document, by Client, Document, Period, Account type. It infers the document based account 
-            based on the document being not none.
+        """ 
+        Retrieves a balance by Client, concept type, Period, Account Type or, if a document based 
+        document, by Client, Document, Period, Account type. It infers the document based account 
+        based on the document being not none.
         """
         try:
             if (document is None):
@@ -184,6 +196,8 @@ class AccountBalance(models.Model):
         except AccountBalance.DoesNotExist:
             return None
 
+    
+
     @classmethod
     def get_total_balance_by_client(cls, client: Client) -> float:
         """ Gets the total balance by client
@@ -209,6 +223,19 @@ class AccountBalance(models.Model):
     def get_COPAD(self):
         return COPAD(self.client.id, self.obligation.id, 
                      self.period, self.account_type.id, self.base_document.id)
+    
+    @classmethod
+    def find_by_COPAD(cls, copad):
+        try:
+            return AccountBalance.objects.get(
+                client=copad.client,
+                concept_type=copad.concept_type,
+                period=copad.period,
+                account_type=copad.account_type,
+                base_document=copad.base_document)
+        except AccountBalance.DoesNotExist:
+            return None
+    
     
     class Meta:
         app_label = 'accounting'

@@ -19,7 +19,8 @@ from antares.apps.core.models import ConceptType
 from antares.apps.core.models import SystemParameter
 
 from ..models import AccountTransaction, AccountType
-
+from antares.apps.core.manager import COPAD
+from ..manager import AccountManager
 
 logger = logging.getLogger(__name__)
 
@@ -116,6 +117,7 @@ class ApiAccountTypeView(BaseDatatableView):
     def filter_queryset(self, qs):
         """ Overriden method to modify the query to retrieve the correct data (a hook on BaseDatatableView)
         """
+        copad = COPAD()
         if (self.request.GET.get('client_id')):
             self.client = Client.find_one(
                 uuid.UUID(self.request.GET.get('client_id')))
@@ -146,9 +148,9 @@ class ApiAccountTypeView(BaseDatatableView):
         else:
             raise ValueError(
                 _(__name__ + '.exceptions.account_type_is_undefined'))
-        qs = qs.filter(
-            client=self.client,
-            concept_type=self.concept_type,
-            period=self.period,
-            account_type=self.account_type)
-        return qs
+        copad.client = self.client 
+        copad.concept_type = self.concept_type 
+        copad.period = self.period
+        copad.account_type = self.account_type
+        
+        return AccountManager.find_balances_qs_by_COPAD(qs, copad)

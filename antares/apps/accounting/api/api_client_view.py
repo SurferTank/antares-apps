@@ -17,6 +17,8 @@ from antares.apps.core.constants import FieldDataType
 from antares.apps.core.middleware.request import get_request
 from antares.apps.core.models import SystemParameter
 from antares.apps.user.exceptions.user_exception import UserException
+from antares.apps.core.manager import COPAD
+from ..manager import AccountManager
 
 from ..models import AccountBalance
 
@@ -121,6 +123,7 @@ class ApiClientView(BaseDatatableView):
     def filter_queryset(self, qs):
         """ Overriden method to modify the query to retrieve the correct data (a hook on BaseDatatableView)
         """
+        copad = COPAD()
         if (self.request.GET.get('client_id')):
             self.client = Client.find_one(
                 uuid.UUID(self.request.GET.get('client_id')))
@@ -132,11 +135,6 @@ class ApiClientView(BaseDatatableView):
                 self.client = get_request().user.get_on_behalf_client()
             except UserException:
                 return qs
-
-        qs = qs.filter(client=self.client)
-        qs = qs.annotate(
-            principal_balance__sum=Sum('principal_balance'),
-            interest_balance__sum=Sum('interest_balance'),
-            penalties_balance__sum=Sum('penalties_balance'),
-            total_balance__sum=Sum('total_balance'))
-        return qs
+        copad.client = self.client 
+        
+        return AccountManager.find_balances_qs_by_COPAD(qs, copad)

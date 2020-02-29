@@ -18,7 +18,7 @@ class InterestDefinitionAdmin(admin.ModelAdmin):
 
 @admin.register(PenaltyDefinition)
 class PenaltyDefinitionAdmin(admin.ModelAdmin):
-    list_display = ('name',  'rate', 'fixed_rate',
+    list_display = ('name',  'rate', 'fixed_amount',
                     'periodicity', 'max_rounds', 
                     'recurring','concept_type', 'active')
 

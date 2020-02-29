@@ -15,8 +15,10 @@ from djmoney.money import Money
 from antares.apps.client.models import Client
 from antares.apps.core.constants import FieldDataType
 from antares.apps.core.middleware.request import get_request
-from antares.apps.core.models import ConceptType
+from antares.apps.core.models import ConceptType, concept_type
 from antares.apps.core.models import SystemParameter
+from antares.apps.core.manager import COPAD
+from ..manager import AccountManager
 
 from ..models import AccountBalance
 
@@ -119,6 +121,7 @@ class ApiConceptTypeView(BaseDatatableView):
     def filter_queryset(self, qs):
         """ Overriden method to modify the query to retrieve the correct data (a hook on BaseDatatableView)
         """
+        copad = COPAD()
         if (self.request.GET.get('client_id')):
             self.client = Client.find_one(
                 uuid.UUID(self.request.GET.get('client_id')))
@@ -136,10 +139,7 @@ class ApiConceptTypeView(BaseDatatableView):
         else:
             raise ValueError(
                 _(__name__ + '.exceptions.concept_type_is_undefined'))
-        qs = qs.filter(client=self.client, concept_type=self.concept_type)
-        qs = qs.annotate(
-            principal_balance__sum=Sum('principal_balance'),
-            interest_balance__sum=Sum('interest_balance'),
-            penalties_balance__sum=Sum('penalties_balance'),
-            total_balance__sum=Sum('total_balance'))
-        return qs
+        copad.client = self.client
+        copad.concept_type = concept_type
+        
+        return AccountManager.find_balances_qs_by_COPAD(qs, copad)
