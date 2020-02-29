@@ -31,12 +31,12 @@ class ChargesManager(object):
         interest_def_list = InterestDefinition.findAllAndByConceptType(account_balance.concept_type)
         penalty_def_list = PenaltyDefinition.findAllAndByConceptType(account_balance.concept_type)
         
-        if (obligation is not None and 
-           account_balance.principal_balance > 0):
+        if (obligation is not None
+             and  account_balance.principal_balance.amount < 0):
             should_calculate = True 
         else:
             should_calculate = False
-        if(not should_calculate or account_balance.compliance_date is None):
+        if(not should_calculate):
             return 
         self.processInterest(event_date, account_balance, obligation, 
                              interest_def_list, should_calculate, invalidate_charges)
