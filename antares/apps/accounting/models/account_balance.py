@@ -221,8 +221,8 @@ class AccountBalance(models.Model):
         return result['total_balance']
 
     def get_COPAD(self):
-        return COPAD(self.client.id, self.obligation.id, 
-                     self.period, self.account_type.id, self.base_document.id)
+        return COPAD(self.client, self.concept_type, 
+                     self.period, self.account_type, self.base_document)
     
     @classmethod
     def find_by_COPAD(cls, copad):

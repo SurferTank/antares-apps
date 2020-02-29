@@ -54,9 +54,10 @@ class InterestDefinition(models.Model):
     @classmethod
     def findAllAndByConceptType(cls, conceptType):
         try:
-            return cls.filter(Q(concept_type__isNull=True) | Q(concept_type=conceptType),  
-                              active=True)
-        except cls.DoesNotExist:
+            return InterestDefinition.objects.filter(Q(concept_type__isnull=True) |
+                                                    Q(concept_type=conceptType)) \
+                                            .filter(active=True)
+        except InterestDefinition.DoesNotExist:
             return []
     
     def save(self, *args, **kwargs):

@@ -62,8 +62,9 @@ class PenaltyDefinition(models.Model):
     @classmethod
     def findAllAndByConceptType(cls, conceptType):
         try:
-            return cls.filter(Q(concept_type__isNull=True) | Q(concept_type=conceptType) )
-        except cls.DoesNotExist:
+            return PenaltyDefinition.objects.filter(Q(concept_type__isnull=True) | 
+                                                    Q(concept_type=conceptType) ).filter(active=True)
+        except PenaltyDefinition.DoesNotExist:
             return []
     
 

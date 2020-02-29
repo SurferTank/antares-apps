@@ -149,4 +149,5 @@ class ApiPeriodView(BaseDatatableView):
         copad.client = self.client 
         copad.concept_type = self.concept_type
         copad.period= self.period
-        return AccountManager.find_balances_qs_by_COPAD(qs, copad)
+        qs =  AccountManager.find_balances_qs_by_COPAD(qs, copad)
+        return qs

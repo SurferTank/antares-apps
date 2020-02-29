@@ -15,7 +15,7 @@ from djmoney.money import Money
 from antares.apps.client.models import Client
 from antares.apps.core.constants import FieldDataType
 from antares.apps.core.middleware.request import get_request
-from antares.apps.core.models import ConceptType, concept_type
+from antares.apps.core.models import ConceptType
 from antares.apps.core.models import SystemParameter
 from antares.apps.core.manager import COPAD
 from ..manager import AccountManager
@@ -140,6 +140,7 @@ class ApiConceptTypeView(BaseDatatableView):
             raise ValueError(
                 _(__name__ + '.exceptions.concept_type_is_undefined'))
         copad.client = self.client
-        copad.concept_type = concept_type
+        copad.concept_type = self.concept_type
         
-        return AccountManager.find_balances_qs_by_COPAD(qs, copad)
+        qs = AccountManager.find_balances_qs_by_COPAD(qs, copad)
+        return qs

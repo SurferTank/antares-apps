@@ -143,7 +143,7 @@ class ObligationVector(models.Model):
                 concept_type=copad.concept_type,
                 period=copad.period,
                 account_type=copad.account_type,
-                base_document=copad.base_document)
+                base_document=copad.document)
         except ObligationVector.DoesNotExist:
             return None
 

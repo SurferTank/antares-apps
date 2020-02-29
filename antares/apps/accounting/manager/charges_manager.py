@@ -34,6 +34,8 @@ class ChargesManager(object):
         if (obligation is not None and 
            account_balance.principal_balance > 0):
             should_calculate = True 
+        else:
+            should_calculate = False
         if(not should_calculate or account_balance.compliance_date is None):
             return 
         self.processInterest(event_date, account_balance, obligation, 

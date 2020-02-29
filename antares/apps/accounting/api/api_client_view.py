@@ -137,4 +137,5 @@ class ApiClientView(BaseDatatableView):
                 return qs
         copad.client = self.client 
         
-        return AccountManager.find_balances_qs_by_COPAD(qs, copad)
+        qs =  AccountManager.find_balances_qs_by_COPAD(qs, copad)
+        return qs
