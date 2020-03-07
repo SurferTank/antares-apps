@@ -25,7 +25,8 @@ class ChargesManager(object):
         for balance in balanceList:
             self.calculateChargesByAccount(balance)
     
-    def calculateChargesByAccount(self, account_balance, event_date = timezone.now(), invalidate_charges=False):
+    def calculateChargesByAccount(self, account_balance, event_date = timezone.now(), 
+                                  invalidate_charges=False):
         
         obligation = ObligationVector.find_one_by_COPAD(account_balance.get_COPAD())
         interest_def_list = InterestDefinition.findAllAndByConceptType(account_balance.concept_type)
@@ -44,10 +45,12 @@ class ChargesManager(object):
                               penalty_def_list, should_calculate, invalidate_charges) 
         
     
-    def processInterest(self, event_date, account_balance, obligation, interest_def_list, should_calculate, invalidate_charges):
+    def processInterest(self, event_date, account_balance, obligation, interest_def_list, 
+                        should_calculate, invalidate_charges):
         logger.info("Processing interest")
         for interestDef in interest_def_list:
-            periodList = PeriodManager.find_period_list_by_client_obligation(obligation.client_obligation, event_date)
+            periodList = PeriodManager.find_period_list_by_client_obligation(obligation.client_obligation, 
+                                                                             event_date)
             for period in periodList:
                 interestRecord = AccountCharge.findByCOPADChargePeriodAndInterestDefinition(account_balance.get_COPAD(),
                                                                                              period, interestDef)
@@ -63,9 +66,9 @@ class ChargesManager(object):
             record.setCOPADPeriodInterestDefinition(account_balance.get_COPAD(), period, definition)
         record.amount = account_balance.principal_balance * definition.rate
         interestDoc = Document(formId="Interest-1")
-        interestDoc.set_COPAD(account_balance.get_COPAD)
+        interestDoc.set_COPAD(account_balance.get_COPAD())
         interestDoc.set_field_value("aPeriod", 200101)
-        interestDoc.set_field_value("aAmount", 50)        
+        interestDoc.set_field_value("aAmount", record.amount)        
         interestDoc.save(DocumentStatusType.SAVED)
         record.charge_document = interestDoc
         record.save()
@@ -93,9 +96,9 @@ class ChargesManager(object):
         if(definition.fixed_amount is not None and definition.fixed_amount>0):
             record.amount = record.amount + definition.fixed_amount
         penaltyDoc = Document(formId="Penalty-1")
-        penaltyDoc.set_COPAD(account_balance.get_COPAD)
+        penaltyDoc.set_COPAD(account_balance.get_COPAD())
         penaltyDoc.set_field_value("aPeriod", 200101)
-        penaltyDoc.set_field_value("aAmount", 50)        
+        penaltyDoc.set_field_value("aAmount", record.amount)        
         penaltyDoc.save(DocumentStatusType.SAVED)
         record.charge_document = penaltyDoc
         record.save()

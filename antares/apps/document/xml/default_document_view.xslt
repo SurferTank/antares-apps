@@ -11,7 +11,7 @@
     <xsl:output method="xml" encoding="utf-8" omit-xml-declaration="yes" indent="yes"/>
     <xsl:template match="/">
         <xsl:text disable-output-escaping="yes"><![CDATA[{% extends template %}
-{% load staticfiles i18n  %} 
+{% load static i18n  %} 
 
 {% block title %}Antares Document{% endblock %}
 {% block ng_app_name %}{% endblock ng_app_name %}

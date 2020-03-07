@@ -73,7 +73,8 @@ class AccountRule(models.Model):
         super(AccountRule, self).save(*args, **kwargs)
 
     def __str__(self):
-        return str(self.id)
+        return self.transaction_type.transaction_type_name + ":" + self.form_definition.form_name + ":" \
+            + self.amount_field 
 
     @classmethod
     def find_active_by_form_definition(cls, form_definition):

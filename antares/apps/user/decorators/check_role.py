@@ -5,7 +5,6 @@ from django.conf import settings
 from django.contrib.auth import REDIRECT_FIELD_NAME
 from django.contrib.auth.views import redirect_to_login
 from django.shortcuts import resolve_url
-from django.utils.decorators import available_attrs
 
 from ..exceptions import RoleDeniedException
 
@@ -20,7 +19,7 @@ def antares_user_passes_test(test_func,
     """
 
     def decorator(view_func):
-        @wraps(view_func, assigned=available_attrs(view_func))
+        @wraps(view_func)
         def _wrapped_view(request, *args, **kwargs):
             if test_func(request.request.user):
                 return view_func(request, *args, **kwargs)

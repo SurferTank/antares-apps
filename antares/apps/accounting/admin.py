@@ -10,7 +10,10 @@ from .models import PenaltyDefinition
 
 
 admin.site.register(GLAccountType, MPTTModelAdmin)
-admin.site.register(AccountRule)
+@admin.register(AccountRule)
+class AccountRuleAdmin(admin.ModelAdmin):
+    list_display = ('transaction_type', 'form_definition', 'concept_type', 'amount_field')
+    
 @admin.register(InterestDefinition)
 class InterestDefinitionAdmin(admin.ModelAdmin):
     list_display = ('name', 'rate', 'periodicity', 'first_is_duedate', 

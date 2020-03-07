@@ -49,7 +49,7 @@ setup(
     '.tar.gz',
     keywords=['management', 'infrastructure'],
     install_requires=[
-        'Django >=1.11.1',
+        'Django >=2.2.9',
         'defusedxml >=0.5.0',
         'django-allauth >=0.32.0',
         'django-angular >=0.8.4',

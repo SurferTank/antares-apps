@@ -8,7 +8,7 @@
 		omit-xml-declaration="yes" indent="yes" />
 	<xsl:template match="/">
 		<xsl:text disable-output-escaping="yes"><![CDATA[{% extends template %} 
-{% load staticfiles i18n markdown_deux_tags static %} 
+{% load static i18n markdown_deux_tags %} 
 
 {% block title %}Antares Document{% endblock %}
 {% block ng_app_name %}{% endblock ng_app_name %}
