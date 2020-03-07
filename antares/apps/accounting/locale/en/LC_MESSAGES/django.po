@@ -67,6 +67,8 @@ msgstr "Period"
 msgid "antares.apps.accounting.templates.panel.account_type"
 msgstr "Account Type"
 
+msgid "antares.apps.accounting.templates.panel.transaction_date"
+msgstr "Transaction Date"
 
 #: manager/account_manager.py:53
 #, python-format

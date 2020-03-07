@@ -17,6 +17,7 @@ from antares.apps.core.constants import FieldDataType
 from antares.apps.core.middleware.request import get_request
 from antares.apps.core.models import ConceptType
 from antares.apps.core.models import SystemParameter
+from antares.apps.core.models import UserParameter
 
 from ..models import AccountTransaction, AccountType
 from antares.apps.core.manager import COPAD
@@ -41,6 +42,7 @@ class ApiAccountTypeView(BaseDatatableView):
     model = AccountTransaction
     columns = [
         'id',
+        'transaction_date',
         'document_id',
         'transaction_type',
         'effect',
@@ -51,6 +53,7 @@ class ApiAccountTypeView(BaseDatatableView):
     ]
     order_columns = [
         'id',
+        'transaction_date'
         '',
         '',
         '',
@@ -73,6 +76,8 @@ class ApiAccountTypeView(BaseDatatableView):
             "DEFAULT_CURRENCY", FieldDataType.STRING, 'USD')
         self.default_locale = SystemParameter.find_one(
             "DEFAULT_LOCALE", FieldDataType.STRING, 'en_US')
+        self.date_format_string = UserParameter.find_one( 'CORE_TEMPLATE_DATE_FORMAT',
+            FieldDataType.STRING, '%Y-%m-%d')
 
     def render_column(self, row, column):
         """ Overriden method to render a column (a hook on BaseDatatableView)
@@ -82,6 +87,8 @@ class ApiAccountTypeView(BaseDatatableView):
                 return row.hrn_code
             else:
                 return str(row.id)
+        if column == 'transaction_date':
+            return row.transaction_date.strftime(self.date_format_string)
         if column == 'document_id':
             row_string = '{document_name}&nbsp;<a href="#" onClick="view_accounting_document(\''+\
                 '{document_id}\');"><i class="fa fa-eye" aria-hidden="true"></i></a>'
