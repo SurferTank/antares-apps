@@ -1,0 +1,17 @@
+{% load static i18n  %} 
+<table width="100%" id="documentLatestTable" class="table table-striped" >
+	<thead>
+    	<tr>
+        	<th>{% trans 'antares.apps.document.templates.latest_document.id' %}</th>
+            <th>{% trans 'antares.apps.document.templates.latest_document.form' %}</th>
+            <th>{% trans 'antares.apps.document.templates.latest_document.author' %}</th>
+            <th>{% trans 'antares.apps.document.templates.latest_document.status' %}</th>
+            <th>{% trans 'antares.apps.document.templates.latest_document.status_date' %}</th>
+     	</tr>
+	</thead>
+</table>
+<script type="text/javascript">
+var latestDocumentLinks = { 
+          latest_documents_call: "{% url "antares.apps.document:api_latest_documents_view" %}", 
+    };
+</script>

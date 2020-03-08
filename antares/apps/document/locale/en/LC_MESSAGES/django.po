@@ -160,3 +160,15 @@ msgstr "The document has been submitted to the system"
 
 msgid "antares.apps.document.messages.document_drafted"
 msgstr "The document has been Drafted"
+
+
+msgid "antares.apps.document.templates.latest_document.id"
+msgstr "ID"
+msgid "antares.apps.document.templates.latest_document.form"
+msgstr "Form"
+msgid "antares.apps.document.templates.latest_document.author"
+msgstr "Author"
+msgid "antares.apps.document.templates.latest_document.status"
+msgstr "Status"
+msgid "antares.apps.document.templates.latest_document.status_date"
+msgstr "Date"

@@ -2,8 +2,9 @@
  * 
  */
 
-function display_obligations_panel(client_id) {
-    if (antaresObligationLinks.obligations_pending_view) {
+function display_pending_obligations(client_id, display=10)
+{
+	 if (antaresObligationLinks.obligations_pending_view) {
         $('#pendingObligationsTable')
             .DataTable({
                 'paging': true,
@@ -12,7 +13,7 @@ function display_obligations_panel(client_id) {
                 'info': false,
                 'searching': false,
                 'bLengthChange': false,
-                'iDisplayLength': 10,
+                'iDisplayLength': display,
                 'conditionalPaging': true,
                 'ajax': {
                     'url': antaresObligationLinks.obligations_pending_view,
@@ -43,7 +44,10 @@ function display_obligations_panel(client_id) {
                 },
             });
     }
-    if (antaresObligationLinks.obligations_complied_view) {
+}
+
+function display_completed_obligations(client_id, display=10) {
+	 if (antaresObligationLinks.obligations_complied_view) {
         $('#compliedObligationsTable')
             .DataTable({
                 'paging': true,
@@ -52,7 +56,7 @@ function display_obligations_panel(client_id) {
                 'info': false,
                 'searching': false,
                 'bLengthChange': false,
-                'iDisplayLength': 10,
+                'iDisplayLength': display,
                 'conditionalPaging': true,
                 'ajax': {
                     'url': antaresObligationLinks.obligations_complied_view,
@@ -85,3 +89,9 @@ function display_obligations_panel(client_id) {
             });
     }
 }
+
+function display_obligations_panel(client_id) {
+    display_pending_obligations(client_id);
+    display_completed_obligations(client_id);
+}
+

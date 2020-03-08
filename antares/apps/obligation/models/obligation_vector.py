@@ -195,10 +195,10 @@ class ObligationVector(models.Model):
         try:
             if type(status) is list:
                 return ObligationVector.objects.filter(
-                    client=client, status__in=status)
+                    client=client, status__in=status).order_by('-due_date')
             else:
                 return ObligationVector.objects.filter(
-                    client=client, status=status)
+                    client=client, status=status).order_by('-due_date')
         except ObligationVector.DoesNotExist:
             return []
 

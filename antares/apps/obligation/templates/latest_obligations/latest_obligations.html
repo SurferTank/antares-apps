@@ -1,0 +1,22 @@
+ {% load static i18n  %} 
+ <table  width="100%" id="pendingObligationsTable" class="table table-striped">
+	<thead>
+    	<tr>
+    		<th>{% trans 'antares.apps.obligation.templates.panel.type' %}</th>
+            <th>{% trans 'antares.apps.obligation.templates.panel.concept_type' %}</th>
+            <th>{% trans 'antares.apps.obligation.templates.panel.period' %}</th>
+            <th>{% trans 'antares.apps.obligation.templates.panel.due_date' %}</th>
+            <th>{% trans 'antares.apps.obligation.templates.panel.status' %}</th>
+            <th>{% trans 'antares.apps.obligation.templates.panel.actions' %}</th>
+   		</tr>
+ 	</thead>
+	<tbody>
+    </tbody>
+</table>
+
+<script type="text/javascript">
+    var antaresObligationLinks = { 
+          obligations_pending_view: "{% url "antares.apps.obligation:panel_ajax_pending_view" %}",
+          
+    };
+</script>

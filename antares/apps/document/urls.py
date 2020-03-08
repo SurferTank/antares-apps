@@ -11,6 +11,7 @@ from .views import DocumentCreateView
 from .views import DocumentEditView
 from .views import DocumentViewView
 from .api import ApiDocumentUploadView
+from .api import ApiLatestDocumentView
 
 app_name = 'antares.apps.document'
 
@@ -27,6 +28,9 @@ urlpatterns = [
     url(r'api/edit$',
         login_required(ApiDocumentSubmitView.as_view()),
         name="api_edit_submit_view"),
+    url(r'api/latest$',
+        login_required(ApiLatestDocumentView.as_view()),
+        name="api_latest_documents_view"),
     url(r'api/upload$',
         login_required(ApiDocumentUploadView.as_view()),
         name="api_upload_view"),
