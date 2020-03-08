@@ -1,6 +1,5 @@
 from django.utils.translation import ugettext as _
 from django.db import models
-from enumfields import Enum
 
 from antares.apps.core.mixins import EnumUtilsMixin
 

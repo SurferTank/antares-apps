@@ -109,7 +109,7 @@ class ApiAccountTypeView(BaseDatatableView):
             else:
                 return str(row.transaction_type.id)
         if column == 'effect':
-            return row.transaction_type.effect.label
+            return row.transaction_type.effect
         if column == 'principal_amount':
             return str(row.principal_amount)
         if column == 'interest_amount':
