@@ -10,7 +10,7 @@ from django.conf import settings
 from django.db import models
 from django.utils import timezone
 from django.utils.translation import ugettext_lazy as _
-from enumfields import EnumField
+
 
 from ..constants import NotificationStatusType
 
@@ -46,8 +46,7 @@ class NotificationRecord(models.Model):
         db_column='document_header',
         blank=True,
         null=True)
-    status = EnumField(
-        NotificationStatusType,
+    status = models.CharField(choices=NotificationStatusType.choices,
         max_length=30,
         default=NotificationStatusType.POSTED)
     update_date = models.DateTimeField()

@@ -5,7 +5,6 @@ from django.conf import settings
 from django.db import models
 from django.utils import timezone
 from django.utils.translation import ugettext as _
-from enumfields import EnumField
 
 from ..constants import DocumentAssociationType, DocumentOriginType, DocumentStatusType
 
@@ -157,8 +156,7 @@ class DocumentHeader(models.Model):
         related_name='associated_document_header_set',
         blank=True,
         null=True)
-    association_type = EnumField(
-        DocumentAssociationType,
+    association_type = models.CharField(choices=DocumentAssociationType.choices,
         max_length=30,
         default=DocumentAssociationType.NONE,
         verbose_name=_(__name__ + ".association_type"),
@@ -209,8 +207,7 @@ class DocumentHeader(models.Model):
         null=True,
         verbose_name=_(__name__ + ".hrn_title"),
         help_text=_(__name__ + ".hrn_title_help"))
-    origin = EnumField(
-        DocumentOriginType,
+    origin = models.CharField(choices=DocumentOriginType.choices,
         max_length=30,
         default=DocumentOriginType.UNKNOWN,
         verbose_name=_(__name__ + ".origin"),
@@ -220,8 +217,7 @@ class DocumentHeader(models.Model):
         null=True,
         verbose_name=_(__name__ + ".save_date"),
         help_text=_(__name__ + ".save_date_help"))
-    status = EnumField(
-        DocumentStatusType,
+    status = models.CharField(choices=DocumentStatusType.choices,
         max_length=30,
         default=DocumentStatusType.DRAFTED,
         verbose_name=_(__name__ + ".status"),

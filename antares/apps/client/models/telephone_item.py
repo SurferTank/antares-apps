@@ -5,7 +5,6 @@ from django.conf import settings
 from django.db import models
 from django.utils import timezone
 from django.utils.translation import ugettext as _
-from enumfields import EnumField
 
 from antares.apps.core.middleware.request import get_request
 
@@ -23,8 +22,8 @@ class TelephoneItem(models.Model):
         db_column='client_branch',
         blank=True,
         null=True)
-    status = EnumField(
-        ItemStatusType, max_length=20, default=ItemStatusType.ACTIVE)
+    status = models.CharField(choices=ItemStatusType.choices, 
+                              max_length=20, default=ItemStatusType.ACTIVE)
     is_principal = models.BooleanField(default=True)
     telephone = models.CharField(max_length=100, blank=True, null=True)
     telephone_type = models.CharField(

@@ -6,7 +6,7 @@ from django.db import models
 from django.db import transaction
 from django.utils import timezone
 from django.utils.translation import ugettext as _
-from enumfields import EnumField
+
 
 from antares.apps.core.middleware.request import get_request
 
@@ -23,12 +23,12 @@ class ThirdPartyRecord(models.Model):
         primary_key=True,
         default=uuid.uuid4,
         editable=False)
-    status = EnumField(
-        ThirdPartyRecordStatusType,
+    status = models.CharField(choices=
+        ThirdPartyRecordStatusType.choices,
         max_length=30,
         default=ThirdPartyRecordStatusType.OPEN)
-    channel = EnumField(
-        ThirdPartyChannelType,
+    channel =  models.CharField(choices=
+        ThirdPartyChannelType.choices,
         max_length=30,
         default=ThirdPartyChannelType.WEB)
     client_branch = models.ForeignKey(

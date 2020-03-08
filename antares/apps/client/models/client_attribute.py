@@ -5,7 +5,6 @@ from django.conf import settings
 from django.db import models
 from django.utils import timezone
 from django.utils.translation import ugettext as _
-from enumfields import EnumField
 
 from antares.apps.core.constants import FieldDataType
 from antares.apps.core.middleware.request import get_request
@@ -29,7 +28,7 @@ class ClientAttribute(models.Model):
         blank=True,
         null=True)
     boolean_value = models.NullBooleanField()
-    data_type = EnumField(FieldDataType, max_length=20)
+    data_type = models.CharField(choices=FieldDataType.choices, max_length=20)
     date_value = models.DateTimeField(blank=True, null=True)
     float_value = models.FloatField(blank=True, null=True)
     integer_value = models.BigIntegerField(blank=True, null=True)

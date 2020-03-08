@@ -11,7 +11,6 @@ from django.utils import timezone
 from django.utils.translation import ugettext as _
 from djmoney.models.fields import MoneyField
 from djmoney.money import Money
-from enumfields import EnumField
 
 from antares.apps.client.models.client import Client
 from antares.apps.core.models.concept_type import ConceptType

@@ -1,49 +1,21 @@
 from django.utils.translation import ugettext as _
-from enumfields import Enum
+from django.db import models
 
 from antares.apps.core.mixins import EnumUtilsMixin
 
 
-class MessageType(EnumUtilsMixin, Enum):
-    FORM_DEFINITION = "Form Definition"
-    FLOW_DEFINITION = "Flow Definition"
-    CURRENT_ACCOUNT = "Current Account"
-    FLOW_CASE = "Flow Case"
-    DOCUMENT = "Document"
-    EXTERNAL_SYSTEM = "External System"
+class MessageType(EnumUtilsMixin, models.TextChoices):
+    FORM_DEFINITION = "Form Definition", _(__name__ + '.MessageType.' + 'FORM_DEFINITION')
+    FLOW_DEFINITION = "Flow Definition", _(__name__ + '.MessageType.' + 'FLOW_DEFINITION')
+    CURRENT_ACCOUNT = "Current Account", _(__name__ + '.MessageType.' + 'CURRENT_ACCOUNT')
+    FLOW_CASE = "Flow Case", _(__name__ + '.MessageType.' + 'FLOW_CASE')
+    DOCUMENT = "Document", _(__name__ + '.MessageType.' + 'DOCUMENT')
+    EXTERNAL_SYSTEM = "External System", _(__name__ + '.MessageType.' + 'EXTERNAL_SYSTEM')
 
-    def __str__(self):
-        """
-        Just returns the value of the Enumeration
-        """
-        return str(self.value)
-
-    class Labels:
-        FORM_DEFINITION = _(__name__ + '.MessageType.' + 'FORM_DEFINITION')
-        FLOW_DEFINITION = _(__name__ + '.MessageType.' + 'FLOW_DEFINITION')
-        CURRENT_ACCOUNT = _(__name__ + '.MessageType.' + 'CURRENT_ACCOUNT')
-        FLOW_CASE = _(__name__ + '.MessageType.' + 'FLOW_CASE')
-        DOCUMENT = _(__name__ + '.MessageType.' + 'DOCUMENT')
-        EXTERNAL_SYSTEM = _(__name__ + '.MessageType.' + 'EXTERNAL_SYSTEM')
-
-
-class MessageStatusType(EnumUtilsMixin, Enum):
-    PENDING = "Pending"
-    PROCESSED = "Processed"
-    WITH_ERRORS = "With Errors"
-    ON_HOLD = "On hold"
-    CANCELLED = "Cancelled"
-    EXTERNAL_SYSTEM = "External System"
-
-    def __str__(self):
-        """
-        Just returns the value of the Enumeration
-        """
-        return str(self.value)
-
-    class Labels:
-        PENDING = _(__name__ + '.MessageStatusType.' + 'PENDING')
-        PROCESSED = _(__name__ + '.MessageStatusType.' + 'PROCESSED')
-        WITH_ERRORS = _(__name__ + '.MessageStatusType.' + 'WITH_ERRORS')
-        ON_HOLD = _(__name__ + '.MessageStatusType.' + 'ON_HOLD')
-        CANCELLED = _(__name__ + '.MessageStatusType.' + 'CANCELLED')
+class MessageStatusType(EnumUtilsMixin, models.TextChoices):
+    PENDING = "Pending", _(__name__ + '.MessageStatusType.' + 'PENDING')
+    PROCESSED = "Processed", _(__name__ + '.MessageStatusType.' + 'PROCESSED')
+    WITH_ERRORS = "With Errors", _(__name__ + '.MessageStatusType.' + 'WITH_ERRORS')
+    ON_HOLD = "On hold", _(__name__ + '.MessageStatusType.' + 'ON_HOLD')
+    CANCELLED = "Cancelled", _(__name__ + '.MessageStatusType.' + 'CANCELLED')
+    EXTERNAL_SYSTEM = "External System", _(__name__ + '.MessageStatusType.' + 'EXTERNAL_SYSTEM')

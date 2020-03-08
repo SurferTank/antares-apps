@@ -6,7 +6,7 @@ from django.db import models
 from django.db.models import Q
 from django.utils import timezone
 from django.utils.translation import ugettext_lazy as _
-from enumfields import EnumField
+
 
 from antares.apps.core.middleware.request import get_request
 
@@ -30,7 +30,7 @@ class ClientUserRelation(models.Model):
         on_delete=models.PROTECT,
         related_name='child_client_relation_set',
         db_column='child_client')
-    relation_type = EnumField(ClientRelationType, max_length=20)
+    relation_type = models.CharField(choices=ClientRelationType.choices, max_length=20)
     start_date = models.DateField(null=False, blank=False)
     end_date = models.DateField(null=True, blank=True)
     creation_date = models.DateTimeField(blank=True, null=True, editable=False)

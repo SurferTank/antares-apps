@@ -4,45 +4,26 @@ Created on Jul 9, 2016
 @author: leobelen
 '''
 from django.utils.translation import ugettext as _
-from enumfields import Enum
+from django.db import models
 
 from antares.apps.core.mixins import EnumUtilsMixin
 
 
-class NotificationStatusType(EnumUtilsMixin, Enum):
-    VIEWED = 'Viewed'
-    POSTED = 'Posted'
+class NotificationStatusType(EnumUtilsMixin, models.TextChoices):
+    VIEWED = 'Viewed', _(__name__ + '.NotificationStatusType.' + 'VIEWED')
+    POSTED = 'Posted', _(__name__ + '.NotificationStatusType.' + 'POSTED')
 
-    def __str__(self):
-        """
-        Just returns the value of the Enumeration
-        """
-        return str(self.value)
-
-    class Labels:
-        VIEWED = _(__name__ + '.NotificationStatusType.' + 'VIEWED')
-        POSTED = _(__name__ + '.NotificationStatusType.' + 'POSTED')
+   
 
 
-class NotificationDocumentStatusType(EnumUtilsMixin, Enum):
-    PENDING = "Pending"
-    PROCESSED = "Processed"
-    WITH_ERRORS = "With Errors"
-    ON_HOLD = "On Hold"
-    CANCELLED = "Cancelled"
-
-    def __str__(self):
-        """
-        Just returns the value of the Enumeration
-        """
-        return str(self.value)
-
-    class Labels:
-        PENDING = _(__name__ + '.NotificationDocumentStatusType.' + 'PENDING')
-        PROCESSED = _(__name__ + '.NotificationDocumentStatusType.' +
+class NotificationDocumentStatusType(EnumUtilsMixin, models.TextChoices):
+    PENDING = "Pending", _(__name__ + '.NotificationDocumentStatusType.' + 'PENDING')
+    PROCESSED = "Processed", _(__name__ + '.NotificationDocumentStatusType.' +
                       'PROCESSED')
-        WITH_ERRORS = _(__name__ + '.NotificationDocumentStatusType.' +
+    WITH_ERRORS = "With Errors", _(__name__ + '.NotificationDocumentStatusType.' +
                         'WITH_ERRORS')
-        ON_HOLD = _(__name__ + '.NotificationDocumentStatusType.' + 'ON_HOLD')
-        CANCELLED = _(__name__ + '.NotificationDocumentStatusType.' +
+    ON_HOLD = "On Hold",  _(__name__ + '.NotificationDocumentStatusType.' + 'ON_HOLD')
+    CANCELLED = "Cancelled", _(__name__ + '.NotificationDocumentStatusType.' +
                       'CANCELLED')
+
+    

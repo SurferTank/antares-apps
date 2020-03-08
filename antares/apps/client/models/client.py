@@ -6,7 +6,6 @@ from django.contrib.auth.models import AnonymousUser
 from django.db import models
 from django.utils import timezone
 from django.utils.translation import ugettext as _
-from enumfields import EnumField
 
 from antares.apps.core.middleware.request import get_request
 
@@ -33,9 +32,8 @@ class Client(models.Model):
     registration_date = models.DateTimeField()
     birth_date = models.DateTimeField(blank=True, null=True)
     defunction_date = models.DateTimeField(blank=True, null=True)
-    gender = EnumField(ClientGenderType, max_length=17, blank=True, null=True)
-    status = EnumField(
-        ClientStatusType, max_length=17, default=ClientStatusType.ACTIVE)
+    gender = models.CharField(choices=ClientGenderType.choices, max_length=17, blank=True, null=True)
+    status = models.CharField(choices=ClientStatusType.choices, max_length=17, default=ClientStatusType.ACTIVE)
     client_type = models.ForeignKey(
         "ClientType", on_delete=models.PROTECT,
         db_column='client_type')  # Field name made lowercase.

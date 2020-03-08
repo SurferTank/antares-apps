@@ -9,7 +9,6 @@ from django.db import models
 from django.db.utils import ProgrammingError
 from django.utils import timezone
 from django.utils.translation import ugettext as _
-from enumfields import EnumField
 
 from antares.apps.core.constants import FieldDataType
 from antares.apps.core.middleware.request import get_request
@@ -34,8 +33,8 @@ class SystemParameter(models.Model):
         null=True,
         verbose_name=_(__name__ + ".boolean_value"),
         help_text=_(__name__ + ".boolean_value_help"))
-    data_type = EnumField(
-        FieldDataType,
+    data_type = models.TextField(
+        choices=FieldDataType.choices,
         max_length=20,
         verbose_name=_(__name__ + ".data_type"),
         help_text=_(__name__ + ".data_type_help"))

@@ -10,7 +10,6 @@ from django.conf import settings
 from django.db import models
 from django.utils import timezone
 from django.utils.translation import ugettext as _
-from enumfields import EnumField
 
 from antares.apps.core.middleware.request import get_request
 
@@ -52,8 +51,7 @@ class FormDefinitionACL(models.Model):
         related_name='form_defintion_acl_set',
         blank=True,
         null=True)
-    access_type = EnumField(
-        FormDefinitionACLAccessType,
+    access_type = models.CharField(choices=FormDefinitionACLAccessType.choices,
         max_length=30,
         default=FormDefinitionACLAccessType.NONE)
     author = models.ForeignKey(

@@ -9,7 +9,7 @@ from django.db.models import Q
 from django.urls import resolve
 from django.utils import timezone
 from django.utils.translation import ugettext as _
-from enumfields import EnumField
+
 
 from antares.apps.core.constants import FieldDataType
 from antares.apps.core.utils import DateUtils
@@ -49,7 +49,7 @@ class FlowActivity(models.Model):
     completion_date = models.DateTimeField(blank=True, null=True)
     creation_date = models.DateTimeField()
     start_date = models.DateTimeField(blank=True, null=True)
-    status = EnumField(FlowActivityStatusType, max_length=30)
+    status = models.CharField(choices=FlowActivityStatusType.choices, max_length=30)
     status_date = models.DateTimeField()
     hrn_code = models.CharField(
         max_length=50,
@@ -71,8 +71,8 @@ class FlowActivity(models.Model):
 
     def waiting_time(self):
         if (self.creation_date is not None and self.start_date is not None and
-                self.status not in (FlowActivityStatusType.CREATED.value,
-                                    FlowActivityStatusType.CANCELLED.value)):
+                self.status not in (FlowActivityStatusType.CREATED,
+                                    FlowActivityStatusType.CANCELLED)):
             return DateUtils.convert_days_to_time_unit(
                 self.start_date - self.creation_date,
                 self.flow_case.flow_definition.duration)
@@ -81,9 +81,9 @@ class FlowActivity(models.Model):
 
     def working_time(self):
         if (self.start_date is not None and self.completion_date is not None
-                and self.status not in (FlowActivityStatusType.CREATED.value,
-                                        FlowActivityStatusType.CANCELLED.value,
-                                        FlowActivityStatusType.ACTIVE.value)):
+                and self.status not in (FlowActivityStatusType.CREATED,
+                                        FlowActivityStatusType.CANCELLED,
+                                        FlowActivityStatusType.ACTIVE)):
             return DateUtils.convert_days_to_time_unit(
                 self.completion_date - self.start_date,
                 self.flow_case.flow_definition.duration)
@@ -92,9 +92,9 @@ class FlowActivity(models.Model):
 
     def duration(self):
         if (self.creation_date is not None and self.completion_date is not None
-                and self.status not in (FlowActivityStatusType.CREATED.value,
-                                        FlowActivityStatusType.CANCELLED.value,
-                                        FlowActivityStatusType.ACTIVE.value)):
+                and self.status not in (FlowActivityStatusType.CREATED,
+                                        FlowActivityStatusType.CANCELLED,
+                                        FlowActivityStatusType.ACTIVE)):
             return DateUtils.convert_days_to_time_unit(
                 self.completion_date - self.creation_date,
                 self.flow_case.flow_definition.duration)
@@ -106,7 +106,8 @@ class FlowActivity(models.Model):
         query = cls.objects.filter(activity_definition=activity_def).\
                 filter(creation_date__is_null=False).\
                 filter(start_date__is_null=False).\
-                filter(status__not_in=[FlowActivityStatusType.CREATED.value, FlowActivityStatusType.CANCELLED.value])
+                filter(status__not_in=[FlowActivityStatusType.CREATED, 
+                                       FlowActivityStatusType.CANCELLED])
 
         if perfomer is not None:
             query = query.filter(perfomer=perfomer)
@@ -122,8 +123,9 @@ class FlowActivity(models.Model):
         query = cls.objects.filter(activity_definition=activity_def).\
             filter(completion__is_null=False).\
             filter(start_date__is_null=False).\
-            filter(status__not_in=[FlowActivityStatusType.CREATED.value, FlowActivityStatusType.CANCELLED.value,
-             FlowActivityStatusType.ACTIVE.value])
+            filter(status__not_in=[FlowActivityStatusType.CREATED, 
+                                   FlowActivityStatusType.CANCELLED,
+             FlowActivityStatusType.ACTIVE])
 
         if perfomer is not None:
             query = query.filter(perfomer=perfomer)
@@ -139,7 +141,8 @@ class FlowActivity(models.Model):
         query = cls.objects.filter(activity_definition=activity_def).\
             filter(completion__is_null=False).\
             filter(creation_date__is_null=False).\
-            filter(status__not_in=[FlowActivityStatusType.CREATED.value, FlowActivityStatusType.CANCELLED.value])
+            filter(status__not_in=[FlowActivityStatusType.CREATED, 
+                                   FlowActivityStatusType.CANCELLED])
 
         if perfomer is not None:
             query = query.filter(perfomer=perfomer)

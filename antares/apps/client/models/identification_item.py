@@ -5,7 +5,6 @@ from django.conf import settings
 from django.db import models
 from django.utils import timezone
 from django.utils.translation import ugettext as _
-from enumfields import EnumField
 
 from antares.apps.core.middleware.request import get_request
 
@@ -22,8 +21,7 @@ class IdentificationItem(models.Model):
     code = models.CharField(max_length=100)
     type = models.ForeignKey(
         "ClientIdentificationType", on_delete=models.PROTECT, db_column='type')
-    status = EnumField(
-        ItemStatusType, max_length=20, default=ItemStatusType.ACTIVE)
+    status = models.CharField(choices=ItemStatusType.choices, max_length=20, default=ItemStatusType.ACTIVE)
     author = models.ForeignKey(
         settings.AUTH_USER_MODEL, on_delete=models.PROTECT, editable=False)
     creation_date = models.DateTimeField(editable=False)

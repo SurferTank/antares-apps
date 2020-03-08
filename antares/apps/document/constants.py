@@ -4,136 +4,79 @@ Created on Jun 23, 2016
 @author: leobelen
 '''
 from django.utils.translation import ugettext as _
-from enumfields import Enum
+from django.db import models
 
 from antares.apps.core.mixins import EnumUtilsMixin
 
 
-class DocumentAssociationType(EnumUtilsMixin, Enum):
-    NONE = "None"
-
-    class Labels:
-        NONE = _(__name__ + '.DocumentAssociationType.' + 'NONE')
+class DocumentAssociationType(EnumUtilsMixin, models.TextChoices):
+    NONE = "None", _(__name__ + '.DocumentAssociationType.' + 'NONE')
 
 
-class DocumentEventType(EnumUtilsMixin, Enum):
-    CREATION = "Creation"
-    DRAFT_MODIFICATION = "Draft Modification"
-    SAVE = "Save"
-    CANCELLATION = "Cancellation"
-
-    class Labels:
-        CREATION = _(__name__ + '.DocumentEventType.' + 'CREATION')
-        DRAFT_MODIFICATION = _(__name__ + '.DocumentEventType.' +
+class DocumentEventType(EnumUtilsMixin, models.TextChoices):
+    CREATION = "Creation", _(__name__ + '.DocumentEventType.' + 'CREATION')
+    DRAFT_MODIFICATION = "Draft Modification", _(__name__ + '.DocumentEventType.' +
                                'DRAFT_MODIFICATION')
-        SAVE = _(__name__ + '.DocumentEventType.' + 'SAVE')
-        CANCELLATION = _(__name__ + '.DocumentEventType.' + 'CANCELLATION')
+    SAVE = "Save", _(__name__ + '.DocumentEventType.' + 'SAVE')
+    CANCELLATION = "Cancellation", _(__name__ + '.DocumentEventType.' + 'CANCELLATION')
+
+class DocumentACLAccessType(EnumUtilsMixin, models.TextChoices):
+    CREATE = "Create", _(__name__ + '.DocumentACLAcessType.' + 'CREATE')
+    MODIFY = "Modify", _(__name__ + '.DocumentACLAcessType.' + 'MODIFY')
+    SAVE = "Save", _(__name__ + '.DocumentACLAcessType.' + 'SAVE')
+    CANCEL = "Cancel", _(__name__ + '.DocumentACLAcessType.' + 'CANCEL')
+    VIEW = "View", _(__name__ + '.DocumentACLAcessType.' + 'VIEW')
+    PRINT = "Print", _(__name__ + '.DocumentACLAcessType.' + 'PRINT')
+    ALL = "All",  _(__name__ + '.DocumentACLAcessType.' + 'ALL')
+    NONE = "None", _(__name__ + '.DocumentACLAcessType.' + 'NONE')
+
+  
+
+class FormDefinitionACLAccessType(EnumUtilsMixin, models.TextChoices):
+    CREATE = "Create", _(__name__ + '.FormDefinitionACLAccessType.' + 'CREATE')
+    SEARCH = "Search", _(__name__ + '.FormDefinitionACLAccessType.' + 'SEARCH')
+    ALL = "All", _(__name__ + '.FormDefinitionACLAccessType.' + 'ALL')
+    NONE = "None", _(__name__ + '.FormDefinitionACLAccessType.' + 'NONE')
 
 
-class DocumentACLAccessType(EnumUtilsMixin, Enum):
-    CREATE = "Create"
-    MODIFY = "Modify"
-    SAVE = "Save"
-    CANCEL = "Cancel"
-    VIEW = "View"
-    PRINT = "Print"
-    ALL = "ALL"
-    NONE = "None"
+class DocumentOriginType(EnumUtilsMixin, models.TextChoices):
+    ONLINE = "Online", _(__name__ + '.DocumentOriginType.' + 'ONLINE')
+    UNKNOWN = "Unknown", _(__name__ + '.DocumentOriginType.' + 'UNKNOWN')
 
-    class Labels:
-        CREATE = _(__name__ + '.DocumentACLAcessType.' + 'CREATE')
-        MODIFY = _(__name__ + '.DocumentACLAcessType.' + 'MODIFY')
-        SAVE = _(__name__ + '.DocumentACLAcessType.' + 'SAVE')
-        CANCEL = _(__name__ + '.DocumentACLAcessType.' + 'CANCEL')
-        VIEW = _(__name__ + '.DocumentACLAcessType.' + 'VIEW')
-        PRINT = _(__name__ + '.DocumentACLAcessType.' + 'PRINT')
-        ALL = _(__name__ + '.DocumentACLAcessType.' + 'ALL')
-        NONE = _(__name__ + '.DocumentACLAcessType.' + 'NONE')
+class DocumentStatusType(EnumUtilsMixin, models.TextChoices):
+    DRAFTED = "Drafted", _(__name__ + '.DocumentStatusType.' + 'DRAFTED')
+    DELETED = "Deleted", _(__name__ + '.DocumentStatusType.' + 'DELETED')
+    SAVED = "Saved", _(__name__ + '.DocumentStatusType.' + 'SAVED')
+    CANCELLED = "Cancelled", _(__name__ + '.DocumentStatusType.' + 'CANCELLED')
 
 
-class FormDefinitionACLAccessType(EnumUtilsMixin, Enum):
-    CREATE = "Create"
-    SEARCH = "Search"
-    ALL = "ALL"
-    NONE = "None"
-
-    class Labels:
-        CREATE = _(__name__ + '.FormDefinitionACLAccessType.' + 'CREATE')
-        SEARCH = _(__name__ + '.FormDefinitionACLAccessType.' + 'SEARCH')
-        ALL = _(__name__ + '.FormDefinitionACLAccessType.' + 'ALL')
-        NONE = _(__name__ + '.FormDefinitionACLAccessType.' + 'NONE')
-
-
-class DocumentOriginType(EnumUtilsMixin, Enum):
-    ONLINE = "Online"
-    UNKNOWN = "Unknown"
-
-    class Labels:
-        ONLINE = _(__name__ + '.DocumentOriginType.' + 'ONLINE')
-        UNKNOWN = _(__name__ + '.DocumentOriginType.' + 'UNKNOWN')
-
-
-class DocumentStatusType(EnumUtilsMixin, Enum):
-    DRAFTED = "Drafted"
-    DELETED = "Deleted"
-    SAVED = "Saved"
-    CANCELLED = "Cancelled"
-
-    class Labels:
-        DRAFTED = _(__name__ + '.DocumentStatusType.' + 'DRAFTED')
-        DELETED = _(__name__ + '.DocumentStatusType.' + 'DELETED')
-        SAVED = _(__name__ + '.DocumentStatusType.' + 'SAVED')
-        CANCELLED = _(__name__ + '.DocumentStatusType.' + 'CANCELLED')
-
-
-class ExternalFunctionExecutionModeType(EnumUtilsMixin, Enum):
-    DRAFT_LOAD = "DRAFT_LOAD"
-    CREATION_TIME = "CREATION_TIME"
-    RUNTIME = "RUNTIME"
-    INACTIVE = "INACTIVE"
-    SAVE_TIME = "SAVE_TIME"
-
-    class Labels:
-        DRAFT_LOAD = _(__name__ + '.ExternalFunctionExecutionModeType.' +
+class ExternalFunctionExecutionModeType(EnumUtilsMixin, models.TextChoices):
+    DRAFT_LOAD = "DRAFT_LOAD", _(__name__ + '.ExternalFunctionExecutionModeType.' +
                        'DRAFT_LOAD')
-        CREATION_TIME = _(__name__ + '.ExternalFunctionExecutionModeType.' +
+    CREATION_TIME = "CREATION_TIME", _(__name__ + '.ExternalFunctionExecutionModeType.' +
                           'CREATION_TIME')
-        RUNTIME = _(__name__ + '.ExternalFunctionExecutionModeType.' +
+    RUNTIME = "RUNTIME", _(__name__ + '.ExternalFunctionExecutionModeType.' +
                     'RUNTIME')
-        INACTIVE = _(__name__ + '.ExternalFunctionExecutionModeType.' +
+    INACTIVE = "INACTIVE", _(__name__ + '.ExternalFunctionExecutionModeType.' +
                      'INACTIVE')
-        SAVE_TIME = _(__name__ + '.ExternalFunctionExecutionModeType.' +
+    SAVE_TIME = "SAVE_TIME", _(__name__ + '.ExternalFunctionExecutionModeType.' +
                       'SAVE_TIME')
 
-
-class FormClassStatusType(EnumUtilsMixin, Enum):
-    DEVELOPMENT = "Development"
-    PRODUCTION = "Production"
-    DEACTIVATED = "Deactivated"
-
-    class Labels:
-        DEVELOPMENT = _(__name__ + '.FormClassStatusType.' + 'DEVELOPMENT')
-        PRODUCTION = _(__name__ + '.FormClassStatusType.' + 'PRODUCTION')
-        DEACTIVATED = _(__name__ + '.FormClassStatusType.' + 'DEACTIVATED')
+class FormClassStatusType(EnumUtilsMixin, models.TextChoices):
+    DEVELOPMENT = "Development",  _(__name__ + '.FormClassStatusType.' + 'DEVELOPMENT')
+    PRODUCTION = "Production", _(__name__ + '.FormClassStatusType.' + 'PRODUCTION')
+    DEACTIVATED = "Deactivated",  _(__name__ + '.FormClassStatusType.' + 'DEACTIVATED')
 
 
-class FormDefinitionStatusType(EnumUtilsMixin, Enum):
-    DEVELOPMENT = "Development"
-    PRODUCTION = "Production"
-    DEACTIVATED = "Deactivated"
-
-    class Labels:
-        DEVELOPMENT = _(__name__ + '.FormDefinitionStatusType.' +
+class FormDefinitionStatusType(EnumUtilsMixin, models.TextChoices):
+    DEVELOPMENT = "Development",  _(__name__ + '.FormDefinitionStatusType.' +
                         'DEVELOPMENT')
-        PRODUCTION = _(__name__ + '.FormDefinitionStatusType.' + 'PRODUCTION')
-        DEACTIVATED = _(__name__ + '.FormDefinitionStatusType.' +
+    PRODUCTION = "Production", _(__name__ + '.FormDefinitionStatusType.' + 'PRODUCTION')
+    DEACTIVATED = "Deactivated",  _(__name__ + '.FormDefinitionStatusType.' +
                         'DEACTIVATED')
 
+class FormClassType(EnumUtilsMixin, models.TextChoices):
+    ADMINISTRATIVE = "Administrative", _(__name__ + '.FormClassType.' + 'ADMINISTRATIVE')
+    OBLIGATION_BASED = "Obligation Based", _(__name__ + '.FormClassType.' + 'OBLIGATION_BASED')
 
-class FormClassType(EnumUtilsMixin, Enum):
-    ADMINISTRATIVE = "Administrative"
-    OBLIGATION_BASED = "Obligation Based"
-
-    class Labels:
-        ADMINISTRATIVE = _(__name__ + '.FormClassType.' + 'ADMINISTRATIVE')
-        OBLIGATION_BASED = _(__name__ + '.FormClassType.' + 'OBLIGATION_BASED')
+   

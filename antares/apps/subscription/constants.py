@@ -5,19 +5,10 @@ Created on Jul 9, 2016
 '''
 
 from django.utils.translation import ugettext as _
-from enumfields import Enum
+from django.db import models
 
 from antares.apps.core.mixins import EnumUtilsMixin
 
 
-class EventType(EnumUtilsMixin, Enum):
-    CREATION = "Creation"
-
-    def __str__(self):
-        """
-        Just returns the value of the Enumeration
-        """
-        return str(self.value)
-
-    class Labels:
-        CREATION = _('antares.apps.flow.constants.EventType.' + 'CREATION')
+class EventType(EnumUtilsMixin, models.TextChoices):
+    CREATION = "Creation", _('antares.apps.flow.constants.EventType.' + 'CREATION')

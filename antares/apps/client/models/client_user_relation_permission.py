@@ -10,7 +10,7 @@ from django.conf import settings
 from django.db import models
 from django.utils import timezone
 from django.utils.translation import ugettext_lazy as _
-from enumfields import EnumField
+
 
 from antares.apps.core.middleware.request import get_request
 
@@ -30,7 +30,7 @@ class ClientUserRelationPermission(models.Model):
         on_delete=models.PROTECT,
         related_name='permission_set',
         db_column='client_user_relation')
-    relation_type = EnumField(ClientRelationPermissionType, max_length=20)
+    relation_type = models.CharField(choices=ClientRelationPermissionType.choices, max_length=20)
     start_date = models.DateField(null=False)
     end_date = models.DateField(null=True)
     creation_date = models.DateTimeField(blank=True, null=True, editable=False)

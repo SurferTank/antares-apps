@@ -7,7 +7,6 @@ from django.db import models
 from django.db.models import Q
 from django.utils import timezone
 from django.utils.translation import ugettext as _
-from enumfields import EnumField
 from lxml import etree
 from lxml import objectify
 
@@ -47,8 +46,7 @@ class FormDefinition(models.Model):
     hrn_script = models.TextField(blank=True, null=True)
     print_xslt = models.TextField(blank=True, null=True)
     start_date = models.DateTimeField()
-    status = EnumField(
-        FormDefinitionStatusType,
+    status = models.CharField(choices=FormDefinitionStatusType.choices,
         max_length=30,
         default=FormDefinitionStatusType.DEVELOPMENT)
     view_xslt = models.TextField(blank=True, null=True)

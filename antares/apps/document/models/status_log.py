@@ -3,7 +3,6 @@ import uuid
 
 from django.db import models
 from django.utils.translation import ugettext as _
-from enumfields import EnumField
 
 from ..constants import DocumentStatusType
 
@@ -18,8 +17,7 @@ class StatusLog(models.Model):
         editable=False,
         verbose_name=_(__name__ + ".id"),
         help_text=_(__name__ + ".primary_key_help"))
-    status = EnumField(
-        DocumentStatusType,
+    status = models.CharField(choices=DocumentStatusType.choices,
         max_length=30,
         verbose_name=_(__name__ + ".status"),
         help_text=_(__name__ + ".status_help"))

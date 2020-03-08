@@ -13,7 +13,6 @@ from django.db import models
 from django.urls.base import reverse
 from django.utils import timezone
 from django.utils.translation import ugettext as _
-from enumfields import EnumField
 import js2py
 from mptt.models import MPTTModel, TreeForeignKey
 
@@ -41,8 +40,8 @@ class Application(MPTTModel):
     application_name = models.CharField(max_length=200)
     url = models.CharField(max_length=300, blank=True, null=True)
     route = models.CharField(max_length=300, blank=True, null=True)
-    scope = EnumField(
-        ApplicationScopeType, max_length=30, default=ApplicationScopeType.SELF)
+    scope = models.CharField(choices=
+        ApplicationScopeType.choices, max_length=30, default=ApplicationScopeType.SELF)
     creation_date = models.DateTimeField(blank=True, null=True, editable=False)
     update_date = models.DateTimeField(blank=True, null=True, editable=False)
     author = models.ForeignKey(

@@ -3,7 +3,6 @@ import uuid
 
 from django.db import models
 from django.utils.translation import ugettext as _
-from enumfields import EnumField
 
 from antares.apps.core.constants import FieldDataType
 
@@ -37,8 +36,7 @@ class IndexedField(models.Model):
         null=True,
         verbose_name=_(__name__ + ".clob_value"),
         help_text=_(__name__ + ".clob_value_help"))
-    data_type = EnumField(
-        FieldDataType,
+    data_type = models.CharField(choices=FieldDataType.choices,
         max_length=30,
         null=False,
         verbose_name=_(__name__ + ".data_type"),

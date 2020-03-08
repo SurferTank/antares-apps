@@ -3,7 +3,6 @@ import uuid
 
 from django.db import models
 from django.utils.translation import ugettext as _
-from enumfields import EnumField
 
 from antares.apps.core.constants import ActionType, ScriptEngineType, FieldDataType
 from antares.apps.core.models.system_parameter import SystemParameter
@@ -25,9 +24,9 @@ class FlowActionDefinition(models.Model):
         db_column='action_definition',
         blank=True,
         null=True)
-    action_type = EnumField(
-        ActionType, max_length=30, default=ActionType.POST_ACTION)
-    script_engine = EnumField(ScriptEngineType, max_length=30)
+    action_type = models.CharField(choices=ActionType.choices, max_length=30, default=ActionType.POST_ACTION)
+    script_engine = models.CharField(choices=ScriptEngineType.choices, 
+                                     max_length=30)
     content = models.CharField(max_length=2000, blank=True, null=True)
 
     def __str__(self):

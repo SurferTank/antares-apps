@@ -8,7 +8,6 @@ import uuid
 
 from django.db import models
 from django.utils.translation import ugettext as _
-from enumfields import EnumField
 from lxml import etree
 from lxml import objectify
 
@@ -53,7 +52,7 @@ class SubscriptionEvent(models.Model):
         null=True)
     script_engine = models.CharField(max_length=255)
     condition_text = models.CharField(max_length=4000, blank=True, null=True)
-    event_type = EnumField(EventType, max_length=30)
+    event_type = models.CharField(choices=EventType.choices, max_length=30)
     subscription_id = models.CharField(max_length=255)
 
     def __str__(self):

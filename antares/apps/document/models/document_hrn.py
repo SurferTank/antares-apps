@@ -3,7 +3,6 @@ import uuid
 
 from django.db import models
 from django.utils.translation import ugettext as _
-from enumfields import EnumField
 
 from ..constants import DocumentStatusType
 
@@ -39,8 +38,7 @@ class DocumentHrn(models.Model):
         null=True,
         verbose_name=_(__name__ + ".hrn_title"),
         help_text=_(__name__ + ".hrn_title_help"))
-    status = EnumField(
-        DocumentStatusType,
+    status = models.CharField(choices=DocumentStatusType.choices,
         max_length=30,
         default=DocumentStatusType.DRAFTED,
         verbose_name=_(__name__ + ".status"),

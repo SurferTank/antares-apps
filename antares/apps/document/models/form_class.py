@@ -5,7 +5,6 @@ from django.conf import settings
 from django.db import models
 from django.utils import timezone
 from django.utils.translation import ugettext as _
-from enumfields import EnumField
 
 from antares.apps.core.middleware.request import get_request
 
@@ -41,11 +40,9 @@ class FormClass(models.Model):
         blank=True,
         null=True,
         editable=False)
-    type = EnumField(
-        FormClassType, max_length=30, default=FormClassType.ADMINISTRATIVE)
+    type = models.CharField(choices=FormClassType.choices, max_length=30, default=FormClassType.ADMINISTRATIVE)
     description = RichTextField(blank=True, null=True)
-    status = EnumField(
-        FormClassStatusType,
+    status = models.CharField(choices=FormClassStatusType.choices,
         max_length=30,
         default=FormClassStatusType.DEVELOPMENT)
     third_party_type = models.CharField(

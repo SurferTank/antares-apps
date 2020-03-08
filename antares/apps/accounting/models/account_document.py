@@ -23,7 +23,7 @@ class AccountDocument(models.Model):
     content = models.TextField(blank=True, null=True)
     reversed_by = models.TextField(blank=True, null=True)
     reverses_document = models.TextField(blank=True, null=True)
-    status = EnumField(AccountDocumentStatusType, max_length=30)
+    status = models.CharField(choices=AccountDocumentStatusType.choices, max_length=30)
     creation_date = models.DateTimeField(blank=True, null=True, editable=False)
     update_date = models.DateTimeField(blank=True, null=True, editable=False)
 

@@ -1,156 +1,76 @@
 from django.utils.translation import ugettext as _
+from django.db import models
 from enumfields import Enum
 
 from antares.apps.core.mixins import EnumUtilsMixin
 
 
-class ActionParameterDirectionType(EnumUtilsMixin, Enum):
-    IN = "In"
-    OUT = "Out"
-    IN_OUT = "In out"
-
-    def __str__(self):
-        """
-        Just returns the value of the Enumeration
-        """
-        return str(self.value)
-
-    class Labels:
-        IN = _(__name__ + '.ActionParameterDirectionType.' + 'IN')
-        OUT = _(__name__ + '.ActionParameterDirectionType.' + 'OUT')
-        IN_OUT = _(__name__ + '.ActionParameterDirectionType.' + 'IN_OUT')
+class ActionParameterDirectionType(EnumUtilsMixin, models.TextChoices):
+    IN = "In", _(__name__ + '.ActionParameterDirectionType.' + 'IN')
+    OUT = "Out", _(__name__ + '.ActionParameterDirectionType.' + 'OUT')
+    IN_OUT = "In out", _(__name__ + '.ActionParameterDirectionType.' + 'IN_OUT')
 
 
-class EnvironmentType(EnumUtilsMixin, Enum):
-    LOCAL = "Local"
-    WEBSERVICE = "Web Service"
 
-    def __str__(self):
-        """
-        Just returns the value of the Enumeration
-        """
-        return str(self.value)
+class EnvironmentType(EnumUtilsMixin, models.TextChoices):
+    LOCAL = "Local",  _(__name__ + '.EnvironmentType.' + 'LOCAL')
+    WEBSERVICE = "Web Service",  _(__name__ + '.EnvironmentType.' + 'WEBSERVICE')
 
-    class Labels:
-        LOCAL = _(__name__ + '.EnvironmentType.' + 'LOCAL')
-        WEBSERVICE = _(__name__ + '.EnvironmentType.' + 'WEBSERVICE')
+  
 
 
-class ActionTargetModuleType(EnumUtilsMixin, Enum):
-    DOCUMENT = "Document"
-    FLOW = "Flow"
+class ActionTargetModuleType(EnumUtilsMixin,  models.TextChoices):
+    DOCUMENT = "Document", _(__name__ + '.ActionTargetModuleType.' + 'DOCUMENT')
+    FLOW = "Flow", _(__name__ + '.ActionTargetModuleType.' + 'FLOW')
 
-    def __str__(self):
-        """
-        Just returns the value of the Enumeration
-        """
-        return str(self.value)
-
-    class Labels:
-        DOCUMENT = _(__name__ + '.ActionTargetModuleType.' + 'DOCUMENT')
-        FLOW = _(__name__ + '.ActionTargetModuleType.' + 'FLOW')
+  
 
 
-class ActionType(EnumUtilsMixin, Enum):
-    PRE_ACTION = "Preaction"
-    POST_ACTION = "Postaction"
+class ActionType(EnumUtilsMixin, models.TextChoices):
+    PRE_ACTION = "Preaction", _(__name__ + '.ActionType.' + 'PRE_ACTION')
+    POST_ACTION = "Postaction", _(__name__ + '.ActionType.' + 'PRE_ACTION')
 
-    def __str__(self):
-        """
-        Just returns the value of the Enumeration
-        """
-        return str(self.value)
-
-    class Labels:
-        PRE_ACTION = _(__name__ + '.ActionType.' + 'PRE_ACTION')
-        POST_ACTION = _(__name__ + '.ActionType.' + 'PRE_ACTION')
+  
 
 
-class FieldDataType(EnumUtilsMixin, Enum):
-    STRING = "String"
-    TEXT = "Text"
-    DATE = "Date"
-    DATETIME = "Datetime"
-    INTEGER = "Integer"
-    FLOAT = "Float"
-    UUID = "UUID"
-    BOOLEAN = "Boolean"
-    USER = "User"
-    CLIENT = "client"
-    DOCUMENT = "document"
-    MONEY = "Money"
+class FieldDataType(EnumUtilsMixin, models.TextChoices):
+    STRING = "String",  _(__name__ + '.FieldDataType.STRING')
+    TEXT = "Text",  _(__name__ + '.FieldDataType.TEXT')
+    DATE = "Date",  _(__name__ + '.FieldDataType.DATE')
+    DATETIME = "Datetime",  _(__name__ + '.FieldDataType.DATETIME')
+    INTEGER = "Integer",  _(__name__ + '.FieldDataType.INTEGER')
+    FLOAT = "Float",  _(__name__ + '.FieldDataType.FLOAT')
+    UUID = "UUID",  _(__name__ + '.FieldDataType.UUID')
+    BOOLEAN = "Boolean",  _(__name__ + '.FieldDataType.BOOLEAN')
+    USER = "User",  _(__name__ + '.FieldDataType.USER')
+    CLIENT = "client",  _(__name__ + '.FieldDataType.CLIENT')
+    DOCUMENT = "document",  _(__name__ + '.FieldDataType.DOCUMENT')
+    MONEY = "Money",  _(__name__ + '.FieldDataType.MONEY')
 
-    def __str__(self):
-        """
-        Just returns the value of the Enumeration
-        """
-        return str(self.value)
+class HrnModuleType(EnumUtilsMixin,  models.TextChoices):
+    DOCUMENT = "Document", _(__name__ + '.HrnModuleType.' + 'DOCUMENT')
+    FLOW_CASE = "Flow Case", _(__name__ + '.HrnModuleType.' + 'FLOW_CASE')
+    FLOW_ACTIVITY = "Flow Activity", _(__name__ + '.HrnModuleType.' + 'FLOW_ACTIVITY')
+    ACCOUNT_BALANCE = "Account Balance", _(__name__ + '.HrnModuleType.' + 'ACCOUNT_BALANCE')
+    ACCOUNT_TRANSACTION = "Account Transaction", _(__name__ + '.HrnModuleType.' + 'ACCOUNT_TRANSACTION')
 
-    class Labels:
-        STRING = _(__name__ + '.FieldDataType.STRING')
-        TEXT = _(__name__ + '.FieldDataType.TEXT')
-        DATE = _(__name__ + '.FieldDataType.DATE')
-        DATETIME = _(__name__ + '.FieldDataType.DATETIME')
-        INTEGER = _(__name__ + '.FieldDataType.INTEGER')
-        FLOAT = _(__name__ + '.FieldDataType.FLOAT')
-        UUID = _(__name__ + '.FieldDataType.UUID')
-        BOOLEAN = _(__name__ + '.FieldDataType.BOOLEAN')
-        USER = _(__name__ + '.FieldDataType.USER')
-        CLIENT = _(__name__ + '.FieldDataType.CLIENT')
-        DOCUMENT = _(__name__ + '.FieldDataType.DOCUMENT')
-        MONEY = _(__name__ + '.FieldDataType.MONEY')
+   
 
 
-class HrnModuleType(EnumUtilsMixin, Enum):
-    DOCUMENT = "Document"
-    FLOW_CASE = "Flow Case"
-    FLOW_ACTIVITY = "Flow Activity"
-    ACCOUNT_BALANCE = "Account Balance"
-    ACCOUNT_TRANSACTION = "Account Transaction"
+class ScriptEngineType(EnumUtilsMixin,  models.TextChoices):
+    JAVASCRIPT = "Javascript",  _(__name__ + '.ScriptEngineType.' + 'JAVASCRIPT')
+    PYTHON = "Python",  _(__name__ + '.ScriptEngineType.' + 'PYTHON')
 
-    def __str__(self):
-        """
-        Just returns the value of the Enumeration
-        """
-        return str(self.value)
-
-    class Labels:
-        DOCUMENT = _(__name__ + '.HrnModuleType.' + 'DOCUMENT')
-        FLOW_CASE = _(__name__ + '.HrnModuleType.' + 'FLOW_CASE')
-        FLOW_ACTIVITY = _(__name__ + '.HrnModuleType.' + 'FLOW_ACTIVITY')
-        ACCOUNT_BALANCE = _(__name__ + '.HrnModuleType.' + 'ACCOUNT_BALANCE')
-        ACCOUNT_TRANSACTION = _(__name__ + '.HrnModuleType.' +
-                                'ACCOUNT_BALANCE')
+   
 
 
-class ScriptEngineType(EnumUtilsMixin, Enum):
-    JAVASCRIPT = "Javascript"
-    PYTHON = "Python"
-
-    def __str__(self):
-        """
-        Just returns the value of the Enumeration
-        """
-        return str(self.value)
-
-    class Labels:
-        JAVASCRIPT = _(__name__ + '.ScriptEngineType.' + 'JAVASCRIPT')
-        PYTHON = _(__name__ + '.ScriptEngineType.' + 'PYTHON')
-
-
-class TimeUnitType(EnumUtilsMixin, Enum):
-    YEAR = "Year"
-    MONTH = "Month"
-    DAY = "Day"
-    HOUR = "Hour"
-    MINUTE = "Minute"
-    SECOND = "Second"
-
-    def __str__(self):
-        """
-        Just returns the value of the Enumeration
-        """
-        return str(self.value)
+class TimeUnitType(EnumUtilsMixin,  models.TextChoices):
+    YEAR = "Year", _(__name__ + '.TimeUnitType.' + 'YEAR')
+    MONTH = "Month", _(__name__ + '.TimeUnitType.' + 'MONTH')
+    DAY = "Day", _(__name__ + '.TimeUnitType.' + 'DAY')
+    HOUR = "Hour", _(__name__ + '.TimeUnitType.' + 'HOUR')
+    MINUTE = "Minute", _(__name__ + '.TimeUnitType.' + 'MINUTE')
+    SECOND = "Second", _(__name__ + '.TimeUnitType.' + 'SECOND')
 
     @classmethod
     def to_enum_from_xpdl(cls, time_unit):
@@ -173,81 +93,27 @@ class TimeUnitType(EnumUtilsMixin, Enum):
             raise ValueError(
                 _(__name__ + ".Exceptions.TimeUnitType.Invalid_time_unit"))
 
-    class Labels:
-        YEAR = _(__name__ + '.TimeUnitType.' + 'YEAR')
-        MONTH = _(__name__ + '.TimeUnitType.' + 'MONTH')
-        DAY = _(__name__ + '.TimeUnitType.' + 'DAY')
-        HOUR = _(__name__ + '.TimeUnitType.' + 'HOUR')
-        MINUTE = _(__name__ + '.TimeUnitType.' + 'MINUTE')
-        SECOND = _(__name__ + '.TimeUnitType.' + 'SECOND')
+class LanguageType(EnumUtilsMixin,  models.TextChoices):
+    ENGLISH = "en", _(__name__ + '.LanguageType.' + 'ENGLISH')
+    SPANISH = "es", _(__name__ + '.LanguageType.' + 'SPANISH')
+    FRENCH = "fr", _(__name__ + '.LanguageType.' + 'FRENCH')
+    PORTUGUESE = "pr",  _(__name__ + '.LanguageType.' + 'PORTUGUESE')
 
+class WeightUnitType(EnumUtilsMixin,  models.TextChoices):
+    KILOGRAM = "Kilogram", _(__name__ + '.WeightUnitType.' + 'KILOGRAM')
+    GRAM = "Gram",  _(__name__ + '.WeightUnitType.' + 'GRAM')
+    TON = "Ton",  _(__name__ + '.WeightUnitType.' + 'TON')
 
-class LanguageType(EnumUtilsMixin, Enum):
-    ENGLISH = "en"
-    SPANISH = "es"
-    FRENCH = "fr"
-    PORTUGUESE = "pr"
-
-    def __str__(self):
-        """
-        Just returns the value of the Enumeration
-        """
-        return str(self.value)
-
-    class Labels:
-        ENGLISH = _(__name__ + '.LanguageType.' + 'ENGLISH')
-        SPANISH = _(__name__ + '.LanguageType.' + 'SPANISH')
-        FRENCH = _(__name__ + '.LanguageType.' + 'FRENCH')
-        PORTUGUESE = _(__name__ + '.LanguageType.' + 'PORTUGUESE')
-
-
-class WeightUnitType(EnumUtilsMixin, Enum):
-    KILOGRAM = "Kilogram"
-    GRAM = "Gram"
-    TON = "Ton"
-
-    def __str__(self):
-        """
-        Just returns the value of the Enumeration
-        """
-        return str(self.value)
-
-    class Labels:
-        KILOGRAM = _(__name__ + '.WeightUnitType.' + 'KILOGRAM')
-        GRAM = _(__name__ + '.WeightUnitType.' + 'GRAM')
-        TON = _(__name__ + '.WeightUnitType.' + 'TON')
-
-
-class SystemModuleType(EnumUtilsMixin, Enum):
-    ACCOUNTING = "Accounting"
-    CLIENT = "Client"
-    CORE = "Core"
-    DOCUMENT = "Document"
-    FLOW = "Flow"
-    NOTIFICATIONS = "Notifications"
-    OBLIGATION = "Obligation"
-    SUBSCRIPTION = "Subscription"
-    TERMINAL = "Terminal"
-    MESSAGE = 'Message'
-    THIRD_PARTY = "Third Party"
-    WEB = "Web"
-
-    def __str__(self):
-        """
-        Just returns the value of the Enumeration
-        """
-        return str(self.value)
-
-    class Labels:
-        ACCOUNTING = _(__name__ + '.SystemModuleType.' + 'ACCOUNTING')
-        CLIENT = _(__name__ + '.SystemModuleType.' + 'CLIENT')
-        CORE = _(__name__ + '.SystemModuleType.' + 'CORE')
-        DOCUMENT = _(__name__ + '.SystemModuleType.' + 'DOCUMENT')
-        FLOW = _(__name__ + '.SystemModuleType.' + 'FLOW')
-        NOTIFICATIONS = _(__name__ + '.SystemModuleType.' + 'NOTIFICATIONS')
-        OBLIGATION = _(__name__ + '.SystemModuleType.' + 'OBLIGATION')
-        SUBSCRIPTION = _(__name__ + '.SystemModuleType.' + 'SUBSCRIPTION')
-        TERMINAL = _(__name__ + '.SystemModuleType.' + 'TERMINAL')
-        MESSAGE = _(__name__ + '.SystemModuleType.' + 'MESSAGE')
-        THIRD_PARTY = _(__name__ + '.SystemModuleType.' + 'THIRD_PARTY')
-        WEB = _(__name__ + '.SystemModuleType.' + 'WEB')
+class SystemModuleType(EnumUtilsMixin,  models.TextChoices):
+    ACCOUNTING = "Accounting", _(__name__ + '.SystemModuleType.' + 'ACCOUNTING')
+    CLIENT = "Client", _(__name__ + '.SystemModuleType.' + 'CLIENT')
+    CORE = "Core", _(__name__ + '.SystemModuleType.' + 'CORE')
+    DOCUMENT = "Document", _(__name__ + '.SystemModuleType.' + 'DOCUMENT')
+    FLOW = "Flow", _(__name__ + '.SystemModuleType.' + 'FLOW')
+    NOTIFICATIONS = "Notifications", _(__name__ + '.SystemModuleType.' + 'NOTIFICATIONS')
+    OBLIGATION = "Obligation", _(__name__ + '.SystemModuleType.' + 'OBLIGATION')
+    SUBSCRIPTION = "Subscription", _(__name__ + '.SystemModuleType.' + 'SUBSCRIPTION')
+    TERMINAL = "Terminal", _(__name__ + '.SystemModuleType.' + 'TERMINAL')
+    MESSAGE = 'Message', _(__name__ + '.SystemModuleType.' + 'MESSAGE')
+    THIRD_PARTY = "Third Party", _(__name__ + '.SystemModuleType.' + 'THIRD_PARTY')
+    WEB = "Web", _(__name__ + '.SystemModuleType.' + 'WEB')

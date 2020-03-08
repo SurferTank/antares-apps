@@ -5,7 +5,6 @@ from django.conf import settings
 from django.db import models
 from django.utils import timezone
 from django.utils.translation import ugettext as _
-from enumfields import EnumField
 
 from antares.apps.core.middleware.request import get_request
 
@@ -23,12 +22,10 @@ class SocialNetworkItem(models.Model):
         db_column='client_branch',
         blank=True,
         null=True)
-    status = EnumField(
-        ItemStatusType, max_length=20, default=ItemStatusType.ACTIVE)
+    status = models.CharField(choices=ItemStatusType.choices, max_length=20, default=ItemStatusType.ACTIVE)
     is_principal = models.BooleanField(default=True)
     item = models.CharField(max_length=100, blank=True, null=True)
-    social_network_type = EnumField(
-        SocialNetworkItemType,
+    social_network_type = models.CharField(choices=SocialNetworkItemType.choices,
         max_length=100,
         default=SocialNetworkItemType.SKYPE)
     author = models.ForeignKey(

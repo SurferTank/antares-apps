@@ -17,20 +17,6 @@ class EnumUtilsMixin:
             local_dict[str(item.value)] = str(item.label)
         return local_dict
 
-    @classmethod
-    def as_choices(cls):
-        """
-        Converts the dict to the format needed for Django choices in templates 
-        
-        :returns: the list of options with the value as id and the label (which can be translated) as text
-        """
-        local_list = []
-        for item in cls:
-            local_dict = {}
-            local_dict['id'] = str(item.value)
-            local_dict['text'] = str(item.label)
-            local_list.append(local_dict)
-        return local_list
 
     @classmethod
     def to_enum(cls, element):

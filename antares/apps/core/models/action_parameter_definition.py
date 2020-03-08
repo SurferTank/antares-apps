@@ -3,7 +3,6 @@ import uuid
 
 from django.db import models
 from django.utils.translation import ugettext as _
-from enumfields import EnumField
 
 from antares.apps.core.constants import ActionParameterDirectionType
 from antares.apps.core.constants import FieldDataType
@@ -27,14 +26,14 @@ class ActionParameterDefinition(models.Model):
         null=True,
         verbose_name=_(__name__ + ".action_definition"),
         help_text=_(__name__ + ".action_definition_help"))
-    data_type = EnumField(
-        FieldDataType,
+    data_type = models.TextField(
+        choices=FieldDataType.choices,
         max_length=8,
         default=FieldDataType.STRING,
         verbose_name=_(__name__ + ".data_type"),
         help_text=_(__name__ + ".data_type_help"))
-    direction = EnumField(
-        ActionParameterDirectionType,
+    direction = models.TextField(
+        choices=ActionParameterDirectionType.choices,
         max_length=6,
         default=ActionParameterDirectionType.IN,
         verbose_name=_(__name__ + ".direction"),

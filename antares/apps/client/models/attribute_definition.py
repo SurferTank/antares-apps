@@ -5,7 +5,6 @@ from django.conf import settings
 from django.db import models
 from django.utils import timezone
 from django.utils.translation import ugettext as _
-from enumfields import EnumField
 
 from antares.apps.core.constants import FieldDataType
 from antares.apps.core.middleware.request import get_request
@@ -19,7 +18,7 @@ class AttributeDefinition(models.Model):
     description = RichTextField(blank=True, null=True)
     display_name = models.CharField(max_length=200)
     active = models.BooleanField(default=True)
-    data_type = EnumField(FieldDataType, max_length=20)
+    data_type = models.CharField(choices=FieldDataType.choices, max_length=20)
     creation_date = models.DateTimeField(blank=True, null=True, editable=False)
     update_date = models.DateTimeField(blank=True, null=True, editable=False)
     author = models.ForeignKey(

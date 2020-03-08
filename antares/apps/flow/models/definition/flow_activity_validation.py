@@ -3,7 +3,6 @@ import uuid
 
 from django.db import models
 from django.utils.translation import ugettext as _
-from enumfields import EnumField
 
 from antares.apps.core.constants import ScriptEngineType
 
@@ -21,8 +20,8 @@ class FlowActivityValidation(models.Model):
     validation_id = models.CharField(max_length=2000)
     validation = models.CharField(max_length=2000)
     message = models.CharField(max_length=2000)
-    script_type = EnumField(
-        ScriptEngineType, max_length=30, default=ScriptEngineType.JAVASCRIPT)
+    script_type = models.CharField(choices=
+        ScriptEngineType.choices, max_length=30, default=ScriptEngineType.JAVASCRIPT)
 
     def __str__(self):
         return str(self.id)

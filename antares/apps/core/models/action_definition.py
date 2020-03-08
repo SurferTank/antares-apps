@@ -4,8 +4,7 @@ from django.conf import settings
 from django.db import models
 from django.utils import timezone
 from django.utils.translation import ugettext as _
-from enumfields import EnumField
-from jinja2.environment import Environment
+
 
 from antares.apps.core.middleware.request import get_request
 
@@ -33,8 +32,8 @@ class ActionDefinition(models.Model):
         verbose_name=_(__name__ + ".definition_content"),
         help_text=_(__name__ + ".action_definition_contents"))
 
-    environment = EnumField(
-        EnvironmentType,
+    environment = models.TextField(
+        choices=EnvironmentType.choices,
         max_length=20,
         default=EnvironmentType.LOCAL,
         verbose_name=_(__name__ + ".environment"),
@@ -44,8 +43,8 @@ class ActionDefinition(models.Model):
         blank=True,
         verbose_name=_(__name__ + ".executable_name"),
         help_text=_(__name__ + ".executable_name_help"))
-    target_module = EnumField(
-        ActionTargetModuleType,
+    target_module = models.TextField(
+        choices=ActionTargetModuleType.choices,
         max_length=30,
         default=ActionTargetModuleType.DOCUMENT,
         verbose_name=_(__name__ + ".target_module"),

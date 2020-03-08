@@ -4,7 +4,6 @@ import uuid
 from django.db import models
 from django.db.transaction import TransactionManagementError
 from django.utils.translation import ugettext as _
-from enumfields import EnumField
 import js2py
 
 from antares.apps.client.models import Client
@@ -30,14 +29,14 @@ class FlowProperty(models.Model):
         db_column='flow_case',
         related_name='property_set')
     clob_value = models.BinaryField(blank=True, null=True)
-    data_type = EnumField(FlowDataType, max_length=30)
+    data_type = models.CharField(choices=FlowDataType.choices, max_length=30)
     date_value = models.DateTimeField(blank=True, null=True)
     decimal_value = models.DecimalField(
         max_digits=19, decimal_places=2, blank=True, null=True)
     integer_value = models.BigIntegerField(blank=True, null=True)
     property_id = models.CharField(max_length=100)
     string_value = models.CharField(max_length=2000, blank=True, null=True)
-    sub_data_type = EnumField(FlowBasicDataSubtype, max_length=30)
+    sub_data_type = models.CharField(choices=FlowBasicDataSubtype.choices, max_length=30)
     text_value = models.TextField(blank=True, null=True)
     boolean_value = models.NullBooleanField()
 

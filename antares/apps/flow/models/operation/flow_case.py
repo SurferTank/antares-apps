@@ -4,7 +4,6 @@ import uuid
 from django.db import models
 from django.utils import timezone
 from django.utils.translation import ugettext as _
-from enumfields import EnumField
 
 from antares.apps.core.constants import FieldDataType
 from antares.apps.document.constants import DocumentStatusType
@@ -42,7 +41,7 @@ class FlowCase(models.Model):
     creation_date = models.DateTimeField()
     priority = models.CharField(max_length=30)
     start_date = models.DateTimeField(blank=True, null=True)
-    status = EnumField(FlowCaseStatusType, max_length=30)
+    status = models.CharField(choices=FlowCaseStatusType.choices, max_length=30)
     hrn_code = models.CharField(
         max_length=50,
         unique=True,

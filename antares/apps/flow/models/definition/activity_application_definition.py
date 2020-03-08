@@ -3,7 +3,7 @@ import uuid
 
 from django.db import models
 from django.utils.translation import ugettext as _
-from enumfields import EnumField
+
 
 from antares.apps.flow.constants import ActivityApplicationDefinitionScopeType
 
@@ -27,8 +27,7 @@ class ActivityApplicationDefinition(models.Model):
         db_column='activity_definition',
         blank=True,
         null=True)
-    scope = EnumField(
-        ActivityApplicationDefinitionScopeType,
+    scope = models.CharField(choices=ActivityApplicationDefinitionScopeType.choices,
         max_length=30,
         default=ActivityApplicationDefinitionScopeType.SAME)
     description = models.CharField(max_length=1000, blank=True, null=True)

@@ -12,7 +12,6 @@ from django.db import models
 from django.utils import timezone
 from django.conf import settings
 from django.utils.translation import ugettext as _
-from enumfields import EnumField
 from antares.apps.core.constants import TimeUnitType
 from antares.apps.core.middleware.request import get_request
 from django.db.models import Q
@@ -27,8 +26,8 @@ class InterestDefinition(models.Model):
         max_length=100, blank=False, null=False, unique=True)
     description = RichTextField(blank=True, null=True)
     rate = models.FloatField(null=False, blank=False)
-    periodicity = EnumField(
-        TimeUnitType, max_length=10, default=TimeUnitType.MONTH)
+    periodicity = models.CharField(choices=
+        TimeUnitType.choices, max_length=10, default=TimeUnitType.MONTH)
     first_is_duedate = models.BooleanField(null=False, default=False)
     use_calendar_periods = models.BooleanField(null=False, default=False)
     concept_type = models.ForeignKey(

@@ -6,7 +6,6 @@ from django.db import models
 from django.db import transaction
 from django.utils import timezone
 from django.utils.translation import ugettext as _
-from enumfields import EnumField
 
 from antares.apps.core.middleware.request import get_request
 
@@ -36,8 +35,8 @@ class ThirdPartyDetail(models.Model):
         'document.DocumentHeader',
         on_delete=models.PROTECT,
         db_column='document')
-    status = EnumField(
-        ThirdPartyDetailStatusType,
+    status = models.CharField(choices=
+        ThirdPartyDetailStatusType.choices,
         max_length=30,
         default=ThirdPartyDetailStatusType.OPEN)
     creation_date = models.DateTimeField()

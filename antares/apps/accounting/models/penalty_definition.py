@@ -17,7 +17,6 @@ from django.db import models
 from django.utils import timezone
 from django.conf import settings
 from django.utils.translation import ugettext as _
-from enumfields import EnumField
 from antares.apps.core.constants import TimeUnitType
 from antares.apps.core.middleware.request import get_request
 from djmoney.models.fields import MoneyField
@@ -35,8 +34,8 @@ class PenaltyDefinition(models.Model):
     rate = models.FloatField(null=True, blank=True)
     fixed_amount = MoneyField(
         max_digits=15, decimal_places=2, default_currency='USD', null=True, blank=True)
-    periodicity = EnumField(
-        TimeUnitType, max_length=10, default=TimeUnitType.MONTH)
+    periodicity = models.CharField(choices=TimeUnitType.choices, max_length=10, 
+                                   default=TimeUnitType.MONTH)
     max_rounds = models.IntegerField(null=True)
     recurring = models.BooleanField(default=False)
     concept_type = models.ForeignKey(
