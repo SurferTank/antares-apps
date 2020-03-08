@@ -227,7 +227,7 @@ class Document(object):
                 associated_to.text = str(self.header.associated_to)
             if self.header.association_type is not None:
                 association_type = headerElements.find('associationType')
-                association_type.text = self.header.association_type.value
+                association_type.text = self.header.association_type
             if self.header.creation_date is not None:
                 creation_date = headerElements.find('creationDate')
                 creation_date.text = self.header.creation_date.isoformat()
@@ -249,13 +249,13 @@ class Document(object):
                 document_version.text = str(self.header.document_version)
             if self.header.status is not None:
                 status = headerElements.find('status')
-                status.text = self.header.status.value
+                status.text = self.header.status
             if self.header.hash is not None:
                 doc_hash = headerElements.find('hash')
                 doc_hash.text = self.header.hash
             if self.header.origin is not None:
                 origin = headerElements.find('origin')
-                origin.text = self.header.origin.value
+                origin.text = self.header.origin
             if self.header.save_date is not None:
                 save_date = headerElements.find('saveDate')
                 save_date.text = self.header.save_date.isoformat()

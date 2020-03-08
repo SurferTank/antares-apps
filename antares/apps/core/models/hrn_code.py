@@ -212,7 +212,7 @@ class HrnCode(models.Model):
                 document.set_header_field("hrn_title", value.get('hrn_title'))
         elif ScriptEngineType.JAVASCRIPT:
             context = js2py.EvalJs({
-                'event_type': event_type.value,
+                'event_type': event_type,
                 'fields': document.get_field_dict(),
                 'header_fields': header_fields,
                 'document': document,

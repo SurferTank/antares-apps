@@ -3,7 +3,7 @@ class EnumUtilsMixin:
         """
         Just returns the value of the Enumeration
         """
-        return str(self.value)
+        return str(self.label)
 
     @classmethod
     def as_dict(cls):
@@ -14,7 +14,7 @@ class EnumUtilsMixin:
         """
         local_dict = {}
         for item in cls:
-            local_dict[str(item.value)] = str(item.label)
+            local_dict[str(item)] = str(item.label)
         return local_dict
 
 
@@ -32,6 +32,6 @@ class EnumUtilsMixin:
             return element
 
         for item in cls:
-            if str(element).lower() == str(item.value).lower():
+            if str(element).lower() == str(item).lower():
                 return item
         return None

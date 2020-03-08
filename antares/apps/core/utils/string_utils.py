@@ -27,4 +27,4 @@ class StringUtils(object):
 
         :param enumType: the enum to adapt.
         """
-        return ((item.value, item.name.replace('_', ' ')) for item in enumtype)
+        return ((item, item.name.replace('_', ' ')) for item in enumtype)

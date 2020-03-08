@@ -231,12 +231,12 @@ class FlowAdminManager(object):
                         flow_def.time_unit = TimeUnitType.to_enum(
                             SystemParameter.find_one(
                                 "FLOW_DEFINITION_DEFAULT_TIME_UNIT_TYPE",
-                                FieldDataType.STRING, TimeUnitType.HOUR.value))
+                                FieldDataType.STRING, TimeUnitType.HOUR))
             else:
                 flow_def.time_unit = TimeUnitType.to_enum(
                     SystemParameter.find_one(
                         "FLOW_DEFINITION_DEFAULT_TIME_UNIT_TYPE",
-                        FieldDataType.STRING, TimeUnitType.HOUR.value))
+                        FieldDataType.STRING, TimeUnitType.HOUR))
 
             priority_node = process_header_node.find(
                 'xpdl:Priority', namespaces=NS_MAP)
@@ -247,13 +247,13 @@ class FlowAdminManager(object):
                         SystemParameter.find_one(
                             "FLOW_DEFINITION_DEFAULT_PRIORITY",
                             FieldDataType.STRING,
-                            FlowPriorityType.STANDARD.value))
+                            FlowPriorityType.STANDARD))
                 flow_def.priority = priority
             else:
                 flow_def.priority = FlowPriorityType.to_enum(
                     SystemParameter.find_one(
                         "FLOW_DEFINITION_DEFAULT_PRIORITY",
-                        FieldDataType.STRING, FlowPriorityType.STANDARD.value))
+                        FieldDataType.STRING, FlowPriorityType.STANDARD))
 
             valid_from_node = process_header_node.find(
                 'xpdl:ValidFrom', namespaces=NS_MAP)
@@ -350,13 +350,13 @@ class FlowAdminManager(object):
 
         prop_def = ApplicationParameterDefinition()
         prop_def.application_definition = app_def
-        prop_def.definition_site = DefinitionSiteType.SYSTEM.value
-        prop_def.property_type = PropertyType.FORMAL_PARAMETER.value
+        prop_def.definition_site = DefinitionSiteType.SYSTEM
+        prop_def.property_type = PropertyType.FORMAL_PARAMETER
         prop_def.order_number = 0
-        prop_def.data_type = FlowDataType.BASIC.value
+        prop_def.data_type = FlowDataType.BASIC
         prop_def.parameter_id = 'propertyId'
         prop_def.display_name = 'property ID'
-        prop_def.sub_data_type = FlowBasicDataSubtype.STRING.value
+        prop_def.sub_data_type = FlowBasicDataSubtype.STRING
         prop_def.save()
         app_def.parameter_definition_set.add(prop_def)
         app_def.save()
@@ -601,7 +601,7 @@ class FlowAdminManager(object):
                         SystemParameter.find_one(
                             "FLOW_ACTIVITY_DEFINITION_DEFAULT_INSTANTIATION",
                             FieldDataType.STRING,
-                            FlowActivityInstantiationType.MULTIPLE.value))
+                            FlowActivityInstantiationType.MULTIPLE))
                 cost_node = simulation_node.find(
                     'xpdl:Cost', namespaces=NS_MAP)
                 if (cost_node is not None and cost_node.text is not None):
@@ -742,7 +742,7 @@ class FlowAdminManager(object):
                                         param = FlowActivityFormParameter()
                                         param.param_id = param_id
                                         param.form = activity_form
-                                        param.value = params_node.text
+                                        param = params_node.text
                                         param.save()
                 elif (ea_name and ea_name.lower() == 'validations'):
                     for validation_node in extended_attribute.iterfind(
@@ -796,7 +796,7 @@ class FlowAdminManager(object):
                                     param = FlowActivityExtraTabParameter()
                                     param.param_id = param_id
                                     param.tab = extra_tab
-                                    param.value = params_node.text
+                                    param = params_node.text
                                     param.save()
                 elif (ea_name and ea_name.lower() == 'actions'):
                     for action_node in extended_attribute.iterfind(
@@ -1302,7 +1302,7 @@ class FlowAdminManager(object):
                 SystemParameter.find_one(
                     "FLOW_ACTIVITY_DEFINITION_TIME_ESTIMATION_METHOD",
                     FieldDataType.STRING,
-                    TimeEstimationMethodType.AVERAGE.value))
+                    TimeEstimationMethodType.AVERAGE))
         if method is None:
             raise ValueError(
                 _(__name__ +
