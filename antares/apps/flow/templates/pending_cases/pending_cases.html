@@ -1,0 +1,23 @@
+{% load static i18n  %} 
+<table width="100%" id="pendingCasesInboxTable" class="table table-striped">
+	<thead>
+		<tr>
+			<th>{% trans 'antares.apps.flow.templates.inbox.activityId' %}</th>
+			<th>{% trans 'antares.apps.flow.templates.inbox.caseId' %}</th>
+			<th>{% trans 'antares.apps.flow.templates.inbox.caseName' %}</th>
+			<th>{% trans 'antares.apps.flow.templates.inbox.priority' %}</th>
+			<th>{% trans 'antares.apps.flow.templates.inbox.sourceId' %}</th>
+			<th>{% trans 'antares.apps.flow.templates.inbox.status' %}</th>
+			<th>{% trans 'antares.apps.flow.templates.inbox.status_date' %}</th>
+			<th>{% trans 'antares.apps.flow.templates.inbox.action.label' %}</th>
+		</tr>
+	</thead>
+	<tbody>
+	</tbody>
+</table>
+
+<script type="text/javascript">
+    var antaresFlowLinks = { 
+          pending_cases_view: "{% url "antares.apps.flow:api_pending_cases" %}",
+    };
+</script>

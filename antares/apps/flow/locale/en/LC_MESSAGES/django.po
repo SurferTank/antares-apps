@@ -102,6 +102,16 @@ msgstr "Started"
 msgid "antares.apps.flow.templates.inbox.action.label"
 msgstr "Action"
 
+#: templates/inbox_view/inbox.html:21
+msgid "antares.apps.flow.templates.inbox.status"
+msgstr "Status"
+
+#: templates/inbox_view/inbox.html:21
+msgid "antares.apps.flow.templates.inbox.status_date"
+msgstr "Date"
+
+
+
 #: templates/inbox_view/inbox.html:65
 msgid "antares.apps.flow.templates.inbox.emptyTable"
 msgstr "No cases found"

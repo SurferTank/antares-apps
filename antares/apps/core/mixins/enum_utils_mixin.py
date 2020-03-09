@@ -1,23 +1,5 @@
 class EnumUtilsMixin:
-    def __str__(self):
-        """
-        Just returns the value of the Enumeration
-        """
-        return str(self.label)
-
-    @classmethod
-    def as_dict(cls):
-        """
-        Converts the Enumeration into a dict
-        
-        :returns: the newly created dict
-        """
-        local_dict = {}
-        for item in cls:
-            local_dict[str(item)] = str(item.label)
-        return local_dict
-
-
+    
     @classmethod
     def to_enum(cls, element):
         """

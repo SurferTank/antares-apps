@@ -14,6 +14,7 @@ from .api import ApiForwardView
 from .api import ApiInboxActiveCasesView
 from .api import ApiInboxCompletedCasesView
 from .api import ApiInboxCreatedCasesView
+from .api import ApiPendingCasesView
 from .views import InboxView
 from .views import LatestActivitiesView
 from .views import WorkspaceView
@@ -71,4 +72,9 @@ urlpatterns = [
     url(r'^api/dashboard_set_tracking_option$',
         login_required(ApiCaseSetTrackingOptionView.as_view()),
         name="api_case_set_tracking_option"),
+    url(r'^api/pending_cases$',
+        login_required(ApiPendingCasesView.as_view()),
+        name="api_pending_cases"),
+    
+    
 ]

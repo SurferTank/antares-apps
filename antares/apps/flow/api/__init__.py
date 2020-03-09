@@ -11,6 +11,7 @@ from .api_forward_view import ApiForwardView
 from .api_inbox_active_cases_view import ApiInboxActiveCasesView
 from .api_inbox_completed_cases_view import ApiInboxCompletedCasesView
 from .api_inbox_created_cases_view import ApiInboxCreatedCasesView
+from .api_pending_cases import ApiPendingCasesView
 
 
 __all__ = [
@@ -27,4 +28,5 @@ __all__ = [
     ApiCaseNoteListView,
     ApiCaseUpdateNoteView,
     ApiCaseSetTrackingOptionView,
+    ApiPendingCasesView,
 ]

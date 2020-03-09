@@ -72,6 +72,54 @@ function display_inbox_page(status) {
  * @param status
  * @returns
  */
+function setup_pending_cases_view() {
+	if ($.fn.dataTable.isDataTable('#pendingCasesInboxTable')) {
+		$('#pendingCasesInboxTable').DataTable().destroy();
+	}
+	if (antaresFlowLinks.pending_cases_view) {
+		$('#pendingCasesInboxTable')
+				.DataTable(
+						{
+							'paging' : true,
+							'processing' : true,
+							'serverSide' : true,
+							'info' : false,
+							'searching' : false,
+							'bLengthChange' : false,
+							'iDisplayLength' : 25,
+							'conditionalPaging' : true,
+							'ajax' : {
+								'url' : antaresFlowLinks.pending_cases_view,
+								'data' : {
+									'csrfmiddlewaretoken' : $
+											.cookie('csrftoken'),
+								},
+								'method' : 'GET',
+								'type' : 'json',
+							},
+							'language' : {
+								'emptyTable' : gettext('antares.apps.flow.templates.inbox.emptyTable'),
+							},
+							'fnDrawCallback' : function(oSettings) {
+								if (oSettings._iDisplayLength >= oSettings
+										.fnRecordsDisplay()) {
+									$(oSettings.nTableWrapper).find(
+											'.dataTables_paginate').hide();
+								} else {
+									$(oSettings.nTableWrapper).find(
+											'.dataTables_paginate').show();
+								}
+							},
+						});
+	}
+}
+
+
+/**
+ * 
+ * @param status
+ * @returns
+ */
 function setup_new_inbox_cases_view(status) {
 	if ($.fn.dataTable.isDataTable('#createdCasesInboxTable')) {
 		$('#createdCasesInboxTable').DataTable().destroy();
