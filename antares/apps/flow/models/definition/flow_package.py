@@ -19,12 +19,12 @@ class FlowPackage(models.Model):
         settings.AUTH_USER_MODEL,
         on_delete=models.PROTECT,
         blank=True,
-        null=True)
-    creation_date = models.DateTimeField()
-    update_date = models.DateTimeField(blank=True, null=True)
-    package_id = models.CharField(max_length=100)
-    package_name = models.CharField(max_length=100)
-    package_version = models.CharField(max_length=30)
+        null=True, editable=False)
+    creation_date = models.DateTimeField(editable=False)
+    update_date = models.DateTimeField(blank=True, null=True, editable=False)
+    package_id = models.CharField(max_length=100, editable=False)
+    package_name = models.CharField(max_length=100, editable=False)
+    package_version = models.CharField(max_length=30, editable=False)
     xpdl = models.TextField()
 
     def save(self, *args, **kwargs):
@@ -35,7 +35,7 @@ class FlowPackage(models.Model):
         super(FlowPackage, self).save(*args, **kwargs)
 
     def __str__(self):
-        return str(self.id)
+        return str(self.package_id)
 
     @classmethod
     def find_one_by_package_id_and_package_version(cls, package_id,

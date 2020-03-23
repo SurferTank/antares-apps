@@ -474,7 +474,14 @@ msgid "antares.apps.flow.constants.FlowPriorityType.MINIMAL"
 msgstr "Minimal"
 
 
-
+msgid "antares.apps.flow.models.definition.flow_definition.table_name"
+msgstr "Flow Definition"
+msgid "antares.apps.flow.models.definition.flow_definition.table_name_plural"
+msgstr "Flow Definitions"
+msgid "antares.apps.flow.models.definition.flow_package.table_name"
+msgstr "Flow Package"
+msgid "antares.apps.flow.models.definition.flow_package.table_name_plural"
+msgstr "Flow Packages"
 
 
 
