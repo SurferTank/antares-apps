@@ -3,18 +3,19 @@ Created on Jul 22, 2016
 
 @author: leobelen
 '''
+from antares.apps.client.constants import ClientStatusType
+import calendar
 from datetime import datetime
 import logging
-import calendar
-from django.utils import timezone
 
+from dateutil.relativedelta import relativedelta
+from django.utils import timezone
 from django.utils.translation import ugettext as _
 
 from ..constants import FieldDataType, TimeUnitType
 from ..models.holiday import Holiday
 from ..models.system_parameter import SystemParameter
-from antares.apps.client.constants import ClientStatusType
-from dateutil.relativedelta import relativedelta
+
 
 logger = logging.getLogger(__name__)
 
@@ -119,14 +120,13 @@ class PeriodManager(object):
             year = int(float(str(period)[:4]))
             month = int(float(str(period)[4:]))
             month_last_day = calendar.monthrange(year, month)[1]
-            if(base_date.day>month_last_day):
+            if(base_date.day > month_last_day):
                 day = month_last_day
             else:
                 day = base_date.day
             if (start_at_midnight == True):
                 base_date = timezone.datetime(year, month, day, 0, 0, 0, 0,
                                      base_date.tzinfo)
-                
                 
             else:
                 base_date = timezone.datetime(year, month, day,
@@ -171,7 +171,7 @@ class PeriodManager(object):
             period, concept_type)
         
     @classmethod
-    def find_period_list(cls, base_date, event_date, time_unit,  client_status=ClientStatusType.ACTIVE):
+    def find_period_list(cls, base_date, event_date, time_unit, client_status=ClientStatusType.ACTIVE):
         """
         Returns a list of periods for processing, using defaults on a client
         obligation object.
@@ -247,7 +247,7 @@ class PeriodManager(object):
         return period_list
     
     @classmethod
-    def find_period_list_by_client_obligation(cls,  client_obligation,  event_date):
+    def find_period_list_by_client_obligation(cls, client_obligation, event_date):
         """
         Returns a list of periods for processing, using defaults on a client
         obligation object.
@@ -264,7 +264,7 @@ class PeriodManager(object):
         if (client_obligation.client.status == ClientStatusType.DEFUNCT):
             return period_list
 
-        if (client_obligation.client.registration_date >
+        if (client_obligation.client.registration_date > 
                 client_obligation.start_date
                 and from_registration_date == True):
             base_date = client_obligation.start_date
@@ -355,7 +355,7 @@ class PeriodManager(object):
             for i in range(0, units_before + units_after):
                 period_list.append(
                     int(
-                        str(base_date.year) + str(base_date.month) +
+                        str(base_date.year) + str(base_date.month) + 
                         str(base_date.day)))
                 base_date = base_date + relativedelta(months=1)
         else:

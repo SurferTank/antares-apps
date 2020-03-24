@@ -1,18 +1,3 @@
-from datetime import datetime
-import hashlib
-import logging
-from typing import Dict
-import uuid
-
-from dateutil import parser as dateparser
-from django.utils import timezone
-from django.utils.translation import ugettext as _
-from djmoney.money import Money
-import js2py
-from lxml import etree
-from lxml import objectify
-from prompt_toolkit.key_binding.bindings.named_commands import self_insert
-
 from antares.apps.accounting.models import AccountType
 from antares.apps.client.models.client import Client
 from antares.apps.client.models.client_branch import ClientBranch
@@ -28,6 +13,20 @@ from antares.apps.flow.models import FlowCase
 from antares.apps.flow.models.operation.flow_activity import FlowActivity
 from antares.apps.obligation.models import ObligationVector
 from antares.apps.user.models import User
+from datetime import datetime
+import hashlib
+import logging
+from typing import Dict
+import uuid
+
+from dateutil import parser as dateparser
+from django.utils import timezone
+from django.utils.translation import ugettext as _
+from djmoney.money import Money
+import js2py
+from lxml import etree
+from lxml import objectify
+from prompt_toolkit.key_binding.bindings.named_commands import self_insert
 
 from ..constants import DocumentEventType, FormClassType
 from ..constants import DocumentStatusType, DocumentOriginType, DocumentAssociationType
@@ -93,8 +92,8 @@ class Document(object):
                     document_id=document_id)))
         self.document_id = self.header.id
 
-        logger.debug("************** " +
-                     _(__name__ + ".messages.document_load") +
+        logger.debug("************** " + 
+                     _(__name__ + ".messages.document_load") + 
                      " ******************")
         logger.debug(
             _(__name__ + ".messages.document_load_document_id {document_id}")
@@ -114,8 +113,8 @@ class Document(object):
 
     def _init_with_form_id(self,
                            form_id: str,
-                           header_fields: Dict[str, str] = None,
-                           fields: Dict[str, str] = None):
+                           header_fields: Dict[str, str]=None,
+                           fields: Dict[str, str]=None):
         """ Instantiates a document instance based on the form id
 
         :param form_id: The form ID, which has to exist on the database
@@ -152,8 +151,8 @@ class Document(object):
 
         self._hydrate_document()
         self._evaluate_field_calculation()
-        logger.debug("************** " +
-                     _(__name__ + ".messages.document_load") +
+        logger.debug("************** " + 
+                     _(__name__ + ".messages.document_load") + 
                      " ******************")
         logger.debug(
             _(__name__ + ".messages.document_load_document_id {document_id}")
@@ -345,7 +344,7 @@ class Document(object):
                                             'displayValue'] = document_obj.header.hrn_code
                             else:
                                 raise NotImplementedError(
-                                    _(__name__ +
+                                    _(__name__ + 
                                       ".messages.field_type_not_implemented_yet"
                                       ))
 
@@ -545,7 +544,7 @@ class Document(object):
                                     (field.get('indexed').lower() == 'true' or
                                      field.get('indexed').lower() == 'yes')):
                                     if (indexedDb is not None
-                                            and indexedDb.string_value !=
+                                            and indexedDb.string_value != 
                                             field.text):
                                         indexedDb.string_value = field.text
                                         indexedDb.save()
@@ -577,7 +576,7 @@ class Document(object):
                                     (field.get('indexed').lower() == 'true' or
                                      field.get('indexed').lower() == 'yes')):
                                     if (indexedDb is not None
-                                            and indexedDb.text_value !=
+                                            and indexedDb.text_value != 
                                             field.text):
                                         indexedDb.text_value = field.text
                                         indexedDb.save()
@@ -612,7 +611,7 @@ class Document(object):
                                     (field.get('indexed').lower() == 'true' or
                                      field.get('indexed').lower() == 'yes')):
                                     if (indexedDb is not None
-                                            and indexedDb.integer_value !=
+                                            and indexedDb.integer_value != 
                                             field.text):
                                         indexedDb.integer_value = int(
                                             float(field.text))
@@ -647,7 +646,7 @@ class Document(object):
                                     (field.get('indexed').lower() == 'true' or
                                      field.get('indexed').lower() == 'yes')):
                                     if (indexedDb is not None
-                                            and indexedDb.float_value !=
+                                            and indexedDb.float_value != 
                                             field.text):
                                         indexedDb.float_value = float(
                                             field.text)
@@ -664,7 +663,7 @@ class Document(object):
                                             FieldDataType.FLOAT)
                                         indexedDb.save()
                             elif datatype == FieldDataType.DATE:
-                                #lets truncate and serialize it.
+                                # lets truncate and serialize it.
                                 dt = dateparser.parse(field.text)
                                 date_value = datetime(dt.year, dt.month,
                                                       dt.day)
@@ -685,7 +684,7 @@ class Document(object):
                                     (field.get('indexed').lower() == 'true' or
                                      field.get('indexed').lower() == 'yes')):
                                     if (indexedDb is not None
-                                            and indexedDb.date_value !=
+                                            and indexedDb.date_value != 
                                             date_value):
                                         indexedDb.date_value = date_value
                                         indexedDb.save()
@@ -700,7 +699,7 @@ class Document(object):
                                             FieldDataType.DATE)
                                         indexedDb.save()
                             elif datatype == FieldDataType.DATETIME:
-                                #lets truncate and serialize it.
+                                # lets truncate and serialize it.
                                 date_value = dateparser.parse(field.text)
                                 if (fieldDb is not None
                                         and fieldDb.date_value != date_value):
@@ -719,7 +718,7 @@ class Document(object):
                                     (field.get('indexed').lower() == 'true' or
                                      field.get('indexed').lower() == 'yes')):
                                     if (indexedDb is not None
-                                            and indexedDb.date_value !=
+                                            and indexedDb.date_value != 
                                             date_value):
                                         indexedDb.date_value = date_value
                                         indexedDb.save()
@@ -752,7 +751,7 @@ class Document(object):
                                     (field.get('indexed').lower() == 'true' or
                                      field.get('indexed').lower() == 'yes')):
                                     if (indexedDb is not None
-                                            and str(indexedDb.uuid_value) !=
+                                            and str(indexedDb.uuid_value) != 
                                             str(field.text)):
                                         indexedDb.uuid_value = str(field.text)
                                         indexedDb.save()
@@ -768,7 +767,7 @@ class Document(object):
                                             FieldDataType.UUID)
                                         indexedDb.save()
                             elif datatype == FieldDataType.CLIENT:
-                                #This is an special case, we have to get first the proper object and then we serialize it as an UUID
+                                # This is an special case, we have to get first the proper object and then we serialize it as an UUID
                                 client_obj = Client.find_one(field.text)
                                 if (fieldDb is not None
                                         and str(fieldDb.uuid_value) != str(
@@ -789,7 +788,7 @@ class Document(object):
                                     (field.get('indexed').lower() == 'true' or
                                      field.get('indexed').lower() == 'yes')):
                                     if (indexedDb is not None
-                                            and str(indexedDb.uuid_value) !=
+                                            and str(indexedDb.uuid_value) != 
                                             str(client_obj.id)):
                                         indexedDb.uuid_value = str(
                                             client_obj.id)
@@ -806,7 +805,7 @@ class Document(object):
                                             FieldDataType.CLIENT)
                                         indexedDb.save()
                             elif datatype == FieldDataType.USER:
-                                #This is an special case, we have to get first the proper object and then we serialize it as an UUID
+                                # This is an special case, we have to get first the proper object and then we serialize it as an UUID
                                 user_obj = User.find_one(field.text)
                                 if (fieldDb is not None
                                         and str(fieldDb.uuid_value) != str(
@@ -826,7 +825,7 @@ class Document(object):
                                     (field.get('indexed').lower() == 'true' or
                                      field.get('indexed').lower() == 'yes')):
                                     if (indexedDb is not None
-                                            and str(indexedDb.uuid_value) !=
+                                            and str(indexedDb.uuid_value) != 
                                             str(user_obj.id)):
                                         indexedDb.uuid_value = str(user_obj.id)
                                         indexedDb.save()
@@ -842,7 +841,7 @@ class Document(object):
                                             FieldDataType.USER)
                                         indexedDb.save()
                             elif datatype == FieldDataType.DOCUMENT:
-                                #This is an special case, we have to get first the proper
+                                # This is an special case, we have to get first the proper
                                 # object and then we serialize it as an UUID
                                 document_obj = Document(document_id=field.text)
                                 if (fieldDb is not None
@@ -865,7 +864,7 @@ class Document(object):
                                     (field.get('indexed').lower() == 'true' or
                                      field.get('indexed').lower() == 'yes')):
                                     if (indexedDb is not None
-                                            and str(indexedDb.uuid_value) !=
+                                            and str(indexedDb.uuid_value) != 
                                             str(document_obj.document_id)):
                                         indexedDb.uuid_value = str(
                                             document_obj.document_id)
@@ -1058,7 +1057,7 @@ class Document(object):
                                     value = User.find_one(value)
                                 elif isinstance(value, User) == False:
                                     raise ValueError(
-                                        _(__name__ +
+                                        _(__name__ + 
                                           ".exceptions.user_field_does_not_understand_anything_but_User_objects"
                                           ))
                                 field.text = str(value.id)
@@ -1070,7 +1069,7 @@ class Document(object):
                                     value = Document(document_id=value)
                                 elif isinstance(value, Document) == False:
                                     raise ValueError(
-                                        _(__name__ +
+                                        _(__name__ + 
                                           ".exceptions.user_field_does_not_understand_anything_but_Document_objects"
                                           ))
                                 field.text = str(value.document_id)
@@ -1083,7 +1082,7 @@ class Document(object):
                                     value = Client.find_one(value)
                                 elif isinstance(value, Client) == False:
                                     raise ValueError(
-                                        _(__name__ +
+                                        _(__name__ + 
                                           ".exceptions.client_field_does_not_understand_anything_but_Client_objects"
                                           ))
                                 field.text = str(value.id)
@@ -1092,7 +1091,7 @@ class Document(object):
                             if value != False and value != "":
                                 if isinstance(value, Money) == False:
                                     raise ValueError(
-                                        _(__name__ +
+                                        _(__name__ + 
                                           ".exceptions.user_field_does_not_understand_anything_but_Document_objects"
                                           ))
                                 field.text = str(value.amount) + "-" + str(
@@ -1100,9 +1099,9 @@ class Document(object):
                             return
                         else:
                             raise DocumentFieldNotFound(
-                                _(__name__ +
+                                _(__name__ + 
                                   ".exceptions.document_field_type_not_found ")
-                                + key)
+                                +key)
         raise DocumentFieldNotFound(
             _(__name__ + ".exceptions.document_field_not_found" + " " + key))
 
@@ -1515,7 +1514,7 @@ class Document(object):
             else:
                 return SystemParameter.find_one("DEFAULT_CURRENCY",
                                                 FieldDataType.STRING,
-                                                "USD")  #default currency
+                                                "USD")  # default currency
 
         raise ValueError(
             _('antares.app.document.manager.invalid_header_field'))
@@ -1524,25 +1523,25 @@ class Document(object):
         headerElements = self.document_xml.find('headerElements')
         accountingElements = headerElements.find('accountingElements')
         if key.lower() == 'obligation_id':
-            #this is an special header field that extracts the account info from the
+            # this is an special header field that extracts the account info from the
             # obligation object and populates it to the account.
             if isinstance(value, str):
                 obligation = ObligationVector.find_one(uuid.UUID(value))
                 if (obligation is None):
                     raise InvalidDocumentValueException(
-                        _(__name__ +
+                        _(__name__ + 
                           ".exceptions.invalid_obligation_specified"))
             elif isinstance(value, uuid.UUID):
                 obligation = ObligationVector.find_one(value)
                 if (obligation is None):
                     raise InvalidDocumentValueException(
-                        _(__name__ +
+                        _(__name__ + 
                           ".exceptions.invalid_obligation_specified"))
             else:
                 obligation = value
             if (obligation.compliance_document is not None):
                 raise InvalidDocumentValueException(
-                    _(__name__ +
+                    _(__name__ + 
                       ".exceptions.the_obligation_already_has_a_compliance_document"
                       ))
             if obligation.client:
@@ -1559,7 +1558,7 @@ class Document(object):
             obligation.compliance_document = self.header
             obligation.save()
         elif key.lower() == 'activity_id':
-            #another special one, this one to set the related case
+            # another special one, this one to set the related case
             if isinstance(value, str):
                 activity = FlowActivity.find_one(uuid.UUID(value))
                 if (activity is None):
@@ -1569,7 +1568,7 @@ class Document(object):
                 activity = FlowActivity.find_one(value)
                 if (activity is None):
                     raise InvalidDocumentValueException(
-                        _(__name__ +
+                        _(__name__ + 
                           ".exceptions.invalid_obligation_specified"))
             else:
                 activity = value
@@ -1584,7 +1583,7 @@ class Document(object):
                 base_document_node.text = str(uuid.UUID(value))
             else:
                 raise InvalidDocumentValueException(
-                    _(__name__ +
+                    _(__name__ + 
                       ".exceptions.invalid_account_document_specified"))
         elif (key.lower() == 'period'):
             period_node = accountingElements.find('period')
@@ -1694,7 +1693,7 @@ class Document(object):
                     pass
             else:
                 raise InvalidDocumentValueException(
-                    _(__name__ +
+                    _(__name__ + 
                       ".exceptions.invalid_account_document_specified"))
 
         elif (key.lower() == 'association_type'):
@@ -1843,7 +1842,7 @@ class Document(object):
         if ((status == DocumentStatusType.CANCELLED
              or status == DocumentStatusType.DELETED) and not prev_status):
             raise InvalidDocumentStatusException(
-                _(__name__ +
+                _(__name__ + 
                   ".exceptions.cannot_change_status_if_cancelled_exception"))
         if (status == DocumentStatusType.SAVED
                 and prev_status is not DocumentStatusType.DRAFTED):
@@ -1985,7 +1984,7 @@ class Document(object):
             self.set_status(status_type)
 
         if (status_type == DocumentStatusType.SAVED):
-            #field validation
+            # field validation
             self._validate_fields()
             self._check_required_fields()
             self._process_modules_hooks()
@@ -1999,7 +1998,7 @@ class Document(object):
         doc_xml = etree.fromstring(etree.tostring(self.document_xml))
         headerElements = doc_xml.find('headerElements')
 
-        #we need to exclude hash as it produces different results
+        # we need to exclude hash as it produces different results
         doc_hash = headerElements.find('hash')
         if (doc_hash is not None):
             doc_hash.text = None
@@ -2013,7 +2012,7 @@ class Document(object):
         """verifies the hash with the hydrated XML """
         doc_hash = self.hash()
 
-        logger.info("calculated hash is " + doc_hash + " and stored hash is " +
+        logger.info("calculated hash is " + doc_hash + " and stored hash is " + 
                     self.header.hash)
         if self.header.hash == doc_hash:
             return True
@@ -2029,24 +2028,24 @@ class Document(object):
         calculated_nodes = self.document_xml.find(
             'structuredData/page/line/field[@calculate]')
         if calculated_nodes is None:
-            #nothing to calculate
+            # nothing to calculate
             return
 
         calculated_nodes[:] = sorted(
             calculated_nodes, key=self.__get_calculated_node_key)
         for calculated_node in self.document_xml.iterfind(
                 'structuredData/page/line/field[@calculate]'):
-            #we need to declare the context each time to allow for nested calculations
+            # we need to declare the context each time to allow for nested calculations
             context = js2py.EvalJs(fields)
             context.execute(
-                calculated_node.get('id') + ' = ' +
+                calculated_node.get('id') + ' = ' + 
                 calculated_node.get('calculate'))
-            fields[calculated_node.get('id')] = eval('context.' +
+            fields[calculated_node.get('id')] = eval('context.' + 
                                                      calculated_node.get('id'))
             self.set_field_value(
                 calculated_node.get('id'), fields[calculated_node.get('id')])
             logger.debug(
-                _(__name__ +
+                _(__name__ + 
                   ".new_value_for_calculated_field {field_id} {calculation_result} {calculation_order}"
                   ).format(
                       field_id=calculated_node.get('id'),
@@ -2065,11 +2064,11 @@ class Document(object):
 
         for validation_node in self.document_xml.iterfind(
                 'structuredData/page/line/field[@validate]'):
-            #we need to declare the context each time to allow for nested calculations
-            context.execute('return_value = ' +
+            # we need to declare the context each time to allow for nested calculations
+            context.execute('return_value = ' + 
                             validation_node.get('validate'))
             logger.debug(
-                _(__name__ +
+                _(__name__ + 
                   ".validation_result {field_id} {validation_result} {validation}"
                   ).format(
                       field_id=validation_node.get('id'),
@@ -2149,7 +2148,6 @@ class Document(object):
             self.set_header_field('account_type', copad.account_type)
         if (copad.base_document is not None and isinstance(copad.base_document, Document)):
             self.set_header_field('base_document', copad.base_document.header)        
-    
    
     def _map_header_fields_to_fields(self):
         """ This simply maps the header fields into the body
@@ -2231,13 +2229,13 @@ class Document(object):
         from antares.apps.obligation.constants import ObligationStatusType
 
         SubscriptionManager.process_document_subscriptions(self)
-        #if an account rule is set for the form_def we post it to the accounting system
+        # if an account rule is set for the form_def we post it to the accounting system
         account_rule_count = self.header.form_definition.account_rule_set.select_related(
         ).count()
         if (account_rule_count > 1):
             AccountManager.post_document(self)
 
-        #this is to set all obligations set as compliant
+        # this is to set all obligations set as compliant
         for obligation in self.header.obligation_vector_compliance_document_set.select_related(
         ).all():
             obligation.status = ObligationStatusType.COMPLIANT
@@ -2248,7 +2246,7 @@ class Document(object):
         """ Gathers information from the system and plugs it to the fields
         
         """
-        #we only do this if the document is in DRAFTED status.
+        # we only do this if the document is in DRAFTED status.
         if self.get_status() != DocumentStatusType.DRAFTED:
             return None
         fields = {}

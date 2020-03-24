@@ -3,18 +3,18 @@ Created on Nov 6, 2017
 
 @author: leobelen
 '''
-from datetime import datetime
-import logging
-
 from antares.apps.client.constants import ClientArchetype
 from antares.apps.client.models import Client, ClientType
 from antares.apps.core.middleware import get_request
+from datetime import datetime
+import logging
 
 
 logger = logging.getLogger(__name__)
 
 
 class ClientTestHelper:
+
     def create_test_user_client(self):
         client_type = ClientType()
         client_type.archetype = ClientArchetype.INDIVIDUAL

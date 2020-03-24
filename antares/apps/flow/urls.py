@@ -23,7 +23,7 @@ from .views import WorkspaceView
 app_name = 'antares.apps.flow'
 
 urlpatterns = [
-    #url(r'inbox/(?P<status_id>[\w\-]+)',
+    # url(r'inbox/(?P<status_id>[\w\-]+)',
     #    login_required(InboxView.as_view()),
     #    name="inbox_view"),
     url(r'^inbox$', login_required(InboxView.as_view()), name="inbox_view"),
@@ -75,6 +75,5 @@ urlpatterns = [
     url(r'^api/pending_cases$',
         login_required(ApiPendingCasesView.as_view()),
         name="api_pending_cases"),
-    
     
 ]

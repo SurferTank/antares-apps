@@ -7,6 +7,7 @@ import subprocess
 
 
 class VersionUtils(object):
+
     @classmethod
     def get_version(cls, version=None):
         """Return a PEP 440-compliant version number from VERSION."""
@@ -21,8 +22,8 @@ class VersionUtils(object):
 
         sub = ''
         if version[3] == 'alpha' and version[4] == 0:
-            #git_changeset = cls.get_git_changeset()
-            #if git_changeset:
+            # git_changeset = cls.get_git_changeset()
+            # if git_changeset:
             #    sub = '.dev%s' % git_changeset
             git_hash = cls.get_last_git_hash()
             if git_hash:

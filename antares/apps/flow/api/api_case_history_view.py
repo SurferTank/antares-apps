@@ -1,11 +1,10 @@
+from antares.apps.core.constants import FieldDataType
+from antares.apps.core.middleware.request import get_request
+from antares.apps.core.models import UserParameter
 import logging
 
 from django.utils.translation import ugettext as _
 from django_datatables_view.base_datatable_view import BaseDatatableView
-
-from antares.apps.core.constants import FieldDataType
-from antares.apps.core.middleware.request import get_request
-from antares.apps.core.models import UserParameter
 
 from ..exceptions import FlowException
 from ..models import FlowActivity
@@ -27,7 +26,7 @@ class ApiCaseHistoryView(BaseDatatableView):
     max_display_length = 50
 
     def __init__(self):
-        self.date_format_string = UserParameter.find_one( 'CORE_TEMPLATE_DATE_TIME_FORMAT',
+        self.date_format_string = UserParameter.find_one('CORE_TEMPLATE_DATE_TIME_FORMAT',
             FieldDataType.STRING, '%Y-%m-%d %H:%M')
 
     def render_column(self, row, column):
@@ -83,7 +82,7 @@ class ApiCaseHistoryView(BaseDatatableView):
                     _(__name__ + ".exceptions.no_activity_was_found"))
             if (activity.performer != get_request().user):
                 raise FlowException(
-                    _(__name__ +
+                    _(__name__ + 
                       ".exceptions.this_activity_was_assigned_to_a_different_user"
                       ))
         else:

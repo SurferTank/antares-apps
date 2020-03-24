@@ -1,12 +1,11 @@
-import logging
-
-from django.utils.translation import ugettext as _
-from django_datatables_view.base_datatable_view import BaseDatatableView
-
 from antares.apps.core.constants import FieldDataType
 from antares.apps.core.middleware.request import get_request
 from antares.apps.core.models import UserParameter
 from antares.apps.document.constants import DocumentStatusType
+import logging
+
+from django.utils.translation import ugettext as _
+from django_datatables_view.base_datatable_view import BaseDatatableView
 
 from ..exceptions import FlowException
 from ..models import FlowActivity
@@ -82,13 +81,13 @@ class ApiCaseDocumentView(BaseDatatableView):
             else:
                 return None
         elif column == 'actions':
-            line = '<a href="#" onClick="viewWorkflowDocument(\''+ str(row.document.id) +\
+            line = '<a href="#" onClick="viewWorkflowDocument(\'' + str(row.document.id) + \
                 '\');"><i class="fa fa-eye" aria-hidden="true"></i></a>'
-            line += '&nbsp;&nbsp;<a href="#" onClick="printWorkflowDocument(\''+ str(row.document.id) +\
+            line += '&nbsp;&nbsp;<a href="#" onClick="printWorkflowDocument(\'' + str(row.document.id) + \
                 '\');"><i class="fa fa-print" aria-hidden="true"></i></a>'
             if DocumentStatusType.to_enum(
                     row.document.status) == DocumentStatusType.DRAFTED:
-                line += '&nbsp;&nbsp;<a href="#" onClick="editWorkflowDocument(\''+ str(row.document.id) +\
+                line += '&nbsp;&nbsp;<a href="#" onClick="editWorkflowDocument(\'' + str(row.document.id) + \
                 '\');"><i class="fa fa-pencil" aria-hidden="true"></i></a>'
             return line
         else:
@@ -106,7 +105,7 @@ class ApiCaseDocumentView(BaseDatatableView):
                     _(__name__ + ".exceptions.no_activity_was_found"))
             if (activity.performer != get_request().user):
                 raise FlowException(
-                    _(__name__ +
+                    _(__name__ + 
                       ".exceptions.this_activity_was_assigned_to_a_different_user"
                       ))
         else:

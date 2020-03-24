@@ -6,6 +6,7 @@ Created on Jul 16, 2016
 
 
 class InvalidStatusException(Exception):
+
     def __init__(self, value):
         self.value = value
 

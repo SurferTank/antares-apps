@@ -1,3 +1,8 @@
+from antares.apps.accounting.models import AccountBalance
+from antares.apps.accounting.models import AccountTransaction
+from antares.apps.core.constants import HrnModuleType, ScriptEngineType, FieldDataType
+from antares.apps.core.middleware.request import get_request
+from antares.apps.core.models.system_parameter import SystemParameter
 import logging
 
 from ckeditor.fields import RichTextField
@@ -7,11 +12,7 @@ from django.utils import timezone
 from django.utils.translation import ugettext as _
 import js2py
 
-from antares.apps.accounting.models import AccountBalance
-from antares.apps.accounting.models import AccountTransaction
-from antares.apps.core.constants import HrnModuleType, ScriptEngineType, FieldDataType
-from antares.apps.core.middleware.request import get_request
-from antares.apps.core.models.system_parameter import SystemParameter
+from ..constants import HrnModuleType
 
 
 logger = logging.getLogger(__name__)

@@ -1,11 +1,9 @@
+from antares.apps.flow.constants import ActivityApplicationDefinitionScopeType
 import logging
 import uuid
 
 from django.db import models
 from django.utils.translation import ugettext as _
-
-
-from antares.apps.flow.constants import ActivityApplicationDefinitionScopeType
 
 
 logger = logging.getLogger(__name__)

@@ -1,3 +1,5 @@
+from antares.apps.core.constants import FieldDataType
+from antares.apps.core.models import SystemParameter
 import decimal
 import logging
 
@@ -5,9 +7,6 @@ import babel.numbers
 from django import template
 from django.utils.safestring import mark_safe
 from djmoney.money import Money
-
-from antares.apps.core.constants import FieldDataType
-from antares.apps.core.models import SystemParameter
 
 from ..models import AccountBalance
 
@@ -46,8 +45,8 @@ def accounting_balance_status_image(client):
     """
     result = AccountBalance.get_total_balance_by_client(client)
     if (result is None or result > 0):
-        return mark_safe('<div style="text-align:center;"><font color="green" size="30">'+\
+        return mark_safe('<div style="text-align:center;"><font color="green" size="30">' + \
             '<i class="fa fa-check" aria-hidden="true"></i></font></div>')
     else:
-        return mark_safe('<div style="text-align:center;"><font color="red" size="30">'+\
+        return mark_safe('<div style="text-align:center;"><font color="red" size="30">' + \
             '<i class="fa fa-times" aria-hidden="true"></i></font></div>')

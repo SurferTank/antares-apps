@@ -3,6 +3,8 @@ Created on Jul 9, 2016
 
 @author: leobelen
 '''
+from antares.apps.core.manager import COPAD
+from antares.apps.core.middleware.request import get_request
 import logging
 import uuid
 
@@ -10,9 +12,6 @@ from django.conf import settings
 from django.db import models
 from django.utils import timezone
 from django.utils.translation import ugettext_lazy as _
-from antares.apps.core.manager import COPAD
-
-from antares.apps.core.middleware.request import get_request
 
 
 logger = logging.getLogger(__name__)
@@ -83,7 +82,7 @@ class ClientObligation(models.Model):
             return []
     
     def get_COPAD(self):
-        return COPAD(self.client.id, self.obligation.id, 
+        return COPAD(self.client.id, self.obligation.id,
                      self.period, self.account_type.id, self.base_document.id)
 
     @classmethod
@@ -105,6 +104,6 @@ class ClientObligation(models.Model):
     class Meta:
         app_label = 'obligation'
         db_table = 'obl_client_obligation'
-        unique_together = (('client', 'concept_type'), )
+        unique_together = (('client', 'concept_type'),)
         verbose_name = _(__name__ + ".table_name")
         verbose_name_plural = _(__name__ + ".table_name_plural")

@@ -1,3 +1,4 @@
+from antares.apps.core.middleware.request import get_request
 from builtins import classmethod
 import logging
 import uuid
@@ -6,8 +7,6 @@ from django.conf import settings
 from django.db import models
 from django.utils import timezone
 from django.utils.translation import ugettext as _
-
-from antares.apps.core.middleware.request import get_request
 
 
 logger = logging.getLogger(__name__)
@@ -60,6 +59,6 @@ class FlowPackage(models.Model):
     class Meta:
         app_label = 'flow'
         db_table = 'flow_package'
-        unique_together = (("package_id", "package_version"), )
+        unique_together = (("package_id", "package_version"),)
         verbose_name = _(__name__ + ".table_name")
         verbose_name_plural = _(__name__ + ".table_name_plural")

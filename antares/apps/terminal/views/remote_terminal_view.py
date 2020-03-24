@@ -1,8 +1,7 @@
+from antares.apps.user.decorators import role_required
 import logging
 
 from django.views.generic import TemplateView
-
-from antares.apps.user.decorators import role_required
 
 
 logger = logging.getLogger(__name__)

@@ -1,3 +1,4 @@
+from antares.apps.core.middleware.request import get_request
 from datetime import datetime, timedelta
 import logging
 import uuid
@@ -7,8 +8,6 @@ from django.conf import settings
 from django.db import models
 from django.utils import timezone
 from django.utils.translation import ugettext as _
-
-from antares.apps.core.middleware.request import get_request
 
 
 logger = logging.getLogger(__name__)
@@ -85,7 +84,7 @@ class Holiday(models.Model):
         """
         Gets the next available working day.
         """
-        #so we only work with full days.
+        # so we only work with full days.
         if isinstance(day, datetime):
             day = day.date()
         day = day + timedelta(days=1)
@@ -97,8 +96,8 @@ class Holiday(models.Model):
             try:
                 holiday = Holiday.objects.get(holiday_date=day, active=True)
                 logger.info(
-                    _(__name__ +
-                      ".skiping_found_holiday_in_database %(holiday)d ") %
+                    _(__name__ + 
+                      ".skiping_found_holiday_in_database %(holiday)d ") % 
                     {'holiday': holiday})
                 Holiday.next_day(day, consider_saturdays, consider_sundays,
                                  consider_holidays)
@@ -131,8 +130,8 @@ class Holiday(models.Model):
             try:
                 holiday = Holiday.objects.get(holiday_date=day, active=True)
                 logger.info(
-                    _(__name__ +
-                      ".skiping_found_holiday_in_database %(holiday)d ") %
+                    _(__name__ + 
+                      ".skiping_found_holiday_in_database %(holiday)d ") % 
                     {'holiday': holiday})
                 Holiday.prev_day(day, consider_saturdays, consider_sundays,
                                  consider_holidays)

@@ -3,10 +3,10 @@ Created on Jun 23, 2016
 
 @author: leobelen
 '''
-from django.utils.translation import ugettext as _
-from django.db import models
-
 from antares.apps.core.mixins import EnumUtilsMixin
+
+from django.db import models
+from django.utils.translation import ugettext as _
 
 
 class AccountDocumentStatusType(EnumUtilsMixin, models.TextChoices):
@@ -18,22 +18,20 @@ class AccountDocumentStatusType(EnumUtilsMixin, models.TextChoices):
 
 
 class BalanceStatusType(EnumUtilsMixin, models.TextChoices):
-    DEBIT = 'Debit',  _(__name__ + '.BalanceStatusType.' + "DEBIT")
-    CREDIT = 'Credit',  _(__name__ + '.BalanceStatusType.' + "CREDIT")
-    BALANCED = 'Balanced',  _(__name__ + '.BalanceStatusType.' + "BALANCED")
-
-    
+    DEBIT = 'Debit', _(__name__ + '.BalanceStatusType.' + "DEBIT")
+    CREDIT = 'Credit', _(__name__ + '.BalanceStatusType.' + "CREDIT")
+    BALANCED = 'Balanced', _(__name__ + '.BalanceStatusType.' + "BALANCED")
     
 
 class TransactionEffectType(EnumUtilsMixin, models.TextChoices):
-    DEBIT = "Debit",  _(__name__ + '.TransactionEffectType.' + "DEBIT")
-    CREDIT = "Credit",  _(__name__ + '.TransactionEffectType.' + "CREDIT")
+    DEBIT = "Debit", _(__name__ + '.TransactionEffectType.' + "DEBIT")
+    CREDIT = "Credit", _(__name__ + '.TransactionEffectType.' + "CREDIT")
 
 
 class TransactionAffectedValueType(EnumUtilsMixin, models.TextChoices):
-    PRINCIPAL = "Principal",  _(__name__ + '.TransactionAffectedValueType.' +
+    PRINCIPAL = "Principal", _(__name__ + '.TransactionAffectedValueType.' + 
                       "PRINCIPAL")
-    INTEREST = "Interest",  _(__name__ + '.TransactionAffectedValueType.' +
+    INTEREST = "Interest", _(__name__ + '.TransactionAffectedValueType.' + 
                       "INTEREST")
-    PENALTIES = "Penalties",  _(__name__ + '.TransactionAffectedValueType.' +
+    PENALTIES = "Penalties", _(__name__ + '.TransactionAffectedValueType.' + 
                       "PENALTIES")

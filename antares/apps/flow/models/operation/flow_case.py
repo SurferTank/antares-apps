@@ -1,14 +1,13 @@
+from antares.apps.core.constants import FieldDataType
+from antares.apps.document.constants import DocumentStatusType
+from antares.apps.flow.constants import FlowCaseStatusType, FlowDataType, \
+    FlowBasicDataSubtype
 import logging
 import uuid
 
 from django.db import models
 from django.utils import timezone
 from django.utils.translation import ugettext as _
-
-from antares.apps.core.constants import FieldDataType
-from antares.apps.document.constants import DocumentStatusType
-from antares.apps.flow.constants import FlowCaseStatusType, FlowDataType, \
-    FlowBasicDataSubtype
 
 
 logger = logging.getLogger(__name__)
@@ -112,7 +111,7 @@ class FlowCase(models.Model):
                         properties[prop.property_id] = str(prop.date_value)
                 else:
                     raise NotImplementedError(
-                        _(__name__ +
+                        _(__name__ + 
                           ".exceptions.field_type_not_implemented {field_sub_data_type}"
                           ).format(field_sub_data_type=prop.sub_data_type))
         return properties

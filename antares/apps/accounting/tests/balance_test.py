@@ -3,18 +3,20 @@ Created on Oct 2, 2017
 
 @author: leobelen
 '''
+from antares.apps.document.constants import DocumentStatusType
+from antares.apps.document.models import FormDefinition
+from antares.apps.document.tests import DocumentTestHelper
+from antares.apps.document.types import Document
 import logging
+
 from django.test import TransactionTestCase
-from ..models import AccountType, TransactionType, AccountRule
+
 from ..constants import BalanceStatusType, TransactionAffectedValueType
 from ..manager import AccountManager
-from antares.apps.document.tests import DocumentTestHelper
-from antares.apps.document.models import FormDefinition
-from antares.apps.document.types import Document
-from antares.apps.document.constants import DocumentStatusType
+from ..models import AccountType, TransactionType, AccountRule
+
 
 logger = logging.getLogger(__name__)
-
 
 
 class BalanceTest(TransactionTestCase):
@@ -52,11 +54,10 @@ class BalanceTest(TransactionTestCase):
         accountRule.save()
 
         logger.info("Document Creation")
-        accdoc= Document(form_id="AccountForm-1")
+        accdoc = Document(form_id="AccountForm-1")
         accdoc.set_field_value("aPeriod", 200101)
         accdoc.set_field_value("aAmount", 50)        
         accdoc.save(DocumentStatusType.DRAFTED)
         accountManager = AccountManager()
         accountManager.post_document(accdoc)
-
             

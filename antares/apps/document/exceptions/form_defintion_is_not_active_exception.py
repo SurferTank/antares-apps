@@ -6,6 +6,7 @@ Created on Jun 15, 2016
 
 
 class FormDefintionIsNotActiveException(Exception):
+
     def __init__(self, value):
         self.value = value
 

@@ -1,3 +1,4 @@
+from antares.apps.core.middleware.request import get_request
 import logging
 import uuid
 
@@ -6,9 +7,6 @@ from django.db import models
 from django.db import transaction
 from django.utils import timezone
 from django.utils.translation import ugettext as _
-
-
-from antares.apps.core.middleware.request import get_request
 
 from ..constants import ThirdPartyRecordStatusType, ThirdPartyChannelType
 
@@ -27,7 +25,7 @@ class ThirdPartyRecord(models.Model):
         ThirdPartyRecordStatusType.choices,
         max_length=30,
         default=ThirdPartyRecordStatusType.OPEN)
-    channel =  models.CharField(choices=
+    channel = models.CharField(choices=
         ThirdPartyChannelType.choices,
         max_length=30,
         default=ThirdPartyChannelType.WEB)

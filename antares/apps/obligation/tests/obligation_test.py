@@ -3,13 +3,15 @@ Created on Oct 2, 2017
 
 @author: leobelen
 '''
-import logging
-from django.test import TransactionTestCase
 from antares.apps.document.tests import DocumentTestHelper
+import logging
+
+from django.test import TransactionTestCase
+
 from ..models import ObligationRule
 
-logger = logging.getLogger(__name__)
 
+logger = logging.getLogger(__name__)
 
 
 class BalanceTest(TransactionTestCase):
@@ -23,5 +25,4 @@ class BalanceTest(TransactionTestCase):
         obligationRule = ObligationRule()
 
         pass
-
             

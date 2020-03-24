@@ -1,11 +1,9 @@
+from antares.apps.flow.constants import DefinitionSiteType
 import logging
 import uuid
 
 from django.db import models
 from django.utils.translation import ugettext as _
-
-
-from antares.apps.flow.constants import DefinitionSiteType
 
 
 logger = logging.getLogger(__name__)
@@ -33,6 +31,6 @@ class ApplicationDefinition(models.Model):
     class Meta:
         app_label = 'flow'
         db_table = 'flow_application_definition'
-        unique_together = (('flow_definition', 'application_id'), )
+        unique_together = (('flow_definition', 'application_id'),)
         verbose_name = _(__name__ + ".table_name")
         verbose_name_plural = _(__name__ + ".table_name_plural")

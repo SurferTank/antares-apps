@@ -17,19 +17,21 @@ from .models import SocialNetworkItem
 from .models import TelephoneItem
 
 
-
 admin.site.register(ClientIdentificationType)
 admin.site.register(AttributeDefinition)
 admin.site.register(ClientType)
 admin.site.register(Client)
 
+
 @admin.register(ClientUserRelation)
 class ClientUserRelationAdmin(admin.ModelAdmin):
-    list_display = ('parent_user', 'child_client' , 'relation_type', 'start_date', 'end_date' )
+    list_display = ('parent_user', 'child_client' , 'relation_type', 'start_date', 'end_date')
+
 
 @admin.register(ClientUserRelationPermission)
 class ClientUserRelationPermissionAdmin(admin.ModelAdmin):
-    list_display = ('client_relation', 'relation_type', 'start_date', 'end_date' )
+    list_display = ('client_relation', 'relation_type', 'start_date', 'end_date')
+
     
 admin.site.register(ClientBranch)
 admin.site.register(TelephoneItem)

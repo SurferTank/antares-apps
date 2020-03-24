@@ -1,4 +1,6 @@
 # -*- coding: utf-8 -*-
+from antares.apps.client.constants import ClientRelationType
+from antares.apps.core.middleware.request import get_request
 import logging
 from uuid import UUID
 import uuid
@@ -11,9 +13,6 @@ from django.db.models import Q
 from django.urls import reverse
 from django.utils import timezone
 from django.utils.translation import ugettext_lazy as _
-
-from antares.apps.client.constants import ClientRelationType
-from antares.apps.core.middleware.request import get_request
 
 from ..exceptions import UserException
 from .role_application import RoleApplication
@@ -42,7 +41,7 @@ class User(AbstractUser):
         unit_list = []
 
         for user_org_unit in self.user_org_unit_set.select_related().filter(
-                Q(start_date__gte=timezone.now()) &
+                Q(start_date__gte=timezone.now()) & 
             (Q(end_date__lte=timezone.now()) | Q(end_date=None))):
             unit_list.append(user_org_unit.org_unit)
         return unit_list
@@ -54,7 +53,7 @@ class User(AbstractUser):
         role_list = []
 
         for user_role in self.user_role_set.select_related().filter(
-                Q(start_date__gte=timezone.now()) &
+                Q(start_date__gte=timezone.now()) & 
             (Q(end_date__lte=timezone.now()) | Q(end_date=None))):
             role_list.append(user_role.role)
         return role_list
@@ -66,14 +65,14 @@ class User(AbstractUser):
                     get_request().user.client_user_relation_set \
                         .select_related().filter(Q(child_client=client) & \
                             Q(start_date__lte=timezone.now()) & (
-                            Q(end_date__gte=timezone.now()) |
+                            Q(end_date__gte=timezone.now()) | 
                             Q(end_date=None))) \
                         .exclude(relation_type=str(ClientRelationType.GENERIC_WORKER))\
                         .order_by('update_date')[:1].get()
                     get_request().session['on_behalf_client'] = str(client.id)
                     return client
                 except:
-                    raise PermissionDenied(_(__name__ +\
+                    raise PermissionDenied(_(__name__ + \
                                               ".user_has_no_relation_with_client {client_id}").format(
                                                   client_id=client.id))
             elif client.id == self.client.id:
@@ -93,19 +92,19 @@ class User(AbstractUser):
         except Exception as e:
             raise UserException(
                 _(__name__ + ".the_user_has_no_client_associated"))
-        #try:
+        # try:
         #    settings.TEST_MODE
-        #except:
+        # except:
         #    settings.TEST_MODE = False
 
-        #if settings.TEST_MODE == False:
+        # if settings.TEST_MODE == False:
         try:
             if (self.client is not None):
                 return self.client
         except:
             raise UserException(
                 _(__name__ + ".the_user_has_no_client_associated"))
-        #else:
+        # else:
         #    return None
 
     @classmethod
@@ -192,7 +191,7 @@ class User(AbstractUser):
         """
         roles = set()
         for user_role in self.role_set.select_related().filter(
-                Q(start_date__lte=timezone.now()) &
+                Q(start_date__lte=timezone.now()) & 
             (Q(end_date__gte=timezone.now()) | Q(end_date=None))):
             roles.add(user_role.role)
             if include_children == True:
@@ -223,13 +222,13 @@ class User(AbstractUser):
         ''' Checks if an user is included on a role '''
         user_roles = self.get_role_string_list()
         if isinstance(roles, str):
-            roles = (roles, )
+            roles = (roles,)
 
         for role in roles:
             if role in user_roles:
                 return True
             else:
-                #if consider_super_user == True and self.is_superuser==True:
+                # if consider_super_user == True and self.is_superuser==True:
                 #    return True
                 return False
 
@@ -239,7 +238,7 @@ class User(AbstractUser):
         """
         org_units = []
         for org_unit in self.org_unit_set.select_related().filter(
-                Q(start_date__lte=timezone.now()) &
+                Q(start_date__lte=timezone.now()) & 
             (Q(end_date__gte=timezone.now()) | Q(end_date=None))):
             org_units.append(org_unit.org_unit)
         return org_unit
@@ -249,7 +248,7 @@ class User(AbstractUser):
         
         """
         for user_role in self.role_set.select_related().filter(
-                Q(start_date__lte=timezone.now()) &
+                Q(start_date__lte=timezone.now()) & 
             (Q(end_date__gte=timezone.now())
              | Q(end_date=None))).filter(role__code=role_code):
             return True
@@ -259,7 +258,7 @@ class User(AbstractUser):
         apps = set()
         for role in self.get_role_list():
             for role_app in role.application_set.select_related().filter(
-                    Q(start_date__lte=timezone.now()) &
+                    Q(start_date__lte=timezone.now()) & 
                 (Q(end_date__gte=timezone.now()) | Q(end_date=None))):
                 if role_app.application not in apps:
                     apps.add(role_app.application)
@@ -272,7 +271,7 @@ class User(AbstractUser):
         """
         users = []
         roles = UserRole.objects.filter(role=role).filter(
-            Q(start_date__lte=timezone.now()) &
+            Q(start_date__lte=timezone.now()) & 
             (Q(end_date__gte=timezone.now()) | Q(end_date=None)))
         if (len(roles) > 0):
             for user in User.objects.filter(role_set__in=roles):
@@ -287,7 +286,7 @@ class User(AbstractUser):
         """
         users = []
         org_units = UserOrgUnit.objects.filter(org_unit=org_unit).filter(
-            Q(start_date__lte=timezone.now()) &
+            Q(start_date__lte=timezone.now()) & 
             (Q(end_date__gte=timezone.now()) | Q(end_date=None)))
         if (len(org_units) > 0):
             for user in User.objects.filter(org_unit_set__in=org_units):

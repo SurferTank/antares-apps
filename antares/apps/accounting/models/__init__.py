@@ -1,4 +1,5 @@
 from .account_balance import AccountBalance
+from .account_charge import AccountCharge
 from .account_document import AccountDocument
 from .account_rule import AccountRule
 from .account_transaction import AccountTransaction
@@ -6,10 +7,10 @@ from .account_type import AccountType
 from .gl_account_type import GLAccountType
 from .gl_balance import GLBalance
 from .gl_transaction import GLTransaction
-from .transaction_type import TransactionType
 from .interest_definition import InterestDefinition
 from .penalty_definition import PenaltyDefinition
-from .account_charge import AccountCharge
+from .transaction_type import TransactionType
+
 
 __all__ = [
     AccountBalance,
@@ -22,6 +23,6 @@ __all__ = [
     GLBalance,
     GLTransaction,
     InterestDefinition,
-    PenaltyDefinition, 
+    PenaltyDefinition,
     AccountCharge
 ]

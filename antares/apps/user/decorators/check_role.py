@@ -19,6 +19,7 @@ def antares_user_passes_test(test_func,
     """
 
     def decorator(view_func):
+
         @wraps(view_func)
         def _wrapped_view(request, *args, **kwargs):
             if test_func(request.request.user):
@@ -32,7 +33,7 @@ def antares_user_passes_test(test_func,
             if ((not login_scheme or login_scheme == current_scheme)
                     and (not login_netloc or login_netloc == current_netloc)):
                 path = request.request.get_full_path()
-            #return redirect(settings.LOGIN_URL)
+            # return redirect(settings.LOGIN_URL)
             return redirect_to_login(path, resolved_login_url, None)
 
         return _wrapped_view
@@ -50,7 +51,7 @@ def role_required(role, login_url=None, raise_exception=False):
 
     def check_role(user):
         if isinstance(role, str):
-            roles = (role, )
+            roles = (role,)
         else:
             roles = role
         # First check if the user has the permission (even anon users)

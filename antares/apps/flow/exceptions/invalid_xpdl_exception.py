@@ -6,6 +6,7 @@ Created on Jul 5, 2016
 
 
 class InvalidXPDLException(Exception):
+
     def __init__(self, value):
         self.value = value
 

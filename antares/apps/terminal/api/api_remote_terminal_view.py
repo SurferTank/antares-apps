@@ -1,11 +1,3 @@
-import logging
-import re
-import traceback
-
-from braces.views import AjaxResponseMixin, JSONResponseMixin
-from django.utils.translation import ugettext as _
-from django.views.generic import View
-
 from antares.apps.accounting.console import AccountConsole
 from antares.apps.client.console import ClientUserRelationConsole
 from antares.apps.core.console import ConceptTypeConsole
@@ -18,8 +10,16 @@ from antares.apps.notifications.console import NotificationConsole
 from antares.apps.obligation.console import ObligationConsole
 from antares.apps.subscription.console import SubscriptionConsole
 from antares.apps.user.console import UserConsole
+import logging
+import re
+import traceback
+
+from braces.views import AjaxResponseMixin, JSONResponseMixin
+from django.utils.translation import ugettext as _
+from django.views.generic import View
 
 from ..models import TerminalLog
+
 
 logger = logging.getLogger(__name__)
 

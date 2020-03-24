@@ -1,11 +1,9 @@
+from antares.apps.flow.constants import TransitionType
 import logging
 import uuid
 
 from django.db import models
 from django.utils.translation import ugettext as _
-
-
-from antares.apps.flow.constants import TransitionType
 
 
 logger = logging.getLogger(__name__)

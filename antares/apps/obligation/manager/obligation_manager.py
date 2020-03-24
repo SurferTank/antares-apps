@@ -3,23 +3,22 @@ Created on Jul 22, 2016
 
 @author: leobelen
 '''
-from builtins import classmethod
-import logging
-from dateutil.relativedelta import relativedelta
-from django.utils import timezone
-from django.utils.translation import ugettext as _
-import js2py
-
 from antares.apps.client.constants import ClientStatusType
 from antares.apps.client.models.client import Client
 from antares.apps.core.constants import FieldDataType, TimeUnitType
 from antares.apps.core.manager.period_manager import PeriodManager
 from antares.apps.core.models import SystemParameter
+from builtins import classmethod
+import logging
+
+from dateutil.relativedelta import relativedelta
+from django.utils import timezone
+from django.utils.translation import ugettext as _
+import js2py
 
 from ..constants import ObligationStatusType, ObligationType
 from ..models import ClientObligation
 from ..models import ObligationRule, ObligationVector
-
 
 
 logger = logging.getLogger(__name__)
@@ -183,9 +182,6 @@ class ObligationManager(object):
                 logger.info(
                     _("antares.apps.obligation.manager.obligation_manager.obligation_status_found_nothing_to_do"
                       ))
-
-   
-   
 
     @classmethod
     def process_obligations(cls, client, concept_type, form_def, when,

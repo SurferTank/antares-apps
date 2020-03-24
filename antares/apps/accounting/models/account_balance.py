@@ -3,6 +3,11 @@ Copyright 2013-2017 SurferTank Inc.
 
 Original version by Leonardo Belen<leobelen@gmail.com>
 """
+from antares.apps.client.models.client import Client
+from antares.apps.core.manager import COPAD
+from antares.apps.core.models.concept_type import ConceptType
+from antares.apps.document.models.document_header import DocumentHeader
+from builtins import classmethod
 import logging
 import uuid
 
@@ -12,14 +17,8 @@ from django.utils.translation import ugettext as _
 from djmoney.models.fields import MoneyField
 from djmoney.money import Money
 
-from antares.apps.client.models.client import Client
-from antares.apps.core.models.concept_type import ConceptType
-from antares.apps.document.models.document_header import DocumentHeader
-from antares.apps.core.manager import COPAD
-
 from ..constants import BalanceStatusType
 from ..models.account_type import AccountType
-from builtins import classmethod
 
 
 logger = logging.getLogger(__name__)
@@ -80,7 +79,7 @@ class AccountBalance(models.Model):
     account_type = models.ForeignKey(
         "AccountType", on_delete=models.PROTECT, db_column='account_type')
 
-    balance_status = models.CharField(max_length=10, 
+    balance_status = models.CharField(max_length=10,
                                       choices=BalanceStatusType.choices,
                                       default=BalanceStatusType.BALANCED)
 
@@ -159,7 +158,6 @@ class AccountBalance(models.Model):
             balance_list = []
         return balance_list
 
-
     @classmethod
     def find_by_CCPAD(cls, client: Client, concept_type: ConceptType,
                       period: int, account_type: AccountType,
@@ -196,8 +194,6 @@ class AccountBalance(models.Model):
         except AccountBalance.DoesNotExist:
             return None
 
-    
-
     @classmethod
     def get_total_balance_by_client(cls, client: Client) -> float:
         """ Gets the total balance by client
@@ -221,7 +217,7 @@ class AccountBalance(models.Model):
         return result['total_balance']
 
     def get_COPAD(self):
-        return COPAD(self.client, self.concept_type, 
+        return COPAD(self.client, self.concept_type,
                      self.period, self.account_type, self.base_document)
     
     @classmethod
@@ -236,17 +232,16 @@ class AccountBalance(models.Model):
         except AccountBalance.DoesNotExist:
             return None
     
-    
     class Meta:
         app_label = 'accounting'
         db_table = 'acc_account_balance'
-        #unique_together = (('client', 'concept_type', 'period', 'account_type',
+        # unique_together = (('client', 'concept_type', 'period', 'account_type',
         #                    'base_document', ), )
         unique_together = ((
             'client',
             'concept_type',
             'period',
             'account_type',
-        ), )
+        ),)
         verbose_name = _(__name__ + ".table_name")
         verbose_name_plural = _(__name__ + ".table_name_plural")

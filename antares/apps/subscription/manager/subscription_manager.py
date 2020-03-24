@@ -3,14 +3,13 @@ Created on Jul 9, 2016
 
 @author: leobelen
 '''
-import logging
-
-import js2py
-
 from antares.apps.core.constants import ScriptEngineType
 from antares.apps.message.constants import MessageType
 from antares.apps.message.models import Message
 from antares.apps.subscription.exceptions.subscription_exception import SubscriptionException
+import logging
+
+import js2py
 
 from ..constants import EventType
 from ..models import SubscriptionEvent
@@ -56,9 +55,9 @@ class SubscriptionManager(object):
                           subs_event, document) == True)
                      or not subs_event.condition_text)):
                     for action in action_set:
-                        if (action.action_definition.id.lower() ==
+                        if (action.action_definition.id.lower() == 
                                 'create_case'
-                                or action.action_definition.lower() ==
+                                or action.action_definition.lower() == 
                                 'createcase'):
                             message = Message.find_or_create_one(
                                 document=document)

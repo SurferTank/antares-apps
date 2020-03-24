@@ -52,6 +52,6 @@ class DocumentHrn(models.Model):
     class Meta:
         app_label = 'document'
         db_table = 'doc_hrn'
-        unique_together = (('document', 'status'), )
+        unique_together = (('document', 'status'),)
         verbose_name = _(__name__ + ".table_name")
         verbose_name_plural = _(__name__ + ".table_name_plural")

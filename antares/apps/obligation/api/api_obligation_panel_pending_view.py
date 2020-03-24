@@ -1,15 +1,14 @@
+from antares.apps.client.models import Client
+from antares.apps.core.constants import FieldDataType
+from antares.apps.core.middleware.request import get_request
+from antares.apps.core.models import UserParameter
+from antares.apps.flow.models import FlowActivity
 import logging
 import uuid
 
 from django.urls import reverse
 from django.utils.translation import ugettext as _
 from django_datatables_view.base_datatable_view import BaseDatatableView
-
-from antares.apps.client.models import Client
-from antares.apps.core.constants import FieldDataType
-from antares.apps.core.middleware.request import get_request
-from antares.apps.core.models import UserParameter
-from antares.apps.flow.models import FlowActivity
 
 from ..constants import ObligationType, ObligationStatusType
 from ..models import ObligationVector

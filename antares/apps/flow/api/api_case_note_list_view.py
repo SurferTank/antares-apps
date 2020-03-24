@@ -1,11 +1,10 @@
+from antares.apps.core.constants import FieldDataType
+from antares.apps.core.middleware.request import get_request
+from antares.apps.core.models import UserParameter
 import logging
 
 from django.utils.translation import ugettext as _
 from django_datatables_view.base_datatable_view import BaseDatatableView
-
-from antares.apps.core.constants import FieldDataType
-from antares.apps.core.middleware.request import get_request
-from antares.apps.core.models import UserParameter
 
 from ..exceptions import FlowException
 from ..models import FlowNote, FlowActivity
@@ -46,8 +45,8 @@ class ApiCaseNoteListView(BaseDatatableView):
             else:
                 return row.title[:30] + "[...]"
         elif column == 'actions':
-            line = '<a href="#" onClick="editNote(\''+ str(row.id) +\
-                '\', \'' + row.title +  '\', \'' + row.content +\
+            line = '<a href="#" onClick="editNote(\'' + str(row.id) + \
+                '\', \'' + row.title + '\', \'' + row.content + \
                 '\');"><i class="fa fa-pencil" aria-hidden="true"></i></a>'
             return line
         else:
@@ -64,7 +63,7 @@ class ApiCaseNoteListView(BaseDatatableView):
                     _(__name__ + ".exceptions.no_activity_was_found"))
             if (activity.performer != get_request().user):
                 raise FlowException(
-                    _(__name__ +
+                    _(__name__ + 
                       ".exceptions.this_activity_was_assigned_to_a_different_user"
                       ))
         else:

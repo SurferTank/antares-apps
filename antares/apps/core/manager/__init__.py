@@ -1,5 +1,5 @@
-from .period_manager import PeriodManager
 from .copad_manager import COPAD
+from .period_manager import PeriodManager
 
 
 __all__ = [

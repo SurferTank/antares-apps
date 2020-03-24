@@ -1,12 +1,11 @@
 #!/usr/bin/env python
 
+import antares
 from distutils.sysconfig import get_python_lib
 import os
 import sys
 
 from setuptools import setup, find_packages
-
-import antares
 
 
 README = open(os.path.join(os.path.dirname(__file__), 'README.rst')).read()
@@ -45,7 +44,7 @@ setup(
     description=('Antares Apps Module'),
     long_description=README,
     zip_safe=True,
-    download_url='https://bitbucket.org/leobelen/antares-apps/get/' + version +
+    download_url='https://bitbucket.org/leobelen/antares-apps/get/' + version + 
     '.tar.gz',
     keywords=['management', 'infrastructure'],
     install_requires=[

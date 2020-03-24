@@ -1,10 +1,9 @@
+from antares.apps.core.constants import FieldDataType
 import logging
 import uuid
 
 from django.db import models
 from django.utils.translation import ugettext as _
-
-from antares.apps.core.constants import FieldDataType
 
 
 logger = logging.getLogger(__name__)
@@ -99,6 +98,6 @@ class IndexedField(models.Model):
     class Meta:
         app_label = 'document'
         db_table = 'doc_indexed_field'
-        unique_together = (('definition', 'document'), )
+        unique_together = (('definition', 'document'),)
         verbose_name = _(__name__ + ".table_name")
         verbose_name_plural = _(__name__ + ".table_name_plural")

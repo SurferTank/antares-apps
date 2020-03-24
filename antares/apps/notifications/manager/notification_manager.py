@@ -1,8 +1,3 @@
-import logging
-
-from django.utils import timezone
-from django.utils.translation import ugettext as _
-
 from antares.apps.core.constants import FieldDataType
 from antares.apps.core.constants import SystemModuleType
 from antares.apps.core.models.system_parameter import SystemParameter
@@ -10,6 +5,10 @@ from antares.apps.document.types import Document
 from antares.apps.message.constants import MessageStatusType
 from antares.apps.message.models import MessageStatus
 from antares.apps.user.models import User
+import logging
+
+from django.utils import timezone
+from django.utils.translation import ugettext as _
 
 from ..models import NotificationRecord
 from ..models import NotificationRule
@@ -19,6 +18,7 @@ logger = logging.getLogger(__name__)
 
 
 class NotificationManager(object):
+
     def __init__(self):
         pass
 
@@ -76,7 +76,7 @@ class NotificationManager(object):
                 raise ValueError(
                     _(__name__ + ".exceptions.the_document_has_no_author"))
 
-            #we have to check that everything is there to post a new record
+            # we have to check that everything is there to post a new record
             notification_record = NotificationRecord()
             notification_record.author = document.get_author()
             notification_record.content = notification_contents
@@ -88,5 +88,5 @@ class NotificationManager(object):
         status.set_status(MessageStatusType.PROCESSED)
 
     @classmethod
-    def get_unread_notifications(max_days: int = 7):
+    def get_unread_notifications(max_days: int=7):
         pass

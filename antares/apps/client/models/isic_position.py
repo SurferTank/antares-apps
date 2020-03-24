@@ -1,3 +1,5 @@
+from antares.apps.core.constants import LanguageType
+from antares.apps.core.middleware.request import get_request
 import logging
 import uuid
 
@@ -7,9 +9,6 @@ from django.db import models
 from django.utils import timezone
 from django.utils.translation import ugettext as _
 from mptt.models import MPTTModel, TreeForeignKey
-
-from antares.apps.core.constants import LanguageType
-from antares.apps.core.middleware.request import get_request
 
 
 logger = logging.getLogger(__name__)
@@ -105,7 +104,7 @@ class IsicPosition(MPTTModel):
         db_table = 'cli_isic_position'
         verbose_name = _(__name__ + ".table_name")
         verbose_name_plural = _(__name__ + ".table_name_plural")
-        unique_together = (('isic_code', 'language'), )
+        unique_together = (('isic_code', 'language'),)
 
     class MPTTMeta:
         order_insertion_by = ['isic_code']

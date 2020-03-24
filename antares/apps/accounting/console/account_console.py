@@ -4,12 +4,11 @@ Copyright 2013-2017 SurferTank Inc.
 Original version by Leonardo Belen<leobelen@gmail.com>
 """
 
+from antares.apps.document.types import Document
 import logging
 from typing import List
 
 from django.utils.translation import ugettext as _
-
-from antares.apps.document.types import Document
 
 from ..manager import AccountManager
 
@@ -22,7 +21,7 @@ class AccountConsole(object):
     """
 
     @classmethod
-    def process_commands(cls, params: List[str], html: bool = False) -> str:
+    def process_commands(cls, params: List[str], html: bool=False) -> str:
         """ Processes the commands handled off by the terminal module
             
             :param params: the list of parameters to use
@@ -56,6 +55,6 @@ class AccountConsole(object):
             return _(__name__ + ".missing_parameter {parameter}").format(
                 parameter='withdocumentid')
         AccountManager.post_document(document)
-        return _(__name__ +
+        return _(__name__ + 
                  ".document_successfully_posted_to_cca {document_id}").format(
                      document_id=document.document_id)

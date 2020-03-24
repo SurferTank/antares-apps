@@ -4,6 +4,8 @@ Created on 16/8/2016
 @author: leobelen
 '''
 
+from antares.apps.core.middleware.request import get_request
+from antares.apps.user.models import User
 import json
 import logging
 
@@ -12,9 +14,6 @@ import dateutil.parser
 from django.utils import timezone
 from django.utils.translation import ugettext as _
 from django.views.generic import View
-
-from antares.apps.core.middleware.request import get_request
-from antares.apps.user.models import User
 
 from ..constants import DocumentStatusType
 from ..models import FormDefinition
@@ -40,7 +39,7 @@ class ApiDocumentUploadView(AjaxResponseMixin, JSONResponseMixin, View):
             json_document["general"]['type'])
         if form_definition is None:
             response_dict["status"] = "Error"
-            response_dict["message"] = _(__name__ +
+            response_dict["message"] = _(__name__ + 
                                          ".errors.no_form_definition_found")
 
         author = User.find_one_by_username(json_document["general"]["author"])

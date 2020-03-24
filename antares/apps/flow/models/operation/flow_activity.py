@@ -1,3 +1,6 @@
+from antares.apps.core.constants import FieldDataType
+from antares.apps.core.utils import DateUtils
+from antares.apps.flow.constants import FlowActivityStatusType, FlowDataType
 import logging
 import uuid
 
@@ -9,11 +12,6 @@ from django.db.models import Q
 from django.urls import resolve
 from django.utils import timezone
 from django.utils.translation import ugettext as _
-
-
-from antares.apps.core.constants import FieldDataType
-from antares.apps.core.utils import DateUtils
-from antares.apps.flow.constants import FlowActivityStatusType, FlowDataType
 
 
 logger = logging.getLogger(__name__)
@@ -106,7 +104,7 @@ class FlowActivity(models.Model):
         query = cls.objects.filter(activity_definition=activity_def).\
                 filter(creation_date__is_null=False).\
                 filter(start_date__is_null=False).\
-                filter(status__not_in=[FlowActivityStatusType.CREATED, 
+                filter(status__not_in=[FlowActivityStatusType.CREATED,
                                        FlowActivityStatusType.CANCELLED])
 
         if perfomer is not None:
@@ -123,7 +121,7 @@ class FlowActivity(models.Model):
         query = cls.objects.filter(activity_definition=activity_def).\
             filter(completion__is_null=False).\
             filter(start_date__is_null=False).\
-            filter(status__not_in=[FlowActivityStatusType.CREATED, 
+            filter(status__not_in=[FlowActivityStatusType.CREATED,
                                    FlowActivityStatusType.CANCELLED,
              FlowActivityStatusType.ACTIVE])
 
@@ -141,7 +139,7 @@ class FlowActivity(models.Model):
         query = cls.objects.filter(activity_definition=activity_def).\
             filter(completion__is_null=False).\
             filter(creation_date__is_null=False).\
-            filter(status__not_in=[FlowActivityStatusType.CREATED, 
+            filter(status__not_in=[FlowActivityStatusType.CREATED,
                                    FlowActivityStatusType.CANCELLED])
 
         if perfomer is not None:
@@ -257,9 +255,9 @@ class FlowActivity(models.Model):
                         if flow_property.property_id == param.content:
                             if flow_property.property_definition.data_type == FlowDataType.BASIC:
                                 if flow_property.property_definition.sub_data_type == FieldDataType.BOOLEAN:
-                                    form_string = "<form><input type=\"checkbox\" name=\"{parameter_id}_{definition_id}\" id=\"{parameter_id}_{definition_id}\" data-toggle=\"toggle\" " +\
-                                    "{checked_value}/><div style=\"text-align: right;\"><a class=\"btn btn-default\" onclick=\"leftToolbarUpdateProperty(event, '{flow_case_id}'," +\
-                                            " '{parameter_id}', $('#{parameter_id}_{definition_id}').prop('checked'));\" class=\"button round small\">" +\
+                                    form_string = "<form><input type=\"checkbox\" name=\"{parameter_id}_{definition_id}\" id=\"{parameter_id}_{definition_id}\" data-toggle=\"toggle\" " + \
+                                    "{checked_value}/><div style=\"text-align: right;\"><a class=\"btn btn-default\" onclick=\"leftToolbarUpdateProperty(event, '{flow_case_id}'," + \
+                                            " '{parameter_id}', $('#{parameter_id}_{definition_id}').prop('checked'));\" class=\"button round small\">" + \
                                             "{button_label}</a></div></form>"
                                     if flow_property.boolean_value == True:
                                         command += form_string.format(
@@ -267,7 +265,7 @@ class FlowActivity(models.Model):
                                             definition_id=app_definition.id,
                                             flow_case_id=self.flow_case.id,
                                             checked_value='checked',
-                                            button_label=_(__name__ +
+                                            button_label=_(__name__ + 
                                                            ".buttons.save"))
                                     else:
                                         command += form_string.format(
@@ -275,7 +273,7 @@ class FlowActivity(models.Model):
                                             definition_id=app_definition.id,
                                             flow_case_id=self.flow_case.id,
                                             checked_value='',
-                                            button_label=_(__name__ +
+                                            button_label=_(__name__ + 
                                                            ".buttons.save"))
                                 else:
                                     if flow_property.property_definition.catalog:
@@ -314,21 +312,21 @@ class FlowActivity(models.Model):
                                             flow_case_id=self.flow_case.id,
                                             url=url,
                                             default_option_name=_(
-                                                __name__ +
+                                                __name__ + 
                                                 ".selector.default_option_text"
                                             ),
-                                            button_label=_(__name__ +
+                                            button_label=_(__name__ + 
                                                            ".buttons.save"))
                                     else:
-                                        form_string =  "<form><input type=\"text\" name=\"{parameter_id}_{definition_id}\" id=\"{parameter_id}_{definition_id}\"/>" +\
-                                            "<div style=\"text-align: right;\"><a class=\"btn btn-default\" onclick=\"leftToolbarUpdateProperty(event, '{flow_case_id}',"+\
-                                            " '{parameter_id}', $('#{parameter_id}_{definition_id}').val());\" class=\"button round small\">" +\
+                                        form_string = "<form><input type=\"text\" name=\"{parameter_id}_{definition_id}\" id=\"{parameter_id}_{definition_id}\"/>" + \
+                                            "<div style=\"text-align: right;\"><a class=\"btn btn-default\" onclick=\"leftToolbarUpdateProperty(event, '{flow_case_id}'," + \
+                                            " '{parameter_id}', $('#{parameter_id}_{definition_id}').val());\" class=\"button round small\">" + \
                                             "{button_label}</a></div></form>"
                                         command += form_string.format(
                                             parameter_id=param.content,
                                             definition_id=app_definition.id,
                                             flow_case_id=self.flow_case.id,
-                                            button_label=_(__name__ +
+                                            button_label=_(__name__ + 
                                                            ".buttons.save"))
 
             tools.append(command)

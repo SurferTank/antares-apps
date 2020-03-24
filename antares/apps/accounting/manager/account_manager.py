@@ -4,20 +4,19 @@ Copyright 2013-2017 SurferTank Inc.
 Original version by Leonardo Belen<leobelen@gmail.com>
 """
 
-import logging
-from typing import List, Dict
-
-from django.db import transaction
-from django.utils import timezone
-from django.utils.translation import ugettext as _
-from djmoney.money import Money
-from django.db.models import Sum
-
 from antares.apps.client.models import Client
 from antares.apps.core.constants import FieldDataType
 from antares.apps.core.models import ConceptType
 from antares.apps.core.models import SystemParameter
 from antares.apps.document.types import Document
+import logging
+from typing import List, Dict
+
+from django.db import transaction
+from django.db.models import Sum
+from django.utils import timezone
+from django.utils.translation import ugettext as _
+from djmoney.money import Money
 
 from ..constants import AccountDocumentStatusType
 from ..constants import TransactionEffectType, TransactionAffectedValueType, BalanceStatusType
@@ -64,13 +63,13 @@ class AccountManager(object):
             logger.error(_(__name__ + '.document_not_ready_for_posting'))
             return None
 
-        #try:
+        # try:
         cancelled_document = AccountManager._get_cancelled_document(
             document)
     
         if (cancelled_document is not None):
             logger.error(
-                _(__name__ + '.cancelling_document %(document_id)s') %
+                _(__name__ + '.cancelling_document %(document_id)s') % 
                 {'document_id': document.document_id})
             AccountManager._cancel_document(cancelled_document, document)
 
@@ -88,7 +87,7 @@ class AccountManager(object):
         
         account_document.status = AccountDocumentStatusType.PROCESSED
 
-        #except Exception as e:
+        # except Exception as e:
         #    logger.exception(e)
         #    account_document.status = AccountDocumentStatusType.WITH_ERRORS
 
@@ -201,7 +200,7 @@ class AccountManager(object):
         """
 
         logger.info(
-            _(__name__ +
+            _(__name__ + 
               ".manager.account_manager.starting_to_balance_the_account"))
         principal = Money(
             0, (document.get_default_currency() or cls.default_currency))
@@ -241,10 +240,9 @@ class AccountManager(object):
                                                    penalties))
         transaction.balance.save()
         
-        #lets create the interest and penalties. 
+        # lets create the interest and penalties. 
         chargesManager = ChargesManager(transaction.balance)
         chargesManager.calculateCharges()
-        
 
     @classmethod
     def _compute_balance_status(cls, principal: float, interest: float,
@@ -383,7 +381,7 @@ class AccountManager(object):
             document: Document,
             rule: AccountRule,
             transaction: AccountTransaction,
-            is_cancelled_document: bool = False) -> AccountTransaction:
+            is_cancelled_document: bool=False) -> AccountTransaction:
         """ Processes the transaction amount based on parameters
         
         :param account_document: the account document
@@ -460,7 +458,6 @@ class AccountManager(object):
          TODO: Implement me.
         """
         pass
-    
     
     @classmethod
     def find_balances_qs_by_COPAD(cls, queryset, copad):

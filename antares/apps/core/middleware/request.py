@@ -32,5 +32,6 @@ def get_request():
 
 
 class RequestMiddleware(MiddlewareMixin):
+
     def process_request(self, request):
         _requests[current_thread()] = request

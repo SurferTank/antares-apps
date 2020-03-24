@@ -3,6 +3,7 @@ Created on Jul 25, 2016
 
 @author: leobelen
 '''
+from antares.apps.core.middleware.request import get_request
 import logging
 import urllib
 import uuid
@@ -15,8 +16,6 @@ from django.utils import timezone
 from django.utils.translation import ugettext as _
 import js2py
 from mptt.models import MPTTModel, TreeForeignKey
-
-from antares.apps.core.middleware.request import get_request
 
 from ..constants import ApplicationScopeType
 

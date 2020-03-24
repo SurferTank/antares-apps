@@ -4,14 +4,13 @@ Created on 16/8/2016
 @author: leobelen
 '''
 
+from antares.apps.core.middleware.request import get_request
 import logging
 
 from braces.views import AjaxResponseMixin, JSONResponseMixin
 from django.utils import timezone
 from django.utils.translation import ugettext as _
 from django.views.generic import View
-
-from antares.apps.core.middleware.request import get_request
 
 from ..constants import DocumentEventType, DocumentStatusType
 from ..types import Document
@@ -29,7 +28,7 @@ class ApiDocumentSubmitView(AjaxResponseMixin, JSONResponseMixin, View):
         response_dict = {}
         event = DocumentEventType.to_enum(request.POST.get('_event'))
         if (event is None):
-            response_dict['errorMessage'] = _(__name__ +
+            response_dict['errorMessage'] = _(__name__ + 
                                               ".exceptions.event_is_missing")
             return self.render_json_response(response_dict)
         fields = {}
@@ -60,7 +59,7 @@ class ApiDocumentSubmitView(AjaxResponseMixin, JSONResponseMixin, View):
 
         if (document.get_status() != DocumentStatusType.DRAFTED):
             response_dict['errorMessage'] = _(
-                __name__ +
+                __name__ + 
                 ".exceptions.document_is_not_in_draft_mode_and_cannot_be_saved"
             )
             return self.render_json_response(response_dict)

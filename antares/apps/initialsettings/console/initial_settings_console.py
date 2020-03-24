@@ -3,15 +3,14 @@ Created on Jul 5, 2016
 
 @author: leobelen
 """
+from antares.apps.core.constants import FieldDataType
+from antares.apps.core.models import SystemParameter
+from antares.apps.flow.manager import FlowAdminManager
 import logging
 import os
 
 from django.conf import settings
 from django.utils.translation import ugettext as _
-
-from antares.apps.core.constants import FieldDataType
-from antares.apps.core.models import SystemParameter
-from antares.apps.flow.manager import FlowAdminManager
 
 
 logger = logging.getLogger(__name__)
@@ -50,7 +49,7 @@ class InitialSettingsConsole(object):
                     "INITIAL_SETTINGS_DEFAULT_FOLDER", FieldDataType.STRING,
                     'initialsettings'), params['withpackage'], 'flow', 'xpdl')
             if os.path.isdir(package) is False:
-                return _(__name__ +
+                return _(__name__ + 
                          ".package_leads_to_inexistent_path {package}").format(
                              package=package)
         else:

@@ -1,11 +1,10 @@
+from antares.apps.core.constants import FieldDataType
+from antares.apps.core.middleware.request import get_request
+from antares.apps.core.models import UserParameter
 import logging
 
 from django.utils.translation import ugettext as _
 from django_datatables_view.base_datatable_view import BaseDatatableView
-
-from antares.apps.core.constants import FieldDataType
-from antares.apps.core.middleware.request import get_request
-from antares.apps.core.models import UserParameter
 
 from ..constants import FlowBasicDataSubtype
 from ..exceptions import FlowException
@@ -73,7 +72,7 @@ class ApiCasePropertiesView(BaseDatatableView):
                 else:
                     return ''
             else:
-                raise FlowException(__name__ +
+                raise FlowException(__name__ + 
                                     ".exceptions.not_implemented_yet")
         else:
             return super(ApiCasePropertiesView, self).render_column(
@@ -90,7 +89,7 @@ class ApiCasePropertiesView(BaseDatatableView):
                     _(__name__ + ".exceptions.no_activity_was_found"))
             if (activity.performer != get_request().user):
                 raise FlowException(
-                    _(__name__ +
+                    _(__name__ + 
                       ".exceptions.this_activity_was_assigned_to_a_different_user"
                       ))
         else:

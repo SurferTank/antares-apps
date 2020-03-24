@@ -1,7 +1,7 @@
-from django.utils.translation import ugettext as _
-from django.db import models
-
 from antares.apps.core.mixins import EnumUtilsMixin
+
+from django.db import models
+from django.utils.translation import ugettext as _
 
 
 class MessageType(EnumUtilsMixin, models.TextChoices):
@@ -11,6 +11,7 @@ class MessageType(EnumUtilsMixin, models.TextChoices):
     FLOW_CASE = "Flow Case", _(__name__ + '.MessageType.' + 'FLOW_CASE')
     DOCUMENT = "Document", _(__name__ + '.MessageType.' + 'DOCUMENT')
     EXTERNAL_SYSTEM = "External System", _(__name__ + '.MessageType.' + 'EXTERNAL_SYSTEM')
+
 
 class MessageStatusType(EnumUtilsMixin, models.TextChoices):
     PENDING = "Pending", _(__name__ + '.MessageStatusType.' + 'PENDING')

@@ -3,13 +3,12 @@ Created on Jun 30, 2016
 
 @author: leobelen
 '''
-import logging
-
 from antares.apps.accounting.models import AccountBalance, AccountDocument, AccountTransaction, AccountRule
 from antares.apps.document.models import DocumentHeader, DocumentField, IndexedField, DocumentHrn, DocumentTableContent, FormDefinition
 from antares.apps.flow.models import PropertyDefinition, TransitionDefinition, ActivityDefinition, ParticipantDefinition, \
     ApplicationDefinition, FlowDefinition, FlowPackage, ActivityApplicationDefinition, ActivityApplicationParameterDefinition, \
     ApplicationParameterDefinition
+import logging
 
 
 class NukeService(object):

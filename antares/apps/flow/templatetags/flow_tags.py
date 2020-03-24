@@ -1,11 +1,10 @@
+from antares.apps.core.middleware.request import get_request
 import logging
 
 from django import template
 from django.urls import reverse
 from django.utils.safestring import mark_safe
 import js2py
-
-from antares.apps.core.middleware.request import get_request
 
 
 logger = logging.getLogger(__name__)

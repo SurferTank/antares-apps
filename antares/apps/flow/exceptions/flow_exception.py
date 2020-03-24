@@ -6,6 +6,7 @@ Created on Jul 12, 2016
 
 
 class FlowException(Exception):
+
     def __init__(self, value):
         self.value = value
 

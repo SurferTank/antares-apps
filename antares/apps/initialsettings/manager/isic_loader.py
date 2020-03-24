@@ -3,17 +3,16 @@ Created on 30/7/2016
 
 @author: leobelen
 """
+from antares.apps.client.models import IsicPosition
+from antares.apps.core.constants import FieldDataType
+from antares.apps.core.constants import LanguageType
+from antares.apps.core.models import SystemParameter
 import csv
 import logging
 import os
 
 from django.conf import settings
 from django.utils.translation import ugettext as _
-
-from antares.apps.client.models import IsicPosition
-from antares.apps.core.constants import FieldDataType
-from antares.apps.core.constants import LanguageType
-from antares.apps.core.models import SystemParameter
 
 
 logger = logging.getLogger(__name__)

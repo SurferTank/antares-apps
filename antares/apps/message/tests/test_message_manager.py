@@ -3,12 +3,11 @@ Created on Nov 5, 2017
 
 @author: leobelen
 '''
-import logging
+from antares.apps.document.tests.document_test_helper import DocumentTestHelper
 import json
+import logging
 
 from django.test import TransactionTestCase
-
-from antares.apps.document.tests.document_test_helper import DocumentTestHelper
 
 from ..service import MessageManager
 

@@ -6,6 +6,7 @@ Created on Jul 18, 2016
 
 
 class UserException(Exception):
+
     def __init__(self, value):
         self.value = value
 

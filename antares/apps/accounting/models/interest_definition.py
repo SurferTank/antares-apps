@@ -3,20 +3,22 @@ Created on Feb 5, 2020
 
 @author: leobelen
 '''
+from antares.apps.core.constants import TimeUnitType
+from antares.apps.core.middleware.request import get_request
 import logging
 import uuid
 
-
 from ckeditor.fields import RichTextField
-from django.db import models
-from django.utils import timezone
 from django.conf import settings
-from django.utils.translation import ugettext as _
-from antares.apps.core.constants import TimeUnitType
-from antares.apps.core.middleware.request import get_request
+from django.db import models
 from django.db.models import Q
+from django.utils import timezone
+from django.utils.translation import ugettext as _
+
 
 logger = logging.getLogger(__name__)
+
+
 class InterestDefinition(models.Model):
     '''
     classdocs
@@ -53,7 +55,7 @@ class InterestDefinition(models.Model):
     @classmethod
     def findAllAndByConceptType(cls, conceptType):
         try:
-            return InterestDefinition.objects.filter(Q(concept_type__isnull=True) |
+            return InterestDefinition.objects.filter(Q(concept_type__isnull=True) | 
                                                     Q(concept_type=conceptType)) \
                                             .filter(active=True)
         except InterestDefinition.DoesNotExist:
@@ -65,5 +67,4 @@ class InterestDefinition(models.Model):
         self.update_date = timezone.now()
         self.author = get_request().user
         super(InterestDefinition, self).save(*args, **kwargs)
-
         

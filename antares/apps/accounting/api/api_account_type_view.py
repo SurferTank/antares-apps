@@ -4,6 +4,13 @@ Copyright 2013-2017 SurferTank Inc.
 Original version by Leonardo Belen<leobelen@gmail.com>
 """
 
+from antares.apps.client.models import Client
+from antares.apps.core.constants import FieldDataType
+from antares.apps.core.manager import COPAD
+from antares.apps.core.middleware.request import get_request
+from antares.apps.core.models import ConceptType
+from antares.apps.core.models import SystemParameter
+from antares.apps.core.models import UserParameter
 import decimal
 import logging
 import uuid
@@ -12,16 +19,9 @@ import babel.numbers
 from django.utils.translation import ugettext as _
 from django_datatables_view.base_datatable_view import BaseDatatableView
 
-from antares.apps.client.models import Client
-from antares.apps.core.constants import FieldDataType
-from antares.apps.core.middleware.request import get_request
-from antares.apps.core.models import ConceptType
-from antares.apps.core.models import SystemParameter
-from antares.apps.core.models import UserParameter
-
-from ..models import AccountTransaction, AccountType
-from antares.apps.core.manager import COPAD
 from ..manager import AccountManager
+from ..models import AccountTransaction, AccountType
+
 
 logger = logging.getLogger(__name__)
 

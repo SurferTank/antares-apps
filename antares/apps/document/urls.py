@@ -7,11 +7,12 @@ from django.conf.urls import url
 from django.contrib.auth.decorators import login_required
 
 from .api import ApiDocumentSubmitView
+from .api import ApiDocumentUploadView
+from .api import ApiLatestDocumentView
 from .views import DocumentCreateView
 from .views import DocumentEditView
 from .views import DocumentViewView
-from .api import ApiDocumentUploadView
-from .api import ApiLatestDocumentView
+
 
 app_name = 'antares.apps.document'
 

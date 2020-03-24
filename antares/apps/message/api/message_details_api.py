@@ -14,4 +14,4 @@ class MessageDetailsApi(generics.RetrieveUpdateDestroyAPIView):
     """This class defines the create behavior of our rest api."""
     queryset = Message.objects.all()
     serializer_class = MessageSerializer
-    permission_classes = (permissions.IsAuthenticated, )
+    permission_classes = (permissions.IsAuthenticated,)

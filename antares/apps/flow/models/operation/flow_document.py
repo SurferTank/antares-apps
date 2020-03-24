@@ -1,11 +1,10 @@
+from antares.apps.flow.constants import FlowDocumentRelationshipType
 import logging
 import uuid
 
 from django.db import models
 from django.utils import timezone
 from django.utils.translation import ugettext as _
-
-from antares.apps.flow.constants import FlowDocumentRelationshipType
 
 
 logger = logging.getLogger(__name__)
@@ -72,6 +71,6 @@ class FlowDocument(models.Model):
     class Meta:
         app_label = 'flow'
         db_table = 'flow_document'
-        unique_together = (("flow_case", "document"), )
+        unique_together = (("flow_case", "document"),)
         verbose_name = _(__name__ + ".table_name")
         verbose_name_plural = _(__name__ + ".table_name_plural")

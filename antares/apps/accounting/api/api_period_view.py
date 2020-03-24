@@ -4,6 +4,12 @@ Copyright 2013-2017 SurferTank Inc.
 Original version by Leonardo Belen<leobelen@gmail.com>
 """
 
+from antares.apps.client.models import Client
+from antares.apps.core.constants import FieldDataType
+from antares.apps.core.manager import COPAD
+from antares.apps.core.middleware.request import get_request
+from antares.apps.core.models import ConceptType
+from antares.apps.core.models import SystemParameter
 import logging
 import uuid
 
@@ -13,14 +19,7 @@ from django.utils.translation import ugettext as _
 from django_datatables_view.base_datatable_view import BaseDatatableView
 from djmoney.money import Money
 
-from antares.apps.client.models import Client
-from antares.apps.core.constants import FieldDataType
-from antares.apps.core.middleware.request import get_request
-from antares.apps.core.models import ConceptType
-from antares.apps.core.models import SystemParameter
-from antares.apps.core.manager import COPAD
 from ..manager import AccountManager
-
 from ..models import AccountBalance
 
 
@@ -74,8 +73,8 @@ class ApiPeriodView(BaseDatatableView):
         """ Overriden method to render a column (a hook on BaseDatatableView)
         """
         if column == 'period':
-            link_string = '<a onClick="display_accounting_panel(\'{client_id}\' , '+\
-                   ' \'{full_name}\', null, null, \'{concept_type_id}\','+\
+            link_string = '<a onClick="display_accounting_panel(\'{client_id}\' , ' + \
+                   ' \'{full_name}\', null, null, \'{concept_type_id}\',' + \
                 '\'{concept_type_name}\', {period}, \'{account_type_id}\', \'{account_type_name}\');\">{account_type_name}</a>'
             return link_string.format(
                 client_id=self.client.id,
@@ -148,6 +147,6 @@ class ApiPeriodView(BaseDatatableView):
             raise ValueError(_(__name__ + '.exceptions.period_is_undefined'))
         copad.client = self.client 
         copad.concept_type = self.concept_type
-        copad.period= self.period
-        qs =  AccountManager.find_balances_qs_by_COPAD(qs, copad)
+        copad.period = self.period
+        qs = AccountManager.find_balances_qs_by_COPAD(qs, copad)
         return qs

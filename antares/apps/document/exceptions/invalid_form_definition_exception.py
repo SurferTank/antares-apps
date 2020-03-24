@@ -6,6 +6,7 @@ Created on Jun 14, 2016
 
 
 class InvalidFormDefinitionException(Exception):
+
     def __init__(self, value):
         self.value = value
 

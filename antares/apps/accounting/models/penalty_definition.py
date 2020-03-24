@@ -8,21 +8,23 @@ Created on Feb 5, 2020
 
 @author: leobelen
 '''
+from antares.apps.core.constants import TimeUnitType
+from antares.apps.core.middleware.request import get_request
 import logging
 import uuid
 
-
 from ckeditor.fields import RichTextField
-from django.db import models
-from django.utils import timezone
 from django.conf import settings
-from django.utils.translation import ugettext as _
-from antares.apps.core.constants import TimeUnitType
-from antares.apps.core.middleware.request import get_request
-from djmoney.models.fields import MoneyField
+from django.db import models
 from django.db.models import Q
+from django.utils import timezone
+from django.utils.translation import ugettext as _
+from djmoney.models.fields import MoneyField
+
 
 logger = logging.getLogger(__name__)
+
+
 class PenaltyDefinition(models.Model):
     '''
     classdocs
@@ -34,7 +36,7 @@ class PenaltyDefinition(models.Model):
     rate = models.FloatField(null=True, blank=True)
     fixed_amount = MoneyField(
         max_digits=15, decimal_places=2, default_currency='USD', null=True, blank=True)
-    periodicity = models.CharField(choices=TimeUnitType.choices, max_length=10, 
+    periodicity = models.CharField(choices=TimeUnitType.choices, max_length=10,
                                    default=TimeUnitType.MONTH)
     max_rounds = models.IntegerField(null=True)
     recurring = models.BooleanField(default=False)
@@ -62,10 +64,9 @@ class PenaltyDefinition(models.Model):
     def findAllAndByConceptType(cls, conceptType):
         try:
             return PenaltyDefinition.objects.filter(Q(concept_type__isnull=True) | 
-                                                    Q(concept_type=conceptType) ).filter(active=True)
+                                                    Q(concept_type=conceptType)).filter(active=True)
         except PenaltyDefinition.DoesNotExist:
             return []
-    
 
     def save(self, *args, **kwargs):
         if self.creation_date is None:

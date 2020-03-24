@@ -6,6 +6,7 @@ Created on Jun 19, 2016
 
 
 class DocumentFieldNotFound(Exception):
+
     def __init__(self, value):
         self.value = value
 

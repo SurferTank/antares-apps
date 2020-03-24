@@ -10,6 +10,7 @@ logger = logging.getLogger(__name__)
 
 
 class ApiCaseSetTrackingOptionView(AjaxResponseMixin, JSONResponseMixin, View):
+
     def post(self, request, *args, **kwargs):
         response_dict = {}
         case_id = request.POST.get('case_id')

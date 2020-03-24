@@ -3,15 +3,14 @@ Created on Jul 24, 2016
 
 @author: leobelen
 '''
+from antares.apps.client.models import Client
+from antares.apps.core.models import ConceptType
+from antares.apps.document.models import FormDefinition
 import logging
 
 import dateutil.parser
 from django.utils import timezone
 from django.utils.translation import ugettext as _
-
-from antares.apps.client.models import Client
-from antares.apps.core.models import ConceptType
-from antares.apps.document.models import FormDefinition
 
 from ..constants import ObligationType, ObligationStatusType
 from ..manager import ObligationManager
@@ -56,7 +55,7 @@ class ObligationConsole(object):
                 if (client is None):
                     return _(__name__ + ".console.client_was_not_found")
             else:
-                return _(__name__ +
+                return _(__name__ + 
                          ".console.either_client_id_or_code_are_missing")
 
         if ('withconcepttype' in params):
@@ -78,7 +77,7 @@ class ObligationConsole(object):
             try:
                 when_date = dateutil.parser.parse(params['when'])
             except:
-                return _(__name__ +
+                return _(__name__ + 
                          ".console.invalid_date_format_for_when_parameter")
         else:
             when_date = timezone.now()
@@ -88,7 +87,7 @@ class ObligationConsole(object):
                 start_date = dateutil.parser.parse(params['withstartdate'])
             except:
                 return _(
-                    __name__ +
+                    __name__ + 
                     ".console.invalid_date_format_for_withstartdate_parameter")
         else:
             start_date = None
@@ -98,7 +97,7 @@ class ObligationConsole(object):
                 end_date = dateutil.parser.parse(params['withenddate'])
             except:
                 return _(
-                    __name__ +
+                    __name__ + 
                     ".console.invalid_date_format_for_withenddate_parameter")
         else:
             end_date = None
@@ -120,7 +119,7 @@ class ObligationConsole(object):
                 if (client is None):
                     return _(__name__ + ".console.client_was_not_found")
             else:
-                return _(__name__ +
+                return _(__name__ + 
                          ".console.either_client_id_or_code_are_missing")
 
         if ('withobligationtype' in params):
@@ -151,7 +150,7 @@ class ObligationConsole(object):
                 client, status)
 
         if (len(obligation_vector_list) == 0):
-            return _(__name__ +
+            return _(__name__ + 
                      ".console.no_obligations_found_for_given_parameters")
 
         result = "<table width=\"100%\"><tr><td " + \

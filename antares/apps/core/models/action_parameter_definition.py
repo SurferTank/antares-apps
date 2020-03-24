@@ -1,11 +1,10 @@
+from antares.apps.core.constants import ActionParameterDirectionType
+from antares.apps.core.constants import FieldDataType
 import logging
 import uuid
 
 from django.db import models
 from django.utils.translation import ugettext as _
-
-from antares.apps.core.constants import ActionParameterDirectionType
-from antares.apps.core.constants import FieldDataType
 
 
 logger = logging.getLogger(__name__)

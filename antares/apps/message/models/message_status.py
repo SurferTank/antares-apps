@@ -3,6 +3,8 @@ Created on Jul 9, 2016
 
 @author: leobelen
 '''
+from antares.apps.core.constants import SystemModuleType
+from antares.apps.core.middleware.request import get_request
 import logging
 import uuid
 
@@ -10,9 +12,6 @@ from django.conf import settings
 from django.db import models
 from django.utils import timezone
 from django.utils.translation import ugettext_lazy as _
-
-from antares.apps.core.constants import SystemModuleType
-from antares.apps.core.middleware.request import get_request
 
 from ..constants import MessageStatusType
 from ..models.message import Message
@@ -29,7 +28,7 @@ class MessageStatus(models.Model):
         db_column='message',
         related_name="status_set")
     module = models.CharField(choices=SystemModuleType.choices, max_length=30)
-    status = models.CharField(choices=MessageStatusType.choices, 
+    status = models.CharField(choices=MessageStatusType.choices,
                               max_length=30, default=MessageStatusType.PENDING)
     creation_date = models.DateTimeField(
         blank=False,

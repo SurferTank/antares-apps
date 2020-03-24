@@ -1,4 +1,5 @@
 class DateUtils(object):
+
     @classmethod
     def convert_days_to_time_unit(cls, days, time_unit=None):
         """ 

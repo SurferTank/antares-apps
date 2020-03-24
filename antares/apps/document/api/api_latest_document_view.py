@@ -4,23 +4,24 @@ Copyright 2013-2017 SurferTank Inc.
 Original version by Leonardo Belen<leobelen@gmail.com>
 """
 
+from antares.apps.client.models import Client
+from antares.apps.core.constants import FieldDataType
+from antares.apps.core.middleware.request import get_request
+from antares.apps.core.middleware.request import get_request
+from antares.apps.core.models import SystemParameter
+from antares.apps.core.models import UserParameter
+from antares.apps.user.exceptions.user_exception import UserException
 import decimal
 import logging
 import uuid
 
 import babel.numbers
+from django.db.models import Q
 from django.utils.translation import ugettext as _
 from django_datatables_view.base_datatable_view import BaseDatatableView
-from django.db.models import Q
-from antares.apps.client.models import Client
-from antares.apps.core.constants import FieldDataType
-from antares.apps.core.middleware.request import get_request
-from antares.apps.core.models import SystemParameter
-from antares.apps.core.models import UserParameter
-from antares.apps.user.exceptions.user_exception import UserException
+
 from ..models import DocumentHeader
 
-from antares.apps.core.middleware.request import get_request
 
 logger = logging.getLogger(__name__)
 
@@ -34,14 +35,14 @@ class ApiLatestDocumentView(BaseDatatableView):
     model = DocumentHeader
     columns = [
         'id',
-        'form_definition', 
+        'form_definition',
        'author',
        'status',
        'save_date',
     ]
     order_columns = [
         'id',
-        'form_definition', 
+        'form_definition',
         'author',
        'status',
        'save_date',
@@ -49,7 +50,6 @@ class ApiLatestDocumentView(BaseDatatableView):
     ]
 
     max_display_length = 5
-
   
     def __init__(self):
         """ Initial value settings 
@@ -58,7 +58,7 @@ class ApiLatestDocumentView(BaseDatatableView):
             "DEFAULT_CURRENCY", FieldDataType.STRING, 'USD')
         self.default_locale = SystemParameter.find_one(
             "DEFAULT_LOCALE", FieldDataType.STRING, 'en_US')
-        self.date_format_string = UserParameter.find_one( 'CORE_TEMPLATE_DATE_FORMAT',
+        self.date_format_string = UserParameter.find_one('CORE_TEMPLATE_DATE_FORMAT',
             FieldDataType.STRING, '%Y-%m-%d')
 
     def render_column(self, row, column):
@@ -94,5 +94,5 @@ class ApiLatestDocumentView(BaseDatatableView):
             except UserException:
                 return qs
      
-        qs = qs.filter(Q(client = self.client) | Q(author = get_request().user)).order_by("-save_date")
+        qs = qs.filter(Q(client=self.client) | Q(author=get_request().user)).order_by("-save_date")
         return qs

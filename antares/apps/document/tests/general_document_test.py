@@ -1,9 +1,8 @@
+from antares.apps.core.middleware import get_request
+from antares.apps.document.constants import DocumentStatusType
 import logging
 
 from django.test import TransactionTestCase
-
-from antares.apps.core.middleware import get_request
-from antares.apps.document.constants import DocumentStatusType
 
 from ..types import Document
 from .document_test_helper import DocumentTestHelper
@@ -38,4 +37,4 @@ class GeneralDocumentTest(TransactionTestCase):
         self.assertEqual(period, 200101, "Unexpected period found")
         document.set_author(get_request().user)
         document.save(DocumentStatusType.SAVED)
-        #self.assertEqual(document.verify_hash_digest(), True , " Hash is incorrect for some reason")
+        # self.assertEqual(document.verify_hash_digest(), True , " Hash is incorrect for some reason")

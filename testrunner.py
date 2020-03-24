@@ -15,9 +15,9 @@ try:
     DATABASE_HOST = 'localhost'
     DATABASE_PORT = None
     DATABASE_ENGINE = 'django.db.backends.postgresql'
-    #DATABASE_ENGINE = 'django.db.backends.postgresql_psycopg2'
-    #DATABASE_ENGINE = 'django.contrib.gis.db.backends.postgis'
-    #DATABASE_ENGINE = 'django.db.backends.mysql'
+    # DATABASE_ENGINE = 'django.db.backends.postgresql_psycopg2'
+    # DATABASE_ENGINE = 'django.contrib.gis.db.backends.postgis'
+    # DATABASE_ENGINE = 'django.db.backends.mysql'
     DATABASE_NAME = 'antares'
     TESTSUITE_DATABASE_NAME = 'antares_test'
     ATOMIC_REQUESTS = True
@@ -86,8 +86,8 @@ try:
         'allauth',
         'allauth.account',
         'allauth.socialaccount',
-        #'allauth.socialaccount.providers.facebook',
-        #'allauth.socialaccount.providers.google',
+        # 'allauth.socialaccount.providers.facebook',
+        # 'allauth.socialaccount.providers.google',
         'debug_toolbar',
         'django_extensions',
         'django_markdown'
@@ -118,7 +118,7 @@ try:
         },
         ROOT_URLCONF='urls',
         INSTALLED_APPS=INSTALLED_APPS,
-        MIDDLEWARE = [
+        MIDDLEWARE=[
             'django.middleware.cache.UpdateCacheMiddleware',
             'django.contrib.sessions.middleware.SessionMiddleware',
             'django.middleware.locale.LocaleMiddleware',
@@ -140,7 +140,7 @@ try:
             os.path.join(BASE_DIR, 'bower_components'),
             os.path.join(BASE_DIR, "static"),
         ),
-        STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.StaticFilesStorage',
+        STATICFILES_STORAGE='django.contrib.staticfiles.storage.StaticFilesStorage',
         STATICFILES_FINDERS=(
             'django.contrib.staticfiles.finders.FileSystemFinder',
             'django.contrib.staticfiles.finders.AppDirectoriesFinder',
@@ -203,7 +203,7 @@ try:
                 }
             }
         },
-        LOCALE_PATHS=(os.path.join(BASE_DIR, 'locale'), ),
+        LOCALE_PATHS=(os.path.join(BASE_DIR, 'locale'),),
         LANGUAGES=(
             ('en', _('English')),
             ('es', _('Spanish')),
@@ -212,7 +212,7 @@ try:
         '//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js',
         STATIC_ROOT=STATIC_ROOT,
         STATIC_URL=STATIC_URL,
-        TEMPLATES = [
+        TEMPLATES=[
         {
             'BACKEND': 'django.template.backends.django.DjangoTemplates',
             'DIRS': [os.path.join(os.path.join(BASE_DIR, 'antares'), 'templates')],
@@ -239,7 +239,7 @@ try:
                     'antares.apps.user.templatetags.auth_tags',
                     'flow_tags':
                     'antares.apps.flow.templatetags.flow_tags',
-                }, 
+                },
                 "builtins": [
                     'django.templatetags.static',
                     ]
@@ -248,11 +248,11 @@ try:
     ]
     )
     
-    
 except ImportError:
     raise ImportError("To fix this error, run: pip install -r requirements.txt")    
 
 django.setup()
+
 
 def run_tests(*test_args):
     if not test_args:
@@ -262,6 +262,7 @@ def run_tests(*test_args):
     failures = test_runner.run_tests(test_args)
     if failures:
         sys.exit(failures)
+
 
 if __name__ == '__main__':
     run_tests(*sys.argv[1:])

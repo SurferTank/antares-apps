@@ -4,13 +4,12 @@ Created on 16/8/2016
 @author: leobelen
 '''
 
+from antares.apps.core.middleware.request import get_request
 import logging
 
 from django.conf import settings
 from django.shortcuts import render
 from django.views.generic import View
-
-from antares.apps.core.middleware.request import get_request
 
 from ..constants import FormDefinitionStatusType
 from ..models import FormDefinition
@@ -52,10 +51,10 @@ class DocumentCreateView(View):
         if ('next' in request.GET):
             next_place = request.GET.get('next')
         else:
-            #TODO: this should be decided first.
+            # TODO: this should be decided first.
             next_place = '/home'
 
-        if (form_definition is None or form_definition.status ==
+        if (form_definition is None or form_definition.status == 
                 FormDefinitionStatusType.DEACTIVATED):
             raise ValueError("Unknown Form ID or the Form is not Active")
 

@@ -1,13 +1,11 @@
+from antares.apps.flow.constants import ActivityType, AssignmentStrategyType, \
+    ExecutionModeType, FlowActivityInstantiationType
 import logging
 import uuid
 
 from django.db import models
 from django.utils.translation import ugettext as _
 
-
-from antares.apps.flow.constants import ActivityType, AssignmentStrategyType, \
-    ExecutionModeType, FlowActivityInstantiationType
-    
 from .transition_definition import TransitionDefinition
 
 
@@ -27,7 +25,7 @@ class ActivityDefinition(models.Model):
         null=True)
     activity_id = models.CharField(max_length=255)
     activity_type = models.CharField(choices=ActivityType.choices, max_length=30)
-    assignment_strategy = models.CharField(choices=AssignmentStrategyType.choices, 
+    assignment_strategy = models.CharField(choices=AssignmentStrategyType.choices,
                                            max_length=30, blank=True, null=True)
     description = models.TextField(blank=True, null=True)
     display_name = models.CharField(max_length=255, blank=True, null=True)

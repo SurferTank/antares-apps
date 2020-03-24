@@ -1,3 +1,4 @@
+from antares.apps.core.manager import COPAD
 import logging
 import uuid
 
@@ -6,7 +7,6 @@ from django.utils import timezone
 from django.utils.translation import ugettext as _
 from djmoney.models.fields import MoneyField
 from djmoney.money import Money
-from antares.apps.core.manager import COPAD
 
 from .account_balance import AccountBalance
 
@@ -109,7 +109,7 @@ class AccountTransaction(models.Model):
             return []
 
     def get_COPAD(self):
-        return COPAD(self.balance.client.id, self.balance.obligation.id, 
+        return COPAD(self.balance.client.id, self.balance.obligation.id,
                      self.balance.period, self.balance.account_type.id, self.balance.base_document.id)
     
     class Meta:

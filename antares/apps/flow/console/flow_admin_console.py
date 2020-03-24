@@ -3,12 +3,6 @@ Created on Jul 5, 2016
 
 @author: leobelen
 '''
-import logging
-from uuid import UUID
-
-from django.core.exceptions import ObjectDoesNotExist
-from django.utils.translation import ugettext as _
-
 from antares.apps.core.constants import FieldDataType
 from antares.apps.core.middleware.request import get_request
 from antares.apps.core.models import UserParameter
@@ -16,6 +10,11 @@ from antares.apps.flow.constants import FlowActivityStatusType
 from antares.apps.flow.models.operation import FlowCase, FlowActivity
 from antares.apps.subscription.manager import SubscriptionManager
 from antares.apps.user.models import User
+import logging
+from uuid import UUID
+
+from django.core.exceptions import ObjectDoesNotExist
+from django.utils.translation import ugettext as _
 
 from ..constants import FlowDefinitionStatusType, TimeEstimationMethodType
 from ..manager import FlowAdminManager
@@ -284,7 +283,7 @@ class FlowAdminConsole(object):
             flow_case = FlowCase.find_one_by_hrn_code(params['withcode'])
         else:
             return _(
-                __name__ +
+                __name__ + 
                 ".console.either_withcaseid_or_withcode_parameters_have_to_be_defined"
             )
         if flow_case is None:
@@ -363,13 +362,13 @@ class FlowAdminConsole(object):
 
         if flow_activity.status in (FlowActivityStatusType.CANCELLED,
                                     FlowActivityStatusType.COMPLETED):
-            return _(__name__ +
+            return _(__name__ + 
                      ".activities_finalized_or_cancelled_cannot_be_reassigned")
 
         flow_activity.performer = performer
         flow_activity.save()
 
-        return _(__name__ +
+        return _(__name__ + 
                  ".activity_reassigned_to {activity} {username}").format(
                      activity=flow_activity.hrn_code,
                      username=performer.username)

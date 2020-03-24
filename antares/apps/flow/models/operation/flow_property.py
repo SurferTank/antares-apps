@@ -1,3 +1,8 @@
+from antares.apps.client.models import Client
+from antares.apps.core.constants import FieldDataType
+from antares.apps.flow.constants import FlowBasicDataSubtype
+from antares.apps.flow.constants import FlowDataType
+from antares.apps.flow.models.definition import PropertyDefinition
 import logging
 import uuid
 
@@ -5,12 +10,6 @@ from django.db import models
 from django.db.transaction import TransactionManagementError
 from django.utils.translation import ugettext as _
 import js2py
-
-from antares.apps.client.models import Client
-from antares.apps.core.constants import FieldDataType
-from antares.apps.flow.constants import FlowBasicDataSubtype
-from antares.apps.flow.constants import FlowDataType
-from antares.apps.flow.models.definition import PropertyDefinition
 
 
 logger = logging.getLogger(__name__)
@@ -97,7 +96,7 @@ class FlowProperty(models.Model):
                             flow_prop.date_value = initial_value
                     else:
                         raise NotImplementedError(
-                            _(__name__ +
+                            _(__name__ + 
                               ".exceptions.basic_data_type_not_implemented_yet"
                               ))
 
@@ -176,25 +175,25 @@ class FlowProperty(models.Model):
                     except FlowProperty.DoesNotExist:
                         prop_def = None
                     if prop_def is not None:
-                        context.execute('result_value =' +
+                        context.execute('result_value =' + 
                                         param_def.content_text)
                         if (hasattr(context, 'result_value')
                                 and prop_def.data_type == FlowDataType.BASIC
                                 and context.result_value is not None):
-                            if (prop_def.sub_data_type ==
+                            if (prop_def.sub_data_type == 
                                     FlowBasicDataSubtype.STRING):
                                 prop_def.string_value = context.result_value
-                            elif (prop_def.sub_data_type ==
+                            elif (prop_def.sub_data_type == 
                                   FlowBasicDataSubtype.TEXT):
                                 prop_def.text_value = context.result_value
-                            elif (prop_def.sub_data_type ==
+                            elif (prop_def.sub_data_type == 
                                   FlowBasicDataSubtype.DATE):
                                 prop_def.date_value = context.result_value
-                            elif (prop_def.sub_data_type ==
+                            elif (prop_def.sub_data_type == 
                                   FlowBasicDataSubtype.INTEGER):
                                 prop_def.integer_value = int(
                                     float(context.result_value))
-                            elif (prop_def.sub_data_type ==
+                            elif (prop_def.sub_data_type == 
                                   FlowBasicDataSubtype.FLOAT):
                                 prop_def.decimal_value = float(
                                     context.result_value)
@@ -230,6 +229,6 @@ class FlowProperty(models.Model):
 
     class Meta:
         db_table = 'flow_property'
-        unique_together = (("flow_case", "property_definition"), )
+        unique_together = (("flow_case", "property_definition"),)
         verbose_name = _(__name__ + ".table_name")
         verbose_name_plural = _(__name__ + ".table_name_plural")

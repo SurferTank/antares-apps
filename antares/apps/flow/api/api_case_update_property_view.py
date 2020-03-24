@@ -12,6 +12,7 @@ logger = logging.getLogger(__name__)
 
 
 class ApiCaseUpdatePropertyView(AjaxResponseMixin, JSONResponseMixin, View):
+
     def post(self, request):
         response_dict = {}
         if 'case_id' in request.POST:

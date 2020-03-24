@@ -1,3 +1,5 @@
+from antares.apps.core.constants import FieldDataType
+from antares.apps.core.middleware.request import get_request
 import datetime
 import logging
 from uuid import UUID
@@ -7,9 +9,6 @@ from django.conf import settings
 from django.db import models
 from django.utils import timezone
 from django.utils.translation import ugettext as _
-
-from antares.apps.core.constants import FieldDataType
-from antares.apps.core.middleware.request import get_request
 
 from .system_parameter import SystemParameter
 
@@ -145,7 +144,7 @@ class UserParameter(models.Model):
                                     False)
             if (default is not None):
                 user_param = UserParameter(id=user_paramId)
-                logger.debug("Creating the parameter with id " + str(user_paramId) +
+                logger.debug("Creating the parameter with id " + str(user_paramId) + 
                              " since it does not exist")
                 user_param.data_type = paramType
                 user_param.user = get_request().user
@@ -189,6 +188,6 @@ class UserParameter(models.Model):
     class Meta:
         app_label = 'core'
         db_table = 'core_user_parameter'
-        unique_together = (('id', 'user'), )
+        unique_together = (('id', 'user'),)
         verbose_name = _(__name__ + ".table_name")
         verbose_name_plural = _(__name__ + ".table_name_plural")

@@ -3,11 +3,10 @@ Created on 30/7/2016
 
 @author: leobelen
 """
+from antares.apps.core.constants import LanguageType
 import logging
 
 from django.utils.translation import ugettext as _
-
-from antares.apps.core.constants import LanguageType
 
 from ..manager import IsicLoader
 

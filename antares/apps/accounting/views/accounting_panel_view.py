@@ -3,15 +3,14 @@ Created on 16/8/2016
 
 @author: leobelen
 '''
+from antares.apps.client.models import Client
+from antares.apps.core.middleware.request import get_request
 import logging
 import uuid
 
 from django.contrib import messages
 from django.utils.translation import ugettext as _
 from django.views.generic import TemplateView
-
-from antares.apps.client.models import Client
-from antares.apps.core.middleware.request import get_request
 
 
 logger = logging.getLogger(__name__)

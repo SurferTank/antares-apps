@@ -3,6 +3,7 @@ Created on 30/8/2016
 
 @author: leobelen
 '''
+from antares.apps.core.middleware.request import get_request
 import logging
 import uuid
 
@@ -12,8 +13,6 @@ from django.contrib.auth.models import AnonymousUser
 from django.db import models
 from django.utils import timezone
 from django.utils.translation import ugettext as _
-
-from antares.apps.core.middleware.request import get_request
 
 
 logger = logging.getLogger(__name__)

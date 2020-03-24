@@ -68,7 +68,7 @@ $(".auth_on_behalf_selector").on("change", function (e) {{
             url_change=reverse(
                 'antares.apps.user:api_on_behalf_change_client'),
             id=request.user.get_on_behalf_client().id,
-            text=request.user.get_on_behalf_client().code + ' - ' +
+            text=request.user.get_on_behalf_client().code + ' - ' + 
             request.user.get_on_behalf_client().full_name)
         return mark_safe(command_string)
     except:

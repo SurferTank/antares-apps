@@ -3,16 +3,15 @@ Created on 21/8/2016
 
 @author: leobelen
 '''
+from antares.apps.core.constants import FieldDataType
+from antares.apps.core.middleware.request import get_request
+from antares.apps.core.models import UserParameter
+from antares.apps.flow.exceptions.flow_exception import FlowException
 import logging
 
 from django.urls import reverse
 from django.utils.translation import ugettext as _
 from django_datatables_view.base_datatable_view import BaseDatatableView
-
-from antares.apps.core.constants import FieldDataType
-from antares.apps.core.middleware.request import get_request
-from antares.apps.core.models import UserParameter
-from antares.apps.flow.exceptions.flow_exception import FlowException
 
 from ..constants import FlowActivityStatusType
 from ..models import FlowActivity
@@ -34,7 +33,7 @@ class ApiInboxActiveCasesView(BaseDatatableView):
     max_display_length = 50
 
     def __init__(self):
-        self.date_format_string = UserParameter.find_one( 'CORE_TEMPLATE_DATE_TIME_FORMAT',
+        self.date_format_string = UserParameter.find_one('CORE_TEMPLATE_DATE_TIME_FORMAT',
             FieldDataType.STRING, '%Y-%m-%d %H:%M')
 
     def render_column(self, row, column):

@@ -1,13 +1,12 @@
+from antares.apps.core.constants import FieldDataType
+from antares.apps.core.middleware.request import get_request
+from antares.apps.core.models import UserParameter
 import logging
 import uuid
 
 from django.urls import reverse
 from django.utils.translation import ugettext as _
 from django_datatables_view.base_datatable_view import BaseDatatableView
-
-from antares.apps.core.constants import FieldDataType
-from antares.apps.core.middleware.request import get_request
-from antares.apps.core.models import UserParameter
 
 from ..constants import ClientRelationType
 from ..models import ClientUserRelation, Client

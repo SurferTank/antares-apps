@@ -18,7 +18,7 @@ class MessageApi(mixins.ListModelMixin, mixins.CreateModelMixin,
     """This class defines the create behavior of our rest api."""
     queryset = Message.objects.all()
     serializer_class = MessageSerializer
-    permission_classes = (permissions.IsAuthenticated, )
+    permission_classes = (permissions.IsAuthenticated,)
 
     def get(self, request, *args, **kwargs):
         return self.list(request, *args, **kwargs)
@@ -31,6 +31,6 @@ class MessageApi(mixins.ListModelMixin, mixins.CreateModelMixin,
     def delete(self, request, *args, **kwargs):
         return self.destroy(request, *args, **kwargs)
 
-    #def perform_create(self, serializer):
+    # def perform_create(self, serializer):
     #    """Save the post data when creating a new OptionArbitrageMsg."""
     #    serializer.save(message_type=MessageType.EXTERNAL_SYSTEM)

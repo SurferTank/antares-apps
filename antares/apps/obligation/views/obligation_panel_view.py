@@ -3,16 +3,15 @@ Created on 19/8/2016
 
 @author: leobelen
 '''
+from antares.apps.client.models import Client
+from antares.apps.core.middleware.request import get_request
+from antares.apps.flow.models import FlowActivity
 import logging
 import uuid
 
 from django.contrib import messages
 from django.utils.translation import ugettext as _
 from django.views.generic import TemplateView
-
-from antares.apps.client.models import Client
-from antares.apps.core.middleware.request import get_request
-from antares.apps.flow.models import FlowActivity
 
 
 logger = logging.getLogger(__name__)

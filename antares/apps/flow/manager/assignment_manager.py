@@ -3,10 +3,9 @@ Created on Jul 13, 2016
 
 @author: leobelen
 '''
+from antares.apps.user.models import User
 import logging
 import random
-
-from antares.apps.user.models import User
 
 from ..constants import AssignmentStrategyType
 
@@ -54,7 +53,7 @@ class AssignmentManager(object):
         if len(participants) == 0:
             return User.get_system_user()
         else:
-            #TODO: this should fail, but for now it will return the system user.
+            # TODO: this should fail, but for now it will return the system user.
             return random.choice(participants)
 
     @classmethod

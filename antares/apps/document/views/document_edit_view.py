@@ -4,6 +4,10 @@ Created on 16/8/2016
 @author: leobelen
 '''
 
+from antares.apps.accounting.models import AccountType
+from antares.apps.client.models import Client
+from antares.apps.core.middleware.request import get_request
+from antares.apps.core.models import ConceptType
 import logging
 import uuid
 
@@ -11,11 +15,6 @@ from django.conf import settings
 from django.shortcuts import render
 from django.views.generic import TemplateView
 from django.views.generic import View
-
-from antares.apps.accounting.models import AccountType
-from antares.apps.client.models import Client
-from antares.apps.core.middleware.request import get_request
-from antares.apps.core.models import ConceptType
 
 from ..constants import FormDefinitionStatusType
 from ..types import Document
@@ -55,7 +54,7 @@ class DocumentEditView(TemplateView):
         if ('next' in request.GET):
             next_place = request.GET.get('next')
         else:
-            #TODO: this should be decided first.
+            # TODO: this should be decided first.
             next_place = '/home'
 
         # TODO: Auth is missing here

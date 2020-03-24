@@ -1,10 +1,9 @@
+from antares.apps.core.middleware.request import get_request
 import logging
 import uuid
 
 from django.utils.translation import ugettext as _
 from django_datatables_view.base_datatable_view import BaseDatatableView
-
-from antares.apps.core.middleware.request import get_request
 
 from ..constants import ItemStatusType, TelephoneItemType
 from ..models import TelephoneItem, ClientBranch

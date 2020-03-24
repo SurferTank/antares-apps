@@ -1,3 +1,5 @@
+from antares.apps.core.constants import FieldDataType
+from antares.apps.core.middleware.request import get_request
 import logging
 
 from ckeditor.fields import RichTextField
@@ -5,9 +7,6 @@ from django.conf import settings
 from django.db import models
 from django.utils import timezone
 from django.utils.translation import ugettext as _
-
-from antares.apps.core.constants import FieldDataType
-from antares.apps.core.middleware.request import get_request
 
 
 logger = logging.getLogger(__name__)

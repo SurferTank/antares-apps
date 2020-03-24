@@ -3,14 +3,13 @@ Created on 16/8/2016
 
 @author: leobelen
 '''
+from antares.apps.user.exceptions import UserException
 import logging
 import uuid
 
 from django.contrib import messages
 from django.utils.translation import ugettext as _
 from django.views.generic import TemplateView
-
-from antares.apps.user.exceptions import UserException
 
 from ..models import Client
 

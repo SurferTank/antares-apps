@@ -1,3 +1,4 @@
+from antares.apps.core.middleware.request import get_request
 import logging
 import uuid
 
@@ -6,9 +7,6 @@ from django.db import models
 from django.db.models import Q
 from django.utils import timezone
 from django.utils.translation import ugettext_lazy as _
-
-
-from antares.apps.core.middleware.request import get_request
 
 from ..constants import ClientRelationType
 from ..exceptions import ClientException
@@ -68,8 +66,8 @@ class ClientUserRelation(models.Model):
                     _(__name__ + '.exceptions.user_has_no_client_assigned'))
 
             for client_relation in ClientUserRelation.objects.filter(
-                    Q(parent_user=get_request().user) &
-                (Q(start_date__lte=timezone.now()) &
+                    Q(parent_user=get_request().user) & 
+                (Q(start_date__lte=timezone.now()) & 
                  (Q(end_date__gte=timezone.now()) | Q(end_date__isnull=True)))
             ):
                 if ((only_executive == True and
@@ -80,7 +78,7 @@ class ClientUserRelation(models.Model):
         else:
             for client_relation in ClientUserRelation.objects.filter(
                     Q(parent_user=get_request().user) & Q(
-                        start_date__lte=timezone.now()) &
+                        start_date__lte=timezone.now()) & 
                 (Q(end_date__gte=timezone.now()) | Q(end_date__isnull=True))):
                 if ((only_executive == True and
                      ClientRelationType.to_enum(client_relation.relation_type)

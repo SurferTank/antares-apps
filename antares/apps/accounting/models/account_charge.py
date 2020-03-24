@@ -3,6 +3,9 @@ Copyright 2013-2017 SurferTank Inc.
 
 Original version by Leonardo Belen<leobelen@gmail.com>
 """
+from antares.apps.client.models.client import Client
+from antares.apps.core.models.concept_type import ConceptType
+from antares.apps.document.models.document_header import DocumentHeader
 import logging
 import uuid
 
@@ -12,14 +15,10 @@ from django.utils.translation import ugettext as _
 from djmoney.models.fields import MoneyField
 from djmoney.money import Money
 
-from antares.apps.client.models.client import Client
-from antares.apps.core.models.concept_type import ConceptType
-from antares.apps.document.models.document_header import DocumentHeader
-
 from ..constants import TransactionAffectedValueType
-from ..models import AccountType
-from ..models import InterestDefinition
-from ..models import PenaltyDefinition
+from .account_type import AccountType
+from .interest_definition import InterestDefinition
+from .penalty_definition import PenaltyDefinition
 
 
 logger = logging.getLogger(__name__)
@@ -95,7 +94,6 @@ class AccountCharge(models.Model):
         self.base_document = copad.base_document 
         self.charge_period = period
         self.penalty_definition = penaltyDefinition
-    
         
     @classmethod
     def findByCOPAD(cls, copad):
@@ -117,7 +115,7 @@ class AccountCharge(models.Model):
                 concept_type=copad.concept_type,
                 period=copad.period,
                 account_type=copad.account_type,
-                base_document=copad.base_document, charge_period=period, 
+                base_document=copad.base_document, charge_period=period,
                 interest_definition=interestDefinition)
         except AccountCharge.DoesNotExist:
             return None
@@ -130,7 +128,7 @@ class AccountCharge(models.Model):
                 concept_type=copad.concept_type,
                 period=copad.period,
                 account_type=copad.account_type,
-                base_document=copad.base_document, charge_period=period, 
+                base_document=copad.base_document, charge_period=period,
                 penalty_definition=penaltyDefinition)
             
         except AccountCharge.DoesNotExist:
@@ -144,12 +142,11 @@ class AccountCharge(models.Model):
             'concept_type',
             'period',
             'account_type',
-            'charge_period', 
+            'charge_period',
             'interest_definition',
             'penalty_definition',
-        ), )
+        ),)
         
         verbose_name = _(__name__ + ".table_name")
         verbose_name_plural = _(__name__ + ".table_name_plural")
-
         

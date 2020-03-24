@@ -3,6 +3,7 @@ Created on Jul 25, 2016
 
 @author: leobelen
 '''
+from antares.apps.core.middleware.request import get_request
 import logging
 import uuid
 
@@ -10,9 +11,6 @@ from django.conf import settings
 from django.db import models
 from django.utils import timezone
 from django.utils.translation import ugettext_lazy as _
-
-
-from antares.apps.core.middleware.request import get_request
 
 from ..constants import ClientRelationPermissionType
 

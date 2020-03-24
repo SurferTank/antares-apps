@@ -3,14 +3,6 @@ Created on Jul 4, 2016
 
 @author: leobelen
 '''
-import logging
-import os
-
-import dateutil.parser
-from django.utils.translation import ugettext as _
-from lxml import etree
-from lxml import objectify
-
 from antares.apps.core.constants import ScriptEngineType, FieldDataType, \
     ActionType
 from antares.apps.core.constants import TimeUnitType
@@ -20,6 +12,13 @@ from antares.apps.flow.constants import FlowDefinitionStatusType, FlowAccessLeve
 from antares.apps.flow.exceptions import InvalidXPDLException, InvalidStatusException
 from antares.apps.flow.models.definition.flow_action_definition import FlowActionDefinition
 from antares.apps.user.models import Role, OrgUnit, User
+import logging
+import os
+
+import dateutil.parser
+from django.utils.translation import ugettext as _
+from lxml import etree
+from lxml import objectify
 
 from ..constants import ExecutionModeType, FlowBasicDataSubtype, AssignmentStrategyType, TransitionType, FormalParameterModeType, ActivityApplicationDefinitionScopeType, \
     FlowActivityInstantiationType, TimeEstimationMethodType
@@ -119,7 +118,7 @@ class FlowAdminManager(object):
                 or not package_version.text):
             raise InvalidXPDLException(
                 _(__name__ + ".exceptions.package_id_information_is_missing"))
-        logger.info("package id " + package_id + ' package_version ' +
+        logger.info("package id " + package_id + ' package_version ' + 
                     package_version.text)
         package = FlowPackage.find_one_by_package_id_and_package_version(
             package_id, package_version.text)
@@ -143,10 +142,10 @@ class FlowAdminManager(object):
         schema = etree.XMLSchema(schema_root)
 
         parser = etree.XMLParser(schema=schema)
-        #TODO: until libxml2 solves the issue on validating, this will be out.
-        #try:
+        # TODO: until libxml2 solves the issue on validating, this will be out.
+        # try:
         #    root = etree.fromstring(xpdl_string, parser)
-        #except Exception:
+        # except Exception:
         #    raise InvalidXPDLException(
         #        _(__name__ + ".exceptions.xpdl_is_invalid"))
 
@@ -343,7 +342,7 @@ class FlowAdminManager(object):
         app_def.flow_definition = flow_def
         app_def.definition_site = DefinitionSiteType.SYSTEM
         app_def.application_id = 'updateproperty'
-        app_def.application_name = _(__name__ +
+        app_def.application_name = _(__name__ + 
                                      ".manager.default_apps.update_property")
         app_def.save()
         flow_def.application_definition_set.add(app_def)
@@ -366,7 +365,7 @@ class FlowAdminManager(object):
         app_def.flow_definition = flow_def
         app_def.definition_site = DefinitionSiteType.SYSTEM
         app_def.application_id = 'currentaccount'
-        app_def.application_name = _(__name__ +
+        app_def.application_name = _(__name__ + 
                                      ".manager.default_apps.current_account")
         app_def.route = 'surfertank_antares_account_status_by_client'
         app_def.save()
@@ -510,9 +509,9 @@ class FlowAdminManager(object):
                         participant_def.role = participant_role
                     else:
                         raise InvalidXPDLException(
-                            _(__name__ +
+                            _(__name__ + 
                               '.exceptions.role_was_not_found_on_system %(role_id)s'
-                              ) %
+                              ) % 
                             {'role_id': extended_attribute_node.get('Value')})
                 elif (
                         extended_attribute_node.get('Name') and
@@ -525,7 +524,7 @@ class FlowAdminManager(object):
                         participant_def.org_unit = participant_org_unit
                     else:
                         raise InvalidXPDLException(
-                            _(__name__ +
+                            _(__name__ + 
                               '.exceptions.org_unit_was_not_found_on_system  %(org_unit_id)s'
                               ) % {
                                   'org_unit_id':
@@ -538,9 +537,9 @@ class FlowAdminManager(object):
                         participant_def.user = participant_user
                     else:
                         raise InvalidXPDLException(
-                            _(__name__ +
+                            _(__name__ + 
                               '.exceptions.username_was_not_found_on_system  %(username)s'
-                              ) %
+                              ) % 
                             {'username': extended_attribute_node.get('Value')})
         participant_def.save()
         flow_def.participant_definition_set.add(participant_def)
@@ -638,7 +637,7 @@ class FlowAdminManager(object):
                     else:
                         activity_def.duration = 0
 
-                    if activity_def.duration != (activity_def.waiting_time +
+                    if activity_def.duration != (activity_def.waiting_time + 
                                                  activity_def.working_time):
                         activity_def.duration = activity_def.waiting_time + activity_def.working_time
             else:
@@ -825,7 +824,7 @@ class FlowAdminManager(object):
                 if (activity_def.activity_type == ActivityType.ROUTE):
                     activity_def.assignment_strategy = AssignmentStrategyType.NONE
                 elif (activity_def.activity_type == ActivityType.TASK
-                      or activity_def.activity_type ==
+                      or activity_def.activity_type == 
                       ActivityType.NO_IMPLEMENTATION):
                     activity_def.assignment_strategy = SystemParameter.find_one(
                         'FLOW_DEFAULT_ACTIVITY_ASSIGNMENT_STRATEGY',
@@ -836,7 +835,7 @@ class FlowAdminManager(object):
                 if (activity_def.activity_type == ActivityType.ROUTE):
                     activity_def.start_mode = AssignmentStrategyType.NONE
                 elif (activity_def.activity_type == ExecutionModeType.AUTOMATIC
-                      or activity_def.activity_type ==
+                      or activity_def.activity_type == 
                       ActivityType.NO_IMPLEMENTATION):
                     activity_def.start_mode = SystemParameter.find_one(
                         'FLOW_DEFAULT_ACTIVITY_DEFAULT_START_EXECUTION_MODE',
@@ -845,7 +844,7 @@ class FlowAdminManager(object):
                 if (activity_def.activity_type == ActivityType.ROUTE):
                     activity_def.finish_mode = AssignmentStrategyType.NONE
                 elif (activity_def.activity_type == ExecutionModeType.AUTOMATIC
-                      or activity_def.activity_type ==
+                      or activity_def.activity_type == 
                       ActivityType.NO_IMPLEMENTATION):
                     activity_def.finish_mode = SystemParameter.find_one(
                         'FLOW_DEFAULT_ACTIVITY_DEFAULT_FINISH_EXECUTION_MODE',
@@ -887,7 +886,7 @@ class FlowAdminManager(object):
                     trans_def.from_activity_definition = from_activity_definition
                 except ActivityDefinition.DoesNotExist:
                     raise InvalidXPDLException(
-                        _(__name__ +
+                        _(__name__ + 
                           '.exceptions.from_activity_id_was_not_found %(transaction_id)s %(activity_id)s'
                           ) % {
                               'transaction_id': trans_id,
@@ -901,7 +900,7 @@ class FlowAdminManager(object):
                     trans_def.to_activity_definition = to_activity_definition
                 except ActivityDefinition.DoesNotExist:
                     raise InvalidXPDLException(
-                        _(__name__ +
+                        _(__name__ + 
                           '.exceptions.to_activity_id_was_not_found %(transaction_id)s %(activity_id)s'
                           ) % {
                               'transaction_id': trans_id,
@@ -1305,7 +1304,7 @@ class FlowAdminManager(object):
                     TimeEstimationMethodType.AVERAGE))
         if method is None:
             raise ValueError(
-                _(__name__ +
+                _(__name__ + 
                   ".exceptions.invalid_time_estimation_method_type_especified")
             )
 

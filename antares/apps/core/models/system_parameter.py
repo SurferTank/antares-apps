@@ -1,3 +1,5 @@
+from antares.apps.core.constants import FieldDataType
+from antares.apps.core.middleware.request import get_request
 import datetime
 import logging
 from uuid import UUID
@@ -9,9 +11,6 @@ from django.db import models
 from django.db.utils import ProgrammingError
 from django.utils import timezone
 from django.utils.translation import ugettext as _
-
-from antares.apps.core.constants import FieldDataType
-from antares.apps.core.middleware.request import get_request
 
 
 logger = logging.getLogger(__name__)
@@ -144,7 +143,7 @@ class SystemParameter(models.Model):
         except cls.DoesNotExist:
             if default is not None:
                 system_param = SystemParameter(id=system_paramId)
-                logger.debug("Creating the parameter with id " +
+                logger.debug("Creating the parameter with id " + 
                              system_paramId + " since it does not exist")
                 system_param.data_type = paramType
                 if (description is not None):
@@ -187,7 +186,6 @@ class SystemParameter(models.Model):
             return None
         except ProgrammingError as e:
                 return None
-            
 
     class Meta:
         app_label = 'core'

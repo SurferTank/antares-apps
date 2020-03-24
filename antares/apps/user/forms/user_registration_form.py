@@ -1,3 +1,4 @@
+from antares.apps.client.models import Client, ClientType
 from datetime import datetime
 
 from captcha.fields import ReCaptchaField
@@ -6,13 +7,11 @@ from django.contrib.auth import get_user_model
 from django.utils import timezone
 from django.utils.translation import ugettext as _
 
-from antares.apps.client.models import Client, ClientType
-
 from ..constants import UserClassType
 from ..models import Role, UserRole, User
 
 
-#from django.contrib.auth.forms import UserCreationForm
+# from django.contrib.auth.forms import UserCreationForm
 class UserRegistrationForm(forms.Form):
     first_name = forms.CharField(
         max_length=30, required=False, help_text='Optional.')
@@ -40,7 +39,7 @@ class UserRegistrationForm(forms.Form):
             user_role.role = role
             user_role.start_date = datetime.now()
             user_role.save()
-        #the role to which all users pertain
+        # the role to which all users pertain
         basic_role = Role.find_one_by_code("BASIC_ROLE")
         user_role = UserRole()
         user_role.author = user
@@ -59,7 +58,7 @@ class UserRegistrationForm(forms.Form):
         client.client_type = client_type
         client.save()
 
-    #def save(self):
+    # def save(self):
     #    from antares.apps.user.models import Role
     #    role = Role.find_one_by_code(self.user_role)
 

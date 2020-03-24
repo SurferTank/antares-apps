@@ -1,11 +1,10 @@
+from antares.apps.core.constants import FieldDataType
+from antares.apps.flow.constants import DefinitionSiteType, FlowDataType, PropertyType
 import logging
 import uuid
 
 from django.db import models
 from django.utils.translation import ugettext as _
-
-from antares.apps.core.constants import FieldDataType
-from antares.apps.flow.constants import DefinitionSiteType, FlowDataType, PropertyType
 
 
 logger = logging.getLogger(__name__)
@@ -28,7 +27,7 @@ class ApplicationParameterDefinition(models.Model):
     order_number = models.IntegerField(blank=True, null=True)
     parameter_id = models.CharField(max_length=200)
     property_type = models.CharField(choices=PropertyType.choices, max_length=30)
-    sub_data_type = models.CharField(choices=FieldDataType.choices, 
+    sub_data_type = models.CharField(choices=FieldDataType.choices,
                                      max_length=30, blank=True, null=True)
 
     def __str__(self):

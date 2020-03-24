@@ -1,3 +1,4 @@
+from antares.apps.core.middleware.request import get_request
 import logging
 import uuid
 
@@ -6,8 +7,6 @@ from django.db import models
 from django.db import transaction
 from django.utils import timezone
 from django.utils.translation import ugettext as _
-
-from antares.apps.core.middleware.request import get_request
 
 
 logger = logging.getLogger(__name__)
@@ -50,7 +49,7 @@ class TerminalLog(models.Model):
         log = TerminalLog()
         log.command = actions
         log.result = return_message
-        #with transaction.atomic():
+        # with transaction.atomic():
         #    log.save()
 
     class Meta:

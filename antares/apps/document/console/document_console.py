@@ -3,12 +3,11 @@ Created on Jun 17, 2016
 
 @author: leobelen
 '''
+from antares.apps.core.constants import FieldDataType
 import logging
 
 from dateutil import parser as dateparser
 from django.utils.translation import ugettext as _
-
-from antares.apps.core.constants import FieldDataType
 
 from ..types import Document
 

@@ -3,14 +3,13 @@ Created on Jul 22, 2016
 
 @author: leobelen
 '''
+from antares.apps.document.models import FormDefinition
+from antares.apps.flow.manager import FlowAdminManager
+from antares.apps.flow.models import FlowDefinition, FlowPackage
 import logging
 
 from django.core.exceptions import ObjectDoesNotExist
 from django.utils.translation import ugettext as _
-
-from antares.apps.document.models import FormDefinition
-from antares.apps.flow.manager import FlowAdminManager
-from antares.apps.flow.models import FlowDefinition, FlowPackage
 
 from ..service import NukeService
 
@@ -19,6 +18,7 @@ logger = logging.getLogger(__name__)
 
 
 class NukeConsole(object):
+
     @classmethod
     def process_commands(cls, params, html=False):
         message = ""

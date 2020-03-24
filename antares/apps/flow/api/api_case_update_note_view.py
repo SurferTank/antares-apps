@@ -12,6 +12,7 @@ logger = logging.getLogger(__name__)
 
 
 class ApiCaseUpdateNoteView(AjaxResponseMixin, JSONResponseMixin, View):
+
     def post(self, request, *args, **kwargs):
         response_dict = {}
         case_id = uuid.UUID(request.POST.get('case_id'))

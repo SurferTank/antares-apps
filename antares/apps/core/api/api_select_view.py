@@ -3,18 +3,18 @@ Created on 21/8/2016
 
 @author: leobelen
 '''
+from antares.apps.core.models.catalog import Catalog
 import logging
 
 from braces.views import AjaxResponseMixin, JSONResponseMixin
 from django.views.generic import View
-
-from antares.apps.core.models.catalog import Catalog
 
 
 logger = logging.getLogger(__name__)
 
 
 class ApiSelectView(AjaxResponseMixin, JSONResponseMixin, View):
+
     def get(self, request, *args, **kwargs):
         if 'selector' in request.GET:
             if 'q' in request.GET:

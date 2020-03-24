@@ -3,12 +3,11 @@ Created on Jul 15, 2016
 
 @author: leobelen
 '''
+from antares.apps.document.models import DocumentHeader
+from antares.apps.document.types import Document
 import logging
 
 from django.utils.translation import ugettext as _
-
-from antares.apps.document.models import DocumentHeader
-from antares.apps.document.types import Document
 
 from ..manager import SubscriptionManager
 
@@ -50,7 +49,7 @@ class SubscriptionConsole(object):
             SubscriptionManager.process_document_subscriptions(document)
 
             return _(
-                __name__ +
+                __name__ + 
                 ".document_subscription_processed_successfully {document_id}"
             ).format(document_id=document.document_id)
         else:

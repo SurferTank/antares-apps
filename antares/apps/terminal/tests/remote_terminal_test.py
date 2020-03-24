@@ -8,6 +8,7 @@ from django.test.testcases import TestCase
 
 
 class RemoteTerminalTest(TestCase):
+
     def setup(self):
         self.testClient = Client()
         loginResult = self.testClient.login(

@@ -11,6 +11,7 @@ logger = logging.getLogger(__name__)
 
 
 class ApiForwardView(AjaxResponseMixin, JSONResponseMixin, View):
+
     def post(self, request, *args, **kwargs):
         response_dict = {}
         request_type = request.POST.get('type')

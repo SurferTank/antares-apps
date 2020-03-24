@@ -2,11 +2,12 @@
 
 import antares.apps.accounting.constants
 from decimal import Decimal
+import uuid
+
 from django.db import migrations, models
 import django.db.models.deletion
 import djmoney.models.fields
 import enumfields.fields
-import uuid
 
 
 class Migration(migrations.Migration):

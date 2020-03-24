@@ -6,6 +6,7 @@ Created on 30/7/2016
 
 
 class ClientException(Exception):
+
     def __init__(self, value):
         self.value = value
 

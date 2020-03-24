@@ -1,10 +1,9 @@
+from antares.apps.core.constants import ScriptEngineType
 import logging
 import uuid
 
 from django.db import models
 from django.utils.translation import ugettext as _
-
-from antares.apps.core.constants import ScriptEngineType
 
 
 logger = logging.getLogger(__name__)

@@ -29,7 +29,7 @@ class UserParameterTest(TransactionTestCase):
         param_value = UserParameter.find_one(
             "STRING_PARAM", FieldDataType.STRING, "another_test")
         self.assertEqual(param_value, "test")
-        logger.info("we could create a string sysparam with value " +
+        logger.info("we could create a string sysparam with value " + 
                     param_value)
 
     def test_text_param(self):
@@ -39,7 +39,7 @@ class UserParameterTest(TransactionTestCase):
         param_value = UserParameter.find_one("TEXT_PARAM", FieldDataType.TEXT,
                                              "another_test")
         self.assertEqual(param_value, "test")
-        logger.info("we could create a text sysparam with value " +
+        logger.info("we could create a text sysparam with value " + 
                     param_value)
 
     def test_integer_param(self):
@@ -49,7 +49,7 @@ class UserParameterTest(TransactionTestCase):
         param_value = UserParameter.find_one("INTEGER_PARAM",
                                              FieldDataType.INTEGER, 2)
         self.assertEqual(param_value, 1)
-        logger.info("we could create a integer sysparam with value " +
+        logger.info("we could create a integer sysparam with value " + 
                     str(param_value))
 
     def test_float_param(self):
@@ -59,7 +59,7 @@ class UserParameterTest(TransactionTestCase):
         param_value = UserParameter.find_one("FLOAT_PARAM",
                                              FieldDataType.FLOAT, 2.0)
         self.assertEqual(param_value, 1.1)
-        logger.info("we could create a float sysparam with value " +
+        logger.info("we could create a float sysparam with value " + 
                     str(param_value))
 
     def test_date_param(self):
@@ -70,7 +70,7 @@ class UserParameterTest(TransactionTestCase):
         param_value = UserParameter.find_one("DATE_PARAM", FieldDataType.DATE,
                                              datetime.date(2011, 1, 1))
         self.assertEqual(param_value, datetime.date(2001, 1, 1))
-        logger.info("we could create a float sysparam with value " +
+        logger.info("we could create a float sysparam with value " + 
                     str(param_value))
 
     def test_datetime_param(self):
@@ -82,7 +82,7 @@ class UserParameterTest(TransactionTestCase):
             "DATETIME_PARAM", FieldDataType.DATETIME,
             datetime.datetime(2011, 1, 1, 1, 1, 1))
         self.assertEqual(param_value, datetime.datetime(2001, 1, 1, 1, 1, 1))
-        logger.info("we could create a float sysparam with value " +
+        logger.info("we could create a float sysparam with value " + 
                     str(param_value))
 
     def test_uuid_param(self):
@@ -94,10 +94,10 @@ class UserParameterTest(TransactionTestCase):
         param_value = UserParameter.find_one("UUID_PARAM", FieldDataType.UUID,
                                              uuid_2, "some test")
         self.assertEqual(param_value, uuid_1)
-        logger.info("we could create a float sysparam with value " +
+        logger.info("we could create a float sysparam with value " + 
                     str(param_value))
 
-    #def test_bool_param(self):
+    # def test_bool_param(self):
     #    param_value = UserParameter.find_one("BOOL_PARAM", FieldDataType.BOOLEAN, True, "some test")
     #    self.assertEqual(param_value, True)
     #    param_value = UserParameter.find_one("UUID_PARAM", FieldDataType.BOOLEAN, False, "some test")

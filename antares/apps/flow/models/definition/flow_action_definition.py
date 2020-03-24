@@ -1,11 +1,10 @@
+from antares.apps.core.constants import ActionType, ScriptEngineType, FieldDataType
+from antares.apps.core.models.system_parameter import SystemParameter
 import logging
 import uuid
 
 from django.db import models
 from django.utils.translation import ugettext as _
-
-from antares.apps.core.constants import ActionType, ScriptEngineType, FieldDataType
-from antares.apps.core.models.system_parameter import SystemParameter
 
 
 logger = logging.getLogger(__name__)
@@ -25,7 +24,7 @@ class FlowActionDefinition(models.Model):
         blank=True,
         null=True)
     action_type = models.CharField(choices=ActionType.choices, max_length=30, default=ActionType.POST_ACTION)
-    script_engine = models.CharField(choices=ScriptEngineType.choices, 
+    script_engine = models.CharField(choices=ScriptEngineType.choices,
                                      max_length=30)
     content = models.CharField(max_length=2000, blank=True, null=True)
 

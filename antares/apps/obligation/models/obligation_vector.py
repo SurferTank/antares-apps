@@ -3,6 +3,9 @@ Created on Jul 9, 2016
 
 @author: leobelen
 '''
+from antares.apps.core.manager import COPAD
+from antares.apps.core.middleware.request import get_request
+from datetime import date
 import logging
 import uuid
 
@@ -10,13 +13,9 @@ from django.conf import settings
 from django.db import models
 from django.utils import timezone
 from django.utils.translation import ugettext_lazy as _
-from datetime import date
-from .obligation_vector_log import ObligationVectorLog
-from antares.apps.core.manager import COPAD
-
-from antares.apps.core.middleware.request import get_request
 
 from ..constants import ObligationType, ObligationStatusType
+from .obligation_vector_log import ObligationVectorLog
 
 
 logger = logging.getLogger(__name__)
@@ -95,9 +94,8 @@ class ObligationVector(models.Model):
         super(ObligationVector, self).save(*args, **kwargs)
         
     def get_COPAD(self):
-        return COPAD(self.client.id, self.obligation.id, 
+        return COPAD(self.client.id, self.obligation.id,
                      self.period, self.account_type.id, self.base_document.id)
-    
 
     @classmethod
     def find_or_create_status(cls, client, concept_type, period, account_type,
@@ -204,7 +202,7 @@ class ObligationVector(models.Model):
 
     def set_status(self,
                               status,
-                              status_date = timezone.now(),
+                              status_date=timezone.now(),
                               compliance_document=None):
         """
         Sets an status on the obligation's vector. 
@@ -215,12 +213,11 @@ class ObligationVector(models.Model):
         if (compliance_document is not None):
             self.compliance_document = compliance_document
         ObligationVectorLog.post_status_log(self)
-        
 
     class Meta:
         app_label = 'obligation'
         db_table = 'obl_vector'
         unique_together = (('client', 'concept_type', 'period', 'account_type',
-                            'base_document'), )
+                            'base_document'),)
         verbose_name = _(__name__ + ".table_name")
         verbose_name_plural = _(__name__ + ".table_name_plural")

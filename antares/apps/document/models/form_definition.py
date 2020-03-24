@@ -1,3 +1,8 @@
+from antares.apps.core.constants import FieldDataType
+from antares.apps.core.manager import PeriodManager
+from antares.apps.core.middleware.request import get_request
+from antares.apps.core.models.system_parameter import SystemParameter
+from antares.apps.document.constants import FormDefinitionStatusType
 from datetime import datetime
 import logging
 import os
@@ -9,12 +14,6 @@ from django.utils import timezone
 from django.utils.translation import ugettext as _
 from lxml import etree
 from lxml import objectify
-
-from antares.apps.core.constants import FieldDataType
-from antares.apps.core.manager import PeriodManager
-from antares.apps.core.middleware.request import get_request
-from antares.apps.core.models.system_parameter import SystemParameter
-from antares.apps.document.constants import FormDefinitionStatusType
 
 from ..exceptions import InvalidFormDefinitionException
 
@@ -120,9 +119,9 @@ class FormDefinition(models.Model):
         schema = etree.XMLSchema(schema_root)
 
         parser = etree.XMLParser(schema=schema)
-        #try:
+        # try:
         #    etree.fromstring(self.definition, parser)
-        #except Exception as e:
+        # except Exception as e:
         #    raise InvalidFormDefinitionException(
         #        _(__name__ + ".exceptions.form_is_invalid"))
 
@@ -351,7 +350,7 @@ class FormDefinition(models.Model):
 
         try:
             return FormDefinition.objects.filter(
-                Q(form_class__concept_type__id=concept_type) &
+                Q(form_class__concept_type__id=concept_type) & 
                 Q(start_date__lgt=period_date) & (Q(end_date__gte=period_date)
                                                   | Q(end_date=None)))
         except:
@@ -364,7 +363,7 @@ class FormDefinition(models.Model):
             form_class = FormClass.objects.get(
                 third_party_type=third_party_type)
             return cls.objects.get(
-                Q(form_class=form_class) &
+                Q(form_class=form_class) & 
                 ~Q(status=FormDefinitionStatusType.DEACTIVATED))
         except:
             return None

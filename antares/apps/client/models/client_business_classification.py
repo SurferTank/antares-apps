@@ -3,6 +3,7 @@ Created on 30/8/2016
 
 @author: leobelen
 '''
+from antares.apps.core.middleware.request import get_request
 import logging
 import uuid
 
@@ -11,8 +12,6 @@ from django.db import models
 from django.utils import timezone
 from django.utils.translation import ugettext as _
 from mptt.fields import TreeForeignKey
-
-from antares.apps.core.middleware.request import get_request
 
 
 class ClientBusinessClassification(models.Model):

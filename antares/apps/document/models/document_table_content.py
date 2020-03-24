@@ -1,9 +1,8 @@
+from antares.apps.core.constants import FieldDataType
 import logging
 
 from django.db import models
 from django.utils.translation import ugettext as _
-
-from antares.apps.core.constants import FieldDataType
 
 
 logger = logging.getLogger(__name__)
@@ -41,6 +40,6 @@ class DocumentTableContent(models.Model):
         app_label = 'document'
         db_table = 'doc_table_contents'
         unique_together = (('document', 'table_definition', 'row_number',
-                            'definition'), )
+                            'definition'),)
         verbose_name = _(__name__ + ".table_name")
         verbose_name_plural = _(__name__ + ".table_name_plural")

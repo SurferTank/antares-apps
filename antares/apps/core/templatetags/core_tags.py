@@ -1,9 +1,8 @@
+from antares.apps.core.middleware.request import get_request
 from datetime import datetime, date
 import logging
 
 from django import template
-
-from antares.apps.core.middleware.request import get_request
 
 from ..constants import FieldDataType
 from ..models import SystemParameter
