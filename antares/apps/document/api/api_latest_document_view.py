@@ -39,6 +39,7 @@ class ApiLatestDocumentView(BaseDatatableView):
        'author',
        'status',
        'save_date',
+       'actions'
     ]
     order_columns = [
         'id',

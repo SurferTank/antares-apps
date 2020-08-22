@@ -172,3 +172,7 @@ msgid "antares.apps.document.templates.latest_document.status"
 msgstr "Status"
 msgid "antares.apps.document.templates.latest_document.status_date"
 msgstr "Date"
+
+msgid "antares.apps.document.templates.latest_document.actions"
+msgstr "Actions"
+
