@@ -39,7 +39,7 @@ class UserParameter(models.Model):
         max_length=20,
         verbose_name=_(__name__ + ".data_type"),
         help_text=_(__name__ + ".data_type_help"))
-    boolean_value = models.NullBooleanField(
+    boolean_value = models.BooleanField(
         blank=True,
         null=True,
         verbose_name=_(__name__ + ".boolean_value"),

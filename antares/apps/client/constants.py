@@ -27,7 +27,7 @@ class ClientArchetype(EnumUtilsMixin, models.TextChoices):
 
 class ClientStatusType(EnumUtilsMixin, models.TextChoices):
     ACTIVE = "Active", _(__name__ + '.ClientStatusType.' + 'ACTIVE')
-    DEFUNCT = "Defunct", _(__name__ + '.ClientStatusType.' + 'DEFUCT')
+    DEFUNCT = "Defunct", _(__name__ + '.ClientStatusType.' + 'DEFUNCT')
     DEFUNCT_CANDIDATE = "Defunct Candidate", _(__name__ + '.ClientStatusType.' + 'DEFUNCT_CANDIDATE')
 
 

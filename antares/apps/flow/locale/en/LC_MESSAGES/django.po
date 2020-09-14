@@ -483,6 +483,29 @@ msgstr "Flow Package"
 msgid "antares.apps.flow.models.definition.flow_package.table_name_plural"
 msgstr "Flow Packages"
 
+msgid "antares.apps.flow.console.flow_admin_console.console.package_id"
+msgstr "Package ID"
+
+msgid "antares.apps.flow.console.flow_admin_console.console.package_version"
+msgstr "Package Version"
+
+msgid "antares.apps.flow.console.flow_admin_console.console.package_name"
+msgstr "Package Name"
+
+msgid "antares.apps.flow.console.flow_admin_console.console.missing_parameter"
+msgstr "Missing parameter: "
 
 
- 
+msgid "antares.apps.flow.console.flow_admin_console.console.flow_id"
+msgstr "Flow ID"
+
+msgid "antares.apps.flow.console.flow_admin_console.console.flow_version"
+msgstr "Flow Version"
+
+msgid "antares.apps.flow.console.flow_admin_console.console.flow_name"
+msgstr "Flow name"
+
+msgid "antares.apps.flow.console.flow_admin_console.console.flow_description"
+msgstr "Description"
+msgid "antares.apps.flow.console.flow_admin_console.console.flow_status"
+msgstr "Status"

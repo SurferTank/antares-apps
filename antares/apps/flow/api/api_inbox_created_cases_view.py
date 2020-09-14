@@ -74,7 +74,7 @@ class ApiInboxCreatedCasesView(BaseDatatableView):
 
         elif (column == 'actions'):
             return '<a href="' + reverse("antares.apps.flow:dashboard_view", args=[str(row.id)]) + '">' + \
-                '<i class="fa fa-sign-in" aria-hidden="true"></i></a>'
+                '<i class="fa fa-sign-in-alt" aria-hidden="true"></i></a>'
         else:
             return super(ApiInboxCreatedCasesView, self).render_column(
                 row, column)

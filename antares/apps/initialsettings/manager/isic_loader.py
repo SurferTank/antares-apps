@@ -32,7 +32,7 @@ class IsicLoader(object):
         folder = os.path.join(
             settings.BASE_DIR,
             SystemParameter.find_one("INITIAL_SETTINGS_DEFAULT_FOLDER",
-                                     FieldDataType.STRING, 'initialsettings'),
+                                     FieldDataType.STRING, 'antares/initialsettings'),
             'isic', 'files')
 
         if language == LanguageType.ENGLISH:

@@ -102,8 +102,7 @@ class User(AbstractUser):
             if (self.client is not None):
                 return self.client
         except:
-            raise UserException(
-                _(__name__ + ".the_user_has_no_client_associated"))
+            return None
         # else:
         #    return None
 

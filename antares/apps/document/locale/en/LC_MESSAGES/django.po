@@ -176,3 +176,5 @@ msgstr "Date"
 msgid "antares.apps.document.templates.latest_document.actions"
 msgstr "Actions"
 
+msgid "antares.apps.documents.templates.emptyMessages.emptyList"
+msgstr "No latest documents found"

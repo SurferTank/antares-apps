@@ -52,13 +52,13 @@ class ApiCaseDocumentView(BaseDatatableView):
                 return None
         elif column == 'status':
             if row.document.status:
-                return row.document.status.label
+                return row.document.status
             else:
                 return None
 
         elif column == 'relationship':
             if row.relationship:
-                return row.relationship.label
+                return row.relationship
             else:
                 return None
         elif column == 'creation_date':

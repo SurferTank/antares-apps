@@ -27,7 +27,7 @@ class SystemParameter(models.Model):
         null=True,
         verbose_name=_(__name__ + ".description"),
         help_text=_(__name__ + ".description_help"))
-    boolean_value = models.NullBooleanField(
+    boolean_value = models.BooleanField(
         blank=True,
         null=True,
         verbose_name=_(__name__ + ".boolean_value"),

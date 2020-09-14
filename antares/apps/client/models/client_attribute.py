@@ -26,7 +26,7 @@ class ClientAttribute(models.Model):
         db_column='attribute_definition',
         blank=True,
         null=True)
-    boolean_value = models.NullBooleanField()
+    boolean_value = models.BooleanField(null=True)
     data_type = models.CharField(choices=FieldDataType.choices, max_length=20)
     date_value = models.DateTimeField(blank=True, null=True)
     float_value = models.FloatField(blank=True, null=True)

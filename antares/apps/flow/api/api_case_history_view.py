@@ -45,7 +45,7 @@ class ApiCaseHistoryView(BaseDatatableView):
             else:
                 return str(row.activity_definition.id)
         elif column == 'status':
-            return row.status.label
+            return row.status
         elif column == 'creation_date':
             return row.creation_date.strftime(self.date_format_string)
         elif column == 'start_date':

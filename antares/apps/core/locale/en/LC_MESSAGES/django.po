@@ -58,6 +58,18 @@ msgstr "System Parameters"
 msgid "antares.apps.core.models.user_parameter.table_name"
 msgstr "User Parameter"
 
+msgid "antares.apps.core.models.concept_type.id"
+msgstr "ID"
+
+msgid "antares.apps.core.models.concept_type.parent"
+msgstr "parent"
+
+msgid "antares.apps.core.models.concept_type.concept_type_name"
+msgstr "Concept Type name"
+
+msgid "antares.apps.core.models.concept_type.description"
+msgstr "description"
+
 msgid "antares.apps.core.models.user_parameter.table_name_plural"
 msgstr "User Parameters"
 

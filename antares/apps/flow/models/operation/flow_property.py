@@ -37,7 +37,7 @@ class FlowProperty(models.Model):
     string_value = models.CharField(max_length=2000, blank=True, null=True)
     sub_data_type = models.CharField(choices=FlowBasicDataSubtype.choices, max_length=30)
     text_value = models.TextField(blank=True, null=True)
-    boolean_value = models.NullBooleanField()
+    boolean_value = models.BooleanField(null=True)
 
     def save(self, *args, **kwargs):
         super(FlowProperty, self).save(*args, **kwargs)

@@ -43,7 +43,7 @@ class ApiClientUserRelationsView(BaseDatatableView):
         if column == 'parent_user':
             return row.parent_user.username
         if column == 'relation_type':
-            return ClientRelationType.to_enum(row.relation_type).get_label()
+            return ClientRelationType.to_enum(row.relation_type).label
         if column == 'start_date':
             if (row.start_date is not None):
                 return row.start_date.strftime(self.date_format_string)

@@ -47,8 +47,7 @@ class WorkspaceView(TemplateView):
             context['activity_tools'] = activity.process_tools()
             context['activity'] = activity
             context['performer'] = get_request().user
-            context['priority_type_choices'] = json.dumps(
-                FlowPriorityType.as_choices())
+            context['priority_type_choices'] = json.dumps(json.dumps(list(map(str, FlowPriorityType))))
         except Exception as e:
             logger.exception(e)
         return context
