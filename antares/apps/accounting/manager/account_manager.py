@@ -78,12 +78,7 @@ class AccountManager(object):
 
         account_document.content = AccountManager._get_account_document_string(
             account_document, transactions)
-        for transaction in transactions:
-            chargesManager = ChargesManager(transaction.balance, timezone.now())
-            if(cancelled_document is None):
-                chargesManager.calculateCharges(False)
-            else:
-                chargesManager.calculateCharges(True)
+    
         
         account_document.status = AccountDocumentStatusType.PROCESSED
 
@@ -241,8 +236,8 @@ class AccountManager(object):
         transaction.balance.save()
         
         # lets create the interest and penalties. 
-        chargesManager = ChargesManager(transaction.balance)
-        chargesManager.calculateCharges()
+        chargesManager = ChargesManager()
+        chargesManager.calculateChargesByAccount(transaction.balance)
 
     @classmethod
     def _compute_balance_status(cls, principal: float, interest: float,

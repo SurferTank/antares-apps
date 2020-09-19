@@ -47,7 +47,7 @@ class ApiCaseNoteListView(BaseDatatableView):
         elif column == 'actions':
             line = '<a href="#" onClick="editNote(\'' + str(row.id) + \
                 '\', \'' + row.title + '\', \'' + row.content + \
-                '\');"><i class="fa fa-pencil" aria-hidden="true"></i></a>'
+                '\', \'' + str(row.flow_case.id) + '\');"><i class="fa fa-pencil-alt" aria-hidden="true"></i></a>'
             return line
         else:
             return super(ApiCaseNoteListView, self).render_column(row, column)

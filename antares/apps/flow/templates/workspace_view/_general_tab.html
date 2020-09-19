@@ -19,10 +19,17 @@
             {% trans 'antares.apps.flow.templates.dashboard.general_tab.name' %}:
         </div>
         <div class="col-lg-2">
+             {% if activity.status == 'Active' %}
             {% if activity.flow_case.case_name is empty %}
                 <a id="activityCaseName" data-type="text" data-pk="{{activity.flow_case.id}}" data-value="{{activity.flow_case.case_name}}" data-url="{% url 'antares.apps.flow:api_case_update_name' %}" data-params="{csrfmiddlewaretoken:'{{csrf_token}}'}" data-title="{% trans 'antares.apps.flow.templates.dashboard.general_tab.enter_case_name' %}">[{% trans 'antares.apps.flow.templates.dashboard.general_tab.enter_name' %}]</a>
             {% else %}
                 <a  id="activityCaseName" data-type="text" data-pk="{{activity.flow_case.id}}" data-value="{{activity.flow_case.case_name}}" data-url="{% url 'antares.apps.flow:api_case_update_name' %}" data-params="{csrfmiddlewaretoken:'{{csrf_token}}'}" data-title="{% trans 'antares.apps.flow.templates.dashboard.general_tab.enter_case_name' %}">{{activity.flow_case.case_name}}</a>
+            {% endif %}
+            {% else %}
+            {% if activity.flow_case.case_name is empty %}
+            {% else %} 
+             {{ activity.flow_case.case_name }}
+            {% endif %}
             {% endif %}
         </div>
         
@@ -38,7 +45,11 @@
             {% trans 'antares.apps.flow.templates.dashboard.general_tab.priority' %}:
         </div>
         <div class="col-lg-2">
-            <a href="#" id="casePriority" data-type="select2" data-pk="{{activity.flow_case.id}}" data-value="{{activity.flow_case.priority}}" data-url="{% url 'antares.apps.flow:api_case_update_priority' %}" data-params="{csrfmiddlewaretoken:'{{csrf_token}}'}" data-title="{% trans 'antares.apps.flow.templates.dashboard.general_tab.select_priority' %}"></a>
+        {% if activity.status == 'Active' %}
+            <a href="#" id="casePriority" data="{{priority_type_choices}}" data-type="select2" data-pk="{{activity.flow_case.id}}" data-value="{{activity.flow_case.priority}}" data-url="{% url 'antares.apps.flow:api_case_update_priority' %}" data-params="{csrfmiddlewaretoken:'{{csrf_token}}'}" data-title="{% trans 'antares.apps.flow.templates.dashboard.general_tab.select_priority' %}"></a>
+            {% else %}
+            {{activity.flow_case.priority}}
+            {% endif %}
         </div>
         </div>
         <div class="row">

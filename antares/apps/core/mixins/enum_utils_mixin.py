@@ -10,10 +10,18 @@ class EnumUtilsMixin:
         if element is None:
             return element
 
-        if isinstance(element, cls):
-            return element
-
         for item in cls:
             if str(element).lower() == str(item).lower():
                 return item
         return None
+    
+    @classmethod
+    def to_list(cls):
+        return list(map(lambda c: c.value, cls))
+    
+    @classmethod
+    def to_dict(cls):
+        return dict(cls.__members__)
+        
+   
+        

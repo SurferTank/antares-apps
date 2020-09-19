@@ -1989,6 +1989,7 @@ class Document(object):
             self._check_required_fields()
             self._process_modules_hooks()
             self.header.hash = self.hash()
+            self.header.status = status_type
             self.header.save()
             AccountManager.post_document(self)
             SubscriptionManager.process_document_subscriptions(self)

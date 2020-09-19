@@ -6,7 +6,7 @@
  * @param note_content
  * @returns
  */
-function editNote(note_id, note_title, note_content) {
+function editNote(note_id, note_title, note_content, flowCaseId) {
 	if (note_id) {
 		$("#note_id").val(note_id);
 	} else {
@@ -38,12 +38,38 @@ function editNote(note_id, note_title, note_content) {
 								{
 									'text' : gettext('antares.apps.flow.templates.dashboard.notes.save_button'),
 									'click' : function() {
-
-										saveCaseNote($(this));
+										saveCaseNote($(this), flowCaseId);
 									}
 								}, ],
 					});
 }
+
+/**
+ * 
+ * @param dialog
+ * @returns
+ */
+function saveCaseNote(dialog, flowCaseId) {
+	if (antaresFlowLinks.case_update_note_call) {
+		$.ajax({
+			'url' : antaresFlowLinks.case_update_note_call,
+			'data' : {
+				'case_id' : flowCaseId,
+				'title' : $("#note_title").val(),
+				'content' : $("#note_content").val(),
+				'note_id' : $("#note_id").val(),
+				'csrfmiddlewaretoken' : $.cookie('csrftoken'),
+			},
+			'method' : 'POST',
+			'type' : 'json',
+			'success' : function(data) {
+				$('#caseNotesTable').DataTable().ajax.reload();
+				dialog.dialog("close");
+			},
+		});
+	}
+}
+
 
 /**
  * Sets up the inbox for usage
@@ -479,31 +505,6 @@ function display_workflow_panel(activity_id) {
 
 }
 
-/**
- * 
- * @param dialog
- * @returns
- */
-function saveCaseNote(dialog) {
-	if (antaresFlowLinks.case_notes_call) {
-		$.ajax({
-			'url' : antaresFlowLinks.case_notes_call,
-			'data' : {
-				'case_id' : '{{activity.flow_case.id}}',
-				'title' : $("#note_title").val(),
-				'content' : $("#note_content").val(),
-				'note_id' : $("#note_id").val(),
-				'csrfmiddlewaretoken' : $.cookie('csrftoken'),
-			},
-			'method' : 'POST',
-			'type' : 'json',
-			'success' : function(data) {
-				$('#caseNotesTable').DataTable().ajax.reload();
-				dialog.dialog("close");
-			},
-		});
-	}
-}
 
 /**
  * 

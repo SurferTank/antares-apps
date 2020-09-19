@@ -2,7 +2,9 @@
 
     <div style="text-align:right; ">
     <a class="btn btn-primary" href="{% url "antares.apps.flow:inbox_view" %}">{% trans 'antares.apps.flow.templates.dashboard.forward.returnToInboxButton' %}</a>&nbsp;
-    <a class="btn btn-primary" onclick="openForwardWindow('{{activity_id}}');">{% trans 'antares.apps.flow.templates.dashboard.forward.forwardCaseButton' %}</a>
+    {% if activity.status == 'Active' %}
+    	<a class="btn btn-primary" onclick="openForwardWindow('{{activity_id}}');">{% trans 'antares.apps.flow.templates.dashboard.forward.forwardCaseButton' %}</a>
+    {% endif %}
     </div>
 
 <div class="panel-group" id="dashboardAccordion">
@@ -15,7 +17,9 @@
         </div>
         <div id="collapseToolbar" class="panel-collapse collapse in">
             <div class="panel-body">
+                {% if activity.status == 'Active' %}
                 {% include 'workspace_view/_tools.html' %}
+                {% endif %}
             </div>
         </div>
     </div>
@@ -34,7 +38,7 @@
             </div>
         </div>
     {% endif %}
-    
+    {% if activity.status == 'Active' %}
     <div class="panel panel-default">
         <div class="panel-heading">
             <h4 class="panel-title">
@@ -49,9 +53,10 @@
             </div>
         </div>
     </div>
+    {% endif %}
 </div>
 
-
+{% if activity.status == 'Active' %}
 <div id="forwardDialog" style="display:none; ">
     <div id="forwardDialogInner">
         <div id="msgValidationError">
@@ -68,4 +73,4 @@
             
         </div>
     </div>
-
+{% endif %}

@@ -28,7 +28,9 @@
                         <li><a data-toggle="tab" href="#documentsTab"> {% trans 'antares.apps.flow.templates.dashboard.tabs.documents' %}</a></li>
                         <li><a data-toggle="tab" href="#notesTab"> {% trans 'antares.apps.flow.templates.dashboard.left.notes' %}</a></li>
                         <li><a data-toggle="tab" href="#historyTab">{% trans 'antares.apps.flow.templates.dashboard.tabs.history' %}</a></li>
+                        {% comment %}
                         <li><a data-toggle="tab" href="#historyTab">{% trans 'antares.apps.flow.templates.dashboard.tabs.flowchart' %}</a></li>
+                        {% endcomment %}
                         {% extra_tabs_index %}
                     </ul>
                     <div class="tab-content">
@@ -47,9 +49,10 @@
                         <div id="historyTab" class="tab-pane fade">
                             {% include 'workspace_view/_history_tab.html' %}
                         </div>
-                        <!-- <div id="flowchartTab" class="tab-pane fade">
+                        {% comment %}
+                         <div id="flowchartTab" class="tab-pane fade">
                             {% include 'workspace_view/_flowchart_tab.html' %} 
-                        </div> -->
+                        {% endcomment %}
                         {% extra_tabs_content %}
                     </div>
                 </div>

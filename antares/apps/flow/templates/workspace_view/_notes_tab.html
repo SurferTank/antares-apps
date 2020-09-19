@@ -9,7 +9,7 @@
         </tr>
      </thead>
 </table>
-<div style="text-align: right;"><a href="#" class="small button round" onclick="editNote('', '', '');">{% trans 'antares.apps.flow.templates.dashboard.left.createNote' %}</a></div>
+<div style="text-align: right;"><a href="#" class="small button round" onclick="editNote('', '', '', '{{ activity.flow_case.id }}')">{% trans 'antares.apps.flow.templates.dashboard.left.createNote' %}</a></div>
  
 <div id="flow_add_note" title="{% trans 'antares.apps.flow.templates.dashboard.notes.edit_note' %}" style="display: none;">
   <form>
