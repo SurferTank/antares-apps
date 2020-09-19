@@ -94,6 +94,8 @@ class ApiLatestDocumentView(BaseDatatableView):
                 self.client = get_request().user.get_on_behalf_client()
             except UserException:
                 return qs
-     
-        qs = qs.filter(Q(client=self.client) | Q(author=get_request().user)).order_by("-save_date")
+        if(self.client is None):
+            qs = qs.filter(Q(status="INVALID"))
+        else:
+            qs = qs.filter(Q(client=self.client) | Q(author=get_request().user)).order_by("-save_date")
         return qs

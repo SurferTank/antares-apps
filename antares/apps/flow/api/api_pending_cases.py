@@ -78,7 +78,7 @@ class ApiPendingCasesView(BaseDatatableView):
             return '<a href="' + reverse("antares.apps.flow:dashboard_view", args=[str(row.id)]) + '">' + \
                 '<i class="fa fa-sign-in-alt" aria-hidden="true"></i></a>'
         else:
-            return super(ApiInboxActiveCasesView, self).render_column(
+            return super(ApiPendingCasesView, self).render_column(
                 row, column)
 
     def filter_queryset(self, qs):
