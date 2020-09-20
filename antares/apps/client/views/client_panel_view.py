@@ -53,13 +53,18 @@ class ClientPanelView(TemplateView):
                 context['template'] = template
                 context['is_inner'] = is_inner
                 return context
+        if(client is not None):
+            main_branch = client.branch_set.select_related().get(branch_number=0)
+            branches = client.branch_set.select_related().exclude(branch_number=0)
 
-        main_branch = client.branch_set.select_related().get(branch_number=0)
-        branches = client.branch_set.select_related().exclude(branch_number=0)
-
-        context['client'] = client
-        context['main_branch'] = main_branch
-        context['branches'] = branches
-        context['template'] = template
-        context['is_inner'] = is_inner
+            context['client'] = client
+            context['main_branch'] = main_branch
+            context['branches'] = branches
+            context['template'] = template
+            context['is_inner'] = is_inner
+            context['client_exists'] = True 
+        else: 
+            context['client_exists'] = False
+            context['template'] = template
+            context['is_inner'] = is_inner
         return context

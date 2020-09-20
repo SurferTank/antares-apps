@@ -84,15 +84,5 @@ class ApiPendingCasesView(BaseDatatableView):
     def filter_queryset(self, qs):
         # use parameters passed in GET request to filter queryset
         # simple example:
-        if self.request.GET.get('status_type'):
-            status_type = FlowActivityStatusType.to_enum(
-                self.request.GET.get('status_type'))
-            # TODO: check validity
-            if status_type is None:
-                raise FlowException(__name__ + ".exceptions.status_unknown")
-        else:
-            status_type = FlowActivityStatusType.ACTIVE
-
-        qs = FlowActivity.find_by_perfomer_and_status(get_request().user,
-                                                      status_type)
+        qs = FlowActivity.find_pending_by_perfomer(get_request().user)
         return qs

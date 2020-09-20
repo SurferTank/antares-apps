@@ -47,7 +47,17 @@ class WorkspaceView(TemplateView):
             context['activity_tools'] = activity.process_tools()
             context['activity'] = activity
             context['performer'] = get_request().user
+            context['validated_performer'] = self.validatePerformer(activity)
             context['priority_type_choices'] = json.dumps(FlowPriorityType.to_dict())
         except Exception as e:
             logger.exception(e)
         return context
+    
+    def validatePerformer(self, activity):
+        if(activity.performer.id != get_request().user.id):
+            return False
+        if(activity.status not in (FlowActivityStatusType.ACTIVE, FlowActivityStatusType.CREATED)):
+            return False
+        return True
+        
+        

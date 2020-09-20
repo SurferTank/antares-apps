@@ -9,8 +9,10 @@
         </tr>
      </thead>
 </table>
-<div style="text-align: right;"><a href="#" class="small button round" onclick="editNote('', '', '', '{{ activity.flow_case.id }}')">{% trans 'antares.apps.flow.templates.dashboard.left.createNote' %}</a></div>
- 
+{% if validated_performer %}
+	<div style="text-align: right;"><a href="#" class="small button round" onclick="editNote('', '', '', '{{ activity.flow_case.id }}')">{% trans 'antares.apps.flow.templates.dashboard.left.createNote' %}</a></div>
+{% endif %}
+
 <div id="flow_add_note" title="{% trans 'antares.apps.flow.templates.dashboard.notes.edit_note' %}" style="display: none;">
   <form>
     <input type="hidden" id="note_id" name="note_id" style="width: 100%;box-sizing: border-box; -webkit-box-sizing:border-box; -moz-box-sizing: border-box; "/>

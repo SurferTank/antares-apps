@@ -950,7 +950,7 @@ $(document).ready(function() {
 		</xsl:if>
 	</xsl:template>
 	<xsl:template name="list-string-processing-inner">
-		<input type="hidden">
+		<select>
 			<xsl:attribute name="value">
                 <xsl:text disable-output-escaping="yes">{{fields.</xsl:text>
                 <xsl:value-of select="@id" />
@@ -989,13 +989,16 @@ $(document).ready(function() {
                     <xsl:value-of select="@id" />
                 </xsl:attribute>
 			</xsl:if>
-		</input>
+		</select>
 		<script type="text/javascript">
 			<xsl:text disable-output-escaping="yes">create_select_field("</xsl:text>
 			<xsl:value-of select="@id" />
 			<xsl:text disable-output-escaping="yes">", "</xsl:text>
 			<xsl:value-of select="@catalogId" />
-			<xsl:text disable-output-escaping="yes">");</xsl:text>
+			<xsl:text disable-output-escaping="yes">", "</xsl:text>
+			<xsl:text disable-output-escaping="yes">{{fields.</xsl:text>
+                <xsl:value-of select="@id" />
+                <xsl:text disable-output-escaping="yes">.id|default_if_none:''}}");</xsl:text>
 		</script>
 	</xsl:template>
 	<xsl:template name="checkbox-string-processing">

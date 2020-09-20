@@ -17,10 +17,12 @@ import uuid
 
 import babel.numbers
 from django.db.models import Q
+from django.urls import reverse
 from django.utils.translation import ugettext as _
 from django_datatables_view.base_datatable_view import BaseDatatableView
 
 from ..models import DocumentHeader
+from ..constants import DocumentStatusType
 
 
 logger = logging.getLogger(__name__)
@@ -77,6 +79,14 @@ class ApiLatestDocumentView(BaseDatatableView):
                 return row.draft_date.strftime(self.date_format_string)
             else:
                 return ""
+        if column == "actions":
+            line = '<a href="' + reverse('antares.apps.document:view_view',  args=[row.id]) + \
+            '"><i class="fa fa-eye" aria-hidden="true"></i></a>'
+           
+            if DocumentStatusType.to_enum(row.status) == DocumentStatusType.DRAFTED:
+                line += '&nbsp;&nbsp;<a href="' + reverse('antares.apps.document:edit_view',  args=[row.id]) + \
+        '"><i class="fa fa-pencil-alt" aria-hidden="true"></i></a>'
+            return line
         else:
             return super(ApiLatestDocumentView, self).render_column(row, column)
 
@@ -97,5 +107,5 @@ class ApiLatestDocumentView(BaseDatatableView):
         if(self.client is None):
             qs = qs.filter(Q(status="INVALID"))
         else:
-            qs = qs.filter(Q(client=self.client) | Q(author=get_request().user)).order_by("-save_date")
+            qs = qs.filter((Q(client=self.client) & Q(status=DocumentStatusType.SAVED)) | Q(author=get_request().user)).order_by("-save_date")
         return qs

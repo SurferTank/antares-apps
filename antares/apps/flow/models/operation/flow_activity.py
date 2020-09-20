@@ -212,6 +212,15 @@ class FlowActivity(models.Model):
                 performer=performer, status=status)
         except FlowActivity.DoesNotExist:
             return []
+    
+    @classmethod
+    def find_pending_by_perfomer(cls, performer):
+        try:
+            return FlowActivity.objects.filter(Q(performer=performer) & (Q(status=FlowActivityStatusType.ACTIVE) | 
+                                                                         Q(status=FlowActivityStatusType.CREATED)))
+        except FlowActivity.DoesNotExist:
+            return []
+
 
     def process_tools(self):
         """ 

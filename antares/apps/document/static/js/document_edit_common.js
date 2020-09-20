@@ -163,7 +163,7 @@ function create_autocomplete_field(field_id, catalog_id) {
  * @param catalog_id
  * @returns
  */
-function create_select_field(field_id, catalog_id) {
+function create_select_field(field_id, catalog_id, value) {
 	$("#fields\\[" + field_id + "\\]").select2(
 			{
 				ajax : {
@@ -174,7 +174,7 @@ function create_select_field(field_id, catalog_id) {
 					'data' : function(params) {
 						return {
 							termId : params.term, /* search term */
-							catalogId : "test",
+							catalogId : catalog_id,
 							page : params.page
 						};
 					},
@@ -200,6 +200,7 @@ function create_select_field(field_id, catalog_id) {
 				},
 				minimumInputLength : 1
 			});
+			$("#fields\\[" + field_id + "\\]").val(value).trigger("change");
 }
 
 /**
