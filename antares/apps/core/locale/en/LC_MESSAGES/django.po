@@ -126,3 +126,13 @@ msgstr "French"
 
 msgid "antares.apps.core.constants.LanguageType.PORTUGUESE"
 msgstr "Portuguese"
+
+msgid "antares.apps.core.models.catalog.id"
+msgstr "ID"
+
+msgid "antares.apps.core.models.catalog.content"
+msgstr "Content"
+
+msgid "antares.apps.core.models.catalog.sql_text"
+msgstr "SQL Query"
+

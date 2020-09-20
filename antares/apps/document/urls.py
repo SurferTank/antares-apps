@@ -12,6 +12,7 @@ from .api import ApiLatestDocumentView
 from .views import DocumentCreateView
 from .views import DocumentEditView
 from .views import DocumentViewView
+from .views import DocumentPrintView
 
 
 app_name = 'antares.apps.document'
@@ -26,6 +27,9 @@ urlpatterns = [
     url(r'view/(?P<document_id>[\w\-]+)$',
         login_required(DocumentViewView.as_view()),
         name="view_view"),
+    url(r'view/(?P<document_id>[\w\-]+)$',
+        login_required(DocumentPrintView.as_view()),
+        name="print_view"),
     url(r'api/edit$',
         login_required(ApiDocumentSubmitView.as_view()),
         name="api_edit_submit_view"),

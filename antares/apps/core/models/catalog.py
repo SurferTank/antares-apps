@@ -16,48 +16,42 @@ class Catalog(models.Model):
     id = models.SlugField(
         primary_key=True,
         max_length=200,
-        verbose_name=_(__name__ + ".id"),
-        help_text=_(__name__ + ".primary_key_help"))
+        verbose_name=_(__name__ + ".id"))
     document_header = models.ForeignKey(
         "document.DocumentHeader",
         on_delete=models.PROTECT,
         db_column='document_header',
         blank=True,
         null=True,
-        verbose_name=_(__name__ + ".document_header"),
-        help_text=_(__name__ + ".document_header_help"))
+        editable=False,
+        verbose_name=_(__name__ + ".document_header"))
 
     content = models.TextField(
         blank=True,
         null=True,
-        verbose_name=_(__name__ + ".content"),
-        help_text=_(__name__ + ".content"))
+        verbose_name=_(__name__ + ".content"))
     sql_text = models.CharField(
         max_length=3000,
         blank=True,
         null=True,
-        verbose_name=_(__name__ + ".sql_text"),
-        help_text=_(__name__ + ".sql_text_help"))
+        verbose_name=_(__name__ + ".sql_text"))
     creation_date = models.DateTimeField(
         blank=False,
         null=False,
         editable=False,
-        verbose_name=_(__name__ + ".creation_name"),
-        help_text=_(__name__ + ".creation_name_help"))
+        verbose_name=_(__name__ + ".creation_name"))
     update_date = models.DateTimeField(
         blank=False,
         null=False,
         editable=False,
-        verbose_name=_(__name__ + ".update_date"),
-        help_text=_(__name__ + ".update_date_help"))
+        verbose_name=_(__name__ + ".update_date"))
     author = models.ForeignKey(
         settings.AUTH_USER_MODEL,
         on_delete=models.PROTECT,
         blank=False,
         null=False,
         editable=False,
-        verbose_name=_(__name__ + ".author"),
-        help_text=_(__name__ + ".author_help"))
+        verbose_name=_(__name__ + ".author"))
 
     def save(self, *args, **kwargs):
         if self.creation_date is None:
