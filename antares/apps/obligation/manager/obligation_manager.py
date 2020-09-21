@@ -121,26 +121,32 @@ class ObligationManager(object):
         """
         Verifies and creates -if needed- the client obligation records, used to calculate the obligations vector.
         """
-        client_obligation_list = ClientObligation.find_by_client_and_concept_type(
-            obligation_row['client'],
-            obligation_row['obligation_rule'].concept_type)
-        if (len(client_obligation_list) == 0):
-            client_obligation = ClientObligation()
-            client_obligation.client = obligation_row['client']
-            client_obligation.obligation_rule = obligation_row[
-                'obligation_rule']
-            client_obligation.concept_type = obligation_row['concept_type']
-            client_obligation.form_definition = obligation_row[
-                'form_definition']
-            client_obligation.start_date = obligation_row['start_date']
-            client_obligation.account_type = obligation_row['account_type']
-            client_obligation.end_date = obligation_row['end_date']
-            client_obligation.save()
-
-            ObligationManager.update_obligation_status(client_obligation)
-        else:
-            for client_obligation in client_obligation_list:
+        if(obligation_row is not None):
+        
+            client_obligation_list = ClientObligation.find_by_client_and_concept_type(
+                obligation_row['client'],
+                obligation_row['obligation_rule'].concept_type)
+            if (len(client_obligation_list) == 0):
+                client_obligation = ClientObligation()
+                client_obligation.client = obligation_row['client']
+                client_obligation.obligation_rule = obligation_row[
+                    'obligation_rule']
+                client_obligation.concept_type = obligation_row['concept_type']
+                client_obligation.form_definition = obligation_row[
+                    'form_definition']
+                client_obligation.start_date = obligation_row['start_date']
+                client_obligation.account_type = obligation_row['account_type']
+                client_obligation.end_date = obligation_row['end_date']
+                client_obligation.save()
+    
                 ObligationManager.update_obligation_status(client_obligation)
+            else:
+                for client_obligation in client_obligation_list:
+                    ObligationManager.update_obligation_status(client_obligation)
+        else: 
+            obligations = ClientObligation.find_all()
+            for client_obligation in obligations:
+                    ObligationManager.update_obligation_status(client_obligation)
 
     @classmethod
     def update_obligation_status(cls, client_obligation):
@@ -201,6 +207,7 @@ class ObligationManager(object):
         for obligation in cls._get_obligations_to_process(
                 client, concept_type, form_def, start_date, end_date):
             ObligationManager._check_or_create_client_obligation(obligation)
+    
 
     @classmethod
     def process_obligations_by_client(cls, client, when):

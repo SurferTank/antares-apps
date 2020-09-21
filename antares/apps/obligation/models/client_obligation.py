@@ -81,6 +81,13 @@ class ClientObligation(models.Model):
         except ClientObligation.DoesNotExist:
             return []
     
+    @staticmethod
+    def find_all():
+        try:
+            return ClientObligation.objects
+        except ClientObligation.DoesNotExist:
+            return []
+        
     def get_COPAD(self):
         if(self.base_document is not None):
             return COPAD(client=self.client.id, concept_type=self.concept_type.id,
