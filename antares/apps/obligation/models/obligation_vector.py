@@ -101,8 +101,9 @@ class ObligationVector(models.Model):
     def find_or_create_status(cls, client, concept_type, period, account_type,
                               base_document, client_obligation,
                               obligation_type, due_date):
-        obligation_status = ObligationVector.find_one_by_COPAD(
-            client, concept_type, period, account_type, base_document)
+        copad = COPAD(client=client, concept_type=concept_type, period=period, account_type=account_type, 
+                      document=base_document)
+        obligation_status = ObligationVector.find_one_by_COPAD(copad)
         if (obligation_status is not None):
             return obligation_status
         obligation_status = ObligationVector()

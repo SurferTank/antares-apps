@@ -9,6 +9,7 @@ from antares.apps.core.constants import FieldDataType, TimeUnitType
 from antares.apps.core.manager.period_manager import PeriodManager
 from antares.apps.core.models import SystemParameter
 from builtins import classmethod
+from antares.apps.core.manager import COPAD
 import logging
 
 from dateutil.relativedelta import relativedelta
@@ -150,10 +151,9 @@ class ObligationManager(object):
         period_list = PeriodManager.find_period_list_by_client_obligation(
             client_obligation, timezone.now())
         for period in period_list:
-            obligation_status = ObligationVector.find_one_by_COPAD(
-                client_obligation.client, client_obligation.concept_type,
-                period, client_obligation.account_type,
-                client_obligation.base_document)
+            copad = client_obligation.get_COPAD()
+            copad.period = period
+            obligation_status = ObligationVector.find_one_by_COPAD(copad)
             if (obligation_status is None or obligation_status.status == ObligationStatusType.CANCELLED):
                 due_date = PeriodManager.calculate_date_from_period(
                     client_obligation.obligation_rule.base_date, period,

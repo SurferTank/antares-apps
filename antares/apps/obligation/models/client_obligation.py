@@ -82,8 +82,13 @@ class ClientObligation(models.Model):
             return []
     
     def get_COPAD(self):
-        return COPAD(self.client.id, self.obligation.id,
-                     self.period, self.account_type.id, self.base_document.id)
+        if(self.base_document is not None):
+            return COPAD(client=self.client.id, concept_type=self.concept_type.id,
+                     account_type=self.account_type.id, 
+                     base_document=self.base_document.id)
+        else: 
+            return COPAD(client=self.client.id, concept_type=self.concept_type.id,
+                     account_type=self.account_type.id)
 
     @classmethod
     def find_one_by_COPAD(cls, copad):
@@ -95,7 +100,6 @@ class ClientObligation(models.Model):
             return ClientObligation.objects.get(
                 client=copad.client,
                 concept_type=copad.concept_type,
-                period=copad.period,
                 account_type=copad.account_type,
                 base_document=copad.base_document)
         except ClientObligation.DoesNotExist:

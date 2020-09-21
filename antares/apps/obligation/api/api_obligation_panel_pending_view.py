@@ -84,10 +84,10 @@ class ApiObligationPanelPendingView(BaseDatatableView):
             if (row.compliance_document is not None):
                 if ObligationType.to_enum(
                         row.obligation_type) != ObligationType.INFORM:
-                    link_string = '<a href="{document_view}?next={obligation_panel}{activity_ref}"><i class="fa fa-pencil" ' + \
+                    link_string = '<a href="{document_view}?next={obligation_panel}{activity_ref}"><i class="fas fa-pencil-alt" ' + \
                         ' aria-hidden="true"></i></a>'
                     if (self.activity is None):
-                        return link_string.format(
+                        link_string = link_string.format(
                             document_view=reverse(
                                 "antares.apps.document:edit_view",
                                 kwargs={
@@ -98,7 +98,7 @@ class ApiObligationPanelPendingView(BaseDatatableView):
                                 'antares.apps.obligation:panel_view'),
                             activity_ref='')
                     else:
-                        return link_string.format(
+                        link_string = link_string.format(
                             document_view=reverse(
                                 "antares.apps.document:edit_view",
                                 kwargs={
@@ -110,11 +110,12 @@ class ApiObligationPanelPendingView(BaseDatatableView):
                                 kwargs={'activity_id': str(self.activity.id)}),
                             activity_ref='&activity_id={activity_id}'.format(
                                 activity_id=self.activity.id))
+                    return link_string
             else:
                 if ObligationType.to_enum(
                         row.obligation_type) != ObligationType.INFORM:
-                    link_string = '<a href="{document_view}?next={obligation_panel}&obligation_id={obligation_id}"><i class="fa fa-pencil" aria-hidden="true"></i></a>'
-                    return link_string.format(
+                    link_string = '<a href="{document_view}?next={obligation_panel}&obligation_id={obligation_id}"><i class="fas fa-pencil-alt" aria-hidden="true"></i></a>'
+                    link_string = link_string.format(
                         document_view=reverse(
                             "antares.apps.document:create_view",
                             kwargs={
@@ -125,6 +126,37 @@ class ApiObligationPanelPendingView(BaseDatatableView):
                         obligation_panel=reverse(
                             'antares.apps.obligation:panel_view'),
                         obligation_id=row.id)
+                    return link_string
+                if ObligationType.to_enum(
+                        row.obligation_type) != ObligationType.FILE:
+                    link_string = '<a href="{document_view}?next={obligation_panel}&obligation_id={obligation_id}"><i class="fas fa-pencil-alt" aria-hidden="true"></i></a>'
+                    link_string = link_string.format(
+                        document_view=reverse(
+                            "antares.apps.document:create_view",
+                            kwargs={
+                                'form_id':
+                                str(row.client_obligation.obligation_rule.
+                                    form_definition.id)
+                            }),
+                        obligation_panel=reverse(
+                            'antares.apps.obligation:panel_view'),
+                        obligation_id=row.id)
+                    return link_string
+                if ObligationType.to_enum(
+                        row.obligation_type) != ObligationType.PAY:
+                    link_string = '<a href="{document_view}?next={obligation_panel}&obligation_id={obligation_id}"><i class="fas fa-pencil-alt" aria-hidden="true"></i></a>'
+                    link_string = link_string.format(
+                        document_view=reverse(
+                            "antares.apps.document:create_view",
+                            kwargs={
+                                'form_id':
+                                str(row.client_obligation.obligation_rule.
+                                    form_definition.id)
+                            }),
+                        obligation_panel=reverse(
+                            'antares.apps.obligation:panel_view'),
+                        obligation_id=row.id)
+                    return link_string
 
         else:
             return super(ApiObligationPanelPendingView, self).render_column(
