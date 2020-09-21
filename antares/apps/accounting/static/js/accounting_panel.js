@@ -315,3 +315,27 @@ function view_accounting_document(document_id) {
     }
     $("#accountDocumentDialog_" + document_id).dialog('open').show();
 }
+
+function print_accounting_document(document_id) {
+	console.log("print_accounting_document called with document_id=" + document_id);
+    if (!$('#accountDocumentDialog_' + document_id).length) {
+        $('<div id="accountDocumentDialog_' + document_id + '" />').dialog({
+            'title': 'Document',
+            'autoOpen': false,
+            'width': 'auto',
+            'height': 'auto',
+            'open': function(event, ui) {
+
+            },
+            'buttons': {
+                'Ok': function() {
+                    $(this).dialog("close");
+                },
+            },
+        }).append('<div id="accountDocumentInnerDiv_' + document_id + '"></div>');
+
+        $('#accountDocumentInnerDiv_' + document_id).load(antaresAccountingLinks.document_view.replace("5911F917-A61B-478B-B7F2-89C754D1FAF6", document_id));
+
+    }
+    $("#accountDocumentDialog_" + document_id).dialog('open').show();
+}

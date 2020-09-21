@@ -91,7 +91,9 @@ class ApiAccountTypeView(BaseDatatableView):
             return row.transaction_date.strftime(self.date_format_string)
         if column == 'document_id':
             row_string = '{document_name}&nbsp;<a href="#" onClick="view_accounting_document(\''+\
-                '{document_id}\');"><i class="fa fa-eye" aria-hidden="true"></i></a>'
+                '{document_id}\');"><i class="fa fa-eye" aria-hidden="true"></i></a>' + \
+                '&nbsp;<a href="#" onClick="print_accounting_document(\''+\
+                '{document_id}\');"><i class="fas fa-print" aria-hidden="true"></i></a>'
             if (row.account_document.document is not None):
                 if row.account_document.document.hrn_code:
                     return row_string.format(

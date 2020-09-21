@@ -82,6 +82,8 @@ class ApiLatestDocumentView(BaseDatatableView):
         if column == "actions":
             line = '<a href="' + reverse('antares.apps.document:view_view',  args=[row.id]) + \
             '"><i class="fa fa-eye" aria-hidden="true"></i></a>'
+            line += '&nbsp;&nbsp;<a href="' + reverse('antares.apps.document:print_view',  args=[row.id]) + \
+            '"><i class="fa fa-print" aria-hidden="true"></i></a>'
            
             if DocumentStatusType.to_enum(row.status) == DocumentStatusType.DRAFTED:
                 line += '&nbsp;&nbsp;<a href="' + reverse('antares.apps.document:edit_view',  args=[row.id]) + \
