@@ -313,7 +313,7 @@ function display_client_panel_by_branch(index, branch_id) {
         });
     }
     if (antaresClientLinks.email_list_call) {
-        $('#email_id_table_' + index).DataTable({
+        $('#email_table_' + index).DataTable({
             'paging': true,
             'processing': true,
             'serverSide': true,
@@ -346,7 +346,7 @@ function display_client_panel_by_branch(index, branch_id) {
 
     }
 
-    if (antaresLink.business_classification_list_call) {
+    if (antaresClientLinks.business_classification_list_call) {
         $('#business_classification_id_table_' + index).DataTable({
             'paging': true,
             'processing': true,
@@ -357,7 +357,7 @@ function display_client_panel_by_branch(index, branch_id) {
             'iDisplayLength': 15,
             'conditionalPaging': true,
             'ajax': {
-                'url': antaresLink.business_classification_list_call,
+                'url': antaresClientLinks.business_classification_list_call,
                 'data': {
                     'csrfmiddlewaretoken': $.cookie('csrftoken'),
                     'branch_id': branch_id,
