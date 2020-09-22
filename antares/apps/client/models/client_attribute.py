@@ -50,7 +50,7 @@ class ClientAttribute(models.Model):
         super(ClientAttribute, self).save(*args, **kwargs)
 
     def __str__(self):
-        return self.id
+        return str(self.id)
 
     class Meta:
         app_label = 'client'

@@ -37,7 +37,7 @@ class ApiBranchListSocialNetworkView(BaseDatatableView):
             social_network_type = SocialNetworkItemType.to_enum(
                 row.social_network_type)
             if social_network_type is not None:
-                return social_network_type.get_label()
+                return social_network_type.label
             else:
                 return None
         elif column == 'item':
@@ -53,7 +53,7 @@ class ApiBranchListSocialNetworkView(BaseDatatableView):
         elif column == 'status':
             status = ItemStatusType.to_enum(row.status)
             if (status is not None):
-                return status.get_label()
+                return status.label
             else:
                 return None
         else:

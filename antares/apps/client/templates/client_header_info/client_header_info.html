@@ -1,16 +1,22 @@
 {% load static i18n  accounting_tags %} 
 <div class="container-fluid">
     <div class="row"> <!-- client info -->
+         <div class="col-lg-2">
+            <div>{% trans 'antares.apps.client.templates.client_header.client_code' %}:</div> 
+        </div>
+        <div class="col-lg-2">
+            <div id="clientName">{{client.code}}</div> 
+        </div>
         <div class="col-lg-2">
             <div>{% trans 'antares.apps.client.templates.client_header.client_name' %}:</div> 
         </div>
-        <div class="col-lg-4">
+        <div class="col-lg-2">
             <div id="clientName">{{client.full_name}}</div> 
         </div>
         <div class="col-lg-2">
             <div>{% trans 'antares.apps.client.templates.client_header.total_balance' %}:</div> 
         </div>
-        <div class="col-lg-4">
+        <div class="col-lg-2">
             <div id="totalBalance">{{client.id|total_accounting_balance}}</div> 
         </div>
     </div> <!-- client info -->

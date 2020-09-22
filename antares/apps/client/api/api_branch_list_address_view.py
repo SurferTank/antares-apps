@@ -42,13 +42,13 @@ class ApiBranchListAddressView(BaseDatatableView):
         if column == 'address_type':
             address_type = AddressType.to_enum(row.address_type)
             if address_type is not None:
-                return address_type.get_label()
+                return address_type.label
             else:
                 return None
 
         elif column == 'country':
-            if (row.country):
-                return row.country
+            if (row.country_code):
+                return row.country_code
             else:
                 return None
 
@@ -75,7 +75,7 @@ class ApiBranchListAddressView(BaseDatatableView):
         elif column == 'status':
             status = ItemStatusType.to_enum(row.status)
             if (status is not None):
-                return status.get_label()
+                return status.label
             else:
                 return None
         else:

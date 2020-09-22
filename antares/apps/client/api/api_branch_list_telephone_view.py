@@ -36,7 +36,7 @@ class ApiBranchListTelephoneView(BaseDatatableView):
         if column == 'telephone_type':
             telephone_type = TelephoneItemType.to_enum(row.telephone_type)
             if telephone_type is not None:
-                return telephone_type.get_label()
+                return telephone_type.label
             else:
                 return None
         elif column == 'telephone':
@@ -52,7 +52,7 @@ class ApiBranchListTelephoneView(BaseDatatableView):
         elif column == 'status':
             status = ItemStatusType.to_enum(row.status)
             if (status is not None):
-                return status.get_label()
+                return status.label
             else:
                 return None
         else:

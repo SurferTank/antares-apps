@@ -58,7 +58,7 @@
                                 {% trans 'antares.apps.client.templates.panel.general.status' %}:
                             </div>
                             <div class="col-lg-2">
-                                {{ client.status.label }}
+                                {{ client.status }}
                             </div>
                      </div>
                      {% if client.client_type.archetype == "Individual" %}
@@ -86,10 +86,10 @@
                             
                             {% endif %}
                             <div class="col-lg-2">
-                                {% trans 'antares.apps.client.templates.panel.general.gender' %}
+                                {% trans 'antares.apps.client.templates.panel.general.gender' %}:
                             </div>
                             <div class="col-lg-2">
-                                {{ client.gender.label }}
+                                {{ client.gender }}
                             </div>
                      </div>
                      {% else %}

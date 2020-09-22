@@ -36,7 +36,7 @@ class ApiBranchListEmailView(BaseDatatableView):
         if column == 'email_type':
             email_type = EmailType.to_enum(row.email_type)
             if email_type is not None:
-                return email_type.get_label()
+                return email_type.label
             else:
                 return None
 
@@ -53,7 +53,7 @@ class ApiBranchListEmailView(BaseDatatableView):
         elif column == 'status':
             status = ItemStatusType.to_enum(row.status)
             if (status is not None):
-                return status.get_label()
+                return status.label
             else:
                 return None
         else:

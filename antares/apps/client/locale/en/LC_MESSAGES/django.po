@@ -409,3 +409,23 @@ msgstr "All"
 msgid "antares.apps.client.constants.ClientRelationPermissionType.FILE"
 msgstr "File"
 
+msgid "antares.apps.client.constants.StatusType.ACTIVE"
+msgstr "Active"
+
+msgid "antares.apps.client.constants.StatusType.INACTIVE"
+msgstr "Inactive"
+
+
+msgid "antares.apps.client.constants.AddressType.REAL"
+msgstr "Real"
+msgid "antares.apps.client.constants.AddressType.LEGAL"
+msgstr "Legal"
+msgid "antares.apps.client.constants.AddressType.ESPECIAL"
+msgstr "Especial"
+
+msgid "antares.apps.client.models.client_attribute.table_name_plural"
+msgstr "Client Attributes"
+msgid "antares.apps.client.models.client_attribute.table_name"
+msgstr "Client Attribute"
+msgid "antares.apps.client.templates.client_header.client_code"
+msgstr "Client Code"

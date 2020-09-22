@@ -4,6 +4,7 @@ from mptt.admin import MPTTModelAdmin
 from .models import AddressItem
 from .models import AttributeDefinition
 from .models import Client
+from .models import ClientAttribute
 from .models import ClientBranch
 from .models import ClientBusinessClassification
 from .models import ClientIdentificationType
@@ -40,4 +41,5 @@ admin.site.register(EmailItem)
 admin.site.register(SocialNetworkItem)
 admin.site.register(ClientBusinessClassification)
 admin.site.register(IdentificationItem)
+admin.site.register(ClientAttribute)
 admin.site.register(IsicPosition, MPTTModelAdmin)

@@ -9,6 +9,7 @@ from .models import Holiday
 from .models import HrnCode
 from .models import SystemParameter
 from .models import UserParameter
+from .models import Tag
 
 
 admin.site.register(ConceptType, MPTTModelAdmin)
@@ -19,3 +20,4 @@ admin.site.register(HrnCode)
 admin.site.register(SystemParameter)
 admin.site.register(UserParameter)
 admin.site.register(ActionDefinition)
+admin.site.register(Tag)

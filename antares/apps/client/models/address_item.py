@@ -47,7 +47,7 @@ class AddressItem(models.Model):
         super(AddressItem, self).save(*args, **kwargs)
 
     def __str__(self):
-        return self.id
+        return str(self.id)
 
     class Meta:
         app_label = 'client'
