@@ -127,3 +127,4 @@ wrapt==1.11.2
 yahoo-finance==1.4.0
 yapf==0.29.0
 zipp==0.6.0
+qrcode==6.1
