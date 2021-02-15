@@ -12,7 +12,6 @@ from django.utils.translation import ugettext as _
 
 from .system_parameter import SystemParameter
 
-
 logger = logging.getLogger(__name__)
 
 
@@ -184,6 +183,8 @@ class UserParameter(models.Model):
                     return None
             else:
                 return None
+        except:
+            pass	   
 
     class Meta:
         app_label = 'core'
