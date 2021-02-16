@@ -1,0 +1,278 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<xpdl:Package xmlns="http://www.wfmc.org/2008/XPDL2.1" xmlns:act="http://www.surfertank.com/antares/flow/xml/activityextendedattributes" xmlns:subs="http://www.surfertank.com/antares/flow/xml/subscriptions" xmlns:xpdl="http://www.wfmc.org/2008/XPDL2.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" Id="SamplePackage" Name="Sample Package" xsi:schemaLocation="http://www.wfmc.org/2008/XPDL2.1 http://www.wfmc.org/standards/docs/bpmnxpdl_31.xsd">
+    <xpdl:PackageHeader>
+        <xpdl:XPDLVersion>2.1</xpdl:XPDLVersion>
+        <xpdl:Vendor>(c) Surfertank Inc.</xpdl:Vendor>
+        <xpdl:Created>2014-02-25 16:36:59</xpdl:Created>
+    </xpdl:PackageHeader>
+    <xpdl:RedefinableHeader PublicationStatus="UNDER_TEST">
+        <xpdl:Author>Leonardo Belen</xpdl:Author>
+        <xpdl:Version>0.1</xpdl:Version>
+        <xpdl:Codepage>UTF-8</xpdl:Codepage>
+        <xpdl:Countrykey>AR</xpdl:Countrykey>
+    </xpdl:RedefinableHeader>
+    <xpdl:ConformanceClass GraphConformance="FULL_BLOCKED"/>
+    <xpdl:Script Type="javascript"/>
+    <xpdl:TypeDeclarations>
+        <xpdl:TypeDeclaration Id="SamplePackage_td1" Name="Sample type declaration">
+            <xpdl:BasicType Type="STRING"/>
+        </xpdl:TypeDeclaration>
+    </xpdl:TypeDeclarations>
+    <xpdl:Applications>
+        <xpdl:Application Id="SamplePackage_app1" Name="A global application - Google">
+            <xpdl:Description>Some application I want to test with</xpdl:Description>
+            <xpdl:FormalParameters>
+                <xpdl:FormalParameter Id="SamplePackage_fp1" IsArray="false" Mode="IN" Name="A formal Parameter">
+                    <xpdl:DataType>
+                        <xpdl:BasicType Type="STRING"/>
+                    </xpdl:DataType>
+                    <xpdl:Length>10</xpdl:Length>
+                </xpdl:FormalParameter>
+                <xpdl:FormalParameter Id="SamplePackage_fp2" IsArray="false" Mode="IN" Name="another formal parameter">
+                    <xpdl:DataType>
+                        <xpdl:BasicType Type="STRING"/>
+                    </xpdl:DataType>
+                </xpdl:FormalParameter>
+            </xpdl:FormalParameters>
+            <xpdl:ExtendedAttributes>
+                <xpdl:ExtendedAttribute Name="url" Value="http://www.google.com"/>
+            </xpdl:ExtendedAttributes>
+        </xpdl:Application>
+    </xpdl:Applications>
+    <xpdl:DataFields>
+        <xpdl:DataField Id="SamplePackage_df1" IsArray="false" Name="Sample workflow variable">
+            <xpdl:DataType>
+                <xpdl:BasicType Type="STRING"/>
+            </xpdl:DataType>
+            <xpdl:Length>200</xpdl:Length>
+        </xpdl:DataField>
+    </xpdl:DataFields>
+    <xpdl:Pools>
+        <xpdl:Pool BoundaryVisible="true" Id="SamplePackage_pool1" MainPool="true" Name="Document Approval" Orientation="HORIZONTAL" Process="DocumentApproval_WP1">
+            <xpdl:Lanes>
+                <xpdl:Lane Id="SamplePackage_pool1_lan1" Name="Expression lane">
+                    <xpdl:NodeGraphicsInfos>
+                        <xpdl:NodeGraphicsInfo BorderColor="0,0,0" FillColor="255,255,215" IsVisible="true" ToolId="JaWE"/>
+                        <xpdl:NodeGraphicsInfo BorderColor="0,0,0" FillColor="255,255,215" IsVisible="true" ToolId="JaWE"/>
+                    </xpdl:NodeGraphicsInfos>
+                </xpdl:Lane>
+                <xpdl:Lane Id="SamplePackage_pool1_lan2" Name="Expression lane">
+                    <xpdl:NodeGraphicsInfos>
+                        <xpdl:NodeGraphicsInfo BorderColor="0,0,0" FillColor="255,255,215" IsVisible="true" ToolId="JaWE"/>
+                        <xpdl:NodeGraphicsInfo BorderColor="0,0,0" FillColor="255,255,215" IsVisible="true" ToolId="JaWE"/>
+                    </xpdl:NodeGraphicsInfos>
+                </xpdl:Lane>
+            </xpdl:Lanes>
+            <xpdl:NodeGraphicsInfos>
+                <xpdl:NodeGraphicsInfo BorderColor="0,0,0" FillColor="255,255,215" IsVisible="true" ToolId="JaWE"/>
+            </xpdl:NodeGraphicsInfos>
+        </xpdl:Pool>
+    </xpdl:Pools>
+    <xpdl:WorkflowProcesses>
+        <xpdl:WorkflowProcess AccessLevel="PUBLIC" Id="DocumentApproval_WP1" Name="Document Approval">
+            <xpdl:ProcessHeader DurationUnit="h">
+                <xpdl:Created>2014-02-25 18:04:28</xpdl:Created>
+            </xpdl:ProcessHeader>
+            <xpdl:RedefinableHeader PublicationStatus="UNDER_TEST">
+                <xpdl:Author>Leonardo Belen</xpdl:Author>
+                <xpdl:Version>1</xpdl:Version>
+            </xpdl:RedefinableHeader>
+            <xpdl:FormalParameters>
+                <xpdl:FormalParameter Id="SamplePackage_wp1_fp1" IsArray="false" Mode="IN" Name="A simple formal parameter">
+                    <xpdl:DataType>
+                        <xpdl:BasicType Type="STRING"/>
+                    </xpdl:DataType>
+                </xpdl:FormalParameter>
+            </xpdl:FormalParameters>
+            <xpdl:Participants>
+                <xpdl:Participant Id="DocumentApproval_wp1_par_analyst" Name="Analyst">
+                    <xpdl:ParticipantType Type="ROLE"/>
+                </xpdl:Participant>
+                <xpdl:Participant Id="DocumentApproval_wp1_par_supervisor" Name="Supervisor">
+                    <xpdl:ParticipantType Type="ROLE"/>
+                </xpdl:Participant>
+            </xpdl:Participants>
+            <xpdl:Applications>
+                <xpdl:Application Id="SamplePackage_wp1_app1" Name="An application">
+                    <xpdl:Description>Some application I want to test with</xpdl:Description>
+                    <xpdl:FormalParameters>
+                        <xpdl:FormalParameter Id="SamplePackage_wp1_fp1" IsArray="false" Mode="IN">
+                            <xpdl:DataType>
+                                <xpdl:BasicType Type="STRING"/>
+                            </xpdl:DataType>
+                        </xpdl:FormalParameter>
+                    </xpdl:FormalParameters>
+                    <xpdl:ExtendedAttributes>
+                        <xpdl:ExtendedAttribute Name="route" Value="surfertank_electra_frontsite_homepage"/>
+                    </xpdl:ExtendedAttributes>
+                </xpdl:Application>
+            </xpdl:Applications>
+            <xpdl:DataFields>
+                <xpdl:DataField Id="SamplePackage_wp1_df1" IsArray="false" Name="A variable with initial value">
+                    <xpdl:DataType>
+                        <xpdl:BasicType Type="STRING"/>
+                    </xpdl:DataType>
+                    <xpdl:InitialValue>"Some Initial Value"</xpdl:InitialValue>
+                </xpdl:DataField>
+                <xpdl:DataField Id="example_string" IsArray="false" Name="Example Workflow String">
+                    <xpdl:DataType>
+                        <xpdl:BasicType Type="STRING"/>
+                    </xpdl:DataType>
+                </xpdl:DataField>
+                <xpdl:DataField Id="example_integer" IsArray="false" Name="Example Workflow Integer">
+                    <xpdl:DataType>
+                        <xpdl:BasicType Type="INTEGER"/>
+                    </xpdl:DataType>
+                </xpdl:DataField>
+                <xpdl:DataField Id="example_boolean" IsArray="false" Name="Example Workflow Boolean">
+                    <xpdl:DataType>
+                        <xpdl:BasicType Type="BOOLEAN"/>
+                    </xpdl:DataType>
+                    <xpdl:InitialValue>false</xpdl:InitialValue>
+                </xpdl:DataField>
+                <xpdl:DataField Id="example_list" IsArray="false" Name="Example Workflow List">
+                    <xpdl:DataType>
+                        <xpdl:BasicType Type="STRING"/>
+                    </xpdl:DataType>
+                    <xpdl:ExtendedAttributes>
+                        <xpdl:ExtendedAttribute Name="Catalog" Value="flow_list_catalog"/>
+                    </xpdl:ExtendedAttributes>
+                </xpdl:DataField>
+            </xpdl:DataFields>
+            <xpdl:Activities>
+                <xpdl:Activity FinishMode="Automatic" Id="SamplePackage_wp1_event_end" Name="End" StartMode="Automatic">
+                    <xpdl:Event>
+                        <xpdl:EndEvent Result="None"/>
+                    </xpdl:Event>
+                    <xpdl:NodeGraphicsInfos>
+                        <xpdl:NodeGraphicsInfo BorderColor="0,0,0" FillColor="236,120,98" Height="31" IsVisible="true" LaneId="SamplePackage_pool1_lan2" ToolId="JaWE" Width="31">
+                            <xpdl:Coordinates XCoordinate="520" YCoordinate="86"/>
+                        </xpdl:NodeGraphicsInfo>
+                    </xpdl:NodeGraphicsInfos>
+                </xpdl:Activity>
+                <xpdl:Activity FinishMode="Automatic" Id="SamplePackage_wp1_event_start" Name="Start" StartMode="Automatic">
+                    <xpdl:Event>
+                        <xpdl:StartEvent Trigger="None"/>
+                    </xpdl:Event>
+                    <xpdl:NodeGraphicsInfos>
+                        <xpdl:NodeGraphicsInfo BorderColor="0,0,0" FillColor="102,204,51" Height="31" IsVisible="true" LaneId="SamplePackage_pool1_lan1" ToolId="JaWE" Width="31">
+                            <xpdl:Coordinates XCoordinate="100" YCoordinate="74"/>
+                        </xpdl:NodeGraphicsInfo>
+                    </xpdl:NodeGraphicsInfos>
+                </xpdl:Activity>
+                <xpdl:Activity FinishMode="Automatic" Id="SamplePackage_wp1_gateway_is_approved" Name="Is it approved?" StartMode="Automatic">
+                    <xpdl:Route GatewayType="Exclusive"/>
+                    <xpdl:TransitionRestrictions>
+                        <xpdl:TransitionRestriction>
+                            <xpdl:Join Type="Exclusive"/>
+                        </xpdl:TransitionRestriction>
+                    </xpdl:TransitionRestrictions>
+                    <xpdl:NodeGraphicsInfos>
+                        <xpdl:NodeGraphicsInfo BorderColor="0,0,0" FillColor="255,229,124" Height="43" IsVisible="true" LaneId="SamplePackage_pool1_lan1" ToolId="JaWE" Width="43">
+                            <xpdl:Coordinates XCoordinate="368" YCoordinate="75"/>
+                        </xpdl:NodeGraphicsInfo>
+                    </xpdl:NodeGraphicsInfos>
+                </xpdl:Activity>
+                <xpdl:Activity FinishMode="Manual" Id="SamplePackage_wp1_act_review_request" Name="Review Request" StartMode="Manual">
+                    <xpdl:Implementation>
+                        <xpdl:No/>
+                    </xpdl:Implementation>
+                    <xpdl:Performers>
+                        <xpdl:Performer/>
+                    </xpdl:Performers>
+                    <xpdl:SimulationInformation Instantiation="MULTIPLE">
+                        <xpdl:Cost>10</xpdl:Cost>
+                        <xpdl:TimeEstimation/>
+                    </xpdl:SimulationInformation>
+                    <xpdl:TransitionRestrictions>
+                        <xpdl:TransitionRestriction>
+                            <xpdl:Split Type="Parallel">
+                                <xpdl:TransitionRefs>
+                                    <xpdl:TransitionRef Id="SamplePackage_wp1_tra5"/>
+                                    <xpdl:TransitionRef Id="SamplePackage_wp1_tra4"/>
+                                </xpdl:TransitionRefs>
+                            </xpdl:Split>
+                        </xpdl:TransitionRestriction>
+                    </xpdl:TransitionRestrictions>
+                    <xpdl:NodeGraphicsInfos>
+                        <xpdl:NodeGraphicsInfo BorderColor="0,0,0" FillColor="187,247,190" Height="60" IsVisible="true" LaneId="SamplePackage_pool1_lan2" ToolId="JaWE" Width="90">
+                            <xpdl:Coordinates XCoordinate="376" YCoordinate="72"/>
+                        </xpdl:NodeGraphicsInfo>
+                    </xpdl:NodeGraphicsInfos>
+                </xpdl:Activity>
+                <xpdl:Activity FinishMode="Manual" Id="SamplePackage_wp1_act_analyze" Name="Analyze Request" StartMode="Manual">
+                    <xpdl:Implementation>
+                        <xpdl:No/>
+                    </xpdl:Implementation>
+                    <xpdl:Performers>
+                        <xpdl:Performer>DocumentApproval_wp1_par_analyst</xpdl:Performer>
+                    </xpdl:Performers>
+                    <xpdl:NodeGraphicsInfos>
+                        <xpdl:NodeGraphicsInfo BorderColor="0,0,0" FillColor="187,247,190" Height="60" IsVisible="true" LaneId="SamplePackage_pool1_lan1" ToolId="JaWE" Width="90">
+                            <xpdl:Coordinates XCoordinate="232" YCoordinate="65"/>
+                        </xpdl:NodeGraphicsInfo>
+                    </xpdl:NodeGraphicsInfos>
+                </xpdl:Activity>
+            </xpdl:Activities>
+            <xpdl:Transitions>
+                <xpdl:Transition From="SamplePackage_wp1_event_start" Id="SamplePackage_wp1_tra1" To="SamplePackage_wp1_act_analyze">
+                    <xpdl:Condition Type="CONDITION"/>
+                    <xpdl:ConnectorGraphicsInfos>
+                        <xpdl:ConnectorGraphicsInfo FillColor="0,0,0" IsVisible="true" Style="NO_ROUTING_SPLINE" ToolId="JaWE"/>
+                    </xpdl:ConnectorGraphicsInfos>
+                </xpdl:Transition>
+                <xpdl:Transition From="SamplePackage_wp1_act_analyze" Id="SamplePackage_wp1_tra2" To="SamplePackage_wp1_gateway_is_approved">
+                    <xpdl:Condition Type="CONDITION"/>
+                    <xpdl:ConnectorGraphicsInfos>
+                        <xpdl:ConnectorGraphicsInfo FillColor="0,0,0" IsVisible="true" Style="NO_ROUTING_SPLINE" ToolId="JaWE"/>
+                    </xpdl:ConnectorGraphicsInfos>
+                </xpdl:Transition>
+                <xpdl:Transition From="SamplePackage_wp1_gateway_is_approved" Id="SamplePackage_wp1_tra3" To="SamplePackage_wp1_act_review_request">
+                    <xpdl:Condition Type="CONDITION"/>
+                    <xpdl:ConnectorGraphicsInfos>
+                        <xpdl:ConnectorGraphicsInfo FillColor="0,0,0" IsVisible="true" Style="NO_ROUTING_SPLINE" ToolId="JaWE"/>
+                    </xpdl:ConnectorGraphicsInfos>
+                </xpdl:Transition>
+                <xpdl:Transition From="SamplePackage_wp1_act_review_request" Id="SamplePackage_wp1_tra4" To="SamplePackage_wp1_event_end">
+                    <xpdl:Condition Type="CONDITION"/>
+                    <xpdl:ConnectorGraphicsInfos>
+                        <xpdl:ConnectorGraphicsInfo FillColor="0,0,0" IsVisible="true" Style="NO_ROUTING_SPLINE" ToolId="JaWE"/>
+                    </xpdl:ConnectorGraphicsInfos>
+                </xpdl:Transition>
+                <xpdl:Transition From="SamplePackage_wp1_act_review_request" Id="SamplePackage_wp1_tra5" To="SamplePackage_wp1_gateway_is_approved">
+                    <xpdl:Condition Type="CONDITION"/>
+                    <xpdl:ConnectorGraphicsInfos>
+                        <xpdl:ConnectorGraphicsInfo FillColor="0,0,0" IsVisible="true" Style="NO_ROUTING_SPLINE" ToolId="JaWE"/>
+                    </xpdl:ConnectorGraphicsInfos>
+                </xpdl:Transition>
+            </xpdl:Transitions>
+            <xpdl:ExtendedAttributes>
+                <xpdl:ExtendedAttribute Name="Subscriptions">
+                    <subs:Subscriptions xmlns:subs="http://www.surfertank.com/antares/flow/xml/subscriptions">
+                        <subs:Subscription eventTrigger="creation" subscriptionId="example_CreateCase">
+                            <subs:Condition>document.get_form_definition().form_version==1</subs:Condition>
+                            <subs:Publisher>
+                                <subs:Type>Form Definition</subs:Type>
+                                <subs:Form>AccountForm-1</subs:Form>
+                            </subs:Publisher>
+                            <subs:Actions>
+                                <subs:Action id="createCase" index="0">
+                                    <subs:Parameters>
+                                        <subs:Parameter id="example_integer">document.get_form_definition().form_version</subs:Parameter>
+                                        <subs:Parameter id="example_string">"Another " + " Evaluated" + " String "</subs:Parameter>
+                                        <subs:Parameter id="_flow_client_id">document.get_header_field('client')</subs:Parameter>
+                                    </subs:Parameters>
+                                </subs:Action>
+                            </subs:Actions>
+                        </subs:Subscription>
+                    </subs:Subscriptions>
+                </xpdl:ExtendedAttribute>
+            </xpdl:ExtendedAttributes>
+        </xpdl:WorkflowProcess>
+    </xpdl:WorkflowProcesses>
+    <xpdl:ExtendedAttributes>
+        <xpdl:ExtendedAttribute Name="EDITING_TOOL" Value="Together Workflow Editor"/>
+        <xpdl:ExtendedAttribute Name="EDITING_TOOL_VERSION" Value="5.5-1-20170721-1200-TAB-3.2-1"/>
+        <xpdl:ExtendedAttribute Name="JaWE_CONFIGURATION" Value="default"/>
+    </xpdl:ExtendedAttributes>
+</xpdl:Package>

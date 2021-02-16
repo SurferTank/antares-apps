@@ -13,7 +13,7 @@ class FlowPackageAdmin(admin.ModelAdmin):
                     'package_version')
 
     def save_model(self, request, obj, form, change):
-        manager = FlowAdminManager(obj.xpdl)
+        manager = FlowAdminManager(xpdl_string=obj.xpdl)
         manager.load_xpdl()
         obj.save()
 
