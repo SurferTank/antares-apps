@@ -8,7 +8,7 @@ from ckeditor.fields import RichTextField
 from django.conf import settings
 from django.db import models
 from django.utils import timezone
-from django.utils.translation import ugettext as _
+from django.utils.translation import gettext as _
 
 from .system_parameter import SystemParameter
 
@@ -143,7 +143,7 @@ class UserParameter(models.Model):
                                     False)
             if (default is not None):
                 user_param = UserParameter(id=user_paramId)
-                logger.debug("Creating the parameter with id " + str(user_paramId) + 
+                logger.debug("Creating the parameter with id " + str(user_paramId) +
                              " since it does not exist")
                 user_param.data_type = paramType
                 user_param.user = get_request().user
@@ -184,7 +184,7 @@ class UserParameter(models.Model):
             else:
                 return None
         except:
-            pass	   
+            pass
 
     class Meta:
         app_label = 'core'

@@ -15,7 +15,7 @@ import uuid
 
 from django.db.models import Sum
 from django.urls import reverse
-from django.utils.translation import ugettext as _
+from django.utils.translation import gettext as _
 from django_datatables_view.base_datatable_view import BaseDatatableView
 from djmoney.money import Money
 
@@ -28,7 +28,7 @@ logger = logging.getLogger(__name__)
 
 class ApiPeriodView(BaseDatatableView):
     """ Retrieves a JSON formatted string to be used on the current account as the details by Account Type. 
-    
+
     :attribute model: The model in which is based the class (required by BaseDatatableView)
     :attribute columns: The columns to serve (required by BaseDatatableView)
     :attribute order_columns: The definition to allow ordering (required by BaseDatatableView)
@@ -37,7 +37,7 @@ class ApiPeriodView(BaseDatatableView):
             (required by BaseDatatableView)
     :attribute default_currency: system-wide value  default currency
     :attribute default_locale: system-wide value default locale
-    
+
     """
     model = AccountBalance
     columns = [
@@ -74,7 +74,7 @@ class ApiPeriodView(BaseDatatableView):
         """
         if column == 'period':
             link_string = '<a onClick="display_accounting_panel(\'{client_id}\' , ' + \
-                   ' \'{full_name}\', null, null, \'{concept_type_id}\',' + \
+                ' \'{full_name}\', null, null, \'{concept_type_id}\',' + \
                 '\'{concept_type_name}\', {period}, \'{account_type_id}\', \'{account_type_name}\');\">{account_type_name}</a>'
             return link_string.format(
                 client_id=self.client.id,
@@ -145,7 +145,7 @@ class ApiPeriodView(BaseDatatableView):
             self.period = self.request.GET.get('period')
         else:
             raise ValueError(_(__name__ + '.exceptions.period_is_undefined'))
-        copad.client = self.client 
+        copad.client = self.client
         copad.concept_type = self.concept_type
         copad.period = self.period
         qs = AccountManager.find_balances_qs_by_COPAD(qs, copad)

@@ -5,7 +5,7 @@ import uuid
 from django.conf import settings
 from django.db import models
 from django.utils import timezone
-from django.utils.translation import ugettext as _
+from django.utils.translation import gettext as _
 
 from ..constants import SocialNetworkItemType, ItemStatusType
 
@@ -21,12 +21,13 @@ class SocialNetworkItem(models.Model):
         db_column='client_branch',
         blank=True,
         null=True)
-    status = models.CharField(choices=ItemStatusType.choices, max_length=20, default=ItemStatusType.ACTIVE)
+    status = models.CharField(
+        choices=ItemStatusType.choices, max_length=20, default=ItemStatusType.ACTIVE)
     is_principal = models.BooleanField(default=True)
     item = models.CharField(max_length=100, blank=True, null=True)
     social_network_type = models.CharField(choices=SocialNetworkItemType.choices,
-        max_length=100,
-        default=SocialNetworkItemType.SKYPE)
+                                           max_length=100,
+                                           default=SocialNetworkItemType.SKYPE)
     author = models.ForeignKey(
         settings.AUTH_USER_MODEL,
         on_delete=models.PROTECT,

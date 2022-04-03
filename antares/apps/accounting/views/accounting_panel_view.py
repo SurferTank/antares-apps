@@ -9,7 +9,7 @@ import logging
 import uuid
 
 from django.contrib import messages
-from django.utils.translation import ugettext as _
+from django.utils.translation import gettext as _
 from django.views.generic import TemplateView
 
 
@@ -46,8 +46,8 @@ class AccountingPanelView(TemplateView):
             except:
                 messages.add_message(
                     self.request, messages.WARNING,
-                    _(__name__ + '.exceptions.user_has_no_client_assigned {username}').\
-                        format(username=self.request.user.username))
+                    _(__name__ + '.exceptions.user_has_no_client_assigned {username}').
+                    format(username=self.request.user.username))
                 context['client'] = None
                 context['template'] = template
                 context['is_inner'] = is_inner

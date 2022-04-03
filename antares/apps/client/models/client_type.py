@@ -5,7 +5,7 @@ from ckeditor.fields import RichTextField
 from django.conf import settings
 from django.db import models
 from django.utils import timezone
-from django.utils.translation import ugettext as _
+from django.utils.translation import gettext as _
 
 from ..constants import ClientArchetype
 
@@ -15,7 +15,8 @@ logger = logging.getLogger(__name__)
 
 class ClientType(models.Model):
     id = models.CharField(primary_key=True, max_length=255)
-    archetype = models.CharField(choices=ClientArchetype.choices, max_length=20)
+    archetype = models.CharField(
+        choices=ClientArchetype.choices, max_length=20)
     short_name = models.CharField(max_length=1000)
     description = RichTextField(blank=True, null=True)
     creation_date = models.DateTimeField(blank=True, null=True, editable=False)

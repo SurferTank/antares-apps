@@ -12,7 +12,7 @@ import logging
 import uuid
 
 from django.db import models
-from django.utils.translation import ugettext as _
+from django.utils.translation import gettext as _
 from lxml import etree
 from lxml import objectify
 
@@ -145,7 +145,7 @@ class SubscriptionEvent(models.Model):
         """
         xpdl = etree.fromstring(flow_def.flow_package.xpdl)
         for flow_node in xpdl.iterfind(
-                'xpdl:WorkflowProcesses/xpdl:WorkflowProcess[@Id="' + 
+                'xpdl:WorkflowProcesses/xpdl:WorkflowProcess[@Id="' +
                 flow_def.flow_id + '"]',
                 namespaces=NS_MAP):
             flow_version = flow_node.find(
@@ -185,7 +185,7 @@ class SubscriptionEvent(models.Model):
                 form_def = FormDefinition.find_one(form_def_node.text)
                 if (form_def is None):
                     raise SubscriptionException(
-                        _(__name__ + 
+                        _(__name__ +
                           'exceptions.form_publisher_wasnt_found {form_def_id}'
                           ).format(form_def_id=form_def_node.text))
 

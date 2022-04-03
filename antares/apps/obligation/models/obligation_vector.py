@@ -12,7 +12,7 @@ import uuid
 from django.conf import settings
 from django.db import models
 from django.utils import timezone
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 
 from ..constants import ObligationType, ObligationStatusType
 from .obligation_vector_log import ObligationVectorLog
@@ -76,8 +76,10 @@ class ObligationVector(models.Model):
     due_date = models.DateTimeField()
     compliance_date = models.DateTimeField(blank=True, null=True)
     period = models.IntegerField()
-    status = models.CharField(choices=ObligationStatusType.choices, max_length=30)
-    obligation_type = models.CharField(choices=ObligationType.choices, max_length=30)
+    status = models.CharField(
+        choices=ObligationStatusType.choices, max_length=30)
+    obligation_type = models.CharField(
+        choices=ObligationType.choices, max_length=30)
     status_date = models.DateTimeField()
     creation_date = models.DateTimeField()
     update_date = models.DateTimeField()
@@ -90,9 +92,9 @@ class ObligationVector(models.Model):
             self.creation_date = timezone.now()
         self.update_date = timezone.now()
         self.author = get_request().user
-        
+
         super(ObligationVector, self).save(*args, **kwargs)
-        
+
     def get_COPAD(self):
         return COPAD(self.client.id, self.obligation.id,
                      self.period, self.account_type.id, self.base_document.id)
@@ -101,7 +103,7 @@ class ObligationVector(models.Model):
     def find_or_create_status(cls, client, concept_type, period, account_type,
                               base_document, client_obligation,
                               obligation_type, due_date):
-        copad = COPAD(client=client, concept_type=concept_type, period=period, account_type=account_type, 
+        copad = COPAD(client=client, concept_type=concept_type, period=period, account_type=account_type,
                       document=base_document)
         obligation_status = ObligationVector.find_one_by_COPAD(copad)
         if (obligation_status is not None):
@@ -115,10 +117,12 @@ class ObligationVector(models.Model):
         obligation_status.client_obligation = client_obligation
         obligation_status.obligation_type = obligation_type
         obligation_status.due_date = due_date
-        if  date.today() > due_date:
-            obligation_status.set_status(ObligationStatusType.LATE, timezone.now())
+        if date.today() > due_date:
+            obligation_status.set_status(
+                ObligationStatusType.LATE, timezone.now())
         else:
-            obligation_status.set_status(ObligationStatusType.PENDING, timezone.now())
+            obligation_status.set_status(
+                ObligationStatusType.PENDING, timezone.now())
         obligation_status.save()
         return obligation_status
 
@@ -202,9 +206,9 @@ class ObligationVector(models.Model):
             return []
 
     def set_status(self,
-                              status,
-                              status_date=timezone.now(),
-                              compliance_document=None):
+                   status,
+                   status_date=timezone.now(),
+                   compliance_document=None):
         """
         Sets an status on the obligation's vector. 
         This function also triggers a save on ObligationVectorLog

@@ -11,7 +11,7 @@ from django.conf import settings
 from django.db import models
 from django.db.models import Q
 from django.utils import timezone
-from django.utils.translation import ugettext as _
+from django.utils.translation import gettext as _
 from lxml import etree
 from lxml import objectify
 
@@ -46,8 +46,8 @@ class FormDefinition(models.Model):
     print_xslt = models.TextField(blank=True, null=True)
     start_date = models.DateTimeField()
     status = models.CharField(choices=FormDefinitionStatusType.choices,
-        max_length=30,
-        default=FormDefinitionStatusType.DEVELOPMENT)
+                              max_length=30,
+                              default=FormDefinitionStatusType.DEVELOPMENT)
     view_xslt = models.TextField(blank=True, null=True)
     creation_date = models.DateTimeField(blank=True, null=True, editable=False)
     update_date = models.DateTimeField(blank=True, null=True, editable=False)
@@ -105,7 +105,8 @@ class FormDefinition(models.Model):
                 _(__name__ + ".incomplete_form_id_definition"))
 
         definition_obj = FormDefinition.set_blank_header_xml(definition_obj)
-        self.definition = etree.tostring(definition_obj, encoding='unicode', xml_declaration=False)
+        self.definition = etree.tostring(
+            definition_obj, encoding='unicode', xml_declaration=False)
         self.verify_and_create_supporting_files(True)
         return self
 
@@ -350,7 +351,7 @@ class FormDefinition(models.Model):
 
         try:
             return FormDefinition.objects.filter(
-                Q(form_class__concept_type__id=concept_type) & 
+                Q(form_class__concept_type__id=concept_type) &
                 Q(start_date__lgt=period_date) & (Q(end_date__gte=period_date)
                                                   | Q(end_date=None)))
         except:
@@ -363,7 +364,7 @@ class FormDefinition(models.Model):
             form_class = FormClass.objects.get(
                 third_party_type=third_party_type)
             return cls.objects.get(
-                Q(form_class=form_class) & 
+                Q(form_class=form_class) &
                 ~Q(status=FormDefinitionStatusType.DEACTIVATED))
         except:
             return None

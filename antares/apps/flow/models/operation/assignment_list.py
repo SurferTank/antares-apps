@@ -5,7 +5,7 @@ import uuid
 from django.conf import settings
 from django.db import models
 from django.utils import timezone
-from django.utils.translation import ugettext as _
+from django.utils.translation import gettext as _
 
 
 logger = logging.getLogger(__name__)
@@ -37,7 +37,8 @@ class AssignmentList(models.Model):
         db_column='activity_definition',
         blank=True,
         null=True)
-    assigment_strategy = models.CharField(choices=AssignmentStrategyType.choices, max_length=30)
+    assigment_strategy = models.CharField(
+        choices=AssignmentStrategyType.choices, max_length=30)
     creation_date = models.DateTimeField()
 
     def save(self, *args, **kwargs):

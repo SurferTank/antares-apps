@@ -14,7 +14,7 @@ import uuid
 
 from django.db.models import Sum
 from django.urls import reverse
-from django.utils.translation import ugettext as _
+from django.utils.translation import gettext as _
 from django_datatables_view.base_datatable_view import BaseDatatableView
 from djmoney.money import Money
 
@@ -27,7 +27,7 @@ logger = logging.getLogger(__name__)
 
 class ApiConceptTypeView(BaseDatatableView):
     """ Retrieves a JSON formatted string to be used on the current account as the details by Concept Type. 
-    
+
     :attribute model: The model in which is based the class (required by BaseDatatableView)
     :attribute columns: The columns to serve (required by BaseDatatableView)
     :attribute order_columns: The definition to allow ordering (required by BaseDatatableView)
@@ -36,7 +36,7 @@ class ApiConceptTypeView(BaseDatatableView):
             (required by BaseDatatableView)
     :attribute default_currency: system-wide value  default currency
     :attribute default_locale: system-wide value default locale
-    
+
     """
     model = AccountBalance
     columns = [
@@ -73,7 +73,7 @@ class ApiConceptTypeView(BaseDatatableView):
         """
         if column == 'period':
             link_string = '<a onClick="display_accounting_panel(\'{client_id}\' , ' + \
-                   ' \'{full_name}\', null, null, \'{concept_type_id}\',' + \
+                ' \'{full_name}\', null, null, \'{concept_type_id}\',' + \
                 '\'{concept_type_name}\', {period});\">{period}</a>'
             return link_string.format(
                 client_id=self.client.id,
@@ -140,6 +140,6 @@ class ApiConceptTypeView(BaseDatatableView):
                 _(__name__ + '.exceptions.concept_type_is_undefined'))
         copad.client = self.client
         copad.concept_type = self.concept_type
-        
+
         qs = AccountManager.find_balances_qs_by_COPAD(qs, copad)
         return qs

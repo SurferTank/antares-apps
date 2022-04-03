@@ -5,7 +5,7 @@ from ckeditor.fields import RichTextField
 from django.conf import settings
 from django.db import models
 from django.utils import timezone
-from django.utils.translation import ugettext as _
+from django.utils.translation import gettext as _
 
 from ..constants import FormClassStatusType, FormClassType
 
@@ -39,11 +39,12 @@ class FormClass(models.Model):
         blank=True,
         null=True,
         editable=False)
-    type = models.CharField(choices=FormClassType.choices, max_length=30, default=FormClassType.ADMINISTRATIVE)
+    type = models.CharField(choices=FormClassType.choices,
+                            max_length=30, default=FormClassType.ADMINISTRATIVE)
     description = RichTextField(blank=True, null=True)
     status = models.CharField(choices=FormClassStatusType.choices,
-        max_length=30,
-        default=FormClassStatusType.DEVELOPMENT)
+                              max_length=30,
+                              default=FormClassStatusType.DEVELOPMENT)
     third_party_type = models.CharField(
         max_length=200, db_index=True, blank=True, null=True)
     name = models.CharField(max_length=255, blank=True, null=True)

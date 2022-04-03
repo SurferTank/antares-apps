@@ -8,7 +8,7 @@ from antares.apps.user.models import User
 import logging
 
 from django.utils import timezone
-from django.utils.translation import ugettext as _
+from django.utils.translation import gettext as _
 
 from ..models import NotificationRecord
 from ..models import NotificationRule
@@ -88,5 +88,5 @@ class NotificationManager(object):
         status.set_status(MessageStatusType.PROCESSED)
 
     @classmethod
-    def get_unread_notifications(max_days: int=7):
+    def get_unread_notifications(max_days: int = 7):
         pass

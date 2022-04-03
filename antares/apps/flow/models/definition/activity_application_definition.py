@@ -3,7 +3,7 @@ import logging
 import uuid
 
 from django.db import models
-from django.utils.translation import ugettext as _
+from django.utils.translation import gettext as _
 
 
 logger = logging.getLogger(__name__)
@@ -26,8 +26,8 @@ class ActivityApplicationDefinition(models.Model):
         blank=True,
         null=True)
     scope = models.CharField(choices=ActivityApplicationDefinitionScopeType.choices,
-        max_length=30,
-        default=ActivityApplicationDefinitionScopeType.SAME)
+                             max_length=30,
+                             default=ActivityApplicationDefinitionScopeType.SAME)
     description = models.CharField(max_length=1000, blank=True, null=True)
 
     def __str__(self):

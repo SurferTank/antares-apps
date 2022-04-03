@@ -7,7 +7,7 @@ import logging
 import uuid
 
 from django.urls import reverse
-from django.utils.translation import ugettext as _
+from django.utils.translation import gettext as _
 from django_datatables_view.base_datatable_view import BaseDatatableView
 
 from ..constants import ObligationType, ObligationStatusType
@@ -44,7 +44,7 @@ class ApiObligationPanelCompliedView(BaseDatatableView):
 
     def __init__(self):
         self.date_format_string = UserParameter.find_one('CORE_TEMPLATE_DATE_FORMAT',
-            FieldDataType.STRING, '%Y-%m-%d')
+                                                         FieldDataType.STRING, '%Y-%m-%d')
         self.client = None
         self.activity = None
 
@@ -133,5 +133,6 @@ class ApiObligationPanelCompliedView(BaseDatatableView):
         else:
             self.client = get_request().user.get_on_behalf_client()
 
-        qs = ObligationVector.find_by_client_and_status(self.client, [ObligationStatusType.COMPLIANT])
+        qs = ObligationVector.find_by_client_and_status(
+            self.client, [ObligationStatusType.COMPLIANT])
         return qs

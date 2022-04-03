@@ -8,7 +8,7 @@ import logging
 import uuid
 
 from django.contrib import messages
-from django.utils.translation import ugettext as _
+from django.utils.translation import gettext as _
 from django.views.generic import TemplateView
 
 from ..models import Client
@@ -47,8 +47,8 @@ class ClientPanelView(TemplateView):
                 client = self.request.user.get_on_behalf_client()
             except UserException:
                 messages.add_message(
-                    self.request, messages.WARNING, _(__name__ + '.exceptions.user_has_no_client_assigned {username}').\
-                        format(username=self.request.user.username))
+                    self.request, messages.WARNING, _(__name__ + '.exceptions.user_has_no_client_assigned {username}').
+                    format(username=self.request.user.username))
                 context['client'] = None
                 context['template'] = template
                 context['is_inner'] = is_inner
@@ -62,8 +62,8 @@ class ClientPanelView(TemplateView):
             context['branches'] = branches
             context['template'] = template
             context['is_inner'] = is_inner
-            context['client_exists'] = True 
-        else: 
+            context['client_exists'] = True
+        else:
             context['client_exists'] = False
             context['template'] = template
             context['is_inner'] = is_inner

@@ -8,7 +8,7 @@ import uuid
 
 from django.db import models
 from django.db.transaction import TransactionManagementError
-from django.utils.translation import ugettext as _
+from django.utils.translation import gettext as _
 import js2py
 
 
@@ -35,7 +35,8 @@ class FlowProperty(models.Model):
     integer_value = models.BigIntegerField(blank=True, null=True)
     property_id = models.CharField(max_length=100)
     string_value = models.CharField(max_length=2000, blank=True, null=True)
-    sub_data_type = models.CharField(choices=FlowBasicDataSubtype.choices, max_length=30)
+    sub_data_type = models.CharField(
+        choices=FlowBasicDataSubtype.choices, max_length=30)
     text_value = models.TextField(blank=True, null=True)
     boolean_value = models.BooleanField(null=True)
 
@@ -96,7 +97,7 @@ class FlowProperty(models.Model):
                             flow_prop.date_value = initial_value
                     else:
                         raise NotImplementedError(
-                            _(__name__ + 
+                            _(__name__ +
                               ".exceptions.basic_data_type_not_implemented_yet"
                               ))
 
@@ -175,25 +176,25 @@ class FlowProperty(models.Model):
                     except FlowProperty.DoesNotExist:
                         prop_def = None
                     if prop_def is not None:
-                        context.execute('result_value =' + 
+                        context.execute('result_value =' +
                                         param_def.content_text)
                         if (hasattr(context, 'result_value')
                                 and prop_def.data_type == FlowDataType.BASIC
                                 and context.result_value is not None):
-                            if (prop_def.sub_data_type == 
+                            if (prop_def.sub_data_type ==
                                     FlowBasicDataSubtype.STRING):
                                 prop_def.string_value = context.result_value
-                            elif (prop_def.sub_data_type == 
+                            elif (prop_def.sub_data_type ==
                                   FlowBasicDataSubtype.TEXT):
                                 prop_def.text_value = context.result_value
-                            elif (prop_def.sub_data_type == 
+                            elif (prop_def.sub_data_type ==
                                   FlowBasicDataSubtype.DATE):
                                 prop_def.date_value = context.result_value
-                            elif (prop_def.sub_data_type == 
+                            elif (prop_def.sub_data_type ==
                                   FlowBasicDataSubtype.INTEGER):
                                 prop_def.integer_value = int(
                                     float(context.result_value))
-                            elif (prop_def.sub_data_type == 
+                            elif (prop_def.sub_data_type ==
                                   FlowBasicDataSubtype.FLOAT):
                                 prop_def.decimal_value = float(
                                     context.result_value)

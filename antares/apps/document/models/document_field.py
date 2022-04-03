@@ -3,7 +3,7 @@ import logging
 import uuid
 
 from django.db import models
-from django.utils.translation import ugettext as _
+from django.utils.translation import gettext as _
 
 
 logger = logging.getLogger(__name__)
@@ -36,9 +36,9 @@ class DocumentField(models.Model):
         verbose_name=_(__name__ + ".clob_value"),
         help_text=_(__name__ + ".clob_value_help"))
     data_type = models.CharField(choices=FieldDataType.choices,
-        max_length=30,
-        verbose_name=_(__name__ + ".data_type"),
-        help_text=_(__name__ + ".data_type_help"))
+                                 max_length=30,
+                                 verbose_name=_(__name__ + ".data_type"),
+                                 help_text=_(__name__ + ".data_type_help"))
     date_value = models.DateTimeField(
         blank=True,
         null=True,

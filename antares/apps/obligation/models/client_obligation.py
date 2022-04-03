@@ -11,7 +11,7 @@ import uuid
 from django.conf import settings
 from django.db import models
 from django.utils import timezone
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 
 
 logger = logging.getLogger(__name__)
@@ -80,22 +80,22 @@ class ClientObligation(models.Model):
                 client=client, concept_type=concept_type)
         except ClientObligation.DoesNotExist:
             return []
-    
+
     @staticmethod
     def find_all():
         try:
             return ClientObligation.objects
         except ClientObligation.DoesNotExist:
             return []
-        
+
     def get_COPAD(self):
         if(self.base_document is not None):
             return COPAD(client=self.client.id, concept_type=self.concept_type.id,
-                     account_type=self.account_type.id, 
-                     base_document=self.base_document.id)
-        else: 
+                         account_type=self.account_type.id,
+                         base_document=self.base_document.id)
+        else:
             return COPAD(client=self.client.id, concept_type=self.concept_type.id,
-                     account_type=self.account_type.id)
+                         account_type=self.account_type.id)
 
     @classmethod
     def find_one_by_COPAD(cls, copad):

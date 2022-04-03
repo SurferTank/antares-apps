@@ -4,7 +4,7 @@ import uuid
 
 from django.conf import settings
 from django.db import models
-from django.utils.translation import ugettext as _
+from django.utils.translation import gettext as _
 
 
 logger = logging.getLogger(__name__)
@@ -24,7 +24,8 @@ class ActivityLog(models.Model):
         related_name="activity_log_set")
     activity_id = models.CharField(max_length=255)
     contents = models.TextField(blank=True, null=True)
-    status = models.CharField(choices=FlowActivityStatusType.choices, max_length=30)
+    status = models.CharField(
+        choices=FlowActivityStatusType.choices, max_length=30)
     status_date = models.DateTimeField()
 
     def __str__(self):

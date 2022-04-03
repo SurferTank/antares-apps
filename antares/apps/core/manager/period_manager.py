@@ -10,7 +10,7 @@ import logging
 
 from dateutil.relativedelta import relativedelta
 from django.utils import timezone
-from django.utils.translation import ugettext as _
+from django.utils.translation import gettext as _
 
 from ..constants import FieldDataType, TimeUnitType
 from ..models.holiday import Holiday
@@ -106,12 +106,12 @@ class PeriodManager(object):
             year = int(float(str(period)[:4]))
             if (start_at_midnight == True):
                 base_date = timezone.datetime(year, base_date.month, base_date.day, 0,
-                                     0, 0, 0, base_date.tzinfo)
+                                              0, 0, 0, base_date.tzinfo)
             else:
                 base_date = timezone.datetime(year, base_date.month, base_date.day,
-                                     base_date.hour, base_date.minute,
-                                     base_date.second, base_date.microsecond,
-                                     base_date.tzinfo)
+                                              base_date.hour, base_date.minute,
+                                              base_date.second, base_date.microsecond,
+                                              base_date.tzinfo)
             return Holiday.next_day(base_date, consider_saturdays,
                                     consider_sundays, consider_holidays)
         if (time_unit == TimeUnitType.MONTH):
@@ -126,14 +126,14 @@ class PeriodManager(object):
                 day = base_date.day
             if (start_at_midnight == True):
                 base_date = timezone.datetime(year, month, day, 0, 0, 0, 0,
-                                     base_date.tzinfo)
-                
+                                              base_date.tzinfo)
+
             else:
                 base_date = timezone.datetime(year, month, day,
-                                     base_date.hour, base_date.minute,
-                                     base_date.second, base_date.microsecond,
-                                     base_date.tzinfo)
-            
+                                              base_date.hour, base_date.minute,
+                                              base_date.second, base_date.microsecond,
+                                              base_date.tzinfo)
+
             return Holiday.next_day(base_date, consider_saturdays,
                                     consider_sundays, consider_holidays)
         if (time_unit == TimeUnitType.DAY):
@@ -144,11 +144,11 @@ class PeriodManager(object):
             day = int(float(str(period)[6:]))
             if (start_at_midnight == True):
                 base_date = timezone.datetime(year, month, day, 0, 0, 0, 0,
-                                     base_date.tzinfo)
+                                              base_date.tzinfo)
             else:
                 base_date = timezone.datetime(year, month, day, base_date.hour,
-                                     base_date.minute, base_date.second,
-                                     base_date.microsecond, base_date.tzinfo)
+                                              base_date.minute, base_date.second,
+                                              base_date.microsecond, base_date.tzinfo)
             return Holiday.next_day(base_date, consider_saturdays,
                                     consider_sundays, consider_holidays)
 
@@ -169,7 +169,7 @@ class PeriodManager(object):
         from antares.apps.document.models.form_definition import FormDefinition
         return FormDefinition.get_one_by_concept_type_id_and_period(
             period, concept_type)
-        
+
     @classmethod
     def find_period_list(cls, base_date, event_date, time_unit, client_status=ClientStatusType.ACTIVE):
         """
@@ -183,7 +183,7 @@ class PeriodManager(object):
 
         # if the client is defunct, it does not make sense to continue
         # calculating anything.
-       
+
         if (client_status == ClientStatusType.DEFUNCT):
             return period_list
 
@@ -233,7 +233,8 @@ class PeriodManager(object):
 
             delta = relativedelta(event_date, base_date)
 
-            interval = delta.years * 12 + delta.months * 30 + delta.days + number_of_days_into_future
+            interval = delta.years * 12 + delta.months * \
+                30 + delta.days + number_of_days_into_future
 
             for i in range(0, interval):
                 period_list.append(
@@ -245,15 +246,16 @@ class PeriodManager(object):
             raise NotImplementedError
 
         return period_list
-    
+
     @classmethod
     def find_period_list_by_client_obligation(cls, client_obligation, event_date):
         """
         Returns a list of periods for processing, using defaults on a client
         obligation object.
         """
-        
-        time_unit = TimeUnitType.to_enum(client_obligation.obligation_rule.time_unit_type)
+
+        time_unit = TimeUnitType.to_enum(
+            client_obligation.obligation_rule.time_unit_type)
         period_list = []
         from_registration_date = SystemParameter.find_one(
             'OBLIGATION_CALCULATE_PERIODS_FROM_REGISTRATION',
@@ -264,7 +266,7 @@ class PeriodManager(object):
         if (client_obligation.client.status == ClientStatusType.DEFUNCT):
             return period_list
 
-        if (client_obligation.client.registration_date > 
+        if (client_obligation.client.registration_date >
                 client_obligation.start_date
                 and from_registration_date == True):
             base_date = client_obligation.start_date
@@ -317,7 +319,8 @@ class PeriodManager(object):
 
             delta = relativedelta(event_date, base_date)
 
-            interval = delta.years * 12 + delta.months * 30 + delta.days + number_of_days_into_future
+            interval = delta.years * 12 + delta.months * \
+                30 + delta.days + number_of_days_into_future
 
             for i in range(0, interval):
                 period_list.append(
@@ -329,10 +332,10 @@ class PeriodManager(object):
             raise NotImplementedError
 
         return period_list
-    
+
     @classmethod
     def find_period_list_by_units(cls, base_date, time_unit, units_before,
-                                   units_after):
+                                  units_after):
         """
         Returns a list of periods for processing, with units before and after a
         baseTime
@@ -355,11 +358,10 @@ class PeriodManager(object):
             for i in range(0, units_before + units_after):
                 period_list.append(
                     int(
-                        str(base_date.year) + str(base_date.month) + 
+                        str(base_date.year) + str(base_date.month) +
                         str(base_date.day)))
                 base_date = base_date + relativedelta(months=1)
         else:
             raise NotImplementedError
 
         return period_list
-    

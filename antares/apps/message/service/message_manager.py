@@ -11,7 +11,7 @@ import json
 import logging
 from typing import List
 
-from django.utils.translation import ugettext as _
+from django.utils.translation import gettext as _
 
 
 logger = logging.getLogger(__name__)
@@ -46,7 +46,7 @@ class MessageManager:
                 msgdoc['type'])
             if form_def is None:
                 raise ValueError(
-                    _(__name__ + 
+                    _(__name__ +
                       ".exceptions.third_party_form_does_not_exist"))
             document = Document(form_id=form_def.id)
             if document is None:
@@ -54,13 +54,13 @@ class MessageManager:
                     _(__name__ + ".exceptions.document_could_not_be_created"))
             # lets push all header fields
             for key, value in msgdoc['header'].items():
-                logger.debug("Header fields => key is " + str(key) + 
+                logger.debug("Header fields => key is " + str(key) +
                              " value is " + str(value))
                 document.set_header_field(key, value)
             for key, value in msgdoc['fields'].items():
                 logger.debug("Body fields => 3p=" + str(key) + " id=" + (
-                    document.get_field_id_by_messagemap(key) or 'None') + 
-                             " value=" + str(value))
+                    document.get_field_id_by_messagemap(key) or 'None') +
+                    " value=" + str(value))
                 document.set_field_value(
                     document.get_field_id_by_messagemap(key), value)
 

@@ -12,7 +12,7 @@ from ckeditor.fields import RichTextField
 from django.conf import settings
 from django.db import models
 from django.utils import timezone
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 
 from ..constants import ObligationOriginType, ObligationPeriodicityType, ObligationType
 
@@ -57,11 +57,16 @@ class ObligationRule(models.Model):
     init_date_expression = models.TextField(blank=True, null=True)
     last_run = models.DateTimeField(blank=True, null=True, editable=False)
     next_run = models.DateTimeField(blank=True, null=True, editable=False)
-    obligation_type = models.CharField(choices=ObligationType.choices, max_length=30)
-    origin = models.CharField(choices=ObligationOriginType.choices, max_length=30)
-    periodicity_type = models.CharField(choices=ObligationPeriodicityType.choices, max_length=30)
-    script_engine_type = models.CharField(choices=ScriptEngineType.choices, max_length=30)
-    time_unit_type = models.CharField(choices=TimeUnitType.choices, max_length=30)
+    obligation_type = models.CharField(
+        choices=ObligationType.choices, max_length=30)
+    origin = models.CharField(
+        choices=ObligationOriginType.choices, max_length=30)
+    periodicity_type = models.CharField(
+        choices=ObligationPeriodicityType.choices, max_length=30)
+    script_engine_type = models.CharField(
+        choices=ScriptEngineType.choices, max_length=30)
+    time_unit_type = models.CharField(
+        choices=TimeUnitType.choices, max_length=30)
     creation_date = models.DateTimeField(editable=False)
     update_date = models.DateTimeField(editable=False)
     saturdays_are_holiday = models.BooleanField(default=False)

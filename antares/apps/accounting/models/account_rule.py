@@ -8,7 +8,7 @@ from ckeditor.fields import RichTextField
 from django.conf import settings
 from django.db import models
 from django.utils import timezone
-from django.utils.translation import ugettext as _
+from django.utils.translation import gettext as _
 
 from ..constants import TransactionAffectedValueType
 
@@ -53,7 +53,8 @@ class AccountRule(models.Model):
     period_field = models.CharField(max_length=100, blank=True, null=True)
     fixed_client = models.ForeignKey(
         "client.client", blank=True, null=True, on_delete=models.PROTECT)
-    value_affected = models.CharField(choices=TransactionAffectedValueType.choices, max_length=20)
+    value_affected = models.CharField(
+        choices=TransactionAffectedValueType.choices, max_length=20)
     author = models.ForeignKey(
         settings.AUTH_USER_MODEL,
         on_delete=models.PROTECT,
@@ -72,7 +73,7 @@ class AccountRule(models.Model):
 
     def __str__(self):
         return self.transaction_type.transaction_type_name + ":" + self.form_definition.form_name + ":" \
-            +self.amount_field 
+            + self.amount_field
 
     @classmethod
     def find_active_by_form_definition(cls, form_definition):

@@ -2,4 +2,4 @@ from django.apps import AppConfig
 
 
 class ThirdpartyConfig(AppConfig):
-    name = 'thirdparty'
+    name = 'antares.apps.thirdparty'

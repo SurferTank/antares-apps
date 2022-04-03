@@ -2,7 +2,7 @@ from antares.apps.core.constants import FieldDataType
 import logging
 
 from django.db import models
-from django.utils.translation import ugettext as _
+from django.utils.translation import gettext as _
 
 
 logger = logging.getLogger(__name__)
@@ -25,7 +25,8 @@ class DocumentTableContent(models.Model):
         related_name='table_content_set')
     clob_value = models.CharField(max_length=255, blank=True, null=True)
     column_number = models.IntegerField(blank=True, null=True)
-    data_type = models.CharField(choices=FieldDataType.choices, max_length=8, blank=True, null=True)
+    data_type = models.CharField(
+        choices=FieldDataType.choices, max_length=8, blank=True, null=True)
     date_value = models.DateTimeField(blank=True, null=True)
     decimal_value = models.DecimalField(
         max_digits=19, decimal_places=2, blank=True, null=True)

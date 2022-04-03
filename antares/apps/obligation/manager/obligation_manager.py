@@ -14,7 +14,7 @@ import logging
 
 from dateutil.relativedelta import relativedelta
 from django.utils import timezone
-from django.utils.translation import ugettext as _
+from django.utils.translation import gettext as _
 import js2py
 
 from ..constants import ObligationStatusType, ObligationType
@@ -122,7 +122,7 @@ class ObligationManager(object):
         Verifies and creates -if needed- the client obligation records, used to calculate the obligations vector.
         """
         if(obligation_row is not None):
-        
+
             client_obligation_list = ClientObligation.find_by_client_and_concept_type(
                 obligation_row['client'],
                 obligation_row['obligation_rule'].concept_type)
@@ -138,15 +138,16 @@ class ObligationManager(object):
                 client_obligation.account_type = obligation_row['account_type']
                 client_obligation.end_date = obligation_row['end_date']
                 client_obligation.save()
-    
+
                 ObligationManager.update_obligation_status(client_obligation)
             else:
                 for client_obligation in client_obligation_list:
-                    ObligationManager.update_obligation_status(client_obligation)
-        else: 
+                    ObligationManager.update_obligation_status(
+                        client_obligation)
+        else:
             obligations = ClientObligation.find_all()
             for client_obligation in obligations:
-                    ObligationManager.update_obligation_status(client_obligation)
+                ObligationManager.update_obligation_status(client_obligation)
 
     @classmethod
     def update_obligation_status(cls, client_obligation):
@@ -179,11 +180,11 @@ class ObligationManager(object):
                 """ lets update the outdated if they need to be updated """
                 if obligation_status.compliance_date is not None:
                     obligation_status.status = ObligationStatusType.COMPLIANT
-                    obligation_status.save() 
+                    obligation_status.save()
                 elif obligation_status.due_date < timezone.now():
                     obligation_status.status = ObligationStatusType.LATE
                     obligation_status.save()
-                
+
             else:
                 logger.info(
                     _("antares.apps.obligation.manager.obligation_manager.obligation_status_found_nothing_to_do"
@@ -207,7 +208,6 @@ class ObligationManager(object):
         for obligation in cls._get_obligations_to_process(
                 client, concept_type, form_def, start_date, end_date):
             ObligationManager._check_or_create_client_obligation(obligation)
-    
 
     @classmethod
     def process_obligations_by_client(cls, client, when):

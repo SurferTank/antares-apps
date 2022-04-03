@@ -5,7 +5,7 @@ from ckeditor.fields import RichTextField
 from django.conf import settings
 from django.db import models
 from django.utils import timezone
-from django.utils.translation import ugettext as _
+from django.utils.translation import gettext as _
 
 from ..constants import TransactionEffectType
 
@@ -24,7 +24,8 @@ class TransactionType(models.Model):
     active = models.BooleanField(default=True)
     calculate_charges = models.BooleanField(default=True)
     description = RichTextField(blank=True, null=True)
-    effect = models.CharField(choices=TransactionEffectType.choices, max_length=6)
+    effect = models.CharField(
+        choices=TransactionEffectType.choices, max_length=6)
     transaction_type_name = models.CharField(max_length=100)
     post_zeros = models.BooleanField(default=True)
     hrn_script = models.TextField(blank=True, null=True)

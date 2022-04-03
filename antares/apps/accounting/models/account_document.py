@@ -4,7 +4,7 @@ import uuid
 
 from django.db import models
 from django.utils import timezone
-from django.utils.translation import ugettext as _
+from django.utils.translation import gettext as _
 
 from ..constants import AccountDocumentStatusType
 
@@ -21,7 +21,8 @@ class AccountDocument(models.Model):
     content = models.TextField(blank=True, null=True)
     reversed_by = models.TextField(blank=True, null=True)
     reverses_document = models.TextField(blank=True, null=True)
-    status = models.CharField(choices=AccountDocumentStatusType.choices, max_length=30)
+    status = models.CharField(
+        choices=AccountDocumentStatusType.choices, max_length=30)
     creation_date = models.DateTimeField(blank=True, null=True, editable=False)
     update_date = models.DateTimeField(blank=True, null=True, editable=False)
 
@@ -37,7 +38,7 @@ class AccountDocument(models.Model):
     @classmethod
     def find_or_create_by_document(cls, document_header: DocumentHeader):
         """ Finds the corresponding AccountDocument record or creates a new one with status PENDING
-        
+
         :param document: the document header that will be used to create the account
         :returns: the account document that corresponds to the document header passed
         """
@@ -52,7 +53,7 @@ class AccountDocument(models.Model):
     @classmethod
     def _find_one_by_document_header(cls, document_header: DocumentHeader):
         """ finds the account document based on the document header passed
-        
+
         :param document_header: the document header
         :returns: the corresponding account document
         """

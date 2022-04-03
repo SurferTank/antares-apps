@@ -12,7 +12,7 @@ from django.db import models
 from django.db.models import Q
 from django.urls import reverse
 from django.utils import timezone
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 
 from ..exceptions import UserException
 from .role_application import RoleApplication
@@ -41,8 +41,8 @@ class User(AbstractUser):
         unit_list = []
 
         for user_org_unit in self.user_org_unit_set.select_related().filter(
-                Q(start_date__gte=timezone.now()) & 
-            (Q(end_date__lte=timezone.now()) | Q(end_date=None))):
+            Q(start_date__gte=timezone.now()) &
+                (Q(end_date__lte=timezone.now()) | Q(end_date=None))):
             unit_list.append(user_org_unit.org_unit)
         return unit_list
 
@@ -53,8 +53,8 @@ class User(AbstractUser):
         role_list = []
 
         for user_role in self.user_role_set.select_related().filter(
-                Q(start_date__gte=timezone.now()) & 
-            (Q(end_date__lte=timezone.now()) | Q(end_date=None))):
+            Q(start_date__gte=timezone.now()) &
+                (Q(end_date__lte=timezone.now()) | Q(end_date=None))):
             role_list.append(user_role.role)
         return role_list
 
@@ -63,18 +63,18 @@ class User(AbstractUser):
             if (self.client is not None and client.id != self.client.id):
                 try:
                     get_request().user.client_user_relation_set \
-                        .select_related().filter(Q(child_client=client) & \
-                            Q(start_date__lte=timezone.now()) & (
-                            Q(end_date__gte=timezone.now()) | 
+                        .select_related().filter(Q(child_client=client) &
+                                                 Q(start_date__lte=timezone.now()) & (
+                            Q(end_date__gte=timezone.now()) |
                             Q(end_date=None))) \
                         .exclude(relation_type=str(ClientRelationType.GENERIC_WORKER))\
                         .order_by('update_date')[:1].get()
                     get_request().session['on_behalf_client'] = str(client.id)
                     return client
                 except:
-                    raise PermissionDenied(_(__name__ + \
-                                              ".user_has_no_relation_with_client {client_id}").format(
-                                                  client_id=client.id))
+                    raise PermissionDenied(_(__name__ +
+                                             ".user_has_no_relation_with_client {client_id}").format(
+                        client_id=client.id))
             elif client.id == self.client.id:
                 get_request().session['on_behalf_client'] = None
                 return None
@@ -190,8 +190,8 @@ class User(AbstractUser):
         """
         roles = set()
         for user_role in self.role_set.select_related().filter(
-                Q(start_date__lte=timezone.now()) & 
-            (Q(end_date__gte=timezone.now()) | Q(end_date=None))):
+            Q(start_date__lte=timezone.now()) &
+                (Q(end_date__gte=timezone.now()) | Q(end_date=None))):
             roles.add(user_role.role)
             if include_children == True:
                 self._get_role_children_list(roles, user_role.role)
@@ -233,23 +233,23 @@ class User(AbstractUser):
 
     def get_org_unit_list(self):
         """
-        
+
         """
         org_units = []
         for org_unit in self.org_unit_set.select_related().filter(
-                Q(start_date__lte=timezone.now()) & 
-            (Q(end_date__gte=timezone.now()) | Q(end_date=None))):
+            Q(start_date__lte=timezone.now()) &
+                (Q(end_date__gte=timezone.now()) | Q(end_date=None))):
             org_units.append(org_unit.org_unit)
         return org_unit
 
     def has_role(self, role_code):
         """
-        
+
         """
         for user_role in self.role_set.select_related().filter(
-                Q(start_date__lte=timezone.now()) & 
+                Q(start_date__lte=timezone.now()) &
             (Q(end_date__gte=timezone.now())
-             | Q(end_date=None))).filter(role__code=role_code):
+                    | Q(end_date=None))).filter(role__code=role_code):
             return True
         return False
 
@@ -257,8 +257,8 @@ class User(AbstractUser):
         apps = set()
         for role in self.get_role_list():
             for role_app in role.application_set.select_related().filter(
-                    Q(start_date__lte=timezone.now()) & 
-                (Q(end_date__gte=timezone.now()) | Q(end_date=None))):
+                Q(start_date__lte=timezone.now()) &
+                    (Q(end_date__gte=timezone.now()) | Q(end_date=None))):
                 if role_app.application not in apps:
                     apps.add(role_app.application)
         return apps
@@ -266,11 +266,11 @@ class User(AbstractUser):
     @classmethod
     def find_active_users_in_role(cls, role):
         """
-        
+
         """
         users = []
         roles = UserRole.objects.filter(role=role).filter(
-            Q(start_date__lte=timezone.now()) & 
+            Q(start_date__lte=timezone.now()) &
             (Q(end_date__gte=timezone.now()) | Q(end_date=None)))
         if (len(roles) > 0):
             for user in User.objects.filter(role_set__in=roles):
@@ -281,11 +281,11 @@ class User(AbstractUser):
     @classmethod
     def find_active_users_in_org_unit(cls, org_unit):
         """
-        
+
         """
         users = []
         org_units = UserOrgUnit.objects.filter(org_unit=org_unit).filter(
-            Q(start_date__lte=timezone.now()) & 
+            Q(start_date__lte=timezone.now()) &
             (Q(end_date__gte=timezone.now()) | Q(end_date=None)))
         if (len(org_units) > 0):
             for user in User.objects.filter(org_unit_set__in=org_units):
@@ -296,7 +296,7 @@ class User(AbstractUser):
     @classmethod
     def find_by_user_id_org_unit_role(cls, user_id, org_unit, role):
         """
-        
+
         """
         users = set()
         org_users = set()

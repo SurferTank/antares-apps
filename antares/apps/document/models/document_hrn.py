@@ -2,7 +2,7 @@ import logging
 import uuid
 
 from django.db import models
-from django.utils.translation import ugettext as _
+from django.utils.translation import gettext as _
 
 from ..constants import DocumentStatusType
 
@@ -39,10 +39,10 @@ class DocumentHrn(models.Model):
         verbose_name=_(__name__ + ".hrn_title"),
         help_text=_(__name__ + ".hrn_title_help"))
     status = models.CharField(choices=DocumentStatusType.choices,
-        max_length=30,
-        default=DocumentStatusType.DRAFTED,
-        verbose_name=_(__name__ + ".status"),
-        help_text=_(__name__ + ".status_help"))
+                              max_length=30,
+                              default=DocumentStatusType.DRAFTED,
+                              verbose_name=_(__name__ + ".status"),
+                              help_text=_(__name__ + ".status_help"))
     until_date = models.DateTimeField(
         blank=True,
         null=True,

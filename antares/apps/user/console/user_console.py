@@ -6,7 +6,7 @@ Created on 16 feb. 2017
 
 import logging
 
-from django.utils.translation import ugettext as _
+from django.utils.translation import gettext as _
 
 from ..models import User
 

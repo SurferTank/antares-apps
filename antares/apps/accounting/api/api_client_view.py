@@ -14,7 +14,7 @@ import uuid
 
 from django.db.models import Sum
 from django.urls import reverse
-from django.utils.translation import ugettext as _
+from django.utils.translation import gettext as _
 from django_datatables_view.base_datatable_view import BaseDatatableView
 from djmoney.money import Money
 
@@ -27,7 +27,7 @@ logger = logging.getLogger(__name__)
 
 class ApiClientView(BaseDatatableView):
     """ Retrieves a JSON formatted string to be used on the current account as the front page. 
-    
+
     :attribute model: The model in which is based the class (required by BaseDatatableView)
     :attribute columns: The columns to serve (required by BaseDatatableView)
     :attribute order_columns: The definition to allow ordering (required by BaseDatatableView)
@@ -36,7 +36,7 @@ class ApiClientView(BaseDatatableView):
             (required by BaseDatatableView)
     :attribute default_currency: system-wide value  default currency
     :attribute default_locale: system-wide value default locale
-    
+
     """
     model = AccountBalance
     columns = [
@@ -134,7 +134,7 @@ class ApiClientView(BaseDatatableView):
                 self.client = get_request().user.get_on_behalf_client()
             except UserException:
                 return qs
-        copad.client = self.client 
-        
+        copad.client = self.client
+
         qs = AccountManager.find_balances_qs_by_COPAD(qs, copad)
         return qs

@@ -173,8 +173,7 @@ $(document).ready(function() {
 						<li>
 							<a class="btn btn-primary" id="documentValidateButton"
 								onclick="validateDocument();">
-								{% trans 'antares.apps.document.edit.buttons.validate'
-								%}</a>
+								{% trans 'antares.apps.document.edit.buttons.validate' %}</a>
 						</li>
 						<li>
 							<a class="btn btn-primary" href="#"

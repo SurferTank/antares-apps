@@ -13,7 +13,7 @@ from django.conf import settings
 from django.db import models
 from django.db.models import Q
 from django.utils import timezone
-from django.utils.translation import ugettext as _
+from django.utils.translation import gettext as _
 
 
 logger = logging.getLogger(__name__)
@@ -28,8 +28,8 @@ class InterestDefinition(models.Model):
         max_length=100, blank=False, null=False, unique=True)
     description = RichTextField(blank=True, null=True)
     rate = models.FloatField(null=False, blank=False)
-    periodicity = models.CharField(choices=
-        TimeUnitType.choices, max_length=10, default=TimeUnitType.MONTH)
+    periodicity = models.CharField(
+        choices=TimeUnitType.choices, max_length=10, default=TimeUnitType.MONTH)
     first_is_duedate = models.BooleanField(null=False, default=False)
     use_calendar_periods = models.BooleanField(null=False, default=False)
     concept_type = models.ForeignKey(
@@ -39,7 +39,7 @@ class InterestDefinition(models.Model):
         blank=True,
         null=True)
     active = models.BooleanField(default=True)
-    
+
     author = models.ForeignKey(
         settings.AUTH_USER_MODEL,
         on_delete=models.PROTECT,
@@ -48,23 +48,22 @@ class InterestDefinition(models.Model):
         editable=False)
     creation_date = models.DateTimeField(blank=True, null=True, editable=False)
     update_date = models.DateTimeField(blank=True, null=True, editable=False)
-    
+
     def __str__(self):
         return self.name
-    
+
     @classmethod
     def findAllAndByConceptType(cls, conceptType):
         try:
-            return InterestDefinition.objects.filter(Q(concept_type__isnull=True) | 
-                                                    Q(concept_type=conceptType)) \
-                                            .filter(active=True)
+            return InterestDefinition.objects.filter(Q(concept_type__isnull=True) |
+                                                     Q(concept_type=conceptType)) \
+                .filter(active=True)
         except InterestDefinition.DoesNotExist:
             return []
-    
+
     def save(self, *args, **kwargs):
         if self.creation_date is None:
             self.creation_date = timezone.now()
         self.update_date = timezone.now()
         self.author = get_request().user
         super(InterestDefinition, self).save(*args, **kwargs)
-        

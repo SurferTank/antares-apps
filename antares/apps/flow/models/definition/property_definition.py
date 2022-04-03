@@ -8,7 +8,7 @@ import logging
 import uuid
 
 from django.db import models
-from django.utils.translation import ugettext as _
+from django.utils.translation import gettext as _
 
 
 logger = logging.getLogger(__name__)
@@ -29,12 +29,14 @@ class PropertyDefinition(models.Model):
     initial_value = models.CharField(max_length=255, blank=True, null=True)
     length = models.IntegerField(blank=True, null=True)
     property_id = models.CharField(max_length=200)
-    property_type = models.CharField(choices=PropertyType.choices, max_length=30)
-    script_engine = models.CharField(choices=ScriptEngineType.choices, max_length=30)
-    sub_data_type = models.CharField(choices=
-        FieldDataType.choices, max_length=30, blank=True, null=True)
-    mode = models.CharField(choices=
-        FormalParameterModeType.choices, max_length=30, blank=True, null=True)
+    property_type = models.CharField(
+        choices=PropertyType.choices, max_length=30)
+    script_engine = models.CharField(
+        choices=ScriptEngineType.choices, max_length=30)
+    sub_data_type = models.CharField(
+        choices=FieldDataType.choices, max_length=30, blank=True, null=True)
+    mode = models.CharField(
+        choices=FormalParameterModeType.choices, max_length=30, blank=True, null=True)
     catalog = models.CharField(max_length=200, blank=True, null=True)
 
     def save(self, *args, **kwargs):

@@ -6,12 +6,13 @@ Created on Jul 9, 2016
 from antares.apps.core.mixins import EnumUtilsMixin
 
 from django.db import models
-from django.utils.translation import ugettext as _
+from django.utils.translation import gettext as _
 
 
 class ApplicationScopeType(EnumUtilsMixin, models.TextChoices):
     SELF = "Self", _(__name__ + '.ApplicationScopeType.' + 'SELF')
-    NEW_WINDOW = "New Window", _(__name__ + '.ApplicationScopeType.' + 'NEW_WINDOW')
+    NEW_WINDOW = "New Window", _(
+        __name__ + '.ApplicationScopeType.' + 'NEW_WINDOW')
     DIALOG = "Dialog", _(__name__ + '.ApplicationScopeType.' + 'DIALOG')
 
 

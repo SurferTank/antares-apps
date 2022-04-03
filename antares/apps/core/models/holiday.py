@@ -7,7 +7,7 @@ from ckeditor.fields import RichTextField
 from django.conf import settings
 from django.db import models
 from django.utils import timezone
-from django.utils.translation import ugettext as _
+from django.utils.translation import gettext as _
 
 
 logger = logging.getLogger(__name__)
@@ -96,8 +96,8 @@ class Holiday(models.Model):
             try:
                 holiday = Holiday.objects.get(holiday_date=day, active=True)
                 logger.info(
-                    _(__name__ + 
-                      ".skiping_found_holiday_in_database %(holiday)d ") % 
+                    _(__name__ +
+                      ".skiping_found_holiday_in_database %(holiday)d ") %
                     {'holiday': holiday})
                 Holiday.next_day(day, consider_saturdays, consider_sundays,
                                  consider_holidays)
@@ -130,8 +130,8 @@ class Holiday(models.Model):
             try:
                 holiday = Holiday.objects.get(holiday_date=day, active=True)
                 logger.info(
-                    _(__name__ + 
-                      ".skiping_found_holiday_in_database %(holiday)d ") % 
+                    _(__name__ +
+                      ".skiping_found_holiday_in_database %(holiday)d ") %
                     {'holiday': holiday})
                 Holiday.prev_day(day, consider_saturdays, consider_sundays,
                                  consider_holidays)

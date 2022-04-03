@@ -11,7 +11,7 @@ from django.db.models import F
 from django.db.models import Q
 from django.urls import resolve
 from django.utils import timezone
-from django.utils.translation import ugettext as _
+from django.utils.translation import gettext as _
 
 
 logger = logging.getLogger(__name__)
@@ -47,7 +47,8 @@ class FlowActivity(models.Model):
     completion_date = models.DateTimeField(blank=True, null=True)
     creation_date = models.DateTimeField()
     start_date = models.DateTimeField(blank=True, null=True)
-    status = models.CharField(choices=FlowActivityStatusType.choices, max_length=30)
+    status = models.CharField(
+        choices=FlowActivityStatusType.choices, max_length=30)
     status_date = models.DateTimeField()
     hrn_code = models.CharField(
         max_length=50,
@@ -102,10 +103,10 @@ class FlowActivity(models.Model):
     @classmethod
     def find_average_waiting_time(cls, activity_def, perfomer=None):
         query = cls.objects.filter(activity_definition=activity_def).\
-                filter(creation_date__is_null=False).\
-                filter(start_date__is_null=False).\
-                filter(status__not_in=[FlowActivityStatusType.CREATED,
-                                       FlowActivityStatusType.CANCELLED])
+            filter(creation_date__is_null=False).\
+            filter(start_date__is_null=False).\
+            filter(status__not_in=[FlowActivityStatusType.CREATED,
+                                   FlowActivityStatusType.CANCELLED])
 
         if perfomer is not None:
             query = query.filter(perfomer=perfomer)
@@ -123,7 +124,7 @@ class FlowActivity(models.Model):
             filter(start_date__is_null=False).\
             filter(status__not_in=[FlowActivityStatusType.CREATED,
                                    FlowActivityStatusType.CANCELLED,
-             FlowActivityStatusType.ACTIVE])
+                                   FlowActivityStatusType.ACTIVE])
 
         if perfomer is not None:
             query = query.filter(perfomer=perfomer)
@@ -212,15 +213,14 @@ class FlowActivity(models.Model):
                 performer=performer, status=status)
         except FlowActivity.DoesNotExist:
             return []
-    
+
     @classmethod
     def find_pending_by_perfomer(cls, performer):
         try:
-            return FlowActivity.objects.filter(Q(performer=performer) & (Q(status=FlowActivityStatusType.ACTIVE) | 
+            return FlowActivity.objects.filter(Q(performer=performer) & (Q(status=FlowActivityStatusType.ACTIVE) |
                                                                          Q(status=FlowActivityStatusType.CREATED)))
         except FlowActivity.DoesNotExist:
             return []
-
 
     def process_tools(self):
         """ 
@@ -265,16 +265,16 @@ class FlowActivity(models.Model):
                             if flow_property.property_definition.data_type == FlowDataType.BASIC:
                                 if flow_property.property_definition.sub_data_type == FieldDataType.BOOLEAN:
                                     form_string = "<form><input type=\"checkbox\" name=\"{parameter_id}_{definition_id}\" id=\"{parameter_id}_{definition_id}\" data-toggle=\"toggle\" " + \
-                                    "{checked_value}/><div style=\"text-align: right;\"><a class=\"btn btn-default\" onclick=\"leftToolbarUpdateProperty(event, '{flow_case_id}'," + \
-                                            " '{parameter_id}', $('#{parameter_id}_{definition_id}').prop('checked'));\" class=\"button round small\">" + \
-                                            "{button_label}</a></div></form>"
+                                        "{checked_value}/><div style=\"text-align: right;\"><a class=\"btn btn-default\" onclick=\"leftToolbarUpdateProperty(event, '{flow_case_id}'," + \
+                                        " '{parameter_id}', $('#{parameter_id}_{definition_id}').prop('checked'));\" class=\"button round small\">" + \
+                                        "{button_label}</a></div></form>"
                                     if flow_property.boolean_value == True:
                                         command += form_string.format(
                                             parameter_id=param.content,
                                             definition_id=app_definition.id,
                                             flow_case_id=self.flow_case.id,
                                             checked_value='checked',
-                                            button_label=_(__name__ + 
+                                            button_label=_(__name__ +
                                                            ".buttons.save"))
                                     else:
                                         command += form_string.format(
@@ -282,7 +282,7 @@ class FlowActivity(models.Model):
                                             definition_id=app_definition.id,
                                             flow_case_id=self.flow_case.id,
                                             checked_value='',
-                                            button_label=_(__name__ + 
+                                            button_label=_(__name__ +
                                                            ".buttons.save"))
                                 else:
                                     if flow_property.property_definition.catalog:
@@ -314,17 +314,18 @@ class FlowActivity(models.Model):
                                                     }});
                                                 </script>"""
 
-                                        url = "/antares/core/api/select_options" + '?selector=' + flow_property.property_definition.catalog
+                                        url = "/antares/core/api/select_options" + '?selector=' + \
+                                            flow_property.property_definition.catalog
                                         command += form_string.format(
                                             parameter_id=param.content,
                                             definition_id=app_definition.id,
                                             flow_case_id=self.flow_case.id,
                                             url=url,
                                             default_option_name=_(
-                                                __name__ + 
+                                                __name__ +
                                                 ".selector.default_option_text"
                                             ),
-                                            button_label=_(__name__ + 
+                                            button_label=_(__name__ +
                                                            ".buttons.save"))
                                     else:
                                         form_string = "<form><input type=\"text\" name=\"{parameter_id}_{definition_id}\" id=\"{parameter_id}_{definition_id}\"/>" + \
@@ -335,7 +336,7 @@ class FlowActivity(models.Model):
                                             parameter_id=param.content,
                                             definition_id=app_definition.id,
                                             flow_case_id=self.flow_case.id,
-                                            button_label=_(__name__ + 
+                                            button_label=_(__name__ +
                                                            ".buttons.save"))
 
             tools.append(command)

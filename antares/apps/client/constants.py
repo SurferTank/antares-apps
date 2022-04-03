@@ -6,7 +6,7 @@ Created on Jun 23, 2016
 from antares.apps.core.mixins import EnumUtilsMixin
 
 from django.db import models
-from django.utils.translation import ugettext as _
+from django.utils.translation import gettext as _
 
 
 class ItemStatusType(EnumUtilsMixin, models.TextChoices):
@@ -28,7 +28,8 @@ class ClientArchetype(EnumUtilsMixin, models.TextChoices):
 class ClientStatusType(EnumUtilsMixin, models.TextChoices):
     ACTIVE = "Active", _(__name__ + '.ClientStatusType.' + 'ACTIVE')
     DEFUNCT = "Defunct", _(__name__ + '.ClientStatusType.' + 'DEFUNCT')
-    DEFUNCT_CANDIDATE = "Defunct Candidate", _(__name__ + '.ClientStatusType.' + 'DEFUNCT_CANDIDATE')
+    DEFUNCT_CANDIDATE = "Defunct Candidate", _(
+        __name__ + '.ClientStatusType.' + 'DEFUNCT_CANDIDATE')
 
 
 class TelephoneItemType(EnumUtilsMixin, models.TextChoices):
@@ -45,12 +46,15 @@ class SocialNetworkItemType(EnumUtilsMixin, models.TextChoices):
 class ClientRelationType(EnumUtilsMixin, models.TextChoices):
     OWNER = "Owner", _(__name__ + '.ClientRelationType.' + 'OWNER')
     DIRECTOR = "Director", _(__name__ + '.ClientRelationType.' + 'DIRECTOR')
-    ACCOUNTANT = "Accountant", _(__name__ + '.ClientRelationType.' + 'ACCOUNTANT')
+    ACCOUNTANT = "Accountant", _(
+        __name__ + '.ClientRelationType.' + 'ACCOUNTANT')
     LAWYER = "Lawyer", _(__name__ + '.ClientRelationType.' + 'LAWYER')
     CLERK = "Clerk", _(__name__ + '.ClientRelationType.' + 'CLERK')
-    GENERIC_WORKER = 'Worker', _(__name__ + '.ClientRelationType.' + 'GENERIC_WORKER')  # this one has no executive relation
+    # this one has no executive relation
+    GENERIC_WORKER = 'Worker', _(
+        __name__ + '.ClientRelationType.' + 'GENERIC_WORKER')
 
-                           
+
 class ClientRelationPermissionType(EnumUtilsMixin, models.TextChoices):
     ALL = "All", _(__name__ + '.ClientRelationPermissionType.' + "ALL")
     FILE = "File", _(__name__ + '.ClientRelationPermissionType.' + "FILE")

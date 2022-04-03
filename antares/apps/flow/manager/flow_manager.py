@@ -16,7 +16,7 @@ import logging
 from babel.dates import parse_date
 from django.utils import timezone
 from django.utils.safestring import mark_safe
-from django.utils.translation import ugettext as _
+from django.utils.translation import gettext as _
 import js2py
 
 from ..constants import FlowCaseSourceType, FlowCaseStatusType, FlowPriorityType, ActivityType, \
@@ -36,7 +36,7 @@ logger = logging.getLogger(__name__)
 
 class FlowManager(object):
     """
-    
+
     """
 
     def __init__(self, **kwargs):
@@ -148,7 +148,7 @@ class FlowManager(object):
         activity.status_date = timezone.now()
         activity.start_date = timezone.now()
         if (activity.activity_definition.activity_type != ActivityType.ROUTE
-                and activity.activity_definition.activity_type != 
+                and activity.activity_definition.activity_type !=
                 ActivityType.SUBFLOW):
             AssignmentManager.get_activity_performer(activity)
         activity.save()
@@ -176,7 +176,7 @@ class FlowManager(object):
                             else:
                                 message += "<div>{message}</div>".format(
                                     message=_(
-                                        __name__ + 
+                                        __name__ +
                                         '.validation_exception_found {id}')
                                     .format(id=validation.id))
                 else:
@@ -228,7 +228,7 @@ class FlowManager(object):
             properties['logger'] = logger
             context = js2py.EvalJs(properties)
             # here we return the values as it is, jst hrn_script and hrn_title
-            context.execute('return_value = ' + 
+            context.execute('return_value = ' +
                             transition_definition.condition_text)
             if (hasattr(context, 'return_value')):
                 return bool(context.return_value)
@@ -370,7 +370,7 @@ class FlowManager(object):
                                     prop.boolean_value = attrib
                             else:
                                 raise NotImplementedError(
-                                    _(__name__ + 
+                                    _(__name__ +
                                       ".exceptions.field_type_not_implemented_executing_actions"
                                       ))
 

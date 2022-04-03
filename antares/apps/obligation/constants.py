@@ -6,28 +6,33 @@ Created on Jul 9, 2016
 from antares.apps.core.mixins import EnumUtilsMixin
 
 from django.db import models
-from django.utils.translation import ugettext as _
+from django.utils.translation import gettext as _
 
 
 class ObligationOriginType(EnumUtilsMixin, models.TextChoices):
-    CLIENT_BASE = 'Client Base', _(__name__ + '.ObligationOriginType.' + 'CLIENT_BASE')
+    CLIENT_BASE = 'Client Base', _(
+        __name__ + '.ObligationOriginType.' + 'CLIENT_BASE')
     FORM = 'Form', _(__name__ + '.ObligationOriginType.' + 'FORM')
 
 
 class ObligationStatusType(EnumUtilsMixin, models.TextChoices):
-    NOT_EXIGIBLE = "Not Exigible", _(__name__ + '.ObligationStatusType.' + 'NOT_EXIGIBLE')
+    NOT_EXIGIBLE = "Not Exigible", _(
+        __name__ + '.ObligationStatusType.' + 'NOT_EXIGIBLE')
     PENDING = "Pending", _(__name__ + '.ObligationStatusType.' + 'PENDING')
-    COMPLIANT = "Compliant", _(__name__ + '.ObligationStatusType.' + 'COMPLIANT')
-    CANCELLED = "Cancelled", _(__name__ + '.ObligationStatusType.' + 'CANCELLED')
+    COMPLIANT = "Compliant", _(
+        __name__ + '.ObligationStatusType.' + 'COMPLIANT')
+    CANCELLED = "Cancelled", _(
+        __name__ + '.ObligationStatusType.' + 'CANCELLED')
     LATE = "Late", _(__name__ + '.ObligationStatusType.' + 'LATE')
 
 
 class ObligationPeriodicityType(EnumUtilsMixin, models.TextChoices):
-    FIXED_DATE = "Fixed date", _(__name__ + '.ObligationPeriodicityType.' + 'FIXED_DATE')
-    FIXED_PERIOD = "Fixed period", _(__name__ + '.ObligationPeriodicityType.' + 
-                         'FIXED_PERIOD')
-    FREE_FORM = "Free form", _(__name__ + '.ObligationPeriodicityType.' + 
-                      'FREE_FORM')
+    FIXED_DATE = "Fixed date", _(
+        __name__ + '.ObligationPeriodicityType.' + 'FIXED_DATE')
+    FIXED_PERIOD = "Fixed period", _(__name__ + '.ObligationPeriodicityType.' +
+                                     'FIXED_PERIOD')
+    FREE_FORM = "Free form", _(__name__ + '.ObligationPeriodicityType.' +
+                               'FREE_FORM')
 
 
 class ObligationType(EnumUtilsMixin, models.TextChoices):
@@ -48,4 +53,3 @@ class ObligationType(EnumUtilsMixin, models.TextChoices):
     # delivery remittance, or in other words, has to create a document for each
     # one of the clients he informs and then create a summary with them.
     INFORM = "Inform", _(__name__ + '.ObligationType.' + 'INFORM')
-

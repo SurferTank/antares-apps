@@ -4,7 +4,7 @@ import uuid
 
 from django.db import models
 from django.utils import timezone
-from django.utils.translation import ugettext as _
+from django.utils.translation import gettext as _
 from djmoney.models.fields import MoneyField
 from djmoney.money import Money
 
@@ -111,7 +111,7 @@ class AccountTransaction(models.Model):
     def get_COPAD(self):
         return COPAD(self.balance.client.id, self.balance.obligation.id,
                      self.balance.period, self.balance.account_type.id, self.balance.base_document.id)
-    
+
     class Meta:
         app_label = 'accounting'
         db_table = 'acc_transaction'

@@ -6,7 +6,7 @@ Created on 30/7/2016
 from antares.apps.core.constants import LanguageType
 import logging
 
-from django.utils.translation import ugettext as _
+from django.utils.translation import gettext as _
 
 from ..manager import IsicLoader
 

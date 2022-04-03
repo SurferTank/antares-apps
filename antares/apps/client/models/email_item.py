@@ -5,7 +5,7 @@ import uuid
 from django.conf import settings
 from django.db import models
 from django.utils import timezone
-from django.utils.translation import ugettext as _
+from django.utils.translation import gettext as _
 
 from ..constants import EmailType, ItemStatusType
 
@@ -21,7 +21,8 @@ class EmailItem(models.Model):
         db_column='client_branch',
         blank=True,
         null=True)
-    status = models.CharField(choices=ItemStatusType.choices, max_length=20, default=ItemStatusType.ACTIVE)
+    status = models.CharField(
+        choices=ItemStatusType.choices, max_length=20, default=ItemStatusType.ACTIVE)
     is_principal = models.BooleanField(default=True)
     email_type = models.CharField(choices=EmailType.choices, max_length=20)
     email = models.CharField(max_length=256)

@@ -4,7 +4,7 @@ import logging
 import uuid
 
 from django.db import models
-from django.utils.translation import ugettext as _
+from django.utils.translation import gettext as _
 
 from .transition_definition import TransitionDefinition
 
@@ -24,20 +24,23 @@ class ActivityDefinition(models.Model):
         blank=True,
         null=True)
     activity_id = models.CharField(max_length=255)
-    activity_type = models.CharField(choices=ActivityType.choices, max_length=30)
+    activity_type = models.CharField(
+        choices=ActivityType.choices, max_length=30)
     assignment_strategy = models.CharField(choices=AssignmentStrategyType.choices,
                                            max_length=30, blank=True, null=True)
     description = models.TextField(blank=True, null=True)
     display_name = models.CharField(max_length=255, blank=True, null=True)
-    finish_mode = models.CharField(choices=ExecutionModeType.choices, max_length=30)
+    finish_mode = models.CharField(
+        choices=ExecutionModeType.choices, max_length=30)
     hrn_script = models.CharField(max_length=2000, blank=True, null=True)
-    start_mode = models.CharField(choices=ExecutionModeType.choices, max_length=30)
+    start_mode = models.CharField(
+        choices=ExecutionModeType.choices, max_length=30)
     property_strategy_definition = models.CharField(
         max_length=100, blank=True, null=True)
     activity_strategy_definition = models.CharField(
         max_length=100, blank=True, null=True)
     instantiation = models.CharField(choices=FlowActivityInstantiationType.choices, max_length=30,
-                                      blank=True, null=True)
+                                     blank=True, null=True)
     cost = models.FloatField(blank=True, null=True)
     waiting_time = models.FloatField(blank=True, null=True)
     working_time = models.FloatField(blank=True, null=True)

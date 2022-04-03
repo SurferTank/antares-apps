@@ -7,7 +7,7 @@ from antares.apps.core.middleware.request import get_request
 import json
 import logging
 
-from django.utils.translation import ugettext as _
+from django.utils.translation import gettext as _
 from django.views.generic import TemplateView
 
 from ..constants import FlowActivityStatusType, FlowPriorityType
@@ -32,7 +32,7 @@ class WorkspaceView(TemplateView):
                         _(__name__ + ".exceptions.no_activity_was_found"))
                 if activity.performer != get_request().user:
                     raise FlowException(
-                        _(__name__ + 
+                        _(__name__ +
                           ".exceptions.this_activity_was_assigned_to_a_different_user"
                           ))
             else:
@@ -48,16 +48,15 @@ class WorkspaceView(TemplateView):
             context['activity'] = activity
             context['performer'] = get_request().user
             context['validated_performer'] = self.validatePerformer(activity)
-            context['priority_type_choices'] = json.dumps(FlowPriorityType.to_dict())
+            context['priority_type_choices'] = json.dumps(
+                FlowPriorityType.to_dict())
         except Exception as e:
             logger.exception(e)
         return context
-    
+
     def validatePerformer(self, activity):
         if(activity.performer.id != get_request().user.id):
             return False
         if(activity.status not in (FlowActivityStatusType.ACTIVE, FlowActivityStatusType.CREATED)):
             return False
         return True
-        
-        

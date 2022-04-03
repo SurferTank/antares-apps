@@ -2,4 +2,4 @@ from django.apps import AppConfig
 
 
 class ObligationConfig(AppConfig):
-    name = 'obligation'
+    name = 'antares.apps.obligation'

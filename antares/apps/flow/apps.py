@@ -2,4 +2,4 @@ from django.apps import AppConfig
 
 
 class FlowConfig(AppConfig):
-    name = 'flow'
+    name = 'antares.apps.flow'

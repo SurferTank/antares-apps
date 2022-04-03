@@ -8,7 +8,7 @@ from antares.apps.document.types import Document
 import logging
 from typing import List
 
-from django.utils.translation import ugettext as _
+from django.utils.translation import gettext as _
 
 from ..manager import AccountManager
 
@@ -21,9 +21,9 @@ class AccountConsole(object):
     """
 
     @classmethod
-    def process_commands(cls, params: List[str], html: bool=False) -> str:
+    def process_commands(cls, params: List[str], html: bool = False) -> str:
         """ Processes the commands handled off by the terminal module
-            
+
             :param params: the list of parameters to use
             :param html: indicates if the process has to produce output in html format
             :returns: a string with the output
@@ -41,7 +41,7 @@ class AccountConsole(object):
     @classmethod
     def _post_document(cls, params: List[str]) -> str:
         """ Posts a document to the current account
-            
+
             :param params: the list of parameters to use
             :param html: indicates if the process has to produce output in html format
             :returns: a string with the output
@@ -55,6 +55,6 @@ class AccountConsole(object):
             return _(__name__ + ".missing_parameter {parameter}").format(
                 parameter='withdocumentid')
         AccountManager.post_document(document)
-        return _(__name__ + 
+        return _(__name__ +
                  ".document_successfully_posted_to_cca {document_id}").format(
                      document_id=document.document_id)

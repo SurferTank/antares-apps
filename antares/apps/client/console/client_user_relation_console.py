@@ -6,7 +6,7 @@ Created on 30/7/2016
 from antares.apps.core.middleware.request import get_request
 import logging
 
-from django.utils.translation import ugettext as _
+from django.utils.translation import gettext as _
 
 from ..constants import ClientRelationType
 from ..models import Client
@@ -44,7 +44,7 @@ class ClientUserRelationConsole(object):
     def _list_client_relations(params, html):
         client_relation_list = ClientUserRelation.get_child_client_list(False)
         if (len(client_relation_list) == 0):
-            return _(__name__ + 
+            return _(__name__ +
                      ".console.the_current_user_has_no_clients_associated")
 
         result = "<table width=\"100%\"><tr><td>" + \
@@ -76,7 +76,7 @@ class ClientUserRelationConsole(object):
         current_client = get_request().user.get_on_behalf_client()
         if (current_client is not None):
             return _(__name__ + ".current_client_is %(client_name)s") % \
-                {'client_name': current_client.code + 
+                {'client_name': current_client.code +
                     ' - ' + current_client.full_name}
 
     @staticmethod

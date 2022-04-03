@@ -1,13 +1,14 @@
 #!/usr/bin/env python
 try:
-    import django, sys
+    import django
+    import sys
     from django.test.runner import DiscoverRunner
     from django.conf import settings
     import os
-    from django.utils.translation import ugettext_lazy as _
-    
+    from django.utils.translation import gettext_lazy as _
+
     import platform
-    
+
     STATIC_ROOT = '/docs/projects/www/cdbdemo/public/'
     DEFAULT_BINARY = "/Users/leobelen/.virtualenvs/antares/bin/python"
     DATABASE_USER = 'antares'
@@ -24,29 +25,29 @@ try:
     STATIC_URL = '/public/'
     DEBUG = True
     DEBUG_PROPAGATE_EXCEPTIONS = True
-    
+
     SITE_ID = 1
-    
+
     SECRET_KEY = 'o-9%7@l+z$7t1g$)+jct*m0e90v87%*7o)%mij&9wz_!*3gu=7'
     CSRF_MIDDLEWARE_SECRET = 'o-9%7@l+z$7t1g$)+jct*m0e90v87%*7o)%mij&9wz_!*3gu=7'
-    
+
     SESSION_COOKIE_DOMAIN = None
-    
+
     # all settings in debug section should be false in productive environment
     # INTERNAL_IPS should be empty in productive environment
-    
+
     VIEW_TEST = True
     INTERNAL_IPS = '127.0.0.1'
     SKIP_CSRF_MIDDLEWARE = False
-    
+
     SERVER_EMAIL = 'antares@surfertank.com'
     EMAIL_HOST = 'localhost'
-    
+
     BASE_DIR = os.path.dirname(
         os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-    
+
     # A default site for the apps who need it.
-    
+
     DJANGO_APPS = (
         'django.contrib.admin',
         'django.contrib.auth',
@@ -57,7 +58,7 @@ try:
         'django.contrib.sites',
         'django.contrib.humanize',
     )
-    
+
     LOCAL_APPS = (
         'antares.apps.core',
         'antares.apps.accounting',
@@ -73,7 +74,7 @@ try:
         'antares.apps.message',
         'antares.apps.terminal',
     )
-    
+
     THIRD_PARTY_APPS = (
         'mptt',
         'ckeditor',
@@ -92,9 +93,9 @@ try:
         'django_extensions',
         'django_markdown'
     )
-    
+
     INSTALLED_APPS = DJANGO_APPS + LOCAL_APPS + THIRD_PARTY_APPS
-    
+
     settings.configure(
         BASE_DIR=os.path.dirname(
             os.path.dirname(os.path.dirname(os.path.abspath(__file__)))),
@@ -132,8 +133,7 @@ try:
             'antares.apps.core.middleware.request.RequestMiddleware',
             'debug_toolbar.middleware.DebugToolbarMiddleware',
             'django.middleware.cache.FetchFromCacheMiddleware',
-        ]
-        ,
+        ],
         MEDIA_URL='/media/',
         MEDIA_ROOT=os.path.join(BASE_DIR, 'media'),
         STATICFILES_DIRS=(
@@ -208,48 +208,48 @@ try:
             ('en', _('English')),
             ('es', _('Spanish')),
         ),
-        CKEDITOR_JQUERY_URL=
-        '//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js',
+        CKEDITOR_JQUERY_URL='//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js',
         STATIC_ROOT=STATIC_ROOT,
         STATIC_URL=STATIC_URL,
         TEMPLATES=[
-        {
-            'BACKEND': 'django.template.backends.django.DjangoTemplates',
-            'DIRS': [os.path.join(os.path.join(BASE_DIR, 'antares'), 'templates')],
-            'APP_DIRS': True,
-            'OPTIONS': {
-                'context_processors': [
-                    'django.template.context_processors.debug',
-                    'django.template.context_processors.request',
-                    'django.contrib.auth.context_processors.auth',
-                    'django.contrib.messages.context_processors.messages',
-                    'django.template.context_processors.i18n',
-                    'django.template.context_processors.media',
-                    'django.template.context_processors.static',
-                    'django.template.context_processors.tz',
-                ],
-                'libraries': {
-                    'accounting_tags':
-                    'antares.apps.accounting.templatetags.accounting_tags',
-                    'core_tags':
-                    'antares.apps.core.templatetags.core_tags',
-                    'notification_tags':
-                    'antares.apps.notifications.templatetags.notification_tags',
-                    'auth_tags':
-                    'antares.apps.user.templatetags.auth_tags',
-                    'flow_tags':
-                    'antares.apps.flow.templatetags.flow_tags',
-                },
-                "builtins": [
-                    'django.templatetags.static',
+            {
+                'BACKEND': 'django.template.backends.django.DjangoTemplates',
+                'DIRS': [os.path.join(os.path.join(BASE_DIR, 'antares'), 'templates')],
+                'APP_DIRS': True,
+                'OPTIONS': {
+                    'context_processors': [
+                        'django.template.context_processors.debug',
+                        'django.template.context_processors.request',
+                        'django.contrib.auth.context_processors.auth',
+                        'django.contrib.messages.context_processors.messages',
+                        'django.template.context_processors.i18n',
+                        'django.template.context_processors.media',
+                        'django.template.context_processors.static',
+                        'django.template.context_processors.tz',
+                    ],
+                    'libraries': {
+                        'accounting_tags':
+                        'antares.apps.accounting.templatetags.accounting_tags',
+                        'core_tags':
+                        'antares.apps.core.templatetags.core_tags',
+                        'notification_tags':
+                        'antares.apps.notifications.templatetags.notification_tags',
+                        'auth_tags':
+                        'antares.apps.user.templatetags.auth_tags',
+                        'flow_tags':
+                        'antares.apps.flow.templatetags.flow_tags',
+                    },
+                    "builtins": [
+                        'django.templatetags.static',
                     ]
+                },
             },
-        },
-    ]
+        ]
     )
-    
+
 except ImportError:
-    raise ImportError("To fix this error, run: pip install -r requirements.txt")    
+    raise ImportError(
+        "To fix this error, run: pip install -r requirements.txt")
 
 django.setup()
 
@@ -266,4 +266,3 @@ def run_tests(*test_args):
 
 if __name__ == '__main__':
     run_tests(*sys.argv[1:])
-

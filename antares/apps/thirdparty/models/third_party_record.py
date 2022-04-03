@@ -6,7 +6,7 @@ from django.conf import settings
 from django.db import models
 from django.db import transaction
 from django.utils import timezone
-from django.utils.translation import ugettext as _
+from django.utils.translation import gettext as _
 
 from ..constants import ThirdPartyRecordStatusType, ThirdPartyChannelType
 
@@ -21,14 +21,12 @@ class ThirdPartyRecord(models.Model):
         primary_key=True,
         default=uuid.uuid4,
         editable=False)
-    status = models.CharField(choices=
-        ThirdPartyRecordStatusType.choices,
-        max_length=30,
-        default=ThirdPartyRecordStatusType.OPEN)
-    channel = models.CharField(choices=
-        ThirdPartyChannelType.choices,
-        max_length=30,
-        default=ThirdPartyChannelType.WEB)
+    status = models.CharField(choices=ThirdPartyRecordStatusType.choices,
+                              max_length=30,
+                              default=ThirdPartyRecordStatusType.OPEN)
+    channel = models.CharField(choices=ThirdPartyChannelType.choices,
+                               max_length=30,
+                               default=ThirdPartyChannelType.WEB)
     client_branch = models.ForeignKey(
         'client.ClientBranch',
         on_delete=models.PROTECT,

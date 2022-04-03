@@ -9,7 +9,7 @@ from ckeditor.fields import RichTextField
 from django.conf import settings
 from django.db import models
 from django.utils import timezone
-from django.utils.translation import ugettext as _
+from django.utils.translation import gettext as _
 import js2py
 
 from ..constants import HrnModuleType
@@ -123,7 +123,7 @@ class HrnCode(models.Model):
     def _get_next_hrn_by_params(cls, module, hrn_id, **kwargs):
         """
             Gets the next HRN Code based on parameters
-            
+
         """
         if module is None or hrn_id is None:
             raise ValueError(

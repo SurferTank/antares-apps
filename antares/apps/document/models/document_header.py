@@ -4,7 +4,7 @@ import uuid
 from django.conf import settings
 from django.db import models
 from django.utils import timezone
-from django.utils.translation import ugettext as _
+from django.utils.translation import gettext as _
 
 from ..constants import DocumentAssociationType, DocumentOriginType, DocumentStatusType
 
@@ -157,10 +157,11 @@ class DocumentHeader(models.Model):
         blank=True,
         null=True)
     association_type = models.CharField(choices=DocumentAssociationType.choices,
-        max_length=30,
-        default=DocumentAssociationType.NONE,
-        verbose_name=_(__name__ + ".association_type"),
-        help_text=_(__name__ + ".association_type_help"))
+                                        max_length=30,
+                                        default=DocumentAssociationType.NONE,
+                                        verbose_name=_(
+                                            __name__ + ".association_type"),
+                                        help_text=_(__name__ + ".association_type_help"))
     cancel_date = models.DateTimeField(
         blank=True,
         null=True,
@@ -208,20 +209,20 @@ class DocumentHeader(models.Model):
         verbose_name=_(__name__ + ".hrn_title"),
         help_text=_(__name__ + ".hrn_title_help"))
     origin = models.CharField(choices=DocumentOriginType.choices,
-        max_length=30,
-        default=DocumentOriginType.UNKNOWN,
-        verbose_name=_(__name__ + ".origin"),
-        help_text=_(__name__ + ".origin_help"))
+                              max_length=30,
+                              default=DocumentOriginType.UNKNOWN,
+                              verbose_name=_(__name__ + ".origin"),
+                              help_text=_(__name__ + ".origin_help"))
     save_date = models.DateTimeField(
         blank=True,
         null=True,
         verbose_name=_(__name__ + ".save_date"),
         help_text=_(__name__ + ".save_date_help"))
     status = models.CharField(choices=DocumentStatusType.choices,
-        max_length=30,
-        default=DocumentStatusType.DRAFTED,
-        verbose_name=_(__name__ + ".status"),
-        help_text=_(__name__ + ".status_help"))
+                              max_length=30,
+                              default=DocumentStatusType.DRAFTED,
+                              verbose_name=_(__name__ + ".status"),
+                              help_text=_(__name__ + ".status_help"))
     default_currency = models.CharField(
         max_length=30,
         blank=True,

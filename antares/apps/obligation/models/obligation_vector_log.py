@@ -11,7 +11,7 @@ import uuid
 from django.conf import settings
 from django.db import models
 from django.utils import timezone
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 
 from ..constants import ObligationStatusType
 
@@ -31,7 +31,8 @@ class ObligationVectorLog(models.Model):
         db_column='obligation',
         blank=True,
         null=True)
-    status = models.CharField(choices=ObligationStatusType.choices, max_length=30)
+    status = models.CharField(
+        choices=ObligationStatusType.choices, max_length=30)
     status_date = models.DateTimeField(blank=True, null=True)
     log_date = models.DateTimeField()
     author = models.ForeignKey(

@@ -13,7 +13,7 @@ import uuid
 
 from django.db import models
 from django.utils import timezone
-from django.utils.translation import ugettext as _
+from django.utils.translation import gettext as _
 from djmoney.models.fields import MoneyField
 from djmoney.money import Money
 
@@ -26,7 +26,7 @@ logger = logging.getLogger(__name__)
 
 class AccountBalance(models.Model):
     """ The current account balance record
-    
+
     :attribute id: the account id
     :attribute default_currency: the currency in which the account is defined
     :attribute concept_type: the concept type for which the current account is defined
@@ -153,7 +153,7 @@ class AccountBalance(models.Model):
     def findByClient(cls, client):
         try:
             balance_list = AccountBalance.objects.filter(
-                        client=client)
+                client=client)
         except AccountBalance.DoesNotExist:
             balance_list = []
         return balance_list
@@ -219,7 +219,7 @@ class AccountBalance(models.Model):
     def get_COPAD(self):
         return COPAD(self.client, self.concept_type,
                      self.period, self.account_type, self.base_document)
-    
+
     @classmethod
     def find_by_COPAD(cls, copad):
         try:
@@ -231,7 +231,7 @@ class AccountBalance(models.Model):
                 base_document=copad.base_document)
         except AccountBalance.DoesNotExist:
             return None
-    
+
     class Meta:
         app_label = 'accounting'
         db_table = 'acc_account_balance'

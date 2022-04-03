@@ -3,7 +3,7 @@ from antares.apps.core.middleware.request import get_request
 from antares.apps.core.models import UserParameter
 import logging
 
-from django.utils.translation import ugettext as _
+from django.utils.translation import gettext as _
 from django_datatables_view.base_datatable_view import BaseDatatableView
 
 from ..exceptions import FlowException
@@ -24,7 +24,7 @@ class ApiCaseNoteListView(BaseDatatableView):
 
     def __init__(self):
         self.date_format_string = UserParameter.find_one('CORE_TEMPLATE_DATE_TIME_FORMAT',
-            FieldDataType.STRING, '%Y-%m-%d %H:%M')
+                                                         FieldDataType.STRING, '%Y-%m-%d %H:%M')
 
     def render_column(self, row, column):
         # We want to render user as a custom column
@@ -47,7 +47,8 @@ class ApiCaseNoteListView(BaseDatatableView):
         elif column == 'actions':
             line = '<a href="#" onClick="editNote(\'' + str(row.id) + \
                 '\', \'' + row.title + '\', \'' + row.content + \
-                '\', \'' + str(row.flow_case.id) + '\');"><i class="fa fa-pencil-alt" aria-hidden="true"></i></a>'
+                '\', \'' + str(row.flow_case.id) + \
+                '\');"><i class="fa fa-pencil-alt" aria-hidden="true"></i></a>'
             return line
         else:
             return super(ApiCaseNoteListView, self).render_column(row, column)
@@ -63,7 +64,7 @@ class ApiCaseNoteListView(BaseDatatableView):
                     _(__name__ + ".exceptions.no_activity_was_found"))
             if (activity.performer != get_request().user):
                 raise FlowException(
-                    _(__name__ + 
+                    _(__name__ +
                       ".exceptions.this_activity_was_assigned_to_a_different_user"
                       ))
         else:

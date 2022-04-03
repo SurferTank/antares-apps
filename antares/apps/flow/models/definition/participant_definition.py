@@ -4,7 +4,7 @@ import uuid
 
 from django.conf import settings
 from django.db import models
-from django.utils.translation import ugettext as _
+from django.utils.translation import gettext as _
 
 
 logger = logging.getLogger(__name__)
@@ -41,7 +41,8 @@ class ParticipantDefinition(models.Model):
     definition_site = models.CharField(max_length=7)
     participant_id = models.CharField(max_length=255)
     participant_name = models.CharField(max_length=255, blank=True, null=True)
-    participant_type = models.CharField(choices=ParticipantType.choices, max_length=30)
+    participant_type = models.CharField(
+        choices=ParticipantType.choices, max_length=30)
 
     def save(self, *args, **kwargs):
         super(ParticipantDefinition, self).save(*args, **kwargs)

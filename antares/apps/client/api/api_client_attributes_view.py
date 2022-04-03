@@ -3,7 +3,7 @@ from antares.apps.core.middleware.request import get_request
 import logging
 import uuid
 
-from django.utils.translation import ugettext as _
+from django.utils.translation import gettext as _
 from django_datatables_view.base_datatable_view import BaseDatatableView
 
 from ..models import ClientAttribute, Client

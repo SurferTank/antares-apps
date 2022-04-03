@@ -4,7 +4,7 @@ from antares.apps.core.models import UserParameter
 from antares.apps.document.constants import DocumentStatusType
 import logging
 
-from django.utils.translation import ugettext as _
+from django.utils.translation import gettext as _
 from django_datatables_view.base_datatable_view import BaseDatatableView
 
 from ..exceptions import FlowException
@@ -33,7 +33,7 @@ class ApiCaseDocumentView(BaseDatatableView):
 
     def __init__(self):
         self.date_format_string = UserParameter.find_one('CORE_TEMPLATE_DATE_TIME_FORMAT',
-            FieldDataType.STRING, '%Y-%m-%d %H:%M')
+                                                         FieldDataType.STRING, '%Y-%m-%d %H:%M')
 
     def render_column(self, row, column):
         # We want to render user as a custom column
@@ -88,7 +88,7 @@ class ApiCaseDocumentView(BaseDatatableView):
             if DocumentStatusType.to_enum(
                     row.document.status) == DocumentStatusType.DRAFTED:
                 line += '&nbsp;&nbsp;<a href="#" onClick="editWorkflowDocument(\'' + str(row.document.id) + \
-                '\');"><i class="fa fa-pencil" aria-hidden="true"></i></a>'
+                    '\');"><i class="fa fa-pencil" aria-hidden="true"></i></a>'
             return line
         else:
             return super(ApiCaseDocumentView, self).render_column(row, column)
@@ -105,7 +105,7 @@ class ApiCaseDocumentView(BaseDatatableView):
                     _(__name__ + ".exceptions.no_activity_was_found"))
             if (activity.performer != get_request().user):
                 raise FlowException(
-                    _(__name__ + 
+                    _(__name__ +
                       ".exceptions.this_activity_was_assigned_to_a_different_user"
                       ))
         else:

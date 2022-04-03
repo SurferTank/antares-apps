@@ -6,7 +6,7 @@ from django.conf import settings
 from django.db import models
 from django.db import transaction
 from django.utils import timezone
-from django.utils.translation import ugettext as _
+from django.utils.translation import gettext as _
 
 from ..constants import ThirdPartyDetailStatusType
 
@@ -34,10 +34,9 @@ class ThirdPartyDetail(models.Model):
         'document.DocumentHeader',
         on_delete=models.PROTECT,
         db_column='document')
-    status = models.CharField(choices=
-        ThirdPartyDetailStatusType.choices,
-        max_length=30,
-        default=ThirdPartyDetailStatusType.OPEN)
+    status = models.CharField(choices=ThirdPartyDetailStatusType.choices,
+                              max_length=30,
+                              default=ThirdPartyDetailStatusType.OPEN)
     creation_date = models.DateTimeField()
     update_date = models.DateTimeField()
     author = models.ForeignKey(

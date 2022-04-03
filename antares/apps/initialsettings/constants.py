@@ -6,7 +6,7 @@ Created on Jul 9, 2016
 from antares.apps.core.mixins import EnumUtilsMixin
 
 from django.db import models
-from django.utils.translation import ugettext as _
+from django.utils.translation import gettext as _
 
 
 class SettingsGroupType(EnumUtilsMixin, models.TextChoices):

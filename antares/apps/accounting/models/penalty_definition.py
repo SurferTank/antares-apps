@@ -8,20 +8,19 @@ Created on Feb 5, 2020
 
 @author: leobelen
 '''
+
+
 from antares.apps.core.constants import TimeUnitType
 from antares.apps.core.middleware.request import get_request
 import logging
 import uuid
-
 from ckeditor.fields import RichTextField
 from django.conf import settings
 from django.db import models
 from django.db.models import Q
 from django.utils import timezone
-from django.utils.translation import ugettext as _
+from django.utils.translation import gettext as _
 from djmoney.models.fields import MoneyField
-
-
 logger = logging.getLogger(__name__)
 
 
@@ -53,17 +52,17 @@ class PenaltyDefinition(models.Model):
         blank=True,
         null=True,
         editable=False)
-    
+
     creation_date = models.DateTimeField(blank=True, null=True, editable=False)
     update_date = models.DateTimeField(blank=True, null=True, editable=False)
 
     def __str__(self):
         return self.name
-    
+
     @classmethod
     def findAllAndByConceptType(cls, conceptType):
         try:
-            return PenaltyDefinition.objects.filter(Q(concept_type__isnull=True) | 
+            return PenaltyDefinition.objects.filter(Q(concept_type__isnull=True) |
                                                     Q(concept_type=conceptType)).filter(active=True)
         except PenaltyDefinition.DoesNotExist:
             return []

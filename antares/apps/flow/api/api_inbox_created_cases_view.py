@@ -10,7 +10,7 @@ from antares.apps.flow.exceptions.flow_exception import FlowException
 import logging
 
 from django.urls import reverse
-from django.utils.translation import ugettext as _
+from django.utils.translation import gettext as _
 from django_datatables_view.base_datatable_view import BaseDatatableView
 
 from ..constants import FlowActivityStatusType

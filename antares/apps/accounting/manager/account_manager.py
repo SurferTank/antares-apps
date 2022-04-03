@@ -15,7 +15,7 @@ from typing import List, Dict
 from django.db import transaction
 from django.db.models import Sum
 from django.utils import timezone
-from django.utils.translation import ugettext as _
+from django.utils.translation import gettext as _
 from djmoney.money import Money
 
 from ..constants import AccountDocumentStatusType
@@ -45,10 +45,10 @@ class AccountManager(object):
     @transaction.atomic
     def post_document(cls, document: Document) -> AccountDocumentStatusType:
         """ Posts a document into the current account, assuming there are rules defined for it. Otherwise it just returns. 
-        
+
         :param document: the document to post 
         :returns: the account document status or None if the document was not supposed to be processed.
-        
+
         """
         account_rules = AccountRule.find_active_by_form_definition(
             document.header.form_definition)
@@ -66,10 +66,10 @@ class AccountManager(object):
         # try:
         cancelled_document = AccountManager._get_cancelled_document(
             document)
-    
+
         if (cancelled_document is not None):
             logger.error(
-                _(__name__ + '.cancelling_document %(document_id)s') % 
+                _(__name__ + '.cancelling_document %(document_id)s') %
                 {'document_id': document.document_id})
             AccountManager._cancel_document(cancelled_document, document)
 
@@ -78,8 +78,7 @@ class AccountManager(object):
 
         account_document.content = AccountManager._get_account_document_string(
             account_document, transactions)
-    
-        
+
         account_document.status = AccountDocumentStatusType.PROCESSED
 
         # except Exception as e:
@@ -87,7 +86,7 @@ class AccountManager(object):
         #    account_document.status = AccountDocumentStatusType.WITH_ERRORS
 
         account_document.save()
-        
+
         return account_document.status
 
     @classmethod
@@ -95,7 +94,7 @@ class AccountManager(object):
             cls, account_document: AccountDocument, document: Document,
             account_rules: List[AccountRule]) -> List[AccountTransaction]:
         """ Processes the rules one by one and produces the required transactions.
-        
+
         :param account_document: Account document to process
         :param document: the underlying document object
         :param account_rules: a list of account rules found for the document
@@ -109,7 +108,7 @@ class AccountManager(object):
                 transaction_list.append(transaction)
                 AccountManager._apply_transaction_to_balance(
                     transaction, document)
-                
+
         return transaction_list
 
     @classmethod
@@ -117,7 +116,7 @@ class AccountManager(object):
                             document: Document,
                             rule: AccountRule) -> AccountTransaction:
         """ Computes the transaction out of a document and a rule
-        
+
         :param account_document: Account document to process
         :param document: the underlying document object
         :param rule: account rule to process
@@ -161,11 +160,11 @@ class AccountManager(object):
         """
         Processes a payment transaction to assign the proper values to the accounts. 
         TODO: Needs to be implemented. 
-        
+
         :param document: the underlying document object
         :param rule: account rule to process
         :returns: the produced transactions
-        
+
         """
         paymentApplicationMethod = SystemParameter.find_one(
             "DEFAULT_PAYMENT_APPLICATION_METHOD", FieldDataType.STRING,
@@ -177,7 +176,7 @@ class AccountManager(object):
         """ determine if the transaction would be applied, even if zero transactions are found
         :param transaction: the working transaction
         :returns: a boolean value to determine if the transaction needs to be filtered out or not
-        
+
         """
         if (transaction.transaction_type.post_zeros == True
                 or transaction.total_amount > 0):
@@ -189,13 +188,13 @@ class AccountManager(object):
     def _apply_transaction_to_balance(cls, transaction: AccountTransaction,
                                       document: Document):
         """ Applies the given transaction to the balance. 
-        
+
         :param transaction: the current transaction
         :param document: the document object. 
         """
 
         logger.info(
-            _(__name__ + 
+            _(__name__ +
               ".manager.account_manager.starting_to_balance_the_account"))
         principal = Money(
             0, (document.get_default_currency() or cls.default_currency))
@@ -225,7 +224,7 @@ class AccountManager(object):
                   'principal': principal.amount,
                   'interest': interest.amount,
                   'penalties': penalties.amount
-              })
+            })
 
         transaction.balance.principal_balance = principal
         transaction.balance.interest_balance = interest
@@ -234,8 +233,8 @@ class AccountManager(object):
             AccountManager._compute_balance_status(principal, interest,
                                                    penalties))
         transaction.balance.save()
-        
-        # lets create the interest and penalties. 
+
+        # lets create the interest and penalties.
         chargesManager = ChargesManager()
         chargesManager.calculateChargesByAccount(transaction.balance)
 
@@ -243,7 +242,7 @@ class AccountManager(object):
     def _compute_balance_status(cls, principal: float, interest: float,
                                 penalties: float) -> BalanceStatusType:
         """ Computes the actual balance status based on the values given
-        
+
         :param principal: the principal amount
         :param interest: the interest amount
         :param penalties: the penalties amount
@@ -261,7 +260,7 @@ class AccountManager(object):
     def _process_client(cls, account_document: AccountDocument,
                         document: Document, rule: AccountRule) -> Client:
         """ Processes the document to get the client
-        
+
         :param account_document: the account document
         :param document: the document
         :param rule: the account rule used to process the account
@@ -287,7 +286,7 @@ class AccountManager(object):
                               document: Document,
                               rule: AccountRule) -> AccountType:
         """ Processes the document to get the AccountType
-        
+
         :param account_document: the account document
         :param document: the document
         :param rule: the account rule used to process the account
@@ -314,7 +313,7 @@ class AccountManager(object):
                               document: Document,
                               rule: AccountRule) -> ConceptType:
         """ Processes the document to get the concept type
-        
+
         :param account_document: the account document
         :param document: the document
         :param rule: the account rule used to process the account
@@ -340,7 +339,7 @@ class AccountManager(object):
     def _process_period(cls, account_document: AccountDocument,
                         document: Document, rule: AccountRule) -> int:
         """ Processes the document to get the period
-        
+
         :param account_document: the account document
         :param document: the document
         :param rule: the account rule used to process the account
@@ -361,7 +360,7 @@ class AccountManager(object):
                                   document: Document,
                                   rule: AccountRule) -> TransactionType:
         """ Processes the rule to get the transaction type
-        
+
         :param account_document: the account document
         :param document: the document
         :param rule: the account rule used to process the account
@@ -376,9 +375,9 @@ class AccountManager(object):
             document: Document,
             rule: AccountRule,
             transaction: AccountTransaction,
-            is_cancelled_document: bool=False) -> AccountTransaction:
+            is_cancelled_document: bool = False) -> AccountTransaction:
         """ Processes the transaction amount based on parameters
-        
+
         :param account_document: the account document
         :param document: the document
         :param rule: the account rule used to process the account
@@ -453,51 +452,51 @@ class AccountManager(object):
          TODO: Implement me.
         """
         pass
-    
+
     @classmethod
     def find_balances_qs_by_COPAD(cls, queryset, copad):
         if(copad.client is not None):
             chargesManager = ChargesManager()
             chargesManager.calculateChargesByClient(copad.client)
-        if(copad.client is not None and 
-           copad.concept_type is None and 
-           copad.period is None and 
+        if(copad.client is not None and
+           copad.concept_type is None and
+           copad.period is None and
            copad.account_type is None):
-             
+
             queryset = queryset.filter(client=copad.client)\
                 .annotate(
                     principal_balance__sum=Sum('principal_balance'),
                     interest_balance__sum=Sum('interest_balance'),
                     penalties_balance__sum=Sum('penalties_balance'),
                     total_balance__sum=Sum('total_balance'))
-        elif (copad.client is not None and 
-           copad.concept_type is not None and 
-           copad.period is None and 
-           copad.account_type is None):
+        elif (copad.client is not None and
+              copad.concept_type is not None and
+              copad.period is None and
+              copad.account_type is None):
             queryset = queryset.filter(client=copad.client, concept_type=copad.concept_type)\
                 .annotate(
                     principal_balance__sum=Sum('principal_balance'),
                     interest_balance__sum=Sum('interest_balance'),
                     penalties_balance__sum=Sum('penalties_balance'),
                     total_balance__sum=Sum('total_balance'))
-                
-        elif (copad.client is not None and 
-           copad.concept_type is not None and 
-           copad.period is not None and 
-           copad.account_type is None):
+
+        elif (copad.client is not None and
+              copad.concept_type is not None and
+              copad.period is not None and
+              copad.account_type is None):
             queryset = queryset.filter(
-                    client=copad.client,
-                    concept_type=copad.concept_type,
-                    period=copad.period)\
+                client=copad.client,
+                concept_type=copad.concept_type,
+                period=copad.period)\
                 .annotate(
                     principal_balance__sum=Sum('principal_balance'),
                     interest_balance__sum=Sum('interest_balance'),
                     penalties_balance__sum=Sum('penalties_balance'),
                     total_balance__sum=Sum('total_balance'))
-        elif (copad.client is not None and 
-           copad.concept_type is not None and 
-           copad.period is not None and 
-           copad.account_type is not None):
+        elif (copad.client is not None and
+              copad.concept_type is not None and
+              copad.period is not None and
+              copad.account_type is not None):
             queryset = queryset.filter(
                 client=copad.client,
                 concept_type=copad.concept_type,

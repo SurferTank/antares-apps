@@ -16,7 +16,7 @@ import logging
 import uuid
 
 import babel.numbers
-from django.utils.translation import ugettext as _
+from django.utils.translation import gettext as _
 from django_datatables_view.base_datatable_view import BaseDatatableView
 
 from ..manager import AccountManager
@@ -28,7 +28,7 @@ logger = logging.getLogger(__name__)
 
 class ApiAccountTypeView(BaseDatatableView):
     """ Retrieves a JSON formatted string to be used on the current account as the details by Account Type. 
-    
+
     :attribute model: The model in which is based the class (required by BaseDatatableView)
     :attribute columns: The columns to serve (required by BaseDatatableView)
     :attribute order_columns: The definition to allow ordering (required by BaseDatatableView)
@@ -37,7 +37,7 @@ class ApiAccountTypeView(BaseDatatableView):
             (required by BaseDatatableView)
     :attribute default_currency: system-wide value  default currency
     :attribute default_locale: system-wide value default locale
-    
+
     """
     model = AccountTransaction
     columns = [
@@ -76,8 +76,8 @@ class ApiAccountTypeView(BaseDatatableView):
             "DEFAULT_CURRENCY", FieldDataType.STRING, 'USD')
         self.default_locale = SystemParameter.find_one(
             "DEFAULT_LOCALE", FieldDataType.STRING, 'en_US')
-        self.date_format_string = UserParameter.find_one( 'CORE_TEMPLATE_DATE_FORMAT',
-            FieldDataType.STRING, '%Y-%m-%d')
+        self.date_format_string = UserParameter.find_one('CORE_TEMPLATE_DATE_FORMAT',
+                                                         FieldDataType.STRING, '%Y-%m-%d')
 
     def render_column(self, row, column):
         """ Overriden method to render a column (a hook on BaseDatatableView)
@@ -90,9 +90,9 @@ class ApiAccountTypeView(BaseDatatableView):
         if column == 'transaction_date':
             return row.transaction_date.strftime(self.date_format_string)
         if column == 'document_id':
-            row_string = '{document_name}&nbsp;<a href="#" onClick="view_accounting_document(\''+\
+            row_string = '{document_name}&nbsp;<a href="#" onClick="view_accounting_document(\'' +\
                 '{document_id}\');"><i class="fa fa-eye" aria-hidden="true"></i></a>' + \
-                '&nbsp;<a href="#" onClick="print_accounting_document(\''+\
+                '&nbsp;<a href="#" onClick="print_accounting_document(\'' +\
                 '{document_id}\');"><i class="fas fa-print" aria-hidden="true"></i></a>'
             if (row.account_document.document is not None):
                 if row.account_document.document.hrn_code:
@@ -157,10 +157,10 @@ class ApiAccountTypeView(BaseDatatableView):
         else:
             raise ValueError(
                 _(__name__ + '.exceptions.account_type_is_undefined'))
-        copad.client = self.client 
-        copad.concept_type = self.concept_type 
+        copad.client = self.client
+        copad.concept_type = self.concept_type
         copad.period = self.period
         copad.account_type = self.account_type
-        
-        qs =  AccountManager.find_balances_qs_by_COPAD(qs, copad)
+
+        qs = AccountManager.find_balances_qs_by_COPAD(qs, copad)
         return qs

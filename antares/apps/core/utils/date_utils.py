@@ -7,7 +7,7 @@ class DateUtils(object):
         """
         from ..models import SystemParameter
         from ..constants import TimeUnitType, FieldDataType
-        from django.utils.translation import ugettext as _
+        from django.utils.translation import gettext as _
 
         if isinstance(str, time_unit):
             time_unit = TimeUnitType.to_enum(time_unit)

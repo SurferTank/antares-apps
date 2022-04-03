@@ -4,7 +4,7 @@ import logging
 import uuid
 
 from django.db import models
-from django.utils.translation import ugettext as _
+from django.utils.translation import gettext as _
 
 
 logger = logging.getLogger(__name__)
@@ -23,7 +23,8 @@ class FlowActionDefinition(models.Model):
         db_column='action_definition',
         blank=True,
         null=True)
-    action_type = models.CharField(choices=ActionType.choices, max_length=30, default=ActionType.POST_ACTION)
+    action_type = models.CharField(
+        choices=ActionType.choices, max_length=30, default=ActionType.POST_ACTION)
     script_engine = models.CharField(choices=ScriptEngineType.choices,
                                      max_length=30)
     content = models.CharField(max_length=2000, blank=True, null=True)

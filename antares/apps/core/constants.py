@@ -1,22 +1,25 @@
 from antares.apps.core.mixins import EnumUtilsMixin
 
 from django.db import models
-from django.utils.translation import ugettext as _
+from django.utils.translation import gettext as _
 
 
 class ActionParameterDirectionType(EnumUtilsMixin, models.TextChoices):
     IN = "In", _(__name__ + '.ActionParameterDirectionType.' + 'IN')
     OUT = "Out", _(__name__ + '.ActionParameterDirectionType.' + 'OUT')
-    IN_OUT = "In out", _(__name__ + '.ActionParameterDirectionType.' + 'IN_OUT')
+    IN_OUT = "In out", _(
+        __name__ + '.ActionParameterDirectionType.' + 'IN_OUT')
 
 
 class EnvironmentType(EnumUtilsMixin, models.TextChoices):
     LOCAL = "Local", _(__name__ + '.EnvironmentType.' + 'LOCAL')
-    WEBSERVICE = "Web Service", _(__name__ + '.EnvironmentType.' + 'WEBSERVICE')
+    WEBSERVICE = "Web Service", _(
+        __name__ + '.EnvironmentType.' + 'WEBSERVICE')
 
 
 class ActionTargetModuleType(EnumUtilsMixin, models.TextChoices):
-    DOCUMENT = "Document", _(__name__ + '.ActionTargetModuleType.' + 'DOCUMENT')
+    DOCUMENT = "Document", _(
+        __name__ + '.ActionTargetModuleType.' + 'DOCUMENT')
     FLOW = "Flow", _(__name__ + '.ActionTargetModuleType.' + 'FLOW')
 
 
@@ -43,13 +46,17 @@ class FieldDataType(EnumUtilsMixin, models.TextChoices):
 class HrnModuleType(EnumUtilsMixin, models.TextChoices):
     DOCUMENT = "Document", _(__name__ + '.HrnModuleType.' + 'DOCUMENT')
     FLOW_CASE = "Flow Case", _(__name__ + '.HrnModuleType.' + 'FLOW_CASE')
-    FLOW_ACTIVITY = "Flow Activity", _(__name__ + '.HrnModuleType.' + 'FLOW_ACTIVITY')
-    ACCOUNT_BALANCE = "Account Balance", _(__name__ + '.HrnModuleType.' + 'ACCOUNT_BALANCE')
-    ACCOUNT_TRANSACTION = "Account Transaction", _(__name__ + '.HrnModuleType.' + 'ACCOUNT_TRANSACTION')
+    FLOW_ACTIVITY = "Flow Activity", _(
+        __name__ + '.HrnModuleType.' + 'FLOW_ACTIVITY')
+    ACCOUNT_BALANCE = "Account Balance", _(
+        __name__ + '.HrnModuleType.' + 'ACCOUNT_BALANCE')
+    ACCOUNT_TRANSACTION = "Account Transaction", _(
+        __name__ + '.HrnModuleType.' + 'ACCOUNT_TRANSACTION')
 
 
 class ScriptEngineType(EnumUtilsMixin, models.TextChoices):
-    JAVASCRIPT = "Javascript", _(__name__ + '.ScriptEngineType.' + 'JAVASCRIPT')
+    JAVASCRIPT = "Javascript", _(
+        __name__ + '.ScriptEngineType.' + 'JAVASCRIPT')
     PYTHON = "Python", _(__name__ + '.ScriptEngineType.' + 'PYTHON')
 
 
@@ -97,15 +104,20 @@ class WeightUnitType(EnumUtilsMixin, models.TextChoices):
 
 
 class SystemModuleType(EnumUtilsMixin, models.TextChoices):
-    ACCOUNTING = "Accounting", _(__name__ + '.SystemModuleType.' + 'ACCOUNTING')
+    ACCOUNTING = "Accounting", _(
+        __name__ + '.SystemModuleType.' + 'ACCOUNTING')
     CLIENT = "Client", _(__name__ + '.SystemModuleType.' + 'CLIENT')
     CORE = "Core", _(__name__ + '.SystemModuleType.' + 'CORE')
     DOCUMENT = "Document", _(__name__ + '.SystemModuleType.' + 'DOCUMENT')
     FLOW = "Flow", _(__name__ + '.SystemModuleType.' + 'FLOW')
-    NOTIFICATIONS = "Notifications", _(__name__ + '.SystemModuleType.' + 'NOTIFICATIONS')
-    OBLIGATION = "Obligation", _(__name__ + '.SystemModuleType.' + 'OBLIGATION')
-    SUBSCRIPTION = "Subscription", _(__name__ + '.SystemModuleType.' + 'SUBSCRIPTION')
+    NOTIFICATIONS = "Notifications", _(
+        __name__ + '.SystemModuleType.' + 'NOTIFICATIONS')
+    OBLIGATION = "Obligation", _(
+        __name__ + '.SystemModuleType.' + 'OBLIGATION')
+    SUBSCRIPTION = "Subscription", _(
+        __name__ + '.SystemModuleType.' + 'SUBSCRIPTION')
     TERMINAL = "Terminal", _(__name__ + '.SystemModuleType.' + 'TERMINAL')
     MESSAGE = 'Message', _(__name__ + '.SystemModuleType.' + 'MESSAGE')
-    THIRD_PARTY = "Third Party", _(__name__ + '.SystemModuleType.' + 'THIRD_PARTY')
+    THIRD_PARTY = "Third Party", _(
+        __name__ + '.SystemModuleType.' + 'THIRD_PARTY')
     WEB = "Web", _(__name__ + '.SystemModuleType.' + 'WEB')

@@ -14,7 +14,7 @@ import logging
 from uuid import UUID
 
 from django.core.exceptions import ObjectDoesNotExist
-from django.utils.translation import ugettext as _
+from django.utils.translation import gettext as _
 
 from ..constants import FlowDefinitionStatusType, TimeEstimationMethodType
 from ..manager import FlowAdminManager
@@ -283,7 +283,7 @@ class FlowAdminConsole(object):
             flow_case = FlowCase.find_one_by_hrn_code(params['withcode'])
         else:
             return _(
-                __name__ + 
+                __name__ +
                 ".console.either_withcaseid_or_withcode_parameters_have_to_be_defined"
             )
         if flow_case is None:
@@ -331,7 +331,8 @@ class FlowAdminConsole(object):
                 if activity.performer:
                     try:
                         if activity.performer.client and activity.performer.client.full_name:
-                            result += "<td>" + activity.performer.client.full_name + " (" + activity.performer.username + ")</td>"
+                            result += "<td>" + activity.performer.client.full_name + \
+                                " (" + activity.performer.username + ")</td>"
                         else:
                             result += "<td>" + activity.performer.username + '</td>'
                     except:
@@ -362,13 +363,13 @@ class FlowAdminConsole(object):
 
         if flow_activity.status in (FlowActivityStatusType.CANCELLED,
                                     FlowActivityStatusType.COMPLETED):
-            return _(__name__ + 
+            return _(__name__ +
                      ".activities_finalized_or_cancelled_cannot_be_reassigned")
 
         flow_activity.performer = performer
         flow_activity.save()
 
-        return _(__name__ + 
+        return _(__name__ +
                  ".activity_reassigned_to {activity} {username}").format(
                      activity=flow_activity.hrn_code,
                      username=performer.username)

@@ -5,7 +5,7 @@ import uuid
 
 from django.db import models
 from django.utils import timezone
-from django.utils.translation import ugettext as _
+from django.utils.translation import gettext as _
 
 
 logger = logging.getLogger(__name__)
@@ -23,20 +23,28 @@ class FlowDefinition(models.Model):
     access_level = models.CharField(max_length=7, editable=False)
     creation_date = models.DateTimeField(editable=False)
     description = models.TextField(blank=True, null=True, editable=False)
-    display_name = models.CharField(max_length=200, blank=True, null=True, editable=False)
-    flow_id = models.CharField(max_length=255, blank=True, null=True, editable=False)
-    flow_name = models.CharField(max_length=255, blank=True, null=True, editable=False)
-    flow_version = models.CharField(max_length=255, blank=True, null=True, editable=False)
-    hrn_script = models.CharField(max_length=2000, blank=True, null=True, editable=False)
+    display_name = models.CharField(
+        max_length=200, blank=True, null=True, editable=False)
+    flow_id = models.CharField(
+        max_length=255, blank=True, null=True, editable=False)
+    flow_name = models.CharField(
+        max_length=255, blank=True, null=True, editable=False)
+    flow_version = models.CharField(
+        max_length=255, blank=True, null=True, editable=False)
+    hrn_script = models.CharField(
+        max_length=2000, blank=True, null=True, editable=False)
     update_date = models.DateTimeField(blank=True, null=True, editable=False)
-    status = models.CharField(choices=FlowDefinitionStatusType.choices, max_length=30)
+    status = models.CharField(
+        choices=FlowDefinitionStatusType.choices, max_length=30)
     valid_from = models.DateTimeField(blank=True, null=True)
     valid_to = models.DateTimeField(blank=True, null=True)
-    time_unit = models.CharField(choices=TimeUnitType.choices, blank=True, null=True, max_length=30, editable=False)
+    time_unit = models.CharField(
+        choices=TimeUnitType.choices, blank=True, null=True, max_length=30, editable=False)
     waiting_time = models.FloatField(blank=True, null=True, editable=False)
     working_time = models.FloatField(blank=True, null=True, editable=False)
     duration = models.FloatField(blank=True, null=True, editable=False)
-    priority = models.CharField(choices=FlowPriorityType.choices, blank=True, null=True, max_length=30)
+    priority = models.CharField(
+        choices=FlowPriorityType.choices, blank=True, null=True, max_length=30)
 
     def __str__(self):
         if self.display_name:

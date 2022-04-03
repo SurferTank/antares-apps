@@ -11,7 +11,7 @@ import uuid
 
 from django.db import models
 from django.utils import timezone
-from django.utils.translation import ugettext as _
+from django.utils.translation import gettext as _
 from djmoney.models.fields import MoneyField
 from djmoney.money import Money
 
@@ -69,7 +69,7 @@ class AccountCharge(models.Model):
         blank=True,
         null=True,
         related_name="account_charge_document_set")
-    
+
     def save(self, *args, **kwargs):
         """ 
         Saves the balance after making some basic validations and sanity controls
@@ -80,21 +80,21 @@ class AccountCharge(models.Model):
     def setCOPADPeriodInterestDefinition(self, copad, period, interestDefinition):
         self.client = copad.client
         self.concept_type = copad.concept_type
-        self.period = copad.period 
+        self.period = copad.period
         self.account_type = copad.account_type
-        self.base_document = copad.base_document 
+        self.base_document = copad.base_document
         self.charge_period = period
         self.interest_definition = interestDefinition
-    
+
     def setCOPADPeriodPenaltyDefinition(self, copad, period, penaltyDefinition):
         self.client = copad.client
         self.concept_type = copad.concept_type
-        self.period = copad.period 
+        self.period = copad.period
         self.account_type = copad.account_type
-        self.base_document = copad.base_document 
+        self.base_document = copad.base_document
         self.charge_period = period
         self.penalty_definition = penaltyDefinition
-        
+
     @classmethod
     def findByCOPAD(cls, copad):
         try:
@@ -106,7 +106,7 @@ class AccountCharge(models.Model):
                 base_document=copad.base_document)
         except AccountCharge.DoesNotExist:
             return None
-        
+
     @classmethod
     def findByCOPADChargePeriodAndInterestDefinition(cls, copad, period, interestDefinition):
         try:
@@ -119,7 +119,7 @@ class AccountCharge(models.Model):
                 interest_definition=interestDefinition)
         except AccountCharge.DoesNotExist:
             return None
-        
+
     @classmethod
     def findByCOPADChargePeriodAndPenaltyDefinition(cls, copad, period, penaltyDefinition):
         try:
@@ -130,10 +130,10 @@ class AccountCharge(models.Model):
                 account_type=copad.account_type,
                 base_document=copad.base_document, charge_period=period,
                 penalty_definition=penaltyDefinition)
-            
+
         except AccountCharge.DoesNotExist:
             return None
-        
+
     class Meta:
         app_label = 'accounting'
         db_table = 'acc_account_charge'
@@ -146,7 +146,6 @@ class AccountCharge(models.Model):
             'interest_definition',
             'penalty_definition',
         ),)
-        
+
         verbose_name = _(__name__ + ".table_name")
         verbose_name_plural = _(__name__ + ".table_name_plural")
-        

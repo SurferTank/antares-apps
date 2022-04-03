@@ -7,7 +7,7 @@ import uuid
 
 from django.db import models
 from django.utils import timezone
-from django.utils.translation import ugettext as _
+from django.utils.translation import gettext as _
 
 
 logger = logging.getLogger(__name__)
@@ -40,7 +40,8 @@ class FlowCase(models.Model):
     creation_date = models.DateTimeField()
     priority = models.CharField(max_length=30)
     start_date = models.DateTimeField(blank=True, null=True)
-    status = models.CharField(choices=FlowCaseStatusType.choices, max_length=30)
+    status = models.CharField(
+        choices=FlowCaseStatusType.choices, max_length=30)
     hrn_code = models.CharField(
         max_length=50,
         unique=True,
@@ -111,7 +112,7 @@ class FlowCase(models.Model):
                         properties[prop.property_id] = str(prop.date_value)
                 else:
                     raise NotImplementedError(
-                        _(__name__ + 
+                        _(__name__ +
                           ".exceptions.field_type_not_implemented {field_sub_data_type}"
                           ).format(field_sub_data_type=prop.sub_data_type))
         return properties
