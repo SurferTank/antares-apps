@@ -3,7 +3,7 @@ import logging
 import uuid
 
 from django.utils.translation import gettext as _
-from django_datatables_view.base_datatable_view import BaseDatatableView
+from ajax_datatable.views import AjaxDatatableView as BaseDatatableView
 
 from ..constants import ItemStatusType, TelephoneItemType
 from ..models import TelephoneItem, ClientBranch
