@@ -41,7 +41,7 @@ class RolenAdmin(MPTTModelAdmin):
                     'parent'
                     )
 
-    
+
 @admin.register(RoleApplication)
 class RoleApplicationAdmin(admin.ModelAdmin):
     list_display = ('role', 'application',
@@ -56,4 +56,8 @@ class ApplicationAdmin(MPTTModelAdmin):
                     )
 
 
-admin.site.register(ApplicationParameter)
+@admin.register(ApplicationParameter)
+class ApplicationAdmin(admin.ModelAdmin):
+    list_display = ("application", "parameter_name",
+                    "value", "is_route_parameter",
+                    "is_named_route_parameter")

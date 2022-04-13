@@ -49,6 +49,24 @@ class Application(MPTTModel):
         related_name="user_application_author_set",
         editable=False)
 
+    def get_parameter_name_list(self):
+        result = []
+        for param in self.parameter_set.select_related().all():
+            result.append(param.parameter_name)
+        return result
+
+    def get_parameter_value_list(self):
+        result = []
+        for param in self.parameter_set.select_related().all():
+            result.append(param.value)
+        return result
+
+    def get_first_parameter_value(self):
+        params = self.parameter_set.select_related().all()
+        if len(params) > 0:
+            return params[0].value
+        return None
+
     def get_parameter_string(self, only_routes=False):
         result = ""
         first_one = True
