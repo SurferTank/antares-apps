@@ -17,7 +17,7 @@ import uuid
 
 import babel.numbers
 from django.utils.translation import gettext as _
-from ajax_datatable.views import AjaxDatatableView as BaseDatatableView
+from django_datatables_view.base_datatable_view import BaseDatatableView
 
 from ..manager import AccountManager
 from ..models import AccountTransaction, AccountType

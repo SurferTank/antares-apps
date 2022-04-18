@@ -8,25 +8,24 @@
 		omit-xml-declaration="yes" indent="yes" />
 	<xsl:template match="/">
 		<xsl:text disable-output-escaping="yes"><![CDATA[{% extends template %} 
-{% load static i18n markdown_deux_tags %} 
+{% load static i18n markdown_deux_tags pipeline %} 
 
 {% block title %}Antares Document{% endblock %}
 {% block ng_app_name %}{% endblock ng_app_name %}
 {% block bodyId %}Antares Document{% endblock %}
 {% block javascript %} 
     {% if is_inner == 'false' %}
-        <script type="text/javascript" src="{% static "jquery-ui/jquery-ui.js" %}"></script>
+        {% javascript 'jquery_ui_js' %}
+		
     {% endif %}
-    <script type="text/javascript" src="{% static "js/document_edit_common.js" %}"></script>
+	{% javascript 'document_edit_common_js' %}
     <script type="text/javascript" src="{% get_media_prefix %}{{edit_js_path}}"></script>
 {% endblock javascript %} 
 
 {% block stylesheets %}
     {% if is_inner == 'false' %}
-        <link rel="stylesheet" href="{% static "jquery-ui/themes/base/jquery-ui.css" %}">
-    <link rel="stylesheet" href="{% static "jquery-ui/themes/base/theme.css" %}">
-    {% endif %} 
-    
+		{% stylesheet 'jquery_ui_css' %}
+		    {% endif %} 
 {% endblock stylesheets %} 
 
 {% block content %} ]]></xsl:text>
@@ -206,27 +205,63 @@ $(document).ready(function() {
 						</div>
 					</xsl:for-each>
 					<div id="documentEditTabs" class="col-lg-12">
-						<ul class="nav nav-tabs">
-							<xsl:for-each select="document/structuredData/page">
-								<li>
-									<a>
-										<xsl:attribute name="href">
-                                        <xsl:value-of
-											select="concat('#antaresDocumentPage-',position())" />
+						  <nav>
+                        <div class="nav nav-tabs nav-fill" id="nav-tab" role="tablist">
+                          <xsl:for-each select="document/structuredData/page">
+						  <button  data-bs-toggle="tab"  type="button" role="tab">
+						  <xsl:if test="position()=1">
+										<xsl:attribute name="class">
+                                        <xsl:text
+											disable-output-escaping="yes">nav-link</xsl:text>
                                     </xsl:attribute>
-										<xsl:value-of select="@title" />
-									</a>
-								</li>
-							</xsl:for-each>
-						</ul>
+									<xsl:attribute name="aria-selected">
+                                        <xsl:text
+											disable-output-escaping="yes">true</xsl:text>
+                                    </xsl:attribute>
+									
+									</xsl:if>
+									<xsl:if test="position()>1">
+										<xsl:attribute name="class">
+                                        <xsl:text
+											disable-output-escaping="yes">nav-link active</xsl:text>
+                                    </xsl:attribute>
+									<xsl:attribute name="aria-selected">
+                                        <xsl:text
+											disable-output-escaping="yes">false</xsl:text>
+                                    </xsl:attribute>
+									
+									</xsl:if>
+									
+						  <xsl:attribute name="data-bs-target">
+						   <xsl:value-of
+											select="concat('#antaresDocumentPage-',position())" />
+						  </xsl:attribute>
+<xsl:attribute name="aria-controls">
+						   <xsl:value-of
+											select="concat('antaresDocumentPage-',position())" />
+						  </xsl:attribute>
+						  <xsl:attribute name="id">
+						   <xsl:value-of
+											select="concat('nav_antaresDocumentPage-',position())" />
+						  </xsl:attribute>
+						  <xsl:attribute name="aria-controls">
+						   <xsl:value-of
+											select="concat('navaria_antaresDocumentPage-',position())" />
+						  </xsl:attribute>
+						  <xsl:value-of select="@title" />
+						  </button>
+						  </xsl:for-each>
+						  </div>
+						</nav>
+						
 						<div class="tab-content">
 							<xsl:for-each select="document/structuredData/page">
 								<br />
-								<div>
+								<div  role="tabpanel">
 									<xsl:if test="position()=1">
 										<xsl:attribute name="class">
                                         <xsl:text
-											disable-output-escaping="yes">tab-pane fade in active</xsl:text>
+											disable-output-escaping="yes">tab-pane fade show active</xsl:text>
                                     </xsl:attribute>
 									</xsl:if>
 									<xsl:if test="position()>1">
@@ -239,6 +274,11 @@ $(document).ready(function() {
                                     <xsl:value-of
 										select="concat('#antaresDocumentPage-', position())" />
                                 </xsl:attribute>
+								<xsl:attribute name="aria-labelledby">
+                                    <xsl:value-of
+											select="concat('nav_antaresDocumentPage-',position())" />
+                                </xsl:attribute>
+									
 									<div class="container">
 										<xsl:for-each select="line">
 											<xsl:sort data-type="number" select="line" />

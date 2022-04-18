@@ -15,7 +15,7 @@ import uuid
 from django.db.models import Sum
 from django.urls import reverse
 from django.utils.translation import gettext as _
-from ajax_datatable.views import AjaxDatatableView as BaseDatatableView
+from django_datatables_view.base_datatable_view import BaseDatatableView
 from djmoney.money import Money
 
 from ..manager import AccountManager

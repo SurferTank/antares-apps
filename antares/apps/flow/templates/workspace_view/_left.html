@@ -1,12 +1,63 @@
 {% load static i18n  markdown_deux_tags %} 
 
     <div style="text-align:right; ">
-    <a class="btn btn-primary" href="{% url "antares.apps.flow:inbox_view" %}">{% trans 'antares.apps.flow.templates.dashboard.forward.returnToInboxButton' %}</a>&nbsp;
+        <a  class="btn btn-primary btn-sm" href="{% url "antares.apps.flow:inbox_view" %}">{% trans 'antares.apps.flow.templates.dashboard.forward.returnToInboxButton' %}</a>
     {% if validated_performer %}
-    	<a class="btn btn-primary" onclick="openForwardWindow('{{activity_id}}');">{% trans 'antares.apps.flow.templates.dashboard.forward.forwardCaseButton' %}</a>
+        <a class="btn btn-primary btn-sm" onclick="openForwardWindow('{{activity_id}}');">{% trans 'antares.apps.flow.templates.dashboard.forward.forwardCaseButton' %}</a>
     {% endif %}
     </div>
 
+    <div class="accordion" id="accordionExample">
+        {% if activity_tools %}
+        <div class="accordion-item">
+          <h2 class="accordion-header" id="headingOne">
+            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                {% trans 'antares.apps.flow.templates.dashboard.left.tools' %}
+            </button>
+          </h2>
+          <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+            <div class="accordion-body">
+                    {% if validated_performer %}
+                    {% include 'workspace_view/_tools.html' %}
+                    {% endif %}
+            </div>
+          </div>
+        </div>
+        {% endif %}
+        {% if activity.activity_definition.description %}
+        <div class="accordion-item">
+          <h2 class="accordion-header" id="headingTwo">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                {% trans 'antares.apps.flow.templates.dashboard.left.help' %}
+            </button>
+          </h2>
+          <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
+            <div class="accordion-body">
+                {% markdown %}{{ activity.activity_definition.description }}{% endmarkdown %}
+            </div>
+          </div>
+        </div>
+        {% endif %}
+        {% if validated_performer %}
+        <div class="accordion-item">
+          <h2 class="accordion-header" id="headingThree">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                {% trans 'antares.apps.flow.templates.dashboard.left.options' %}
+            </button>
+          </h2>
+          <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionExample">
+            <div class="accordion-body">
+                <div>{% trans "antares.apps.flow.templates.dashboard.left.options.track_this_flow" %}
+                    <input type="checkbox" id="flow_options_track_flow" data-toggle="toggle" {% if tracking_option == 'true' %} checked {% endif %}></input>
+                </div>
+          </div>
+          {% endif %}
+        </div>
+
+      </div>
+    </div>
+
+      {% comment %}
 <div class="panel-group" id="dashboardAccordion">
     {% if activity_tools %}
     <div class="panel panel-default">
@@ -55,6 +106,7 @@
     </div>
     {% endif %}
 </div>
+ {% endcomment %}
 
 {% if validated_performer %}
 <div id="forwardDialog" style="display:none; ">

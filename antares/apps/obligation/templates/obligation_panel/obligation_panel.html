@@ -1,5 +1,5 @@
 {% extends template %} 
-{% load static i18n  %} 
+{% load static i18n pipeline  %} 
 {% block content %} 
 {% if error_message %}	
     {{error_message}}
@@ -10,14 +10,20 @@
                     {% include 'client_header_info/client_header_info.html' %}
             {% endif %}
         </div> <!-- client info -->
+
+        <nav>
+            <div class="nav nav-tabs nav-fill" id="nav-tab" role="tablist">
+              <button class="nav-link active" id="nav-pendingTab" data-bs-toggle="tab" data-bs-target="#pendingTab" type="button" role="tab" aria-controls="nav-home" aria-selected="true">{% trans 'antares.apps.obligation.templates.panel.pending' %}</button>
+              <button class="nav-link" id="nav-compliedTab" data-bs-toggle="tab" data-bs-target="#compliedTab" type="button" role="tab" aria-controls="nav-profile" aria-selected="false">{% trans 'antares.apps.obligation.templates.panel.complied' %}</button>
+              
+            </div>
+          </nav>
+
         <div class="row"> <!-- client info -->
             <div class="col-lg-12">
-                <ul class="nav nav-tabs">
-                    <li class="active"><a data-toggle="tab" href="#pendingTab">{% trans 'antares.apps.obligation.templates.panel.pending' %}</a></li>
-                    <li><a data-toggle="tab" href="#compliedTab">{% trans 'antares.apps.obligation.templates.panel.complied' %}</a></li>
-                </ul>
+
                 <div class="tab-content">
-                    <div id="pendingTab" class="tab-pane fade in active">
+                    <div class="tab-pane fade show active" id="pendingTab" role="tabpanel" aria-labelledby="pendingTab">
                         <table  width="100%" id="pendingObligationsTable" class="table table-striped">
                             <thead>
                                 <tr>
@@ -33,7 +39,7 @@
                             </tbody>
                         </table>
                     </div>
-                    <div id="compliedTab" class="tab-pane fade">
+                    <div class="tab-pane fade" id="compliedTab" role="tabpanel" aria-labelledby="compliedTab">
                         <table  width="100%" id="compliedObligationsTable" class="table table-striped">
                             <thead>
                                 <tr>
@@ -66,36 +72,18 @@
     </script>
 {% endblock %} 
 
-{% block javascript %} 
-    {% if is_inner == False %}
-        <script type="text/javascript" src="{% static "jquery-ui/jquery-ui.js" %}"></script>
-	<script type="text/javascript" src="{% static "datatables.net/js/jquery.dataTables.js" %}"></script>
-	<script type="text/javascript" src="{% static "datatables.net-bs/js/dataTables.bootstrap.js" %}"></script>
-	<script type="text/javascript" src="{% static "datatables.net-colreorder/js/dataTables.colReorder.js" %}"></script>
-	<script type="text/javascript" src="{% static "datatables.net-fixedcolumns/js/dataTables.fixedColumns.js" %}"></script>
-	<script type="text/javascript" src="{% static "datatables.net-keytable/js/dataTables.keyTable.js" %}"></script>
-	<script type="text/javascript" src="{% static "datatables.net-responsive/js/dataTables.responsive.js" %}"></script>
-	<script type="text/javascript" src="{% static "datatables.net-responsive-bs/js/responsive.bootstrap.js" %}"></script>
-	<script type="text/javascript" src="{% static "datatables.net-scroller/js/dataTables.scroller.js" %}"></script>
-	<script type="text/javascript" src="{% static "datatables.net-select/js/dataTables.select.js" %}"></script>
-	<script type="text/javascript" src="{% static "datatables.net-bs/js/dataTables.bootstrap.js" %}"></script>
-    {% endif %} 
-    <script type="text/javascript" src="{% static "js/obligation_panel.js" %}"></script>
-{% endblock javascript %} 
-    
+{% block javascript %}
+{% if is_inner == False %}
+{% javascript 'jquery_ui_js' %}
+{% javascript 'datatables_js' %}
+{% endif %}
+{% javascript 'obligation_panel_js' %}
+{% endblock javascript %}
 {% block stylesheets %}
-    {% if is_inner == False %}
-        <link rel="stylesheet" href="{% static "jquery-ui/themes/base/jquery-ui.css" %}">
-    <link rel="stylesheet" href="{% static "jquery-ui/themes/base/theme.css" %}">
-    <link rel="stylesheet" href="{% static "datatables.net-bs/css/dataTables.bootstrap.css" %}">
-    <link rel="stylesheet" href="{% static "datatables.net-colreorder-bs/css/colReorder.bootstrap.css" %}">
-    <link rel="stylesheet" href="{% static "datatables.net-fixedcolumns-bs/css/fixedColumns.bootstrap.css" %}">
-    <link rel="stylesheet" href="{% static "datatables.net-keytable-bs/css/keyTable.bootstrap.css" %}">
-    <link rel="stylesheet" href="{% static "datatables.net-responsive-bs/css/responsive.bootstrap.css" %}">
-    <link rel="stylesheet" href="{% static "datatables.net-scroller-bs/css/scroller.bootstrap.css" %}">
-    <link rel="stylesheet" href="{% static "datatables.net-select-bs/css/select.bootstrap.css" %}">
-    <link rel="stylesheet" href="{% static "datatables.net-bs/css/dataTables.bootstrap.css" %}">
-    {% endif %} 
-{% endblock stylesheets %} 
+{% if is_inner == False %}
+{% stylesheet 'jquery_ui_css' %}
+{% stylesheet 'datatables_css' %}
+{% endif %}
+{% endblock stylesheets %}
 
 {% block ng_app_name %}{% endblock ng_app_name %}

@@ -6,7 +6,7 @@
  * @param note_content
  * @returns
  */
-function editNote(note_id, note_title, note_content, flowCaseId) {
+ function editNote(note_id, note_title, note_content, flowCaseId) {
 	if (note_id) {
 		$("#note_id").val(note_id);
 	} else {

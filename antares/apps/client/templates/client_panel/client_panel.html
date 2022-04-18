@@ -1,318 +1,361 @@
-{% extends template %} 
-{% load static i18n  core_tags %} 
+{% extends template %}
+{% load static i18n  core_tags pipeline %}
 {% block content %}
 <div class="container" id="clientPanel" style="display:none; ">
-	<div class="row">
-		{% if is_inner == False %}
-              {% include 'client_header_info/client_header_info.html' %}
+    <div class="row">
+        {% if is_inner == False %}
+        {% include 'client_header_info/client_header_info.html' %}
         {% endif %}
-	</div>
-	<!-- client info -->
-	<div class="row">
-		<!-- client info -->
-		<div class="col-lg-12 tabbable">
-			<ul class="nav nav-tabs">
-				<li class="active"><a data-toggle="tab" href="#general_info_tab">{% trans 'antares.apps.client.templates.panel.general_information' %}</a></li>
-                    {% if branches %}
-                    <li><a data-toggle="tab" href="#branches_tab">{% trans 'antares.apps.client.templates.panel.branches' %}</a></li>
-                    {% endif %}
-                    <li><a data-toggle="tab" href="#attributes_tab">{% trans 'antares.apps.client.templates.panel.attributes' %}</a></li>
-                    <li><a data-toggle="tab" href="#relations_tab">{% trans 'antares.apps.client.templates.panel.relations' %}</a></li>
-                </ul>
-                <div class="tab-content">
-                    <div id="general_info_tab" class="tab-pane fade in active">
-                        <div class="row">
-                            <div class="col-lg-2">
-                                {% trans 'antares.apps.client.templates.panel.general.code' %}:
-                            </div>
-                            <div class="col-lg-2">
-                                {{ client.code }}
-                            </div>
-                            <div class="col-lg-2">
-                                {% trans 'antares.apps.client.templates.panel.general.full_name' %}:
-                            </div>
-                            <div class="col-lg-2">
-                                {{ client.full_name }}
-                            </div>
-                            <div class="col-lg-2">
-                                {% trans 'antares.apps.client.templates.panel.general.client_type' %}:
-                            </div>
-                            <div class="col-lg-2">
-                                {{ client.client_type.short_name }}
-                            </div>
-                        </div>
+    </div>
+
+
+    <nav>
+        <div class="nav nav-tabs nav-fill" id="nav-tab" role="tablist">
+          <button class="nav-link active" id="nav-general_info_tab" data-bs-toggle="tab" data-bs-target="#general_info_tab" type="button" role="tab" aria-controls="nav-home" aria-selected="true">{% trans 'antares.apps.client.templates.panel.general_information' %}</button>
+
+          {% if branches %}
+          <button class="nav-link" id="nav-branches_tab" data-bs-toggle="tab" data-bs-target="#branches_tab" type="button" role="tab" aria-controls="nav-profile" aria-selected="false">{% trans 'antares.apps.client.templates.panel.branches' %}</button>
+          {% endif %}
+      
+          
+          <button class="nav-link" id="nav-attributes_tab" data-bs-toggle="tab" data-bs-target="#attributes_tab" type="button" role="tab" aria-controls="nav-profile" aria-selected="false">{% trans 'antares.apps.client.templates.panel.attributes' %}</button>
+      
+          <button class="nav-link" id="nav-relations" data-bs-toggle="tab" data-bs-target="#relations_tab" type="button" role="tab" aria-controls="nav-profile" aria-selected="false">{% trans 'antares.apps.client.templates.panel.relations' %}</button>
+        </div>
+      </nav>
+
+
+
+    <!-- client info -->
+    <div class="row">
+        <!-- client info -->
+        <div class="col-lg-12 tabbable">
+            <div class="tab-content" id="clientPanelContent">
+                <div class="tab-pane fade show active" id="general_info_tab" role="tabpanel" aria-labelledby="general_info_tab"> 
                     <div class="row">
-                            <div class="col-lg-2">
-                                {% trans 'antares.apps.client.templates.panel.general.registration_date' %}:
-                            </div>
-                            <div class="col-lg-2">
-                                {{ client.registration_date| date_format }}
-                            </div>
-                            <div class="col-lg-2">
-                                
-                            </div>
-                            <div class="col-lg-2">
-                                
-                            </div>
-                            <div class="col-lg-2">
-                                {% trans 'antares.apps.client.templates.panel.general.status' %}:
-                            </div>
-                            <div class="col-lg-2">
-                                {{ client.status }}
-                            </div>
-                     </div>
-                     {% if client.client_type.archetype == "Individual" %}
-                     <div class="row">
-                            <div class="col-lg-2">
-                                {% trans 'antares.apps.client.templates.panel.general.birth_date' %}:
-                            </div>
-                            <div class="col-lg-2">
-                                {{ client.birth_date| date_format }}
-                            </div>
-                            {% if client.defunct_date %}
-                            <div class="col-lg-2">
-                                {% trans 'antares.apps.client.templates.panel.general.defunction_date' %}
-                            </div>
-                            <div class="col-lg-2">
-                                {{ client.defunction_date| date_format }}
-                            </div>
-                            {% else %}
-                            <div class="col-lg-2">
-                                
-                            </div>
-                            <div class="col-lg-2">
-                                
-                            </div>
-                            
-                            {% endif %}
-                            <div class="col-lg-2">
-                                {% trans 'antares.apps.client.templates.panel.general.gender' %}:
-                            </div>
-                            <div class="col-lg-2">
-                                {{ client.gender }}
-                            </div>
-                     </div>
-                     {% else %}
-                                
-                     {% endif %}
-                     {% if main.occupation %}
-                     <div class="row">
-                            <div class="col-lg-2">
-                                {% trans 'antares.apps.client.templates.panel.general.occupation' %}
-                            </div>
-                            <div class="col-lg-10">
-                                {{ main.occupation }}
-                            </div>
-                     </div>
-                     {% endif %}
-                     <h3>{% trans 'antares.apps.client.templates.client_id_table.identification_information' %}</h3>
-                     <table  width="100%" id="client_id_table" class="table table-striped">
-                            <thead>
-                                <tr>
-                                    <th>{% trans 'antares.apps.client.templates.client_id_table.type' %}</th>
-                                    <th>{% trans 'antares.apps.client.templates.client_id_table.code' %}</th>
-                                    <th>{% trans 'antares.apps.client.templates.client_id_table.active' %}</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                            </tbody>
-                        </table>
-                    
-                     <h3>{% trans 'antares.apps.client.templates.client_id_table.addresses' %}</h3>
-                     <table  width="100%" id="address_id_table" class="table table-striped">
-                            <thead>
-                                <tr>
-                                    <th>{% trans 'antares.apps.client.templates.client_id_table.address_type' %}</th>
-                                    <th>{% trans 'antares.apps.client.templates.client_id_table.country' %}</th>           
-                                    <th>{% trans 'antares.apps.client.templates.client_id_table.line_1' %}</th>
-                                    <th>{% trans 'antares.apps.client.templates.client_id_table.line_2' %}</th>
-                                    <th>{% trans 'antares.apps.client.templates.client_id_table.postal_code' %}</th>
-                                    <th>{% trans 'antares.apps.client.templates.client_id_table.is_principal' %}</th>
-                                    <th>{% trans 'antares.apps.client.templates.client_id_table.status' %}</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                            </tbody>
-                        </table>
-                      <h3>{% trans 'antares.apps.client.templates.client_id_table.telephone' %}</h3>
-                     <table  width="100%" id="telephone_table" class="table table-striped">
-                            <thead>
-                                <tr>
-                                    <th>{% trans 'antares.apps.client.templates.client_id_table.telephone_type' %}</th>
-                                    <th>{% trans 'antares.apps.client.templates.client_id_table.telephone' %}</th> 
-                                    <th>{% trans 'antares.apps.client.templates.client_id_table.is_principal' %}</th>
-                                    <th>{% trans 'antares.apps.client.templates.client_id_table.status' %}</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                            </tbody>
-                        </table>
-                        <h3>{% trans 'antares.apps.client.templates.client_id_table.social_network' %}</h3>
-                     <table  width="100%" id="social_network_table" class="table table-striped">
-                            <thead>
-                                <tr>
-                                    <th>{% trans 'antares.apps.client.templates.client_id_table.social_media_type' %}</th>
-                                    <th>{% trans 'antares.apps.client.templates.client_id_table.item' %}</th> 
-                                    <th>{% trans 'antares.apps.client.templates.client_id_table.is_principal' %}</th>
-                                    <th>{% trans 'antares.apps.client.templates.client_id_table.status' %}</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                            </tbody>
-                        </table>
-                        <h3>{% trans 'antares.apps.client.templates.client_id_table.emails' %}</h3>
-                     <table  width="100%" id="email_id_table" class="table table-striped">
-                            <thead>
-                                <tr>
-                                    <th>{% trans 'antares.apps.client.templates.client_id_table.email_type' %}</th>
-                                    <th>{% trans 'antares.apps.client.templates.client_id_table.email' %}</th> 
-                                    <th>{% trans 'antares.apps.client.templates.client_id_table.is_principal' %}</th>
-                                    <th>{% trans 'antares.apps.client.templates.client_id_table.status' %}</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                            </tbody>
-                        </table>
-                        <h3>{% trans 'antares.apps.client.templates.client_id_table.business_classification' %}</h3>
-                     <table  width="100%" id="business_classification_id_table" class="table table-striped">
-                            <thead>
-                                <tr>
-                                    <th>{% trans 'antares.apps.client.templates.client_id_table.business_classification' %}</th>
-                                    <th>{% trans 'antares.apps.client.templates.client_id_table.start_date' %}</th> 
-                                    <th>{% trans 'antares.apps.client.templates.client_id_table.end_date' %}</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                            </tbody>
-                        </table>
-                     </div>
-                     
-                    {% if branches %}
-                    
-                    <div id="branches_tab" class="tab-pane fade">
-                        <div class="tabbable">
-                        <ul class="nav nav-tabs">
-                        {% for branch in branches %}
-                                {% if forloop.first %}
-                                    <li class="active"><a data-toggle="tab" href="#branch_{{forloop.counter}}">{{branch.branch_number}} - {{branch.branch_name}} </a></li>
-                                {% else %}
-                                    <li><a data-toggle="tab" href="#branch_{{forloop.counter}}">{{branch.branch_number}} - {{branch.branch_name}} </a></li>
-                                {% endif %}
-                        {% endfor %}    
-                        </ul>
-                        <div class="tab-content">
-                        {% for branch in branches %}
-                            {% if forloop.first %}
-                                <div id="branch_{{forloop.counter}}" class="tab-pane fade in active">
-                            {% else %}
-                                <div id="branch_{{forloop.counter}}" class="tab-pane fade">
-                            {% endif %}
-                            <div class="row">
-                            <div class="col-lg-2">
-                                {% trans 'antares.apps.client.templates.panel.general.branch_name' %}:
-                            </div>
-                            <div class="col-lg-2">
-                                {{ branch.branch_name }}
-                            </div>
-                            <div class="col-lg-2">
-                                {% trans 'antares.apps.client.templates.panel.general.branch_number' %}:
-                            </div>
-                            <div class="col-lg-2">
-                                {{ branch.branch_number }}
-                            </div>
-                            <div class="col-lg-2">
-                                {% trans 'antares.apps.client.templates.panel.general.registration_date' %}:
-                            </div>
-                            <div class="col-lg-2">
-                                {{ branch.registration_date| date_format }}
-                            </div>
-                            
-                            </div>
-                            
-                            
-                            <h3>{% trans 'antares.apps.client.templates.client_id_table.addresses' %}</h3>
-                     <table  width="100%" id="address_id_table_{{forloop.counter}}" class="table table-striped">
-                            <thead>
-                                <tr>
-                                    <th>{% trans 'antares.apps.client.templates.client_id_table.address_type' %}</th>
-                                    <th>{% trans 'antares.apps.client.templates.client_id_table.country' %}</th>           
-                                    <th>{% trans 'antares.apps.client.templates.client_id_table.line_1' %}</th>
-                                    <th>{% trans 'antares.apps.client.templates.client_id_table.line_2' %}</th>
-                                    <th>{% trans 'antares.apps.client.templates.client_id_table.postal_code' %}</th>
-                                    <th>{% trans 'antares.apps.client.templates.client_id_table.is_principal' %}</th>
-                                    <th>{% trans 'antares.apps.client.templates.client_id_table.status' %}</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                            </tbody>
-                        </table>
-                      <h3>{% trans 'antares.apps.client.templates.client_id_table.telephone' %}</h3>
-                     <table  width="100%" id="telephone_table_{{forloop.counter}}" class="table table-striped">
-                            <thead>
-                                <tr>
-                                    <th>{% trans 'antares.apps.client.templates.client_id_table.telephone_type' %}</th>
-                                    <th>{% trans 'antares.apps.client.templates.client_id_table.telephone' %}</th> 
-                                    <th>{% trans 'antares.apps.client.templates.client_id_table.is_principal' %}</th>
-                                    <th>{% trans 'antares.apps.client.templates.client_id_table.status' %}</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                            </tbody>
-                        </table>
-                        <h3>{% trans 'antares.apps.client.templates.client_id_table.social_network' %}</h3>
-                     <table  width="100%" id="social_network_table_{{forloop.counter}}" class="table table-striped">
-                            <thead>
-                                <tr>
-                                    <th>{% trans 'antares.apps.client.templates.client_id_table.social_media_type' %}</th>
-                                    <th>{% trans 'antares.apps.client.templates.client_id_table.item' %}</th> 
-                                    <th>{% trans 'antares.apps.client.templates.client_id_table.is_principal' %}</th>
-                                    <th>{% trans 'antares.apps.client.templates.client_id_table.status' %}</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                            </tbody>
-                        </table>
-                        <h3>{% trans 'antares.apps.client.templates.client_id_table.emails' %}</h3>
-                     <table  width="100%" id="email_table_{{forloop.counter}}" class="table table-striped">
-                            <thead>
-                                <tr>
-                                    <th>{% trans 'antares.apps.client.templates.client_id_table.email_type' %}</th>
-                                    <th>{% trans 'antares.apps.client.templates.client_id_table.email' %}</th> 
-                                    <th>{% trans 'antares.apps.client.templates.client_id_table.is_principal' %}</th>
-                                    <th>{% trans 'antares.apps.client.templates.client_id_table.status' %}</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                            </tbody>
-                        </table>
-                        <h3>{% trans 'antares.apps.client.templates.client_id_table.business_classification' %}</h3>
-                     <table  width="100%" id="business_classification_id_table_{{forloop.counter}}" class="table table-striped">
-                            <thead>
-                                <tr>
-                                    <th>{% trans 'antares.apps.client.templates.client_id_table.business_classification' %}</th>
-                                    <th>{% trans 'antares.apps.client.templates.client_id_table.start_date' %}</th> 
-                                    <th>{% trans 'antares.apps.client.templates.client_id_table.end_date' %}</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                            </tbody>
-                        </table>
+                        <div class="col-lg-2">
+                            {% trans 'antares.apps.client.templates.panel.general.code' %}:
                         </div>
-                        {% empty %}
-                            {% trans 'antares.apps.client.templates.panel.no_branches_found' %}
-                        {% endfor %}    
+                        <div class="col-lg-2">
+                            {{ client.code }}
                         </div>
+                        <div class="col-lg-2">
+                            {% trans 'antares.apps.client.templates.panel.general.full_name' %}:
+                        </div>
+                        <div class="col-lg-2">
+                            {{ client.full_name }}
+                        </div>
+                        <div class="col-lg-2">
+                            {% trans 'antares.apps.client.templates.panel.general.client_type' %}:
+                        </div>
+                        <div class="col-lg-2">
+                            {{ client.client_type.short_name }}
                         </div>
                     </div>
-                   
+                    <div class="row">
+                        <div class="col-lg-2">
+                            {% trans 'antares.apps.client.templates.panel.general.registration_date' %}:
+                        </div>
+                        <div class="col-lg-2">
+                            {{ client.registration_date| date_format }}
+                        </div>
+                        <div class="col-lg-2">
+
+                        </div>
+                        <div class="col-lg-2">
+
+                        </div>
+                        <div class="col-lg-2">
+                            {% trans 'antares.apps.client.templates.panel.general.status' %}:
+                        </div>
+                        <div class="col-lg-2">
+                            {{ client.status }}
+                        </div>
+                    </div>
+                    {% if client.client_type.archetype == "Individual" %}
+                    <div class="row">
+                        <div class="col-lg-2">
+                            {% trans 'antares.apps.client.templates.panel.general.birth_date' %}:
+                        </div>
+                        <div class="col-lg-2">
+                            {{ client.birth_date| date_format }}
+                        </div>
+                        {% if client.defunct_date %}
+                        <div class="col-lg-2">
+                            {% trans 'antares.apps.client.templates.panel.general.defunction_date' %}
+                        </div>
+                        <div class="col-lg-2">
+                            {{ client.defunction_date| date_format }}
+                        </div>
+                        {% else %}
+                        <div class="col-lg-2">
+
+                        </div>
+                        <div class="col-lg-2">
+
+                        </div>
+
+                        {% endif %}
+                        <div class="col-lg-2">
+                            {% trans 'antares.apps.client.templates.panel.general.gender' %}:
+                        </div>
+                        <div class="col-lg-2">
+                            {{ client.gender }}
+                        </div>
+                    </div>
+                    {% else %}
+
                     {% endif %}
+                    {% if main.occupation %}
+                    <div class="row">
+                        <div class="col-lg-2">
+                            {% trans 'antares.apps.client.templates.panel.general.occupation' %}
+                        </div>
+                        <div class="col-lg-10">
+                            {{ main.occupation }}
+                        </div>
+                    </div>
+                    {% endif %}
+                    <h3>{% trans 'antares.apps.client.templates.client_id_table.identification_information' %}</h3>
+                    <table width="100%" id="client_id_table" class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>{% trans 'antares.apps.client.templates.client_id_table.type' %}</th>
+                                <th>{% trans 'antares.apps.client.templates.client_id_table.code' %}</th>
+                                <th>{% trans 'antares.apps.client.templates.client_id_table.active' %}</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
+
+                    <h3>{% trans 'antares.apps.client.templates.client_id_table.addresses' %}</h3>
+                    <table width="100%" id="address_id_table" class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>{% trans 'antares.apps.client.templates.client_id_table.address_type' %}</th>
+                                <th>{% trans 'antares.apps.client.templates.client_id_table.country' %}</th>
+                                <th>{% trans 'antares.apps.client.templates.client_id_table.line_1' %}</th>
+                                <th>{% trans 'antares.apps.client.templates.client_id_table.line_2' %}</th>
+                                <th>{% trans 'antares.apps.client.templates.client_id_table.postal_code' %}</th>
+                                <th>{% trans 'antares.apps.client.templates.client_id_table.is_principal' %}</th>
+                                <th>{% trans 'antares.apps.client.templates.client_id_table.status' %}</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
+                    <h3>{% trans 'antares.apps.client.templates.client_id_table.telephone' %}</h3>
+                    <table width="100%" id="telephone_table" class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>{% trans 'antares.apps.client.templates.client_id_table.telephone_type' %}</th>
+                                <th>{% trans 'antares.apps.client.templates.client_id_table.telephone' %}</th>
+                                <th>{% trans 'antares.apps.client.templates.client_id_table.is_principal' %}</th>
+                                <th>{% trans 'antares.apps.client.templates.client_id_table.status' %}</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
+                    <h3>{% trans 'antares.apps.client.templates.client_id_table.social_network' %}</h3>
+                    <table width="100%" id="social_network_table" class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>{% trans 'antares.apps.client.templates.client_id_table.social_media_type' %}</th>
+                                <th>{% trans 'antares.apps.client.templates.client_id_table.item' %}</th>
+                                <th>{% trans 'antares.apps.client.templates.client_id_table.is_principal' %}</th>
+                                <th>{% trans 'antares.apps.client.templates.client_id_table.status' %}</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
+                    <h3>{% trans 'antares.apps.client.templates.client_id_table.emails' %}</h3>
+                    <table width="100%" id="email_id_table" class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>{% trans 'antares.apps.client.templates.client_id_table.email_type' %}</th>
+                                <th>{% trans 'antares.apps.client.templates.client_id_table.email' %}</th>
+                                <th>{% trans 'antares.apps.client.templates.client_id_table.is_principal' %}</th>
+                                <th>{% trans 'antares.apps.client.templates.client_id_table.status' %}</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
+                    <h3>{% trans 'antares.apps.client.templates.client_id_table.business_classification' %}</h3>
+                    <table width="100%" id="business_classification_id_table" class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>{% trans 'antares.apps.client.templates.client_id_table.business_classification' %}
+                                </th>
+                                <th>{% trans 'antares.apps.client.templates.client_id_table.start_date' %}</th>
+                                <th>{% trans 'antares.apps.client.templates.client_id_table.end_date' %}</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
+                </div>
+
+                {% if branches %}
+
+                <div class="tab-pane fade" id="branches_tab" role="tabpanel" aria-labelledby="branches_tab">
+                    <div class="tabbable">
+                        <ul class="nav nav-tabs">
+                            {% for branch in branches %}
+                            {% if forloop.first %}
+                            <li class="active"><a data-toggle="tab"
+                                    href="#branch_{{forloop.counter}}">{{branch.branch_number}} - {{branch.branch_name}}
+                                </a></li>
+                            {% else %}
+                            <li><a data-toggle="tab" href="#branch_{{forloop.counter}}">{{branch.branch_number}} -
+                                    {{branch.branch_name}} </a></li>
+                            {% endif %}
+                            {% endfor %}
+                        </ul>
+                        <div class="tab-content">
+                            {% for branch in branches %}
+                            {% if forloop.first %}
+                            <div id="branch_{{forloop.counter}}" class="tab-pane fade in active">
+                                {% else %}
+                                <div id="branch_{{forloop.counter}}" class="tab-pane fade">
+                                    {% endif %}
+                                    <div class="row">
+                                        <div class="col-lg-2">
+                                            {% trans 'antares.apps.client.templates.panel.general.branch_name' %}:
+                                        </div>
+                                        <div class="col-lg-2">
+                                            {{ branch.branch_name }}
+                                        </div>
+                                        <div class="col-lg-2">
+                                            {% trans 'antares.apps.client.templates.panel.general.branch_number' %}:
+                                        </div>
+                                        <div class="col-lg-2">
+                                            {{ branch.branch_number }}
+                                        </div>
+                                        <div class="col-lg-2">
+                                            {% trans 'antares.apps.client.templates.panel.general.registration_date' %}:
+                                        </div>
+                                        <div class="col-lg-2">
+                                            {{ branch.registration_date| date_format }}
+                                        </div>
+
+                                    </div>
+
+
+                                    <h3>{% trans 'antares.apps.client.templates.client_id_table.addresses' %}</h3>
+                                    <table width="100%" id="address_id_table_{{forloop.counter}}"
+                                        class="table table-striped">
+                                        <thead>
+                                            <tr>
+                                                <th>{% trans 'antares.apps.client.templates.client_id_table.address_type' %}
+                                                </th>
+                                                <th>{% trans 'antares.apps.client.templates.client_id_table.country' %}
+                                                </th>
+                                                <th>{% trans 'antares.apps.client.templates.client_id_table.line_1' %}
+                                                </th>
+                                                <th>{% trans 'antares.apps.client.templates.client_id_table.line_2' %}
+                                                </th>
+                                                <th>{% trans 'antares.apps.client.templates.client_id_table.postal_code' %}
+                                                </th>
+                                                <th>{% trans 'antares.apps.client.templates.client_id_table.is_principal' %}
+                                                </th>
+                                                <th>{% trans 'antares.apps.client.templates.client_id_table.status' %}
+                                                </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                        </tbody>
+                                    </table>
+                                    <h3>{% trans 'antares.apps.client.templates.client_id_table.telephone' %}</h3>
+                                    <table width="100%" id="telephone_table_{{forloop.counter}}"
+                                        class="table table-striped">
+                                        <thead>
+                                            <tr>
+                                                <th>{% trans 'antares.apps.client.templates.client_id_table.telephone_type' %}
+                                                </th>
+                                                <th>{% trans 'antares.apps.client.templates.client_id_table.telephone' %}
+                                                </th>
+                                                <th>{% trans 'antares.apps.client.templates.client_id_table.is_principal' %}
+                                                </th>
+                                                <th>{% trans 'antares.apps.client.templates.client_id_table.status' %}
+                                                </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                        </tbody>
+                                    </table>
+                                    <h3>{% trans 'antares.apps.client.templates.client_id_table.social_network' %}</h3>
+                                    <table width="100%" id="social_network_table_{{forloop.counter}}"
+                                        class="table table-striped">
+                                        <thead>
+                                            <tr>
+                                                <th>{% trans 'antares.apps.client.templates.client_id_table.social_media_type' %}
+                                                </th>
+                                                <th>{% trans 'antares.apps.client.templates.client_id_table.item' %}
+                                                </th>
+                                                <th>{% trans 'antares.apps.client.templates.client_id_table.is_principal' %}
+                                                </th>
+                                                <th>{% trans 'antares.apps.client.templates.client_id_table.status' %}
+                                                </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                        </tbody>
+                                    </table>
+                                    <h3>{% trans 'antares.apps.client.templates.client_id_table.emails' %}</h3>
+                                    <table width="100%" id="email_table_{{forloop.counter}}"
+                                        class="table table-striped">
+                                        <thead>
+                                            <tr>
+                                                <th>{% trans 'antares.apps.client.templates.client_id_table.email_type' %}
+                                                </th>
+                                                <th>{% trans 'antares.apps.client.templates.client_id_table.email' %}
+                                                </th>
+                                                <th>{% trans 'antares.apps.client.templates.client_id_table.is_principal' %}
+                                                </th>
+                                                <th>{% trans 'antares.apps.client.templates.client_id_table.status' %}
+                                                </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                        </tbody>
+                                    </table>
+                                    <h3>{% trans 'antares.apps.client.templates.client_id_table.business_classification' %}
+                                    </h3>
+                                    <table width="100%" id="business_classification_id_table_{{forloop.counter}}"
+                                        class="table table-striped">
+                                        <thead>
+                                            <tr>
+                                                <th>{% trans 'antares.apps.client.templates.client_id_table.business_classification' %}
+                                                </th>
+                                                <th>{% trans 'antares.apps.client.templates.client_id_table.start_date' %}
+                                                </th>
+                                                <th>{% trans 'antares.apps.client.templates.client_id_table.end_date' %}
+                                                </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                {% empty %}
+                                {% trans 'antares.apps.client.templates.panel.no_branches_found' %}
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+
                     
-                    
-                    
-                    
-                    
-                    <div id="attributes_tab" class="tab-pane fade">
-                        <table  width="100%" id="client_attributes_table" class="table table-striped">
+                </div>
+                {% endif %}
+
+
+
+                    <div class="tab-pane fade" id="attributes_tab" role="tabpanel" aria-labelledby="attributes_tab">
+                        <table width="100%" id="client_attributes_table" class="table table-striped">
                             <thead>
                                 <tr>
                                     <th>{% trans 'antares.apps.client.templates.panel.attribute_name' %}</th>
@@ -323,8 +366,8 @@
                             </tbody>
                         </table>
                     </div>
-                    <div id="relations_tab" class="tab-pane fade">
-                        <table  width="100%" id="relations_table" class="table table-striped">
+                    <div class="tab-pane fade" id="relations_tab" role="tabpanel" aria-labelledby="relations_tab">
+                        <table width="100%" id="relations_table" class="table table-striped">
                             <thead>
                                 <tr>
                                     <th>{% trans 'antares.apps.client.templates.panel.client' %}</th>
@@ -336,61 +379,49 @@
                             <tbody>
                             </tbody>
                         </table>
-                        
+
                     </div>
                 </div>
             </div>
-	</div>
-</div>
-<script type="text/javascript">
-	 var antaresClientLinks = { 
-          user_relations_call: "{% url "antares.apps.client:api_user_relations_view" %}", 
-          attributes_view_call: "{% url "antares.apps.client:api_attributes_view" %}",
-          client_id_call: "{% url "antares.apps.client:api_client_id_view" %}", 
-          address_list_call: '{% url "antares.apps.client:api_branch_list_address_view" %}', 
-          business_classification_list_call: '{% url "antares.apps.client:api_branch_list_business_classification_view" %}', 
-          email_list_call: '{% url "antares.apps.client:api_branch_list_email_view" %}', 
-          telephone_list_call: '{% url "antares.apps.client:api_branch_list_telephone_view" %}', 
-          socialnetwork_list_call: '{% url "antares.apps.client:api_branch_list_social_network_view" %}',
-    }
-    
-    $(document).ready(function() { 
-        display_client_panel('{{client.id}}', '{{main_branch.id}}');
-        {% for branch in branches %}
-            display_client_panel_by_branch({{forloop.counter}}, "{{branch.id}}");
-        {% endfor %}
-    });
-</script>
-{% endblock content %}
+        </div>
+    </div>
+    <script type="text/javascript">
+        var antaresClientLinks = {
+            user_relations_call: "{% url 'antares.apps.client:api_user_relations_view' %}",
+            attributes_view_call: "{% url 'antares.apps.client:api_attributes_view' %}",
+            client_id_call: "{% url 'antares.apps.client:api_client_id_view' %}",
+            address_list_call: "{% url 'antares.apps.client:api_branch_list_address_view' %}",
+            business_classification_list_call: "{% url 'antares.apps.client:api_branch_list_business_classification_view' %}",
+            email_list_call: "{% url 'antares.apps.client:api_branch_list_email_view' %}",
+            telephone_list_call: "{% url 'antares.apps.client:api_branch_list_telephone_view' %}",
+            socialnetwork_list_call: "{% url 'antares.apps.client:api_branch_list_social_network_view' %}",
+        }
 
-{% block javascript %} 
+        display_client_panel('{{client.id}}', '{{main_branch.id}}');
+
+        {% for branch in branches %}
+
+        display_client_panel_by_branch({
+            {
+                forloop.counter
+            }
+        }, "{{branch.id}}");
+
+
+        {% endfor %}
+    </script>
+    {% endblock content %}
+    {% block javascript %}
     {% if is_inner == False %}
-        <script type="text/javascript" src="{% static "jquery-ui/jquery-ui.js" %}"></script>
-	<script type="text/javascript" src="{% static "datatables.net/js/jquery.dataTables.js" %}"></script>
-	<script type="text/javascript" src="{% static "datatables.net-bs/js/dataTables.bootstrap.js" %}"></script>
-	<script type="text/javascript" src="{% static "datatables.net-colreorder/js/dataTables.colReorder.js" %}"></script>
-	<script type="text/javascript" src="{% static "datatables.net-fixedcolumns/js/dataTables.fixedColumns.js" %}"></script>
-	<script type="text/javascript" src="{% static "datatables.net-keytable/js/dataTables.keyTable.js" %}"></script>
-	<script type="text/javascript" src="{% static "datatables.net-responsive/js/dataTables.responsive.js" %}"></script>
-	<script type="text/javascript" src="{% static "datatables.net-responsive-bs/js/responsive.bootstrap.js" %}"></script>
-	<script type="text/javascript" src="{% static "datatables.net-scroller/js/dataTables.scroller.js" %}"></script>
-	<script type="text/javascript" src="{% static "datatables.net-select/js/dataTables.select.js" %}"></script>
-	<script type="text/javascript" src="{% static "datatables.net-bs/js/dataTables.bootstrap.js" %}"></script>
+    {% javascript 'jquery_ui_js' %}
+    {% javascript 'datatables_js' %}
     {% endif %}
-    <script type="text/javascript" src="{% static "js/client_panel.js" %}"></script>
-{% endblock javascript %} 
-{% block stylesheets %} 
+    {% javascript 'client_panel_js' %}
+    {% endblock javascript %}
+    {% block stylesheets %}
     {% if is_inner == False %}
-        <link rel="stylesheet" href="{% static "jquery-ui/themes/base/jquery-ui.css" %}">
-    <link rel="stylesheet" href="{% static "jquery-ui/themes/base/theme.css" %}">
-    <link rel="stylesheet" href="{% static "datatables.net-bs/css/dataTables.bootstrap.css" %}">
-    <link rel="stylesheet" href="{% static "datatables.net-colreorder-bs/css/colReorder.bootstrap.css" %}">
-    <link rel="stylesheet" href="{% static "datatables.net-fixedcolumns-bs/css/fixedColumns.bootstrap.css" %}">
-    <link rel="stylesheet" href="{% static "datatables.net-keytable-bs/css/keyTable.bootstrap.css" %}">
-    <link rel="stylesheet" href="{% static "datatables.net-responsive-bs/css/responsive.bootstrap.css" %}">
-    <link rel="stylesheet" href="{% static "datatables.net-scroller-bs/css/scroller.bootstrap.css" %}">
-    <link rel="stylesheet" href="{% static "datatables.net-select-bs/css/select.bootstrap.css" %}">
-    <link rel="stylesheet" href="{% static "datatables.net-bs/css/dataTables.bootstrap.css" %}">
+    {% stylesheet 'jquery_ui_css' %}
+    {% stylesheet 'datatables_css' %}
     {% endif %}
-{% endblock stylesheets %}
-{% block ng_app_name %}{% endblock ng_app_name %}
+    {% endblock stylesheets %}
+    {% block ng_app_name %}{% endblock ng_app_name %}

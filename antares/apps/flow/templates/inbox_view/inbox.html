@@ -1,34 +1,32 @@
-{% extends "base_layout.html" %} 
-{% load static i18n  %} 
+{% extends "base_layout.html" %}
+{% load static i18n  pipeline %}
 {% block content %}
 <div class="container">
-	<div class="row">
-		<div class="col-lg-2">{% include 'inbox_view/_left_panel.html' %}</div>
-		<div class="col-lg-10">
-        
-			<div id="createdCasesInboxPanel">
-				<table width="100%" id="createdCasesInboxTable"
-					class="table table-striped">
-					<thead>
-						<tr>
-							<th>{% trans 'antares.apps.flow.templates.inbox.activityId' %}</th>
-							<th>{% trans 'antares.apps.flow.templates.inbox.caseId' %}</th>
-							<th>{% trans 'antares.apps.flow.templates.inbox.caseName' %}</th>
-							<th>{% trans 'antares.apps.flow.templates.inbox.priority' %}</th>
-							<th>{% trans 'antares.apps.flow.templates.inbox.sourceId' %}</th>
-							<th>{% trans 'antares.apps.flow.templates.inbox.created' %}</th>
-							<th>{% trans 'antares.apps.flow.templates.inbox.action.label' %}</th>
-						</tr>
-					</thead>
-					<tbody>
+    <div class="row">
+        <div class="col-lg-2">{% include 'inbox_view/_left_panel.html' %}</div>
+        <div class="col-lg-10">
 
-					</tbody>
-				</table>
+            <div id="createdCasesInboxPanel">
+                <table width="100%" id="createdCasesInboxTable" class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>{% trans 'antares.apps.flow.templates.inbox.activityId' %}</th>
+                            <th>{% trans 'antares.apps.flow.templates.inbox.caseId' %}</th>
+                            <th>{% trans 'antares.apps.flow.templates.inbox.caseName' %}</th>
+                            <th>{% trans 'antares.apps.flow.templates.inbox.priority' %}</th>
+                            <th>{% trans 'antares.apps.flow.templates.inbox.sourceId' %}</th>
+                            <th>{% trans 'antares.apps.flow.templates.inbox.created' %}</th>
+                            <th>{% trans 'antares.apps.flow.templates.inbox.action.label' %}</th>
+                        </tr>
+                    </thead>
+                    <tbody>
 
-			</div>
-			<div id="activeCasesInboxPanel" style="display:none; ">
-                <table width="100%" id="activeCasesInboxTable"
-                    class="table table-striped">
+                    </tbody>
+                </table>
+
+            </div>
+            <div id="activeCasesInboxPanel" style="display:none; ">
+                <table width="100%" id="activeCasesInboxTable" class="table table-striped">
                     <thead>
                         <tr>
                             <th>{% trans 'antares.apps.flow.templates.inbox.activityId' %}</th>
@@ -45,10 +43,9 @@
 
                     </tbody>
                 </table>
-		</div>
-		<div id="completedCasesInboxPanel" style="display:none; ">
-                <table width="100%" id="completedCasesInboxTable"
-                    class="table table-striped">
+            </div>
+            <div id="completedCasesInboxPanel" style="display:none; ">
+                <table width="100%" id="completedCasesInboxTable" class="table table-striped">
                     <thead>
                         <tr>
                             <th>{% trans 'antares.apps.flow.templates.inbox.activityId' %}</th>
@@ -68,49 +65,31 @@
                 </table>
 
             </div>
-			<div id="statsInboxPanel" style="display:none; ">
-				<h3>Not implemented yet</h3>
-			</div>
-	</div>
-</div>
-<script type="text/javascript">
-    var antaresFlowLinks = {
-                created_inbox_case_view: "{% url "antares.apps.flow:api_created_inbox_case_view" %}", 
-                active_inbox_case_view: "{% url "antares.apps.flow:api_active_inbox_case_view" %}", 
-                completed_inbox_case_view: "{% url "antares.apps.flow:api_completed_inbox_case_view" %}",
-            };
+            <div id="statsInboxPanel" style="display:none; ">
+                <h3>Not implemented yet</h3>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript">
+        var antaresFlowLinks = {
+            created_inbox_case_view: "{% url 'antares.apps.flow:api_created_inbox_case_view' %}",
+            active_inbox_case_view: "{% url 'antares.apps.flow:api_active_inbox_case_view' %}",
+            completed_inbox_case_view: "{% url 'antares.apps.flow:api_completed_inbox_case_view' %}",
+        };
 
-       $(document).ready(function() { 
-        display_inbox_page('{{activity_status}}');
-    });
+        $(document).ready(function () {
+            display_inbox_page('{{activity_status}}');
+        });
     </script>
-{% endblock %} 
-{% block javascript %} 
-    <script type="text/javascript" src="{% static "jquery-ui/jquery-ui.js" %}"></script>
-	<script type="text/javascript" src="{% static "datatables.net/js/jquery.dataTables.js" %}"></script>
-	<script type="text/javascript" src="{% static "datatables.net-bs/js/dataTables.bootstrap.js" %}"></script>
-	<script type="text/javascript" src="{% static "datatables.net-colreorder/js/dataTables.colReorder.js" %}"></script>
-	<script type="text/javascript" src="{% static "datatables.net-fixedcolumns/js/dataTables.fixedColumns.js" %}"></script>
-	<script type="text/javascript" src="{% static "datatables.net-keytable/js/dataTables.keyTable.js" %}"></script>
-	<script type="text/javascript" src="{% static "datatables.net-responsive/js/dataTables.responsive.js" %}"></script>
-	<script type="text/javascript" src="{% static "datatables.net-responsive-bs/js/responsive.bootstrap.js" %}"></script>
-	<script type="text/javascript" src="{% static "datatables.net-scroller/js/dataTables.scroller.js" %}"></script>
-	<script type="text/javascript" src="{% static "datatables.net-select/js/dataTables.select.js" %}"></script>
-	<script type="text/javascript" src="{% static "datatables.net-bs/js/dataTables.bootstrap.js" %}"></script>
-    
-    <script type="text/javascript" src="{% static "js/flow.js" %}"></script> 
-{% endblock javascript %} 
-{% block stylesheets %} 
-    <link rel="stylesheet" href="{% static "jquery-ui/themes/base/jquery-ui.css" %}">
-    <link rel="stylesheet" href="{% static "jquery-ui/themes/base/theme.css" %}">
-    <link rel="stylesheet" href="{% static "datatables.net-bs/css/dataTables.bootstrap.css" %}">
-    <link rel="stylesheet" href="{% static "datatables.net-colreorder-bs/css/colReorder.bootstrap.css" %}">
-    <link rel="stylesheet" href="{% static "datatables.net-fixedcolumns-bs/css/fixedColumns.bootstrap.css" %}">
-    <link rel="stylesheet" href="{% static "datatables.net-keytable-bs/css/keyTable.bootstrap.css" %}">
-    <link rel="stylesheet" href="{% static "datatables.net-responsive-bs/css/responsive.bootstrap.css" %}">
-    <link rel="stylesheet" href="{% static "datatables.net-scroller-bs/css/scroller.bootstrap.css" %}">
-    <link rel="stylesheet" href="{% static "datatables.net-select-bs/css/select.bootstrap.css" %}">
-    <link rel="stylesheet" href="{% static "datatables.net-bs/css/dataTables.bootstrap.css" %}">
-{% endblock stylesheets %}
+    {% endblock %}
+    {% block javascript %}
+    {% javascript 'jquery_ui_js' %}
+    {% javascript 'datatables_js' %}
+    {% javascript 'flow_js' %}
+    {% endblock javascript %}
+    {% block stylesheets %}
+    {% stylesheet 'jquery_ui_css' %}
+    {% stylesheet 'datatables_css' %}
+    {% endblock stylesheets %}
 
-{% block ng_app_name %}{% endblock ng_app_name %}
+    {% block ng_app_name %}{% endblock ng_app_name %}

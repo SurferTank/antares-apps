@@ -4,7 +4,7 @@ from antares.apps.core.models import UserParameter
 import logging
 
 from django.utils.translation import gettext as _
-from ajax_datatable.views import AjaxDatatableView as BaseDatatableView
+from django_datatables_view.base_datatable_view import BaseDatatableView
 
 from ..exceptions import FlowException
 from ..models import FlowActivity

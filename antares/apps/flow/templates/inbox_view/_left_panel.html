@@ -1,30 +1,42 @@
 {% load static i18n  %}
-<div class="panel-group" id="inboxAccordion">
-    <div class="panel panel-default">
-        <div class="panel-heading">
-            <h4 class="panel-title">
-                <a data-toggle="collapse" data-parent="#inboxAccordion" href="#collapseToolbar">{% trans 'antares.apps.flow.templates.inbox.myInbox' %}</a>
-            </h4>
-        </div>
-        <div id="collapseToolbar" class="panel-collapse collapse in">
-            <div class="panel-body">
-                <div><a onClick="display_inbox_page('created');">{% trans 'antares.apps.flow.templates.inbox.newCases' %}</a></div>
-                <div><a onClick="display_inbox_page('active');">{% trans 'antares.apps.flow.templates.inbox.activeCases' %}</a></div>
-                <div><a onClick="display_inbox_page('completed');">{% trans 'antares.apps.flow.templates.inbox.completedCases' %}</a></div>
-                
+<div class="accordion" id="accordionInbox">
+    <div class="accordion-item">
+        <h2 class="accordion-header" id="headingOne">
+            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne"
+                aria-expanded="true" aria-controls="collapseOne">
+                {% trans 'antares.apps.flow.templates.inbox.myInbox' %}
+            </button>
+        </h2>
+        <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne"
+            data-bs-parent="#accordionExample">
+            <div class="accordion-body">
+                <div><a
+                        onClick="display_inbox_page('created');">{% trans 'antares.apps.flow.templates.inbox.newCases' %}</a>
+                </div>
+                <div><a
+                        onClick="display_inbox_page('active');">{% trans 'antares.apps.flow.templates.inbox.activeCases' %}</a>
+                </div>
+                <div><a
+                        onClick="display_inbox_page('completed');">{% trans 'antares.apps.flow.templates.inbox.completedCases' %}</a>
+                </div>
+
             </div>
         </div>
     </div>
-    <div class="panel panel-default">
-        <div class="panel-heading">
-            <h4 class="panel-title">
-                <a data-toggle="collapse" data-parent="#inboxAccordion" href="#collapseStats">{% trans 'antares.apps.flow.templates.inbox.myStats'  %}</a>
-            </h4>
-        </div>
-        <div id="collapseStats" class="panel-collapse collapse">
-           <div class="panel-body">
-                <div><a onClick="display_inbox_page('stats');">{% trans "antares.apps.flow.templates.inbox.user_stats" %}</a></div>
-           </div>
+    <div class="accordion-item">
+        <h2 class="accordion-header" id="headingTwo">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                {% trans 'antares.apps.flow.templates.inbox.myStats'  %}
+            </button>
+        </h2>
+        <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo"
+            data-bs-parent="#accordionExample">
+            <div class="accordion-body">
+                <div><a
+                        onClick="display_inbox_page('stats');">{% trans "antares.apps.flow.templates.inbox.user_stats" %}</a>
+                </div>
+            </div>
         </div>
     </div>
 </div>

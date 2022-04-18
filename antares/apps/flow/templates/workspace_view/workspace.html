@@ -1,9 +1,6 @@
 {% extends "base_layout.html" %} 
-{% load static i18n  flow_tags %} 
+{% load static i18n  flow_tags pipeline %} 
 {% block content %}
-
-
-
     <div class="container">
     <div class="row">
         <div class="col-lg-12">
@@ -22,35 +19,46 @@
             </div>
             <div class="col-lg-9">
                 <div class="row">
-                    <ul class="nav nav-tabs">
-                        <li class="active"><a data-toggle="tab" href="#generalTab"> {% trans 'antares.apps.flow.templates.dashboard.tabs.general' %}</a></li>
-                        <li><a data-toggle="tab" href="#propertiesTab">{% trans 'antares.apps.flow.templates.dashboard.tabs.properties' %}</a></li>
-                        <li><a data-toggle="tab" href="#documentsTab"> {% trans 'antares.apps.flow.templates.dashboard.tabs.documents' %}</a></li>
-                        <li><a data-toggle="tab" href="#notesTab"> {% trans 'antares.apps.flow.templates.dashboard.left.notes' %}</a></li>
-                        <li><a data-toggle="tab" href="#historyTab">{% trans 'antares.apps.flow.templates.dashboard.tabs.history' %}</a></li>
-                        {% comment %}
-                        <li><a data-toggle="tab" href="#historyTab">{% trans 'antares.apps.flow.templates.dashboard.tabs.flowchart' %}</a></li>
-                        {% endcomment %}
+
+                    <nav>
+                        <div class="nav nav-tabs nav-fill" id="nav-tab" role="tablist">
+                          <button class="nav-link active" id="nav-generalTab" data-bs-toggle="tab" data-bs-target="#generalTab" type="button" role="tab" aria-controls="nav-home" aria-selected="true">{% trans 'antares.apps.flow.templates.dashboard.tabs.general' %}</button>
+                
+                          <button class="nav-link " id="nav-propertiesTab" data-bs-toggle="tab" data-bs-target="#propertiesTab" type="button" role="tab" aria-controls="nav-home" aria-selected="true">{% trans 'antares.apps.flow.templates.dashboard.tabs.properties' %}</button>
+                
+                          <button class="nav-link " id="nav-documentsTab" data-bs-toggle="tab" data-bs-target="#documentsTab" type="button" role="tab" aria-controls="nav-home" aria-selected="true">{% trans 'antares.apps.flow.templates.dashboard.tabs.documents' %}</button>
+                
+                          <button class="nav-link " id="nav-notesTab" data-bs-toggle="tab" data-bs-target="#notesTab" type="button" role="tab" aria-controls="nav-home" aria-selected="true">{% trans 'antares.apps.flow.templates.dashboard.left.notes' %}</button>
+                
+                
+                          <button class="nav-link " id="nav-historyTab" data-bs-toggle="tab" data-bs-target="#historyTab" type="button" role="tab" aria-controls="nav-home" aria-selected="true">{% trans 'antares.apps.flow.templates.dashboard.tabs.history' %}</button>
+                            {% comment %}
+                      
+                          <button class="nav-link " id="nav-historyTab" data-bs-toggle="tab" data-bs-target="#flowchartTab" type="button" role="tab" aria-controls="nav-home" aria-selected="true">{% trans 'antares.apps.flow.templates.dashboard.tabs.flowchart' %}</button>
+                            {% endcomment %}
                         {% extra_tabs_index %}
-                    </ul>
+                      
+                        </div>
+                      </nav>
+
                     <div class="tab-content">
-                        <div id="generalTab" class="tab-pane fade in active">
+                        <div class="tab-pane fade show active" id="generalTab" role="tabpanel" aria-labelledby="generalTab">
                             {% include 'workspace_view/_general_tab.html' %}
                         </div>
-                        <div id="propertiesTab" class="tab-pane fade">
+                        <div class="tab-pane fade" id="propertiesTab" role="tabpanel" aria-labelledby="propertiesTab" >
                             {% include 'workspace_view/_properties_tab.html' %}
                         </div>
-                        <div id="documentsTab" class="tab-pane fade">
+                        <div class="tab-pane fade" id="documentsTab" role="tabpanel" aria-labelledby="documentsTab" >
                             {% include 'workspace_view/_documents_tab.html' %}
                         </div>
-                        <div id="notesTab" class="tab-pane fade">
+                        <div class="tab-pane fade" id="notesTab" role="tabpanel" aria-labelledby="notesTab">
                             {% include 'workspace_view/_notes_tab.html' %}
                         </div>
-                        <div id="historyTab" class="tab-pane fade">
+                        <div class="tab-pane fade" id="historyTab" role="tabpanel" aria-labelledby="historyTab">
                             {% include 'workspace_view/_history_tab.html' %}
                         </div>
                         {% comment %}
-                         <div id="flowchartTab" class="tab-pane fade">
+                         <div class="tab-pane fade" id="flowchartTab" role="tabpanel" aria-labelledby="flowchartTab" >
                             {% include 'workspace_view/_flowchart_tab.html' %} 
                         {% endcomment %}
                         {% extra_tabs_content %}
@@ -99,35 +107,15 @@
     });
 </script>
 {% endblock %} 
-{% block javascript %} 
-    <script type="text/javascript" src="{% static "jquery-ui/jquery-ui.js" %}"></script>
-	<script type="text/javascript" src="{% static "datatables.net/js/jquery.dataTables.js" %}"></script>
-	<script type="text/javascript" src="{% static "datatables.net-bs/js/dataTables.bootstrap.js" %}"></script>
-	<script type="text/javascript" src="{% static "datatables.net-colreorder/js/dataTables.colReorder.js" %}"></script>
-	<script type="text/javascript" src="{% static "datatables.net-fixedcolumns/js/dataTables.fixedColumns.js" %}"></script>
-	<script type="text/javascript" src="{% static "datatables.net-keytable/js/dataTables.keyTable.js" %}"></script>
-	<script type="text/javascript" src="{% static "datatables.net-responsive/js/dataTables.responsive.js" %}"></script>
-	<script type="text/javascript" src="{% static "datatables.net-responsive-bs/js/responsive.bootstrap.js" %}"></script>
-	<script type="text/javascript" src="{% static "datatables.net-scroller/js/dataTables.scroller.js" %}"></script>
-	<script type="text/javascript" src="{% static "datatables.net-select/js/dataTables.select.js" %}"></script>
-	<script type="text/javascript" src="{% static "datatables.net-bs/js/dataTables.bootstrap.js" %}"></script>
-    <script type="text/javascript" src="{% static "x-editable/dist/bootstrap3-editable/js/bootstrap-editable.js" %}"></script>
-    <script type="text/javascript" src="{% static "ckeditor/ckeditor.js" %}"></script>
-	<script type="text/javascript" src="{% static "ckeditor/skins/kama/skin.js" %}"></script>
-	<script type="text/javascript" src="{% static "js/flow.js" %}"></script>
-{% endblock javascript %} 
-{% block stylesheets %} 
-    <link rel="stylesheet" href="{% static "jquery-ui/themes/base/jquery-ui.css" %}">
-    <link rel="stylesheet" href="{% static "jquery-ui/themes/base/theme.css" %}">
-    <link rel="stylesheet" href="{% static "datatables.net-bs/css/dataTables.bootstrap.css" %}">
-    <link rel="stylesheet" href="{% static "datatables.net-colreorder-bs/css/colReorder.bootstrap.css" %}">
-    <link rel="stylesheet" href="{% static "datatables.net-fixedcolumns-bs/css/fixedColumns.bootstrap.css" %}">
-    <link rel="stylesheet" href="{% static "datatables.net-keytable-bs/css/keyTable.bootstrap.css" %}">
-    <link rel="stylesheet" href="{% static "datatables.net-responsive-bs/css/responsive.bootstrap.css" %}">
-    <link rel="stylesheet" href="{% static "datatables.net-scroller-bs/css/scroller.bootstrap.css" %}">
-    <link rel="stylesheet" href="{% static "datatables.net-select-bs/css/select.bootstrap.css" %}">
-    <link rel="stylesheet" href="{% static "datatables.net-bs/css/dataTables.bootstrap.css" %}">
-    <link rel="stylesheet" href="{% static "x-editable/dist/bootstrap3-editable/css/bootstrap-editable.css" %}">
-    <link rel="stylesheet" href="{% static "ckeditor/skins/kama/editor.css" %}">
+{% block javascript %}
+{% javascript 'jquery_ui_js' %}
+{% javascript 'datatables_js' %}
+{% javascript 'ckeditor_js' %}
+{% javascript 'flow_js' %}
+{% endblock javascript %}
+{% block stylesheets %}
+{% stylesheet 'jquery_ui_css' %}
+{% stylesheet 'datatables_css' %}
+{% stylesheet 'ckeditor_css' %}
 {% endblock stylesheets %}
 {% block ng_app_name %}{% endblock ng_app_name %}
