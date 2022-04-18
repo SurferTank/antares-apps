@@ -344,6 +344,7 @@ function leftToolbarUpdateProperty(event, caseId, propertyId, value) {
  * 
  * @param activity_id
  * @returns
+ * TODO: disabled all in place edition for now. 
  */
 function display_workflow_panel(activity_id) {
 	$("#activityCaseName").editable();

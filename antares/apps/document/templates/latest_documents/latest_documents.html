@@ -1,4 +1,5 @@
 {% load static i18n  %} 
+<h3>Documents</h3>
 <table width="100%" id="documentLatestTable" class="table table-striped" >
 	<thead>
     	<tr>
@@ -13,6 +14,6 @@
 </table>
 <script type="text/javascript">
 var latestDocumentLinks = { 
-          latest_documents_call: "{% url "antares.apps.document:api_latest_documents_view" %}", 
+          latest_documents_call: '{% url "antares.apps.document:api_latest_documents_view" %}', 
     };
 </script>

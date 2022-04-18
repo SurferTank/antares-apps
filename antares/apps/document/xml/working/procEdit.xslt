@@ -206,7 +206,7 @@ $(document).ready(function() {
 					</xsl:for-each>
 					<div id="documentEditTabs" class="col-lg-12">
 						  <nav>
-                        <div class="nav nav-tabs nav-fill" id="nav-tab" role="tablist">
+                        <div class="nav nav-tabs" id="nav-tab" role="tablist">
                           <xsl:for-each select="document/structuredData/page">
 						  <button  data-bs-toggle="tab"  type="button" role="tab">
 						  <xsl:if test="position()=1">
@@ -293,12 +293,10 @@ $(document).ready(function() {
 					</div>
 				</div>
 				<div id="documentSaveDialog" style="display:none;">
-					<div id="documentSaveDialogContent">{% trans
-						'antares.apps.document.messages.document_saved' %}</div>
+					<div id="documentSaveDialogContent">{% trans 'antares.apps.document.messages.document_saved' %}</div>
 				</div>
 				<div id="documentDraftDialog" style="display:none;">
-					<div id="documentDraftDialogContent">{% trans
-						'antares.apps.document.messages.document_drafted' %}</div>
+					<div id="documentDraftDialogContent">{% trans 'antares.apps.document.messages.document_drafted' %}</div>
 				</div>
 				<div id="documentHelpDialog" style="display:none;">
 					<div id="documentSaveHelpContent">

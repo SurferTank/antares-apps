@@ -20,21 +20,37 @@ from .models import TelephoneItem
 
 admin.site.register(ClientIdentificationType)
 admin.site.register(AttributeDefinition)
-admin.site.register(ClientType)
-admin.site.register(Client)
+
+
+@admin.register(ClientType)
+class ClientTypeAdmin(admin.ModelAdmin):
+    list_display = ('short_name', 'archetype', 'description')
+
+
+@admin.register(Client)
+class ClientAdmin(admin.ModelAdmin):
+    list_display = ('code', 'full_name', 'registration_date',
+                    'client_type', 'status')
 
 
 @admin.register(ClientUserRelation)
 class ClientUserRelationAdmin(admin.ModelAdmin):
-    list_display = ('parent_user', 'child_client' , 'relation_type', 'start_date', 'end_date')
+    list_display = ('parent_user', 'child_client',
+                    'relation_type', 'start_date', 'end_date')
 
 
 @admin.register(ClientUserRelationPermission)
 class ClientUserRelationPermissionAdmin(admin.ModelAdmin):
-    list_display = ('client_relation', 'relation_type', 'start_date', 'end_date')
+    list_display = ('client_relation', 'relation_type',
+                    'start_date', 'end_date')
 
-    
-admin.site.register(ClientBranch)
+
+@admin.register(ClientBranch)
+class ClientBranchAdmin(admin.ModelAdmin):
+    list_display = ('client', 'branch_number',
+                    'branch_name', 'registration_date', )
+
+
 admin.site.register(TelephoneItem)
 admin.site.register(AddressItem)
 admin.site.register(EmailItem)
@@ -42,4 +58,9 @@ admin.site.register(SocialNetworkItem)
 admin.site.register(ClientBusinessClassification)
 admin.site.register(IdentificationItem)
 admin.site.register(ClientAttribute)
-admin.site.register(IsicPosition, MPTTModelAdmin)
+
+
+@admin.register(IsicPosition)
+class IsicPositionAdmin(admin.ModelAdmin):
+    list_display = ('isic_code', 'isic_name',
+                    'language')

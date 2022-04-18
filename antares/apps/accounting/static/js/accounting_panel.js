@@ -247,49 +247,53 @@ function build_breadcrumbs(client_id, client_name = null, document = null, docum
     + document + " document_name=" + document_name + " concept_type_id=" + concept_type_id + " concept_type_name=" + concept_type_name + 
     " period="  + period + " account_type_id=" + account_type_id + " account_type_name=" + account_type_name);
     $("#breadcrumsAccountingPanel").html("");
+    var breadcCrumb = "<div>";
     if (client_id && document == null && concept_type_id == null && period == null && account_type_id == null) {
-        $("#breadcrumsAccountingPanel").append('<a onClick="display_accounting_panel(\'' +
+        breadcCrumb += '<a onClick="display_accounting_panel(\'' +
             client_id + '\', \'' + client_name + '\');">' +
-            client_name + '</a>');
+            client_name + '</a>';
     } else if (client_id && document == null && concept_type_id && period == null && account_type_id == null) {
-        $("#breadcrumsAccountingPanel").append('<a onClick="display_accounting_panel(\'' +
+        breadcCrumb += '<a onClick="display_accounting_panel(\'' +
             client_id + '\', \'' + client_name + '\');">' +
-            client_name + '</a>');
-        $("#breadcrumsAccountingPanel").append('&nbsp;&gt;&nbsp;');
-        $("#breadcrumsAccountingPanel").append('<a onClick="display_accounting_panel(\'' +
+            client_name + '</a>';
+            breadcCrumb += "<span> &gt; </span>";
+            breadcCrumb += '<a onClick="display_accounting_panel(\'' +
             client_id + '\', \'' + client_name + '\', null, null, \'' + concept_type_id + '\', \'' + concept_type_name + '\');">' +
-            concept_type_name + '</a>');
+            concept_type_name + '</a>';
 
     } else if (client_id && document == null && concept_type_id!= null && period != null && account_type_id == null) {
-        $("#breadcrumsAccountingPanel").append('<a onClick="display_accounting_panel(\'' +
+        breadcCrumb += '<a onClick="display_accounting_panel(\'' +
             client_id + '\', \'' + client_name + '\');">' +
-            client_name + '</a>');
-        $("#breadcrumsAccountingPanel").append('&nbsp;&gt;&nbsp;');
-        $("#breadcrumsAccountingPanel").append('<a onClick="display_accounting_panel(\'' +
+            client_name + '</a>';
+            breadcCrumb += "<span> &gt; </span>";
+            breadcCrumb += '<a onClick="display_accounting_panel(\'' +
             client_id + '\', \'' + client_name + '\', null, null, \'' + concept_type_id + '\', \'' + concept_type_name + '\');">' +
-            concept_type_name + '</a>');
-        $("#breadcrumsAccountingPanel").append('&nbsp;&gt;&nbsp;');
-        $("#breadcrumsAccountingPanel").append('<a onClick="display_accounting_panel(\'' +
+            concept_type_name + '</a>';
+            breadcCrumb += "<span> &gt; </span>";
+            breadcCrumb += '<a onClick="display_accounting_panel(\'' +
             client_id + '\', \'' + client_name + '\', null, null, \'' + concept_type_id + '\', \'' + concept_type_name + '\', ' + period + ');">' +
-            period + '</a>');
+            period + '</a>';
     } else if (client_id && document == null && concept_type_id!= null && period!= null && account_type_id!= null) {
-        $("#breadcrumsAccountingPanel").append('<a onClick="display_accounting_panel(\'' +
+        breadcCrumb += '<a onClick="display_accounting_panel(\'' +
             client_id + '\', \'' + client_name + '\');">' +
-            client_name + '</a>');
-        $("#breadcrumsAccountingPanel").append('&nbsp;&gt;&nbsp;');
-        $("#breadcrumsAccountingPanel").append('<a onClick="display_accounting_panel(\'' +
+            client_name + '</a>';
+            breadcCrumb += "<span> &gt; </span>";
+            breadcCrumb += '<a onClick="display_accounting_panel(\'' +
             client_id + '\', \'' + client_name + '\', null, null, \'' + concept_type_id + '\', \'' + concept_type_name + '\');">' +
-            concept_type_name + '</a>');
-        $("#breadcrumsAccountingPanel").append('&nbsp;&gt;&nbsp;');
-        $("#breadcrumsAccountingPanel").append('<a onClick="display_accounting_panel(\'' +
+            concept_type_name + '</a>';
+            breadcCrumb += "<span> &gt; </span>";
+            breadcCrumb += '<a onClick="display_accounting_panel(\'' +
             client_id + '\', \'' + client_name + '\', null, null, \'' + concept_type_id + '\', \'' + concept_type_name + '\', ' + period + ');">' +
-            period + '</a>');
-        $("#breadcrumsAccountingPanel").append('&nbsp;&gt;&nbsp;');
-        $("#breadcrumsAccountingPanel").append('<a onClick="display_accounting_panel(\'' +
+            period + '</a>';
+            breadcCrumb += "<span> &gt; </span>";
+            breadcCrumb += '<a onClick="display_accounting_panel(\'' +
             client_id + '\', \'' + client_name + '\', null, null, \'' + concept_type_id + '\', \'' +
             concept_type_name + '\', ' + period + ', \'' + account_type_id + '\', \'' + account_type_name + '\');">' +
-            account_type_name + '</a>');
+            account_type_name + '</a>';
+            
     }
+    breadcCrumb += "</div>";
+    $("#breadcrumsAccountingPanel").append( breadcCrumb);
 }
 
 function view_accounting_document(document_id) {
