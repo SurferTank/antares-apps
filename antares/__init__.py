@@ -1,7 +1,7 @@
 from antares.apps.core.utils import VersionUtils
 
 
-VERSION = (0, 0, 5, 'alpha', 0)
+VERSION = (0, 0, 6, 'alpha', 0)
 
 
 def get_version():
