@@ -9,7 +9,7 @@ from antares.apps.user.models import User
 import json
 import logging
 
-from braces.views import AjaxResponseMixin, JSONResponseMixin
+from antares.libs.braces.views import AjaxResponseMixin, JSONResponseMixin
 import dateutil.parser
 from django.utils import timezone
 from django.utils.translation import gettext as _

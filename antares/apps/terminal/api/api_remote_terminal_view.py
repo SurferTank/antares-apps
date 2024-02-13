@@ -14,7 +14,7 @@ import logging
 import re
 import traceback
 
-from braces.views import AjaxResponseMixin, JSONResponseMixin
+from antares.libs.braces.views import AjaxResponseMixin, JSONResponseMixin
 from django.utils.translation import gettext as _
 from django.views.generic import View
 

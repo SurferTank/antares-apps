@@ -5,7 +5,7 @@ Created on 28 sep. 2016
 '''
 from copy import deepcopy
 
-from braces.views import AjaxResponseMixin, JSONResponseMixin
+from antares.libs.braces.views import AjaxResponseMixin, JSONResponseMixin
 from django.views.generic import View
 
 
@@ -23,7 +23,7 @@ class ApiOnBehalfSelectorView(AjaxResponseMixin, JSONResponseMixin, View):
             ):
                 client['id'] = str(related_client.child_client.id)
                 client['text'] = related_client.child_client.code + ' - ' + \
-                     related_client.child_client.full_name
+                    related_client.child_client.full_name
                 response.append(deepcopy(client))
         else:
             client = {}
@@ -35,6 +35,6 @@ class ApiOnBehalfSelectorView(AjaxResponseMixin, JSONResponseMixin, View):
             ):
                 client['id'] = str(related_client.child_client.id)
                 client['text'] = related_client.child_client.code + ' - ' + \
-                     related_client.child_client.full_name
+                    related_client.child_client.full_name
                 response.append(deepcopy(client))
         return self.render_json_response(response)

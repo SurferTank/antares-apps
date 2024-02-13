@@ -1,6 +1,6 @@
 import logging
 
-from braces.views import AjaxResponseMixin, JSONResponseMixin
+from antares.libs.braces.views import AjaxResponseMixin, JSONResponseMixin
 from django.views.generic import View
 
 from ..manager import FlowManager

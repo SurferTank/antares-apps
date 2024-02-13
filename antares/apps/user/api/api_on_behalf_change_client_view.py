@@ -6,7 +6,7 @@ Created on 29 sep. 2016
 from antares.apps.client.models import Client
 import uuid
 
-from braces.views import AjaxResponseMixin, JSONResponseMixin
+from antares.libs.braces.views import AjaxResponseMixin, JSONResponseMixin
 from django.contrib import messages
 from django.utils.translation import gettext as _
 from django.views.generic import View

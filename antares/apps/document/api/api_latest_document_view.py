@@ -30,9 +30,6 @@ logger = logging.getLogger(__name__)
 
 class ApiLatestDocumentView(BaseDatatableView):
     """ Retrieves a JSON formatted string to be used on the document latest document control
-
-
-
     """
     model = DocumentHeader
     columns = [

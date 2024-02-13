@@ -1,7 +1,7 @@
 from antares.apps.core.middleware.request import get_request
 import logging
 
-from braces.views import AjaxResponseMixin, JSONResponseMixin
+from antares.libs.braces.views import AjaxResponseMixin, JSONResponseMixin
 from django.urls import reverse
 from django.utils.translation import gettext as _
 from django.views.generic import View

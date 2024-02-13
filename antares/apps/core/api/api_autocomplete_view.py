@@ -6,7 +6,7 @@ Created on 21/8/2016
 from antares.apps.core.models.catalog import Catalog
 import logging
 
-from braces.views import AjaxResponseMixin, JSONResponseMixin
+from antares.libs.braces.views import AjaxResponseMixin, JSONResponseMixin
 from django.views.generic import View
 
 

@@ -7,7 +7,7 @@ Created on 16/8/2016
 from antares.apps.core.middleware.request import get_request
 import logging
 
-from braces.views import AjaxResponseMixin, JSONResponseMixin
+from antares.libs.braces.views import AjaxResponseMixin, JSONResponseMixin
 from django.utils import timezone
 from django.utils.translation import gettext as _
 from django.views.generic import View
