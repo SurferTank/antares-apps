@@ -46,7 +46,7 @@ google-api-python-client==1.7.11
 google-auth==1.10.0
 google-auth-httplib2==0.0.3
 googlemaps==4.0.0
-gunicorn==20.0.4
+gunicorn==22.0.0
 httplib2==0.18.1
 idna==2.8
 imagesize==1.1.0
