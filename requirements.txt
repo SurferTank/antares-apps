@@ -120,7 +120,7 @@ Unidecode==1.1.1
 unittest2==1.1.0
 uritemplate==3.0.1
 urllib3==1.25.7
-virtualenv==16.7.9
+virtualenv==20.36.1
 wcwidth==0.1.7
 whitenoise==5.0.1
 wrapt==1.11.2
